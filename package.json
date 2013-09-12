@@ -1,0 +1,14 @@
+{
+  "name": "peopletourpeople",
+  "description": "People Tour People App",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "3.3.5",
+    "ejs": "*",
+    "stylus": "*"
+  },
+  "scripts": {
+    "start": "node app.js"
+  }
+}

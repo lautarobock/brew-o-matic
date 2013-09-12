@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="index">
+  <head>
+    <title>Brew-o-Matic</title>
+    <link rel='stylesheet' href='/css/style.css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <script src="http://code.jquery.com/jquery.js"></script>    
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>
+    <script src="js/index.js"></script>
+  </head>
+  <body ng-controller="MainController" id="MainController">
+    <div id="fb-root"></div>
+    <script src="js/fb.js"></script>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <nav class="navbar navbar-default" role="navigation">
+            <a class="navbar-brand" href="#">Brew-o-Matic</a>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#">{{me.name}}</a></li>
+                <li><a href="#">Link</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li><a href="#">Separated link</a></li>
+                    <li><a href="#">One more separated link</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <div class="panel panel-default">
+            <div class="panel-heading"><strong>Opciones</strong></div>
+            <div class="panel-body">
+              
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10">
+          <div ng-view></div>
+        </div>
+      </div>
+    
+      <footer>
+        <fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>
+      </footer>
+    </div>
+  </body>
+  
+</html>

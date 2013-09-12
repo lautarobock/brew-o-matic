@@ -1,0 +1,29 @@
+<div>
+    <div ng-show="receipts">
+        <h2>Mis recetas</h2>
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Fecha</th>
+              <th>Nombre</th>
+              <th>Estilo</th>
+              <th>DI</th>
+              <th>DF</th>
+              <th>%Alc</th>
+              <th>IBUs</th>
+              <th>Autor</th>
+              <th>Batch (L)</th>
+            </tr>
+          </thead>
+        </table>
+    </div>
+    <div class="panel panel-default" ng-hide="receipts">
+        <div class="panel-heading"><strong>Mis Recetas</strong></div>
+        <div class="panel-body">
+          <div class="alert alert-info">Aun no tiene recetas creadas</div>
+          <a type="button" class="btn btn-default clearfix" href="#/receipt/new">Nueva receta</a>        
+        </div>
+    </div>
+</div>
+  
