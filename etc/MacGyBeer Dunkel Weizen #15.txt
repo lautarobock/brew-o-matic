@@ -1,0 +1,43 @@
+MacGyBeer Dunkel Weizen #15
+Dunkelweizen
+
+Recipe Specs
+----------------
+Batch Size (L):           21.0
+Total Grain (kg):         5.800
+Total Hops (g):           30.00
+Original Gravity (OG):    1.050  (°P): 12.4
+Final Gravity (FG):       1.013  (°P): 3.3
+Alcohol by Volume (ABV):  4.91 %
+Colour (SRM):             21.8   (EBC): 42.9
+Bitterness (IBU):         13.6   (Tinseth)
+Brewhouse Efficiency (%): 59
+Boil Time (Minutes):      60
+
+Grain Bill
+----------------
+3.000 kg Pilsner (51.72%)
+2.000 kg Wheat Malt (34.48%)
+0.400 kg Wheat Malt, Dark (6.9%)
+0.200 kg Chocolate (3.45%)
+0.100 kg Cristal 140 (1.72%)
+0.100 kg Whaat Roasted (1.72%)
+
+Hop Bill
+----------------
+10.0 g Mapuche Pellet (7.7% Alpha) @ 60 Minutes (Boil) (0.5 g/L)
+10.0 g Hallertau Tradition Pellet (4.9% Alpha) @ 30 Minutes (Boil) (0.5 g/L)
+10.0 g Hallertau Tradition Pellet (4.9% Alpha) @ 0 Minutes (Boil) (0.5 g/L)
+
+Misc Bill
+----------------
+2.0 g Whirlfloc Tablet @ 15 Minutes (Boil)
+
+Single step Infusion at 68°C for 60 Minutes.
+Fermented at 18°C with Safbrew WB-06
+
+Notes
+----------------
+El rendimiento fue malisimo, pero porque se me apelmazo la cama de granos y se me tapo todo, revolvi, hice canales, de todo.. una kk
+
+Recipe Generated with BrewMate

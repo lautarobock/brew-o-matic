@@ -1,0 +1,39 @@
+MacGyBeer Brown Ale #17
+American Brown Ale
+
+Recipe Specs
+----------------
+Batch Size (L):           20.8
+Total Grain (kg):         7.200
+Total Hops (g):           41.00
+Original Gravity (OG):    1.059  (°P): 14.5
+Final Gravity (FG):       1.009  (°P): 2.3
+Alcohol by Volume (ABV):  6.49 %
+Colour (SRM):             25.5   (EBC): 50.2
+Bitterness (IBU):         31.4   (Tinseth)
+Brewhouse Efficiency (%): 56
+Boil Time (Minutes):      75
+
+Grain Bill
+----------------
+5.000 kg Pilsner (69.44%)
+1.400 kg Munich I (19.44%)
+0.400 kg Crystal 140 (5.56%)
+0.200 kg Chocolate (2.78%)
+0.200 kg Crystal 60 (2.78%)
+
+Hop Bill
+----------------
+18.0 g Magnum Pellet (12% Alpha) @ 75 Minutes (First Wort) (0.9 g/L)
+10.0 g East Kent Golding Pellet (5% Alpha) @ 30 Minutes (Boil) (0.5 g/L)
+13.0 g East Kent Golding Pellet (5% Alpha) @ 0 Minutes (Boil) (0.6 g/L)
+
+Misc Bill
+----------------
+2.0 g Whirlfloc Tablet @ 15 Minutes (Boil)
+
+Single step Infusion at 65°C for 70 Minutes.
+Fermented at 19°C with Danstar Nottingham
+
+
+Recipe Generated with BrewMate

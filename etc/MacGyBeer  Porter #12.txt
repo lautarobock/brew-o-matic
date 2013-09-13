@@ -1,0 +1,43 @@
+MacGyBeer  Porter #12
+Robust Porter
+
+Recipe Specs
+----------------
+Batch Size (L):           23.0
+Total Grain (kg):         6.000
+Total Hops (g):           30.00
+Original Gravity (OG):    1.052  (°P): 12.9
+Final Gravity (FG):       1.013  (°P): 3.3
+Alcohol by Volume (ABV):  5.11 %
+Colour (SRM):             29.8   (EBC): 58.7
+Bitterness (IBU):         18.9   (Tinseth)
+Brewhouse Efficiency (%): 65
+Boil Time (Minutes):      75
+
+Grain Bill
+----------------
+5.000 kg Pilsner (83.33%)
+0.200 kg Caraaroma (3.33%)
+0.200 kg Carafa I malt (3.33%)
+0.200 kg Carafa III malt (3.33%)
+0.200 kg Caramunich I (3.33%)
+0.200 kg Rauchmalt (3.33%)
+
+Hop Bill
+----------------
+20.0 g Cascade Pellet (7.1% Alpha) @ 60 Minutes (Boil) (0.9 g/L)
+10.0 g East Kent Golding Pellet (5% Alpha) @ 30 Minutes (Boil) (0.4 g/L)
+
+Misc Bill
+----------------
+2.0 g Whirlfloc Tablet @ 15 Minutes (Boil)
+
+Single step Infusion at 67°C for 60 Minutes.
+Fermented at 16°C with Danstar Nottingham
+
+Notes
+----------------
+las maltas especiales son todas importadas.
+Donde puse rauch. va malta ahumada
+
+Recipe Generated with BrewMate

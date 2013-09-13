@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href='http://www.brewmate.net/brewmate.xsl' type='text/xsl'?>
+<!--BeerXML Format Recipe - Generated with BrewMate - www.brewmate.net-->
+<RECIPES>
+  <RECIPE>
+    <NAME>MacGyBeer Original ##</NAME>
+    <VERSION>1</VERSION>
+    <TYPE>All Grain</TYPE>
+    <STYLE>
+      <NAME>Northern English Brown Ale</NAME>
+    </STYLE>
+    <BREWER>Lautaro - MacGyBeer</BREWER>
+    <BATCH_SIZE>26</BATCH_SIZE>
+    <BOIL_SIZE>29.25</BOIL_SIZE>
+    <BOIL_TIME>75</BOIL_TIME>
+    <EFFICIENCY>66</EFFICIENCY>
+    <HOPS>
+      <HOP>
+        <NAME>Mapuche</NAME>
+        <VERSION>1</VERSION>
+        <ALPHA>7.7</ALPHA>
+        <AMOUNT>0.02</AMOUNT>
+        <USE>Boil</USE>
+        <TIME>60</TIME>
+        <FORM>Pellet</FORM>
+      </HOP>
+      <HOP>
+        <NAME>East Kent Golding</NAME>
+        <VERSION>1</VERSION>
+        <ALPHA>4.7</ALPHA>
+        <AMOUNT>0.02</AMOUNT>
+        <USE>Boil</USE>
+        <TIME>30</TIME>
+        <FORM>Pellet</FORM>
+      </HOP>
+      <HOP>
+        <NAME>East Kent Golding</NAME>
+        <VERSION>1</VERSION>
+        <ALPHA>4.7</ALPHA>
+        <AMOUNT>0.02</AMOUNT>
+        <USE>Boil</USE>
+        <TIME>0</TIME>
+        <FORM>Pellet</FORM>
+      </HOP>
+    </HOPS>
+    <FERMENTABLES>
+      <FERMENTABLE>
+        <NAME>Pilsner</NAME>
+        <VERSION>1</VERSION>
+        <AMOUNT>5.000</AMOUNT>
+        <TYPE>Grain</TYPE>
+        <YIELD>80.434782608695485</YIELD>
+        <COLOR>1.7</COLOR>
+        <POTENTIAL>1.037</POTENTIAL>
+        <PERCENTAGE>75.76</PERCENTAGE>
+      </FERMENTABLE>
+      <FERMENTABLE>
+        <NAME>Munich I</NAME>
+        <VERSION>1</VERSION>
+        <AMOUNT>1.000</AMOUNT>
+        <TYPE>Grain</TYPE>
+        <YIELD>82.608695652173992</YIELD>
+        <COLOR>7.1</COLOR>
+        <POTENTIAL>1.038</POTENTIAL>
+        <PERCENTAGE>15.15</PERCENTAGE>
+      </FERMENTABLE>
+      <FERMENTABLE>
+        <NAME>Chocolate</NAME>
+        <VERSION>1</VERSION>
+        <AMOUNT>0.200</AMOUNT>
+        <TYPE>Grain</TYPE>
+        <YIELD>63.043478260869378</YIELD>
+        <COLOR>350</COLOR>
+        <POTENTIAL>1.029</POTENTIAL>
+        <PERCENTAGE>3.03</PERCENTAGE>
+      </FERMENTABLE>
+      <FERMENTABLE>
+        <NAME>Crystal 120</NAME>
+        <VERSION>1</VERSION>
+        <AMOUNT>0.200</AMOUNT>
+        <TYPE>Grain</TYPE>
+        <YIELD>71.739130434782425</YIELD>
+        <COLOR>120</COLOR>
+        <POTENTIAL>1.033</POTENTIAL>
+        <PERCENTAGE>3.03</PERCENTAGE>
+      </FERMENTABLE>
+      <FERMENTABLE>
+        <NAME>Crystal 140</NAME>
+        <VERSION>1</VERSION>
+        <AMOUNT>0.200</AMOUNT>
+        <TYPE>Grain</TYPE>
+        <YIELD>71.739130434782425</YIELD>
+        <COLOR>140</COLOR>
+        <POTENTIAL>1.033</POTENTIAL>
+        <PERCENTAGE>3.03</PERCENTAGE>
+      </FERMENTABLE>
+    </FERMENTABLES>
+    <MISCS>
+      <MISC>
+        <NAME>Whirlfloc Tablet</NAME>
+        <VERSION>1</VERSION>
+        <TYPE>Fining</TYPE>
+        <USE>Boil</USE>
+        <TIME>15</TIME>
+        <AMOUNT>0.002</AMOUNT>
+      </MISC>
+    </MISCS>
+    <YEASTS>
+      <YEAST>
+        <NAME>Danstar Nottingham</NAME>
+        <VERSION>1</VERSION>
+        <ATTENUATION>75</ATTENUATION>
+      </YEAST>
+    </YEASTS>
+    <WATERS></WATERS>
+    <MASH>
+      <NAME></NAME>
+      <VERSION>1</VERSION>
+      <MASH_STEPS>
+        <MASH_STEP>
+          <NAME>Saccharification Rest</NAME>
+          <VERSION>1</VERSION>
+          <TYPE>Infusion</TYPE>
+          <STEP_TEMP>68</STEP_TEMP>
+          <STEP_TIME>70</STEP_TIME>
+        </MASH_STEP>
+      </MASH_STEPS>
+    </MASH>
+    <NOTES></NOTES>
+    <OG>1.051</OG>
+    <PRIMARY_TEMP>19</PRIMARY_TEMP>
+    <!--BrewMate XLST-->
+    <FG>1.013</FG>
+    <CALCCOLOUR>20.1</CALCCOLOUR>
+    <CALCIBU>21.4</CALCIBU>
+    <!--BrewMate Specific Settings-->
+    <BIAB>0</BIAB>
+    <IBUCalcMethod>0</IBUCalcMethod>
+    <GrainCalcMethod>2</GrainCalcMethod>
+    <StyleNaziMode>1</StyleNaziMode>
+    <IsNoChill>0</IsNoChill>
+    <GrainUnits>1</GrainUnits>
+    <HopsUnits>0</HopsUnits>
+    <VolumeUnits>1</VolumeUnits>
+    <TemperatureUnits>0</TemperatureUnits>
+    <Colour>0</Colour>
+    <GrainTemp>0</GrainTemp>
+    <StrikeWater>0</StrikeWater>
+    <GrainAbsorbtion>0.9</GrainAbsorbtion>
+    <WatertoGrainRatio></WatertoGrainRatio>
+    <SpargeDeadSpace></SpargeDeadSpace>
+    <SpargeTempDesired>0</SpargeTempDesired>
+    <TopUpWater></TopUpWater>
+    <PercentEvap></PercentEvap>
+    <TrubChillerLosses></TrubChillerLosses>
+    <calendarpressed>0</calendarpressed>
+    <brewdayDate></brewdayDate>
+    <yeastpitchDate></yeastpitchDate>
+    <primaryDate></primaryDate>
+    <secondaryDate></secondaryDate>
+    <keggingDate></keggingDate>
+    <serveDate></serveDate>
+    <brewdayEnabled>1</brewdayEnabled>
+    <yeastpitchEnabled>1</yeastpitchEnabled>
+    <primaryEnabled>1</primaryEnabled>
+    <secondaryEnabled>0</secondaryEnabled>
+    <keggingEnabled>1</keggingEnabled>
+    <serveEnabled>1</serveEnabled>
+  </RECIPE>
+</RECIPES>
