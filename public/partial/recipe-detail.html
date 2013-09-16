@@ -1,9 +1,9 @@
-<div class="panel panel-default">
+<div class="panel panel-default" id="RecipeDetailCtrl">
     <div class="panel-body">
         <div class="row">
             <div class="col-lg-4">
                 <label for="name">Nombre</label>
-                <input type="text" class="form-control" id="name" placeholder="Nombre">
+                <input type="text" class="form-control" id="name" placeholder="Nombre" ng-model="recipe.NAME">
             </div>
             <div class="col-lg-2">
               <label for="batch_size">Batch (L)</label>
@@ -25,7 +25,7 @@
         <div class="row">
             <div class="col-lg-4">
                 <label for="style">Style</label>
-                <input type="text" class="form-control" id="style" placeholder="Estilo">
+                <input type="text" class="form-control" id="style" placeholder="Estilo" ng-model="recipe.STYLE.NAME">
             </div>
             <div class="col-lg-2">
               <label for="EFFICIENCY">Eficiencia</label>
@@ -70,6 +70,67 @@
     <div class="panel-body">
         
     </div>
+</div>
+<div class="panel panel-default" >
+    <div class="panel-heading">Cargar desde BrewMate</div>
+    <div class="panel-body" ng-show="importEnabled">
+        <input class="form-control input-sm" type="file" id="file" name="files[]" />
+    </div>
+    <div class="panel-body" ng-hide="importEnabled">
+        The File APIs are not fully supported in this browser.    
+    </div>
+    <script>
+        function handleFileSelect(evt) {
+        var files = evt.target.files; // FileList object
+
+        // files is a FileList of File objects. List some properties.
+        for (var i = 0, f; f = files[i]; i++) {
+          var reader = new FileReader();
+          reader.onload = (function(theFile) {
+            return function(e) {
+              // Render thumbnail.
+                var xotree = new XML.ObjTree();
+                var xml = e.target.result;
+                var tree = xotree.parseXML( xml );       	// source to tree
+                
+                var scope = angular.element(document.getElementById('RecipeDetailCtrl')).scope();
+                scope.recipe = tree.RECIPES.RECIPE;
+                scope.recipe.CALCCOLOUR = parseFloat(scope.recipe.CALCCOLOUR);
+                scope.recipe.BATCH_SIZE = parseFloat(scope.recipe.BATCH_SIZE);
+                scope.recipe.EFFICIENCY = parseFloat(scope.recipe.EFFICIENCY);
+                scope.recipe.OG = parseFloat(scope.recipe.OG);
+                scope.recipe.FG = parseFloat(scope.recipe.FG);
+                scope.recipe.CALCIBU = parseFloat(scope.recipe.CALCIBU);
+                
+                scope.recipe.totalAmount = 0;
+                angular.forEach(scope.recipe.FERMENTABLES.FERMENTABLE,function(ferm) {
+                    ferm.AMOUNT = parseFloat(ferm.AMOUNT);
+                    ferm.COLOR = parseFloat(ferm.COLOR);
+                    ferm.POTENTIAL = parseFloat(ferm.POTENTIAL);
+                    ferm.PERCENTAGE = parseFloat(ferm.PERCENTAGE);
+                    scope.recipe.totalAmount += ferm.AMOUNT;
+                });
+                
+                scope.recipe.totalHop = 0;
+                angular.forEach(scope.recipe.HOPS.HOP,function(hop) {
+                    hop.ALPHA = parseFloat(hop.ALPHA);
+                    hop.AMOUNT = parseFloat(hop.AMOUNT);
+                    hop.TIME = parseFloat(hop.TIME);
+                    scope.recipe.totalHop += hop.AMOUNT;
+                });
+                
+                scope.recipe.YEASTS.YEAST = [scope.recipe.YEASTS.YEAST];
+                scope.recipe.YEASTS.YEAST[0].ATTENUATION = parseFloat(scope.recipe.YEASTS.YEAST[0].ATTENUATION);
+                scope.changeYeast();
+                scope.$apply();
+                
+            };
+          })(f);
+          reader.readAsText(f);
+        }
+    }
+    document.getElementById('file').addEventListener('change', handleFileSelect, false);
+    </script>
 </div>
 <div class="pull-right">
     <button type="button" class="btn btn-default">Cancelar</button>

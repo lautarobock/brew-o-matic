@@ -576,6 +576,12 @@
                 }
             });
         };
+        
+        $scope.importEnabled = angular.isDefined(window.File)
+                                && angular.isDefined(window.FileReader)
+                                && angular.isDefined(window.FileList)
+                                && angular.isDefined(window.Blob);
+        
     });
     
     index.factory('Person',function($resource) {
@@ -584,4 +590,7 @@
             findByFb: {method: 'GET', params: {}, isArray:false}
         });
     });
+    
+    
+    
 })();
