@@ -309,100 +309,132 @@
 
     index.controller("RecipeDetailCtrl", function ($scope,BrewHelper) {
         
+        //$scope.recipe = {
+        //    "GrainCalcMethod": "2",
+        //    totalAmount: 7.2,
+        //    totalHop: 0.041,
+        //    CALCCOLOUR: 25.5,
+        //    BATCH_SIZE: 20.8,
+        //    EFFICIENCY: 56,
+        //    OG: 1.059,
+        //    CALCIBU: 31.4,
+        //    FG: 1.009,
+        //    "FERMENTABLES": {
+        //        "FERMENTABLE": [
+        //          {
+        //            "NAME": "Pilsner",
+        //            "VERSION": "1",
+        //            "AMOUNT": 5.000,
+        //            "TYPE": "Grain",
+        //            "YIELD": "80.434782608695485",
+        //            "COLOR": 1.7,
+        //            "POTENTIAL": 1.037,
+        //            "PERCENTAGE": 69.44
+        //          },
+        //          {
+        //            "NAME": "Munich I",
+        //            "VERSION": "1",
+        //            "AMOUNT": 1.400,
+        //            "TYPE": "Grain",
+        //            "YIELD": "82.608695652173992",
+        //            "COLOR": 7.1,
+        //            "POTENTIAL": 1.038,
+        //            "PERCENTAGE": 19.44
+        //          },
+        //          {
+        //            "NAME": "Crystal 140",
+        //            "VERSION": "1",
+        //            "AMOUNT": 0.400,
+        //            "TYPE": "Grain",
+        //            "YIELD": "71.739130434782425",
+        //            "COLOR": 140,
+        //            "POTENTIAL": 1.033,
+        //            "PERCENTAGE": 5.56
+        //          },
+        //          {
+        //            "NAME": "Chocolate",
+        //            "VERSION": "1",
+        //            "AMOUNT": 0.200,
+        //            "TYPE": "Grain",
+        //            "YIELD": "63.043478260869378",
+        //            "COLOR": 350,
+        //            "POTENTIAL": 1.029,
+        //            "PERCENTAGE": 2.78
+        //          },
+        //          {
+        //            "NAME": "Crystal 60",
+        //            "VERSION": "1",
+        //            "AMOUNT": 0.200,
+        //            "TYPE": "Grain",
+        //            "YIELD": "73.913043478260931",
+        //            "COLOR": 60,
+        //            "POTENTIAL": 1.034,
+        //            "PERCENTAGE": 2.78
+        //          }
+        //        ]
+        //    },
+        //    "HOPS": {
+        //        "HOP": [
+        //          {
+        //            "NAME": "Magnum",
+        //            "VERSION": "1",
+        //            "ALPHA": 12,
+        //            "AMOUNT": 0.018,
+        //            "USE": "First Wort",
+        //            "TIME": 70,
+        //            "FORM": "Pellet"
+        //          },
+        //          {
+        //            "NAME": "East Kent Golding",
+        //            "VERSION": "1",
+        //            "ALPHA": 5,
+        //            "AMOUNT": 0.01,
+        //            "USE": "Boil",
+        //            "TIME": 30,
+        //            "FORM": "Pellet"
+        //          },
+        //          {
+        //            "NAME": "East Kent Golding",
+        //            "VERSION": "1",
+        //            "ALPHA": 5,
+        //            "AMOUNT": 0.013,
+        //            "USE": "Boil",
+        //            "TIME": 0,
+        //            "FORM": "Pellet"
+        //          }
+        //        ]
+        //    },
+        //    "YEASTS": {
+        //      "YEAST": [{
+        //        "NAME": "Danstar Nottingham",
+        //        "VERSION": "1",
+        //        "ATTENUATION": 84
+        //      }]
+        //    },
+        //};
         $scope.recipe = {
             "GrainCalcMethod": "2",
-            totalAmount: 7.2,
-            totalHop: 0.041,
-            CALCCOLOUR: 25.5,
-            BATCH_SIZE: 20.8,
-            EFFICIENCY: 56,
-            OG: 1.059,
-            CALCIBU: 31.4,
+            totalAmount: 0,
+            totalHop: 0,
+            CALCCOLOUR: 0,
+            BATCH_SIZE: 20,
+            EFFICIENCY: 65,
+            OG: 1,
+            CALCIBU: 0,
+            FG: 1,
             "FERMENTABLES": {
-                "FERMENTABLE": [
-                  {
-                    "NAME": "Pilsner",
-                    "VERSION": "1",
-                    "AMOUNT": 5.000,
-                    "TYPE": "Grain",
-                    "YIELD": "80.434782608695485",
-                    "COLOR": 1.7,
-                    "POTENTIAL": 1.037,
-                    "PERCENTAGE": 69.44
-                  },
-                  {
-                    "NAME": "Munich I",
-                    "VERSION": "1",
-                    "AMOUNT": 1.400,
-                    "TYPE": "Grain",
-                    "YIELD": "82.608695652173992",
-                    "COLOR": 7.1,
-                    "POTENTIAL": 1.038,
-                    "PERCENTAGE": 19.44
-                  },
-                  {
-                    "NAME": "Crystal 140",
-                    "VERSION": "1",
-                    "AMOUNT": 0.400,
-                    "TYPE": "Grain",
-                    "YIELD": "71.739130434782425",
-                    "COLOR": 140,
-                    "POTENTIAL": 1.033,
-                    "PERCENTAGE": 5.56
-                  },
-                  {
-                    "NAME": "Chocolate",
-                    "VERSION": "1",
-                    "AMOUNT": 0.200,
-                    "TYPE": "Grain",
-                    "YIELD": "63.043478260869378",
-                    "COLOR": 350,
-                    "POTENTIAL": 1.029,
-                    "PERCENTAGE": 2.78
-                  },
-                  {
-                    "NAME": "Crystal 60",
-                    "VERSION": "1",
-                    "AMOUNT": 0.200,
-                    "TYPE": "Grain",
-                    "YIELD": "73.913043478260931",
-                    "COLOR": 60,
-                    "POTENTIAL": 1.034,
-                    "PERCENTAGE": 2.78
-                  }
-                ]
+                "FERMENTABLE": []
             },
             "HOPS": {
-                "HOP": [
-                  {
-                    "NAME": "Magnum",
-                    "VERSION": "1",
-                    "ALPHA": 12,
-                    "AMOUNT": 0.018,
-                    "USE": "First Wort",
-                    "TIME": 70,
-                    "FORM": "Pellet"
-                  },
-                  {
-                    "NAME": "East Kent Golding",
-                    "VERSION": "1",
-                    "ALPHA": 5,
-                    "AMOUNT": 0.01,
-                    "USE": "Boil",
-                    "TIME": 30,
-                    "FORM": "Pellet"
-                  },
-                  {
-                    "NAME": "East Kent Golding",
-                    "VERSION": "1",
-                    "ALPHA": 5,
-                    "AMOUNT": 0.013,
-                    "USE": "Boil",
-                    "TIME": 0,
-                    "FORM": "Pellet"
-                  }
-                ]
-            }
+                "HOP": []
+            },
+            "YEASTS": {
+              "YEAST": [{
+                "NAME": "",
+                "VERSION": "1",
+                "ATTENUATION": 75
+              }]
+            },
         };
         
         $scope.removeFermentable = function(fermentable) {
@@ -458,6 +490,7 @@
             $scope.recipe.OG = BrewHelper.toPotential(og);
             
             $scope.changeHop();
+            $scope.changeYeast();
         };
         
         $scope.hopGramsPerLiter = function(hop,batchSize) {
@@ -503,6 +536,21 @@
             $scope.recipe.CALCIBU = BrewHelper.round(ibu,10);
             
         };
+        
+        $scope.changeYeast = function() {
+            var OG = BrewHelper.toPpg($scope.recipe.OG);
+            var FG = OG * (100-$scope.recipe.YEASTS.YEAST[0].ATTENUATION)/100;
+            $scope.recipe.FG = BrewHelper.toPotential(FG);
+            $scope.recipe.ABV = BrewHelper.round((OG-FG)*0.131,100);
+            
+            //Balance Value
+            var AA = (OG-FG)/OG;
+            
+            var RTE = 0.82 * FG + 0.18 * OG;
+            
+            $scope.recipe.BV = BrewHelper.round(0.8 * $scope.recipe.CALCIBU / RTE,100);
+        };
+        $scope.changeYeast();
         
         $scope.convertColor = function(srm) {
             if ( srm > 40 ) {

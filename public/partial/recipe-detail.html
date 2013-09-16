@@ -15,11 +15,11 @@
             </div>
             <div class="col-lg-2">
               <label for="ibu">IBU</label>
-              <input type="number" class="form-control" id="ibu" readonly="true" ng-model="recipe.CALCIBU">
+              <input type="text" class="form-control" id="ibu" readonly="true" ng-model="recipe.CALCIBU">
             </div>
             <div class="col-lg-2">
               <label for="balance">Balance</label>
-              <input type="number" class="form-control" id="balance" readonly="true">
+              <input type="text" class="form-control" id="balance" readonly="true" ng-model="recipe.BV"/>
             </div>
         </div>
         <div class="row">
@@ -33,15 +33,15 @@
             </div>
             <div class="col-lg-2">
               <label for="fg">FG</label>
-              <input type="number" class="form-control" id="fg" readonly="true">
+              <input type="text" class="form-control" id="fg" readonly="true" ng-model="recipe.FG"/>
             </div>
             <div class="col-lg-2">
               <label for="bugu">BU/GU</label>
-              <input type="number" class="form-control" id="bugu" readonly="true" value="{{calulateBUGU(recipe.CALCIBU,recipe.OG)|number:2}}"/>
+              <input type="text" class="form-control" id="bugu" readonly="true" value="{{calulateBUGU(recipe.CALCIBU,recipe.OG)|number:2}}"/>
             </div>
             <div class="col-lg-2">
               <label for="abv">Alcohol (ABV) %</label>
-              <input type="number" class="form-control" id="abv" readonly="true">
+              <input type="text" class="form-control" id="abv" readonly="true" ng-model="recipe.ABV"/>
             </div>
         </div>
     </div>
@@ -49,13 +49,24 @@
 <ng-include src="'partial/recipe-detail-fermentables.html'"></ng-include>
 <ng-include src="'partial/recipe-detail-hops.html'"></ng-include>
 <div class="panel panel-default">
-    <div class="panel-heading">Otros</div>
-    <div class="panel-body">
-        
-    </div>
+    <div class="panel-heading">Levadura</div>
+    <table class="table table-condensed table-hover">
+      <thead>
+        <tr>
+          <th style="width:90%">Levadura</th>
+          <th style="width:10%">Atenuacion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="yeast in recipe.YEASTS.YEAST">
+            <td><input class="form-control input-sm" type="text" ng-model="yeast.NAME"/></td>
+            <td><input ng-change="changeYeast()" class="form-control input-sm" type="number" ng-model="yeast.ATTENUATION"/></td>
+        </tr>
+      </tbody>
+    </table>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading">Levadura</div>
+    <div class="panel-heading">Otros</div>
     <div class="panel-body">
         
     </div>
