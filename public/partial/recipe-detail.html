@@ -10,8 +10,8 @@
               <input ng-change="changeAmount()" type="number" class="form-control" id="batch_size" step="0.1" ng-model="recipe.BATCH_SIZE">
             </div>
             <div class="col-lg-2">
-              <label for="og">OG</label>
-              <input type="number" class="form-control" id="og" value="1.050">
+              <label for="OG">OG</label>
+              <input type="number" class="form-control" id="OG" ng-model="recipe.OG" step="0.001" disabled>
             </div>
             <div class="col-lg-2">
               <label for="ibu">IBU</label>
@@ -28,8 +28,8 @@
                 <input type="text" class="form-control" id="style" placeholder="Estilo">
             </div>
             <div class="col-lg-2">
-              <label for="eficiency">Eficiencia</label>
-              <input type="number" class="form-control" id="eficiency" value="70">
+              <label for="EFFICIENCY">Eficiencia</label>
+              <input ng-change="changeAmount()" type="number" class="form-control" id="EFFICIENCY" ng-model="recipe.EFFICIENCY">
             </div>
             <div class="col-lg-2">
               <label for="fg">FG</label>
@@ -46,67 +46,8 @@
         </div>
     </div>
 </div>
-<div class="panel panel-default">
-    <div class="panel-heading">Granos</div>
-    <div class="panel-body">
-        <div class="form-inline pull-right" role="form">
-            <strong>Modo:</strong>
-            <label class="radio-inline">
-                <input type="radio"
-                        ng-model="recipe.GrainCalcMethod"
-                        name="GrainCalcMethod"
-                        value="1" disabled> %
-            </label>
-            <label class="radio-inline">
-                <input type="radio"
-                        ng-model="recipe.GrainCalcMethod"
-                        name="GrainCalcMethod"
-                        value="2" disabled> Kg
-            </label>
-        </div>
-    </div>
-    <table class="table table-condensed table-hover">
-      <thead>
-        <tr>
-          <th style="width:50%">Grano/Fermentable</th>
-          <th style="width:10%">Extracto</th>
-          <th style="width:10%">Color</th>
-          <th style="width:10%">%</th>
-          <th style="width:10%">Kg</th>
-          <th style="width:2%"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="fermentable in recipe.FERMENTABLES.FERMENTABLE">
-            <td><input class="form-control input-sm" type="text" ng-model="fermentable.NAME"/></td>
-            <td><input class="form-control input-sm" type="number" step="0.001" ng-model="fermentable.POTENTIAL"/></td>
-            <td><input ng-change="changeAmount()" class="form-control input-sm" type="number" step="0.1" ng-model="fermentable.COLOR"/></td>
-            <td><input ng-disabled="recipe.GrainCalcMethod==2" class="form-control input-sm" type="number" step="0.01" ng-model="fermentable.PERCENTAGE"/></td></td>
-            <td><input ng-change="changeAmount()" ng-disabled="recipe.GrainCalcMethod==1" class="form-control input-sm" type="number" step="0.1" ng-model="fermentable.AMOUNT"/></td></td>
-            <td>
-                <button type="button" class="close" aria-hidden="true" ng-click="removeFermentable(fermentable)">&times;</button>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="4"><strong class="pull-right">Total:</strong></td>
-            <td>{{recipe.totalAmount | number:3}}</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="panel-body">
-        <button type="button" class="btn btn-default pull-right" ng-click="addFermentable()">Agregar</button>
-        <strong>Color:</strong> {{recipe.CALCCOLOUR | number:1}} SRM
-        <div style="border: 1px solid; width: 100px; height: 30px; background-color: {{convertColor(recipe.CALCCOLOUR)}}">
-            
-        </div>
-    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading">Lupulos</div>
-    <div class="panel-body">
-        
-    </div>
-</div>
+<ng-include src="'partial/recipe-detail-fermentables.html'"></ng-include>
+<ng-include src="'partial/recipe-detail-hops.html'"></ng-include>
 <div class="panel panel-default">
     <div class="panel-heading">Otros</div>
     <div class="panel-body">

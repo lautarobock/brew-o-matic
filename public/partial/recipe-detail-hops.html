@@ -1,0 +1,45 @@
+<div class="panel panel-default">
+    <div class="panel-heading">Lupulos</div>
+    <table class="table table-condensed table-hover">
+      <thead>
+        <tr>
+          <th style="width:26%">Lupulo</th>
+          <th style="width:8%">Alpha</th>
+          <th style="width:12%">Modo</th>
+          <th style="width:10%">Kg</th>
+          <th style="width:8%">g/L</th>
+          <th style="width:8%">%</th>
+          <th style="width:12%">Uso</th>
+          <th style="width:8%">Tiempo</th>
+          <th style="width:8%">IBU</th>
+          <th style="width:2%"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="hop in recipe.HOPS.HOP">
+            <td><input class="form-control input-sm" type="text" ng-model="hop.NAME"/></td>
+            <td><input ng-change="changeHop()" class="form-control input-sm" type="number" step="0.1" ng-model="hop.ALPHA"/></td>
+            <td><input class="form-control input-sm" type="text" ng-model="hop.FORM" disabled/></td>
+            <td><input ng-change="changeHop()" class="form-control input-sm" type="number" step="0.001" ng-model="hop.AMOUNT"/></td>
+            <td><input class="form-control input-sm" type="text" disabled value="{{hopGramsPerLiter(hop,recipe.BATCH_SIZE)|number:2}}"/></td>
+            <td><input class="form-control input-sm" type="text" value="{{hopPercentage(hop,recipe.totalHop)|number:2}}" disabled/></td>
+            <td><input class="form-control input-sm" type="text" ng-model="hop.USE" disabled/></td>
+            <td><input ng-change="changeHop()" class="form-control input-sm" type="number" ng-model="hop.TIME"/></td>
+            <td><input class="form-control input-sm" type="text" value="{{hopIBU(hop,recipe.totalHop)}}" disabled/></td>
+            <td>
+                <button type="button" class="close" aria-hidden="true" ng-click="removeHop(hop)">&times;</button>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3"><strong class="pull-right">Total:</strong></td>
+            <td>{{recipe.totalHop | number:3}}</td>
+            <td colspan="4"><strong class="pull-right">IBUs:</strong></td>
+            <td>XX</td>
+            <td></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="panel-body">
+        <button type="button" class="btn btn-default pull-right" ng-click="addHop()">Agregar</button>
+    </div>
+</div>

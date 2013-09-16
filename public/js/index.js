@@ -1,17 +1,34 @@
 (function() {
-    
-//    var SRM = ['#FFFFFF','#F3F993','#F5F75C','#F6F513','#EAE615','#E0D01B','#D5BC26','#CDAA37','#C1963C','#BE8C3A','#BE823A','#C17A37','#BF7138',
-//        '#BC6733','#B26033','#A85839','#985336','#8D4C32','#7C452D','#6B3A1E','#5D341A','#4E2A0C','#4A2727','#361F1B','#261716','#231716','#19100F',
-//        '#16100F','#120D0C','#100B0A','#050B0A'];
 
     var SRM = ['#FFFFFF','FFE699' , '#FFD878' , '#FFCA5A' , '#FFBF42' , '#FBB123' , '#F8A600' , '#F39C00' , '#EA8F00' , '#E58500' , '#DE7C00',
                 '#D77200' , '#CF6900' , '#CB6200' , '#C35900' , '#BB5100' , '#B54C00' , '#B04500' , '#A63E00' , '#A13700' , '#9B3200',
                 '#952D00' , '#8E2900' , '#882300' , '#821E00' , '#7B1A00' , '#771900' , '#701400' , '#6A0E00' , '#660D00' , '#5E0B00',
                 '#5A0A02' , '#600903' , '#520907' , '#4C0505' , '#470606' , '#440607' , '#3F0708' , '#3B0607' , '#3A070B' , '#36080A'];
+    
     var index = angular.module('index', ['ngResource']);
     
     index.controller("RecipeListCtrl", function ($scope) {
         
+    });
+ 
+    index.factory("BrewHelper",function() {
+        return {
+            toLbs: function(kg) {
+                return kg / 0.45359;
+            },
+            toGal: function(liters) {
+                return liters * 0.264172052637296;
+            },
+            toPpg: function(potential) {
+                return potential * 1000 - 1000;
+            },
+            toPotential: function(ppg) {
+                return this.round((ppg + 1000) / 1000,1000);
+            },
+            round: function (value, zeros) {
+                return Math.round(value*zeros)/zeros;
+            }
+        };
     });
  
     index.
@@ -33,13 +50,16 @@
     });
     
 
-    index.controller("RecipeDetailCtrl", function ($scope) {
+    index.controller("RecipeDetailCtrl", function ($scope,BrewHelper) {
         
         $scope.recipe = {
             "GrainCalcMethod": "2",
             totalAmount: 7.2,
+            totalHop: 0.041,
             CALCCOLOUR: 25.5,
             BATCH_SIZE: 20.8,
+            EFFICIENCY: 56,
+            OG: 1.059,
             "FERMENTABLES": {
                 "FERMENTABLE": [
                   {
@@ -93,11 +113,38 @@
                     "PERCENTAGE": 2.78
                   }
                 ]
+            },
+            "HOPS": {
+                "HOP": [
+                  {
+                    "NAME": "Magnum",
+                    "VERSION": "1",
+                    "ALPHA": 12,
+                    "AMOUNT": 0.018,
+                    "USE": "First Wort",
+                    "TIME": 75,
+                    "FORM": "Pellet"
+                  },
+                  {
+                    "NAME": "East Kent Golding",
+                    "VERSION": "1",
+                    "ALPHA": 5,
+                    "AMOUNT": 0.01,
+                    "USE": "Boil",
+                    "TIME": 30,
+                    "FORM": "Pellet"
+                  },
+                  {
+                    "NAME": "East Kent Golding",
+                    "VERSION": "1",
+                    "ALPHA": 5,
+                    "AMOUNT": 0.013,
+                    "USE": "Boil",
+                    "TIME": 0,
+                    "FORM": "Pellet"
+                  }
+                ]
             }
-        };
-
-        function round(value, zeros) {
-            return Math.round(value*zeros)/zeros;
         };
         
         $scope.removeFermentable = function(fermentable) {
@@ -134,7 +181,7 @@
             
             //Percetajes
             angular.forEach($scope.recipe.FERMENTABLES.FERMENTABLE,function(f) {
-                f.PERCENTAGE = round(f.AMOUNT/$scope.recipe.totalAmount*100,100);
+                f.PERCENTAGE = BrewHelper.round(f.AMOUNT/$scope.recipe.totalAmount*100,100);
             });
             
             //Color
@@ -143,10 +190,55 @@
                 colourMCU += ((f.AMOUNT / 0.45359) * f.COLOR) / ($scope.recipe.BATCH_SIZE*0.264172052637296);
             });
             $scope.recipe.CALCCOLOUR = 1.4922 * Math.pow(colourMCU,0.6859);
+            
+            //OG
+            var og = 0;
+            angular.forEach($scope.recipe.FERMENTABLES.FERMENTABLE,function(f) {
+                og += BrewHelper.toLbs(f.AMOUNT) * BrewHelper.toPpg(f.POTENTIAL) * ($scope.recipe.EFFICIENCY/100)
+                        / BrewHelper.toGal($scope.recipe.BATCH_SIZE);
+            });
+            $scope.recipe.OG = BrewHelper.toPotential(og);
+        };
+        
+        $scope.hopGramsPerLiter = function(hop,batchSize) {
+            return hop.AMOUNT*1000/batchSize;
+        };
+        
+        $scope.hopPercentage = function(hop,totalHop) {
+            return hop.AMOUNT/totalHop*100;
+        };
+        
+        $scope.hopIBU = function(hop,totalHop) {
+            return 0;
+        };
+        
+        $scope.removeHop = function(hop) {
+            var index = $scope.recipe["HOPS"]["HOP"].indexOf(hop);
+            $scope.recipe["HOPS"]["HOP"].splice(index, 1);
+        };
+        
+        $scope.addHop = function() {
+            $scope.recipe["HOPS"]["HOP"].push({
+                "NAME": "East Kent Golding",
+                "VERSION": "1",
+                "ALPHA": 5,
+                "AMOUNT": 0.01,
+                "USE": "Boil",
+                "TIME": 30,
+                "FORM": "Pellet"
+            });
+        };
+        
+        $scope.changeHop = function() {
+            var amount = 0;
+            angular.forEach($scope.recipe.HOPS.HOP,function(hop) {
+                amount += hop.AMOUNT;
+            });
+            $scope.recipe.totalHop = amount;
         };
         
         $scope.convertColor = function(srm) {
-            if ( srm > 30 ) {
+            if ( srm > 40 ) {
                 return "black";
             } else if ( srm < 1 ) {
                 return "white";
