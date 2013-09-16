@@ -15,7 +15,7 @@
             </div>
             <div class="col-lg-2">
               <label for="ibu">IBU</label>
-              <input type="number" class="form-control" id="ibu" readonly="true">
+              <input type="number" class="form-control" id="ibu" readonly="true" ng-model="recipe.CALCIBU">
             </div>
             <div class="col-lg-2">
               <label for="balance">Balance</label>
@@ -37,7 +37,7 @@
             </div>
             <div class="col-lg-2">
               <label for="bugu">BU/GU</label>
-              <input type="number" class="form-control" id="bugu" readonly="true">
+              <input type="number" class="form-control" id="bugu" readonly="true" value="{{calulateBUGU(recipe.CALCIBU,recipe.OG)|number:2}}"/>
             </div>
             <div class="col-lg-2">
               <label for="abv">Alcohol (ABV) %</label>
@@ -50,6 +50,12 @@
 <ng-include src="'partial/recipe-detail-hops.html'"></ng-include>
 <div class="panel panel-default">
     <div class="panel-heading">Otros</div>
+    <div class="panel-body">
+        
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">Levadura</div>
     <div class="panel-body">
         
     </div>

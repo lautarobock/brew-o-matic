@@ -11,7 +11,7 @@
           <th style="width:8%">%</th>
           <th style="width:12%">Uso</th>
           <th style="width:8%">Tiempo</th>
-          <th style="width:8%">IBU</th>
+          <th style="width:6%">IBU</th>
           <th style="width:2%"></th>
         </tr>
       </thead>
@@ -24,8 +24,9 @@
             <td><input class="form-control input-sm" type="text" disabled value="{{hopGramsPerLiter(hop,recipe.BATCH_SIZE)|number:2}}"/></td>
             <td><input class="form-control input-sm" type="text" value="{{hopPercentage(hop,recipe.totalHop)|number:2}}" disabled/></td>
             <td><input class="form-control input-sm" type="text" ng-model="hop.USE" disabled/></td>
-            <td><input ng-change="changeHop()" class="form-control input-sm" type="number" ng-model="hop.TIME"/></td>
-            <td><input class="form-control input-sm" type="text" value="{{hopIBU(hop,recipe.totalHop)}}" disabled/></td>
+            <!--<td><input ng-change="changeHop()" class="form-control input-sm" type="number" ng-model="hop.TIME"/></td>-->
+            <td><select class="form-control input-sm" ng-change="changeHop()" ng-model="hop.TIME" ng-options="a for a in [0,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90,100,110,120]"></select></td>
+            <td><input class="form-control input-sm" type="text" value="{{hopIBU(hop)|number:2}}" disabled/></td>
             <td>
                 <button type="button" class="close" aria-hidden="true" ng-click="removeHop(hop)">&times;</button>
             </td>
@@ -34,7 +35,7 @@
             <td colspan="3"><strong class="pull-right">Total:</strong></td>
             <td>{{recipe.totalHop | number:3}}</td>
             <td colspan="4"><strong class="pull-right">IBUs:</strong></td>
-            <td>XX</td>
+            <td>{{recipe.CALCIBU|number:2}}</td>
             <td></td>
         </tr>
       </tbody>
