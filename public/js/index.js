@@ -238,7 +238,7 @@
         }
     };
     
-    var index = angular.module('index', ['ngResource']);
+    var index = angular.module('index', ['ngResource','data']);
     
     index.controller("RecipeListCtrl", function ($scope) {
         
@@ -307,7 +307,7 @@
     });
     
 
-    index.controller("RecipeDetailCtrl", function ($scope,BrewHelper) {
+    index.controller("RecipeDetailCtrl", function ($scope,BrewHelper,Grain) {
         
         //$scope.recipe = {
         //    "GrainCalcMethod": "2",
@@ -436,6 +436,8 @@
               }]
             },
         };
+        
+        $scope.grains = Grain.query();
         
         $scope.removeFermentable = function(fermentable) {
             var index = $scope.recipe["FERMENTABLES"]["FERMENTABLE"].indexOf(fermentable);
@@ -566,6 +568,14 @@
             return bu/BrewHelper.toPpg(gu);
         };
         
+        $scope.changeGrain = function(fermentable) {
+            angular.forEach($scope.grains,function(grain) {
+                if ( fermentable.NAME == grain.name) {
+                    fermentable.POTENTIAL = grain.potential;
+                    fermentable.COLOR = grain.colour;
+                }
+            });
+        };
     });
     
     index.factory('Person',function($resource) {
