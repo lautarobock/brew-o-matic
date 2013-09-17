@@ -2,8 +2,8 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-lg-4">
-                <label for="name">Nombre</label>
-                <input type="text" class="form-control" id="name" placeholder="Nombre" ng-model="recipe.NAME">
+                <label for="recipename">Nombre</label>
+                <input type="text" class="form-control" id="recipename" placeholder="Nombre" ng-model="recipe.NAME">
             </div>
             <div class="col-lg-2">
               <label for="batch_size">Batch (L)</label>
@@ -59,20 +59,47 @@
       </thead>
       <tbody>
         <tr ng-repeat="yeast in recipe.YEASTS.YEAST">
-            <td><input class="form-control input-sm" type="text" ng-model="yeast.NAME"/></td>
+            <!--<td><input class="form-control input-sm" type="text" ng-model="yeast.NAME"/></td>-->
+            <td>
+                <input ng-change="onChangeYeast(yeast)" class="form-control input-sm" type="text" ng-model="yeast.NAME" list="yeastNames" placeholder="Buscar Levaduras"/>
+                <datalist id="yeastNames">
+                    <option ng-repeat="yeast in yeasts" value="{{yeast.name}}">
+                        {{yeast.name}}
+                    </option>
+                </datalist>
+            </td>
             <td><input ng-change="changeYeast()" class="form-control input-sm" type="number" ng-model="yeast.ATTENUATION"/></td>
         </tr>
       </tbody>
     </table>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading">Otros</div>
+    <div class="panel-heading">Misc</div>
     <div class="panel-body">
         
     </div>
 </div>
-<div class="panel panel-default" >
-    <div class="panel-heading">Cargar desde BrewMate</div>
+<div style="overflow: hidden;margin-bottom: 1em;">
+    <div class="pull-left">
+        <a href="#/recipe/" type="button" class="btn btn-link glyphicon glyphicon-chevron-left"> Volver al listado</a>
+    </div>
+    <div class="pull-right">
+        <a href="#/recipe/" type="button" class="btn btn-default">Cancelar</a>
+        <button ng-click="save()" type="button" class="btn btn-primary">Guardar</button>
+    </div>
+</div>
+<div ng-repeat="notification in notifications">
+    <div class="alert alert-{{notification.type}} alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>{{notification.title}}</strong>
+        {{notification.text}}
+    </div>
+</div>
+
+
+<a ng-click="import=true" class="btn btn-link" ng-hide="import">Importar receta desde BrewMate</a>
+<div class="panel panel-default" ng-show="import">
+    <div class="panel-heading">Importar receta desde BrewMate</div>
     <div class="panel-body" ng-show="importEnabled">
         <input class="form-control input-sm" type="file" id="file" name="files[]" />
     </div>
@@ -122,6 +149,7 @@
                 scope.recipe.YEASTS.YEAST = [scope.recipe.YEASTS.YEAST];
                 scope.recipe.YEASTS.YEAST[0].ATTENUATION = parseFloat(scope.recipe.YEASTS.YEAST[0].ATTENUATION);
                 scope.changeYeast();
+                scope.recipe.date = new Date();
                 scope.$apply();
                 
             };
@@ -131,11 +159,4 @@
     }
     document.getElementById('file').addEventListener('change', handleFileSelect, false);
     </script>
-</div>
-<div class="pull-left">
-    <a href="#/recipe/" type="button" class="btn btn-link glyphicon glyphicon-chevron-left"> Volver al listado</a>
-</div>
-<div class="pull-right">
-    <a href="#/recipe/" type="button" class="btn btn-default">Cancelar</a>
-    <button ng-click="save()" type="button" class="btn btn-primary">Guardar</button>
 </div>

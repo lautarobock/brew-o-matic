@@ -17,7 +17,10 @@
             </label>
         </div>
     </div>
-    <table class="table table-condensed table-hover">
+    <div style="margin: 0 2em;" class="alert alert-info" ng-hide="recipe.FERMENTABLES.FERMENTABLE.length != 0">
+        Aun no tiene ningun fermentable en la receta
+    </div>
+    <table class="table table-condensed table-hover" ng-show="recipe.FERMENTABLES.FERMENTABLE.length != 0">
       <thead>
         <tr>
           <th style="width:50%">Grano/Fermentable</th>
