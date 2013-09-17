@@ -240,7 +240,12 @@
     
     var index = angular.module('index', ['ngResource','data']);
     
-    index.controller("RecipeListCtrl", function ($scope) {
+    index.controller("RecipeListCtrl", function ($scope,$rootScope) {
+        
+        $rootScope.breadcrumbs = [{
+                link: '#',
+                title: 'Home'
+        }];
         
         $scope.load = function() {
             if ( localStorage["brew-o-matic.recipes"] ) {
@@ -320,17 +325,27 @@
                 otherwise({redirectTo: '/recipe'});
     }]);
     
-    index.controller("MainController",function($scope,Person) {
+    index.controller("MainController",function($scope,Person,$rootScope) {
         //$scope.$on('fbdata',function(event,args) {
         //    $scope.me = Person.findByFb({fb_id:args.id});
         //});
         $scope.me = {
             name: 'User'
         };
+        $rootScope.breadcrumbs = [];
     });
     
 
-    index.controller("RecipeDetailCtrl", function ($scope,BrewHelper,Grain,Hop,Yeast,$routeParams) {
+    index.controller("RecipeDetailCtrl", function ($scope,BrewHelper,Grain,Hop,Yeast,$routeParams,$rootScope) {
+        
+        $rootScope.breadcrumbs = [{
+                link: '#',
+                title: 'Home'
+            },{
+                link: '#',
+                title: 'Recipe'
+            }];
+        
         
         if ( $routeParams.recipeId ) {
             var recipes = JSON.parse(localStorage["brew-o-matic.recipes"]);
