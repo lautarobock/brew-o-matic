@@ -16,6 +16,12 @@
               <th>Batch (L)</th>
             </tr>
           </thead>
+          <tbody>
+            <tr ng-repeat="(name,recipe) in recipes">
+                <td></td>
+                <td>{{ name }}</td>
+            </tr>
+          </tbody>
         </table>
     </div>
     <div class="panel panel-default" ng-hide="recipes">

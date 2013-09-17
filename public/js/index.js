@@ -241,7 +241,7 @@
     var index = angular.module('index', ['ngResource','data']);
     
     index.controller("RecipeListCtrl", function ($scope) {
-        
+        $scope.recipes = localStorage["brew-o-matic.recipes"];
     });
  
     index.factory("BrewHelper",function() {
@@ -434,7 +434,7 @@
                 "VERSION": "1",
                 "ATTENUATION": 75
               }]
-            },
+            }
         };
         
         $scope.grains = Grain.query();
@@ -452,13 +452,13 @@
              * 
              */
             $scope.recipe["FERMENTABLES"]["FERMENTABLE"].push({
-                "NAME": "Pilsner",
+                "NAME": "",
                 "VERSION": "1",
-                "AMOUNT": 1,
+                "AMOUNT": null,
                 "TYPE": "Grain",
                 "YIELD": 0, 
-                "COLOR": 1.7,
-                "POTENTIAL": 1.037,
+                "COLOR": null,
+                "POTENTIAL": null,
                 "PERCENTAGE": 100
             });
             $scope.changeAmount();
@@ -581,7 +581,12 @@
                                 && angular.isDefined(window.FileReader)
                                 && angular.isDefined(window.FileList)
                                 && angular.isDefined(window.Blob);
-        
+
+        $scope.save = function() {
+            var recipes = localStorage["brew-o-matic.recipes"] || {};
+            recipes[$scope.recipe.NAME] = $scope.recipe;
+            localStorage["brew-o-matic.recipes"] = recipes;
+        };
     });
     
     index.factory('Person',function($resource) {

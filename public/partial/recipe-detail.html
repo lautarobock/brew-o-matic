@@ -132,7 +132,10 @@
     document.getElementById('file').addEventListener('change', handleFileSelect, false);
     </script>
 </div>
+<div class="pull-left">
+    <a href="#/recipe/" type="button" class="btn btn-link glyphicon glyphicon-chevron-left"> Volver al listado</a>
+</div>
 <div class="pull-right">
-    <button type="button" class="btn btn-default">Cancelar</button>
-    <button type="button" class="btn btn-primary">Guardar</button>
+    <a href="#/recipe/" type="button" class="btn btn-default">Cancelar</a>
+    <button ng-click="save()" type="button" class="btn btn-primary">Guardar</button>
 </div>

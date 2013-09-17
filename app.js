@@ -32,7 +32,7 @@ if ('development' == app.get('env')) {
 }
 
 //Initialize Mongoose
-mongoose.connect('localhost', 'brew-o-matic');
+//mongoose.connect('localhost', 'brew-o-matic');
 
 var person = require("./routes/person.js");
 
