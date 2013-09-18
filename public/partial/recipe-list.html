@@ -13,15 +13,15 @@
               <th>%Alc</th>
               <th>IBUs</th>
               <th>Autor</th>
-              <th>Batch (L)</th>
-              <th></th>
+              <th style="width:90px">Batch (L)</th>
+              <th style="width:90px"></th>
             </tr>
           </thead>
           <tbody>
             <tr ng-repeat="recipe in recipes">
                 <td><a href="#/recipe/edit/{{encodeName(recipe._id)}}">#{{ $index+1 }}</a></td>
                 <td>{{ recipe.date|date:'dd-MM-yyyy' }}</td>
-                <td>{{ recipe.NAME }}</td>
+                <td>{{ recipe.NAME|limitText:17}}</td>
                 <td>{{ recipe.STYLE.NAME }}</td>
                 <td>{{ recipe.OG  }}</td>
                 <td>{{ recipe.FG  }}</td>

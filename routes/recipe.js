@@ -23,7 +23,7 @@ exports.remove= function(req, res) {
 
 
 function generateId(name,user_id) {
-    return name.replace(" ", "").replace("#","Nro") + user_id + (new Date()).getTime();
+    return name.replace(" ", "_").replace("#","_Nro_") + "-" + user_id + "-" + (new Date()).getTime();
 }
 
 exports.save = function(req, res) {

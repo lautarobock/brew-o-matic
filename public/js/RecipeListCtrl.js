@@ -2,6 +2,16 @@
 
     var index = angular.module('index');
 
+    index.filter("limitText", function() {
+        return function(value, limit) {
+            if ( value.length > limit ) {
+                return value.substring(0,limit) + "...";
+            } else {
+                return value;
+            }
+        };
+    });
+    
     index.controller("RecipeListCtrl", function ($scope,$rootScope,Recipe) {
 
         $rootScope.breadcrumbs = [{
