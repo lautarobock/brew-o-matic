@@ -34,11 +34,36 @@ if ('development' == app.get('env')) {
 //Initialize Mongoose
 mongoose.connect('localhost', 'brew-o-matic');
 
-var person = require("./routes/person.js");
+//app.get('/user/google_*', function(req,res,next){
+//    
+//    next();
+//});
+
+function filter (req,res,next){
+    console.log("checking session");
+    var s = req.session;
+    console.log("user: " + s.user_id);
+    if (s.user_id ) {
+        console.log("sigue");
+        next();
+    } else {
+        console.log("null");
+        res.send(null);
+    }
+}
+
+//app.all('/user*', filter);
+//app.all('/recipe*', filter);
+var recipe = require("./routes/recipe.js");
 
 //app.get('/', routes.index);
-app.get('/users', user.list);
-app.get('/person/fb:id',person.findByFb);
+app.get('/user/google_:google_id', user.getByGoogleId);
+app.post('/user', user.add);
+app.get('/recipe',recipe.findAll,filter)
+app.get('/recipe/:id',recipe.get)
+app.post('/recipe',recipe.save,filter)
+app.delete('/recipe/:id',recipe.remove,filter)
+//app.get('/person/fb:id',person.findByFb);
 //app.put('/person/fb:id',person.updateByFb);
 
 http.createServer(app).listen(app.get('port'), function(){

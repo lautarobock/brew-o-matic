@@ -1,7 +1,7 @@
 (function() {
     var index = angular.module('index');
 
-    index.controller("RecipeDetailCtrl", function ($scope,BrewHelper,Grain,Hop,Yeast,$routeParams,$rootScope) {
+    index.controller("RecipeDetailCtrl", function ($scope,BrewHelper,Grain,Hop,Yeast,$routeParams,$rootScope,Recipe) {
 
         $rootScope.breadcrumbs = [{
             link: '#',
@@ -11,40 +11,6 @@
             title: 'Recipe'
         }];
 
-
-        if ( $routeParams.recipeId ) {
-            var recipes = JSON.parse(localStorage["brew-o-matic.recipes"]);
-            if ( recipes[$routeParams.recipeId]) {
-                $scope.recipe = recipes[$routeParams.recipeId];
-            }
-
-        } else {
-            $scope.recipe = {
-                "GrainCalcMethod": "2",
-                date: new Date(),
-                totalAmount: 0,
-                totalHop: 0,
-                CALCCOLOUR: 0,
-                BATCH_SIZE: 20,
-                EFFICIENCY: 65,
-                OG: 1,
-                CALCIBU: 0,
-                FG: 1,
-                "FERMENTABLES": {
-                    "FERMENTABLE": []
-                },
-                "HOPS": {
-                    "HOP": []
-                },
-                "YEASTS": {
-                    "YEAST": [{
-                        "NAME": "",
-                        "VERSION": "1",
-                        "ATTENUATION": 75
-                    }]
-                }
-            };
-        }
 
 
         $scope.grains = Grain.query();
@@ -165,7 +131,6 @@
 
             $scope.recipe.BV = BrewHelper.round(0.8 * $scope.recipe.CALCIBU / RTE,100);
         };
-        $scope.changeYeast();
 
         $scope.convertColor = function(srm) {
             return BrewHelper.convertColor(srm);
@@ -217,16 +182,57 @@
                     text:'La receta debe tener un nombre'
                 });
             } else {
-                var recipes = localStorage["brew-o-matic.recipes"] || '{}';
-                recipes = JSON.parse(recipes);
-                recipes[$scope.recipe.NAME] = $scope.recipe;
-                localStorage["brew-o-matic.recipes"] = JSON.stringify(recipes);
-                $scope.notifications.push({
-                    type:'success',
-                    title:'Receta Guardada!',
-                    text:'Ya puedes acceder a esta receta localmente!'
+                //var recipes = localStorage["brew-o-matic.recipes"] || '{}';
+                //recipes = JSON.parse(recipes);
+                //recipes[$scope.recipe.NAME] = $scope.recipe;
+                //localStorage["brew-o-matic.recipes"] = JSON.stringify(recipes);
+                var recipe = new Recipe($scope.recipe);
+                recipe.$save(function(){
+                        $scope.notifications.push({
+                        type:'success',
+                        title:'Receta Guardada!',
+                        text:'Ya puedes acceder a esta receta localmente!'
+                    });
                 });
+                
             }
         };
+        
+        if ( $routeParams.recipeId ) {
+            //var recipes = JSON.parse(localStorage["brew-o-matic.recipes"]);
+            //if ( recipes[$routeParams.recipeId]) {
+            //    $scope.recipe = recipes[$routeParams.recipeId];
+            //}
+            $scope.recipe = Recipe.get({id:$routeParams.recipeId},function() {
+                $scope.changeYeast();
+            });
+        } else {
+            $scope.recipe = {
+                "GrainCalcMethod": "2",
+                date: new Date(),
+                totalAmount: 0,
+                totalHop: 0,
+                CALCCOLOUR: 0,
+                BATCH_SIZE: 20,
+                EFFICIENCY: 65,
+                OG: 1,
+                CALCIBU: 0,
+                FG: 1,
+                "FERMENTABLES": {
+                    "FERMENTABLE": []
+                },
+                "HOPS": {
+                    "HOP": []
+                },
+                "YEASTS": {
+                    "YEAST": [{
+                        "NAME": "",
+                        "VERSION": "1",
+                        "ATTENUATION": 75
+                    }]
+                }
+            };
+            $scope.changeYeast();
+        }
     });
 })();

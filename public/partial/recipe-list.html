@@ -1,5 +1,5 @@
 <div>
-    <div class="panel panel-default" ng-show="recipes">
+    <div class="panel panel-default" ng-show="recipes.length!=0">
         <div class="panel-heading"><strong>Mis Recetas</strong></div>
         <table class="table table-striped table-hover">
           <thead>
@@ -18,10 +18,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="(name,recipe) in recipes">
-                <td><a href="#/recipe/edit/{{encodeName(recipe.NAME)}}">#{{ $index+1 }}</a></td>
+            <tr ng-repeat="recipe in recipes">
+                <td><a href="#/recipe/edit/{{encodeName(recipe._id)}}">#{{ $index+1 }}</a></td>
                 <td>{{ recipe.date|date:'dd-MM-yyyy' }}</td>
-                <td>{{ name }}</td>
+                <td>{{ recipe.NAME }}</td>
                 <td>{{ recipe.STYLE.NAME }}</td>
                 <td>{{ recipe.OG  }}</td>
                 <td>{{ recipe.FG  }}</td>
@@ -30,8 +30,8 @@
                 <td>{{ recipe.BREWER }}</td>
                 <td>{{ recipe.BATCH_SIZE }}</td>
                 <td>
-                    <a href="#/recipe/edit/{{encodeName(recipe.NAME)}}" type="button" class="btn btn-primary btn-xs">editar</a>
-                    <button type="button" class="close" aria-hidden="true" ng-click="removeRecipe(name)">&times;</button>
+                    <a href="#/recipe/edit/{{encodeName(recipe._id)}}" type="button" class="btn btn-primary btn-xs">editar</a>
+                    <button type="button" class="close" aria-hidden="true" ng-click="removeRecipe(recipe._id)">&times;</button>
                 </td>
             </tr>
           </tbody>
@@ -40,11 +40,11 @@
             <a type="button" class="btn btn-default pull-right" href="#/recipe/new">Nueva receta</a>
         </div>
     </div>
-    <div class="panel panel-default" ng-hide="recipes">
+    <div class="panel panel-default" ng-hide="recipes.length!=0">
         <div class="panel-heading"><strong>Mis Recetas</strong></div>
         <div class="panel-body">
           <div class="alert alert-info">Aun no tiene recetas creadas</div>
-          <a type="button" class="btn btn-default" href="#/recipe/new">Nueva receta</a>        
+          <a type="button" class="btn btn-default" href="#/recipe/new">Nueva receta</a>
         </div>
     </div>
 </div>

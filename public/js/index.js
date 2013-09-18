@@ -64,21 +64,15 @@
                 otherwise({redirectTo: '/recipe'});
     }]);
     
-    index.controller("MainController",function($scope,Person,$rootScope) {
+    index.controller("MainController",function($scope,$rootScope) {
         //$scope.$on('fbdata',function(event,args) {
         //    $scope.me = Person.findByFb({fb_id:args.id});
         //});
-        $scope.me = {
-            name: 'User'
-        };
+        //$scope.me = {
+        //    name: 'User'
+        //};
         $rootScope.breadcrumbs = [];
-    });
-
-    index.factory('Person',function($resource) {
-        return $resource('person/fb:fb_id',{fb_id:'@fb_id'}, {
-            save: { method: 'PUT', params: {}},
-            findByFb: {method: 'GET', params: {}, isArray:false}
-        });
+                
     });
 
     var SRM = ['#FFFFFF','FFE699' , '#FFD878' , '#FFCA5A' , '#FFBF42' , '#FBB123' , '#F8A600' , '#F39C00' , '#EA8F00' , '#E58500' , '#DE7C00',

@@ -1,8 +1,9 @@
 (function() {
 
     var index = angular.module('index');
+
  
-    index.controller("LoginController",function($scope,$rootScope) {
+    index.controller("LoginController",function($scope,$rootScope,User) {
         $scope.$on('g+login',function(event,authResult) {
             if (authResult['access_token']) {
               // Autorizado correctamente
@@ -15,8 +16,21 @@
                 var request = gapi.client.oauth2.userinfo.get();
                 
                 request.execute(function (obj){
-                    $rootScope.user = obj;
-                    $scope.$apply();
+                    User.getByGoogleId({
+                        id:obj.id
+                    },function(user){
+                        if ( angular.isDefined(user.google_id) ) {
+                            $rootScope.user = obj;
+                            console.log(user);
+                        } else {
+                            var newUser = new User({google_id:obj.id,name:obj.name});
+                            newUser.$save(function() {
+                                $rootScope.user = obj;
+                            });
+                            console.log("Server Login Error");
+                        }
+                    });
+                    
                 });
               });
               
