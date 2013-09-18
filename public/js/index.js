@@ -73,7 +73,6 @@
         };
         $rootScope.breadcrumbs = [];
     });
-    
 
     index.factory('Person',function($resource) {
         return $resource('person/fb:fb_id',{fb_id:'@fb_id'}, {
