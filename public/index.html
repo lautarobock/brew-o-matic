@@ -10,6 +10,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>
     <script src="js/index.js"></script>
+    <script src="js/RecipeListCtrl.js"></script>
+    <script src="js/RecipeDetailCtrl.js"></script>
     <script src="js/Data.js"></script>
     <script src="js/ObjTree.js"></script>
   </head>
@@ -23,18 +25,12 @@
       </a>
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li><a id="email" href="#"></a></li>
-          <!--<li><a href="#">Link</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li><a href="#">Separated link</a></li>
-              <li><a href="#">One more separated link</a></li>
-            </ul>
-          </li>-->
+            <li class="dropdown">
+                <a  href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="email"></span><b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="javascript:disconnectUser()">Desconectar</a></li>
+                </ul>
+            </li>
         </ul>
         <span id="signinButton" class="navbar-form navbar-right">
           <span
@@ -87,23 +83,44 @@
       <!--</footer>-->
     </div>
     <script type="text/javascript">
+        var access_token;
+        function disconnectUser() {
+            var revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' +
+                    access_token;
+
+            // Realiza una solicitud GET asíncrona.
+            $.ajax({
+                type: 'GET',
+                url: revokeUrl,
+                async: false,
+                contentType: "application/json",
+                dataType: 'jsonp',
+                success: function(nullResponse) {
+                    // Lleva a cabo una acción ahora que el usuario está desconectado
+                    // La respuesta siempre está indefinida.
+
+                    document.getElementById('signinButton').setAttribute('style', 'display: block');
+                    document.getElementById('email').innerHTML = '';
+                },
+                error: function(e) {
+                    // Gestiona el error
+                    // console.log(e);
+                    // Puedes indicar a los usuarios que se desconecten de forma manual si se produce un error
+                    // https://plus.google.com/apps
+                }
+            });
+        }
+        // Se puede activar la desconexión haciendo clic en un botón
+        $('#revokeButton').click(disconnectUser);
+    </script>
+    <script type="text/javascript">
       (function() {
         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
         po.src = 'https://apis.google.com/js/client:plusone.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
       })();
       
-      function getEmailCallback(obj){
-        var el = document.getElementById('email');
-        var email = '';
-    
-        if (obj.name) {
-          el.innerHTML = obj.name;
-        } else if (obj['email']) {
-          el.innerHTML = 'Email: ' + obj['email'];
-        }
-        
-      }
+
       
       function signinCallback(authResult) {
         if (authResult['access_token']) {
@@ -111,10 +128,20 @@
           // Oculta el botón de inicio de sesión ahora que el usuario está autorizado, por ejemplo:
           
           gapi.auth.setToken(authResult);
-          
+    access_token = authResult['access_token'];
           gapi.client.load('oauth2', 'v2', function() {
             var request = gapi.client.oauth2.userinfo.get();
-            request.execute(getEmailCallback);
+            request.execute(function (obj){
+                var el = document.getElementById('email');
+                var email = '';
+
+                if (obj.name) {
+                    el.innerHTML = obj.name;
+                } else if (obj['email']) {
+                    el.innerHTML = 'Email: ' + obj['email'];
+                }
+
+            });
           });
           
           document.getElementById('signinButton').setAttribute('style', 'display: none');

@@ -1,10 +1,92 @@
 (function() {
 
-    var SRM = ['#FFFFFF','FFE699' , '#FFD878' , '#FFCA5A' , '#FFBF42' , '#FBB123' , '#F8A600' , '#F39C00' , '#EA8F00' , '#E58500' , '#DE7C00',
-                '#D77200' , '#CF6900' , '#CB6200' , '#C35900' , '#BB5100' , '#B54C00' , '#B04500' , '#A63E00' , '#A13700' , '#9B3200',
-                '#952D00' , '#8E2900' , '#882300' , '#821E00' , '#7B1A00' , '#771900' , '#701400' , '#6A0E00' , '#660D00' , '#5E0B00',
-                '#5A0A02' , '#600903' , '#520907' , '#4C0505' , '#470606' , '#440607' , '#3F0708' , '#3B0607' , '#3A070B' , '#36080A'];
+
+    var index = angular.module('index', ['ngResource','data']);
+
+    index.factory("BrewHelper",function() {
+        return {
+            toLbs: function(kg) {
+                return kg / 0.45359;
+            },
+            toOz: function(kg) {
+                return kg * 1000 * 0.035274;
+            },
+            toGal: function(liters) {
+                return liters * 0.264172052637296;
+            },
+            toPpg: function(potential) {
+                return potential * 1000 - 1000;
+            },
+            toPotential: function(ppg) {
+                return this.round((ppg + 1000) / 1000,1000);
+            },
+            round: function (value, zeros) {
+                return Math.round(value*zeros)/zeros;
+            },
+            calculateU: function(gravity,time) {
+                var g = this.toPpg(gravity);
+                var m = 30;
+                var M = 120;
+                for (var i=0; i<U_gravity.length; i++) {   
+                    if (g < U_gravity[i]) {
+                        M = U_gravity[i];
+                        break;
+                    } else {
+                        m = U_gravity[i];
+                    }
+                }
+                var diff = M-m;
+                var p = (g-m)/diff; //proporcion
+                
+                var valm = U[time.toString()][m.toString()];
+                var valM = U[time.toString()][M.toString()];
+                var valDiff = valM-valm; //Diff de valores
+                var valP = valDiff*p;
+                return valm+valP;
+            },convertColor: function(srm) {
+                if ( srm > 40 ) {
+                    return "black";
+                } else if ( srm < 1 ) {
+                    return "white";
+                } else {
+                    return SRM[Math.round(srm)];
+                }
+            }
+        };
+    });
+ 
+    index.
+        config(['$routeProvider', function($routeProvider) {
+            $routeProvider.
+                when('/recipe', {templateUrl: 'partial/recipe-list.html',   controller: 'RecipeListCtrl'}).
+                when('/recipe/edit/:recipeId', {templateUrl: 'partial/recipe-detail.html', controller: 'RecipeDetailCtrl'}).
+                when('/recipe/new', {templateUrl: 'partial/recipe-detail.html', controller: 'RecipeDetailCtrl'}).
+                otherwise({redirectTo: '/recipe'});
+    }]);
     
+    index.controller("MainController",function($scope,Person,$rootScope) {
+        //$scope.$on('fbdata',function(event,args) {
+        //    $scope.me = Person.findByFb({fb_id:args.id});
+        //});
+        $scope.me = {
+            name: 'User'
+        };
+        $rootScope.breadcrumbs = [];
+    });
+    
+
+    index.factory('Person',function($resource) {
+        return $resource('person/fb:fb_id',{fb_id:'@fb_id'}, {
+            save: { method: 'PUT', params: {}},
+            findByFb: {method: 'GET', params: {}, isArray:false}
+        });
+    });
+
+    var SRM = ['#FFFFFF','FFE699' , '#FFD878' , '#FFCA5A' , '#FFBF42' , '#FBB123' , '#F8A600' , '#F39C00' , '#EA8F00' , '#E58500' , '#DE7C00',
+        '#D77200' , '#CF6900' , '#CB6200' , '#C35900' , '#BB5100' , '#B54C00' , '#B04500' , '#A63E00' , '#A13700' , '#9B3200',
+        '#952D00' , '#8E2900' , '#882300' , '#821E00' , '#7B1A00' , '#771900' , '#701400' , '#6A0E00' , '#660D00' , '#5E0B00',
+        '#5A0A02' , '#600903' , '#520907' , '#4C0505' , '#470606' , '#440607' , '#3F0708' , '#3B0607' , '#3A070B' , '#36080A'];
+
     var U_time = [0,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90,100,110,120];
     var U_gravity = [30,40,50,60,70,80,90,100,110,120];
     var U = {
@@ -237,347 +319,6 @@
             '120':0.134
         }
     };
-    
-    var index = angular.module('index', ['ngResource','data']);
-    
-    index.controller("RecipeListCtrl", function ($scope,$rootScope) {
-        
-        $rootScope.breadcrumbs = [{
-                link: '#',
-                title: 'Home'
-        }];
-        
-        $scope.load = function() {
-            if ( localStorage["brew-o-matic.recipes"] ) {
-                $scope.recipes = JSON.parse(localStorage["brew-o-matic.recipes"]);
-                var any = false;
-                angular.forEach($scope.recipes,function(value){
-                    any=true;
-                });
-                if (!any) {
-                    $scope.recipes = undefined;
-                }
-            }    
-        }
-        $scope.load();
-        
-        $scope.removeRecipe = function(name) {
-            delete $scope.recipes[name];
-            localStorage["brew-o-matic.recipes"] = JSON.stringify($scope.recipes);
-            $scope.load();
-        };
-        
-        $scope.encodeName = function(name) {
-            return encodeURIComponent(name);
-        };
-    });
- 
-    index.factory("BrewHelper",function() {
-        return {
-            toLbs: function(kg) {
-                return kg / 0.45359;
-            },
-            toOz: function(kg) {
-                return kg * 1000 * 0.035274;
-            },
-            toGal: function(liters) {
-                return liters * 0.264172052637296;
-            },
-            toPpg: function(potential) {
-                return potential * 1000 - 1000;
-            },
-            toPotential: function(ppg) {
-                return this.round((ppg + 1000) / 1000,1000);
-            },
-            round: function (value, zeros) {
-                return Math.round(value*zeros)/zeros;
-            },
-            calculateU: function(gravity,time) {
-                var g = this.toPpg(gravity);
-                var m = 30;
-                var M = 120;
-                for (var i=0; i<U_gravity.length; i++) {   
-                    if (g < U_gravity[i]) {
-                        M = U_gravity[i];
-                        break;
-                    } else {
-                        m = U_gravity[i];
-                    }
-                }
-                var diff = M-m;
-                var p = (g-m)/diff; //proporcion
-                
-                var valm = U[time.toString()][m.toString()];
-                var valM = U[time.toString()][M.toString()];
-                var valDiff = valM-valm; //Diff de valores
-                var valP = valDiff*p;
-                return valm+valP;
-            }
-        };
-    });
- 
-    index.
-        config(['$routeProvider', function($routeProvider) {
-            $routeProvider.
-                when('/recipe', {templateUrl: 'partial/recipe-list.html',   controller: 'RecipeListCtrl'}).
-                when('/recipe/edit/:recipeId', {templateUrl: 'partial/recipe-detail.html', controller: 'RecipeDetailCtrl'}).
-                when('/recipe/new', {templateUrl: 'partial/recipe-detail.html', controller: 'RecipeDetailCtrl'}).
-                otherwise({redirectTo: '/recipe'});
-    }]);
-    
-    index.controller("MainController",function($scope,Person,$rootScope) {
-        //$scope.$on('fbdata',function(event,args) {
-        //    $scope.me = Person.findByFb({fb_id:args.id});
-        //});
-        $scope.me = {
-            name: 'User'
-        };
-        $rootScope.breadcrumbs = [];
-    });
-    
 
-    index.controller("RecipeDetailCtrl", function ($scope,BrewHelper,Grain,Hop,Yeast,$routeParams,$rootScope) {
-        
-        $rootScope.breadcrumbs = [{
-                link: '#',
-                title: 'Home'
-            },{
-                link: '#',
-                title: 'Recipe'
-            }];
-        
-        
-        if ( $routeParams.recipeId ) {
-            var recipes = JSON.parse(localStorage["brew-o-matic.recipes"]);
-            if ( recipes[$routeParams.recipeId]) {
-                $scope.recipe = recipes[$routeParams.recipeId];
-            }
-            
-        } else {
-            $scope.recipe = {
-                "GrainCalcMethod": "2",
-                date: new Date(),
-                totalAmount: 0,
-                totalHop: 0,
-                CALCCOLOUR: 0,
-                BATCH_SIZE: 20,
-                EFFICIENCY: 65,
-                OG: 1,
-                CALCIBU: 0,
-                FG: 1,
-                "FERMENTABLES": {
-                    "FERMENTABLE": []
-                },
-                "HOPS": {
-                    "HOP": []
-                },
-                "YEASTS": {
-                  "YEAST": [{
-                    "NAME": "",
-                    "VERSION": "1",
-                    "ATTENUATION": 75
-                  }]
-                }
-            };  
-        }
-        
-        
-        $scope.grains = Grain.query();
-        
-        $scope.hops = Hop.query();
-        
-        $scope.yeasts = Yeast.query();
-        
-        $scope.removeFermentable = function(fermentable) {
-            var index = $scope.recipe["FERMENTABLES"]["FERMENTABLE"].indexOf(fermentable);
-            $scope.recipe["FERMENTABLES"]["FERMENTABLE"].splice(index, 1);
-            $scope.changeAmount();
-        };
-        
-        $scope.addFermentable = function() {
-            /*
-             * Yield y Potential:
-             * 82.608695652173992 -> 1.038
-             * 
-             */
-            $scope.recipe["FERMENTABLES"]["FERMENTABLE"].push({
-                "NAME": "",
-                "VERSION": "1",
-                "AMOUNT": null,
-                "TYPE": "Grain",
-                "YIELD": 0, 
-                "COLOR": null,
-                "POTENTIAL": null,
-                "PERCENTAGE": 100
-            });
-            $scope.changeAmount();
-        };
-        
-        $scope.changeAmount = function() {
-            var amount = 0;
-            angular.forEach($scope.recipe.FERMENTABLES.FERMENTABLE,function(f) {
-                amount += f.AMOUNT;
-            });
-            $scope.recipe.totalAmount = amount;
-            
-            //Percetajes
-            angular.forEach($scope.recipe.FERMENTABLES.FERMENTABLE,function(f) {
-                f.PERCENTAGE = BrewHelper.round(f.AMOUNT/$scope.recipe.totalAmount*100,100);
-            });
-            
-            //Color
-            var colourMCU = 0;
-            angular.forEach($scope.recipe.FERMENTABLES.FERMENTABLE,function(f) {
-                colourMCU += ((f.AMOUNT / 0.45359) * f.COLOR) / ($scope.recipe.BATCH_SIZE*0.264172052637296);
-            });
-            $scope.recipe.CALCCOLOUR = 1.4922 * Math.pow(colourMCU,0.6859);
-            
-            //OG
-            var og = 0;
-            angular.forEach($scope.recipe.FERMENTABLES.FERMENTABLE,function(f) {
-                og += BrewHelper.toLbs(f.AMOUNT) * BrewHelper.toPpg(f.POTENTIAL) * ($scope.recipe.EFFICIENCY/100)
-                        / BrewHelper.toGal($scope.recipe.BATCH_SIZE);
-            });
-            $scope.recipe.OG = BrewHelper.toPotential(og);
-            
-            $scope.changeHop();
-        };
-        
-        $scope.hopGramsPerLiter = function(hop,batchSize) {
-            return hop.AMOUNT*1000/batchSize;
-        };
-        
-        $scope.hopPercentage = function(hop,totalHop) {
-            return hop.AMOUNT/totalHop*100;
-        };
-        
-        $scope.hopIBU = function(hop) {
-            var U = BrewHelper.calculateU($scope.recipe.OG,hop.TIME);
-            return BrewHelper.toOz(hop.AMOUNT)*hop.ALPHA*U*(7489/100)/BrewHelper.toGal($scope.recipe.BATCH_SIZE);
-        };
-        
-        $scope.removeHop = function(hop) {
-            var index = $scope.recipe["HOPS"]["HOP"].indexOf(hop);
-            $scope.recipe["HOPS"]["HOP"].splice(index, 1);
-            $scope.changeHop();
-        };
-        
-        $scope.addHop = function() {
-            $scope.recipe["HOPS"]["HOP"].push({
-                "NAME": "",
-                "VERSION": "1",
-                "ALPHA": null,
-                "AMOUNT": null,
-                "USE": "Boil",
-                "TIME": 0,
-                "FORM": "Pellet"
-            });
-            $scope.changeHop();
-        };
-        
-        $scope.changeHop = function() {
-            var amount = 0;
-            var ibu = 0;
-            angular.forEach($scope.recipe.HOPS.HOP,function(hop) {
-                amount += hop.AMOUNT;
-                ibu += $scope.hopIBU(hop);
-            });
-            $scope.recipe.totalHop = amount;
-            $scope.recipe.CALCIBU = BrewHelper.round(ibu,10);
-            $scope.changeYeast();
-        };
-        
-        $scope.changeYeast = function() {
-            var OG = BrewHelper.toPpg($scope.recipe.OG);
-            var FG = OG * (100-$scope.recipe.YEASTS.YEAST[0].ATTENUATION)/100;
-            $scope.recipe.FG = BrewHelper.toPotential(FG);
-            $scope.recipe.ABV = BrewHelper.round((OG-FG)*0.131,100);
-            
-            //Balance Value
-            var AA = (OG-FG)/OG;
-            
-            var RTE = 0.82 * FG + 0.18 * OG;
-            
-            $scope.recipe.BV = BrewHelper.round(0.8 * $scope.recipe.CALCIBU / RTE,100);
-        };
-        $scope.changeYeast();
-        
-        $scope.convertColor = function(srm) {
-            if ( srm > 40 ) {
-                return "black";
-            } else if ( srm < 1 ) {
-                return "white";
-            } else {
-                return SRM[Math.round(srm)];
-            }
-        };
-        
-        $scope.calulateBUGU = function(bu,gu) {
-            return bu/BrewHelper.toPpg(gu);
-        };
-        
-        $scope.changeGrain = function(fermentable) {
-            angular.forEach($scope.grains,function(grain) {
-                if ( fermentable.NAME == grain.name) {
-                    fermentable.POTENTIAL = grain.potential;
-                    fermentable.COLOR = grain.colour;
-                }
-            });
-            $scope.changeAmount();
-        };
-        
-        $scope.onChangeHop = function(changed) {
-            angular.forEach($scope.hops,function(hop) {
-                if ( changed.NAME == hop.name) {
-                    changed.ALPHA = hop.alpha;
-                }
-            });
-            $scope.changeHop();
-        };
-        
-        $scope.onChangeYeast = function(changed) {
-            angular.forEach($scope.yeasts,function(yeast) {
-                if ( changed.NAME == yeast.name) {
-                    changed.ATTENUATION = yeast.aa;
-                }
-            });
-            $scope.changeYeast();
-        };
-        
-        $scope.importEnabled = angular.isDefined(window.File)
-                                && angular.isDefined(window.FileReader)
-                                && angular.isDefined(window.FileList)
-                                && angular.isDefined(window.Blob);
 
-        $scope.notifications = [];
-        $scope.save = function() {
-            if ( !angular.isDefined($scope.recipe.NAME) ) {
-                $scope.notifications.push({
-                    type:'danger',
-                    title:'Nombre obligatorio',
-                    text:'La receta debe tener un nombre'
-                }); 
-            } else {
-                var recipes = localStorage["brew-o-matic.recipes"] || '{}';
-                recipes = JSON.parse(recipes);
-                recipes[$scope.recipe.NAME] = $scope.recipe;
-                localStorage["brew-o-matic.recipes"] = JSON.stringify(recipes);
-                $scope.notifications.push({
-                    type:'success',
-                    title:'Receta Guardada!',
-                    text:'Ya puedes acceder a esta receta localmente!'
-                }); 
-            }
-        };
-    });
-    
-    index.factory('Person',function($resource) {
-        return $resource('person/fb:fb_id',{fb_id:'@fb_id'}, {
-            save: { method: 'PUT', params: {}},
-            findByFb: {method: 'GET', params: {}, isArray:false}
-        });
-    });
-    
-    
-    
 })();
