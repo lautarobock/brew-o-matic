@@ -63,7 +63,11 @@
                 when('/recipe/new', {templateUrl: 'partial/recipe-detail.html', controller: 'RecipeDetailCtrl'}).
                 otherwise({redirectTo: '/recipe'});
     }]);
-    
+
+    index.controller("ShareController", function($scope) {
+        $scope.recipe = Recipe.get({id:$routeParams.recipeId});
+    });
+
     index.controller("MainController",function($scope,$rootScope) {
         //$scope.$on('fbdata',function(event,args) {
         //    $scope.me = Person.findByFb({fb_id:args.id});

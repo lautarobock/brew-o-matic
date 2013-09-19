@@ -9,7 +9,7 @@
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>
-    <script src="js/index.js"></script>
+    <script src="js/share.js"></script>
     <script src="js/RecipeListCtrl.js"></script>
     <script src="js/RecipeDetailCtrl.js"></script>
     <script src="js/LoginController.js"></script>
@@ -39,7 +39,76 @@
       <div class="panel panel-default">
         <div class="panel-heading"><strong>{{recipe.NAME}}</strong></div>
         <div class="panel-body">
-            
+            <div class="panel panel-default" id="RecipeDetailCtrl" >
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label for="recipename">Nombre</label>
+                            <input type="text" class="form-control" id="recipename" placeholder="Nombre" ng-model="recipe.NAME" disabled>
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="batch_size">Batch (L)</label>
+                            <input ng-change="changeAmount()" type="number" class="form-control" id="batch_size" step="0.1" ng-model="recipe.BATCH_SIZE" disabled>
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="OG">OG</label>
+                            <input type="number" class="form-control" id="OG" ng-model="recipe.OG" step="0.001" disabled>
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="ibu">IBU</label>
+                            <input type="text" class="form-control" id="ibu" ng-model="recipe.CALCIBU" disabled>
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="balance">Balance</label>
+                            <input type="text" class="form-control" id="balance" ng-model="recipe.BV" disabled/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label for="style">Style</label>
+                            <input type="text" class="form-control" id="style" placeholder="Estilo" ng-model="recipe.STYLE.NAME" disabled>
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="EFFICIENCY">Eficiencia</label>
+                            <input ng-change="changeAmount()" type="number" class="form-control" id="EFFICIENCY" ng-model="recipe.EFFICIENCY" disabled>
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="fg">FG</label>
+                            <input type="text" class="form-control" id="fg" ng-model="recipe.FG" disabled/>
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="bugu">BU/GU</label>
+                            <input type="text" class="form-control" id="bugu" value="{{calulateBUGU(recipe.CALCIBU,recipe.OG)|number:2}}" disabled/>
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="abv">Alcohol (ABV) %</label>
+                            <input type="text" class="form-control" id="abv" ng-model="recipe.ABV" disabled/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ng-include src="'partial/recipe-detail-fermentables.html'"></ng-include>
+            <ng-include src="'partial/recipe-detail-hops.html'"></ng-include>
+            <div class="panel panel-default">
+                <div class="panel-heading">Levadura</div>
+                <table class="table table-condensed table-hover">
+                    <thead>
+                    <tr>
+                        <th style="width:90%">Levadura</th>
+                        <th style="width:10%">Atenuacion</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="yeast in recipe.YEASTS.YEAST">
+                        <!--<td><input class="form-control input-sm" type="text" ng-model="yeast.NAME"/></td>-->
+                        <td>
+                            <input ng-change="onChangeYeast(yeast)" class="form-control input-sm" type="text" ng-model="yeast.NAME" disabled/>
+                        </td>
+                        <td><input ng-change="changeYeast()" class="form-control input-sm" type="number" ng-model="yeast.ATTENUATION" disabled/></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
       </div>
     </div>
