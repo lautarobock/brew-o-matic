@@ -1,7 +1,7 @@
 (function() {
     var index = angular.module('index');
 
-    index.controller("RecipeDetailCtrl", function ($scope,BrewHelper,Grain,Hop,Yeast,$routeParams,$rootScope,Recipe) {
+    index.controller("RecipeDetailCtrl", function ($scope,BrewHelper,Grain,Hop,Yeast,$routeParams,$rootScope,Recipe,$location) {
 
         $rootScope.breadcrumbs = [{
             link: '#',
@@ -174,6 +174,7 @@
             && angular.isDefined(window.Blob);
 
         $scope.notifications = [];
+
         $scope.save = function() {
             if ( !angular.isDefined($scope.recipe.NAME) ) {
                 $scope.notifications.push({
@@ -182,19 +183,18 @@
                     text:'La receta debe tener un nombre'
                 });
             } else {
-                //var recipes = localStorage["brew-o-matic.recipes"] || '{}';
-                //recipes = JSON.parse(recipes);
-                //recipes[$scope.recipe.NAME] = $scope.recipe;
-                //localStorage["brew-o-matic.recipes"] = JSON.stringify(recipes);
-                var recipe = new Recipe($scope.recipe);
-                recipe.$save(function(){
-                        $scope.notifications.push({
+                //var recipe = new Recipe($scope.recipe);
+                if (!$scope.recipe.$save) {
+                    $scope.recipe = new Recipe($scope.recipe);
+                }
+                $scope.recipe.$save(function(saved){
+                    $scope.notifications.push({
                         type:'success',
                         title:'Receta Guardada!',
                         text:'Ya puedes acceder a esta receta localmente!'
                     });
-                });
-                
+                    $location.path('/recipe/edit/' + saved._id) 
+                });                        
             }
         };
         
@@ -207,7 +207,7 @@
                 $scope.changeYeast();
             });
         } else {
-            $scope.recipe = {
+            $scope.recipe = new Recipe({
                 "GrainCalcMethod": "2",
                 date: new Date(),
                 totalAmount: 0,
@@ -231,7 +231,7 @@
                         "ATTENUATION": 75
                     }]
                 }
-            };
+            });
             $scope.changeYeast();
         }
     });

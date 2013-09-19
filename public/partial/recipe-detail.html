@@ -49,7 +49,7 @@
 <ng-include src="'partial/recipe-detail-fermentables.html'"></ng-include>
 <ng-include src="'partial/recipe-detail-hops.html'"></ng-include>
 <div class="panel panel-default">
-    <div class="panel-heading">Levadura</div>
+    <div class="panel-heading"><strong>Levadura</strong></div>
     <table class="table table-condensed table-hover">
       <thead>
         <tr>
@@ -77,6 +77,29 @@
     <div class="panel-heading">Misc</div>
     <div class="panel-body">
         
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><strong>Otros datos</strong></div>
+    <div class="panel-body" >
+        <div class="row">
+            <div class="col-lg-6">
+                <label for="brewer">Cervecero</label>
+                <input type="text" class="form-control" id="brewer" placeholder="Cervecero" ng-model="recipe.BREWER">
+            </div>
+            <div class="col-lg-2">
+              <label for="boil_size">Litros a Hervir (L)</label>
+              <input type="number" class="form-control" id="boil_size" step="0.1" ng-model="recipe.BOIL_SIZE">
+            </div>
+            <div class="col-lg-2">
+              <label for="boil_time">Tiempo Hervido (min)</label>
+              <input type="number" class="form-control" id="boil_time" ng-model="recipe.BOIL_TIME">
+            </div>
+            <div class="col-lg-2">
+              <label for="primary_temp">T. Primario</label>
+              <input type="number" class="form-control" id="primary_temp" step="0.1" ng-model="recipe.PRIMARY_TEMP">
+            </div>
+        </div>
     </div>
 </div>
 <div style="overflow: hidden;margin-bottom: 1em;">
@@ -128,23 +151,38 @@
                 scope.recipe.OG = parseFloat(scope.recipe.OG);
                 scope.recipe.FG = parseFloat(scope.recipe.FG);
                 scope.recipe.CALCIBU = parseFloat(scope.recipe.CALCIBU);
+                scope.recipe.BOIL_SIZE = parseFloat(scope.recipe.BOIL_SIZE);
+                scope.recipe.BOIL_TIME = parseFloat(scope.recipe.BOIL_TIME);
+                scope.recipe.PRIMARY_TEMP = parseFloat(scope.recipe.PRIMARY_TEMP);
                 
                 scope.recipe.totalAmount = 0;
-                angular.forEach(scope.recipe.FERMENTABLES.FERMENTABLE,function(ferm) {
+                function convertFerm(ferm) {
                     ferm.AMOUNT = parseFloat(ferm.AMOUNT);
                     ferm.COLOR = parseFloat(ferm.COLOR);
                     ferm.POTENTIAL = parseFloat(ferm.POTENTIAL);
                     ferm.PERCENTAGE = parseFloat(ferm.PERCENTAGE);
                     scope.recipe.totalAmount += ferm.AMOUNT;
-                });
+                }
+                if (scope.recipe.FERMENTABLES.FERMENTABLE instanceof Array) {
+                    angular.forEach(scope.recipe.FERMENTABLES.FERMENTABLE,convertFerm); 
+                } else {
+                    convertFerm(scope.recipe.FERMENTABLES.FERMENTABLE);
+                    scope.recipe.FERMENTABLES.FERMENTABLE = [scope.recipe.FERMENTABLES.FERMENTABLE];
+                }
                 
-                scope.recipe.totalHop = 0;
-                angular.forEach(scope.recipe.HOPS.HOP,function(hop) {
+                function convertHop(hop) {
                     hop.ALPHA = parseFloat(hop.ALPHA);
                     hop.AMOUNT = parseFloat(hop.AMOUNT);
                     hop.TIME = parseFloat(hop.TIME);
                     scope.recipe.totalHop += hop.AMOUNT;
-                });
+                }
+                scope.recipe.totalHop = 0;
+                if (scope.recipe.HOPS.HOP instanceof Array) {
+                    angular.forEach(scope.recipe.HOPS.HOP,convertHop);
+                } else {
+                    convertHop(scope.recipe.HOPS.HOP);
+                    scope.recipe.HOPS.HOP = [scope.recipe.HOPS.HOP];
+                }
                 
                 scope.recipe.YEASTS.YEAST = [scope.recipe.YEASTS.YEAST];
                 scope.recipe.YEASTS.YEAST[0].ATTENUATION = parseFloat(scope.recipe.YEASTS.YEAST[0].ATTENUATION);

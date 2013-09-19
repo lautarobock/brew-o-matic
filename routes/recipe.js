@@ -23,15 +23,31 @@ exports.remove= function(req, res) {
 
 
 function generateId(name,user_id) {
-    return name.replace(" ", "_").replace("#","_Nro_") + "-" + user_id + "-" + (new Date()).getTime();
+    return name.replace(/ /g, "_").replace(/#/g,"_Nro_") + "-" + user_id + "-" + (new Date()).getTime();
 }
 
 exports.save = function(req, res) {
-    var recipe = new model.Recipe(req.body);
-    recipe._id = generateId(req.body.NAME,req.session.user_id);
-    recipe.owner = req.session.user_id;
-    recipe.save(function(err,s){
+    console.log("request");
+    console.log(req.body);
+    
+    
+    function callback(err,s){
+        console.log("err: ");
+        console.log(err);
+        console.log("respuesta");
         console.log(s);
         res.send(s);
-    });
+    }
+    
+    if (!req.body._id) {
+        var recipe = new model.Recipe(req.body);
+        recipe._id = generateId(req.body.NAME,req.session.user_id);
+        recipe.owner = req.session.user_id;
+        recipe.save(callback);
+    } else {
+        var id = req.body._id;
+        delete req.body._id;
+        model.Recipe.findByIdAndUpdate(id,req.body,callback);
+    }
+    
 };
