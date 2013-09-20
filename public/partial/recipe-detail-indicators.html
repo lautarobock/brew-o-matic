@@ -56,7 +56,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" style="margin:3em 0em">
+        <div class="row" style="margin:3em 0em 0">
             <center><b>Balance</b>: {{calulateBUGU(recipe.CALCIBU,recipe.OG)|number:2}}</center>
             <div class="progress">
                 <div class="progress-bar progress-bar-success" ng-style="{width: (calulateBUGU(recipe.CALCIBU,recipe.OG)*100)+'%'}">
@@ -67,5 +67,12 @@
                 </div>
             </div>
         </div>
+        <div class="row" style="margin:0">
+            <strong>Color:</strong> {{recipe.CALCCOLOUR | number:1}} SRM
+            <div style="border: 1px solid; height: 50px; background-color: {{convertColor(recipe.CALCCOLOUR)}};border-radius: 5px;">
+                
+            </div>
+        </div>
+
     </div>
 </div>

@@ -62,6 +62,17 @@
                     scope.recipe.HOPS.HOP = [scope.recipe.HOPS.HOP];
                 }
                 
+                function convertMisc(misc) {
+                    misc.TIME = parseFloat(misc.TIME);
+                    misc.AMOUNT = parseFloat(misc.AMOUNT);
+                }
+                if ( scope.recipe.MISCS.MISC instanceof Array ) {
+                    angular.forEach(scope.recipe.MISCS.MISC,convertMisc);
+                } else {
+                    convertMisc(scope.recipe.MISCS.MISC);
+                    scope.recipe.MISCS.MISC = [scope.recipe.MISCS.MISC];
+                }
+                
                 scope.recipe.YEASTS.YEAST = [scope.recipe.YEASTS.YEAST];
                 scope.recipe.YEASTS.YEAST[0].ATTENUATION = parseFloat(scope.recipe.YEASTS.YEAST[0].ATTENUATION);
                 scope.changeYeast();
