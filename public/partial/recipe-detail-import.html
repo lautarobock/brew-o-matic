@@ -1,0 +1,78 @@
+<a ng-click="import=true" class="btn btn-link" ng-hide="import">Importar receta desde BrewMate</a>
+<div class="panel panel-default" ng-show="import">
+    <div class="panel-heading">Importar receta desde BrewMate</div>
+    <div class="panel-body" ng-show="importEnabled">
+        <input class="form-control input-sm" type="file" id="file" name="files[]" />
+    </div>
+    <div class="panel-body" ng-hide="importEnabled">
+        The File APIs are not fully supported in this browser.    
+    </div>
+    <script>
+        function handleFileSelect(evt) {
+        var files = evt.target.files; // FileList object
+
+        // files is a FileList of File objects. List some properties.
+        for (var i = 0, f; f = files[i]; i++) {
+          var reader = new FileReader();
+          reader.onload = (function(theFile) {
+            return function(e) {
+              // Render thumbnail.
+                var xotree = new XML.ObjTree();
+                var xml = e.target.result;
+                var tree = xotree.parseXML( xml );       	// source to tree
+                
+                var scope = angular.element(document.getElementById('RecipeDetailCtrl')).scope();
+                scope.recipe = tree.RECIPES.RECIPE;
+                scope.recipe.CALCCOLOUR = parseFloat(scope.recipe.CALCCOLOUR);
+                scope.recipe.BATCH_SIZE = parseFloat(scope.recipe.BATCH_SIZE);
+                scope.recipe.EFFICIENCY = parseFloat(scope.recipe.EFFICIENCY);
+                scope.recipe.OG = parseFloat(scope.recipe.OG);
+                scope.recipe.FG = parseFloat(scope.recipe.FG);
+                scope.recipe.CALCIBU = parseFloat(scope.recipe.CALCIBU);
+                scope.recipe.BOIL_SIZE = parseFloat(scope.recipe.BOIL_SIZE);
+                scope.recipe.BOIL_TIME = parseFloat(scope.recipe.BOIL_TIME);
+                scope.recipe.PRIMARY_TEMP = parseFloat(scope.recipe.PRIMARY_TEMP);
+                
+                scope.recipe.totalAmount = 0;
+                function convertFerm(ferm) {
+                    ferm.AMOUNT = parseFloat(ferm.AMOUNT);
+                    ferm.COLOR = parseFloat(ferm.COLOR);
+                    ferm.POTENTIAL = parseFloat(ferm.POTENTIAL);
+                    ferm.PERCENTAGE = parseFloat(ferm.PERCENTAGE);
+                    scope.recipe.totalAmount += ferm.AMOUNT;
+                }
+                if (scope.recipe.FERMENTABLES.FERMENTABLE instanceof Array) {
+                    angular.forEach(scope.recipe.FERMENTABLES.FERMENTABLE,convertFerm); 
+                } else {
+                    convertFerm(scope.recipe.FERMENTABLES.FERMENTABLE);
+                    scope.recipe.FERMENTABLES.FERMENTABLE = [scope.recipe.FERMENTABLES.FERMENTABLE];
+                }
+                
+                function convertHop(hop) {
+                    hop.ALPHA = parseFloat(hop.ALPHA);
+                    hop.AMOUNT = parseFloat(hop.AMOUNT);
+                    hop.TIME = parseFloat(hop.TIME);
+                    scope.recipe.totalHop += hop.AMOUNT;
+                }
+                scope.recipe.totalHop = 0;
+                if (scope.recipe.HOPS.HOP instanceof Array) {
+                    angular.forEach(scope.recipe.HOPS.HOP,convertHop);
+                } else {
+                    convertHop(scope.recipe.HOPS.HOP);
+                    scope.recipe.HOPS.HOP = [scope.recipe.HOPS.HOP];
+                }
+                
+                scope.recipe.YEASTS.YEAST = [scope.recipe.YEASTS.YEAST];
+                scope.recipe.YEASTS.YEAST[0].ATTENUATION = parseFloat(scope.recipe.YEASTS.YEAST[0].ATTENUATION);
+                scope.changeYeast();
+                scope.recipe.date = new Date();
+                scope.$apply();
+                
+            };
+          })(f);
+          reader.readAsText(f);
+        }
+    }
+    document.getElementById('file').addEventListener('change', handleFileSelect, false);
+    </script>
+</div>

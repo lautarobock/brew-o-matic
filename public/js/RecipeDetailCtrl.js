@@ -1,7 +1,7 @@
 (function() {
     var index = angular.module('index');
 
-    index.controller("RecipeDetailCtrl", function ($scope,BrewHelper,Grain,Hop,Yeast,$routeParams,$rootScope,Recipe,$location) {
+    index.controller("RecipeDetailCtrl", function ($scope,BrewHelper,Grain,Hop,Yeast,Misc,Style,$routeParams,$rootScope,Recipe,$location) {
 
         $rootScope.breadcrumbs = [{
             link: '#',
@@ -18,6 +18,10 @@
         $scope.hops = Hop.query();
 
         $scope.yeasts = Yeast.query();
+        
+        $scope.miscs = Misc.query();
+        
+        $scope.styles = Style.query();
 
         $scope.removeFermentable = function(fermentable) {
             var index = $scope.recipe["FERMENTABLES"]["FERMENTABLE"].indexOf(fermentable);
@@ -168,6 +172,31 @@
             $scope.changeYeast();
         };
 
+        $scope.addMisc = function() {
+            $scope.recipe.MISCS.MISC.push({
+                NAME: null,
+                VERSION: "1",
+                TYPE: "Fining",
+                USE: "Boil",
+                TIME: null,
+                AMOUNT: null
+            });
+        };
+        
+        $scope.onChangeMisc = function(changed) {
+            angular.forEach($scope.miscs,function(misc) {
+                if ( changed.NAME == misc.name) {
+                    changed.TYPE = misc.type;
+                    changed.USE = misc.use;
+                }
+            });
+        };
+        
+        $scope.removeMisc = function(misc) {
+            var index = $scope.recipe.MISCS.MISC.indexOf(misc);
+            $scope.recipe.MISCS.MISC.splice(index, 1);
+        };
+        
         $scope.importEnabled = angular.isDefined(window.File)
             && angular.isDefined(window.FileReader)
             && angular.isDefined(window.FileList)
@@ -175,6 +204,10 @@
 
         $scope.notifications = [];
 
+        $scope.sharedUrl = function(_id) {
+            return 'http://'+$location.host() + ":" + $location.port() + '/share.html#/' + _id;
+        };
+        
         $scope.save = function() {
             if ( !angular.isDefined($scope.recipe.NAME) ) {
                 $scope.notifications.push({
@@ -226,6 +259,9 @@
                         "VERSION": "1",
                         "ATTENUATION": 75
                     }]
+                },
+                MISCS: {
+                    MISC: []
                 }
             });
             $scope.changeYeast();

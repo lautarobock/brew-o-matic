@@ -1,17 +1,9 @@
 (function() {
 
 
-    var share = angular.module('index', ['ngResource','data']);
+    var share = angular.module('share', ['ngResource','data','resources','helper']);
 
-
-//    share.
-//        config(['$routeProvider', function($routeProvider) {
-//        $routeProvider.
-//            when('/recipe/edit/:recipeId', {controller: 'RecipeDetailCtrl'}).
-//            otherwise({redirectTo: '/recipe/edit/:recipeId'});
-//    }]);
-
-    share.controller("ShareController", function($scope,Recipe,$location) {
+    share.controller("ShareController", function($scope,Recipe,$location,BrewHelper) {
         $scope.recipe = Recipe.get({id:$location.path().substr(1,$location.path().length-1)});
 
         $scope.calulateBUGU = function(bu,gu) {
@@ -26,10 +18,15 @@
             return hop.AMOUNT/totalHop*100;
         };
 
-//        $scope.hopIBU = function(hop) {
-//            var U = BrewHelper.calculateU($scope.recipe.OG,hop.TIME);
-//            return BrewHelper.toOz(hop.AMOUNT)*hop.ALPHA*U*(7489/100)/BrewHelper.toGal($scope.recipe.BATCH_SIZE);
-//        };
+        $scope.convertColor = function(srm) {
+            return BrewHelper.convertColor(srm);
+        };
+
+        
+        $scope.hopIBU = function(hop) {
+            var U = BrewHelper.calculateU($scope.recipe.OG,hop.TIME);
+            return BrewHelper.toOz(hop.AMOUNT)*hop.ALPHA*U*(7489/100)/BrewHelper.toGal($scope.recipe.BATCH_SIZE);
+        };
 
     });
 

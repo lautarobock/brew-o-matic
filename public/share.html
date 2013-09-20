@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="index">
+<html ng-app="share">
   <head>
     <title>Brew-o-Matic</title>
     <link rel='stylesheet' href='/css/style.css' />
@@ -10,9 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>
     <script src="js/share.js"></script>
-    <script src="js/RecipeListCtrl.js"></script>
-    <script src="js/RecipeDetailCtrl.js"></script>
-    <script src="js/LoginController.js"></script>
+    <script src="js/helper.js"></script>
     <script src="js/resources.js"></script>
     <script src="js/Data.js"></script>
     <script src="js/ObjTree.js"></script>
@@ -27,7 +25,9 @@
         <div class="col-md-2" >
           <div class="panel panel-default" style="max-width:200px; max-height:200px;">
             <div class="panel-body" >
-              <img src="images/logo.jpg" style="max-width:100%; max-height:100%;"/>
+                <a href="/">
+                    <img src="images/logo.jpg" style="max-width:100%; max-height:100%;"/>
+                </a>
             </div>
           </div>
         </div>
@@ -180,6 +180,32 @@
                         <td><span ng-bind="yeast.ATTENUATION"/></td>
                     </tr>
                     </tbody>
+                </table>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Misc</strong></div>
+                <div style="margin: 2em 2em 0;" class="alert alert-info" ng-hide="recipe.MISCS.MISC.length != 0">
+                    No tiene ningun misc en la receta
+                </div>
+                <table class="table table-condensed table-hover" ng-show="recipe.MISCS.MISC.length != 0" style="margin-top: 1em;">
+                  <thead>
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Tipo</th>
+                      <th>Uso</th>
+                      <th>Tiempo</th>
+                      <th>Kg</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="misc in recipe.MISCS.MISC">
+                        <td><span ng-bind="misc.NAME"/></td>
+                        <td><span ng-bind="misc.TYPE" /></td>
+                        <td><span ng-bind="misc.USE" /></td>
+                        <td><span ng-bind="misc.TIME" /></td>
+                        <td><span ng-bind="misc.AMOUNT" /></td>
+                    </tr>
+                  </tbody>
                 </table>
             </div>
         </div>

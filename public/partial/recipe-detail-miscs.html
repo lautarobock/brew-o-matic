@@ -1,0 +1,40 @@
+<div class="panel panel-default">
+    <div class="panel-heading"><strong>Misc</strong></div>
+    <div style="margin: 2em 2em 0;" class="alert alert-info" ng-hide="recipe.MISCS.MISC.length != 0">
+        Aun no tiene ningun misc en la receta
+    </div>
+    <table class="table table-condensed table-hover" ng-show="recipe.MISCS.MISC.length != 0" style="margin-top: 1em;">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Tipo</th>
+          <th>Uso</th>
+          <th>Tiempo</th>
+          <th>Kg</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="misc in recipe.MISCS.MISC">
+            <td>
+                <input ng-change="onChangeMisc(misc)" class="form-control input-sm" type="text" ng-model="misc.NAME" list="miscNames" placeholder="Buscar Miscs"/>
+                <datalist id="miscNames">
+                    <option ng-repeat="misc in miscs" value="{{misc.name}}">
+                        {{misc.name}}
+                    </option>
+                </datalist>
+            </td>
+            <td><input class="form-control input-sm" type="text" ng-model="misc.TYPE" /></td>
+            <td><input class="form-control input-sm" type="text" ng-model="misc.USE" /></td>
+            <td><input class="form-control input-sm" type="number" ng-model="misc.TIME" placeholder="Tiempo" /></td>
+            <td><input class="form-control input-sm" type="number" step="0.001" ng-model="misc.AMOUNT" placeholder="Kg"/></td>
+            <td>
+                <button type="button" class="close" aria-hidden="true" ng-click="removeMisc(misc)">&times;</button>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="panel-body">
+        <button type="button" class="btn btn-default pull-right" ng-click="addMisc()">Agregar</button>
+    </div>
+</div>

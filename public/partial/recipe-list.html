@@ -5,15 +5,15 @@
           <thead>
             <tr>
               <th>#</th>
-              <th>Fecha</th>
+              <th style="width:7em">Fecha</th>
               <th>Nombre</th>
-              <th>Estilo</th>
-              <th>DI</th>
-              <th>DF</th>
-              <th>%Alc</th>
-              <th>IBUs</th>
+              <th style="width:14em">Estilo</th>
+              <th style="width:4em">DI</th>
+              <th style="width:4em">DF</th>
+              <th style="width:4em">%Alc</th>
+              <th style="width:4em">IBUs</th>
               <th>Autor</th>
-              <th style="width:90px">Batch (L)</th>
+              <th style="width:6em">Batch (L)</th>
               <th style="width:90px"></th>
             </tr>
           </thead>
@@ -21,7 +21,7 @@
             <tr ng-repeat="recipe in recipes">
                 <td><a href="#/recipe/edit/{{encodeName(recipe._id)}}">#{{ $index+1 }}</a></td>
                 <td>{{ recipe.date|date:'dd-MM-yyyy' }}</td>
-                <td>{{ recipe.NAME|limitText:17}}</td>
+                <td title="{{recipe.NAME}}">{{ recipe.NAME|limitText:45}}</td>
                 <td>{{ recipe.STYLE.NAME }}</td>
                 <td>{{ recipe.OG  }}</td>
                 <td>{{ recipe.FG  }}</td>
@@ -43,8 +43,11 @@
     <div class="panel panel-default" ng-hide="recipes.length!=0">
         <div class="panel-heading"><strong>Mis Recetas</strong></div>
         <div class="panel-body">
-          <div class="alert alert-info">Aun no tiene recetas creadas</div>
-          <a type="button" class="btn btn-default" href="#/recipe/new">Nueva receta</a>
+          <div class="alert alert-info">
+                Aun no tiene recetas creadas 
+                <a href="#/recipe/new" class="alert-link">Crea tu primera receta desde aca!</a>
+          </div>
+          <a type="button" class="btn btn-default pull-right" href="#/recipe/new">Nueva receta</a>
         </div>
     </div>
 </div>

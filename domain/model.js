@@ -59,6 +59,16 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
             ATTENUATION: Number
         }]
     },
+    MISCS: {
+        MISC: [{
+            NAME: String,
+            VERSION: String,
+            TYPE: String,
+            USE: String,
+            TIME: Number,
+            AMOUNT: Number
+        }]
+    },
     PRIMARY_TEMP: Number,
     BIAB: String,
     IBUCalcMethod: String,

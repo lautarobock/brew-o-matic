@@ -1,15 +1,15 @@
 (function() {
     
-    var index = angular.module('index');
+    var res = angular.module('resources',[]);
     
-    index.factory('User',function($resource) {
+    res.factory('User',function($resource) {
         return $resource('user/:type:id',{}, {
             add: { method: 'POST', params: {}},
             getByGoogleId: {method: 'GET', params: {type:'google_'}, isArray:false}
         });
     });
     
-    index.factory('Recipe',function($resource) {
+    res.factory('Recipe',function($resource) {
         return $resource('recipe/:id',{}, {});
     });    
 })();

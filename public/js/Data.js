@@ -1,6 +1,1352 @@
 
 var data = angular.module('data',[]);
 
+data.factory("Style",function() {
+    return {
+        query: function() {
+            return [
+                {
+                  "name": "American Amber Ale",
+                  "OG_Min": 1.045,
+                  "OG_Max": 1.060,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.015,
+                  "IBU_Min": 25,
+                  "IBU_Max": 40,
+                  "Colour_Min": 10,
+                  "Colour_Max": 17,
+                  "ABV_Min": 4.5,
+                  "ABV_Max": 6.0
+                },
+                {
+                  "name": "American Barleywine",
+                  "OG_Min": 1.080,
+                  "OG_Max": 1.120,
+                  "FG_Min": 1.016,
+                  "FG_Max": 1.030,
+                  "IBU_Min": 50,
+                  "IBU_Max": 120,
+                  "Colour_Min": 10,
+                  "Colour_Max": 19,
+                  "ABV_Min": 8.0,
+                  "ABV_Max": 12.0
+                },
+                {
+                  "name": "American Brown Ale",
+                  "OG_Min": 1.045,
+                  "OG_Max": 1.060,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.016,
+                  "IBU_Min": 20,
+                  "IBU_Max": 40,
+                  "Colour_Min": 18,
+                  "Colour_Max": 35,
+                  "ABV_Min": 4.3,
+                  "ABV_Max": 6.2
+                },
+                {
+                  "name": "American IPA",
+                  "OG_Min": 1.056,
+                  "OG_Max": 1.075,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.018,
+                  "IBU_Min": 40,
+                  "IBU_Max": 70,
+                  "Colour_Min": 6,
+                  "Colour_Max": 15,
+                  "ABV_Min": 5.5,
+                  "ABV_Max": 7.5
+                },
+                {
+                  "name": "American Pale Ale",
+                  "OG_Min": 1.045,
+                  "OG_Max": 1.060,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.015,
+                  "IBU_Min": 30,
+                  "IBU_Max": 45,
+                  "Colour_Min": 5,
+                  "Colour_Max": 14,
+                  "ABV_Min": 4.5,
+                  "ABV_Max": 6.0
+                },
+                {
+                  "name": "American Stout",
+                  "OG_Min": 1.050,
+                  "OG_Max": 1.075,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.022,
+                  "IBU_Min": 35,
+                  "IBU_Max": 75,
+                  "Colour_Min": 30,
+                  "Colour_Max": 40,
+                  "ABV_Min": 5.0,
+                  "ABV_Max": 7.0
+                },
+                {
+                  "name": "American Wheat or Rye Beer",
+                  "OG_Min": 1.040,
+                  "OG_Max": 1.055,
+                  "FG_Min": 1.008,
+                  "FG_Max": 1.013,
+                  "IBU_Min": 15,
+                  "IBU_Max": 30,
+                  "Colour_Min": 3,
+                  "Colour_Max": 6,
+                  "ABV_Min": 4.0,
+                  "ABV_Max": 5.5
+                },
+                {
+                  "name": "Australian Dark/Old Ale",
+                  "OG_Min": 1.040,
+                  "OG_Max": 1.050,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.016,
+                  "IBU_Min": 15,
+                  "IBU_Max": 20,
+                  "Colour_Min": 19,
+                  "Colour_Max": 35,
+                  "ABV_Min": 4.5,
+                  "ABV_Max": 5.3
+                },
+                {
+                  "name": "Australian Lager",
+                  "OG_Min": 1.040,
+                  "OG_Max": 1.050,
+                  "FG_Min": 1.004,
+                  "FG_Max": 1.010,
+                  "IBU_Min": 10,
+                  "IBU_Max": 20,
+                  "Colour_Min": 2,
+                  "Colour_Max": 6,
+                  "ABV_Min": 4.2,
+                  "ABV_Max": 5.1
+                },
+                {
+                  "name": "Australian Light Lager",
+                  "OG_Min": 1.028,
+                  "OG_Max": 1.035,
+                  "FG_Min": 1.004,
+                  "FG_Max": 1.008,
+                  "IBU_Min": 10,
+                  "IBU_Max": 15,
+                  "Colour_Min": 2,
+                  "Colour_Max": 4,
+                  "ABV_Min": 2.8,
+                  "ABV_Max": 3.5
+                },
+                {
+                  "name": "Australian Pale Ale",
+                  "OG_Min": 1.0435,
+                  "OG_Max": 1.050,
+                  "FG_Min": 1.004,
+                  "FG_Max": 1.006,
+                  "IBU_Min": 25,
+                  "IBU_Max": 40,
+                  "Colour_Min": 5,
+                  "Colour_Max": 9,
+                  "ABV_Min": 4.2,
+                  "ABV_Max": 6.0
+                },
+                {
+                  "name": "Australian Premium Lager",
+                  "OG_Min": 1.045,
+                  "OG_Max": 1.055,
+                  "FG_Min": 1.008,
+                  "FG_Max": 1.012,
+                  "IBU_Min": 15,
+                  "IBU_Max": 25,
+                  "Colour_Min": 2,
+                  "Colour_Max": 6,
+                  "ABV_Min": 4.7,
+                  "ABV_Max": 6.0
+                },
+                {
+                  "name": "Baltic Porter",
+                  "OG_Min": 1.060,
+                  "OG_Max": 1.090,
+                  "FG_Min": 1.016,
+                  "FG_Max": 1.024,
+                  "IBU_Min": 20,
+                  "IBU_Max": 40,
+                  "Colour_Min": 17,
+                  "Colour_Max": 30,
+                  "ABV_Min": 5.5,
+                  "ABV_Max": 9.5
+                },
+                {
+                  "name": "Belgian Blond Ale",
+                  "OG_Min": 1.062,
+                  "OG_Max": 1.075,
+                  "FG_Min": 1.008,
+                  "FG_Max": 1.018,
+                  "IBU_Min": 15,
+                  "IBU_Max": 30,
+                  "Colour_Min": 4,
+                  "Colour_Max": 7,
+                  "ABV_Min": 6.0,
+                  "ABV_Max": 7.5
+                },
+                {
+                  "name": "Belgian Dark Strong Ale",
+                  "OG_Min": 1.075,
+                  "OG_Max": 1.110,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.024,
+                  "IBU_Min": 20,
+                  "IBU_Max": 35,
+                  "Colour_Min": 12,
+                  "Colour_Max": 22,
+                  "ABV_Min": 8.0,
+                  "ABV_Max": 11.0
+                },
+                {
+                  "name": "Belgian Dubbel",
+                  "OG_Min": 1.062,
+                  "OG_Max": 1.075,
+                  "FG_Min": 1.008,
+                  "FG_Max": 1.018,
+                  "IBU_Min": 15,
+                  "IBU_Max": 25,
+                  "Colour_Min": 10,
+                  "Colour_Max": 17,
+                  "ABV_Min": 6.0,
+                  "ABV_Max": 7.6
+                },
+                {
+                  "name": "Belgian Golden Strong Ale",
+                  "OG_Min": 1.070,
+                  "OG_Max": 1.095,
+                  "FG_Min": 1.005,
+                  "FG_Max": 1.016,
+                  "IBU_Min": 22,
+                  "IBU_Max": 35,
+                  "Colour_Min": 3,
+                  "Colour_Max": 6,
+                  "ABV_Min": 7.5,
+                  "ABV_Max": 10.5
+                },
+                {
+                  "name": "Belgian Pale Ale",
+                  "OG_Min": 1.048,
+                  "OG_Max": 1.054,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.014,
+                  "IBU_Min": 20,
+                  "IBU_Max": 30,
+                  "Colour_Min": 8,
+                  "Colour_Max": 14,
+                  "ABV_Min": 4.8,
+                  "ABV_Max": 5.5
+                },
+                {
+                  "name": "Belgian Specialty Ale",
+                  "OG_Min": 1.030,
+                  "OG_Max": 1.080,
+                  "FG_Min": 1.006,
+                  "FG_Max": 1.019,
+                  "IBU_Min": 15,
+                  "IBU_Max": 140,
+                  "Colour_Min": 3,
+                  "Colour_Max": 50,
+                  "ABV_Min": 3.0,
+                  "ABV_Max": 9.0
+                },
+                {
+                  "name": "Belgian Tripel",
+                  "OG_Min": 1.075,
+                  "OG_Max": 1.085,
+                  "FG_Min": 1.008,
+                  "FG_Max": 1.014,
+                  "IBU_Min": 20,
+                  "IBU_Max": 40,
+                  "Colour_Min": 4.5,
+                  "Colour_Max": 7,
+                  "ABV_Min": 7.5,
+                  "ABV_Max": 9.5
+                },
+                {
+                  "name": "Berliner Weisse",
+                  "OG_Min": 1.028,
+                  "OG_Max": 1.032,
+                  "FG_Min": 1.003,
+                  "FG_Max": 1.006,
+                  "IBU_Min": 3,
+                  "IBU_Max": 8,
+                  "Colour_Min": 2,
+                  "Colour_Max": 3,
+                  "ABV_Min": 2.8,
+                  "ABV_Max": 3.8
+                },
+                {
+                  "name": "Biere de Garde",
+                  "OG_Min": 1.060,
+                  "OG_Max": 1.080,
+                  "FG_Min": 1.008,
+                  "FG_Max": 1.016,
+                  "IBU_Min": 18,
+                  "IBU_Max": 28,
+                  "Colour_Min": 6,
+                  "Colour_Max": 19,
+                  "ABV_Min": 6.0,
+                  "ABV_Max": 8.5
+                },
+                {
+                  "name": "Blonde Ale",
+                  "OG_Min": 1.038,
+                  "OG_Max": 1.054,
+                  "FG_Min": 1.008,
+                  "FG_Max": 1.013,
+                  "IBU_Min": 15,
+                  "IBU_Max": 28,
+                  "Colour_Min": 3,
+                  "Colour_Max": 6,
+                  "ABV_Min": 3.8,
+                  "ABV_Max": 5.5
+                },
+                {
+                  "name": "Bohemian Pilsener",
+                  "OG_Min": 1.044,
+                  "OG_Max": 1.056,
+                  "FG_Min": 1.013,
+                  "FG_Max": 1.017,
+                  "IBU_Min": 35,
+                  "IBU_Max": 45,
+                  "Colour_Min": 3.5,
+                  "Colour_Max": 6,
+                  "ABV_Min": 4.2,
+                  "ABV_Max": 5.4
+                },
+                {
+                  "name": "Brown Porter",
+                  "OG_Min": 1.040,
+                  "OG_Max": 1.052,
+                  "FG_Min": 1.008,
+                  "FG_Max": 1.014,
+                  "IBU_Min": 18,
+                  "IBU_Max": 35,
+                  "Colour_Min": 20,
+                  "Colour_Max": 30,
+                  "ABV_Min": 4.0,
+                  "ABV_Max": 5.4
+                },
+                {
+                  "name": "Cascadian Dark Ale",
+                  "OG_Min": 1.060,
+                  "OG_Max": 1.075,
+                  "FG_Min": 1.008,
+                  "FG_Max": 1.016,
+                  "IBU_Min": 60,
+                  "IBU_Max": 90,
+                  "Colour_Min": 30,
+                  "Colour_Max": 40,
+                  "ABV_Min": 5.5,
+                  "ABV_Max": 8.5
+                },
+                {
+                  "name": "California Common Beer",
+                  "OG_Min": 1.048,
+                  "OG_Max": 1.054,
+                  "FG_Min": 1.011,
+                  "FG_Max": 1.014,
+                  "IBU_Min": 30,
+                  "IBU_Max": 45,
+                  "Colour_Min": 10,
+                  "Colour_Max": 14,
+                  "ABV_Min": 4.5,
+                  "ABV_Max": 5.5
+                },
+                {
+                  "name": "Christmas/Winter Specialty Spiced Beer",
+                  "OG_Min": 1.030,
+                  "OG_Max": 1.110,
+                  "FG_Min": 1.005,
+                  "FG_Max": 1.025,
+                  "IBU_Min": 0,
+                  "IBU_Max": 70,
+                  "Colour_Min": 5,
+                  "Colour_Max": 50,
+                  "ABV_Min": 2.5,
+                  "ABV_Max": 12.0
+                },
+                {
+                  "name": "Classic American Pilsner",
+                  "OG_Min": 1.044,
+                  "OG_Max": 1.060,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.015,
+                  "IBU_Min": 25,
+                  "IBU_Max": 40,
+                  "Colour_Min": 3,
+                  "Colour_Max": 6,
+                  "ABV_Min": 4.5,
+                  "ABV_Max": 6.0
+                },
+                {
+                  "name": "Classic Rauchbier",
+                  "OG_Min": 1.050,
+                  "OG_Max": 1.057,
+                  "FG_Min": 1.012,
+                  "FG_Max": 1.016,
+                  "IBU_Min": 20,
+                  "IBU_Max": 30,
+                  "Colour_Min": 12,
+                  "Colour_Max": 22,
+                  "ABV_Min": 4.8,
+                  "ABV_Max": 6.0
+                },
+                {
+                  "name": "Cream Ale",
+                  "OG_Min": 1.042,
+                  "OG_Max": 1.055,
+                  "FG_Min": 1.006,
+                  "FG_Max": 1.012,
+                  "IBU_Min": 15,
+                  "IBU_Max": 20,
+                  "Colour_Min": 2.5,
+                  "Colour_Max": 5,
+                  "ABV_Min": 4.2,
+                  "ABV_Max": 5.6
+                },
+                {
+                  "name": "Dark American Lager",
+                  "OG_Min": 1.044,
+                  "OG_Max": 1.056,
+                  "FG_Min": 1.008,
+                  "FG_Max": 1.012,
+                  "IBU_Min": 8,
+                  "IBU_Max": 20,
+                  "Colour_Min": 14,
+                  "Colour_Max": 22,
+                  "ABV_Min": 4.2,
+                  "ABV_Max": 6
+                },
+                {
+                  "name": "Doppelbock",
+                  "OG_Min": 1.072,
+                  "OG_Max": 1.112,
+                  "FG_Min": 1.016,
+                  "FG_Max": 1.024,
+                  "IBU_Min": 16,
+                  "IBU_Max": 26,
+                  "Colour_Min": 6,
+                  "Colour_Max": 25,
+                  "ABV_Min": 7.0,
+                  "ABV_Max": 10.0
+                },
+                {
+                  "name": "Dortmunder Export",
+                  "OG_Min": 1.048,
+                  "OG_Max": 1.056,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.015,
+                  "IBU_Min": 23,
+                  "IBU_Max": 30,
+                  "Colour_Min": 4,
+                  "Colour_Max": 6,
+                  "ABV_Min": 4.8,
+                  "ABV_Max": 6.0
+                },
+                {
+                  "name": "Dry Stout",
+                  "OG_Min": 1.036,
+                  "OG_Max": 1.050,
+                  "FG_Min": 1.007,
+                  "FG_Max": 1.011,
+                  "IBU_Min": 30,
+                  "IBU_Max": 45,
+                  "Colour_Min": 25,
+                  "Colour_Max": 40,
+                  "ABV_Min": 4.0,
+                  "ABV_Max": 5.0
+                },
+                {
+                  "name": "Dunkelweizen",
+                  "OG_Min": 1.044,
+                  "OG_Max": 1.056,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.014,
+                  "IBU_Min": 10,
+                  "IBU_Max": 18,
+                  "Colour_Min": 14,
+                  "Colour_Max": 23,
+                  "ABV_Min": 4.3,
+                  "ABV_Max": 5.6
+                },
+                {
+                  "name": "Dusseldorf Altbier",
+                  "OG_Min": 1.046,
+                  "OG_Max": 1.054,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.015,
+                  "IBU_Min": 35,
+                  "IBU_Max": 50,
+                  "Colour_Min": 11,
+                  "Colour_Max": 17,
+                  "ABV_Min": 4.5,
+                  "ABV_Max": 5.2
+                },
+                {
+                  "name": "Eisbock",
+                  "OG_Min": 1.078,
+                  "OG_Max": 1.120,
+                  "FG_Min": 1.020,
+                  "FG_Max": 1.035,
+                  "IBU_Min": 25,
+                  "IBU_Max": 35,
+                  "Colour_Min": 18,
+                  "Colour_Max": 30,
+                  "ABV_Min": 9,
+                  "ABV_Max": 14.0
+                },
+                {
+                  "name": "English Barleywine",
+                  "OG_Min": 1.080,
+                  "OG_Max": 1.120,
+                  "FG_Min": 1.018,
+                  "FG_Max": 1.030,
+                  "IBU_Min": 35,
+                  "IBU_Max": 70,
+                  "Colour_Min": 8,
+                  "Colour_Max": 22,
+                  "ABV_Min": 8.0,
+                  "ABV_Max": 12.0
+                },
+                {
+                  "name": "English IPA",
+                  "OG_Min": 1.050,
+                  "OG_Max": 1.075,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.018,
+                  "IBU_Min": 40,
+                  "IBU_Max": 60,
+                  "Colour_Min": 8,
+                  "Colour_Max": 14,
+                  "ABV_Min": 5.0,
+                  "ABV_Max": 7.5
+                },
+                {
+                  "name": "Extra Special/Strong Bitter (English Pale Ale)",
+                  "OG_Min": 1.048,
+                  "OG_Max": 1.060,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.016,
+                  "IBU_Min": 30,
+                  "IBU_Max": 50,
+                  "Colour_Min": 6,
+                  "Colour_Max": 18,
+                  "ABV_Min": 4.6,
+                  "ABV_Max": 6.2
+                },
+                {
+                  "name": "Flanders Brown Ale/Oud Bruin",
+                  "OG_Min": 1.040,
+                  "OG_Max": 1.074,
+                  "FG_Min": 1.008,
+                  "FG_Max": 1.012,
+                  "IBU_Min": 20,
+                  "IBU_Max": 25,
+                  "Colour_Min": 15,
+                  "Colour_Max": 22,
+                  "ABV_Min": 4.0,
+                  "ABV_Max": 8.0
+                },
+                {
+                  "name": "Flanders Red Ale",
+                  "OG_Min": 1.048,
+                  "OG_Max": 1.057,
+                  "FG_Min": 1.002,
+                  "FG_Max": 1.012,
+                  "IBU_Min": 10,
+                  "IBU_Max": 25,
+                  "Colour_Min": 10,
+                  "Colour_Max": 16,
+                  "ABV_Min": 4.6,
+                  "ABV_Max": 6.5
+                },
+                {
+                  "name": "Foreign Extra Stout",
+                  "OG_Min": 1.056,
+                  "OG_Max": 1.075,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.018,
+                  "IBU_Min": 30,
+                  "IBU_Max": 70,
+                  "Colour_Min": 30,
+                  "Colour_Max": 40,
+                  "ABV_Min": 5.5,
+                  "ABV_Max": 8.0
+                },
+                {
+                  "name": "Fruit Beer",
+                  "OG_Min": 1.030,
+                  "OG_Max": 1.110,
+                  "FG_Min": 1.004,
+                  "FG_Max": 1.024,
+                  "IBU_Min": 5,
+                  "IBU_Max": 70,
+                  "Colour_Min": 3,
+                  "Colour_Max": 50,
+                  "ABV_Min": 2.5,
+                  "ABV_Max": 12.0
+                },
+                {
+                  "name": "Fruit Lambic",
+                  "OG_Min": 1.040,
+                  "OG_Max": 1.060,
+                  "FG_Min": 1.000,
+                  "FG_Max": 1.010,
+                  "IBU_Min": 0,
+                  "IBU_Max": 10,
+                  "Colour_Min": 3,
+                  "Colour_Max": 7,
+                  "ABV_Min": 5.0,
+                  "ABV_Max": 7.0
+                },
+                {
+                  "name": "German Pilsner (Pils)",
+                  "OG_Min": 1.044,
+                  "OG_Max": 1.050,
+                  "FG_Min": 1.008,
+                  "FG_Max": 1.013,
+                  "IBU_Min": 25,
+                  "IBU_Max": 45,
+                  "Colour_Min": 2,
+                  "Colour_Max": 5,
+                  "ABV_Min": 4.4,
+                  "ABV_Max": 5.2
+                },
+                {
+                  "name": "Gueuze",
+                  "OG_Min": 1.040,
+                  "OG_Max": 1.060,
+                  "FG_Min": 1.000,
+                  "FG_Max": 1.006,
+                  "IBU_Min": 0,
+                  "IBU_Max": 10,
+                  "Colour_Min": 3,
+                  "Colour_Max": 7,
+                  "ABV_Min": 5.0,
+                  "ABV_Max": 8.0
+                },
+                {
+                  "name": "Imperial IPA",
+                  "OG_Min": 1.075,
+                  "OG_Max": 1.090,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.020,
+                  "IBU_Min": 60,
+                  "IBU_Max": 120,
+                  "Colour_Min": 8,
+                  "Colour_Max": 15,
+                  "ABV_Min": 7.5,
+                  "ABV_Max": 10.0
+                },
+                {
+                  "name": "Imperial Stout",
+                  "OG_Min": 1.075,
+                  "OG_Max": 1.115,
+                  "FG_Min": 1.018,
+                  "FG_Max": 1.030,
+                  "IBU_Min": 50,
+                  "IBU_Max": 90,
+                  "Colour_Min": 30,
+                  "Colour_Max": 40,
+                  "ABV_Min": 8.0,
+                  "ABV_Max": 12.0
+                },
+                {
+                  "name": "Irish Red Ale",
+                  "OG_Min": 1.044,
+                  "OG_Max": 1.060,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.016,
+                  "IBU_Min": 17,
+                  "IBU_Max": 28,
+                  "Colour_Min": 9,
+                  "Colour_Max": 18,
+                  "ABV_Min": 4.0,
+                  "ABV_Max": 6.0
+                },
+                {
+                  "name": "Kolsch",
+                  "OG_Min": 1.044,
+                  "OG_Max": 1.050,
+                  "FG_Min": 1.007,
+                  "FG_Max": 1.011,
+                  "IBU_Min": 20,
+                  "IBU_Max": 30,
+                  "Colour_Min": 3.5,
+                  "Colour_Max": 5,
+                  "ABV_Min": 4.4,
+                  "ABV_Max": 5.2
+                },
+                {
+                  "name": "Lite American Lager",
+                  "OG_Min": 1.028,
+                  "OG_Max": 1.040,
+                  "FG_Min": 0.998,
+                  "FG_Max": 1.008,
+                  "IBU_Min": 8,
+                  "IBU_Max": 12,
+                  "Colour_Min": 2,
+                  "Colour_Max": 3,
+                  "ABV_Min": 2.8,
+                  "ABV_Max": 4.2
+                },
+                {
+                  "name": "Maibock/Helles Bock",
+                  "OG_Min": 1.064,
+                  "OG_Max": 1.072,
+                  "FG_Min": 1.011,
+                  "FG_Max": 1.018,
+                  "IBU_Min": 23,
+                  "IBU_Max": 35,
+                  "Colour_Min": 6,
+                  "Colour_Max": 11,
+                  "ABV_Min": 6.3,
+                  "ABV_Max": 7.4
+                },
+                {
+                  "name": "Mild",
+                  "OG_Min": 1.030,
+                  "OG_Max": 1.038,
+                  "FG_Min": 1.008,
+                  "FG_Max": 1.013,
+                  "IBU_Min": 10,
+                  "IBU_Max": 25,
+                  "Colour_Min": 12,
+                  "Colour_Max": 25,
+                  "ABV_Min": 2.8,
+                  "ABV_Max": 4.5
+                },
+                {
+                  "name": "Munich Dunkel",
+                  "OG_Min": 1.048,
+                  "OG_Max": 1.056,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.016,
+                  "IBU_Min": 18,
+                  "IBU_Max": 28,
+                  "Colour_Min": 14,
+                  "Colour_Max": 28,
+                  "ABV_Min": 4.5,
+                  "ABV_Max": 5.6
+                },
+                {
+                  "name": "Munich Helles",
+                  "OG_Min": 1.045,
+                  "OG_Max": 1.051,
+                  "FG_Min": 1.008,
+                  "FG_Max": 1.012,
+                  "IBU_Min": 16,
+                  "IBU_Max": 22,
+                  "Colour_Min": 3,
+                  "Colour_Max": 5,
+                  "ABV_Min": 4.7,
+                  "ABV_Max": 5.4
+                },
+                {
+                  "name": "North German Altbier",
+                  "OG_Min": 1.046,
+                  "OG_Max": 1.054,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.015,
+                  "IBU_Min": 25,
+                  "IBU_Max": 40,
+                  "Colour_Min": 13,
+                  "Colour_Max": 19,
+                  "ABV_Min": 4.5,
+                  "ABV_Max": 5.2
+                },
+                {
+                  "name": "Northern English Brown Ale",
+                  "OG_Min": 1.040,
+                  "OG_Max": 1.052,
+                  "FG_Min": 1.008,
+                  "FG_Max": 1.013,
+                  "IBU_Min": 20,
+                  "IBU_Max": 30,
+                  "Colour_Min": 12,
+                  "Colour_Max": 22,
+                  "ABV_Min": 4.2,
+                  "ABV_Max": 5.4
+                },
+                {
+                  "name": "Oatmeal Stout",
+                  "OG_Min": 1.048,
+                  "OG_Max": 1.065,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.018,
+                  "IBU_Min": 25,
+                  "IBU_Max": 40,
+                  "Colour_Min": 22,
+                  "Colour_Max": 40,
+                  "ABV_Min": 4.2,
+                  "ABV_Max": 5.9
+                },
+                {
+                  "name": "Oktoberfest/Marzen",
+                  "OG_Min": 1.050,
+                  "OG_Max": 1.057,
+                  "FG_Min": 1.012,
+                  "FG_Max": 1.016,
+                  "IBU_Min": 20,
+                  "IBU_Max": 28,
+                  "Colour_Min": 7,
+                  "Colour_Max": 14,
+                  "ABV_Min": 4.8,
+                  "ABV_Max": 5.7
+                },
+                {
+                  "name": "Old Ale",
+                  "OG_Min": 1.060,
+                  "OG_Max": 1.090,
+                  "FG_Min": 1.015,
+                  "FG_Max": 1.022,
+                  "IBU_Min": 30,
+                  "IBU_Max": 60,
+                  "Colour_Min": 10,
+                  "Colour_Max": 22,
+                  "ABV_Min": 6.0,
+                  "ABV_Max": 9.0
+                },
+                {
+                  "name": "Other Smoked Beer",
+                  "OG_Min": 1.030,
+                  "OG_Max": 1.110,
+                  "FG_Min": 1.006,
+                  "FG_Max": 1.024,
+                  "IBU_Min": 5,
+                  "IBU_Max": 70,
+                  "Colour_Min": 5,
+                  "Colour_Max": 50,
+                  "ABV_Min": 2.5,
+                  "ABV_Max": 12.0
+                },
+                {
+                  "name": "Premium American Lager",
+                  "OG_Min": 1.046,
+                  "OG_Max": 1.056,
+                  "FG_Min": 1.008,
+                  "FG_Max": 1.012,
+                  "IBU_Min": 15,
+                  "IBU_Max": 25,
+                  "Colour_Min": 2,
+                  "Colour_Max": 6,
+                  "ABV_Min": 4.6,
+                  "ABV_Max": 6.0
+                },
+                {
+                  "name": "Robust Porter",
+                  "OG_Min": 1.048,
+                  "OG_Max": 1.065,
+                  "FG_Min": 1.012,
+                  "FG_Max": 1.016,
+                  "IBU_Min": 25,
+                  "IBU_Max": 50,
+                  "Colour_Min": 22,
+                  "Colour_Max": 35,
+                  "ABV_Min": 4.8,
+                  "ABV_Max": 6.5
+                },
+                {
+                  "name": "Roggenbier (German Rye Beer)",
+                  "OG_Min": 1.046,
+                  "OG_Max": 1.056,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.014,
+                  "IBU_Min": 10,
+                  "IBU_Max": 20,
+                  "Colour_Min": 14,
+                  "Colour_Max": 19,
+                  "ABV_Min": 4.5,
+                  "ABV_Max": 6.0
+                },
+                {
+                  "name": "Saison",
+                  "OG_Min": 1.048,
+                  "OG_Max": 1.065,
+                  "FG_Min": 1.002,
+                  "FG_Max": 1.012,
+                  "IBU_Min": 20,
+                  "IBU_Max": 35,
+                  "Colour_Min": 5,
+                  "Colour_Max": 14,
+                  "ABV_Min": 5.0,
+                  "ABV_Max": 7.0
+                },
+                {
+                  "name": "Schwarzbier",
+                  "OG_Min": 1.046,
+                  "OG_Max": 1.052,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.016,
+                  "IBU_Min": 22,
+                  "IBU_Max": 32,
+                  "Colour_Min": 17,
+                  "Colour_Max": 30,
+                  "ABV_Min": 4.4,
+                  "ABV_Max": 5.4
+                },
+                {
+                  "name": "Scottish Light 60/-",
+                  "OG_Min": 1.030,
+                  "OG_Max": 1.035,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.013,
+                  "IBU_Min": 10,
+                  "IBU_Max": 20,
+                  "Colour_Min": 9,
+                  "Colour_Max": 17,
+                  "ABV_Min": 2.5,
+                  "ABV_Max": 3.2
+                },
+                {
+                  "name": "Scottish Light 70/-",
+                  "OG_Min": 1.035,
+                  "OG_Max": 1.040,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.013,
+                  "IBU_Min": 10,
+                  "IBU_Max": 25,
+                  "Colour_Min": 9,
+                  "Colour_Max": 17,
+                  "ABV_Min": 3.2,
+                  "ABV_Max": 3.9
+                },
+                {
+                  "name": "Scottish Light 80/-",
+                  "OG_Min": 1.040,
+                  "OG_Max": 1.054,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.015,
+                  "IBU_Min": 15,
+                  "IBU_Max": 30,
+                  "Colour_Min": 9,
+                  "Colour_Max": 17,
+                  "ABV_Min": 3.9,
+                  "ABV_Max": 5.0
+                },
+                {
+                  "name": "Southern English Brown Ale",
+                  "OG_Min": 1.033,
+                  "OG_Max": 1.042,
+                  "FG_Min": 1.011,
+                  "FG_Max": 1.014,
+                  "IBU_Min": 12,
+                  "IBU_Max": 20,
+                  "Colour_Min": 19,
+                  "Colour_Max": 35,
+                  "ABV_Min": 2.8,
+                  "ABV_Max": 4.1
+                },
+                {
+                  "name": "Special/Best/Premium Bitter",
+                  "OG_Min": 1.040,
+                  "OG_Max": 1.048,
+                  "FG_Min": 1.008,
+                  "FG_Max": 1.012,
+                  "IBU_Min": 25,
+                  "IBU_Max": 40,
+                  "Colour_Min": 5,
+                  "Colour_Max": 16,
+                  "ABV_Min": 3.8,
+                  "ABV_Max": 4.6
+                },
+                {
+                  "name": "Specialty Beer",
+                  "OG_Min": 1.030,
+                  "OG_Max": 1.110,
+                  "FG_Min": 1.006,
+                  "FG_Max": 1.024,
+                  "IBU_Min": 5,
+                  "IBU_Max": 70,
+                  "Colour_Min": 5,
+                  "Colour_Max": 50,
+                  "ABV_Min": 2.5,
+                  "ABV_Max": 12.0
+                },
+                {
+                  "name": "Spice, Herb, or Vegetable Beer",
+                  "OG_Min": 1.030,
+                  "OG_Max": 1.110,
+                  "FG_Min": 1.005,
+                  "FG_Max": 1.025,
+                  "IBU_Min": 0,
+                  "IBU_Max": 70,
+                  "Colour_Min": 5,
+                  "Colour_Max": 50,
+                  "ABV_Min": 2.5,
+                  "ABV_Max": 12.0
+                },
+                {
+                  "name": "Standard American Lager",
+                  "OG_Min": 1.040,
+                  "OG_Max": 1.050,
+                  "FG_Min": 1.004,
+                  "FG_Max": 1.010,
+                  "IBU_Min": 8,
+                  "IBU_Max": 15,
+                  "Colour_Min": 2,
+                  "Colour_Max": 4,
+                  "ABV_Min": 4.2,
+                  "ABV_Max": 5.3
+                },
+                {
+                  "name": "Standard/Ordinary Bitter",
+                  "OG_Min": 1.032,
+                  "OG_Max": 1.040,
+                  "FG_Min": 1.007,
+                  "FG_Max": 1.011,
+                  "IBU_Min": 25,
+                  "IBU_Max": 35,
+                  "Colour_Min": 4,
+                  "Colour_Max": 14,
+                  "ABV_Min": 3.2,
+                  "ABV_Max": 3.8
+                },
+                {
+                  "name": "Straight (Unblended) Lambic",
+                  "OG_Min": 1.040,
+                  "OG_Max": 1.054,
+                  "FG_Min": 1.001,
+                  "FG_Max": 1.010,
+                  "IBU_Min": 0,
+                  "IBU_Max": 10,
+                  "Colour_Min": 3,
+                  "Colour_Max": 7,
+                  "ABV_Min": 5.0,
+                  "ABV_Max": 6.5
+                },
+                {
+                  "name": "Strong Scotch Ale",
+                  "OG_Min": 1.070,
+                  "OG_Max": 1.130,
+                  "FG_Min": 1.018,
+                  "FG_Max": 1.056,
+                  "IBU_Min": 17,
+                  "IBU_Max": 35,
+                  "Colour_Min": 14,
+                  "Colour_Max": 25,
+                  "ABV_Min": 6.5,
+                  "ABV_Max": 10.0
+                },
+                {
+                  "name": "Sweet Stout",
+                  "OG_Min": 1.044,
+                  "OG_Max": 1.060,
+                  "FG_Min": 1.012,
+                  "FG_Max": 1.024,
+                  "IBU_Min": 20,
+                  "IBU_Max": 40,
+                  "Colour_Min": 30,
+                  "Colour_Max": 40,
+                  "ABV_Min": 4.0,
+                  "ABV_Max": 6.0
+                },
+                {
+                  "name": "Traditional Bock",
+                  "OG_Min": 1.064,
+                  "OG_Max": 1.072,
+                  "FG_Min": 1.013,
+                  "FG_Max": 1.019,
+                  "IBU_Min": 20,
+                  "IBU_Max": 27,
+                  "Colour_Min": 14,
+                  "Colour_Max": 22,
+                  "ABV_Min": 6.3,
+                  "ABV_Max": 7.2
+                },
+                {
+                  "name": "Vienna Lager",
+                  "OG_Min": 1.046,
+                  "OG_Max": 1.052,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.014,
+                  "IBU_Min": 18,
+                  "IBU_Max": 30,
+                  "Colour_Min": 10,
+                  "Colour_Max": 16,
+                  "ABV_Min": 4.5,
+                  "ABV_Max": 5.5
+                },
+                {
+                  "name": "Weizen/Weissbier",
+                  "OG_Min": 1.044,
+                  "OG_Max": 1.052,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.014,
+                  "IBU_Min": 8,
+                  "IBU_Max": 15,
+                  "Colour_Min": 2,
+                  "Colour_Max": 8,
+                  "ABV_Min": 4.3,
+                  "ABV_Max": 5.6
+                },
+                {
+                  "name": "Weizenbock",
+                  "OG_Min": 1.064,
+                  "OG_Max": 1.090,
+                  "FG_Min": 1.015,
+                  "FG_Max": 1.022,
+                  "IBU_Min": 15,
+                  "IBU_Max": 30,
+                  "Colour_Min": 12,
+                  "Colour_Max": 25,
+                  "ABV_Min": 6.5,
+                  "ABV_Max": 8.0
+                },
+                {
+                  "name": "Witbier",
+                  "OG_Min": 1.044,
+                  "OG_Max": 1.052,
+                  "FG_Min": 1.008,
+                  "FG_Max": 1.012,
+                  "IBU_Min": 10,
+                  "IBU_Max": 20,
+                  "Colour_Min": 2,
+                  "Colour_Max": 4,
+                  "ABV_Min": 4.5,
+                  "ABV_Max": 5.5
+                },
+                {
+                  "name": "Wood-Aged Beer",
+                  "OG_Min": 1.030,
+                  "OG_Max": 1.110,
+                  "FG_Min": 1.006,
+                  "FG_Max": 1.024,
+                  "IBU_Min": 5,
+                  "IBU_Max": 70,
+                  "Colour_Min": 5,
+                  "Colour_Max": 50,
+                  "ABV_Min": 2.5,
+                  "ABV_Max": 12.0
+                }
+              ];
+        }
+    };
+});
+
+data.factory("Misc",function() {
+    return {
+        query: function() {
+            return [
+                {
+                  "name": "Black Pepper",
+                  "type": "Spice",
+                  "use": "Boil"
+                },
+                {
+                  "name": "Calcium Chloride",
+                  "type": "Water Agent",
+                  "use": "Mash"
+                },
+                {
+                  "name": "Caraway Seed",
+                  "type": "Spice",
+                  "use": "Boil"
+                },
+                {
+                  "name": "Cardamom Seed",
+                  "type": "Spice",
+                  "use": "Boil"
+                },
+                {
+                  "name": "Chamomile",
+                  "type": "Spice",
+                  "use": "Boil"
+                },
+                {
+                  "name": "Chili Pepper",
+                  "type": "Spice",
+                  "use": "Boil"
+                },
+                {
+                  "name": "Cinnamon",
+                  "type": "Spice",
+                  "use": "Boil"
+                },
+                {
+                  "name": "Cinnamon Stick",
+                  "type": "Spice",
+                  "use": "Boil"
+                },
+                {
+                  "name": "Citric Acid",
+                  "type": "Water Agent",
+                  "use": "Mash"
+                },
+                {
+                  "name": "Cocoa Powder",
+                  "type": "Other",
+                  "use": "Boil"
+                },
+                {
+                  "name": "Coriander Seed",
+                  "type": "Spice",
+                  "use": "Boil"
+                },
+                {
+                  "name": "Corriander Seed",
+                  "type": "Spice",
+                  "use": "Boil"
+                },
+                {
+                  "name": "Dried Elderberries",
+                  "type": "Other",
+                  "use": "Secondary"
+                },
+                {
+                  "name": "Dried Elderflowers",
+                  "type": "Other",
+                  "use": "Secondary"
+                },
+                {
+                  "name": "Epsom Salt (MgSO4)",
+                  "type": "Water Agent",
+                  "use": "Mash"
+                },
+                {
+                  "name": "Fennel Seed",
+                  "type": "Spice",
+                  "use": "Boil"
+                },
+                {
+                  "name": "Gelatin",
+                  "type": "Fining",
+                  "use": "Secondary"
+                },
+                {
+                  "name": "Ginger Root",
+                  "type": "Herb",
+                  "use": "Boil"
+                },
+                {
+                  "name": "Grains of Paradise",
+                  "type": "Spice",
+                  "use": "Boil"
+                },
+                {
+                  "name": "Gypsum (Calcium Sulfate)",
+                  "type": "Water Agent",
+                  "use": "Mash"
+                },
+                {
+                  "name": "Irish Moss",
+                  "type": "Fining",
+                  "use": "Boil"
+                },
+                {
+                  "name": "Isinglass (Liquid)",
+                  "type": "Fining",
+                  "use": "Secondary"
+                },
+                {
+                  "name": "Jamaican Peper",
+                  "type": "Other",
+                  "use": "Boil"
+                },
+                {
+                  "name": "Juniper Berries",
+                  "type": "Other",
+                  "use": "Secondary"
+                },
+                {
+                  "name": "Lactic Acid",
+                  "type": "Water Agent",
+                  "use": "Mash"
+                },
+                {
+                  "name": "Lavender",
+                  "type": "Herb",
+                  "use": "Boil"
+                },
+                {
+                  "name": "Licorice Root",
+                  "type": "Other",
+                  "use": "Boil"
+                },
+                {
+                  "name": "Malto-Dextrine",
+                  "type": "Other",
+                  "use": "Boil"
+                },
+                {
+                  "name": "Mugwort",
+                  "type": "Herb",
+                  "use": "Boil"
+                },
+                {
+                  "name": "Oak Chips",
+                  "type": "Flavor",
+                  "use": "Secondary"
+                },
+                {
+                  "name": "Orange Peel",
+                  "type": "Spice",
+                  "use": "Boil"
+                },
+                {
+                  "name": "Papain",
+                  "type": "Fining",
+                  "use": "Secondary"
+                },
+                {
+                  "name": "PH 5.2",
+                  "type": "Water Agent",
+                  "use": "Mash"
+                },
+                {
+                  "name": "Polyclar",
+                  "type": "Fining",
+                  "use": "Secondary"
+                },
+                {
+                  "name": "Red Peper",
+                  "type": "Other",
+                  "use": "Boil"
+                },
+                {
+                  "name": "Rosemary",
+                  "type": "Herb",
+                  "use": "Boil"
+                },
+                {
+                  "name": "Spruce Tips",
+                  "type": "Other",
+                  "use": "Boil"
+                },
+                {
+                  "name": "Star Anise",
+                  "type": "Spice",
+                  "use": "Boil"
+                },
+                {
+                  "name": "Vanilla",
+                  "type": "Other",
+                  "use": "Boil"
+                },
+                {
+                  "name": "Whirlfloc Tablet",
+                  "type": "Fining",
+                  "use": "Boil"
+                },
+                {
+                  "name": "Yarrow",
+                  "type": "Herb",
+                  "use": "Boil"
+                },
+                {
+                  "name": "Yeast Nutrient",
+                  "type": "Other",
+                  "use": "Boil"
+                }
+              ];
+        }
+    };
+});
+
 data.factory("Yeast",function() {
     return {
         query: function() {
