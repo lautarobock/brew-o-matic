@@ -3,7 +3,12 @@
 
     var share = angular.module('share', ['ngResource','data','resources','helper']);
 
-    share.controller("ShareController", function($scope,Recipe,$location,BrewHelper) {
+    share.controller("ShareController", function($scope,Recipe,$location,BrewHelper,HopUse,HopForm) {
+        
+        $scope.hopUses = HopUse.query();
+        
+        $scope.hopForms = HopForm.query();
+        
         $scope.recipe = Recipe.get({id:$location.path().substr(1,$location.path().length-1)});
 
         $scope.calulateBUGU = function(bu,gu) {
@@ -22,10 +27,21 @@
             return BrewHelper.convertColor(srm);
         };
 
+        function getUtilization(name,list) {
+            var utilization = 1;
+            angular.forEach(list, function(it) {
+                if ( name === it.name ) {
+                    utilization = it.utilization;
+                }
+            });
+            return utilization;
+        }
         
         $scope.hopIBU = function(hop) {
             var U = BrewHelper.calculateU($scope.recipe.OG,hop.TIME);
-            return BrewHelper.toOz(hop.AMOUNT)*hop.ALPHA*U*(7489/100)/BrewHelper.toGal($scope.recipe.BATCH_SIZE);
+            var baseIBU = BrewHelper.toOz(hop.AMOUNT)*hop.ALPHA*U*(7489/100)/BrewHelper.toGal($scope.recipe.BATCH_SIZE);
+            //add or remove by utilization (ej: mash use 20%)
+            return baseIBU * getUtilization(hop.USE,$scope.hopUses) * getUtilization(hop.FORM,$scope.hopForms);
         };
 
     });

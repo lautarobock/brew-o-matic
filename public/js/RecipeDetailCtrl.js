@@ -1,7 +1,23 @@
 (function() {
     var index = angular.module('index');
 
-    index.controller("RecipeDetailCtrl", function ($scope,BrewHelper,Grain,Hop,Yeast,Misc,Style,$routeParams,$rootScope,Recipe,$location) {
+    index.controller("RecipeDetailCtrl",
+                     function (
+                               $scope,
+                               BrewHelper,
+                               Grain,
+                               Hop,
+                               HopUse,
+                               HopForm,
+                               Yeast,
+                               Style,
+                               Misc,
+                               MiscType,
+                               MiscUse,
+                               $routeParams,
+                               $rootScope,
+                               Recipe,
+                               $location) {
 
         $rootScope.breadcrumbs = [{
             link: '#',
@@ -16,12 +32,20 @@
         $scope.grains = Grain.query();
 
         $scope.hops = Hop.query();
+        
+        $scope.hopUses = HopUse.query();
+        
+        $scope.hopForms = HopForm.query();
 
         $scope.yeasts = Yeast.query();
         
         $scope.miscs = Misc.query();
         
         $scope.styles = Style.query();
+        
+        $scope.miscTypes = MiscType.query();
+        
+        $scope.miscUses = MiscUse.query();
 
         $scope.removeFermentable = function(fermentable) {
             var index = $scope.recipe["FERMENTABLES"]["FERMENTABLE"].indexOf(fermentable);
@@ -86,9 +110,21 @@
             return hop.AMOUNT/totalHop*100;
         };
 
+        function getUtilization(name,list) {
+            var utilization = 1;
+            angular.forEach(list, function(it) {
+                if ( name === it.name ) {
+                    utilization = it.utilization;
+                }
+            });
+            return utilization;
+        }
+        
         $scope.hopIBU = function(hop) {
             var U = BrewHelper.calculateU($scope.recipe.OG,hop.TIME);
-            return BrewHelper.toOz(hop.AMOUNT)*hop.ALPHA*U*(7489/100)/BrewHelper.toGal($scope.recipe.BATCH_SIZE);
+            var baseIBU = BrewHelper.toOz(hop.AMOUNT)*hop.ALPHA*U*(7489/100)/BrewHelper.toGal($scope.recipe.BATCH_SIZE);
+            //add or remove by utilization (ej: mash use 20%)
+            return baseIBU * getUtilization(hop.USE,$scope.hopUses) * getUtilization(hop.FORM,$scope.hopForms);
         };
 
         $scope.removeHop = function(hop) {
@@ -266,5 +302,11 @@
             });
             $scope.changeYeast();
         }
+        
+        $scope.gravityBarValue = function(grav,max) {
+            return BrewHelper.toPpg(grav) / max * 100;
+        }
+        
+        
     });
 })();

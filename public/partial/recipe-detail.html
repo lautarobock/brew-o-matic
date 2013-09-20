@@ -1,131 +1,134 @@
-<div class="panel panel-default" id="RecipeDetailCtrl">
-    <div class="panel-body">
-        <div class="row">
-            <div class="col-lg-4">
-                <label for="recipename">Nombre</label>
-                <input type="text" class="form-control" id="recipename" placeholder="Nombre" ng-model="recipe.NAME">
-            </div>
-            <div class="col-lg-2">
-              <label for="batch_size">Batch (L)</label>
-              <input ng-change="changeAmount()" type="number" class="form-control" id="batch_size" step="0.1" ng-model="recipe.BATCH_SIZE">
-            </div>
-            <div class="col-lg-2">
-              <label for="OG">OG</label>
-              <input type="number" class="form-control" id="OG" ng-model="recipe.OG" step="0.001" disabled>
-            </div>
-            <div class="col-lg-2">
-              <label for="ibu">IBU</label>
-              <input type="text" class="form-control" id="ibu" readonly="true" ng-model="recipe.CALCIBU">
-            </div>
-            <div class="col-lg-2">
-              <label for="balance">Balance</label>
-              <input type="text" class="form-control" id="balance" readonly="true" ng-model="recipe.BV"/>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4">
-                <label for="style">Style</label>
-                <input type="text" class="form-control" id="style" placeholder="Estilo" ng-model="recipe.STYLE.NAME" list="styleNames">
-                <datalist id="styleNames">
-                    <option ng-repeat="style in styles" value="{{style.name}}">
-                        {{style.name}}
-                    </option>
-                </datalist>                    
-            </div>
-            <div class="col-lg-2">
-              <label for="EFFICIENCY">Eficiencia</label>
-              <input ng-change="changeAmount()" type="number" class="form-control" id="EFFICIENCY" ng-model="recipe.EFFICIENCY">
-            </div>
-            <div class="col-lg-2">
-              <label for="fg">FG</label>
-              <input type="text" class="form-control" id="fg" readonly="true" ng-model="recipe.FG"/>
-            </div>
-            <div class="col-lg-2">
-              <label for="bugu">BU/GU</label>
-              <input type="text" class="form-control" id="bugu" readonly="true" value="{{calulateBUGU(recipe.CALCIBU,recipe.OG)|number:2}}"/>
-            </div>
-            <div class="col-lg-2">
-              <label for="abv">Alcohol (ABV) %</label>
-              <input type="text" class="form-control" id="abv" readonly="true" ng-model="recipe.ABV"/>
-            </div>
-        </div>
-    </div>
-</div>
-<ng-include src="'partial/recipe-detail-fermentables.html'"></ng-include>
-<ng-include src="'partial/recipe-detail-hops.html'"></ng-include>
-<div class="panel panel-default">
-    <div class="panel-heading"><strong>Levadura</strong></div>
-    <table class="table table-condensed table-hover" style="margin-top: 1em;margin-bottom: 2em;">
-      <thead>
-        <tr>
-          <th style="width:90%">Levadura</th>
-          <th style="width:10%">Atenuacion</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="yeast in recipe.YEASTS.YEAST">
-            <!--<td><input class="form-control input-sm" type="text" ng-model="yeast.NAME"/></td>-->
-            <td>
-                <input ng-change="onChangeYeast(yeast)" class="form-control input-sm" type="text" ng-model="yeast.NAME" list="yeastNames" placeholder="Buscar Levaduras"/>
-                <datalist id="yeastNames">
-                    <option ng-repeat="yeast in yeasts" value="{{yeast.name}}">
-                        {{yeast.name}}
-                    </option>
-                </datalist>
-            </td>
-            <td><input ng-change="changeYeast()" class="form-control input-sm" type="number" ng-model="yeast.ATTENUATION"/></td>
-        </tr>
-      </tbody>
-    </table>
-</div>
-<ng-include src="'partial/recipe-detail-miscs.html'"></ng-include>
-<div class="panel panel-default">
-    <div class="panel-heading"><strong>Otros datos</strong></div>
-    <div class="panel-body" >
-        <div class="row">
-            <div class="col-lg-6">
-                <label for="brewer">Cervecero</label>
-                <input type="text" class="form-control" id="brewer" placeholder="Cervecero" ng-model="recipe.BREWER">
-            </div>
-            <div class="col-lg-2">
-              <label for="boil_size">Litros a Hervir (L)</label>
-              <input type="number" class="form-control" id="boil_size" step="0.1" ng-model="recipe.BOIL_SIZE">
-            </div>
-            <div class="col-lg-2">
-              <label for="boil_time">Tiempo Hervido (min)</label>
-              <input type="number" class="form-control" id="boil_time" ng-model="recipe.BOIL_TIME">
-            </div>
-            <div class="col-lg-2">
-              <label for="primary_temp">T. Primario</label>
-              <input type="number" class="form-control" id="primary_temp" step="0.1" ng-model="recipe.PRIMARY_TEMP">
+<div class="row">
+    <div class="col-md-10" >
+        <div class="panel panel-default" id="RecipeDetailCtrl">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label for="recipename">Nombre</label>
+                        <input type="text" class="form-control" id="recipename" placeholder="Nombre" ng-model="recipe.NAME">
+                    </div>
+                    <div class="col-lg-2">
+                      <label for="batch_size">Batch (L)</label>
+                      <input ng-change="changeAmount()" type="number" class="form-control" id="batch_size" step="0.1" ng-model="recipe.BATCH_SIZE">
+                    </div>
+                    <div class="col-lg-2">
+                      <label for="OG">OG</label>
+                      <input type="number" class="form-control" id="OG" ng-model="recipe.OG" step="0.001" disabled>
+                    </div>
+                    <div class="col-lg-2">
+                      <label for="ibu">IBU</label>
+                      <input type="text" class="form-control" id="ibu" readonly="true" ng-model="recipe.CALCIBU">
+                    </div>
+                    <div class="col-lg-2">
+                      <label for="balance">Balance</label>
+                      <input type="text" class="form-control" id="balance" readonly="true" ng-model="recipe.BV"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label for="style">Style</label>
+                        <input type="text" class="form-control" id="style" placeholder="Estilo" ng-model="recipe.STYLE.NAME" list="styleNames">
+                        <datalist id="styleNames">
+                            <option ng-repeat="style in styles" value="{{style.name}}">
+                                {{style.name}}
+                            </option>
+                        </datalist>                    
+                    </div>
+                    <div class="col-lg-2">
+                      <label for="EFFICIENCY">Eficiencia</label>
+                      <input ng-change="changeAmount()" type="number" class="form-control" id="EFFICIENCY" ng-model="recipe.EFFICIENCY">
+                    </div>
+                    <div class="col-lg-2">
+                      <label for="fg">FG</label>
+                      <input type="text" class="form-control" id="fg" readonly="true" ng-model="recipe.FG"/>
+                    </div>
+                    <div class="col-lg-2">
+                      <label for="bugu">BU/GU</label>
+                      <input type="text" class="form-control" id="bugu" readonly="true" value="{{calulateBUGU(recipe.CALCIBU,recipe.OG)|number:2}}"/>
+                    </div>
+                    <div class="col-lg-2">
+                      <label for="abv">Alcohol (ABV) %</label>
+                      <input type="text" class="form-control" id="abv" readonly="true" ng-model="recipe.ABV"/>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row" ng-show="recipe._id">
-            <div class="col-lg-12">
-                <label for="link_ro">Link de solo lectura <a target="_blank" href="{{sharedUrl(recipe._id)}}"><span class="glyphicon glyphicon-link"></a></span></label>
-                <span class="form-control" >
-                    {{sharedUrl(recipe._id)}}
-                </span>
+        <ng-include src="'partial/recipe-detail-fermentables.html'"></ng-include>
+        <ng-include src="'partial/recipe-detail-hops.html'"></ng-include>
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong>Levadura</strong></div>
+            <table class="table table-condensed table-hover" style="margin-top: 1em;margin-bottom: 2em;">
+              <thead>
+                <tr>
+                  <th style="width:90%">Levadura</th>
+                  <th style="width:10%">Atenuacion</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="yeast in recipe.YEASTS.YEAST">
+                    <!--<td><input class="form-control input-sm" type="text" ng-model="yeast.NAME"/></td>-->
+                    <td>
+                        <input ng-change="onChangeYeast(yeast)" class="form-control input-sm" type="text" ng-model="yeast.NAME" list="yeastNames" placeholder="Buscar Levaduras"/>
+                        <datalist id="yeastNames">
+                            <option ng-repeat="yeast in yeasts" value="{{yeast.name}}">
+                                {{yeast.name}}
+                            </option>
+                        </datalist>
+                    </td>
+                    <td><input ng-change="changeYeast()" class="form-control input-sm" type="number" ng-model="yeast.ATTENUATION"/></td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+        <ng-include src="'partial/recipe-detail-miscs.html'"></ng-include>
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong>Otros datos</strong></div>
+            <div class="panel-body" >
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label for="brewer">Cervecero</label>
+                        <input type="text" class="form-control" id="brewer" placeholder="Cervecero" ng-model="recipe.BREWER">
+                    </div>
+                    <div class="col-lg-2">
+                      <label for="boil_size">Litros a Hervir (L)</label>
+                      <input type="number" class="form-control" id="boil_size" step="0.1" ng-model="recipe.BOIL_SIZE">
+                    </div>
+                    <div class="col-lg-2">
+                      <label for="boil_time">Tiempo Hervido (min)</label>
+                      <input type="number" class="form-control" id="boil_time" ng-model="recipe.BOIL_TIME">
+                    </div>
+                    <div class="col-lg-2">
+                      <label for="primary_temp">T. Primario</label>
+                      <input type="number" class="form-control" id="primary_temp" step="0.1" ng-model="recipe.PRIMARY_TEMP">
+                    </div>
+                </div>
+                <div class="row" ng-show="recipe._id">
+                    <div class="col-lg-12">
+                        <label for="link_ro">Link de solo lectura <a target="_blank" href="{{sharedUrl(recipe._id)}}"><span class="glyphicon glyphicon-link"></a></span></label>
+                        <input class="form-control" value="{{sharedUrl(recipe._id)}}" disabled/>
+                    </div>
+                </div>
             </div>
         </div>
+        <div style="overflow: hidden;margin-bottom: 1em;">
+            <div class="pull-left">
+                <a href="#/recipe/" type="button" class="btn btn-link glyphicon glyphicon-chevron-left"> Volver al listado</a>
+            </div>
+            <div class="pull-right">
+                <a href="#/recipe/" type="button" class="btn btn-default">Cancelar</a>
+                <button ng-click="save()" type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+        <div ng-repeat="notification in notifications">
+            <div class="alert alert-{{notification.type}} alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>{{notification.title}}</strong>
+                {{notification.text}}
+            </div>
+        </div>
+        <ng-include src="'partial/recipe-detail-import.html'"></ng-include>
+    </div>
+    <div class="col-md-2" >
+        <ng-include src="'partial/recipe-detail-indicators.html'"></ng-include>
     </div>
 </div>
-<div style="overflow: hidden;margin-bottom: 1em;">
-    <div class="pull-left">
-        <a href="#/recipe/" type="button" class="btn btn-link glyphicon glyphicon-chevron-left"> Volver al listado</a>
-    </div>
-    <div class="pull-right">
-        <a href="#/recipe/" type="button" class="btn btn-default">Cancelar</a>
-        <button ng-click="save()" type="button" class="btn btn-primary">Guardar</button>
-    </div>
-</div>
-<div ng-repeat="notification in notifications">
-    <div class="alert alert-{{notification.type}} alert-dismissable">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <strong>{{notification.title}}</strong>
-        {{notification.text}}
-    </div>
-</div>
-
-
-<ng-include src="'partial/recipe-detail-import.html'"></ng-include>

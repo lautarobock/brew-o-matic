@@ -9,8 +9,8 @@
           <th>Nombre</th>
           <th>Tipo</th>
           <th>Uso</th>
-          <th>Tiempo</th>
-          <th>Kg</th>
+          <th style="width: 8em">Tiempo (min)</th>
+          <th style="width: 8em">Peso (Kg)</th>
           <th></th>
         </tr>
       </thead>
@@ -24,8 +24,18 @@
                     </option>
                 </datalist>
             </td>
-            <td><input class="form-control input-sm" type="text" ng-model="misc.TYPE" /></td>
-            <td><input class="form-control input-sm" type="text" ng-model="misc.USE" /></td>
+            <!--<td><input class="form-control input-sm" type="text" ng-model="misc.TYPE" /></td>-->
+            <td>
+                <select class="form-control input-sm" ng-model="misc.TYPE">
+                    <option ng-repeat="type in miscTypes">{{type}}</option>
+                </select>
+            </td>
+            <!--<td><input class="form-control input-sm" type="text" ng-model="misc.USE" /></td>-->
+            <td>
+                <select class="form-control input-sm" ng-model="misc.USE">
+                    <option ng-repeat="use in miscUses">{{use}}</option>
+                </select>
+            </td>
             <td><input class="form-control input-sm" type="number" ng-model="misc.TIME" placeholder="Tiempo" /></td>
             <td><input class="form-control input-sm" type="number" step="0.001" ng-model="misc.AMOUNT" placeholder="Kg"/></td>
             <td>
