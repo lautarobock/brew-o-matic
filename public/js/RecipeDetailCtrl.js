@@ -199,10 +199,6 @@
         };
         
         if ( $routeParams.recipeId ) {
-            //var recipes = JSON.parse(localStorage["brew-o-matic.recipes"]);
-            //if ( recipes[$routeParams.recipeId]) {
-            //    $scope.recipe = recipes[$routeParams.recipeId];
-            //}
             $scope.recipe = Recipe.get({id:$routeParams.recipeId},function() {
                 $scope.changeYeast();
             });

@@ -24,6 +24,7 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     BOIL_SIZE: Number,
     BOIL_TIME: Number,
     ABV: Number,
+    BV: Number,
     EFFICIENCY: Number,
     OG: Number,
     CALCIBU: Number,
