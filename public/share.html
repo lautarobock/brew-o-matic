@@ -39,171 +39,197 @@
       <div class="panel panel-default">
         <div class="panel-heading"><strong>{{recipe.NAME}}</strong></div>
         <div class="panel-body">
-            <div class="panel panel-default" id="RecipeDetailCtrl" >
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <label for="recipename">Nombre</label>
-                            <span class="form-control" id="recipename" ng-bind="recipe.NAME" />
-                        </div>
-                        <div class="col-lg-2">
-                            <label for="batch_size">Batch (L)</label>
-                            <span class="form-control" id="batch_size" ng-bind="recipe.BATCH_SIZE"/>
-                        </div>
-                        <div class="col-lg-2">
-                            <label for="OG">OG</label>
-                            <span class="form-control" id="OG" ng-bind="recipe.OG" />
-                        </div>
-                        <div class="col-lg-2">
-                            <label for="ibu">IBU</label>
-                            <span class="form-control" id="ibu" ng-bind="recipe.CALCIBU" />
-                        </div>
-                        <div class="col-lg-2">
-                            <label for="balance">Balance</label>
-                            <span class="form-control" id="balance" ng-bind="recipe.BV" />
+            <div class="row">
+                <div class="col-md-10" >
+                    <div class="panel panel-default" id="RecipeDetailCtrl" >
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <label for="recipename">Nombre</label>
+                                    <span class="form-control" id="recipename" ng-bind="recipe.NAME" />
+                                </div>
+                                <div class="col-lg-2">
+                                    <label for="batch_size">Batch (L)</label>
+                                    <span class="form-control" id="batch_size" ng-bind="recipe.BATCH_SIZE"/>
+                                </div>
+                                <div class="col-lg-2">
+                                    <label for="OG">OG</label>
+                                    <span class="form-control" id="OG" ng-bind="recipe.OG" />
+                                </div>
+                                <div class="col-lg-2">
+                                    <label for="ibu">IBU</label>
+                                    <span class="form-control" id="ibu" ng-bind="recipe.CALCIBU" />
+                                </div>
+                                <div class="col-lg-2">
+                                    <label for="balance">Balance</label>
+                                    <span class="form-control" id="balance" ng-bind="recipe.BV" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <label for="style">Style</label>
+                                    <span class="form-control" id="style" ng-bind="recipe.STYLE.NAME" />
+                                </div>
+                                <div class="col-lg-2">
+                                    <label for="EFFICIENCY">Eficiencia</label>
+                                    <span class="form-control" id="EFFICIENCY" ng-bind="recipe.EFFICIENCY" />
+                                </div>
+                                <div class="col-lg-2">
+                                    <label for="fg">FG</label>
+                                    <span class="form-control" id="fg" ng-bind="recipe.FG" />
+                                </div>
+                                <div class="col-lg-2">
+                                    <label for="bugu">BU/GU</label>
+                                    <span class="form-control" id="bugu" >{{calulateBUGU(recipe.CALCIBU,recipe.OG)|number:2}}</span>
+                                </div>
+                                <div class="col-lg-2">
+                                    <label for="abv">Alcohol (ABV) %</label>
+                                    <span class="form-control" id="abv" ng-bind="recipe.ABV" />
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <label for="style">Style</label>
-                            <span class="form-control" id="style" ng-bind="recipe.STYLE.NAME" />
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><strong>Granos</strong></div>
+                        <div style="margin: 0 2em;" class="alert alert-info" ng-hide="recipe.FERMENTABLES.FERMENTABLE.length != 0">
+                            No tiene ningun fermentable en la receta
                         </div>
-                        <div class="col-lg-2">
-                            <label for="EFFICIENCY">Eficiencia</label>
-                            <span class="form-control" id="EFFICIENCY" ng-bind="recipe.EFFICIENCY" />
+                        <table class="table table-condensed table-hover" ng-show="recipe.FERMENTABLES.FERMENTABLE.length != 0">
+                            <thead>
+                            <tr>
+                                <th style="width:50%">Grano/Fermentable</th>
+                                <th style="width:10%">Extracto</th>
+                                <th style="width:10%">Color</th>
+                                <th style="width:10%">%</th>
+                                <th style="width:10%">Kg</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="fermentable in recipe.FERMENTABLES.FERMENTABLE">
+                                <td><span ng-bind="fermentable.NAME"/></td>
+                                <td><span ng-bind="fermentable.POTENTIAL" /></td>
+                                <td><span ng-bind="fermentable.COLOR" /></td>
+                                <td><span ng-bind="fermentable.PERCENTAGE"/></td></td>
+                                <td><span ng-bind="fermentable.AMOUNT"/></td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"><strong class="pull-right">Total:</strong></td>
+                                <td>{{recipe.totalAmount | number:3}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><strong>Lupulos</strong></div>
+                        <div style="margin: 2em 2em 0;" class="alert alert-info" ng-hide="recipe.HOPS.HOP.length != 0">
+                            No tiene ningun lupulo en la receta
                         </div>
-                        <div class="col-lg-2">
-                            <label for="fg">FG</label>
-                            <span class="form-control" id="fg" ng-bind="recipe.FG" />
+                        <table class="table table-condensed table-hover" ng-show="recipe.HOPS.HOP.length != 0">
+                            <thead>
+                            <tr>
+                                <th style="width:26%">Lupulo</th>
+                                <th style="width:8%">Alpha</th>
+                                <th style="width:12%">Modo</th>
+                                <th style="width:10%">Kg</th>
+                                <th style="width:8%">g/L</th>
+                                <th style="width:8%">%</th>
+                                <th style="width:12%">Uso</th>
+                                <th style="width:8%">Tiempo</th>
+                                <th style="width:6%">IBU</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="hop in recipe.HOPS.HOP">
+                                <td><span ng-bind="hop.NAME"/></td>
+                                <td><span ng-bind="hop.ALPHA"/></td>
+                                <td><span ng-bind="hop.FORM"/></td>
+                                <td><span ng-bind="hop.AMOUNT"/></td>
+                                <td><span>{{hopGramsPerLiter(hop,recipe.BATCH_SIZE)|number:2}}</span></td>
+                                <td><span>{{hopPercentage(hop,recipe.totalHop)|number:2}}</span></td>
+                                <td><span ng-bind="hop.USE" /></td>
+                                <td><span ng-bind="hop.TIME" /></td>
+                                <td><span>{{hopIBU(hop)|number:2}}</span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"><strong class="pull-right">Total:</strong></td>
+                                <td>{{recipe.totalHop | number:3}}</td>
+                                <td colspan="4"><strong class="pull-right">IBUs:</strong></td>
+                                <td>{{recipe.CALCIBU|number:2}}</td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Levadura</div>
+                        <table class="table table-condensed table-hover">
+                            <thead>
+                            <tr>
+                                <th style="width:90%">Levadura</th>
+                                <th style="width:10%">Atenuacion</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="yeast in recipe.YEASTS.YEAST">
+                                <td><span ng-bind="yeast.NAME"/></td>
+                                <td><span ng-bind="yeast.ATTENUATION"/></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><strong>Misc</strong></div>
+                        <div style="margin: 2em;" class="alert alert-info" ng-hide="recipe.MISCS.MISC.length != 0">
+                            No tiene ningun misc en la receta
                         </div>
-                        <div class="col-lg-2">
-                            <label for="bugu">BU/GU</label>
-                            <span class="form-control" id="bugu" >{{calulateBUGU(recipe.CALCIBU,recipe.OG)|number:2}}</span>
-                        </div>
-                        <div class="col-lg-2">
-                            <label for="abv">Alcohol (ABV) %</label>
-                            <span class="form-control" id="abv" ng-bind="recipe.ABV" />
+                        <table class="table table-condensed table-hover" ng-show="recipe.MISCS.MISC.length != 0" style="margin-top: 1em;">
+                          <thead>
+                            <tr>
+                              <th>Nombre</th>
+                              <th>Tipo</th>
+                              <th>Uso</th>
+                              <th>Tiempo</th>
+                              <th>Kg</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr ng-repeat="misc in recipe.MISCS.MISC">
+                                <td><span ng-bind="misc.NAME"/></td>
+                                <td><span ng-bind="misc.TYPE" /></td>
+                                <td><span ng-bind="misc.USE" /></td>
+                                <td><span ng-bind="misc.TIME" /></td>
+                                <td><span ng-bind="misc.AMOUNT" /></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><strong>Otros datos</strong></div>
+                        <div class="panel-body" >
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="brewer">Cervecero</label>
+                                    <span class="form-control" id="brewer" ng-bind="recipe.BREWER"/>
+                                </div>
+                                <div class="col-lg-2">
+                                  <label for="boil_size">Litros a Hervir (L)</label>
+                                  <span class="form-control" id="boil_size" ng-bind="recipe.BOIL_SIZE"/>
+                                </div>
+                                <div class="col-lg-2">
+                                  <label for="boil_time">Hervido (min)</label>
+                                  <span class="form-control" id="boil_time" ng-bind="recipe.BOIL_TIME">
+                                </div>
+                                <div class="col-lg-2">
+                                  <label for="primary_temp">T. Primario</label>
+                                  <span class="form-control" id="primary_temp" ng-bind="recipe.PRIMARY_TEMP"/>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading"><strong>Granos</strong></div>
-                <div style="margin: 0 2em;" class="alert alert-info" ng-hide="recipe.FERMENTABLES.FERMENTABLE.length != 0">
-                    No tiene ningun fermentable en la receta
+                <div class="col-md-2" >
+                  <ng-include src="'partial/recipe-detail-indicators.html'"></ng-include>
                 </div>
-                <table class="table table-condensed table-hover" ng-show="recipe.FERMENTABLES.FERMENTABLE.length != 0">
-                    <thead>
-                    <tr>
-                        <th style="width:50%">Grano/Fermentable</th>
-                        <th style="width:10%">Extracto</th>
-                        <th style="width:10%">Color</th>
-                        <th style="width:10%">%</th>
-                        <th style="width:10%">Kg</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="fermentable in recipe.FERMENTABLES.FERMENTABLE">
-                        <td><span ng-bind="fermentable.NAME"/></td>
-                        <td><span ng-bind="fermentable.POTENTIAL" /></td>
-                        <td><span ng-bind="fermentable.COLOR" /></td>
-                        <td><span ng-bind="fermentable.PERCENTAGE"/></td></td>
-                        <td><span ng-bind="fermentable.AMOUNT"/></td></td>
-                    </tr>
-                    <tr>
-                        <td colspan="4"><strong class="pull-right">Total:</strong></td>
-                        <td>{{recipe.totalAmount | number:3}}</td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div class="panel-body">
-                    <strong>Color:</strong> {{recipe.CALCCOLOUR | number:1}} SRM
-                    <div style="border: 1px solid; width: 100px; height: 30px; background-color: {{convertColor(recipe.CALCCOLOUR)}}"></div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading"><strong>Lupulos</strong></div>
-                <div style="margin: 2em 2em 0;" class="alert alert-info" ng-hide="recipe.HOPS.HOP.length != 0">
-                    No tiene ningun lupulo en la receta
-                </div>
-                <table class="table table-condensed table-hover" ng-show="recipe.HOPS.HOP.length != 0">
-                    <thead>
-                    <tr>
-                        <th style="width:26%">Lupulo</th>
-                        <th style="width:8%">Alpha</th>
-                        <th style="width:12%">Modo</th>
-                        <th style="width:10%">Kg</th>
-                        <th style="width:8%">g/L</th>
-                        <th style="width:8%">%</th>
-                        <th style="width:12%">Uso</th>
-                        <th style="width:8%">Tiempo</th>
-                        <th style="width:6%">IBU</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="hop in recipe.HOPS.HOP">
-                        <td><span ng-bind="hop.NAME"/></td>
-                        <td><span ng-bind="hop.ALPHA"/></td>
-                        <td><span ng-bind="hop.FORM"/></td>
-                        <td><span ng-bind="hop.AMOUNT"/></td>
-                        <td><span>{{hopGramsPerLiter(hop,recipe.BATCH_SIZE)|number:2}}</span></td>
-                        <td><span>{{hopPercentage(hop,recipe.totalHop)|number:2}}</span></td>
-                        <td><span ng-bind="hop.USE" /></td>
-                        <td><span ng-bind="hop.TIME" /></td>
-                        <td><span>{{hopIBU(hop)|number:2}}</span></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3"><strong class="pull-right">Total:</strong></td>
-                        <td>{{recipe.totalHop | number:3}}</td>
-                        <td colspan="4"><strong class="pull-right">IBUs:</strong></td>
-                        <td>{{recipe.CALCIBU|number:2}}</td>
-                        <td></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">Levadura</div>
-                <table class="table table-condensed table-hover">
-                    <thead>
-                    <tr>
-                        <th style="width:90%">Levadura</th>
-                        <th style="width:10%">Atenuacion</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="yeast in recipe.YEASTS.YEAST">
-                        <td><span ng-bind="yeast.NAME"/></td>
-                        <td><span ng-bind="yeast.ATTENUATION"/></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading"><strong>Misc</strong></div>
-                <div style="margin: 2em 2em 0;" class="alert alert-info" ng-hide="recipe.MISCS.MISC.length != 0">
-                    No tiene ningun misc en la receta
-                </div>
-                <table class="table table-condensed table-hover" ng-show="recipe.MISCS.MISC.length != 0" style="margin-top: 1em;">
-                  <thead>
-                    <tr>
-                      <th>Nombre</th>
-                      <th>Tipo</th>
-                      <th>Uso</th>
-                      <th>Tiempo</th>
-                      <th>Kg</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr ng-repeat="misc in recipe.MISCS.MISC">
-                        <td><span ng-bind="misc.NAME"/></td>
-                        <td><span ng-bind="misc.TYPE" /></td>
-                        <td><span ng-bind="misc.USE" /></td>
-                        <td><span ng-bind="misc.TIME" /></td>
-                        <td><span ng-bind="misc.AMOUNT" /></td>
-                    </tr>
-                  </tbody>
-                </table>
             </div>
         </div>
       </div>

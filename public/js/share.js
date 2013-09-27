@@ -43,6 +43,10 @@
             //add or remove by utilization (ej: mash use 20%)
             return baseIBU * getUtilization(hop.USE,$scope.hopUses) * getUtilization(hop.FORM,$scope.hopForms);
         };
+        
+        $scope.gravityBarValue = function(grav,max) {
+            return BrewHelper.toPpg(grav) / max * 100;
+        }
 
     });
 
