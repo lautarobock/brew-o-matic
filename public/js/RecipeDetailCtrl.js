@@ -260,7 +260,7 @@
                     $scope.notifications.push({
                         type:'success',
                         title:'Receta Guardada!',
-                        text:'Ya puedes acceder a esta receta localmente!'
+                        text:'Ya puedes acceder a esta receta desde cualquier lugar!'
                     });
                     $location.path('/recipe/edit/' + saved._id) 
                 });                        

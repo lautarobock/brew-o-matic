@@ -75,6 +75,7 @@
                 
                 scope.recipe.YEASTS.YEAST = [scope.recipe.YEASTS.YEAST];
                 scope.recipe.YEASTS.YEAST[0].ATTENUATION = parseFloat(scope.recipe.YEASTS.YEAST[0].ATTENUATION);
+                scope.recipe.GrainCalcMethod = '2';
                 scope.changeYeast();
                 scope.recipe.date = new Date();
                 scope.$apply();
