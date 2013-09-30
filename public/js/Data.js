@@ -82,7 +82,8 @@ data.factory("Style",function() {
                   "Colour_Min": 10,
                   "Colour_Max": 17,
                   "ABV_Min": 4.5,
-                  "ABV_Max": 6.0
+                  "ABV_Max": 6.0,
+                  "link": "http://www.bjcp.org/2008styles/style10.php#1b"
                 },
                 {
                   "name": "American Barleywine",
@@ -95,7 +96,8 @@ data.factory("Style",function() {
                   "Colour_Min": 10,
                   "Colour_Max": 19,
                   "ABV_Min": 8.0,
-                  "ABV_Max": 12.0
+                  "ABV_Max": 12.0,
+                  "link": "http://www.bjcp.org/2008styles/style19.php#1c"
                 },
                 {
                   "name": "American Brown Ale",

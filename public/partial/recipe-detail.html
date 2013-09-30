@@ -27,12 +27,17 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <label for="style">Style</label>
-                        <input type="text" class="form-control" id="style" placeholder="Estilo" ng-model="recipe.STYLE.NAME" list="styleNames">
-                        <datalist id="styleNames">
-                            <option ng-repeat="style in styles" value="{{style.name}}">
-                                {{style.name}}
-                            </option>
-                        </datalist>                    
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="style" placeholder="Estilo" ng-model="recipe.STYLE.NAME" list="styleNames">
+                            <span class="input-group-btn">
+                                <a title="Link a la pagina del estilo en el BJCP" ng-disabled="!bjcpLink(recipe.STYLE.NAME)" class="btn btn-default" target="_blank" href="{{bjcpLink(recipe.STYLE.NAME)}}" ><span class="glyphicon glyphicon-link"></a>
+                            </span>
+                            <datalist id="styleNames">
+                                <option ng-repeat="style in styles" value="{{style.name}}">
+                                    {{style.name}}
+                                </option>
+                            </datalist>
+                        </div>
                     </div>
                     <div class="col-lg-2">
                       <label for="EFFICIENCY">Eficiencia</label>

@@ -244,6 +244,16 @@
             return 'http://'+$location.host() + ":" + $location.port() + '/share.html#/' + _id;
         };
         
+        $scope.bjcpLink = function(selected) {
+            var link;
+            angular.forEach($scope.styles,function(style) {
+                if (style.link && selected == style.name) {
+                    link = style.link;
+                }
+            });
+            return link;
+        };
+        
         $scope.save = function() {
             if ( !angular.isDefined($scope.recipe.NAME) ) {
                 $scope.notifications.push({
