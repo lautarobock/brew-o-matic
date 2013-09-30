@@ -269,6 +269,12 @@
         
         if ( $routeParams.recipeId ) {
             $scope.recipe = Recipe.get({id:$routeParams.recipeId},function() {
+                if ( $location.path().indexOf('/recipe/clone') == 0) {
+                    $scope.recipe.cloneFrom = $scope.recipe._id;
+                    $scope.recipe._id = undefined;
+                    $scope.recipe.date = new Date();
+                    $scope.recipe.isPublic = false;
+                }
                 $scope.changeYeast();
             });
         } else {

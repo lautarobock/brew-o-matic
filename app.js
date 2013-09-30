@@ -59,10 +59,14 @@ var recipe = require("./routes/recipe.js");
 //app.get('/', routes.index);
 app.get('/user/google_:google_id', user.getByGoogleId);
 app.post('/user', user.add);
+app.put('/user/favorite_add',user.addToFavorites,filter)
+app.put('/user/favorite_drop',user.removeFromFavorites,filter)
+app.get('/recipe/public',recipe.findPublic,filter)
 app.get('/recipe',recipe.findAll,filter)
 app.get('/recipe/:id',recipe.get)
 app.post('/recipe',recipe.save,filter)
 app.delete('/recipe/:id',recipe.remove,filter)
+
 //app.get('/person/fb:id',person.findByFb);
 //app.put('/person/fb:id',person.updateByFb);
 

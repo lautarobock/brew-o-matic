@@ -4,12 +4,13 @@ var Schema = mongoose.Schema;
 
 exports.User = mongoose.model("User",new Schema({
     google_id: String,
-    name: String
+    name: String,
+    favorites: [String]
 }));
 
 exports.Recipe = mongoose.model("Recipe", new Schema({
     _id: String,
-    owner: String,
+    owner: {type:String, ref:'User'},
     GrainCalcMethod: String,
     date: Date,
     totalAmount: Number,
@@ -92,6 +93,8 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     primaryEnabled: String,
     secondaryEnabled: String,
     keggingEnabled: String,
-    serveEnabled: String
+    serveEnabled: String,
+    isPublic: Boolean,
+    cloneFrom: String
     
 },{ _id: false }));

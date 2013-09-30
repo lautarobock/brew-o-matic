@@ -20,12 +20,12 @@
                         id:obj.id
                     },function(user){
                         if ( angular.isDefined(user.google_id) ) {
-                            $rootScope.user = obj;
+                            $rootScope.user = user;
                             console.log(user);
                         } else {
                             var newUser = new User({google_id:obj.id,name:obj.name});
-                            newUser.$save(function() {
-                                $rootScope.user = obj;
+                            newUser.$save(function(user) {
+                                $rootScope.user = user;
                             });
                             console.log("Server Login Error");
                         }

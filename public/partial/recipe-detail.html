@@ -108,6 +108,16 @@
                         <input class="form-control" value="{{sharedUrl(recipe._id)}}" disabled/>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="recipe.isPublic"/>
+                                Publicar Receta <span class="text-info">(Las recetas publicas podran ser vistas por todos los usuarios en su panel principal)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div style="overflow: hidden;margin-bottom: 1em;">

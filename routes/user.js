@@ -1,4 +1,5 @@
 var model = require('../domain/model.js');
+var mongoose = require('mongoose');
 /*
  * GET users listing.
  */
@@ -8,7 +9,6 @@ exports.add = function(req,res) {
     user.google_id = req.body.google_id;
     user.name = req.body.name
     model.User.create(user,function(err,newuser) {
-        console.log(newuser);
         res.send(newuser);
     });
     
@@ -26,4 +26,30 @@ exports.getByGoogleId = function(req, res){
         }
         res.send(user);
     });   
+};
+
+exports.addToFavorites = function(req,res) {
+    model.User
+            .findOne({_id: new mongoose.Types.ObjectId(req.session.user_id)})
+            .exec(function(err,user) {
+        user.favorites.push(req.body._id);
+        user.save(function(err,user) {
+            res.send(user);
+        });
+    });
+};
+
+exports.removeFromFavorites = function(req,res) {
+    model.User
+            .findOne({_id: new mongoose.Types.ObjectId(req.session.user_id)})
+            .exec(function(err,user) {
+        
+        var index = user.favorites.indexOf(req.body._id);
+        if ( index > -1 ) {
+            user.favorites.splice(index,1);
+        }
+        user.save(function(err,user) {
+            res.send(user);
+        });
+    });
 };

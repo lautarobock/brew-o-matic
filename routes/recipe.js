@@ -1,22 +1,26 @@
 var model = require('../domain/model.js');
 
+
+exports.findPublic = function (req, res) {
+    model.Recipe.find({isPublic:true}).where('owner').populate('owner').ne(req.session.user_id).sort('-date').limit(req.query.limit).exec(function(err,results) {
+        res.send(results);
+    });
+};
+
 exports.findAll = function(req, res) {
-    model.Recipe.find({owner:req.session.user_id}).exec(function(err,results) {
-        console.log(results);
+    model.Recipe.find({owner:req.session.user_id}).sort('-date').exec(function(err,results) {
         res.send(results);
     });    
 };
 
 exports.get = function(req, res) {
     model.Recipe.findOne({_id:req.params.id}).exec(function(err,results) {
-        console.log(results);
         res.send(results);
     });    
 };
 
 exports.remove= function(req, res) {
     model.Recipe.findByIdAndRemove(req.params.id,function(err,results) {
-        console.log(results);
         res.send(results);
     });    
 };
@@ -27,15 +31,8 @@ function generateId(name,user_id) {
 }
 
 exports.save = function(req, res) {
-    console.log("request");
-    console.log(req.body);
-    
     
     function callback(err,s){
-        console.log("err: ");
-        console.log(err);
-        console.log("respuesta");
-        console.log(s);
         res.send(s);
     }
     
