@@ -279,7 +279,8 @@ data.factory("Style",function() {
                   "Colour_Max": 22,
                   "ABV_Min": 8.0,
                   "ABV_Max": 11.0,
-                  "link": "http://www.bjcp.org/2008styles/style18.php#1e"
+                  "link": "http://www.bjcp.org/2008styles/style18.php#1e",
+                  "related":"http://www.ratebeer.com/beerstyles/abt-quadrupel/80/"
                 },
                 {
                   "name": "Belgian Dubbel",
@@ -293,7 +294,8 @@ data.factory("Style",function() {
                   "Colour_Max": 17,
                   "ABV_Min": 6.0,
                   "ABV_Max": 7.6,
-                  "link": "http://www.bjcp.org/2008styles/style18.php#1b"
+                  "link": "http://www.bjcp.org/2008styles/style18.php#1b",
+                  "related": "http://www.ratebeer.com/beerstyles/abbey-dubbel/71/"
                 },
                 {
                   "name": "Belgian Golden Strong Ale",
@@ -349,7 +351,8 @@ data.factory("Style",function() {
                   "Colour_Max": 7,
                   "ABV_Min": 7.5,
                   "ABV_Max": 9.5,
-                  "link": "http://www.bjcp.org/2008styles/style18.php#1c"
+                  "link": "http://www.bjcp.org/2008styles/style18.php#1c",
+                  "related":"http://www.ratebeer.com/beerstyles/abbey-tripel/72/"
                 },
                 {
                   "name": "Berliner Weisse",
@@ -601,7 +604,8 @@ data.factory("Style",function() {
                   "Colour_Max": 17,
                   "ABV_Min": 4.5,
                   "ABV_Max": 5.2,
-                  "link": "http://www.bjcp.org/2008styles/style07.php#1c"
+                  "link": "http://www.bjcp.org/2008styles/style07.php#1c",
+                  "related":"http://www.ratebeer.com/beerstyles/altbier/2/"
                 },
                 {
                   "name": "Eisbock",

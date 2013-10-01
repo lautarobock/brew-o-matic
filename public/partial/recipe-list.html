@@ -24,7 +24,9 @@
                     <span class="glyphicon glyphicon-check" title="Esta receta es publica, puede ser vista por todos los usuarios" ng-show="recipe.isPublic"/>
                 </td>
                 <td>{{ recipe.date|date:'dd-MM-yyyy' }}</td>
-                <td title="{{recipe.NAME}}">{{ recipe.NAME|limitText:30}}</td>
+                <td title="{{recipe.NAME}}">
+                    <a href="#/recipe/edit/{{encodeName(recipe._id)}}">{{ recipe.NAME|limitText:30}}</a>
+                </td>
                 <td>{{ recipe.STYLE.NAME }}</td>
                 <td>{{ recipe.OG  }}</td>
                 <td>{{ recipe.FG  }}</td>

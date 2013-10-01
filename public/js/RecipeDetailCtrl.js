@@ -254,6 +254,16 @@
             return link;
         };
         
+        $scope.relatedLink = function(selected) {
+            var link;
+            angular.forEach($scope.styles,function(style) {
+                if (style.link && selected == style.name) {
+                    link = style.related;
+                }
+            });
+            return link;
+        };
+        
         $scope.save = function() {
             if ( !angular.isDefined($scope.recipe.NAME) ) {
                 $scope.notifications.push({
