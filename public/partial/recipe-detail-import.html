@@ -66,11 +66,18 @@
                     misc.TIME = parseFloat(misc.TIME);
                     misc.AMOUNT = parseFloat(misc.AMOUNT);
                 }
-                if ( scope.recipe.MISCS.MISC instanceof Array ) {
-                    angular.forEach(scope.recipe.MISCS.MISC,convertMisc);
+                
+                if ( scope.recipe.MISCS && scope.recipe.MISCS.MISC ) {
+                    if ( scope.recipe.MISCS.MISC instanceof Array ) {
+                        angular.forEach(scope.recipe.MISCS.MISC,convertMisc);
+                    } else {
+                        convertMisc(scope.recipe.MISCS.MISC);
+                        scope.recipe.MISCS.MISC = [scope.recipe.MISCS.MISC];
+                    }
                 } else {
-                    convertMisc(scope.recipe.MISCS.MISC);
-                    scope.recipe.MISCS.MISC = [scope.recipe.MISCS.MISC];
+                    scope.recipe.MISCS = {
+                        MISC: []
+                    };
                 }
                 
                 scope.recipe.YEASTS.YEAST = [scope.recipe.YEASTS.YEAST];

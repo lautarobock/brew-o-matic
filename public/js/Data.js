@@ -110,7 +110,8 @@ data.factory("Style",function() {
                   "Colour_Min": 18,
                   "Colour_Max": 35,
                   "ABV_Min": 4.3,
-                  "ABV_Max": 6.2
+                  "ABV_Max": 6.2,
+                  "link": "http://www.bjcp.org/2008styles/style10.php#1c"
                 },
                 {
                   "name": "American IPA",
@@ -123,7 +124,8 @@ data.factory("Style",function() {
                   "Colour_Min": 6,
                   "Colour_Max": 15,
                   "ABV_Min": 5.5,
-                  "ABV_Max": 7.5
+                  "ABV_Max": 7.5,
+                  "link": "http://www.bjcp.org/2008styles/style14.php#1b"
                 },
                 {
                   "name": "American Pale Ale",
@@ -136,7 +138,8 @@ data.factory("Style",function() {
                   "Colour_Min": 5,
                   "Colour_Max": 14,
                   "ABV_Min": 4.5,
-                  "ABV_Max": 6.0
+                  "ABV_Max": 6.0,
+                  "link": "http://www.bjcp.org/2008styles/style10.php#1a"
                 },
                 {
                   "name": "American Stout",
@@ -149,7 +152,8 @@ data.factory("Style",function() {
                   "Colour_Min": 30,
                   "Colour_Max": 40,
                   "ABV_Min": 5.0,
-                  "ABV_Max": 7.0
+                  "ABV_Max": 7.0,
+                  "link": "http://www.bjcp.org/2008styles/style13.php#1e"
                 },
                 {
                   "name": "American Wheat or Rye Beer",
@@ -162,7 +166,8 @@ data.factory("Style",function() {
                   "Colour_Min": 3,
                   "Colour_Max": 6,
                   "ABV_Min": 4.0,
-                  "ABV_Max": 5.5
+                  "ABV_Max": 5.5,
+                  "link": "http://www.bjcp.org/2008styles/style06.php#1d"
                 },
                 {
                   "name": "Australian Dark/Old Ale",
@@ -175,7 +180,8 @@ data.factory("Style",function() {
                   "Colour_Min": 19,
                   "Colour_Max": 35,
                   "ABV_Min": 4.5,
-                  "ABV_Max": 5.3
+                  "ABV_Max": 5.3,
+                  "link": ""
                 },
                 {
                   "name": "Australian Lager",
@@ -188,7 +194,8 @@ data.factory("Style",function() {
                   "Colour_Min": 2,
                   "Colour_Max": 6,
                   "ABV_Min": 4.2,
-                  "ABV_Max": 5.1
+                  "ABV_Max": 5.1,
+                  "link": ""
                 },
                 {
                   "name": "Australian Light Lager",
@@ -201,7 +208,8 @@ data.factory("Style",function() {
                   "Colour_Min": 2,
                   "Colour_Max": 4,
                   "ABV_Min": 2.8,
-                  "ABV_Max": 3.5
+                  "ABV_Max": 3.5,
+                  "link": ""
                 },
                 {
                   "name": "Australian Pale Ale",
@@ -214,7 +222,8 @@ data.factory("Style",function() {
                   "Colour_Min": 5,
                   "Colour_Max": 9,
                   "ABV_Min": 4.2,
-                  "ABV_Max": 6.0
+                  "ABV_Max": 6.0,
+                  "link": ""
                 },
                 {
                   "name": "Australian Premium Lager",
@@ -227,7 +236,8 @@ data.factory("Style",function() {
                   "Colour_Min": 2,
                   "Colour_Max": 6,
                   "ABV_Min": 4.7,
-                  "ABV_Max": 6.0
+                  "ABV_Max": 6.0,
+                  "link": ""
                 },
                 {
                   "name": "Baltic Porter",
@@ -240,7 +250,8 @@ data.factory("Style",function() {
                   "Colour_Min": 17,
                   "Colour_Max": 30,
                   "ABV_Min": 5.5,
-                  "ABV_Max": 9.5
+                  "ABV_Max": 9.5,
+                  "link": "http://www.bjcp.org/2008styles/style12.php#1c"
                 },
                 {
                   "name": "Belgian Blond Ale",
@@ -253,7 +264,8 @@ data.factory("Style",function() {
                   "Colour_Min": 4,
                   "Colour_Max": 7,
                   "ABV_Min": 6.0,
-                  "ABV_Max": 7.5
+                  "ABV_Max": 7.5,
+                  "link": "http://www.bjcp.org/2008styles/style18.php#1a"
                 },
                 {
                   "name": "Belgian Dark Strong Ale",
@@ -266,7 +278,8 @@ data.factory("Style",function() {
                   "Colour_Min": 12,
                   "Colour_Max": 22,
                   "ABV_Min": 8.0,
-                  "ABV_Max": 11.0
+                  "ABV_Max": 11.0,
+                  "link": "http://www.bjcp.org/2008styles/style18.php#1e"
                 },
                 {
                   "name": "Belgian Dubbel",
@@ -279,7 +292,8 @@ data.factory("Style",function() {
                   "Colour_Min": 10,
                   "Colour_Max": 17,
                   "ABV_Min": 6.0,
-                  "ABV_Max": 7.6
+                  "ABV_Max": 7.6,
+                  "link": "http://www.bjcp.org/2008styles/style18.php#1b"
                 },
                 {
                   "name": "Belgian Golden Strong Ale",
@@ -292,7 +306,8 @@ data.factory("Style",function() {
                   "Colour_Min": 3,
                   "Colour_Max": 6,
                   "ABV_Min": 7.5,
-                  "ABV_Max": 10.5
+                  "ABV_Max": 10.5,
+                  "link": "http://www.bjcp.org/2008styles/style18.php#1d"
                 },
                 {
                   "name": "Belgian Pale Ale",
@@ -305,7 +320,8 @@ data.factory("Style",function() {
                   "Colour_Min": 8,
                   "Colour_Max": 14,
                   "ABV_Min": 4.8,
-                  "ABV_Max": 5.5
+                  "ABV_Max": 5.5,
+                  "link": "http://www.bjcp.org/2008styles/style16.php#1b"
                 },
                 {
                   "name": "Belgian Specialty Ale",
@@ -318,7 +334,8 @@ data.factory("Style",function() {
                   "Colour_Min": 3,
                   "Colour_Max": 50,
                   "ABV_Min": 3.0,
-                  "ABV_Max": 9.0
+                  "ABV_Max": 9.0,
+                  "link": "http://www.bjcp.org/2008styles/style16.php#1e"
                 },
                 {
                   "name": "Belgian Tripel",
@@ -331,7 +348,8 @@ data.factory("Style",function() {
                   "Colour_Min": 4.5,
                   "Colour_Max": 7,
                   "ABV_Min": 7.5,
-                  "ABV_Max": 9.5
+                  "ABV_Max": 9.5,
+                  "link": "http://www.bjcp.org/2008styles/style18.php#1c"
                 },
                 {
                   "name": "Berliner Weisse",
@@ -344,7 +362,8 @@ data.factory("Style",function() {
                   "Colour_Min": 2,
                   "Colour_Max": 3,
                   "ABV_Min": 2.8,
-                  "ABV_Max": 3.8
+                  "ABV_Max": 3.8,
+                  "link": "http://www.bjcp.org/2008styles/style17.php#1a"
                 },
                 {
                   "name": "Biere de Garde",
@@ -357,7 +376,8 @@ data.factory("Style",function() {
                   "Colour_Min": 6,
                   "Colour_Max": 19,
                   "ABV_Min": 6.0,
-                  "ABV_Max": 8.5
+                  "ABV_Max": 8.5,
+                  "link": "http://www.bjcp.org/2008styles/style16.php#1d"
                 },
                 {
                   "name": "Blonde Ale",
@@ -370,7 +390,8 @@ data.factory("Style",function() {
                   "Colour_Min": 3,
                   "Colour_Max": 6,
                   "ABV_Min": 3.8,
-                  "ABV_Max": 5.5
+                  "ABV_Max": 5.5,
+                  "link": "http://www.bjcp.org/2008styles/style06.php#1b"
                 },
                 {
                   "name": "Bohemian Pilsener",
@@ -383,7 +404,8 @@ data.factory("Style",function() {
                   "Colour_Min": 3.5,
                   "Colour_Max": 6,
                   "ABV_Min": 4.2,
-                  "ABV_Max": 5.4
+                  "ABV_Max": 5.4,
+                  "link": "http://www.bjcp.org/2008styles/style02.php#1b"
                 },
                 {
                   "name": "Brown Porter",
@@ -396,7 +418,8 @@ data.factory("Style",function() {
                   "Colour_Min": 20,
                   "Colour_Max": 30,
                   "ABV_Min": 4.0,
-                  "ABV_Max": 5.4
+                  "ABV_Max": 5.4,
+                  "link": "http://www.bjcp.org/2008styles/style12.php#1a"
                 },
                 {
                   "name": "Cascadian Dark Ale",
@@ -409,7 +432,8 @@ data.factory("Style",function() {
                   "Colour_Min": 30,
                   "Colour_Max": 40,
                   "ABV_Min": 5.5,
-                  "ABV_Max": 8.5
+                  "ABV_Max": 8.5,
+                  "link": ""
                 },
                 {
                   "name": "California Common Beer",
@@ -422,7 +446,8 @@ data.factory("Style",function() {
                   "Colour_Min": 10,
                   "Colour_Max": 14,
                   "ABV_Min": 4.5,
-                  "ABV_Max": 5.5
+                  "ABV_Max": 5.5,
+                  "link": "http://www.bjcp.org/2008styles/style07.php#1b"
                 },
                 {
                   "name": "Christmas/Winter Specialty Spiced Beer",
@@ -435,7 +460,8 @@ data.factory("Style",function() {
                   "Colour_Min": 5,
                   "Colour_Max": 50,
                   "ABV_Min": 2.5,
-                  "ABV_Max": 12.0
+                  "ABV_Max": 12.0,
+                  "link": "http://www.bjcp.org/2008styles/style21.php#1b"
                 },
                 {
                   "name": "Classic American Pilsner",
@@ -448,7 +474,8 @@ data.factory("Style",function() {
                   "Colour_Min": 3,
                   "Colour_Max": 6,
                   "ABV_Min": 4.5,
-                  "ABV_Max": 6.0
+                  "ABV_Max": 6.0,
+                  "link": "http://www.bjcp.org/2008styles/style02.php#1c"
                 },
                 {
                   "name": "Classic Rauchbier",
@@ -461,7 +488,8 @@ data.factory("Style",function() {
                   "Colour_Min": 12,
                   "Colour_Max": 22,
                   "ABV_Min": 4.8,
-                  "ABV_Max": 6.0
+                  "ABV_Max": 6.0,
+                  "link": "http://www.bjcp.org/2008styles/style22.php#1a"
                 },
                 {
                   "name": "Cream Ale",
@@ -474,7 +502,8 @@ data.factory("Style",function() {
                   "Colour_Min": 2.5,
                   "Colour_Max": 5,
                   "ABV_Min": 4.2,
-                  "ABV_Max": 5.6
+                  "ABV_Max": 5.6,
+                  "link": "http://www.bjcp.org/2008styles/style06.php#1a"
                 },
                 {
                   "name": "Dark American Lager",
@@ -487,7 +516,8 @@ data.factory("Style",function() {
                   "Colour_Min": 14,
                   "Colour_Max": 22,
                   "ABV_Min": 4.2,
-                  "ABV_Max": 6
+                  "ABV_Max": 6,
+                  "link": "http://www.bjcp.org/2008styles/style04.php#1a"
                 },
                 {
                   "name": "Doppelbock",
@@ -500,7 +530,22 @@ data.factory("Style",function() {
                   "Colour_Min": 6,
                   "Colour_Max": 25,
                   "ABV_Min": 7.0,
-                  "ABV_Max": 10.0
+                  "ABV_Max": 10.0,
+                  "link": "http://www.bjcp.org/2008styles/style05.php#1c"
+                },
+                {
+                  "name": "Dorada Pampeana",
+                  "OG_Min": 1.042,
+                  "OG_Max": 1.054,
+                  "FG_Min": 1.009,
+                  "FG_Max": 1.013,
+                  "IBU_Min": 15,
+                  "IBU_Max": 22,
+                  "Colour_Min": 3,
+                  "Colour_Max": 5,
+                  "ABV_Min": 4.3,
+                  "ABV_Max": 5.5,
+                  "link": "http://www.bjcp.org/intl/dorada.doc"
                 },
                 {
                   "name": "Dortmunder Export",
@@ -513,7 +558,8 @@ data.factory("Style",function() {
                   "Colour_Min": 4,
                   "Colour_Max": 6,
                   "ABV_Min": 4.8,
-                  "ABV_Max": 6.0
+                  "ABV_Max": 6.0,
+                  "link": "http://www.bjcp.org/2008styles/style01.php#1e"
                 },
                 {
                   "name": "Dry Stout",
@@ -526,7 +572,8 @@ data.factory("Style",function() {
                   "Colour_Min": 25,
                   "Colour_Max": 40,
                   "ABV_Min": 4.0,
-                  "ABV_Max": 5.0
+                  "ABV_Max": 5.0,
+                  "link": "http://www.bjcp.org/2008styles/style13.php#1a"
                 },
                 {
                   "name": "Dunkelweizen",
@@ -539,7 +586,8 @@ data.factory("Style",function() {
                   "Colour_Min": 14,
                   "Colour_Max": 23,
                   "ABV_Min": 4.3,
-                  "ABV_Max": 5.6
+                  "ABV_Max": 5.6,
+                  "link": "http://www.bjcp.org/2008styles/style15.php#1b"
                 },
                 {
                   "name": "Dusseldorf Altbier",
@@ -552,7 +600,8 @@ data.factory("Style",function() {
                   "Colour_Min": 11,
                   "Colour_Max": 17,
                   "ABV_Min": 4.5,
-                  "ABV_Max": 5.2
+                  "ABV_Max": 5.2,
+                  "link": "http://www.bjcp.org/2008styles/style07.php#1c"
                 },
                 {
                   "name": "Eisbock",
@@ -565,7 +614,8 @@ data.factory("Style",function() {
                   "Colour_Min": 18,
                   "Colour_Max": 30,
                   "ABV_Min": 9,
-                  "ABV_Max": 14.0
+                  "ABV_Max": 14.0,
+                  "link": "http://www.bjcp.org/2008styles/style05.php#1d"
                 },
                 {
                   "name": "English Barleywine",
@@ -578,7 +628,8 @@ data.factory("Style",function() {
                   "Colour_Min": 8,
                   "Colour_Max": 22,
                   "ABV_Min": 8.0,
-                  "ABV_Max": 12.0
+                  "ABV_Max": 12.0,
+                  "link": "http://www.bjcp.org/2008styles/style19.php#1b"
                 },
                 {
                   "name": "English IPA",
@@ -591,7 +642,8 @@ data.factory("Style",function() {
                   "Colour_Min": 8,
                   "Colour_Max": 14,
                   "ABV_Min": 5.0,
-                  "ABV_Max": 7.5
+                  "ABV_Max": 7.5,
+                  "link": "http://www.bjcp.org/2008styles/style14.php#1a"
                 },
                 {
                   "name": "Extra Special/Strong Bitter (English Pale Ale)",
@@ -604,7 +656,8 @@ data.factory("Style",function() {
                   "Colour_Min": 6,
                   "Colour_Max": 18,
                   "ABV_Min": 4.6,
-                  "ABV_Max": 6.2
+                  "ABV_Max": 6.2,
+                  "link": "http://www.bjcp.org/2008styles/style08.php#1c"
                 },
                 {
                   "name": "Flanders Brown Ale/Oud Bruin",
@@ -617,7 +670,8 @@ data.factory("Style",function() {
                   "Colour_Min": 15,
                   "Colour_Max": 22,
                   "ABV_Min": 4.0,
-                  "ABV_Max": 8.0
+                  "ABV_Max": 8.0,
+                  "link": "http://www.bjcp.org/2008styles/style17.php#1c"
                 },
                 {
                   "name": "Flanders Red Ale",
@@ -630,7 +684,8 @@ data.factory("Style",function() {
                   "Colour_Min": 10,
                   "Colour_Max": 16,
                   "ABV_Min": 4.6,
-                  "ABV_Max": 6.5
+                  "ABV_Max": 6.5,
+                  "link": "http://www.bjcp.org/2008styles/style17.php#1b"
                 },
                 {
                   "name": "Foreign Extra Stout",
@@ -643,7 +698,8 @@ data.factory("Style",function() {
                   "Colour_Min": 30,
                   "Colour_Max": 40,
                   "ABV_Min": 5.5,
-                  "ABV_Max": 8.0
+                  "ABV_Max": 8.0,
+                  "link": "http://www.bjcp.org/2008styles/style13.php#1d"
                 },
                 {
                   "name": "Fruit Beer",
@@ -656,7 +712,8 @@ data.factory("Style",function() {
                   "Colour_Min": 3,
                   "Colour_Max": 50,
                   "ABV_Min": 2.5,
-                  "ABV_Max": 12.0
+                  "ABV_Max": 12.0,
+                  "link": "http://www.bjcp.org/2008styles/style20.php#1a"
                 },
                 {
                   "name": "Fruit Lambic",
@@ -669,7 +726,8 @@ data.factory("Style",function() {
                   "Colour_Min": 3,
                   "Colour_Max": 7,
                   "ABV_Min": 5.0,
-                  "ABV_Max": 7.0
+                  "ABV_Max": 7.0,
+                  "link": "http://www.bjcp.org/2008styles/style17.php#1f"
                 },
                 {
                   "name": "German Pilsner (Pils)",
@@ -682,7 +740,8 @@ data.factory("Style",function() {
                   "Colour_Min": 2,
                   "Colour_Max": 5,
                   "ABV_Min": 4.4,
-                  "ABV_Max": 5.2
+                  "ABV_Max": 5.2,
+                  "link": "http://www.bjcp.org/2008styles/style02.php#1a"
                 },
                 {
                   "name": "Gueuze",
@@ -695,7 +754,8 @@ data.factory("Style",function() {
                   "Colour_Min": 3,
                   "Colour_Max": 7,
                   "ABV_Min": 5.0,
-                  "ABV_Max": 8.0
+                  "ABV_Max": 8.0,
+                  "link": "http://www.bjcp.org/2008styles/style17.php#1e"
                 },
                 {
                   "name": "Imperial IPA",
@@ -708,7 +768,8 @@ data.factory("Style",function() {
                   "Colour_Min": 8,
                   "Colour_Max": 15,
                   "ABV_Min": 7.5,
-                  "ABV_Max": 10.0
+                  "ABV_Max": 10.0,
+                  "link": "http://www.bjcp.org/2008styles/style14.php#1c"
                 },
                 {
                   "name": "Imperial Stout",
@@ -721,7 +782,22 @@ data.factory("Style",function() {
                   "Colour_Min": 30,
                   "Colour_Max": 40,
                   "ABV_Min": 8.0,
-                  "ABV_Max": 12.0
+                  "ABV_Max": 12.0,
+                  "link": "http://www.bjcp.org/2008styles/style13.php#1f"
+                },
+                {
+                  "name": "IPA Argenta",
+                  "OG_Min": 1.050,
+                  "OG_Max": 1.070,
+                  "FG_Min": 1.010,
+                  "FG_Max": 1.018,
+                  "IBU_Min": 36,
+                  "IBU_Max": 60,
+                  "Colour_Min": 6,
+                  "Colour_Max": 10,
+                  "ABV_Min": 5,
+                  "ABV_Max": 7,
+                  "link": "http://goo.gl/4ybhp0"
                 },
                 {
                   "name": "Irish Red Ale",
@@ -734,7 +810,8 @@ data.factory("Style",function() {
                   "Colour_Min": 9,
                   "Colour_Max": 18,
                   "ABV_Min": 4.0,
-                  "ABV_Max": 6.0
+                  "ABV_Max": 6.0,
+                  "link": "http://www.bjcp.org/2008styles/style09.php#1d"
                 },
                 {
                   "name": "Kolsch",
@@ -747,7 +824,8 @@ data.factory("Style",function() {
                   "Colour_Min": 3.5,
                   "Colour_Max": 5,
                   "ABV_Min": 4.4,
-                  "ABV_Max": 5.2
+                  "ABV_Max": 5.2,
+                  "link": "http://www.bjcp.org/2008styles/style06.php#1c"
                 },
                 {
                   "name": "Lite American Lager",
@@ -760,7 +838,8 @@ data.factory("Style",function() {
                   "Colour_Min": 2,
                   "Colour_Max": 3,
                   "ABV_Min": 2.8,
-                  "ABV_Max": 4.2
+                  "ABV_Max": 4.2,
+                  "link": "http://www.bjcp.org/2008styles/style01.php#1a"
                 },
                 {
                   "name": "Maibock/Helles Bock",
@@ -773,7 +852,8 @@ data.factory("Style",function() {
                   "Colour_Min": 6,
                   "Colour_Max": 11,
                   "ABV_Min": 6.3,
-                  "ABV_Max": 7.4
+                  "ABV_Max": 7.4,
+                  "link": "http://www.bjcp.org/2008styles/style05.php#1a"
                 },
                 {
                   "name": "Mild",
@@ -786,7 +866,8 @@ data.factory("Style",function() {
                   "Colour_Min": 12,
                   "Colour_Max": 25,
                   "ABV_Min": 2.8,
-                  "ABV_Max": 4.5
+                  "ABV_Max": 4.5,
+                  "link": "http://www.bjcp.org/2008styles/style11.php#1a"
                 },
                 {
                   "name": "Munich Dunkel",
@@ -799,7 +880,8 @@ data.factory("Style",function() {
                   "Colour_Min": 14,
                   "Colour_Max": 28,
                   "ABV_Min": 4.5,
-                  "ABV_Max": 5.6
+                  "ABV_Max": 5.6,
+                  "link": "http://www.bjcp.org/2008styles/style04.php#1b"
                 },
                 {
                   "name": "Munich Helles",
@@ -812,7 +894,8 @@ data.factory("Style",function() {
                   "Colour_Min": 3,
                   "Colour_Max": 5,
                   "ABV_Min": 4.7,
-                  "ABV_Max": 5.4
+                  "ABV_Max": 5.4,
+                  "link": "http://www.bjcp.org/2008styles/style01.php#1d"
                 },
                 {
                   "name": "North German Altbier",
@@ -825,7 +908,8 @@ data.factory("Style",function() {
                   "Colour_Min": 13,
                   "Colour_Max": 19,
                   "ABV_Min": 4.5,
-                  "ABV_Max": 5.2
+                  "ABV_Max": 5.2,
+                  "link": "http://www.bjcp.org/2008styles/style07.php#1a"
                 },
                 {
                   "name": "Northern English Brown Ale",
@@ -838,7 +922,8 @@ data.factory("Style",function() {
                   "Colour_Min": 12,
                   "Colour_Max": 22,
                   "ABV_Min": 4.2,
-                  "ABV_Max": 5.4
+                  "ABV_Max": 5.4,
+                  "link": "http://www.bjcp.org/2008styles/style11.php#1c"
                 },
                 {
                   "name": "Oatmeal Stout",
@@ -851,7 +936,8 @@ data.factory("Style",function() {
                   "Colour_Min": 22,
                   "Colour_Max": 40,
                   "ABV_Min": 4.2,
-                  "ABV_Max": 5.9
+                  "ABV_Max": 5.9,
+                  "link": "http://www.bjcp.org/2008styles/style13.php#1c"
                 },
                 {
                   "name": "Oktoberfest/Marzen",
@@ -864,7 +950,8 @@ data.factory("Style",function() {
                   "Colour_Min": 7,
                   "Colour_Max": 14,
                   "ABV_Min": 4.8,
-                  "ABV_Max": 5.7
+                  "ABV_Max": 5.7,
+                  "link": "http://www.bjcp.org/2008styles/style03.php#1b"
                 },
                 {
                   "name": "Old Ale",
@@ -877,7 +964,8 @@ data.factory("Style",function() {
                   "Colour_Min": 10,
                   "Colour_Max": 22,
                   "ABV_Min": 6.0,
-                  "ABV_Max": 9.0
+                  "ABV_Max": 9.0,
+                  "link": "http://www.bjcp.org/2008styles/style19.php#1a"
                 },
                 {
                   "name": "Other Smoked Beer",
@@ -890,7 +978,8 @@ data.factory("Style",function() {
                   "Colour_Min": 5,
                   "Colour_Max": 50,
                   "ABV_Min": 2.5,
-                  "ABV_Max": 12.0
+                  "ABV_Max": 12.0,
+                  "link": "http://www.bjcp.org/2008styles/style22.php#1b"
                 },
                 {
                   "name": "Premium American Lager",
@@ -903,7 +992,8 @@ data.factory("Style",function() {
                   "Colour_Min": 2,
                   "Colour_Max": 6,
                   "ABV_Min": 4.6,
-                  "ABV_Max": 6.0
+                  "ABV_Max": 6.0,
+                  "link": "http://www.bjcp.org/2008styles/style01.php#1c"
                 },
                 {
                   "name": "Robust Porter",
@@ -916,7 +1006,8 @@ data.factory("Style",function() {
                   "Colour_Min": 22,
                   "Colour_Max": 35,
                   "ABV_Min": 4.8,
-                  "ABV_Max": 6.5
+                  "ABV_Max": 6.5,
+                  "link": "http://www.bjcp.org/2008styles/style12.php#1b"
                 },
                 {
                   "name": "Roggenbier (German Rye Beer)",
@@ -929,7 +1020,8 @@ data.factory("Style",function() {
                   "Colour_Min": 14,
                   "Colour_Max": 19,
                   "ABV_Min": 4.5,
-                  "ABV_Max": 6.0
+                  "ABV_Max": 6.0,
+                  "link": "http://www.bjcp.org/2008styles/style15.php#1d"
                 },
                 {
                   "name": "Saison",
@@ -942,7 +1034,8 @@ data.factory("Style",function() {
                   "Colour_Min": 5,
                   "Colour_Max": 14,
                   "ABV_Min": 5.0,
-                  "ABV_Max": 7.0
+                  "ABV_Max": 7.0,
+                  "link": "http://www.bjcp.org/2008styles/style16.php#1c"
                 },
                 {
                   "name": "Schwarzbier",
@@ -955,7 +1048,8 @@ data.factory("Style",function() {
                   "Colour_Min": 17,
                   "Colour_Max": 30,
                   "ABV_Min": 4.4,
-                  "ABV_Max": 5.4
+                  "ABV_Max": 5.4,
+                  "link": "http://www.bjcp.org/2008styles/style04.php#1c"
                 },
                 {
                   "name": "Scottish Light 60/-",
@@ -968,7 +1062,8 @@ data.factory("Style",function() {
                   "Colour_Min": 9,
                   "Colour_Max": 17,
                   "ABV_Min": 2.5,
-                  "ABV_Max": 3.2
+                  "ABV_Max": 3.2,
+                  "link": "http://www.bjcp.org/2008styles/style09.php#1a"
                 },
                 {
                   "name": "Scottish Light 70/-",
@@ -981,7 +1076,8 @@ data.factory("Style",function() {
                   "Colour_Min": 9,
                   "Colour_Max": 17,
                   "ABV_Min": 3.2,
-                  "ABV_Max": 3.9
+                  "ABV_Max": 3.9,
+                  "link": "http://www.bjcp.org/2008styles/style09.php#1b"
                 },
                 {
                   "name": "Scottish Light 80/-",
@@ -994,7 +1090,8 @@ data.factory("Style",function() {
                   "Colour_Min": 9,
                   "Colour_Max": 17,
                   "ABV_Min": 3.9,
-                  "ABV_Max": 5.0
+                  "ABV_Max": 5.0,
+                  "link": "http://www.bjcp.org/2008styles/style09.php#1c"
                 },
                 {
                   "name": "Southern English Brown Ale",
@@ -1007,7 +1104,8 @@ data.factory("Style",function() {
                   "Colour_Min": 19,
                   "Colour_Max": 35,
                   "ABV_Min": 2.8,
-                  "ABV_Max": 4.1
+                  "ABV_Max": 4.1,
+                  "link": "http://www.bjcp.org/2008styles/style11.php#1b"
                 },
                 {
                   "name": "Special/Best/Premium Bitter",
@@ -1020,7 +1118,8 @@ data.factory("Style",function() {
                   "Colour_Min": 5,
                   "Colour_Max": 16,
                   "ABV_Min": 3.8,
-                  "ABV_Max": 4.6
+                  "ABV_Max": 4.6,
+                  "link": "http://www.bjcp.org/2008styles/style08.php#1b"
                 },
                 {
                   "name": "Specialty Beer",
@@ -1033,7 +1132,8 @@ data.factory("Style",function() {
                   "Colour_Min": 5,
                   "Colour_Max": 50,
                   "ABV_Min": 2.5,
-                  "ABV_Max": 12.0
+                  "ABV_Max": 12.0,
+                  "link": "http://www.bjcp.org/2008styles/style23.php#1a"
                 },
                 {
                   "name": "Spice, Herb, or Vegetable Beer",
@@ -1046,7 +1146,8 @@ data.factory("Style",function() {
                   "Colour_Min": 5,
                   "Colour_Max": 50,
                   "ABV_Min": 2.5,
-                  "ABV_Max": 12.0
+                  "ABV_Max": 12.0,
+                  "link": "http://www.bjcp.org/2008styles/style21.php#1a"
                 },
                 {
                   "name": "Standard American Lager",
@@ -1059,7 +1160,8 @@ data.factory("Style",function() {
                   "Colour_Min": 2,
                   "Colour_Max": 4,
                   "ABV_Min": 4.2,
-                  "ABV_Max": 5.3
+                  "ABV_Max": 5.3,
+                  "link": "http://www.bjcp.org/2008styles/style01.php#1b"
                 },
                 {
                   "name": "Standard/Ordinary Bitter",
@@ -1072,7 +1174,8 @@ data.factory("Style",function() {
                   "Colour_Min": 4,
                   "Colour_Max": 14,
                   "ABV_Min": 3.2,
-                  "ABV_Max": 3.8
+                  "ABV_Max": 3.8,
+                  "link": "http://www.bjcp.org/2008styles/style08.php#1a"
                 },
                 {
                   "name": "Straight (Unblended) Lambic",
@@ -1085,7 +1188,8 @@ data.factory("Style",function() {
                   "Colour_Min": 3,
                   "Colour_Max": 7,
                   "ABV_Min": 5.0,
-                  "ABV_Max": 6.5
+                  "ABV_Max": 6.5,
+                  "link": "http://www.bjcp.org/2008styles/style17.php#1d"
                 },
                 {
                   "name": "Strong Scotch Ale",
@@ -1098,7 +1202,8 @@ data.factory("Style",function() {
                   "Colour_Min": 14,
                   "Colour_Max": 25,
                   "ABV_Min": 6.5,
-                  "ABV_Max": 10.0
+                  "ABV_Max": 10.0,
+                  "link": "http://www.bjcp.org/2008styles/style09.php#1e"
                 },
                 {
                   "name": "Sweet Stout",
@@ -1111,7 +1216,8 @@ data.factory("Style",function() {
                   "Colour_Min": 30,
                   "Colour_Max": 40,
                   "ABV_Min": 4.0,
-                  "ABV_Max": 6.0
+                  "ABV_Max": 6.0,
+                  "link": "http://www.bjcp.org/2008styles/style13.php#1b"
                 },
                 {
                   "name": "Traditional Bock",
@@ -1124,7 +1230,8 @@ data.factory("Style",function() {
                   "Colour_Min": 14,
                   "Colour_Max": 22,
                   "ABV_Min": 6.3,
-                  "ABV_Max": 7.2
+                  "ABV_Max": 7.2,
+                  "link": "http://www.bjcp.org/2008styles/style05.php#1b"
                 },
                 {
                   "name": "Vienna Lager",
@@ -1137,7 +1244,8 @@ data.factory("Style",function() {
                   "Colour_Min": 10,
                   "Colour_Max": 16,
                   "ABV_Min": 4.5,
-                  "ABV_Max": 5.5
+                  "ABV_Max": 5.5,
+                  "link": "http://www.bjcp.org/2008styles/style03.php#1a"
                 },
                 {
                   "name": "Weizen/Weissbier",
@@ -1150,7 +1258,8 @@ data.factory("Style",function() {
                   "Colour_Min": 2,
                   "Colour_Max": 8,
                   "ABV_Min": 4.3,
-                  "ABV_Max": 5.6
+                  "ABV_Max": 5.6,
+                  "link": "http://www.bjcp.org/2008styles/style15.php#1a"
                 },
                 {
                   "name": "Weizenbock",
@@ -1163,7 +1272,8 @@ data.factory("Style",function() {
                   "Colour_Min": 12,
                   "Colour_Max": 25,
                   "ABV_Min": 6.5,
-                  "ABV_Max": 8.0
+                  "ABV_Max": 8.0,
+                  "link": "http://www.bjcp.org/2008styles/style15.php#1c"
                 },
                 {
                   "name": "Witbier",
@@ -1176,7 +1286,8 @@ data.factory("Style",function() {
                   "Colour_Min": 2,
                   "Colour_Max": 4,
                   "ABV_Min": 4.5,
-                  "ABV_Max": 5.5
+                  "ABV_Max": 5.5,
+                  "link": "http://www.bjcp.org/2008styles/style16.php#1a"
                 },
                 {
                   "name": "Wood-Aged Beer",
@@ -1189,7 +1300,8 @@ data.factory("Style",function() {
                   "Colour_Min": 5,
                   "Colour_Max": 50,
                   "ABV_Min": 2.5,
-                  "ABV_Max": 12.0
+                  "ABV_Max": 12.0,
+                  "link": "http://www.bjcp.org/2008styles/style22.php#1c"
                 }
               ];
         }

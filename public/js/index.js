@@ -21,6 +21,11 @@
 
     index.controller("MainController",function($scope,$rootScope) {
         $rootScope.breadcrumbs = [];
+        
+        $scope.login = function() {
+            var button = $($($("#signinButton").children()[0]).children()[0])
+            button.click();
+        };
     });
 
 
