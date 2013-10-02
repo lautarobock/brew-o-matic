@@ -1,6 +1,6 @@
 (function() {
 
-    var index = angular.module('index');
+    var index = angular.module('login',[]);
 
  
     index.controller("LoginController",function($scope,$rootScope,User) {

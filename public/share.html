@@ -12,12 +12,15 @@
     <script src="js/share.js"></script>
     <script src="js/helper.js"></script>
     <script src="js/resources.js"></script>
+    <script src="js/LoginController.js"></script>
     <script src="js/Data.js"></script>
     <script src="js/ObjTree.js"></script>
   </head>
   <body ng-controller="ShareController" id="ShareController">
     <div id="fb-root"></div>
     <!--<script src="js/fb.js"></scsript>-->
+    
+    <div ng-include="'partial/nav.html'"></div>
     
     <!-- Logo & Breadcrumb -->
     <div class="container" style="margin-top: 1em;">
@@ -234,6 +237,18 @@
         </div>
       </div>
     </div>
+    <script type="text/javascript">
+        (function() {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = 'https://apis.google.com/js/client:plusone.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
+      
+        function signinCallback(authResult) {
+            var $scope = angular.element(document.getElementById('LoginController')).scope();
+            $scope.$emit('g+login', authResult)
+        }
+    </script>      
   </body>
   
 </html>

@@ -48,10 +48,20 @@
                     scope.recipe.FERMENTABLES.FERMENTABLE = [scope.recipe.FERMENTABLES.FERMENTABLE];
                 }
                 
+                var times = [0,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90,100,110,120];
+                
                 function convertHop(hop) {
                     hop.ALPHA = parseFloat(hop.ALPHA);
                     hop.AMOUNT = parseFloat(hop.AMOUNT);
                     hop.TIME = parseFloat(hop.TIME);
+                    if (times.indexOf(hop.TIME) == -1) {
+                        var t = times[0];
+                        var i = 0;
+                        while ( t < hop.TIME) {
+                            t = times [++i];
+                        }
+                        hop.TIME = times[i-1];
+                    }
                     scope.recipe.totalHop += hop.AMOUNT;
                 }
                 scope.recipe.totalHop = 0;

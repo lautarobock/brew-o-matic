@@ -1,7 +1,7 @@
 (function() {
 
 
-    var index = angular.module('index', ['ngResource','data','resources','helper']);
+    var index = angular.module('index', ['ngResource','data','resources','helper','login']);
 
     
  

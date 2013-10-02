@@ -37,8 +37,16 @@
                 var diff = M-m;
                 var p = (g-m)/diff; //proporcion
                 
-                var valm = U[time.toString()][m.toString()];
-                var valM = U[time.toString()][M.toString()];
+                var valm;
+                var valM;
+                if ( U[time.toString()] ) {
+                    valm = U[time.toString()][m.toString()];
+                    valM = U[time.toString()][M.toString()];
+                } else {
+                    valm = 0;
+                    valM = 0;
+                }
+                
                 var valDiff = valM-valm; //Diff de valores
                 var valP = valDiff*p;
                 return valm+valP;
