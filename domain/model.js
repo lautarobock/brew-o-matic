@@ -97,6 +97,12 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     isPublic: Boolean,
     cloneFrom: String,
     starredBy: [{_id:Schema.Types.ObjectId,name:String}],
-    clonedBy: [{_id:Schema.Types.ObjectId,name:String}]
+    clonedBy: [{_id:Schema.Types.ObjectId,name:String}],
+    comments:[{
+        text: String,
+        _id: Schema.Types.ObjectId,
+        name: String,
+        date: Date
+    }]
     
 },{ _id: false }));

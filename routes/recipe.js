@@ -30,6 +30,19 @@ function generateId(name,user_id) {
     return name.replace(/ /g, "_").replace(/#/g,"_Nro_") + "-" + user_id + "-" + (new Date()).getTime();
 }
 
+exports.addComment = function(req,res) {
+    model.Recipe.findOne({_id:req.body._id}).exec(function(err,recipe) {
+        recipe.comments.push({
+            _id: req.session.user_id,
+            name: req.session.user_name,
+            text: req.body.text,
+            date: new Date()
+        });
+        recipe.save();
+        res.send(recipe.comments);
+    });
+};
+
 exports.save = function(req, res) {
     
     function callback(err,s){

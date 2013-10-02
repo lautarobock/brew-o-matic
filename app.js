@@ -62,6 +62,7 @@ app.post('/user', user.add);
 app.put('/user/favorite_add',user.addToFavorites,filter)
 app.put('/user/favorite_drop',user.removeFromFavorites,filter)
 app.get('/recipe/public',recipe.findPublic,filter)
+app.put('/recipe/comment',recipe.addComment,filter)
 app.get('/recipe',recipe.findAll,filter)
 app.get('/recipe/:id',recipe.get)
 app.post('/recipe',recipe.save,filter)

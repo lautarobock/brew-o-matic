@@ -13,7 +13,8 @@
     
     res.factory('Recipe',function($resource) {
         return $resource('recipe/:operation:id',{}, {
-            findPublic: {method:'GET',params: {operation:'public',}, isArray:true }
+            findPublic: {method:'GET',params: {operation:'public',}, isArray:true },
+            addComment: {method:'PUT',params: {operation:'comment',}, isArray:true }
         });
     });
     
