@@ -37,11 +37,11 @@
 
         $rootScope.$watch('user',function() {
             $scope.recipes = Recipe.query();
-            $scope.published = Recipe.findPublic({limit:$scope.publishedCount});
+            $scope.published = Recipe.findPublic();
         });
         
         $scope.findMore = function() {
-            $scope.publishedCount+=2;
+            $scope.publishedCount+=10;
             $scope.published = Recipe.findPublic({limit:$scope.publishedCount});
         };
         
