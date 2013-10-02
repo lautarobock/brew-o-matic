@@ -293,6 +293,8 @@
                     $scope.recipe.cloneFrom = $scope.recipe._id;
                     $scope.recipe._id = undefined;
                     $scope.recipe.date = new Date();
+                    $scope.recipe.starredBy = [];
+                    $scope.recipe.clonedBy = [];
                     $scope.recipe.isPublic = false;
                 }
                 $scope.changeYeast();

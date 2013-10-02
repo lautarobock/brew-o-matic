@@ -25,7 +25,7 @@
                 </td>
                 <td>{{ recipe.date|date:'dd-MM-yyyy' }}</td>
                 <td title="{{recipe.NAME}}">
-                    <a href="#/recipe/edit/{{encodeName(recipe._id)}}">{{ recipe.NAME|limitText:30}}</a>
+                    <a href="#/recipe/edit/{{encodeName(recipe._id)}}">{{ recipe.NAME|limitText:26}}</a>
                 </td>
                 <td>{{ recipe.STYLE.NAME }}</td>
                 <td>{{ recipe.OG  }}</td>

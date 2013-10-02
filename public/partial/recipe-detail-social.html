@@ -1,0 +1,26 @@
+<div class="panel panel-default">
+    <div class="panel-heading"><strong>Social</strong></div>
+    <div class="panel-body" >
+        <div class="row" >
+            <div style="margin:0 0.5em">
+                <strong>Tu receta le gusta a:</strong>
+                <ul>
+                    <li ng-repeat="user in recipe.starredBy">
+                        {{user.name}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row" >
+            <div style="margin:0 0.5em">
+                <strong>Clonada por:</strong>
+                <ul>
+                    <li ng-repeat="user in recipe.clonedBy">
+                        {{user.name}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>

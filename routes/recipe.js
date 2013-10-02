@@ -41,6 +41,20 @@ exports.save = function(req, res) {
         recipe._id = generateId(req.body.NAME,req.session.user_id);
         recipe.owner = req.session.user_id;
         recipe.save(callback);
+        
+        /**
+         * Si la estoy clonando de otra, debo hacerle update para
+         * poner que fue clonada por mi.
+         */
+        if (recipe.cloneFrom ) {
+            model.Recipe.findOne({_id:recipe.cloneFrom}).exec(function(err,recipe){
+                recipe.clonedBy.push({
+                    _id: req.session.user_id,
+                    name: req.session.user_name
+                });
+                recipe.save();
+            });
+        }
     } else {
         var id = req.body._id;
         delete req.body._id;

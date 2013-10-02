@@ -1,5 +1,6 @@
 var model = require('../domain/model.js');
 var mongoose = require('mongoose');
+var Arrays = require("../public/js/util/util.js").Arrays;
 /*
  * GET users listing.
  */
@@ -23,6 +24,7 @@ exports.getByGoogleId = function(req, res){
             console.log("Set User_Id in session: " + user._id);
             //console.log(req);
             s.user_id = user._id;
+            s.user_name = user.name;
         }
         res.send(user);
     });   
@@ -42,7 +44,7 @@ exports.addToFavorites = function(req,res) {
                 });
                 recipe.save();
             });
-
+            
             user.save(function(err,user) {
                 res.send(user);
             });
@@ -60,6 +62,18 @@ exports.removeFromFavorites = function(req,res) {
         }
         user.save(function(err,user) {
             res.send(user);
+        });
+        
+        //update recipe too (async)
+        model.Recipe.findOne({_id:req.body._id},function(err,recipe) {
+            Arrays.remove(recipe.starredBy,user._id,function(userid,object){
+                if ( object._id.toString() == userid.toString()) {
+                    return 0;
+                } else {
+                    return -1;
+                }
+            });
+            recipe.save();
         });
     });
 };
