@@ -95,6 +95,7 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     keggingEnabled: String,
     serveEnabled: String,
     isPublic: Boolean,
-    cloneFrom: String
+    cloneFrom: String,
+    starredBy: [{_id:Schema.Types.ObjectId,name:String}]
     
 },{ _id: false }));

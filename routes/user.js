@@ -32,10 +32,20 @@ exports.addToFavorites = function(req,res) {
     model.User
             .findOne({_id: new mongoose.Types.ObjectId(req.session.user_id)})
             .exec(function(err,user) {
-        user.favorites.push(req.body._id);
-        user.save(function(err,user) {
-            res.send(user);
-        });
+            user.favorites.push(req.body._id);
+
+            //update recipe too (async)
+            model.Recipe.findOne({_id:req.body._id},function(err,recipe) {
+                recipe.starredBy.push({
+                    _id:user._id,
+                    name: user.name
+                });
+                recipe.save();
+            });
+
+            user.save(function(err,user) {
+                res.send(user);
+            });
     });
 };
 
