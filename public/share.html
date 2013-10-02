@@ -28,11 +28,26 @@
         <div class="col-md-2" >
           <div class="panel panel-default" style="max-width:200px; max-height:200px;">
             <div class="panel-body" >
-                <a href="/">
+                <a href="/#/recipe">
                     <img src="images/logo.jpg" style="max-width:100%; max-height:100%;"/>
                 </a>
             </div>
           </div>
+        </div>
+        <div class="col-md-10" >
+            <div class="panel panel-default">
+                <div class="panel-body" >
+                    <div><b>Compartida por:</b> {{recipe.owner.name}}</div>
+                    <div><b>Cervecero:</b> {{recipe.BREWER}}</div>
+                    <div ng-show="user" class="pull-right">
+                        <a href="/#/recipe/clone/{{encodeName(recipe._id)}}" type="button" class="btn btn-default btn-xs">clonar</a>
+                        <button ng-hide="user._id == recipe.owner._id" title="Agregar a favoritos" type="button" class="btn btn-default btn-xs">
+                            <span ng-hide="user.favorites.indexOf(recipe._id) != -1" class="glyphicon glyphicon-star-empty" ng-click="addFavorites(recipe)"></span>
+                            <span ng-show="user.favorites.indexOf(recipe._id) != -1" class="glyphicon glyphicon-star" ng-click="removeFavorites(recipe)"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
       </div>
     </div>

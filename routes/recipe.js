@@ -14,7 +14,7 @@ exports.findAll = function(req, res) {
 };
 
 exports.get = function(req, res) {
-    model.Recipe.findOne({_id:req.params.id}).exec(function(err,results) {
+    model.Recipe.findOne({_id:req.params.id}).populate('owner').exec(function(err,results) {
         res.send(results);
     });    
 };

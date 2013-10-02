@@ -3,7 +3,7 @@
 
     var share = angular.module('share', ['ngResource','data','resources','helper','login']);
 
-    share.controller("ShareController", function($scope,Recipe,$location,BrewHelper,HopUse,HopForm) {
+    share.controller("ShareController", function($scope,Recipe,$location,BrewHelper,HopUse,HopForm,User,$rootScope) {
         
         $scope.hopUses = HopUse.query();
         
@@ -47,6 +47,25 @@
         $scope.gravityBarValue = function(grav,max) {
             return BrewHelper.toPpg(grav) / max * 100;
         }
+        
+        $scope.addFavorites = function(recipe) {
+            User.addToFavorites(recipe,function(user) {
+                console.log(user);
+                $rootScope.user.favorites = user.favorites;
+            });
+        };
+        
+        $scope.removeFavorites = function(recipe) {
+            User.removeFromFavorites(recipe,function(user) {
+                console.log(user);
+                $rootScope.user.favorites = user.favorites;
+            });
+        };
+        
+        
+        $scope.encodeName = function(name) {
+            return encodeURIComponent(name);
+        };
 
     });
 
