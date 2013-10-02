@@ -83,7 +83,9 @@ data.factory("Style",function() {
                   "Colour_Max": 17,
                   "ABV_Min": 4.5,
                   "ABV_Max": 6.0,
-                  "link": "http://www.bjcp.org/2008styles/style10.php#1b"
+                  "link": "http://www.bjcp.org/2008styles/style10.php#1b",
+                  "related": "http://www.ratebeer.com/beerstyles/amber-ale/53/"
+                  
                 },
                 {
                   "name": "American Barleywine",
@@ -97,7 +99,8 @@ data.factory("Style",function() {
                   "Colour_Max": 19,
                   "ABV_Min": 8.0,
                   "ABV_Max": 12.0,
-                  "link": "http://www.bjcp.org/2008styles/style19.php#1c"
+                  "link": "http://www.bjcp.org/2008styles/style19.php#1c",
+                  "related":"http://www.ratebeer.com/beerstyles/american-strong-ale/64/"
                 },
                 {
                   "name": "American Brown Ale",
@@ -111,7 +114,8 @@ data.factory("Style",function() {
                   "Colour_Max": 35,
                   "ABV_Min": 4.3,
                   "ABV_Max": 6.2,
-                  "link": "http://www.bjcp.org/2008styles/style10.php#1c"
+                  "link": "http://www.bjcp.org/2008styles/style10.php#1c",
+                  "related": "http://www.ratebeer.com/beerstyles/brown-ale/15/"
                 },
                 {
                   "name": "American IPA",
@@ -125,7 +129,8 @@ data.factory("Style",function() {
                   "Colour_Max": 15,
                   "ABV_Min": 5.5,
                   "ABV_Max": 7.5,
-                  "link": "http://www.bjcp.org/2008styles/style14.php#1b"
+                  "link": "http://www.bjcp.org/2008styles/style14.php#1b",
+                  "related": "http://www.ratebeer.com/beerstyles/india-pale-ale-ipa/17/"
                 },
                 {
                   "name": "American Pale Ale",
@@ -139,7 +144,8 @@ data.factory("Style",function() {
                   "Colour_Max": 14,
                   "ABV_Min": 4.5,
                   "ABV_Max": 6.0,
-                  "link": "http://www.bjcp.org/2008styles/style10.php#1a"
+                  "link": "http://www.bjcp.org/2008styles/style10.php#1a",
+                  "related": "http://www.ratebeer.com/beerstyles/american-pale-ale/18/"
                 },
                 {
                   "name": "American Stout",
@@ -153,7 +159,8 @@ data.factory("Style",function() {
                   "Colour_Max": 40,
                   "ABV_Min": 5.0,
                   "ABV_Max": 7.0,
-                  "link": "http://www.bjcp.org/2008styles/style13.php#1e"
+                  "link": "http://www.bjcp.org/2008styles/style13.php#1e",
+                  "related": "http://www.ratebeer.com/beerstyles/stout/6/"
                 },
                 {
                   "name": "American Wheat or Rye Beer",
@@ -167,7 +174,8 @@ data.factory("Style",function() {
                   "Colour_Max": 6,
                   "ABV_Min": 4.0,
                   "ABV_Max": 5.5,
-                  "link": "http://www.bjcp.org/2008styles/style06.php#1d"
+                  "link": "http://www.bjcp.org/2008styles/style06.php#1d",
+                  "related": "http://www.ratebeer.com/beerstyles/wheat-ale/19/"
                 },
                 {
                   "name": "Australian Dark/Old Ale",
@@ -251,7 +259,8 @@ data.factory("Style",function() {
                   "Colour_Max": 30,
                   "ABV_Min": 5.5,
                   "ABV_Max": 9.5,
-                  "link": "http://www.bjcp.org/2008styles/style12.php#1c"
+                  "link": "http://www.bjcp.org/2008styles/style12.php#1c",
+                  "related":"http://www.ratebeer.com/beerstyles/baltic-porter/63/"
                 },
                 {
                   "name": "Belgian Blond Ale",
@@ -265,7 +274,8 @@ data.factory("Style",function() {
                   "Colour_Max": 7,
                   "ABV_Min": 6.0,
                   "ABV_Max": 7.5,
-                  "link": "http://www.bjcp.org/2008styles/style18.php#1a"
+                  "link": "http://www.bjcp.org/2008styles/style18.php#1a",
+                  "related": "http://www.ratebeer.com/beerstyles/belgian-ale/12/"
                 },
                 {
                   "name": "Belgian Dark Strong Ale",
@@ -309,7 +319,8 @@ data.factory("Style",function() {
                   "Colour_Max": 6,
                   "ABV_Min": 7.5,
                   "ABV_Max": 10.5,
-                  "link": "http://www.bjcp.org/2008styles/style18.php#1d"
+                  "link": "http://www.bjcp.org/2008styles/style18.php#1d",
+                  "related":"http://www.ratebeer.com/beerstyles/belgian-strong-ale/13/"
                 },
                 {
                   "name": "Belgian Pale Ale",
@@ -323,7 +334,8 @@ data.factory("Style",function() {
                   "Colour_Max": 14,
                   "ABV_Min": 4.8,
                   "ABV_Max": 5.5,
-                  "link": "http://www.bjcp.org/2008styles/style16.php#1b"
+                  "link": "http://www.bjcp.org/2008styles/style16.php#1b",
+                  "related": "http://www.ratebeer.com/beerstyles/belgian-ale/12/"
                 },
                 {
                   "name": "Belgian Specialty Ale",
@@ -337,7 +349,8 @@ data.factory("Style",function() {
                   "Colour_Max": 50,
                   "ABV_Min": 3.0,
                   "ABV_Max": 9.0,
-                  "link": "http://www.bjcp.org/2008styles/style16.php#1e"
+                  "link": "http://www.bjcp.org/2008styles/style16.php#1e",
+                  "related": "http://www.ratebeer.com/beerstyles/specialty-grain/106/"
                 },
                 {
                   "name": "Belgian Tripel",
@@ -366,7 +379,8 @@ data.factory("Style",function() {
                   "Colour_Max": 3,
                   "ABV_Min": 2.8,
                   "ABV_Max": 3.8,
-                  "link": "http://www.bjcp.org/2008styles/style17.php#1a"
+                  "link": "http://www.bjcp.org/2008styles/style17.php#1a",
+                  "related": "http://www.ratebeer.com/beerstyles/berliner-weisse/61/"
                 },
                 {
                   "name": "Biere de Garde",
@@ -380,7 +394,8 @@ data.factory("Style",function() {
                   "Colour_Max": 19,
                   "ABV_Min": 6.0,
                   "ABV_Max": 8.5,
-                  "link": "http://www.bjcp.org/2008styles/style16.php#1d"
+                  "link": "http://www.bjcp.org/2008styles/style16.php#1d",
+                  "related": "http://www.ratebeer.com/beerstyles/biere-de-garde/58/"
                 },
                 {
                   "name": "Blonde Ale",
@@ -394,7 +409,8 @@ data.factory("Style",function() {
                   "Colour_Max": 6,
                   "ABV_Min": 3.8,
                   "ABV_Max": 5.5,
-                  "link": "http://www.bjcp.org/2008styles/style06.php#1b"
+                  "link": "http://www.bjcp.org/2008styles/style06.php#1b",
+                  "related": "http://www.ratebeer.com/beerstyles/golden-ale-blond-ale/54/"
                 },
                 {
                   "name": "Bohemian Pilsener",
@@ -408,7 +424,8 @@ data.factory("Style",function() {
                   "Colour_Max": 6,
                   "ABV_Min": 4.2,
                   "ABV_Max": 5.4,
-                  "link": "http://www.bjcp.org/2008styles/style02.php#1b"
+                  "link": "http://www.bjcp.org/2008styles/style02.php#1b",
+                  "related": "http://www.ratebeer.com/beerstyles/czech-pilsner-sv283tly/31/"
                 },
                 {
                   "name": "Brown Porter",
@@ -422,7 +439,8 @@ data.factory("Style",function() {
                   "Colour_Max": 30,
                   "ABV_Min": 4.0,
                   "ABV_Max": 5.4,
-                  "link": "http://www.bjcp.org/2008styles/style12.php#1a"
+                  "link": "http://www.bjcp.org/2008styles/style12.php#1a",
+                  "related": "http://www.ratebeer.com/beerstyles/porter/5/"
                 },
                 {
                   "name": "Cascadian Dark Ale",
@@ -450,7 +468,8 @@ data.factory("Style",function() {
                   "Colour_Max": 14,
                   "ABV_Min": 4.5,
                   "ABV_Max": 5.5,
-                  "link": "http://www.bjcp.org/2008styles/style07.php#1b"
+                  "link": "http://www.bjcp.org/2008styles/style07.php#1b",
+                  "related": "http://www.ratebeer.com/beerstyles/california-common/42/"
                 },
                 {
                   "name": "Christmas/Winter Specialty Spiced Beer",
@@ -478,7 +497,8 @@ data.factory("Style",function() {
                   "Colour_Max": 6,
                   "ABV_Min": 4.5,
                   "ABV_Max": 6.0,
-                  "link": "http://www.bjcp.org/2008styles/style02.php#1c"
+                  "link": "http://www.bjcp.org/2008styles/style02.php#1c",
+                  "related": "http://www.ratebeer.com/beerstyles/pilsener/4/"
                 },
                 {
                   "name": "Classic Rauchbier",
@@ -492,7 +512,8 @@ data.factory("Style",function() {
                   "Colour_Max": 22,
                   "ABV_Min": 4.8,
                   "ABV_Max": 6.0,
-                  "link": "http://www.bjcp.org/2008styles/style22.php#1a"
+                  "link": "http://www.bjcp.org/2008styles/style22.php#1a",
+                  "related": "http://www.ratebeer.com/beerstyles/smoked/41/"
                 },
                 {
                   "name": "Cream Ale",
@@ -506,7 +527,8 @@ data.factory("Style",function() {
                   "Colour_Max": 5,
                   "ABV_Min": 4.2,
                   "ABV_Max": 5.6,
-                  "link": "http://www.bjcp.org/2008styles/style06.php#1a"
+                  "link": "http://www.bjcp.org/2008styles/style06.php#1a",
+                  "related": "http://www.ratebeer.com/beerstyles/cream-ale/35/"
                 },
                 {
                   "name": "Dark American Lager",
@@ -534,7 +556,8 @@ data.factory("Style",function() {
                   "Colour_Max": 25,
                   "ABV_Min": 7.0,
                   "ABV_Max": 10.0,
-                  "link": "http://www.bjcp.org/2008styles/style05.php#1c"
+                  "link": "http://www.bjcp.org/2008styles/style05.php#1c",
+                  "related": "http://www.ratebeer.com/beerstyles/doppelbock/26/"
                 },
                 {
                   "name": "Dorada Pampeana",
@@ -576,7 +599,8 @@ data.factory("Style",function() {
                   "Colour_Max": 40,
                   "ABV_Min": 4.0,
                   "ABV_Max": 5.0,
-                  "link": "http://www.bjcp.org/2008styles/style13.php#1a"
+                  "link": "http://www.bjcp.org/2008styles/style13.php#1a",
+                  "related": "http://www.ratebeer.com/beerstyles/dry-stout/22/"
                 },
                 {
                   "name": "Dunkelweizen",
@@ -590,7 +614,8 @@ data.factory("Style",function() {
                   "Colour_Max": 23,
                   "ABV_Min": 4.3,
                   "ABV_Max": 5.6,
-                  "link": "http://www.bjcp.org/2008styles/style15.php#1b"
+                  "link": "http://www.bjcp.org/2008styles/style15.php#1b",
+                  "related": "http://www.ratebeer.com/beerstyles/dunkelweizen/100/"
                 },
                 {
                   "name": "Dusseldorf Altbier",
@@ -619,7 +644,8 @@ data.factory("Style",function() {
                   "Colour_Max": 30,
                   "ABV_Min": 9,
                   "ABV_Max": 14.0,
-                  "link": "http://www.bjcp.org/2008styles/style05.php#1d"
+                  "link": "http://www.bjcp.org/2008styles/style05.php#1d",
+                  "related": "http://www.ratebeer.com/beerstyles/eisbock/27/"
                 },
                 {
                   "name": "English Barleywine",
@@ -633,7 +659,8 @@ data.factory("Style",function() {
                   "Colour_Max": 22,
                   "ABV_Min": 8.0,
                   "ABV_Max": 12.0,
-                  "link": "http://www.bjcp.org/2008styles/style19.php#1b"
+                  "link": "http://www.bjcp.org/2008styles/style19.php#1b",
+                  "related":"http://www.ratebeer.com/beerstyles/barley-wine/11/"
                 },
                 {
                   "name": "English IPA",
@@ -647,7 +674,8 @@ data.factory("Style",function() {
                   "Colour_Max": 14,
                   "ABV_Min": 5.0,
                   "ABV_Max": 7.5,
-                  "link": "http://www.bjcp.org/2008styles/style14.php#1a"
+                  "link": "http://www.bjcp.org/2008styles/style14.php#1a",
+                  "related": "http://www.ratebeer.com/beerstyles/india-pale-ale-ipa/17/"
                 },
                 {
                   "name": "Extra Special/Strong Bitter (English Pale Ale)",
@@ -661,7 +689,8 @@ data.factory("Style",function() {
                   "Colour_Max": 18,
                   "ABV_Min": 4.6,
                   "ABV_Max": 6.2,
-                  "link": "http://www.bjcp.org/2008styles/style08.php#1c"
+                  "link": "http://www.bjcp.org/2008styles/style08.php#1c",
+                  "related": "http://www.ratebeer.com/beerstyles/english-pale-ale/16/"
                 },
                 {
                   "name": "Flanders Brown Ale/Oud Bruin",
@@ -675,7 +704,8 @@ data.factory("Style",function() {
                   "Colour_Max": 22,
                   "ABV_Min": 4.0,
                   "ABV_Max": 8.0,
-                  "link": "http://www.bjcp.org/2008styles/style17.php#1c"
+                  "link": "http://www.bjcp.org/2008styles/style17.php#1c",
+                  "related": "http://www.ratebeer.com/beerstyles/sour-red-brown/118/"
                 },
                 {
                   "name": "Flanders Red Ale",
@@ -689,7 +719,8 @@ data.factory("Style",function() {
                   "Colour_Max": 16,
                   "ABV_Min": 4.6,
                   "ABV_Max": 6.5,
-                  "link": "http://www.bjcp.org/2008styles/style17.php#1b"
+                  "link": "http://www.bjcp.org/2008styles/style17.php#1b",
+                  "related": "http://www.ratebeer.com/beerstyles/sour-red-brown/118/"
                 },
                 {
                   "name": "Foreign Extra Stout",
@@ -703,7 +734,8 @@ data.factory("Style",function() {
                   "Colour_Max": 40,
                   "ABV_Min": 5.5,
                   "ABV_Max": 8.0,
-                  "link": "http://www.bjcp.org/2008styles/style13.php#1d"
+                  "link": "http://www.bjcp.org/2008styles/style13.php#1d",
+                  "related": "http://www.ratebeer.com/beerstyles/foreign-stout/79/"
                 },
                 {
                   "name": "Fruit Beer",
@@ -717,7 +749,8 @@ data.factory("Style",function() {
                   "Colour_Max": 50,
                   "ABV_Min": 2.5,
                   "ABV_Max": 12.0,
-                  "link": "http://www.bjcp.org/2008styles/style20.php#1a"
+                  "link": "http://www.bjcp.org/2008styles/style20.php#1a",
+                  "related": "http://www.ratebeer.com/beerstyles/fruit-beer/40/"
                 },
                 {
                   "name": "Fruit Lambic",
@@ -731,7 +764,8 @@ data.factory("Style",function() {
                   "Colour_Max": 7,
                   "ABV_Min": 5.0,
                   "ABV_Max": 7.0,
-                  "link": "http://www.bjcp.org/2008styles/style17.php#1f"
+                  "link": "http://www.bjcp.org/2008styles/style17.php#1f",
+                  "related": "http://www.ratebeer.com/beerstyles/lambic-style--fruit/14/"
                 },
                 {
                   "name": "German Pilsner (Pils)",
@@ -759,7 +793,8 @@ data.factory("Style",function() {
                   "Colour_Max": 7,
                   "ABV_Min": 5.0,
                   "ABV_Max": 8.0,
-                  "link": "http://www.bjcp.org/2008styles/style17.php#1e"
+                  "link": "http://www.bjcp.org/2008styles/style17.php#1e",
+                  "related": "http://www.ratebeer.com/beerstyles/lambic-style--gueuze/73/"
                 },
                 {
                   "name": "Imperial IPA",
@@ -773,7 +808,8 @@ data.factory("Style",function() {
                   "Colour_Max": 15,
                   "ABV_Min": 7.5,
                   "ABV_Max": 10.0,
-                  "link": "http://www.bjcp.org/2008styles/style14.php#1c"
+                  "link": "http://www.bjcp.org/2008styles/style14.php#1c",
+                  "related": "http://www.ratebeer.com/beerstyles/imperial-double-ipa/81/"
                 },
                 {
                   "name": "Imperial Stout",
@@ -787,7 +823,8 @@ data.factory("Style",function() {
                   "Colour_Max": 40,
                   "ABV_Min": 8.0,
                   "ABV_Max": 12.0,
-                  "link": "http://www.bjcp.org/2008styles/style13.php#1f"
+                  "link": "http://www.bjcp.org/2008styles/style13.php#1f",
+                  "related": "http://www.ratebeer.com/beerstyles/imperial-stout/24/"
                 },
                 {
                   "name": "IPA Argenta",
@@ -815,7 +852,8 @@ data.factory("Style",function() {
                   "Colour_Max": 18,
                   "ABV_Min": 4.0,
                   "ABV_Max": 6.0,
-                  "link": "http://www.bjcp.org/2008styles/style09.php#1d"
+                  "link": "http://www.bjcp.org/2008styles/style09.php#1d",
+                  "related": "http://www.ratebeer.com/beerstyles/irish-ale/62/"
                 },
                 {
                   "name": "Kolsch",
@@ -829,7 +867,8 @@ data.factory("Style",function() {
                   "Colour_Max": 5,
                   "ABV_Min": 4.4,
                   "ABV_Max": 5.2,
-                  "link": "http://www.bjcp.org/2008styles/style06.php#1c"
+                  "link": "http://www.bjcp.org/2008styles/style06.php#1c",
+                  "related": "http://www.ratebeer.com/beerstyles/kolsch/39/"
                 },
                 {
                   "name": "Lite American Lager",
@@ -857,7 +896,8 @@ data.factory("Style",function() {
                   "Colour_Max": 11,
                   "ABV_Min": 6.3,
                   "ABV_Max": 7.4,
-                  "link": "http://www.bjcp.org/2008styles/style05.php#1a"
+                  "link": "http://www.bjcp.org/2008styles/style05.php#1a",
+                  "related": "http://www.ratebeer.com/beerstyles/heller-bock/105/"
                 },
                 {
                   "name": "Mild",
@@ -871,7 +911,8 @@ data.factory("Style",function() {
                   "Colour_Max": 25,
                   "ABV_Min": 2.8,
                   "ABV_Max": 4.5,
-                  "link": "http://www.bjcp.org/2008styles/style11.php#1a"
+                  "link": "http://www.bjcp.org/2008styles/style11.php#1a",
+                  "related": "http://www.ratebeer.com/beerstyles/mild-ale/55/"
                 },
                 {
                   "name": "Munich Dunkel",
@@ -885,7 +926,8 @@ data.factory("Style",function() {
                   "Colour_Max": 28,
                   "ABV_Min": 4.5,
                   "ABV_Max": 5.6,
-                  "link": "http://www.bjcp.org/2008styles/style04.php#1b"
+                  "link": "http://www.bjcp.org/2008styles/style04.php#1b",
+                  "related": "http://www.ratebeer.com/beerstyles/dunkel-tmavy/28/"
                 },
                 {
                   "name": "Munich Helles",
@@ -899,7 +941,8 @@ data.factory("Style",function() {
                   "Colour_Max": 5,
                   "ABV_Min": 4.7,
                   "ABV_Max": 5.4,
-                  "link": "http://www.bjcp.org/2008styles/style01.php#1d"
+                  "link": "http://www.bjcp.org/2008styles/style01.php#1d",
+                  "related": "http://www.ratebeer.com/beerstyles/dortmunder-helles/60/"
                 },
                 {
                   "name": "North German Altbier",
@@ -927,7 +970,8 @@ data.factory("Style",function() {
                   "Colour_Max": 22,
                   "ABV_Min": 4.2,
                   "ABV_Max": 5.4,
-                  "link": "http://www.bjcp.org/2008styles/style11.php#1c"
+                  "link": "http://www.bjcp.org/2008styles/style11.php#1c",
+                  "related": "http://www.ratebeer.com/beerstyles/brown-ale/15/"
                 },
                 {
                   "name": "Oatmeal Stout",
@@ -941,7 +985,8 @@ data.factory("Style",function() {
                   "Colour_Max": 40,
                   "ABV_Min": 4.2,
                   "ABV_Max": 5.9,
-                  "link": "http://www.bjcp.org/2008styles/style13.php#1c"
+                  "link": "http://www.bjcp.org/2008styles/style13.php#1c",
+                  "related": "http://www.ratebeer.com/beerstyles/stout/6/"
                 },
                 {
                   "name": "Oktoberfest/Marzen",
@@ -955,7 +1000,8 @@ data.factory("Style",function() {
                   "Colour_Max": 14,
                   "ABV_Min": 4.8,
                   "ABV_Max": 5.7,
-                  "link": "http://www.bjcp.org/2008styles/style03.php#1b"
+                  "link": "http://www.bjcp.org/2008styles/style03.php#1b",
+                  "related": "http://www.ratebeer.com/beerstyles/oktoberfest-marzen/37/"
                 },
                 {
                   "name": "Old Ale",
@@ -969,7 +1015,8 @@ data.factory("Style",function() {
                   "Colour_Max": 22,
                   "ABV_Min": 6.0,
                   "ABV_Max": 9.0,
-                  "link": "http://www.bjcp.org/2008styles/style19.php#1a"
+                  "link": "http://www.bjcp.org/2008styles/style19.php#1a",
+                  "related": "http://www.ratebeer.com/beerstyles/old-ale/76/"
                 },
                 {
                   "name": "Other Smoked Beer",
@@ -983,7 +1030,8 @@ data.factory("Style",function() {
                   "Colour_Max": 50,
                   "ABV_Min": 2.5,
                   "ABV_Max": 12.0,
-                  "link": "http://www.bjcp.org/2008styles/style22.php#1b"
+                  "link": "http://www.bjcp.org/2008styles/style22.php#1b",
+                  "related": "http://www.ratebeer.com/beerstyles/smoked/41/"
                 },
                 {
                   "name": "Premium American Lager",
@@ -997,7 +1045,8 @@ data.factory("Style",function() {
                   "Colour_Max": 6,
                   "ABV_Min": 4.6,
                   "ABV_Max": 6.0,
-                  "link": "http://www.bjcp.org/2008styles/style01.php#1c"
+                  "link": "http://www.bjcp.org/2008styles/style01.php#1c",
+                  "related": "http://www.ratebeer.com/beerstyles/premium-lager/103/"
                 },
                 {
                   "name": "Robust Porter",
@@ -1011,7 +1060,8 @@ data.factory("Style",function() {
                   "Colour_Max": 35,
                   "ABV_Min": 4.8,
                   "ABV_Max": 6.5,
-                  "link": "http://www.bjcp.org/2008styles/style12.php#1b"
+                  "link": "http://www.bjcp.org/2008styles/style12.php#1b",
+                  "related": "http://www.ratebeer.com/beerstyles/imperial-strong-porter/113/"
                 },
                 {
                   "name": "Roggenbier (German Rye Beer)",
@@ -1039,7 +1089,8 @@ data.factory("Style",function() {
                   "Colour_Max": 14,
                   "ABV_Min": 5.0,
                   "ABV_Max": 7.0,
-                  "link": "http://www.bjcp.org/2008styles/style16.php#1c"
+                  "link": "http://www.bjcp.org/2008styles/style16.php#1c",
+                  "related": "http://www.ratebeer.com/beerstyles/saison/45/"
                 },
                 {
                   "name": "Schwarzbier",
@@ -1053,7 +1104,8 @@ data.factory("Style",function() {
                   "Colour_Max": 30,
                   "ABV_Min": 4.4,
                   "ABV_Max": 5.4,
-                  "link": "http://www.bjcp.org/2008styles/style04.php#1c"
+                  "link": "http://www.bjcp.org/2008styles/style04.php#1c",
+                  "related": "http://www.ratebeer.com/beerstyles/schwarzbier/29/"
                 },
                 {
                   "name": "Scottish Light 60/-",
@@ -1067,7 +1119,8 @@ data.factory("Style",function() {
                   "Colour_Max": 17,
                   "ABV_Min": 2.5,
                   "ABV_Max": 3.2,
-                  "link": "http://www.bjcp.org/2008styles/style09.php#1a"
+                  "link": "http://www.bjcp.org/2008styles/style09.php#1a",
+                  "related": "http://www.ratebeer.com/beerstyles/scottish-ale/21/"
                 },
                 {
                   "name": "Scottish Light 70/-",
@@ -1081,7 +1134,8 @@ data.factory("Style",function() {
                   "Colour_Max": 17,
                   "ABV_Min": 3.2,
                   "ABV_Max": 3.9,
-                  "link": "http://www.bjcp.org/2008styles/style09.php#1b"
+                  "link": "http://www.bjcp.org/2008styles/style09.php#1b",
+                  "related": "http://www.ratebeer.com/beerstyles/scottish-ale/21/"
                 },
                 {
                   "name": "Scottish Light 80/-",
@@ -1095,7 +1149,8 @@ data.factory("Style",function() {
                   "Colour_Max": 17,
                   "ABV_Min": 3.9,
                   "ABV_Max": 5.0,
-                  "link": "http://www.bjcp.org/2008styles/style09.php#1c"
+                  "link": "http://www.bjcp.org/2008styles/style09.php#1c",
+                  "related": "http://www.ratebeer.com/beerstyles/scottish-ale/21/"
                 },
                 {
                   "name": "Southern English Brown Ale",
@@ -1109,7 +1164,8 @@ data.factory("Style",function() {
                   "Colour_Max": 35,
                   "ABV_Min": 2.8,
                   "ABV_Max": 4.1,
-                  "link": "http://www.bjcp.org/2008styles/style11.php#1b"
+                  "link": "http://www.bjcp.org/2008styles/style11.php#1b",
+                  "related": "http://www.ratebeer.com/beerstyles/brown-ale/15/"
                 },
                 {
                   "name": "Special/Best/Premium Bitter",
@@ -1123,7 +1179,8 @@ data.factory("Style",function() {
                   "Colour_Max": 16,
                   "ABV_Min": 3.8,
                   "ABV_Max": 4.6,
-                  "link": "http://www.bjcp.org/2008styles/style08.php#1b"
+                  "link": "http://www.bjcp.org/2008styles/style08.php#1b",
+                  "related": "http://www.ratebeer.com/beerstyles/premium-bitter-esb/101/"
                 },
                 {
                   "name": "Specialty Beer",
@@ -1137,7 +1194,8 @@ data.factory("Style",function() {
                   "Colour_Max": 50,
                   "ABV_Min": 2.5,
                   "ABV_Max": 12.0,
-                  "link": "http://www.bjcp.org/2008styles/style23.php#1a"
+                  "link": "http://www.bjcp.org/2008styles/style23.php#1a",
+                  "related": "http://www.ratebeer.com/beerstyles/specialty-grain/106/"
                 },
                 {
                   "name": "Spice, Herb, or Vegetable Beer",
@@ -1165,7 +1223,8 @@ data.factory("Style",function() {
                   "Colour_Max": 4,
                   "ABV_Min": 4.2,
                   "ABV_Max": 5.3,
-                  "link": "http://www.bjcp.org/2008styles/style01.php#1b"
+                  "link": "http://www.bjcp.org/2008styles/style01.php#1b",
+                  "related": "http://www.ratebeer.com/beerstyles/pale-lager/3/"
                 },
                 {
                   "name": "Standard/Ordinary Bitter",
@@ -1179,7 +1238,8 @@ data.factory("Style",function() {
                   "Colour_Max": 14,
                   "ABV_Min": 3.2,
                   "ABV_Max": 3.8,
-                  "link": "http://www.bjcp.org/2008styles/style08.php#1a"
+                  "link": "http://www.bjcp.org/2008styles/style08.php#1a",
+                  "related": "http://www.ratebeer.com/beerstyles/bitter/20/"
                 },
                 {
                   "name": "Straight (Unblended) Lambic",
@@ -1193,7 +1253,8 @@ data.factory("Style",function() {
                   "Colour_Max": 7,
                   "ABV_Min": 5.0,
                   "ABV_Max": 6.5,
-                  "link": "http://www.bjcp.org/2008styles/style17.php#1d"
+                  "link": "http://www.bjcp.org/2008styles/style17.php#1d",
+                  "related": "http://www.ratebeer.com/beerstyles/lambic-style--unblended/78/"
                 },
                 {
                   "name": "Strong Scotch Ale",
@@ -1207,7 +1268,8 @@ data.factory("Style",function() {
                   "Colour_Max": 25,
                   "ABV_Min": 6.5,
                   "ABV_Max": 10.0,
-                  "link": "http://www.bjcp.org/2008styles/style09.php#1e"
+                  "link": "http://www.bjcp.org/2008styles/style09.php#1e",
+                  "related": "http://www.ratebeer.com/beerstyles/scotch-ale/102/"
                 },
                 {
                   "name": "Sweet Stout",
@@ -1221,7 +1283,8 @@ data.factory("Style",function() {
                   "Colour_Max": 40,
                   "ABV_Min": 4.0,
                   "ABV_Max": 6.0,
-                  "link": "http://www.bjcp.org/2008styles/style13.php#1b"
+                  "link": "http://www.bjcp.org/2008styles/style13.php#1b",
+                  "related": "http://www.ratebeer.com/beerstyles/sweet-stout/23/"
                 },
                 {
                   "name": "Traditional Bock",
@@ -1235,7 +1298,8 @@ data.factory("Style",function() {
                   "Colour_Max": 22,
                   "ABV_Min": 6.3,
                   "ABV_Max": 7.2,
-                  "link": "http://www.bjcp.org/2008styles/style05.php#1b"
+                  "link": "http://www.bjcp.org/2008styles/style05.php#1b",
+                  "related": "http://www.ratebeer.com/beerstyles/dunkler-bock/9/"
                 },
                 {
                   "name": "Vienna Lager",
@@ -1249,7 +1313,8 @@ data.factory("Style",function() {
                   "Colour_Max": 16,
                   "ABV_Min": 4.5,
                   "ABV_Max": 5.5,
-                  "link": "http://www.bjcp.org/2008styles/style03.php#1a"
+                  "link": "http://www.bjcp.org/2008styles/style03.php#1a",
+                  "related": "http://www.ratebeer.com/beerstyles/amber-lager-vienna/36/"
                 },
                 {
                   "name": "Weizen/Weissbier",
@@ -1263,7 +1328,8 @@ data.factory("Style",function() {
                   "Colour_Max": 8,
                   "ABV_Min": 4.3,
                   "ABV_Max": 5.6,
-                  "link": "http://www.bjcp.org/2008styles/style15.php#1a"
+                  "link": "http://www.bjcp.org/2008styles/style15.php#1a",
+                  "related": "http://www.ratebeer.com/beerstyles/german-hefeweizen/7/"
                 },
                 {
                   "name": "Weizenbock",
@@ -1277,7 +1343,8 @@ data.factory("Style",function() {
                   "Colour_Max": 25,
                   "ABV_Min": 6.5,
                   "ABV_Max": 8.0,
-                  "link": "http://www.bjcp.org/2008styles/style15.php#1c"
+                  "link": "http://www.bjcp.org/2008styles/style15.php#1c",
+                  "related": "http://www.ratebeer.com/beerstyles/weizen-bock/25/"
                 },
                 {
                   "name": "Witbier",
@@ -1291,7 +1358,8 @@ data.factory("Style",function() {
                   "Colour_Max": 4,
                   "ABV_Min": 4.5,
                   "ABV_Max": 5.5,
-                  "link": "http://www.bjcp.org/2008styles/style16.php#1a"
+                  "link": "http://www.bjcp.org/2008styles/style16.php#1a",
+                  "related":"http://www.ratebeer.com/beerstyles/belgian-white-witbier/48/"
                 },
                 {
                   "name": "Wood-Aged Beer",
