@@ -340,6 +340,100 @@
         $scope.gravityBarValue = function(grav,max) {
             return BrewHelper.toPpg(grav) / max * 100;
         }
+       
+        $scope.handleFileSelect = function(file) {
+            var files = file.files; // FileList object
         
+            // files is a FileList of File objects. List some properties.
+            for (var i = 0, f; f = files[i]; i++) {
+                var reader = new FileReader();
+                reader.onload = (function(theFile) {
+                    return function(e) {
+                    
+                        var xotree = new XML.ObjTree();
+                        var xml = e.target.result;
+                        var tree = xotree.parseXML( xml );       	// source to tree
+                        
+                        //var scope = angular.element(document.getElementById('RecipeDetailCtrl')).scope();
+                        var scope = $scope;
+                        scope.recipe = tree.RECIPES.RECIPE;
+                        scope.recipe.CALCCOLOUR = parseFloat(scope.recipe.CALCCOLOUR);
+                        scope.recipe.BATCH_SIZE = parseFloat(scope.recipe.BATCH_SIZE);
+                        scope.recipe.EFFICIENCY = parseFloat(scope.recipe.EFFICIENCY);
+                        scope.recipe.OG = parseFloat(scope.recipe.OG);
+                        scope.recipe.FG = parseFloat(scope.recipe.FG);
+                        scope.recipe.CALCIBU = parseFloat(scope.recipe.CALCIBU);
+                        scope.recipe.BOIL_SIZE = parseFloat(scope.recipe.BOIL_SIZE);
+                        scope.recipe.BOIL_TIME = parseFloat(scope.recipe.BOIL_TIME);
+                        scope.recipe.PRIMARY_TEMP = parseFloat(scope.recipe.PRIMARY_TEMP);
+                        
+                        scope.recipe.totalAmount = 0;
+                        function convertFerm(ferm) {
+                            ferm.AMOUNT = parseFloat(ferm.AMOUNT);
+                            ferm.COLOR = parseFloat(ferm.COLOR);
+                            ferm.POTENTIAL = parseFloat(ferm.POTENTIAL);
+                            ferm.PERCENTAGE = parseFloat(ferm.PERCENTAGE);
+                            scope.recipe.totalAmount += ferm.AMOUNT;
+                        }
+                        if (scope.recipe.FERMENTABLES.FERMENTABLE instanceof Array) {
+                            angular.forEach(scope.recipe.FERMENTABLES.FERMENTABLE,convertFerm); 
+                        } else {
+                            convertFerm(scope.recipe.FERMENTABLES.FERMENTABLE);
+                            scope.recipe.FERMENTABLES.FERMENTABLE = [scope.recipe.FERMENTABLES.FERMENTABLE];
+                        }
+                        
+                        var times = [0,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90,100,110,120];
+                        
+                        function convertHop(hop) {
+                            hop.ALPHA = parseFloat(hop.ALPHA);
+                            hop.AMOUNT = parseFloat(hop.AMOUNT);
+                            hop.TIME = parseFloat(hop.TIME);
+                            if (times.indexOf(hop.TIME) == -1) {
+                                var t = times[0];
+                                var i = 0;
+                                while ( t < hop.TIME) {
+                                    t = times [++i];
+                                }
+                                hop.TIME = times[i-1];
+                            }
+                            scope.recipe.totalHop += hop.AMOUNT;
+                        }
+                        scope.recipe.totalHop = 0;
+                        if (scope.recipe.HOPS.HOP instanceof Array) {
+                            angular.forEach(scope.recipe.HOPS.HOP,convertHop);
+                        } else {
+                            convertHop(scope.recipe.HOPS.HOP);
+                            scope.recipe.HOPS.HOP = [scope.recipe.HOPS.HOP];
+                        }
+                        
+                        function convertMisc(misc) {
+                            misc.TIME = parseFloat(misc.TIME);
+                            misc.AMOUNT = parseFloat(misc.AMOUNT);
+                        }
+                        
+                        if ( scope.recipe.MISCS && scope.recipe.MISCS.MISC ) {
+                            if ( scope.recipe.MISCS.MISC instanceof Array ) {
+                                angular.forEach(scope.recipe.MISCS.MISC,convertMisc);
+                            } else {
+                                convertMisc(scope.recipe.MISCS.MISC);
+                                scope.recipe.MISCS.MISC = [scope.recipe.MISCS.MISC];
+                            }
+                        } else {
+                            scope.recipe.MISCS = {
+                                MISC: []
+                            };
+                        }
+                        
+                        scope.recipe.YEASTS.YEAST = [scope.recipe.YEASTS.YEAST];
+                        scope.recipe.YEASTS.YEAST[0].ATTENUATION = parseFloat(scope.recipe.YEASTS.YEAST[0].ATTENUATION);
+                        scope.recipe.GrainCalcMethod = '2';
+                        scope.changeYeast();
+                        scope.recipe.date = new Date();
+                        scope.$apply();
+                    };
+                })(f);
+                reader.readAsText(f);
+            }
+        };
     });
 })();

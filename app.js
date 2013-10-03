@@ -6,6 +6,7 @@
 var express = require('express');
 //var routes = require('./routes');
 var user = require('./routes/user');
+var model = require('./domain/model.js');
 var http = require('http');
 var path = require('path');
 var mongoose = require('mongoose');
@@ -43,20 +44,25 @@ function filter (req,res,next){
     console.log("checking session");
     var s = req.session;
     console.log("user: " + s.user_id);
+    console.log("google_id: " + req.query.google_id);
     if (s.user_id ) {
         console.log("sigue");
         next();
-    } else if ( req.params.google_id ) {
-        var r = {};
-        r.send = function(user) {
-            if ( !user ) {
-                console.log("null");
-                res.send(500,{error:'Hubo un problema con la operacion, presion F5 y reintente'});
-            } else {
+    } else if ( req.query.google_id ) {
+        model.User.findOne({'google_id':req.query.google_id}).exec(function(err,user) {
+            console.log(user);
+            if (user) {
+                var s = req.session;
+                console.log("Set User_Id in session: " + user._id);
+                //console.log(req);
+                s.user_id = user._id;
+                s.user_name = user.name;
                 next();
+            } else {
+                console.log("null");
+                res.send(500,{error:'Hubo un problema con la operacion, presion F5 y reintente'});              
             }
-        };
-        user.getByGoogleId(req,r)
+        });   
     } else {
         console.log("null");
         res.send(500,{error:'Hubo un problema con la operacion, presion F5 y reintente'});

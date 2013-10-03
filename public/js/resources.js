@@ -2,8 +2,11 @@
     
     var res = angular.module('resources',[]);
     
-    res.factory('User',function($resource) {
-        return $resource('user/:type:id',{}, {
+    res.factory('User',function($resource,$rootScope) {
+        var params = function() {
+            return $rootScope.user ? $rootScope.user.google_id : null;
+        };
+        return $resource('user/:type:id',{google_id:params}, {
             add: { method: 'POST', params: {}},
             getByGoogleId: {method: 'GET', params: {type:'google_'}, isArray:false},
             addToFavorites: {method: 'PUT', params: {type:'favorite_add'}},
@@ -11,8 +14,11 @@
         });
     });
     
-    res.factory('Recipe',function($resource) {
-        return $resource('recipe/:operation:id',{}, {
+    res.factory('Recipe',function($resource,$rootScope) {
+        var params = function() {
+            return $rootScope.user ? $rootScope.user.google_id : null;
+        };
+        return $resource('recipe/:operation:id',{google_id:params}, {
             findPublic: {method:'GET',params: {operation:'public'}, isArray:true },
             addComment: {
                 method:'PUT',
