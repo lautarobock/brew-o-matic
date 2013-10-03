@@ -100,7 +100,8 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     clonedBy: [{_id:Schema.Types.ObjectId,name:String}],
     comments:[{
         text: String,
-        _id: Schema.Types.ObjectId,
+        _id: String,
+        user_id: Schema.Types.ObjectId,
         name: String,
         date: Date
     }]

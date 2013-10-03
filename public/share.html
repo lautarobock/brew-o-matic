@@ -13,6 +13,7 @@
     <script src="js/helper.js"></script>
     <script src="js/resources.js"></script>
     <script src="js/LoginController.js"></script>
+    <script src="js/CommentController.js"></script>
     <script src="js/Data.js"></script>
     <script src="js/ObjTree.js"></script>
   </head>
@@ -244,13 +245,16 @@
                             </div>
                         </div>
                     </div>
+                    
                 </div>
                 <div class="col-md-2" >
                   <ng-include src="'partial/recipe-detail-indicators.html'"></ng-include>
                 </div>
             </div>
+            
         </div>
       </div>
+      <ng-include src="'partial/recipe-comments.html'"></ng-include>
     </div>
     <script type="text/javascript">
         (function() {

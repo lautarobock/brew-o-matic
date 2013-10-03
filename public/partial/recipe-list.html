@@ -37,7 +37,27 @@
                 <td>
                     <a href="#/recipe/edit/{{encodeName(recipe._id)}}" type="button" class="btn btn-primary btn-xs">editar</a>
                     <a href="#/recipe/clone/{{encodeName(recipe._id)}}" type="button" class="btn btn-default btn-xs">clonar</a>
-                    <button type="button" class="close" aria-hidden="true" ng-click="removeRecipe(recipe._id)">&times;</button>
+                    <!--<button type="button" class="close" aria-hidden="true" ng-click="removeRecipe(recipe._id)">&times;</button>-->
+                    <button data-target="#confirmation{{recipe._id}}" data-toggle="modal"  type="button" class="close" aria-hidden="true">&times;</button>
+                    <div class="modal fade" id="confirmation{{recipe._id}}" role="dialog" aria-labelledby="#label">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="label">Confirmacion</h4>
+                                </div>
+                                <div class="modal-body">
+                                    ¿Esta seguro que desea eliminar la receta?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn" data-dismiss="modal">No</a>
+                                    <button type="button" ng-click="removeRecipe(recipe._id)" class="btn btn-primary" >
+                                        Si
+                                    </button >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </td>
             </tr>
           </tbody>

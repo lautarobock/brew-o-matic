@@ -341,12 +341,5 @@
             return BrewHelper.toPpg(grav) / max * 100;
         }
         
-        $scope.addComment = function(comment) {
-            Recipe.addComment({
-                _id: $scope.recipe._id,
-                text: comment
-            });
-        };
-        
     });
 })();

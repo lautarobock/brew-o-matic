@@ -26,7 +26,13 @@
         }
     });
     
-    index.controller("RecipeListCtrl", function ($scope,$rootScope,Recipe,User,$location) {
+    index.controller("RecipeListCtrl", function (
+                $scope,
+                $rootScope,
+                Recipe,
+                User,
+                $location,
+                $timeout) {
 
         $scope.publishedCount = 10;
     
@@ -47,7 +53,10 @@
         
         $scope.removeRecipe = function(_id) {
             Recipe.remove({id:_id}, function() {
-                $scope.recipes = Recipe.query();
+                $('#confirmation' + _id).modal('hide');
+                $timeout(function() {
+                    $scope.recipes = Recipe.query();
+                },500);
             });
             
         };

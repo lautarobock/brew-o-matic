@@ -142,22 +142,7 @@
                 {{notification.text}}
             </div>
         </div>
-        <div class="panel panel-default" ng-show="recipe._id">
-            <div class="panel-heading"><strong>Comentarios</strong></div>
-            <div class="panel-body" >
-                <div class="row container">
-                    <label for="text">Comentario</label>
-                    <textarea rows="5" class="form-control" id="text" placeholder="Escriba su comentario" ng-model="comment"/>
-                </div>
-                <button ng-click="addComment(comment)" style="margin-top: 1em;" type="button" class="btn btn-primary pull-right">Aceptar</button>
-                <div class="row container">
-                    <div class="row container" ng-repeat="comment in recipe.comments">
-                        <label for="text_{{comment.name}}">{{comment.name}} - {{comment.date | date:'short'}}</label>
-                        <div class="form-control" id="text_{{comment.name}}" ng-bind="comment.text"/>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <ng-include src="'partial/recipe-comments.html'"></ng-include>
         <ng-include src="'partial/recipe-detail-import.html'"></ng-include>
     </div>
     <div class="col-md-2" >

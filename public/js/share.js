@@ -1,7 +1,7 @@
 (function() {
 
 
-    var share = angular.module('share', ['ngResource','data','resources','helper','login']);
+    var share = angular.module('share', ['ngResource','data','resources','helper','login','comments']);
 
     share.controller("ShareController", function($scope,Recipe,$location,BrewHelper,HopUse,HopForm,User,$rootScope) {
         

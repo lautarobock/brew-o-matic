@@ -1,5 +1,5 @@
 var model = require('../domain/model.js');
-
+var Arrays = require('../public/js/util/util.js').Arrays;
 
 exports.findPublic = function (req, res) {
     model.Recipe.find({isPublic:true}).where('owner').populate('owner').ne(req.session.user_id).sort('-date').limit(req.query.limit).exec(function(err,results) {
@@ -31,12 +31,23 @@ function generateId(name,user_id) {
 }
 
 exports.addComment = function(req,res) {
-    model.Recipe.findOne({_id:req.body._id}).exec(function(err,recipe) {
+    model.Recipe.findOne({_id:req.body.recipe_id}).exec(function(err,recipe) {
         recipe.comments.push({
-            _id: req.session.user_id,
+            _id: req.session.user_id + "_" + new Date().getTime(),
+            user_id: req.session.user_id,
             name: req.session.user_name,
             text: req.body.text,
             date: new Date()
+        });
+        recipe.save();
+        res.send(recipe.comments);
+    });
+};
+
+exports.deleteComment = function(req,res) {
+    model.Recipe.findOne({_id:req.body.recipe_id}).exec(function(err,recipe) {
+        Arrays.remove(recipe.comments,req.body.comment,function(comment,iter){
+            return comment._id == iter._id ? 0 : -1;
         });
         recipe.save();
         res.send(recipe.comments);

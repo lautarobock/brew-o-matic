@@ -1,0 +1,38 @@
+<div class="panel panel-default" ng-show="recipe._id" ng-controller="CommentController">
+    <div class="panel-heading"><strong>Comentarios</strong></div>
+    <div class="panel-body" >
+        <div class="row container" ng-show="user">
+            <label for="text">Comentario</label>
+            <textarea ng-blur="blur(comment)" ng-focus="focus(comment)" rows="{{rows}}" class="form-control" id="text" placeholder="Escriba su comentario" ng-model="comment"/>
+            <button ng-click="addComment(comment)" style="margin-top: 1em;" type="button" class="btn btn-primary">Aceptar</button>
+        </div>
+        <ul class="list-group" style="margin-top: 1em;">
+            <li class="list-group-item" ng-repeat="comment in recipe.comments | orderBy:'-date'">
+                <label for="text_{{comment.name}}">{{comment.name}}</label> -
+                <span title="{{comment.date|date:'dd/MM/yyyy HH:mm'}}">{{formatDate(comment.date)}}</span>
+                <!--<button ng-click="removeComment(comment)" ng-show="user._id == comment.user_id" type="button" class="close" aria-hidden="true">&times;</button>                -->
+                <button ng-show="user._id == comment.user_id" type="button" data-target="#confirmation" data-toggle="modal" class="close" aria-hidden="true">&times;</button>
+                <pre id="text_{{comment.name}}" ng-bind="comment.text"/>
+                <div class="modal fade" id="confirmation" role="dialog" aria-labelledby="#label">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="label">Confirmacion</h4>
+                            </div>
+                            <div class="modal-body">
+                                ¿Esta seguro que desea eliminar el comentario?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn" data-dismiss="modal">No</a>
+                                <button type="button" ng-click="removeComment(comment)" class="btn btn-primary" >
+                                    Si
+                                </button >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
