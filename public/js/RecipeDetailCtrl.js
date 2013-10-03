@@ -72,6 +72,30 @@
             $scope.changeAmount();
         };
 
+        $scope.$watch("recipe.BATCH_SIZE", function(newValue,oldValue) {
+            if ( !oldValue || !$scope.recipe || !$scope.recipe.FERMENTABLES ) return;
+            
+            if ( !newValue || newValue == 0) {
+                newValue = 1;
+                $scope.recipe.BATCH_SIZE = 1;
+            }
+            
+            var cohef = newValue / oldValue;
+            
+            if ( !$scope.recipe.fixIngredients || $scope.recipe.fixIngredients == '0' ) {
+                var newTotalAmount = $scope.recipe.totalAmount * cohef;
+                //Ajusto los ingredientes antes de re-hacer los calculos
+                angular.forEach($scope.recipe.FERMENTABLES.FERMENTABLE,function(f) {
+                    f.AMOUNT = BrewHelper.round((f.PERCENTAGE/100)*newTotalAmount,1000); ;
+                }); 
+            }
+            $scope.changeAmount();
+        });
+       
+        
+        /**
+         * si fijo la OG, al aumentar los litros debo aumentar materiales en la misma proporcion.
+         */
         $scope.changeAmount = function() {
             var amount = 0;
             angular.forEach($scope.recipe.FERMENTABLES.FERMENTABLE,function(f) {

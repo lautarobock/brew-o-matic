@@ -2,19 +2,27 @@
     <div class="panel-heading"><strong>Granos</strong></div>
     <div class="panel-body">
         <div class="form-inline pull-right" role="form">
-            <strong>Modo:</strong>
-            <label class="radio-inline">
-                <input type="radio"
-                        ng-model="recipe.GrainCalcMethod"
-                        name="GrainCalcMethod"
-                        value="0" disabled> %
-            </label>
-            <label class="radio-inline">
-                <input type="radio"
-                        ng-model="recipe.GrainCalcMethod"
-                        name="GrainCalcMethod"
-                        value="2" disabled> Kg
-            </label>
+            <!--<strong>Modo:</strong>-->
+            <!--<label class="radio-inline">-->
+            <!--    <input type="radio"-->
+            <!--            ng-model="recipe.GrainCalcMethod"-->
+            <!--            name="GrainCalcMethod"-->
+            <!--            value="0" disabled> %-->
+            <!--</label>-->
+            <!--<label class="radio-inline">-->
+            <!--    <input type="radio"-->
+            <!--            ng-model="recipe.GrainCalcMethod"-->
+            <!--            name="GrainCalcMethod"-->
+            <!--            value="2" disabled> Kg-->
+            <!--</label>-->
+            <select class="form-control input-sm" ng-model="recipe.fixIngredients">
+                <option ng-selected="recipe.fixIngredients=='1'" value="1">
+                    Fijar Ingredientes
+                </option>
+                <option ng-selected="!recipe.fixIngredients || recipe.fixIngredients=='0'" value="0">
+                    Fijar OG
+                </option>
+            </select>
         </div>
     </div>
     <div style="margin: 0 2em;" class="alert alert-info" ng-hide="recipe.FERMENTABLES.FERMENTABLE.length != 0">

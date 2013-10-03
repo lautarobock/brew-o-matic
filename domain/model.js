@@ -104,6 +104,7 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
         user_id: Schema.Types.ObjectId,
         name: String,
         date: Date
-    }]
+    }],
+    fixIngredients: String
     
 },{ _id: false }));
