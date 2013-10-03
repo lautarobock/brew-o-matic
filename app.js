@@ -46,9 +46,20 @@ function filter (req,res,next){
     if (s.user_id ) {
         console.log("sigue");
         next();
+    } else if ( req.params.google_id ) {
+        var r = {};
+        r.send = function(user) {
+            if ( !user ) {
+                console.log("null");
+                res.send(500,{error:'Hubo un problema con la operacion, presion F5 y reintente'});
+            } else {
+                next();
+            }
+        };
+        user.getByGoogleId(req,r)
     } else {
         console.log("null");
-        res.send(null);
+        res.send(500,{error:'Hubo un problema con la operacion, presion F5 y reintente'});
     }
 }
 
@@ -59,14 +70,14 @@ var recipe = require("./routes/recipe.js");
 //app.get('/', routes.index);
 app.get('/user/google_:google_id', user.getByGoogleId);
 app.post('/user', user.add);
-app.put('/user/favorite_add',user.addToFavorites,filter)
-app.put('/user/favorite_drop',user.removeFromFavorites,filter)
-app.get('/recipe/public',recipe.findPublic,filter)
-app.put('/recipe/comment',recipe.addComment,filter)
-app.get('/recipe',recipe.findAll,filter)
+app.put('/user/favorite_add',filter,user.addToFavorites)
+app.put('/user/favorite_drop',filter,user.removeFromFavorites)
+app.get('/recipe/public',filter,recipe.findPublic)
+app.put('/recipe/comment',filter,recipe.addComment)
+app.get('/recipe',filter,recipe.findAll)
 app.get('/recipe/:id',recipe.get)
-app.post('/recipe',recipe.save,filter)
-app.delete('/recipe/:id',recipe.remove,filter)
+app.post('/recipe',filter,recipe.save)
+app.delete('/recipe/:id',filter,recipe.remove)
 
 //app.get('/person/fb:id',person.findByFb);
 //app.put('/person/fb:id',person.updateByFb);

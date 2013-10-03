@@ -283,7 +283,13 @@
                         text:'Ya puedes acceder a esta receta desde cualquier lugar!'
                     });
                     $location.path('/recipe/edit/' + saved._id) 
-                });                        
+                },function(error) {
+                    $scope.notifications.push({
+                        type:'danger',
+                        title:'Error!',
+                        text:error.data.error
+                    });
+                });
             }
         };
         

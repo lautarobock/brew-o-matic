@@ -71,6 +71,7 @@ exports.save = function(req, res) {
     } else {
         var id = req.body._id;
         delete req.body._id;
+        req.body.owner = req.body.owner._id;
         model.Recipe.findByIdAndUpdate(id,req.body,callback);
     }
     
