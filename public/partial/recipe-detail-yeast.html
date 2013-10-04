@@ -1,0 +1,25 @@
+<div class="panel panel-default">
+    <div class="panel-heading"><strong>Levadura</strong></div>
+    <table class="table table-condensed table-hover" style="margin-top: 1em;margin-bottom: 2em;">
+      <thead>
+        <tr>
+          <th style="width:90%">Levadura</th>
+          <th style="width:10%">Atenuacion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="yeast in recipe.YEASTS.YEAST">
+            <!--<td><input class="form-control input-sm" type="text" ng-model="yeast.NAME"/></td>-->
+            <td>
+                <input ng-change="onChangeYeast(yeast)" class="form-control input-sm" type="text" ng-model="yeast.NAME" list="yeastNames" placeholder="Buscar Levaduras"/>
+                <datalist id="yeastNames">
+                    <option ng-repeat="yeast in yeasts" value="{{yeast.name}}">
+                        {{yeast.name}}
+                    </option>
+                </datalist>
+            </td>
+            <td><input ng-change="changeYeast()" class="form-control input-sm" type="number" ng-model="yeast.ATTENUATION"/></td>
+        </tr>
+      </tbody>
+    </table>
+</div>

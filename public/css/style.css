@@ -5,3 +5,11 @@ body {
 a {
   color: #00b7ff;
 }
+
+.gt-warning {
+    background: yellow !important
+}
+
+.gt-calculated  {
+    background: #FFFFCC !important
+}

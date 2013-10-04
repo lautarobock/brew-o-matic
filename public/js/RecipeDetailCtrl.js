@@ -1,6 +1,29 @@
 (function() {
     var index = angular.module('index');
 
+    index.controller("RecipeTabCtrl",function($scope) {
+        $scope.tabs = {
+            main: {
+                title: 'Recipe',
+                template: 'recipe-detail-main'
+            },
+            mash: {
+                title: 'Macerado',
+                template: 'recipe-mash'
+            }};
+        
+        $scope.selectedTab = 'main';
+        
+        $scope.getActiveClass = function(tab) {
+            return $scope.selectedTab === tab ? 'active':'';
+        };
+        
+        $scope.changeTab = function(tab) {
+            $scope.selectedTab=tab;
+            $scope.$parent.notifications = [];
+        };
+    });
+    
     index.controller("RecipeDetailCtrl",
                      function (
                                $scope,
@@ -27,8 +50,6 @@
             title: 'Recipe'
         }];
 
-
-
         $scope.grains = Grain.query();
 
         $scope.hops = Hop.query();
@@ -47,6 +68,12 @@
         
         $scope.miscUses = MiscUse.query();
 
+        //Helper functions
+        
+        $scope.round1 = function(value) {
+            return BrewHelper.round(value,10);
+        };
+        
         $scope.removeFermentable = function(fermentable) {
             var index = $scope.recipe["FERMENTABLES"]["FERMENTABLE"].indexOf(fermentable);
             $scope.recipe["FERMENTABLES"]["FERMENTABLE"].splice(index, 1);
@@ -345,10 +372,12 @@
                     $scope.recipe.isPublic = false;
                 }
                 $scope.changeYeast();
+                //$scope.$emit("recipeLoaded");
             });
         } else {
             $scope.recipe = new Recipe({
                 "GrainCalcMethod": "2",
+                fixIngredients: "1",
                 date: new Date(),
                 totalAmount: 0,
                 totalHop: 0,
@@ -377,6 +406,14 @@
             });
             $scope.changeYeast();
         }
+        
+        $scope.tabLink = function(tab) {
+            var base = "#/recipe/edit/" + $scope.recipe._id;
+            if ( tab == 'mash') {
+                return base + "/mash";
+            }
+            return base;
+        };
         
         $scope.gravityBarValue = function(grav,max) {
             return BrewHelper.toPpg(grav) / max * 100;

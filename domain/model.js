@@ -70,6 +70,26 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
             AMOUNT: Number
         }]
     },
+    MASH: {
+        MASH_STEPS: {
+            MASH_STEP: [ {
+                NAME: String,
+                TYPE: String,
+                INFUSE_AMOUNT: String,
+                STEP_TIME: Number,
+                STEP_TEMP: Number,
+                DESCRIPTION: String,
+                WATER_GRAIN_RATIO: Number,
+                DECOCTION_AMT: Number
+                //Others data not used yet
+                //RAMP_TIME: Number,
+                //END_TEMP: Number,
+                //INFUSE_TEMP: Number,
+                //DISPLAY_STEP_TEMP: Number,
+                //DISPLAY_INFUSE_AMT: Number,
+            }]
+        }
+    },
     PRIMARY_TEMP: Number,
     BIAB: String,
     IBUCalcMethod: String,
@@ -94,6 +114,7 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     secondaryEnabled: String,
     keggingEnabled: String,
     serveEnabled: String,
+    //Start own properties
     isPublic: Boolean,
     cloneFrom: String,
     starredBy: [{_id:Schema.Types.ObjectId,name:String}],
@@ -105,6 +126,8 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
         name: String,
         date: Date
     }],
-    fixIngredients: String
+    fixIngredients: String,
+    mashTemp: Number,
+    lossMashTemp: Number
     
 },{ _id: false }));

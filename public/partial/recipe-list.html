@@ -1,14 +1,14 @@
 <div>
     <div class="panel panel-default" ng-show="recipes.length!=0">
-        <div class="panel-heading"><strong>Mis Recetas ({{recipes.length}})</strong></div>
+        <div class="panel-heading"><strong>Mis Recetas ({{(recipes | filter:searchCriteria).length}})</strong></div>
         <div class="panel-body" >
             <div class="input-group" style="width: 400px">
-                <input type="text"  class="form-control" ng-model="searchCriteria">
+                <input type="text"  class="form-control input-sm" ng-model="searchCriteria">
                 <span class="input-group-btn">
                     <!--<button class="btn btn-default" type="button">-->
                     <!--    <span class="glyphicon glyphicon-search"></span>-->
                     <!--</button>-->
-                    <button ng-click="searchCriteria=''" class="btn btn-default" type="button">
+                    <button ng-click="searchCriteria=''" class="btn btn-default btn-sm" type="button">
                         <span class="glyphicon glyphicon-remove"></span>
                     </button>
                 </span>
@@ -150,7 +150,17 @@
 
 <div>
     <div class="panel panel-default" ng-show="published.length!=0">
-        <div class="panel-heading"><strong>Ultimas Recetas Publicadas</strong></div>
+        <div class="panel-heading"><strong>Recetas Publicadas ({{(published | filter:publicSearchCriteria).length}})</strong></div>
+        <div class="panel-body" >
+            <div class="input-group" style="width: 400px">
+                <input type="text"  class="form-control input-sm" ng-model="publicSearchCriteria">
+                <span class="input-group-btn">
+                    <button ng-click="publicSearchCriteria=''" class="btn btn-default btn-sm" type="button">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
         <table class="table table-striped table-hover">
           <thead>
             <tr>
@@ -169,7 +179,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="recipe in published">
+            <tr ng-repeat="recipe in published | filter:publicSearchCriteria">
                 <td>
                     <a ng-hide="user.favorites.indexOf(recipe._id) != -1" href="#/recipe" type="button" class="glyphicon glyphicon-star-empty" ng-click="addFavorites(recipe)"></a>
                     <a ng-show="user.favorites.indexOf(recipe._id) != -1" href="#/recipe" type="button" class="glyphicon glyphicon-star" ng-click="removeFavorites(recipe)"></a>

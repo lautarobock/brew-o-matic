@@ -1,0 +1,108 @@
+<div ng-controller="RecipeMashCtrl">
+    <div class="col-md-10">
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong>Empaste</strong></div>
+            <div class="panel-body" >
+                <div class="row">
+                    <div class="col-lg-2">
+                        <label for="batch_size">Batch</label>
+                        <span class="form-control gt-calculated" id="batch_size" >
+                            {{recipe.BATCH_SIZE}} Lts
+                        </span>
+                    </div>
+                    <div class="col-lg-2">
+                      <label for="OG">OG</label>
+                      <span class="form-control gt-calculated" id="OG" ng-bind="recipe.OG" />
+                    </div>
+                    <div class="col-lg-2">
+                        <label for="totalWater">Agua total</label>
+                        <span class="form-control gt-calculated" id="totalWater" >
+                            <!--{{recipe.StrikeWater}} -->
+                            --
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2">
+                        <label for="totalGrain">Total Granos</label>
+                        <span class="form-control gt-calculated" id="totalGrain">
+                            {{recipe.totalAmount}} Kg
+                        </span>
+                    </div>
+                    <div class="col-lg-2">
+                        <label for="grainTemp">Temp granos (Cº)</label>
+                        <input type="number" class="form-control" id="grainTemp" ng-model="recipe.GrainTemp" />
+                    </div>
+                    <div class="col-lg-2">
+                        <label for="strikeWater">Agua inicial (L)</label>
+                        <input ng-change="recipe.WatertoGrainRatio=round1(recipe.StrikeWater/recipe.totalAmount)" type="number" class="form-control" id="strikeWater" step="0.1" ng-model="recipe.StrikeWater" />
+                    </div>
+                    <div class="col-lg-2">
+                        <label for="watertoGrainRatio">Empaste (L/Kg)</label>
+                        <input ng-change="recipe.StrikeWater=round1(recipe.WatertoGrainRatio*recipe.totalAmount)" type="number" class="form-control" id="watertoGrainRatio" step="0.1" ng-model="recipe.WatertoGrainRatio" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2">
+                        <label for="initMashTemp">T. Macerado</label>
+                        <input type="number" class="form-control" id="initMashTemp" ng-model="recipe.mashTemp" />
+                    </div>
+                    <div class="col-lg-2">
+                        <label for="grainTemp">T. Agua Inicial</label>
+                        <span class="form-control gt-calculated" id="grainTemp"  >
+                            {{((recipe.mashTemp-recipe.GrainTemp)*0.417/recipe.WatertoGrainRatio+recipe.mashTemp+recipe.lossMashTemp)|number:0}} ºC
+                        </span>
+                    </div>
+                    <div class="col-lg-2">
+                        <label for="lossMashTemp">Perdida (ºC)</label>
+                        <input type="number" class="form-control" id="lossMashTemp" ng-model="recipe.lossMashTemp" />
+                    </div>
+                    <div class="col-lg-2">
+                        <label for="mashVolume">Volumen Total</label>
+                        <span class="form-control gt-calculated" id="mashVolume" title="Valor Aproximado que ocupa la malta mas el agua en el macerador">
+                            {{recipe.StrikeWater+recipe.totalAmount|number:1}} Lts
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="panel-heading"><strong>Escalones</strong></div>-->
+            <!--<div class="panel-body" >-->
+            <!--    <ul class="list-group">-->
+            <!--        <li class="list-group-item">Mash-in</li>-->
+            <!--        <li class="list-group-item">Mash-out</li>-->
+            <!--    </ul>-->
+            <!--</div>-->
+            <div class="panel-heading"><strong>Lavado</strong></div>
+            <div class="panel-body" >
+                <div class="row">
+                    <div class="col-lg-2">
+                        <label for="spargeWater">Cantidad Agua</label>
+                        <span class="form-control gt-calculated" id="spargeWater" >
+                            0
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="overflow: hidden;margin-bottom: 1em;">
+            <div class="pull-left">
+                <a href="#/recipe/" type="button" class="btn btn-link glyphicon glyphicon-chevron-left"> Volver al listado</a>
+            </div>
+            <div class="pull-right">
+                <a href="#/recipe/" type="button" class="btn btn-default">Cancelar</a>
+                <button ng-click="save()" type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+        <div ng-repeat="notification in notifications">
+            <div class="alert alert-{{notification.type}} alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>{{notification.title}}</strong>
+                {{notification.text}}
+            </div>
+        </div>            
+    </div>
+    <div class="col-md-2" >
+        <ng-include src="'partial/recipe-detail-indicators.html'"></ng-include>
+        <ng-include src="'partial/recipe-detail-social.html'"></ng-include>
+    </div>
+</div>
