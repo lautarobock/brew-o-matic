@@ -146,6 +146,22 @@
         <ng-include src="'partial/recipe-detail-import.html'"></ng-include>
     </div>
     <div class="col-md-2" >
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong>Opciones</strong></div>
+            <div class="panel-body" >
+                <div style="margin: 0">
+                    <strong title="Ingredientes: Al modificar los litros ajusta la OG y no modifica la cantidad de ingredientes. OG: Al modificar los litros ajusta los ingredientes y no modifica la OG" >Dejar Fijo:</strong>
+                    <select class="form-control input-sm" ng-model="recipe.fixIngredients">
+                        <option ng-selected="recipe.fixIngredients=='1'" value="1">
+                            Ingredientes
+                        </option>
+                        <option ng-selected="!recipe.fixIngredients || recipe.fixIngredients=='0'" value="0">
+                            OG
+                        </option>
+                    </select>                        
+                </div>
+            </div>
+        </div>
         <ng-include src="'partial/recipe-detail-indicators.html'"></ng-include>
         <ng-include src="'partial/recipe-detail-social.html'"></ng-include>
     </div>

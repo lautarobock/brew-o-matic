@@ -1,7 +1,7 @@
 <div class="panel panel-default">
     <div class="panel-heading"><strong>Granos</strong></div>
-    <div class="panel-body">
-        <div class="form-inline pull-right" role="form">
+    <!--<div class="panel-body">-->
+        <!--<div class="form-inline pull-right" role="form">-->
             <!--<strong>Modo:</strong>-->
             <!--<label class="radio-inline">-->
             <!--    <input type="radio"-->
@@ -15,20 +15,12 @@
             <!--            name="GrainCalcMethod"-->
             <!--            value="2" disabled> Kg-->
             <!--</label>-->
-            <select class="form-control input-sm" ng-model="recipe.fixIngredients">
-                <option ng-selected="recipe.fixIngredients=='1'" value="1">
-                    Fijar Ingredientes
-                </option>
-                <option ng-selected="!recipe.fixIngredients || recipe.fixIngredients=='0'" value="0">
-                    Fijar OG
-                </option>
-            </select>
-        </div>
-    </div>
-    <div style="margin: 0 2em;" class="alert alert-info" ng-hide="recipe.FERMENTABLES.FERMENTABLE.length != 0">
+        <!--</div>-->
+    <!--</div>-->
+    <div style="margin: 2em 2em 0;" class="alert alert-info" ng-hide="recipe.FERMENTABLES.FERMENTABLE.length != 0">
         Aun no tiene ningun fermentable en la receta
     </div>
-    <table class="table table-condensed table-hover" ng-show="recipe.FERMENTABLES.FERMENTABLE.length != 0">
+    <table class="table table-condensed table-hover" ng-show="recipe.FERMENTABLES.FERMENTABLE.length != 0" style="margin-top: 1em;">
       <thead>
         <tr>
           <th style="width:50%">Grano/Fermentable</th>

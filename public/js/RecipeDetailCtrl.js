@@ -75,8 +75,6 @@
         $scope.batchSizeBlur = function() {
             if ( (!$scope.recipe.BATCH_SIZE || $scope.recipe.BATCH_SIZE == 0) && $scope.tempAmount ) {
                 $scope.recipe.BATCH_SIZE = $scope.tempAmount;
-
-                
             }
         };
 
@@ -90,14 +88,23 @@
                 return;
             }
             
-            var cohef = newValue / oldValue;
-            
             if ( !$scope.recipe.fixIngredients || $scope.recipe.fixIngredients == '0' ) {
-                var newTotalAmount = $scope.recipe.totalAmount * cohef;
+                var cohef = newValue / oldValue;
+                
                 //Ajusto los ingredientes antes de re-hacer los calculos
+                
+                //Maltas
+                var newTotalAmount = $scope.recipe.totalAmount * cohef;
                 angular.forEach($scope.recipe.FERMENTABLES.FERMENTABLE,function(f) {
                     f.AMOUNT = BrewHelper.round((f.PERCENTAGE/100)*newTotalAmount,1000); ;
-                }); 
+                });
+                
+                //Lupulos
+                var newTotalHop = $scope.recipe.totalHop * cohef;
+                angular.forEach($scope.recipe.HOPS.HOP,function(hop) {
+                    var percentage = $scope.hopPercentage(hop,$scope.recipe.totalHop);
+                    hop.AMOUNT = BrewHelper.round((percentage/100)*newTotalHop,10000); ;
+                });
             }
             $scope.changeAmount();
         });
