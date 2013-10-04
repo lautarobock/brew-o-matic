@@ -5,7 +5,12 @@
             <div class="input-group" style="width: 400px">
                 <input type="text"  class="form-control" ng-model="searchCriteria">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Buscar</button>
+                    <!--<button class="btn btn-default" type="button">-->
+                    <!--    <span class="glyphicon glyphicon-search"></span>-->
+                    <!--</button>-->
+                    <button ng-click="searchCriteria=''" class="btn btn-default" type="button">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
                 </span>
             </div>
         </div>
