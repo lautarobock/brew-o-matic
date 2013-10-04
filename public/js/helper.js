@@ -1,7 +1,30 @@
 (function() {
     
     var helper = angular.module("helper",[]);
-    
+
+    helper.directive('ngFocus', ['$parse', function($parse) {
+        return function(scope, element, attr) {
+            var fn = $parse(attr['ngFocus']);
+            element.bind('focus', function(event) {
+                scope.$apply(function() {
+                    fn(scope, {$event:event});
+                });
+            });
+        }
+    }]);
+
+    helper.directive('ngBlur', ['$parse', function($parse) {
+        return function(scope, element, attr) {
+            var fn = $parse(attr['ngBlur']);
+            element.bind('blur', function(event) {
+                scope.$apply(function() {
+                    fn(scope, {$event:event});
+                });
+            });
+        }
+    }]);
+
+
     helper.factory("BrewHelper",function() {
         return {
             toLbs: function(kg) {

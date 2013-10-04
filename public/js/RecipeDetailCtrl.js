@@ -72,12 +72,22 @@
             $scope.changeAmount();
         };
 
+        $scope.batchSizeBlur = function() {
+            if ( (!$scope.recipe.BATCH_SIZE || $scope.recipe.BATCH_SIZE == 0) && $scope.tempAmount ) {
+                $scope.recipe.BATCH_SIZE = $scope.tempAmount;
+
+                
+            }
+        };
+
+        $scope.tempAmount = null;
+
         $scope.$watch("recipe.BATCH_SIZE", function(newValue,oldValue) {
             if ( !oldValue || !$scope.recipe || !$scope.recipe.FERMENTABLES ) return;
             
             if ( !newValue || newValue == 0) {
-                newValue = 1;
-                $scope.recipe.BATCH_SIZE = 1;
+                $scope.tempAmount = oldValue;
+                return;
             }
             
             var cohef = newValue / oldValue;

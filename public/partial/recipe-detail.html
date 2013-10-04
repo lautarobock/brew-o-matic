@@ -9,7 +9,7 @@
                     </div>
                     <div class="col-lg-2">
                       <label for="batch_size">Batch (L)</label>
-                      <input type="number" min="1" class="form-control" id="batch_size" step="0.1" ng-model="recipe.BATCH_SIZE">
+                      <input ng-blur="batchSizeBlur()" type="number" min="1" class="form-control" id="batch_size" step="0.1" ng-model="recipe.BATCH_SIZE">
                     </div>
                     <div class="col-lg-2">
                       <label for="OG">OG</label>
