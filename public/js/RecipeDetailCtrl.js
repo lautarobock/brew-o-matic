@@ -167,6 +167,9 @@
             });
             $scope.recipe.OG = BrewHelper.toPotential(og);
 
+            //Calculo el agua para el macerado en
+            $scope.recipe.StrikeWater=BrewHelper.round($scope.recipe.WatertoGrainRatio*$scope.recipe.totalAmount,10);
+
             $scope.changeHop();
         };
 
@@ -402,7 +405,12 @@
                 },
                 MISCS: {
                     MISC: []
-                }
+                },
+                WatertoGrainRatio: 3,
+                mashTemp: 66,
+                lossMashTemp: 0,
+                GrainTemp: 25
+
             });
             $scope.changeYeast();
         }

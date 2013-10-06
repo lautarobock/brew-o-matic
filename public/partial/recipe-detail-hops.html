@@ -36,15 +36,15 @@
                 </select>
             </td>
             <td><input ng-change="changeHop()" class="form-control input-sm" type="number" step="0.001" ng-model="hop.AMOUNT" placeholder="Kg"/></td>
-            <td><input class="form-control input-sm" type="text" disabled value="{{hopGramsPerLiter(hop,recipe.BATCH_SIZE)|number:2}}"/></td>
-            <td><input class="form-control input-sm" type="text" value="{{hopPercentage(hop,recipe.totalHop)|number:2}}" disabled/></td>
+            <td><span class="form-control input-sm gt-calculated">{{hopGramsPerLiter(hop,recipe.BATCH_SIZE)|number:2}}</span></td>
+            <td><span class="form-control input-sm gt-calculated">{{hopPercentage(hop,recipe.totalHop)|number:2}}</span></td>
             <td>
                 <select ng-change="changeHop()" class="form-control input-sm" ng-model="hop.USE">
                     <option ng-repeat="use in hopUses">{{use.name}}</option>
                 </select>
             </td>
             <td><select class="form-control input-sm" ng-change="changeHop()" ng-model="hop.TIME" ng-options="a for a in [0,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90,100,110,120]"></select></td>
-            <td><input class="form-control input-sm" type="text" value="{{hopIBU(hop)|number:2}}" disabled/></td>
+            <td><span class="form-control input-sm gt-calculated">{{hopIBU(hop)|number:2}}</span></td>
             <td>
                 <button type="button" class="close" aria-hidden="true" ng-click="removeHop(hop)">&times;</button>
             </td>

@@ -3,32 +3,32 @@
         <div class="row">
             <div class="col-lg-4">
                 <label for="recipename">Nombre</label>
-                <input type="text" class="form-control" id="recipename" placeholder="Nombre" ng-model="recipe.NAME">
+                <input type="text" class="form-control input-sm" id="recipename" placeholder="Nombre" ng-model="recipe.NAME">
             </div>
             <div class="col-lg-2">
               <label for="batch_size">Batch (L)</label>
-              <input ng-blur="batchSizeBlur()" type="number" min="1" class="form-control" id="batch_size" step="0.1" ng-model="recipe.BATCH_SIZE">
+              <input ng-blur="batchSizeBlur()" type="number" min="1" class="form-control input-sm" id="batch_size" step="0.1" ng-model="recipe.BATCH_SIZE">
             </div>
             <div class="col-lg-2">
               <label for="OG">OG</label>
-              <input type="number" class="form-control" id="OG" ng-model="recipe.OG" step="0.001" disabled>
+              <span class="form-control input-sm gt-calculated" id="OG" ng-bind="recipe.OG" />
             </div>
             <div class="col-lg-2">
               <label for="ibu">IBU</label>
-              <input type="text" class="form-control" id="ibu" readonly="true" ng-model="recipe.CALCIBU">
+              <span class="form-control input-sm gt-calculated" id="ibu" ng-bind="recipe.CALCIBU">
             </div>
             <div class="col-lg-2">
               <label for="balance">Balance</label>
-              <input type="text" class="form-control" id="balance" readonly="true" ng-model="recipe.BV"/>
+              <span class="form-control input-sm gt-calculated" id="balance" ng-bind="recipe.BV"/>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-4">
                 <label for="style">Style</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" id="style" placeholder="Estilo" ng-model="recipe.STYLE.NAME" list="styleNames">
+                    <input type="text" class="form-control input-sm" id="style" placeholder="Estilo" ng-model="recipe.STYLE.NAME" list="styleNames">
                     <span class="input-group-btn">
-                        <a title="Link a la pagina del estilo en el BJCP" ng-disabled="!bjcpLink(recipe.STYLE.NAME)" class="btn btn-default" target="_blank" href="{{bjcpLink(recipe.STYLE.NAME)}}" ><span class="glyphicon glyphicon-link"></a>
+                        <a title="Link a la pagina del estilo en el BJCP" ng-disabled="!bjcpLink(recipe.STYLE.NAME)" class="btn btn-default btn-sm" target="_blank" href="{{bjcpLink(recipe.STYLE.NAME)}}" ><span class="glyphicon glyphicon-link"></a>
                     </span>
                     <datalist id="styleNames">
                         <option ng-repeat="style in styles" value="{{style.name}}">
@@ -40,19 +40,19 @@
             </div>
             <div class="col-lg-2">
               <label for="EFFICIENCY">Eficiencia</label>
-              <input ng-change="changeAmount()" type="number" class="form-control" id="EFFICIENCY" ng-model="recipe.EFFICIENCY">
+              <input ng-change="changeAmount()" type="number" class="form-control input-sm gt-preset" id="EFFICIENCY" ng-model="recipe.EFFICIENCY">
             </div>
             <div class="col-lg-2">
               <label for="fg">FG</label>
-              <input type="text" class="form-control" id="fg" readonly="true" ng-model="recipe.FG"/>
+              <span class="form-control input-sm gt-calculated" id="fg" ng-bind="recipe.FG"/>
             </div>
             <div class="col-lg-2">
               <label for="bugu">BU/GU</label>
-              <input type="text" class="form-control" id="bugu" readonly="true" value="{{calulateBUGU(recipe.CALCIBU,recipe.OG)|number:2}}"/>
+              <span class="form-control input-sm gt-calculated" id="bugu" >{{calulateBUGU(recipe.CALCIBU,recipe.OG)|number:2}}</span>
             </div>
             <div class="col-lg-2">
               <label for="abv">Alcohol (ABV) %</label>
-              <input type="text" class="form-control" id="abv" readonly="true" ng-model="recipe.ABV"/>
+              <span class="form-control input-sm gt-calculated" id="abv" ng-bind="recipe.ABV"/>
             </div>
         </div>
     </div>

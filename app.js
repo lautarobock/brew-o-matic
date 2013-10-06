@@ -33,7 +33,10 @@ if ('development' == app.get('env')) {
 }
 
 //Initialize Mongoose
-mongoose.connect('localhost', 'brew-o-matic');
+//mongoose.connect('localhost', 'brew-o-matic');
+//mongodb://af_brew-o-matic-lautaromail:mngn0k588adkt5er4h758tp1im@ds047948.mongolab.com:47948/af_brew-o-matic-lautaromail
+mongoose.connect(process.env.MONGOLAB_URI);
+
 
 //app.get('/user/google_*', function(req,res,next){
 //    

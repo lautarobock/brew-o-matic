@@ -4,25 +4,25 @@
         <div class="row">
             <div class="col-lg-6">
                 <label for="brewer">Cervecero</label>
-                <input type="text" class="form-control" id="brewer" placeholder="Cervecero" ng-model="recipe.BREWER">
+                <input type="text" class="form-control input-sm" id="brewer" placeholder="Cervecero" ng-model="recipe.BREWER">
             </div>
             <div class="col-lg-2">
               <label for="boil_size">Litros a Hervir (L)</label>
-              <input type="number" class="form-control" id="boil_size" step="0.1" ng-model="recipe.BOIL_SIZE">
+              <input type="number" class="form-control input-sm" id="boil_size" step="0.1" ng-model="recipe.BOIL_SIZE">
             </div>
             <div class="col-lg-2">
               <label for="boil_time">Hervido (min)</label>
-              <input type="number" class="form-control" id="boil_time" ng-model="recipe.BOIL_TIME">
+              <input type="number" class="form-control input-sm" id="boil_time" ng-model="recipe.BOIL_TIME">
             </div>
             <div class="col-lg-2">
               <label for="primary_temp">T. Primario</label>
-              <input type="number" class="form-control" id="primary_temp" step="0.1" ng-model="recipe.PRIMARY_TEMP">
+              <input type="number" class="form-control input-sm" id="primary_temp" step="0.1" ng-model="recipe.PRIMARY_TEMP">
             </div>
         </div>
         <div class="row" ng-show="recipe._id">
             <div class="col-lg-12">
                 <label for="link_ro">Link de solo lectura <a target="_blank" href="{{sharedUrl(recipe._id)}}"><span class="glyphicon glyphicon-link"></a></span></label>
-                <input class="form-control" value="{{sharedUrl(recipe._id)}}" disabled/>
+                <input class="form-control input-sm gt-calculated" value="{{sharedUrl(recipe._id)}}" disabled/>
             </div>
         </div>
         <div class="row">
