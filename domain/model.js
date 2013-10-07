@@ -102,6 +102,7 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     Colour: String,
     GrainTemp: Number,
     StrikeWater: Number,
+    SpargeDeadSpace: Number,
     GrainAbsorbtion: Number,
     WatertoGrainRatio: Number,
     SpargeTempDesired: Number,

@@ -1,0 +1,70 @@
+<div ng-controller="RecipeMashCtrl">
+    <div class="col-md-10">
+        <div class="panel panel-default">
+            <div class="panel-body" >
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label for="topUpWater">Agua Agregada</label>
+                        <input type="number" class="form-control input-sm" id="topUpWater" ng-model="recipe.TopUpWater" />
+                    </div>
+                    <div class="col-lg-4">
+                      <label for="beforeBoil">Litros antes de hervor</label>
+                      <span class="form-control input-sm gt-calculated" id="beforeBoil" ng-bind="'--'" />
+                    </div>
+                    <div class="col-lg-4">
+                        <label title="La densidad medida antes de enviar a hervor" for="ogBeforeBoil">Densidad Previa</label>
+                        <span class="form-control input-sm gt-calculated" id="ogBeforeBoil" ng-bind="'--'"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label for="BOIL_TIME_2">Tiempo Hervor</label>
+                        <input type="number" class="form-control input-sm" id="BOIL_TIME_2" ng-model="recipe.BOIL_TIME" />
+                    </div>
+                    <div class="col-lg-4">
+                        <label title="% por hora" for="percentEvap">Evaporacion %</label>
+                        <input type="number" class="form-control input-sm gt-preset" id="percentEvap" ng-model="recipe.PercentEvap" />
+                    </div>
+                    <div class="col-lg-4">
+                        <label for="afterBoil">Litros despues de hervor</label>
+                        <span class="form-control input-sm gt-calculated" id="afterBoil" ng-bind="'--'" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label for="trubChillerLosses">Perdida Turb y Enfirado</label>
+                        <input type="number" class="form-control input-sm gt-preset" id="trubChillerLosses" ng-model="recipe.TrubChillerLosses" />
+                    </div>
+                    <div class="col-lg-4">
+                        <label for="finalVolume">Volumen Final</label>
+                        <span class="form-control input-sm gt-calculated" id="finalVolume" ng-bind="'--'" />
+                    </div>
+                    <div class="col-lg-4">
+                        <label title="Perdida de 4%" for="afterCooling">Luego Enfriado (L)</label>
+                        <span class="form-control input-sm gt-calculated" id="afterCooling" ng-bind="'--'" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="overflow: hidden;margin-bottom: 1em;">
+            <div class="pull-left">
+                <a href="#/recipe/" type="button" class="btn btn-link glyphicon glyphicon-chevron-left"> Volver al listado</a>
+            </div>
+            <div class="pull-right">
+                <a href="#/recipe/" type="button" class="btn btn-default">Cancelar</a>
+                <button ng-click="save()" type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+        <div ng-repeat="notification in notifications">
+            <div class="alert alert-{{notification.type}} alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>{{notification.title}}</strong>
+                {{notification.text}}
+            </div>
+        </div>            
+    </div>
+    <div class="col-md-2" >
+        <ng-include src="'partial/recipe-detail-indicators.html'"></ng-include>
+        <ng-include src="'partial/recipe-detail-social.html'"></ng-include>
+    </div>
+</div>

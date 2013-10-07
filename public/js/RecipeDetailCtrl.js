@@ -2,6 +2,7 @@
     var index = angular.module('index');
 
     index.controller("RecipeTabCtrl",function($scope) {
+        $scope.sortTabs = ['main','mash','boil'];
         $scope.tabs = {
             main: {
                 title: 'Recipe',
@@ -10,6 +11,10 @@
             mash: {
                 title: 'Macerado',
                 template: 'recipe-mash'
+            },
+            boil: {
+                title: 'Hervido',
+                template: 'recipe-boil'
             }};
         
         $scope.selectedTab = 'main';
