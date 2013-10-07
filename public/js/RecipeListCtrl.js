@@ -75,14 +75,9 @@
             });
         };
         
-        $scope.sharedUrl = function(_id) {
-            return 'http://'+$location.host() + ":" + $location.port() + '/share.html#/' + _id;
-        };
-
-
-        $scope.encodeName = function(name) {
-            return encodeURIComponent(name);
-        };
+        //$scope.sharedUrl = function(_id) {
+        //    return 'http://'+$location.host() + ":" + $location.port() + '/share.html#/' + _id;
+        //};
     });
 
 })();

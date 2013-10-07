@@ -311,9 +311,9 @@
 
         $scope.notifications = [];
 
-        $scope.sharedUrl = function(_id) {
-            return 'http://'+$location.host() + ":" + $location.port() + '/share.html#/' + _id;
-        };
+        //$scope.sharedUrl = function(_id) {
+        //    return 'http://'+$location.host() + ":" + $location.port() + '/share.html#/' + _id;
+        //};
         
         $scope.bjcpLink = function(selected) {
             var link;
@@ -373,6 +373,8 @@
                     $scope.recipe.starredBy = [];
                     $scope.recipe.clonedBy = [];
                     $scope.recipe.isPublic = false;
+                    //Al clonar elimino los comentarios de la original
+                    $scope.recipe.comments = [];
                 }
                 $scope.changeYeast();
                 //$scope.$emit("recipeLoaded");

@@ -1,0 +1,77 @@
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading"><strong>Estadisticas</strong></div>
+        <div class="panel-body" >
+            <div class="col-md-6" id="RecipeDetailCtrl">
+                <h4 title="Recetas mias en las que otros usuarios han hecho comentarios">Mis recetas comentadas ({{stats.commented.length}})</h4>
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="commented in stats.commented">
+                        <a href="#/recipe/edit/{{encodeName(commented._id)}}">{{commented.NAME}}</a>
+                        <span  style="cursor: pointer" ng-click="show=!show" class="badge">{{commented.comments.length}}</span>
+                        <div ng-show="show">
+                            <div ng-repeat="comment in commented.comments | orderBy:'-date'"">
+                                <label for="text_{{comment.name}}">{{comment.name}}</label> -
+                                <span title="{{comment.date|date:'dd/MM/yyyy HH:mm'}}">{{formatDate(comment.date)}}</span>
+                                <pre id="text_{{comment.name}}" ng-bind="comment.text"/>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <h4 title="Recetas creadas por mi que han sido clonadas por otros usuarios">Mis recetas clonadas por otros ({{stats.cloned.length}})</h4>
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="recipe in stats.cloned">
+                        <a href="#/recipe/edit/{{encodeName(recipe._id)}}">{{recipe.NAME}}</a>
+                        <span  style="cursor: pointer" ng-click="show=!show" class="badge">{{recipe.clonedBy.length}}</span>
+                        <div ng-show="show">
+                            <ul>
+                                <li ng-repeat="clone in recipe.clonedBy">
+                                    por: {{clone.name}}
+                                    <a ng-show="clone.recipe_id" href="{{sharedUrl(clone.recipe_id)}}"><span class="glyphicon glyphicon-link"/></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                <h4 title="Recetas creadas por mi que han sido agregadas a sus favoritos por otros usuarios">Mis recetas mas populares ({{stats.starredBy.length}})</h4>
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="recipe in stats.starredBy | orderBy:'-starredBy.length'">
+                        <a href="#/recipe/edit/{{encodeName(recipe._id)}}">{{recipe.NAME}}</a>
+                        <span  style="cursor: pointer" ng-click="show=!show" class="badge">{{recipe.starredBy.length}}</span>
+                        <div ng-show="show">
+                            <ul>
+                                <li ng-repeat="starred in recipe.starredBy">
+                                    por: {{starred.name}}
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h4 title="Comentarios hechos por mi en recetas de otros">Mis Comentarios en otras recetas ({{stats.myCommented.length}})</h4>
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="commented in stats.myCommented">
+                        <a target="_blank" href="{{sharedUrl(commented._id)}}">{{commented.NAME}}</a> (de: {{commented.owner.name}})
+                        <span  style="cursor: pointer" ng-click="show=!show" class="badge">{{commented.comments.length}}</span>
+                        <div ng-show="show">
+                                <div ng-repeat="comment in commented.comments | orderBy:'-date'"">
+                                    <label for="text_{{comment.name}}">{{comment.name}}</label> -
+                                    <span title="{{comment.date|date:'dd/MM/yyyy HH:mm'}}">{{formatDate(comment.date)}}</span>
+                                    <pre id="text_{{comment.name}}" ng-bind="comment.text"/>
+                                </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h4 title="Recetas que he clonado de otro cervecero (entre parentesis la receta original)">Mis Clones ({{stats.clones.length}})</h4>
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="recipe in stats.clones">
+                        <a href="#/recipe/edit/{{encodeName(recipe._id)}}">{{recipe.NAME}}</a>
+                        (<a href="{{sharedUrl(recipe.cloneFrom)}}">Ver original</a>)
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

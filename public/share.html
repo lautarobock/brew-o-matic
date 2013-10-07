@@ -35,7 +35,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-10" >
+        <div class="col-md-10" ng-show="recipe._id"> 
             <div class="panel panel-default">
                 <div class="panel-body" >
                     <div><b>Compartida por:</b> {{recipe.owner.name}}</div>
@@ -53,8 +53,14 @@
       </div>
     </div>
     
+    <div class="container" ng-show="notFound">
+        <div class="alert alert-danger">
+            UPS! Receta no encontrada, es posible que el usuario la haya borrado.
+        </div>
+    </div>
+    
     <!-- Content -->
-    <div class="container">   
+    <div class="container" ng-show="recipe._id"> 
       <div class="panel panel-default">
         <div class="panel-heading"><strong>{{recipe.NAME}}</strong></div>
         <div class="panel-body">

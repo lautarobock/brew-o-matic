@@ -3,13 +3,51 @@
 
     var share = angular.module('share', ['ngResource','data','resources','helper','login','comments']);
 
-    share.controller("ShareController", function($scope,Recipe,$location,BrewHelper,HopUse,HopForm,User,$rootScope) {
+    share.controller("ShareController", function(
+                    $scope,
+                    Recipe,
+                    $location,
+                    BrewHelper,
+                    HopUse,
+                    HopForm,
+                    User,
+                    $rootScope,
+                    $filter) {
+        
+        $scope.formatDate = function(date) {
+            date = new Date(date);
+            //Fecha de hoy en segundos
+            var today = new Date().getTime()/1000;
+            //Fecha del comentario en segundos
+            var dateSec = date.getTime()/1000;
+            
+            //Diferencia en segundos
+            var diffSec = today-dateSec;
+            
+            if (diffSec<60) { // Si es menos de un minuto
+                return "Hace menos de un minuto"
+            } if (diffSec < (60*60)) { // Si es menos de una hora
+                return "Hace " + Math.round(diffSec/60) + " minutos";
+            } if (date.getDate() == new Date().getDate()) { //si aun es el mismo dia
+                return "Hoy" + " hace " + Math.round(diffSec/60/60) + " horas";
+            } if (date.getDate() == new Date().getDate()-1 ) { // Si fue durane el dia de ayer
+                return "Ayer " + $filter('date')(date,'HH:mm');
+            } else {
+                return $filter('date')(date,'dd/MM/yyyy HH:mm');
+            }
+        };
         
         $scope.hopUses = HopUse.query();
         
         $scope.hopForms = HopForm.query();
         
-        $scope.recipe = Recipe.get({id:$location.path().substr(1,$location.path().length-1)});
+        $scope.notFound = false;
+        $scope.recipe = Recipe.get({id:$location.path().substr(1,$location.path().length-1)},function() {
+            if (!$scope.recipe._id) {
+                $scope.notFound = true;
+                console.log("Receta no encotrada");
+            }
+        });
 
         $scope.calulateBUGU = function(bu,gu) {
             return bu/(gu * 1000 - 1000);

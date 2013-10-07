@@ -116,9 +116,9 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     serveEnabled: String,
     //Start own properties
     isPublic: Boolean,
-    cloneFrom: String,
+    cloneFrom: {type:String, ref:'Recipe'},
     starredBy: [{_id:Schema.Types.ObjectId,name:String}],
-    clonedBy: [{_id:Schema.Types.ObjectId,name:String}],
+    clonedBy: [{_id:Schema.Types.ObjectId,name:String,recipe_id:{type:String, ref:'Recipe'}}],
     comments:[{
         text: String,
         _id: String,

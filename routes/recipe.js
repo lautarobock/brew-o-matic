@@ -62,7 +62,8 @@ exports.save = function(req, res) {
     
     if (!req.body._id) {
         var recipe = new model.Recipe(req.body);
-        recipe._id = generateId(req.body.NAME,req.session.user_id);
+        var id = generateId(req.body.NAME,req.session.user_id);
+        recipe._id = id;
         recipe.owner = req.session.user_id;
         recipe.save(callback);
         
@@ -74,7 +75,8 @@ exports.save = function(req, res) {
             model.Recipe.findOne({_id:recipe.cloneFrom}).exec(function(err,recipe){
                 recipe.clonedBy.push({
                     _id: req.session.user_id,
-                    name: req.session.user_name
+                    name: req.session.user_name,
+                    recipe_id: id
                 });
                 recipe.save();
             });
