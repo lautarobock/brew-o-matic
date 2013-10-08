@@ -1,8 +1,23 @@
 (function() {
     var index = angular.module('index');
 
+    index.controller("FermentationCtrl", function($scope) {
+        $scope.addFermentationStage = function() {
+            $scope.recipe.fermentation.stages.push({
+                title: null,
+                duration: 0, //In days
+                transferring: false, //In the end of stage
+                losses: 0, //Litros perdidos
+                temperature: null,
+                inc: 0, //incremento de la temperatura
+                incUnit: 'Dia', //Unidades: 'Dia', 'Hora',
+                action: null// 'Inoculacion', 'Dry-Hop', 'Otro'                
+            });
+        };
+    });
+    
     index.controller("RecipeTabCtrl",function($scope) {
-        $scope.sortTabs = ['main','mash','boil'];
+        $scope.sortTabs = ['main','mash','boil','fermentation'];
         $scope.tabs = {
             main: {
                 title: 'Recipe',
@@ -15,6 +30,10 @@
             boil: {
                 title: 'Hervido',
                 template: 'recipe-boil'
+            },
+            fermentation: {
+                title: 'Fermentacion',
+                template: 'recipe-fermentation'
             }};
         
         $scope.selectedTab = 'main';

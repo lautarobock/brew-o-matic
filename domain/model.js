@@ -91,6 +91,18 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
             }]
         }
     },
+    fermentation: {
+        stages: [{
+            title: String,
+            duration: Number, //In days
+            transferring: Boolean, //In the end of stage
+            losses: Number, //Litros perdidos
+            temperature: Number,
+            inc: Number, //incremento de la temperatura
+            incUnit: String, //Unidades: 'Dia', 'Hora',
+            action: String // 'Inoculacion', 'Dry-Hop', 'Otro'
+        }]
+    },
     PRIMARY_TEMP: Number,
     BIAB: String,
     IBUCalcMethod: String,
