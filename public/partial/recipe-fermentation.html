@@ -8,29 +8,40 @@
                     <a href="" ng-click="addFermentationStage()" class="alert-link">Agrega tu primera etapa!</a>
                 </div>
                 <div ng-show="recipe.fermentation.stages.length!=0">
-                    <ul class="list-group">
-                        <li ng-repeat="stage in recipe.fermentation.stages" class="list-group-item">
+                    <div ng-repeat="stage in recipe.fermentation.stages" class="panel panel-default">
+                        <div class="panel-heading"><input ng-focus="onFocus=true" ng-blur="onFocus=false" id="step_title" ng-style="styleTitle(onFocus)" style="font-weight: bold;-webkit-box-shadow:none;box-shadow:none;" class="form-control" type="text" ng-model="stage.title" placeholder="(Ingrese un titulo)"/></div>
+                        <div class="panel-body" >
+                            <!--<div class="row">-->
+                                <!--<div class="col-md-12">-->
+                                    <!--<input id="step_title" style="font-weight: bold;" class="form-control" type="text" ng-model="stage.title" placeholder="(Ingrese un titulo)"/>-->
+                                <!--</div>-->
+                            <!--</div>-->
                             <div class="row">
-                                <div class="col-md-12">
-                                    <label for="title">Titulo</label>
-                                    <input id="title" class="form-control input-sm" type="text" ng-model="stage.title" placeholder="Ingrese un titulo"/>
+                                <div class="col-md-3">
+                                    <label for="temp">Temperatura</label>
+                                    <input id="temp" class="form-control input-sm" type="number" step="0.1" ng-model="stage.temperature" placeholder="Temperatura"/>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label for="duration">Duracion (dias)</label>
                                     <input id="duration" class="form-control input-sm" type="number" ng-model="stage.duration" placeholder="Duracion en dias"/>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="checkbox" style="margin-top: 2em;">
                                         <label for="transferring">Trasvase al final?</label>
                                         <input id="transferring" type="checkbox" ng-model="stage.transferring" />
                                     </div>
                                 </div>
+                                <div class="col-md-3">
+                                    <label for="losses">Litros perdidos</label>
+                                    <input ng-disabled="!stage.transferring" id="losses" class="form-control input-sm" type="number" step="0.1" ng-model="stage.losses" placeholder="Litros Perdidos"/>
+                                </div>
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                     <button type="button" ng-click="addFermentationStage()" class="btn btn-default">Agregar Otra</button>
+                    <div class="row">
+                        <div google-chart chart="chart" style="{{chart.cssStyle}}"></div>
+                    </div>
                 </div>
             </div>
         </div>

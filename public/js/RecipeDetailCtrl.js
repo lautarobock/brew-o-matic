@@ -14,6 +14,150 @@
                 action: null// 'Inoculacion', 'Dry-Hop', 'Otro'                
             });
         };
+
+
+        $scope.styleTitle = function(onFocus) {
+            if ( onFocus ) {
+                return {background: 'white','border-color':'#ccc'};
+            } else {
+                return {background: '#f5f5f5','border-color':'#f5f5f5'};
+            }
+        };
+
+        $scope.chart = {
+            "type": "LineChart",
+            "displayed": true,
+            "cssStyle": "height:300px; width:100%;",
+            "data": {
+                "cols": [
+                    {
+                        "id": "day",
+                        "label": "Dias",
+                        "type": "number"
+                    },
+                    {
+                        "id": "inoculation",
+                        "label": "Inoculacion",
+                        "type": "number"
+                    },
+                    {
+                        "id": "primaria",
+                        "label": "Primaria",
+                        "type": "number"
+                    },
+                    {
+                        "id": "secundaria",
+                        "label": "Secundaria",
+                        "type": "number"
+                    },
+                    {
+                        "id": "maduracion",
+                        "label": "Maduracion",
+                        "type": "number"
+                    }
+                ],
+                "rows": [
+                    {
+                        "c": [
+                            {
+                                "v": 0
+                            },
+                            {
+                                "v": 21,
+                                "f": "21 Inoculacion"
+                            }
+                        ]
+                    },
+                    {
+                        "c": [
+                            {
+                                "v": 0.1
+                            },
+                            {
+                                "v": 21,
+                                "f": "21 Inoculacion"
+                            },
+                            {
+                                "v": 18,
+                                "f": "18 Primaria"
+                            }
+                        ]
+                    },
+                    {
+                        "c": [
+                            {
+                                "v": 1
+                            },
+                            {
+
+                            },
+                            {
+                                "v": 18,
+                                "f": "18 Primaria"
+                            }
+                        ]
+                    },
+                    {
+                        "c": [
+                            {
+                                "v": 7
+                            },
+                            {
+
+                            },
+                            {
+                                "v": 18,
+                                "f": "18 Primaria"
+                            },
+                            {
+                                "v": 11,
+                                "f": "11 Grados"
+                            },
+                            {
+                                "v": 11,
+                                "f": "11 Maduracion"
+                            }
+                        ]
+                    },
+                    {
+                        "c": [
+                            {
+                                "v": 11
+                            },
+                            {
+
+                            },
+                            {
+
+                            },
+                            {
+                                "v": 11,
+                                "f": "11 Grados"
+                            },
+                            {
+
+                            }
+                        ]
+                    }
+                ]
+            },
+            "options": {
+                "title": "Evolucion",
+                "isStacked": "true",
+                "fill": 20,
+                "displayExactValues": true,
+                "vAxis": {
+                    "title": "Temperatura",
+                    "gridlines": {
+                        "count": 10
+                    }
+                },
+                "hAxis": {
+                    "title": "Dias"
+                }
+            },
+            "formatters": {}
+        }
     });
     
     index.controller("RecipeTabCtrl",function($scope) {
