@@ -1,5 +1,5 @@
 <div class="row"  ng-controller="RecipeTabCtrl">
-    <div class="col-md-12">
+    <div class="col-md-12" style="margin-bottom: -0.1em;">
         <ul class="nav nav-tabs">
             <li ng-class="getActiveClass(tab)" ng-repeat="tab in sortTabs">
                 <a style="cursor: pointer" ng-click="changeTab(tab)">{{tabs[tab].title}}</a>

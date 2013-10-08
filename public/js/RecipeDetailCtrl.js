@@ -339,6 +339,23 @@
             });
             return link;
         };
+
+        $scope.calculateSgBeforeBoil = function(BOIL_TIME, PercentEvap, OG) {
+            //Porcentaje evaporado en todo el tiempo
+            //TODO, esto en realidad deberia hacerse hora por hora (no es lo mismo)
+            var percentageEvap = (BOIL_TIME/60)*PercentEvap/100;
+            return BrewHelper.toPotential(BrewHelper.toPpg(OG) * (1-percentageEvap));
+        };
+        
+        $scope.calculateBoilSize = function(BATCH_SIZE, TrubChillerLosses, BOIL_TIME, PercentEvap, TopUpWater) {
+            var ltsAfterBoil = BATCH_SIZE/0.94+TrubChillerLosses;
+            
+            //Porcentaje evaporado en todo el tiempo
+            //TODO, esto en realidad deberia hacerse hora por hora (no es lo mismo)
+            var percentageEvap = (BOIL_TIME/60)*PercentEvap/100;
+            var tuw = TopUpWater ? TopUpWater : 0;
+            return ltsAfterBoil / ( 1 - percentageEvap ) + tuw;
+        };
         
         $scope.save = function() {
             if ( !angular.isDefined($scope.recipe.NAME) ) {
@@ -352,6 +369,7 @@
                 if (!$scope.recipe.$save) {
                     $scope.recipe = new Recipe($scope.recipe);
                 }
+                $scope.recipe.BOIL_SIZE = $scope.calculateBoilSize($scope.recipe.BATCH_SIZE, $scope.recipe.TrubChillerLosses, $scope.recipe.BOIL_TIME, $scope.recipe.PercentEvap, $scope.recipe.TopUpWater);
                 $scope.recipe.$save(function(saved){
                     $scope.notifications.push({
                         type:'success',
@@ -397,6 +415,8 @@
                 OG: 1,
                 CALCIBU: 0,
                 FG: 1,
+                BOIL_TIME: 90,
+                GrainAbsorbtion: 0.9,
                 "FERMENTABLES": {
                     "FERMENTABLE": []
                 },
@@ -416,8 +436,12 @@
                 WatertoGrainRatio: 3,
                 mashTemp: 66,
                 lossMashTemp: 0,
-                GrainTemp: 25
-
+                GrainTemp: 25,
+                SpargeDeadSpace: 0,
+                SpargeTempDesired: 75,
+                TopUpWater: 0,
+                PercentEvap: 10,
+                TrubChillerLosses: 0
             });
             $scope.changeYeast();
         }

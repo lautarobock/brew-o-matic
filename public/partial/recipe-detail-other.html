@@ -7,8 +7,8 @@
                 <input type="text" class="form-control input-sm" id="brewer" placeholder="Cervecero" ng-model="recipe.BREWER">
             </div>
             <div class="col-lg-2">
-              <label for="boil_size">Litros a Hervir (L)</label>
-              <input type="number" class="form-control input-sm" id="boil_size" step="0.1" ng-model="recipe.BOIL_SIZE">
+                <label for="boil_size">Litros a Hervir (L)</label>
+                <span class="form-control input-sm gt-calculated" id="beforeBoil" ng-bind="round1(calculateBoilSize(recipe.BATCH_SIZE, recipe.TrubChillerLosses, recipe.BOIL_TIME, recipe.PercentEvap, recipe.TopUpWater)) + ' Lts'" />
             </div>
             <div class="col-lg-2">
               <label for="boil_time">Hervido (min)</label>
