@@ -108,6 +108,7 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     SpargeTempDesired: Number,
     PercentEvap: Number,
     TrubChillerLosses: Number,
+    TopUpWater: Number,
     calendarpressed: String,
     brewdayEnabled: String,
     yeastpitchEnabled: String,

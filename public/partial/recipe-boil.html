@@ -5,11 +5,11 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <label for="topUpWater">Agua Agregada</label>
-                        <input type="number" class="form-control input-sm" id="topUpWater" ng-model="recipe.TopUpWater" />
+                        <input type="number" class="form-control input-sm" id="topUpWater" step="0.1" ng-model="recipe.TopUpWater" />
                     </div>
                     <div class="col-lg-4">
                       <label for="beforeBoil">Litros antes de hervor</label>
-                      <span class="form-control input-sm gt-calculated" id="beforeBoil" ng-bind="'--'" />
+                      <span class="form-control input-sm gt-calculated" id="beforeBoil" ng-bind="round1((recipe.BATCH_SIZE/0.94+recipe.TrubChillerLosses)/( 1-((recipe.BOIL_TIME/60)*recipe.PercentEvap/100) )+recipe.TopUpWater) + ' Lts'" />
                     </div>
                     <div class="col-lg-4">
                         <label title="La densidad medida antes de enviar a hervor" for="ogBeforeBoil">Densidad Previa</label>
@@ -23,25 +23,25 @@
                     </div>
                     <div class="col-lg-4">
                         <label title="% por hora" for="percentEvap">Evaporacion %</label>
-                        <input type="number" class="form-control input-sm gt-preset" id="percentEvap" ng-model="recipe.PercentEvap" />
+                        <input type="number" class="form-control input-sm gt-preset" id="percentEvap" step="0.1" ng-model="recipe.PercentEvap" />
                     </div>
                     <div class="col-lg-4">
                         <label for="afterBoil">Litros despues de hervor</label>
-                        <span class="form-control input-sm gt-calculated" id="afterBoil" ng-bind="'--'" />
+                        <span class="form-control input-sm gt-calculated" id="afterBoil" ng-bind="round1(recipe.BATCH_SIZE/0.94+recipe.TrubChillerLosses) + ' Lts'" />
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-4">
                         <label for="trubChillerLosses">Perdida Turb y Enfirado</label>
-                        <input type="number" class="form-control input-sm gt-preset" id="trubChillerLosses" ng-model="recipe.TrubChillerLosses" />
+                        <input type="number" class="form-control input-sm gt-preset" id="trubChillerLosses" step="0.1" ng-model="recipe.TrubChillerLosses" />
                     </div>
                     <div class="col-lg-4">
                         <label for="finalVolume">Volumen Final</label>
-                        <span class="form-control input-sm gt-calculated" id="finalVolume" ng-bind="'--'" />
+                        <span class="form-control input-sm gt-calculated" id="finalVolume" ng-bind="round1(recipe.BATCH_SIZE/0.94) + ' Lts'" />
                     </div>
                     <div class="col-lg-4">
-                        <label title="Perdida de 4%" for="afterCooling">Luego Enfriado (L)</label>
-                        <span class="form-control input-sm gt-calculated" id="afterCooling" ng-bind="'--'" />
+                        <label title="Perdida de 4%" for="afterCooling">Luego Enfriado (4%)</label>
+                        <span class="form-control input-sm gt-calculated" id="afterCooling" ng-bind="recipe.BATCH_SIZE + ' Lts'" />
                     </div>
                 </div>
             </div>

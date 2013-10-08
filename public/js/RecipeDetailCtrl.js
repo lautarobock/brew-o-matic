@@ -303,7 +303,7 @@
                 }
             });
         };
-        
+
         $scope.removeMisc = function(misc) {
             var index = $scope.recipe.MISCS.MISC.indexOf(misc);
             $scope.recipe.MISCS.MISC.splice(index, 1);
