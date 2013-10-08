@@ -75,6 +75,7 @@ function filter (req,res,next){
 //app.all('/user*', filter);
 //app.all('/recipe*', filter);
 var recipe = require("./routes/recipe.js");
+var data = require("./routes/data.js");
 
 //app.get('/', routes.index);findStats
 app.get('/user/google_:google_id', user.getByGoogleId);
@@ -89,9 +90,10 @@ app.get('/recipe',filter,recipe.findAll)
 app.get('/recipe/:id',recipe.get)
 app.post('/recipe',filter,recipe.save)
 app.delete('/recipe/:id',filter,recipe.remove)
-
-//app.get('/person/fb:id',person.findByFb);
-//app.put('/person/fb:id',person.updateByFb);
+var services = ['Style','Grain','Hop','Yeast','Misc'];
+for (s in services ) {
+  app.get('/' + services[s].toLowerCase(),data[services[s]].findAll);  
+}
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

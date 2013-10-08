@@ -133,3 +133,41 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     lossMashTemp: Number
     
 },{ _id: false }));
+
+exports.Grain = mongoose.model("Grain",new Schema({
+    "name": String,
+    "type": String,
+    "colour": Number,
+    "potential": Number
+},{ _id: false }));
+
+exports.Misc = mongoose.model("Misc",new Schema({
+    "name": String,
+    "type": String,
+    "use": String
+},{ _id: false }));
+
+exports.Yeast = mongoose.model("Yeast",new Schema({
+    "name": String,
+    "aa": Number
+},{ _id: false }));
+
+exports.Hop = mongoose.model("Hop",new Schema({
+    "name": String,
+    "alpha": Number
+},{ _id: false }));
+
+exports.Style = mongoose.model("Style",new Schema({
+    "name": String,
+    "OG_Min": Number,
+    "OG_Max": Number,
+    "FG_Min": Number,
+    "FG_Max": Number,
+    "IBU_Min": Number,
+    "IBU_Max": Number,
+    "Colour_Min": Number,
+    "Colour_Max": Number,
+    "ABV_Min": Number,
+    "ABV_Max": Number,
+    "link": String
+},{ _id: false }));

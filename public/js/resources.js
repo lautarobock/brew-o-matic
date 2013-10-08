@@ -32,7 +32,11 @@
         });
     });
     
-    //res.factory('PublicRecipe',function($resource) {
-    //    return $resource('recipe/public/:id',{}, {});
-    //});
+    var services = ['Style','Grain','Hop','Yeast','Misc'];
+    angular.forEach(services,function(s) {
+        res.factory(s,function($resource) {
+            return $resource( s.toLowerCase() + '/:id',{}, {});
+        });    
+    });
+    
 })();
