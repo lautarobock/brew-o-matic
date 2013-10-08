@@ -3,8 +3,9 @@
     <table class="table table-condensed table-hover" style="margin-top: 1em;margin-bottom: 2em;">
       <thead>
         <tr>
-          <th style="width:90%">Levadura</th>
-          <th style="width:10%">Atenuacion</th>
+          <th>Levadura</th>
+          <th style="width:8em">Cantidad (g)</th>
+          <th style="width:6em">Atenuacion</th>
         </tr>
       </thead>
       <tbody>
@@ -18,7 +19,12 @@
                     </option>
                 </datalist>
             </td>
-            <td><input ng-change="changeYeast()" class="form-control input-sm" type="number" ng-model="yeast.ATTENUATION"/></td>
+            <td>
+                <input class="form-control input-sm" type="number" ng-model="yeast.AMOUNT"/></td>
+            </td>
+            <td>
+                <input ng-change="changeYeast()" class="form-control input-sm" type="number" ng-model="yeast.ATTENUATION"/>
+            </td>
         </tr>
       </tbody>
     </table>

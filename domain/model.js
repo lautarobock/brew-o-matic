@@ -57,7 +57,8 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
         YEAST: [{
             NAME: String,
             VERSION: String,
-            ATTENUATION: Number
+            ATTENUATION: Number,
+            AMOUNT: Number
         }]
     },
     MISCS: {

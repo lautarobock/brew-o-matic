@@ -7,13 +7,18 @@ var Arrays = require("../public/js/util/util.js").Arrays;
 
 var services = ['Style','Grain','Hop','Yeast','Misc'];
 
-for (s in services ) {
-    var service = services[s];
+function createRest(exports,service) {
     exports[service] = {
         findAll: function(req, res) {
+            console.log(service + " .findAll");
             model[service].find({}).exec(function(err,results) {
                 res.send(results);
             });    
-        }    
-    }; 
+        }
+    };
+}
+
+for (s in services ) {
+    var service = services[s];
+    createRest(exports,service);
 }
