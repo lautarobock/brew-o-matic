@@ -20,12 +20,12 @@
                                             ng-bind="round1(calculateBoilSize(recipe.BATCH_SIZE, recipe.TrubChillerLosses, recipe.BOIL_TIME, recipe.PercentEvap, recipe.TopUpWater)) + ' Lts'" />
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <label for="topUpWater">Agua Agregada</label>
-                                        <input type="number" class="form-control input-sm" id="topUpWater" step="0.1" ng-model="recipe.TopUpWater" />
-                                    </div>
-                                </div>
+                                <!--<div class="row">-->
+                                <!--    <div class="col-lg-6">-->
+                                <!--        <label for="topUpWater">Agua Agregada</label>-->
+                                <!--        <input type="number" class="form-control input-sm" id="topUpWater" step="0.1" ng-model="recipe.TopUpWater" />-->
+                                <!--    </div>-->
+                                <!--</div>-->
                             </div>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label title="Litros en el fermentador" for="afterCooling">Luego Enfriado (4%)</label>
-                                        <span class="form-control input-sm gt-calculated" id="afterCooling" ng-bind="recipe.BATCH_SIZE + ' Lts'" />
+                                        <span style="font-weight: bold;" class="form-control input-sm gt-calculated" id="afterCooling" ng-bind="recipe.BATCH_SIZE + ' Lts'" />
                                     </div>
                                 </div>
                             </div>

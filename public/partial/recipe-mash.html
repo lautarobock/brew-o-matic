@@ -80,7 +80,7 @@
                     <div class="col-lg-2">
                         <label for="spargeWater">Cantidad Agua</label>
                         <span class="form-control input-sm gt-calculated" id="spargeWater"
-                              ng-bind="round1(calculateBoilSize(recipe.BATCH_SIZE, recipe.TrubChillerLosses, recipe.BOIL_TIME, recipe.PercentEvap, recipe.TopUpWater)-recipe.StrikeWater+recipe.SpargeDeadSpace+(recipe.GrainAbsorbtion*recipe.totalAmount)) + ' Lts'" />
+                              ng-bind="round1(calculateBoilSize(recipe.BATCH_SIZE, recipe.TrubChillerLosses, recipe.BOIL_TIME, recipe.PercentEvap, recipe.TopUpWater)-recipe.StrikeWater-recipe.TopUpWater+recipe.SpargeDeadSpace+(recipe.GrainAbsorbtion*recipe.totalAmount)) + ' Lts'" />
                     </div>
                     <div class="col-lg-2">
                         <label title="Litros perdidos en el lavado (por ejemplo debajo del FF)" for="spargeDeadSpace">Espacio Muerto</label>
