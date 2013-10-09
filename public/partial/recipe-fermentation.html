@@ -1,7 +1,7 @@
 <div ng-controller="FermentationCtrl">
     <div class="col-md-10">
         <div class="panel panel-default">
-            <div class="panel-heading"><strong>Fermentacion</strong></div>
+            <div class="panel-heading"><strong>Etapas de Fermentacion</strong></div>
             <div class="panel-body" >
                 <div class="alert alert-info" ng-hide="recipe.fermentation.stages.length!=0">
                     No ha creado ninguna etapa de fermentacion aun  
@@ -9,38 +9,104 @@
                 </div>
                 <div ng-show="recipe.fermentation.stages.length!=0">
                     <div ng-repeat="stage in recipe.fermentation.stages" class="panel panel-default">
-                        <div class="panel-heading"><input ng-focus="onFocus=true" ng-blur="onFocus=false" id="step_title" ng-style="styleTitle(onFocus)" style="font-weight: bold;-webkit-box-shadow:none;box-shadow:none;" class="form-control" type="text" ng-model="stage.title" placeholder="(Ingrese un titulo)"/></div>
+                        <div class="panel-heading">
+                            <button ng-click="recipe.fermentation.stages.splice($index,1);updateChart();"
+                                    type="button"
+                                    class="close" aria-hidden="true">&times;</button>
+                            <button ng-disabled="$first"
+                                    ng-click="moveUp(stage,$index);updateChart();"
+                                    type="button"
+                                    class="gt-fermentation-stage-btn-move pull-right glyphicon glyphicon-chevron-up"></button>
+                            <button ng-disabled="$last"
+                                    ng-click="moveDown(stage,$index);updateChart();"
+                                    type="button"
+                                    class="gt-fermentation-stage-btn-move pull-right glyphicon glyphicon-chevron-down"></button>
+                            <input ng-focus="onFocus=true" ng-blur="onFocus=false;updateChart();" id="step_title" ng-style="styleTitle(onFocus)" class="form-control gt-fermentation-stage-title" type="text" ng-model="stage.title" placeholder="(Ingrese un titulo)"/>
+                        </div>
                         <div class="panel-body" >
-                            <!--<div class="row">-->
-                                <!--<div class="col-md-12">-->
-                                    <!--<input id="step_title" style="font-weight: bold;" class="form-control" type="text" ng-model="stage.title" placeholder="(Ingrese un titulo)"/>-->
-                                <!--</div>-->
-                            <!--</div>-->
                             <div class="row">
                                 <div class="col-md-3">
                                     <label for="temp">Temperatura</label>
-                                    <input id="temp" class="form-control input-sm" type="number" step="0.1" ng-model="stage.temperature" placeholder="Temperatura"/>
+                                    <input ng-change="updateChart()" ng-blur="changeTemp(stage);updateChart();" id="temp" class="form-control input-sm" type="number" ng-model="stage.temperature" placeholder="Temperatura"/>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="duration">Duracion (dias)</label>
-                                    <input id="duration" class="form-control input-sm" type="number" ng-model="stage.duration" placeholder="Duracion en dias"/>
+                                    <label for="temp">Temperatura Final</label>
+                                    <input ng-change="updateChart();" ng-focus="changeTemp(stage);" ng-blur="changeTemp(stage)" id="temp" class="form-control input-sm" type="number" ng-model="stage.temperatureEnd" placeholder="Temperatura Final"/>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="duration">Duracion</label>
+                                    <input ng-change="updateChart();" id="duration" class="form-control input-sm" type="number" ng-model="stage.duration" placeholder="Duracion en dias"/>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="durationMode">Modo</label>
+                                    <select ng-change="updateChart()" id="durationMode" class="form-control input-sm" ng-model="stage.durationMode">
+                                        <option value="Dias">Dias</option>
+                                        <option value="Horas">Horas</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="actual">Lts Estimados</label>
+                                    <span id="actual" class="form-control input-sm gt-calculated">
+                                        {{estimateLiters($index)}}
+                                    </span>
+                                </div>
+                                <div class="col-md-3">
                                 </div>
                                 <div class="col-md-3">
                                     <div class="checkbox" style="margin-top: 2em;">
-                                        <label for="transferring">Trasvase al final?</label>
-                                        <input id="transferring" type="checkbox" ng-model="stage.transferring" />
+                                        <label title="Transvasara al final del la etapa?" for="transferring">Trasvase?</label>
+                                        <input ng-change="updateChart()" id="transferring" type="checkbox" ng-model="stage.transferring" />
                                     </div>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="losses">Litros perdidos</label>
+                                    <label for="losses">Lts perdidos</label>
                                     <input ng-disabled="!stage.transferring" id="losses" class="form-control input-sm" type="number" step="0.1" ng-model="stage.losses" placeholder="Litros Perdidos"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="action"></label>
+                                    <input ng-change="updateChart();" id="action" class="form-control input-sm" ng-model="stage.action" placeholder="Escriba aqui un comentario sobre la etapa"/>
+                                     <!--list="suggest_{{$index}}"-->
+                                    <!--<datalist id="suggest_{{$index}}">-->
+                                    <!--    <option ng-repeat="suggest in suggests" value="{{suggest}}">-->
+                                    <!--        {{suggest}}-->
+                                    <!--    </option>-->
+                                    <!--</datalist>-->
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <button type="button" ng-click="addFermentationStage()" class="btn btn-default">Agregar Otra</button>
-                    <div class="row">
-                        <div google-chart chart="chart" style="{{chart.cssStyle}}"></div>
+                    <button type="button" ng-click="addFermentationStage()" class="btn btn-default pull-right">Agregar Etapa</button>
+                    
+                    <div class="panel panel-default" style="margin-top: 5em">
+                        <div class="panel-heading"><strong>Resumen y graficos</strong></div>
+                        <div class="panel-body" >
+                            <div class="row container">
+                                <strong>Duracion Total: </strong>{{calculateDays(recipe.fermentation)}}
+                            </div>
+                            <div class="row container">
+                                <strong>Volumen final: </strong>{{estimateLiters(recipe.fermentation.stages.length)}} Litros
+                            </div>
+                            <div class="row container">
+                                <strong>Volumen perdido: </strong>{{recipe.BATCH_SIZE - estimateLiters(recipe.fermentation.stages.length)}} Litros
+                            </div>
+                            <div class="row container">
+                                <strong class="pull-left">Si comienzo el: </strong>
+                                <input type="number" class="form-control input-sm pull-left" ng-model="simulatedDate_day" style="width: 50px;margin-left: 1em;" />
+                                <input type="number" class="form-control input-sm pull-left" ng-model="simulatedDate_month" style="width: 50px;margin-left: 1em;" />
+                                <input type="number" class="form-control input-sm pull-left" ng-model="simulatedDate_year" style="width: 70px;margin-left: 1em;" />
+                                <span style="margin-left: 1em;" class="pull-left">terminaria en</span> 
+                                <span title="Fecha estimada de fin de proceso de fermentacion/maduracion, a esto falta sumarle el tiempo de carbonatacion"
+                                      style="font-weight: bold; width:90px; margin-left: 1em;"
+                                      class="form-control input-sm gt-calculated pull-left">{{estimateEnd(simulatedDate_day,simulatedDate_month,simulatedDate_year,recipe.fermentation)|date:'dd-MM-yyyy'}}</span> 
+                            </div>
+                        </div>
+                        <div class="panel-body" >
+                            <div google-chart chart="chart" ng-style="chart.cssStyle"></div>    
+                        </div>
                     </div>
                 </div>
             </div>

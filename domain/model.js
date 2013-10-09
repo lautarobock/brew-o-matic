@@ -94,12 +94,12 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     fermentation: {
         stages: [{
             title: String,
-            duration: Number, //In days
+            duration: Number, //In days/hours
+            durationMode: String, //'Dias' / 'Horas'
             transferring: Boolean, //In the end of stage
             losses: Number, //Litros perdidos
             temperature: Number,
-            inc: Number, //incremento de la temperatura
-            incUnit: String, //Unidades: 'Dia', 'Hora',
+            temperatureEnd: Number,
             action: String // 'Inoculacion', 'Dry-Hop', 'Otro'
         }]
     },

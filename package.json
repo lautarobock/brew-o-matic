@@ -9,7 +9,7 @@
     "stylus": "*"
   },
   "scripts": {
-    "start": "node app.js",
+    "start": "./startup.sh",
     "test": "node_modules/nodeunit/bin/nodeunit test"
   }
 }

@@ -16,4 +16,20 @@ a {
 
 .gt-preset {
     background: #ddf8e6 !important;
- }
+}
+
+.gt-fermentation-stage-title {
+    font-weight: bold !important;
+    -webkit-box-shadow:none !important;
+    box-shadow:none !important;
+    width: 80% !important;
+}
+
+.gt-fermentation-stage-btn-move {
+    margin-right: 1em !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    -webkit-appearance: none !important;
+}
+

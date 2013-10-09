@@ -1,165 +1,7 @@
 (function() {
     var index = angular.module('index');
 
-    index.controller("FermentationCtrl", function($scope) {
-        $scope.addFermentationStage = function() {
-            $scope.recipe.fermentation.stages.push({
-                title: null,
-                duration: 0, //In days
-                transferring: false, //In the end of stage
-                losses: 0, //Litros perdidos
-                temperature: null,
-                inc: 0, //incremento de la temperatura
-                incUnit: 'Dia', //Unidades: 'Dia', 'Hora',
-                action: null// 'Inoculacion', 'Dry-Hop', 'Otro'                
-            });
-        };
 
-
-        $scope.styleTitle = function(onFocus) {
-            if ( onFocus ) {
-                return {background: 'white','border-color':'#ccc'};
-            } else {
-                return {background: '#f5f5f5','border-color':'#f5f5f5'};
-            }
-        };
-
-        $scope.chart = {
-            "type": "LineChart",
-            "displayed": true,
-            "cssStyle": "height:300px; width:100%;",
-            "data": {
-                "cols": [
-                    {
-                        "id": "day",
-                        "label": "Dias",
-                        "type": "number"
-                    },
-                    {
-                        "id": "inoculation",
-                        "label": "Inoculacion",
-                        "type": "number"
-                    },
-                    {
-                        "id": "primaria",
-                        "label": "Primaria",
-                        "type": "number"
-                    },
-                    {
-                        "id": "secundaria",
-                        "label": "Secundaria",
-                        "type": "number"
-                    },
-                    {
-                        "id": "maduracion",
-                        "label": "Maduracion",
-                        "type": "number"
-                    }
-                ],
-                "rows": [
-                    {
-                        "c": [
-                            {
-                                "v": 0
-                            },
-                            {
-                                "v": 21,
-                                "f": "21 Inoculacion"
-                            }
-                        ]
-                    },
-                    {
-                        "c": [
-                            {
-                                "v": 0.1
-                            },
-                            {
-                                "v": 21,
-                                "f": "21 Inoculacion"
-                            },
-                            {
-                                "v": 18,
-                                "f": "18 Primaria"
-                            }
-                        ]
-                    },
-                    {
-                        "c": [
-                            {
-                                "v": 1
-                            },
-                            {
-
-                            },
-                            {
-                                "v": 18,
-                                "f": "18 Primaria"
-                            }
-                        ]
-                    },
-                    {
-                        "c": [
-                            {
-                                "v": 7
-                            },
-                            {
-
-                            },
-                            {
-                                "v": 18,
-                                "f": "18 Primaria"
-                            },
-                            {
-                                "v": 11,
-                                "f": "11 Grados"
-                            },
-                            {
-                                "v": 11,
-                                "f": "11 Maduracion"
-                            }
-                        ]
-                    },
-                    {
-                        "c": [
-                            {
-                                "v": 11
-                            },
-                            {
-
-                            },
-                            {
-
-                            },
-                            {
-                                "v": 11,
-                                "f": "11 Grados"
-                            },
-                            {
-
-                            }
-                        ]
-                    }
-                ]
-            },
-            "options": {
-                "title": "Evolucion",
-                "isStacked": "true",
-                "fill": 20,
-                "displayExactValues": true,
-                "vAxis": {
-                    "title": "Temperatura",
-                    "gridlines": {
-                        "count": 10
-                    }
-                },
-                "hAxis": {
-                    "title": "Dias"
-                }
-            },
-            "formatters": {}
-        }
-    });
-    
     index.controller("RecipeTabCtrl",function($scope) {
         $scope.sortTabs = ['main','mash','boil','fermentation'];
         $scope.tabs = {
@@ -385,16 +227,21 @@
             $scope.changeHop();
         };
 
+        $scope.suggests = [];
+        
         $scope.changeHop = function() {
             var amount = 0;
             var ibu = 0;
+            $scope.suggests = [];
             angular.forEach($scope.recipe.HOPS.HOP,function(hop) {
                 amount += hop.AMOUNT;
                 ibu += $scope.hopIBU(hop);
+                $scope.suggests.push(hop.NAME);
             });
             $scope.recipe.totalHop = amount;
             $scope.recipe.CALCIBU = BrewHelper.round(ibu,10);
             $scope.changeYeast();
+            
         };
 
         $scope.changeYeast = function() {
