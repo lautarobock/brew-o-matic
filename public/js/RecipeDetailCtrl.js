@@ -380,6 +380,7 @@
                     $scope.recipe = new Recipe($scope.recipe);
                 }
                 $scope.recipe.BOIL_SIZE = $scope.calculateBoilSize($scope.recipe.BATCH_SIZE, $scope.recipe.TrubChillerLosses, $scope.recipe.BOIL_TIME, $scope.recipe.PercentEvap, $scope.recipe.TopUpWater);
+                
                 $scope.recipe.$save(function(saved){
                     $scope.notifications.push({
                         type:'success',
@@ -442,6 +443,10 @@
                 },
                 MISCS: {
                     MISC: []
+                },
+                fermentation: {
+                    view: 'expand',
+                    stages: []
                 },
                 WatertoGrainRatio: 3,
                 mashTemp: 66,

@@ -3,23 +3,40 @@
 
     index.controller("FermentationCtrl", function($scope) {
         $scope.addFermentationStage = function() {
+            var temp = null;
+            //cada etapa nueva la creo con la temperatura final de la anterior
+            if ($scope.recipe.fermentation.stages.length != 0 ) {
+                temp = $scope.recipe.fermentation.stages[$scope.recipe.fermentation.stages.length-1].temperatureEnd;
+            }
             $scope.recipe.fermentation.stages.push({
                 title: null,
                 duration: 0, 
                 durationMode: 'Dias', 
                 transferring: false, //In the end of stage
                 losses: 0, //Litros perdidos
-                temperature: null,
+                temperature: temp,
                 temperatureEnd: null,
                 action: null// 'Inoculacion', 'Dry-Hop', 'Otro'                
             });
         };
 
-        var today = new Date();
+        var today;
+        if ($scope.recipe.fermentation.estimateDate) {
+            today = new Date($scope.recipe.fermentation.estimateDate);
+        } else {
+            today = new Date();
+        }
+        
         $scope.simulatedDate_day = today.getDate();
         $scope.simulatedDate_month = today.getMonth() + 1;
         $scope.simulatedDate_year = today.getYear() + 1900;
         
+        $scope.$watch("simulatedDate_day+simulatedDate_month+simulatedDate_year",function(value) {
+            if ($scope.simulatedDate_day && $scope.simulatedDate_month && $scope.simulatedDate_year) {
+                $scope.recipe.fermentation.estimateDate = new Date($scope.simulatedDate_year,$scope.simulatedDate_month-1,$scope.simulatedDate_day);
+            }
+        });
+                
         $scope.estimateEnd = function(day,month,year,fermentation) {
             var date = new Date(year, month-1, day);
             return new Date(date.getTime()+calculateDays(fermentation)*24*60*60*1000);
@@ -92,7 +109,7 @@
             var cols = [{
                     "id": "day",
                     "label": "Dias",
-                    "type": "number"
+                    "type": "date"
                 },{
                     "id": "temp",
                     "label": "Temperatura",
@@ -101,6 +118,7 @@
             
             var rows = [];
             var day = 0;
+            var today = new Date($scope.simulatedDate_year,$scope.simulatedDate_month-1,$scope.simulatedDate_day);
             angular.forEach($scope.recipe.fermentation.stages,function(stage) {
                 var duration = stage.duration|0;
                 if ( duration != 0) {
@@ -110,7 +128,7 @@
                     rows.push({
                             "c": [
                                 {
-                                    "v": day
+                                    "v": today
                                 },
                                 {
                                     "v": stage.temperature|0,
@@ -120,10 +138,12 @@
                         });
                     
                     day += duration;
+                    today = new Date( today.getTime() + duration * 24 * 60 * 60 * 1000 );
+
                     rows.push({
                             "c": [
                                 {
-                                    "v": day
+                                    "v": today
                                 },
                                 {
                                     "v": stage.temperatureEnd|0,
@@ -135,7 +155,7 @@
                     rows.push({
                             "c": [
                                 {
-                                    "v": day
+                                    "v": today
                                 },
                                 {
                                     "v": stage.temperature|0,

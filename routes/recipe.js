@@ -57,6 +57,10 @@ exports.deleteComment = function(req,res) {
 exports.save = function(req, res) {
     
     function callback(err,s){
+        if (err) {
+            console.log("error", err);
+        }
+        console.log("response",s);
         res.send(s);
     }
     
@@ -82,10 +86,12 @@ exports.save = function(req, res) {
             });
         }
     } else {
+        console.log("UPDATE PREV",req.body);
         var id = req.body._id;
         delete req.body._id;
         req.body.owner = req.body.owner._id;
-        model.Recipe.findByIdAndUpdate(id,req.body,callback);
+        console.log("UPDATE POST", req.body);
+        model.Recipe.findByIdAndUpdate(id,req.body).populate('owner').exec(callback);
     }
     
 };

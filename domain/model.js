@@ -92,6 +92,8 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
         }
     },
     fermentation: {
+        view: String,
+        estimateDate: Date,
         stages: [{
             title: String,
             duration: Number, //In days/hours
