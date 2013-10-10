@@ -10,6 +10,17 @@ a {
     background: yellow !important
 }
 
+
+.gt-green {
+    background: green !important;
+    color: white !important;
+}
+
+.gt-error {
+    background: red !important;
+    color: white !important;
+}
+
 .gt-calculated  {
     background: #FFFFCC !important
 }

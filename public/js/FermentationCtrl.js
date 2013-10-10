@@ -69,16 +69,16 @@
             return result;
         };
         
-        $scope.estimateLiters = function($index) {
-            var liters = $scope.recipe.BATCH_SIZE;
-            for ( var i=0; i<$index; i++ ) {
-                var it = $scope.recipe.fermentation.stages[i];
-                if ( it.transferring ) {
-                    liters -= it.losses;
-                }
-            }
-            return liters;
-        };
+        //$scope.estimateLiters = function($index) {
+        //    var liters = $scope.recipe.BATCH_SIZE;
+        //    for ( var i=0; i<$index; i++ ) {
+        //        var it = $scope.recipe.fermentation.stages[i];
+        //        if ( it.transferring ) {
+        //            liters -= it.losses;
+        //        }
+        //    }
+        //    return liters;
+        //};
         
         $scope.moveUp = function(stage,$index) {
             $scope.recipe.fermentation.stages.splice($index,1);

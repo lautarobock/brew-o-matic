@@ -1,9 +1,41 @@
 (function() {
     var index = angular.module('index');
 
+    index.controller("BottlingCtrl",function($scope) {
+
+        $scope.leftClass = function(value) {
+            
+            //Botella mas chica
+            var min = 100;
+            angular.forEach($scope.recipe.bottling.bottles, function(bottle) {
+                if ( bottle.size < min ) {
+                    min = bottle.size;
+                }
+            });
+            
+            if ( value >= 0 ) {
+                return 'gt-calculated';
+            } else if ( value >= -min ) { //Deberia comparar contra la botella mas chica q tengo
+                return 'gt-green';
+            } else {
+                return 'gt-error';
+            }
+        };
+    
+        $scope.addBottle = function() {
+            var rest = $scope.estimateLiters($scope.recipe.fermentation.stages.length)-$scope.bottledLiters();
+            $scope.recipe.bottling.bottles.push({
+                type: null,
+                size: null, //En litros
+                amount: 0,
+                carbonatationType: 'sugar'//'sugar', 'must', 'co2'
+            });
+    
+        };
+    });
 
     index.controller("RecipeTabCtrl",function($scope) {
-        $scope.sortTabs = ['main','mash','boil','fermentation'];
+        $scope.sortTabs = ['main','mash','boil','fermentation','bottling'];
         $scope.tabs = {
             main: {
                 title: 'Recipe',
@@ -20,6 +52,10 @@
             fermentation: {
                 title: 'Fermentacion',
                 template: 'recipe-fermentation'
+            },
+            bottling: {
+                title: 'Embotellado',
+                template: 'recipe-bottling'
             }};
         
         $scope.selectedTab = 'main';
@@ -80,8 +116,16 @@
 
         //Helper functions
         
+        $scope.round = function(value) {
+            return Math.round(value);
+        };
+        
         $scope.round1 = function(value) {
             return BrewHelper.round(value,10);
+        };
+        
+        $scope.round2 = function(value) {
+            return BrewHelper.round(value,100);
         };
         
         $scope.removeFermentable = function(fermentable) {
@@ -448,6 +492,10 @@
                     view: 'expand',
                     stages: []
                 },
+                bottling: {
+                    sugarType: 'cane', //'cane', 'corn'
+                    bottles: []
+                },
                 WatertoGrainRatio: 3,
                 mashTemp: 66,
                 lossMashTemp: 0,
@@ -473,6 +521,25 @@
             return BrewHelper.toPpg(grav) / max * 100;
         }
        
+        $scope.bottledLiters = function() {
+            var liters = 0;
+            angular.forEach($scope.recipe.bottling.bottles,function(bottle){
+                liters += bottle.size * bottle.amount;
+            });
+            return liters;
+        };
+        
+        $scope.estimateLiters = function($index) {
+            var liters = $scope.recipe.BATCH_SIZE;
+            for ( var i=0; i<$index; i++ ) {
+                var it = $scope.recipe.fermentation.stages[i];
+                if ( it.transferring ) {
+                    liters -= it.losses;
+                }
+            }
+            return liters;
+        };
+        
         $scope.handleFileSelect = function(file) {
             var files = file.files; // FileList object
         

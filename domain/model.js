@@ -105,6 +105,15 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
             action: String // 'Inoculacion', 'Dry-Hop', 'Otro'
         }]
     },
+    bottling: {
+        sugarType: String, 
+        bottles: [{
+            bottleType: String,
+            size: Number,
+            amount: Number,
+            carbonatationType: String 
+        }]
+    },
     PRIMARY_TEMP: Number,
     BIAB: String,
     IBUCalcMethod: String,
