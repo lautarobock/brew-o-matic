@@ -1,14 +1,88 @@
 <div ng-controller="FermentationCtrl">
     <div class="col-md-10">
         <div class="panel panel-default">
-            <div class="panel-heading"><strong>Etapas de Fermentacion</strong></div>
+            <div class="panel-heading">
+                <strong>Etapas de Fermentacion</strong>
+            </div>
             <div class="panel-body" >
                 <div class="alert alert-info" ng-hide="recipe.fermentation.stages.length!=0">
                     No ha creado ninguna etapa de fermentacion aun  
                     <a href="" ng-click="addFermentationStage()" class="alert-link">Agrega tu primera etapa!</a>
                 </div>
                 <div ng-show="recipe.fermentation.stages.length!=0">
-                    <div ng-repeat="stage in recipe.fermentation.stages" class="panel panel-default">
+                    <div class="row" ng-init="viewMode='expand'" style="width: 100%;margin-bottom: 1em">
+                        <button style="margin-left: 1em" ng-disabled="viewMode=='expand'" ng-click="viewMode='expand'" type="button" class="btn btn-default btn-xs pull-right">Expandida</button>
+                        <button ng-disabled="viewMode=='compact'" ng-click="viewMode='compact'" type="button" class="btn btn-default btn-xs pull-right">Compacta</button>
+                    </div>
+                    <table class="table table-striped table-hover" ng-show="viewMode=='compact'">
+                        <thead>
+                            <tr>
+                                <th>Titulo</th>
+                                <th style="width:6em">T. Inicial</th>
+                                <th style="width:6em">T. Final</th>
+                                <th style="width:3em">Duracion</th>
+                                <th style="width:6em">Modo</th>
+                                <th style="width:3em">Volumen</th>
+                                <th style="width:3em">Trasvasa?</th>
+                                <th style="width:3em">Vol Perdido</th>
+                                <th>Notas</th>
+                                <th style="width:7em"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="stage in recipe.fermentation.stages">
+                                <td>
+                                    <input ng-blur="updateChart()" class="form-control input-sm" type="text" ng-model="stage.title" placeholder="(Ingrese un titulo)"/>
+                                </td>
+                                <td>
+                                    <input ng-change="updateChart()" ng-blur="changeTemp(stage);updateChart();" class="form-control input-sm" type="number" ng-model="stage.temperature" placeholder="Temperatura"/>
+                                </td>
+                                <td>
+                                    <input ng-change="updateChart();" ng-focus="changeTemp(stage);" ng-blur="changeTemp(stage)" class="form-control input-sm" type="number" ng-model="stage.temperatureEnd" placeholder="Temperatura Final"/>
+                                </td>
+                                <td>
+                                    <input ng-change="updateChart();" class="form-control input-sm" type="number" ng-model="stage.duration" placeholder="Duracion"/>
+                                </td>
+                                <td>
+                                    <select ng-change="updateChart()" class="form-control input-sm" ng-model="stage.durationMode">
+                                        <option value="Dias">Dias</option>
+                                        <option value="Horas">Horas</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <span class="form-control input-sm gt-calculated">
+                                        {{estimateLiters($index)|number:1}}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="checkbox" title="Transvasara al final del la etapa?" >
+                                        <input ng-change="updateChart()" type="checkbox" ng-model="stage.transferring" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <input ng-disabled="!stage.transferring" class="form-control input-sm" type="number" step="0.1" ng-model="stage.losses" placeholder="Litros Perdidos"/>
+                                </td>
+                                <td>
+                                    <input ng-change="updateChart();" class="form-control input-sm" ng-model="stage.action" placeholder="Escriba aqui un comentario sobre la etapa"/>
+                                </td>
+                                <td>
+                                    <button ng-click="recipe.fermentation.stages.splice($index,1);updateChart();"
+                                            type="button"
+                                            class="close" aria-hidden="true">&times;</button>
+                                    <button ng-disabled="$first"
+                                            ng-click="moveUp(stage,$index);updateChart();"
+                                            type="button"
+                                            class="gt-fermentation-stage-btn-move pull-right glyphicon glyphicon-chevron-up"></button>
+                                    <button ng-disabled="$last"
+                                            ng-click="moveDown(stage,$index);updateChart();"
+                                            type="button"
+                                            class="gt-fermentation-stage-btn-move pull-right glyphicon glyphicon-chevron-down"></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div ng-repeat="stage in recipe.fermentation.stages" class="panel panel-default" ng-show="viewMode=='expand'">
                         <div class="panel-heading">
                             <button ng-click="recipe.fermentation.stages.splice($index,1);updateChart();"
                                     type="button"
@@ -35,7 +109,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label for="duration">Duracion</label>
-                                    <input ng-change="updateChart();" id="duration" class="form-control input-sm" type="number" ng-model="stage.duration" placeholder="Duracion en dias"/>
+                                    <input ng-change="updateChart();" id="duration" class="form-control input-sm" type="number" ng-model="stage.duration" placeholder="Duracion"/>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="durationMode">Modo</label>
@@ -49,7 +123,7 @@
                                 <div class="col-md-3">
                                     <label for="actual">Lts Estimados</label>
                                     <span id="actual" class="form-control input-sm gt-calculated">
-                                        {{estimateLiters($index)}}
+                                        {{estimateLiters($index)|number:1}}
                                     </span>
                                 </div>
                                 <div class="col-md-3">
@@ -88,10 +162,10 @@
                                 <strong>Duracion Total: </strong>{{calculateDays(recipe.fermentation)}}
                             </div>
                             <div class="row container">
-                                <strong>Volumen final: </strong>{{estimateLiters(recipe.fermentation.stages.length)}} Litros
+                                <strong>Volumen final: </strong>{{estimateLiters(recipe.fermentation.stages.length)|number:1}} Litros
                             </div>
                             <div class="row container">
-                                <strong>Volumen perdido: </strong>{{recipe.BATCH_SIZE - estimateLiters(recipe.fermentation.stages.length)}} Litros
+                                <strong>Volumen perdido: </strong>{{recipe.BATCH_SIZE - estimateLiters(recipe.fermentation.stages.length)|number:1}} Litros
                             </div>
                             <div class="row container">
                                 <strong class="pull-left">Si comienzo el: </strong>
