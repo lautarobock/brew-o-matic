@@ -34,6 +34,9 @@
                             <span style="display: inline" ng-class="leftClass(estimateLiters(recipe.fermentation.stages.length)-bottledLiters())" class="form-control input-sm ">
                                 {{estimateLiters(recipe.fermentation.stages.length)-bottledLiters()|number:2}} Ltrs
                             </span>
+                            <span  ng-class="restClass" style="margin-left: 2em">
+                                {{restComment}}
+                            </span>
                         </div>
                     </li>
                 </ul>
@@ -48,6 +51,7 @@
                         <thead>
                             <tr>
                                 <th>Tipo</th>
+                                <th style="width:3em">Color</th>                                
                                 <th style="width:10em">Tamaño</th>
                                 <th style="width:10em">Cantidad</th>
                                 <th style="width:10em">Total</th>
@@ -58,26 +62,36 @@
                         <tbody>
                             <tr ng-repeat="bottle in recipe.bottling.bottles">
                                 <td>
-                                    <input class="form-control input-sm" type="text" ng-model="bottle.bottleType" placeholder="(Tipo: porron, medio, litro, corni)"/>
+                                    <input ng-change="changeBottleType(bottle)" class="form-control input-sm" type="text" ng-model="bottle.bottleType" placeholder="(Tipo: porron, medio, litro, corni)" list="bottleNames"/>
+                                    <datalist id="bottleNames">
+                                        <option ng-repeat="bottle in bottles" value="{{bottle.name}}">
+                                            {{bottle.name}}
+                                        </option>
+                                    </datalist>
                                 </td>
                                 <td>
-                                    <input ng-blur="subTotal=round2(bottle.size*bottle.amount)" ng-change="bottle.amount=round(subTotal/bottle.size)" class="form-control input-sm" type="number" step="0.001" ng-model="bottle.size" placeholder="(Tamaño)"/>
+                                    <div ng-style="{'height': '28px','border':'1px solid','border-radius': '5px','background-color':getBottleColor(bottle.colour)}" >
+                
+                                    </div>
                                 </td>
                                 <td>
-                                    <input ng-change="subTotal=round2(bottle.size*bottle.amount)" class="form-control input-sm" type="number" ng-model="bottle.amount" placeholder="(Cantidad)"/>
+                                    <input ng-blur="bottle.subTotal=round2(bottle.size*bottle.amount);changeBottles()" ng-change="bottle.amount=round(bottle.subTotal/bottle.size)" class="form-control input-sm" type="number" step="0.001" ng-model="bottle.size" placeholder="(Tamaño)"/>
                                 </td>
                                 <td>
-                                    <input ng-change="bottle.amount=round(subTotal/bottle.size)" ng-init="subTotal=round2(estimateLiters(recipe.fermentation.stages.length)-bottledLiters())" class="form-control input-sm" type="number" ng-model="subTotal" placeholder="(Litros)" value="liters" />
+                                    <input ng-change="bottle.subTotal=round2(bottle.size*bottle.amount);changeBottles()" class="form-control input-sm" type="number" ng-model="bottle.amount" placeholder="(Cantidad)"/>
                                 </td>
                                 <td>
-                                    <select class="form-control input-sm" ng-model="bottle.carbonatationType">
+                                    <input ng-change="bottle.amount=round(bottle.subTotal/bottle.size);changeBottles()" class="form-control input-sm" type="number" ng-model="bottle.subTotal" placeholder="(Litros)" value="liters" />
+                                </td>
+                                <td>
+                                    <select ng-change="changeBottles()" class="form-control input-sm" ng-model="bottle.carbonatationType">
                                         <option value="sugar">Azucar</option>
                                         <option value="must">Mosto</option>
                                         <option value="co2">CO2</option>
                                     </select>
                                 </td>
                                 <td>
-                                    <button ng-click="recipe.bottling.bottles.splice($index,1);"
+                                    <button ng-click="recipe.bottling.bottles.splice($index,1);changeBottles()"
                                             type="button"
                                             class="close" aria-hidden="true">&times;</button>
                                 </td>
@@ -87,17 +101,82 @@
                     <button type="button" ng-click="addBottle()" class="btn btn-default pull-right">Agregar Botella</button>
                     
                 </div>
-                <!--<div class="panel panel-default" style="margin-top: 5em">
-                    <div class="panel-heading"><strong>Resumen y graficos</strong></div>
+                <div class="panel panel-default" style="margin-top: 5em">
+                    <div class="panel-heading"><strong>Carbonatacion Natural (Azucar)</strong></div>
                     <div class="panel-body" >
                         <ul class="list-group">
-                            <li class="list-group-item">
-                                <strong>Duracion Total: </strong>{{calculateDays(recipe.fermentation)}}
+                            <li class="list-group-item" style="overflow: hidden;">
+                                <div class="col-md-3">
+                                    <strong>Volumen: </strong>
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="form-control input-sm gt-calculated">
+                                        {{volumeByCarbonatationType['sugar']|number:1}} Lts
+                                    </span>
+                                </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-3">
+                                    <strong>Vol. de CO<sub>2</sub> residual:</strong>
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="form-control input-sm gt-calculated" ng-bind="restCO2|number:2"/>
+                                </div>
                             </li>
-                            <li class="list-group-item">
-                                <strong>Volumen final: </strong>{{estimateLiters(recipe.fermentation.stages.length)|number:1}} Litros
+                            <li class="list-group-item" style="overflow: hidden;">
+                                <div class="col-md-3">
+                                    <strong>Vol. de CO<sub>2</sub> deseados: </strong> 
+                                </div>
+                                <div class="col-md-2">
+                                    <input ng-change="changeBottles();" class="form-control input-sm" type="number" step="0.01" ng-model="recipe.bottling.sugar.desiredVol" placeholder="(Vol CO2)" />
+                                </div>
+                                <div class="col-md-1">
+                                    <span ng-hide="disableObtainVolCO2" style="cursor: pointer;color:green" ng-click="recipe.bottling.sugar.desiredVol = obtainVolCO2Style();changeBottles();"  title="Usa el valor recomendado segun el estilo elegido." class="glyphicon glyphicon-certificate"></span>
+                                    <span ng-show="disableObtainVolCO2" style="color:red" title="No se ha seleccionado un estilo de BJCP o el mismo no tiene valor asocaido. Imposible usar valor automatico" class="glyphicon glyphicon-certificate"></span>
+                                </div>
+                                <div class="col-md-3">
+                                    <strong title="Es la temperatura maxima a la que ha fermentado la cerveza">
+                                        Temperatura:
+                                    </strong>
+                                </div>
+                                <div class="col-md-2">
+                                    <input ng-change="changeBottles();" class="form-control input-sm" type="number" step="0" ng-model="recipe.bottling.sugar.temperature" placeholder="(Temp)" />
+                                </div>
+                                <div class="col-md-1">
+                                    <a ng-click="obtainMaxFermTemp()" href="" title="Obtiene la maxima temperatura del plan de fermentacion">
+                                        Obtener
+                                    </a>
+                                </div>
                             </li>
-                            <li class="list-group-item">
+                            <li class="list-group-item" style="overflow: hidden;">
+                                <div class="col-md-3">
+                                    <strong>Tipo de Azucar:</strong>
+                                </div>
+                                <div class="col-md-2">
+                                    <select ng-change="changeBottles()" class="form-control input-sm" ng-model="recipe.bottling.sugar.sugarType">
+                                        <option value="cane">Caña</option>
+                                        <option value="corn">Maiz</option>
+                                        <option value="honey">Miel</option>
+                                    </select>                                    
+                                </div>
+                            </li>
+                            <li class="list-group-item" style="overflow: hidden;">
+                                <div class="col-md-3">
+                                    <strong>g/L:</strong>
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="form-control input-sm gt-calculated" ng-bind="gramsLiter"/>
+                                </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-3">
+                                    <strong>Azucar Total:</strong>
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="form-control input-sm gt-calculated" >
+                                        {{gramsLiter*volumeByCarbonatationType['sugar']|number:0}}
+                                    </span>
+                                </div>
+                            </li>
+                            <!--<li class="list-group-item">
                                 <strong>Volumen perdido: </strong>{{recipe.BATCH_SIZE - estimateLiters(recipe.fermentation.stages.length)|number:1}} Litros
                             </li>
                             <li class="list-group-item">
@@ -109,13 +188,13 @@
                                 <span title="Fecha estimada de fin de proceso de fermentacion/maduracion, a esto falta sumarle el tiempo de carbonatacion"
                                       style="font-weight: bold; width:90px; display: inline"
                                       class="form-control input-sm gt-calculated ">{{estimateEnd(simulatedDate_day,simulatedDate_month,simulatedDate_year,recipe.fermentation)|date:'dd-MM-yyyy'}}</span> 
-                            </li>
+                            </li>-->
                         </ul>
                     </div>
-                    <div class="panel-body" >
+                   <!-- <div class="panel-body" >
                         <div google-chart chart="chart" ng-style="chart.cssStyle"></div>    
-                    </div>
-                </div>-->
+                    </div>-->
+                </div>
             </div>
         </div>
         <div style="overflow: hidden;margin-bottom: 1em;">

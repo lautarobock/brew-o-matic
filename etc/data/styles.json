@@ -1,6 +1,9 @@
+db.styles.remove();
 db.styles.insert([
                 {
                   "name": "American Amber Ale",
+                  "co2_min": 2.26,
+                  "co2_max": 2.78,
                   "OG_Min": 1.045,
                   "OG_Max": 1.060,
                   "FG_Min": 1.010,
@@ -17,6 +20,8 @@ db.styles.insert([
                 },
                 {
                   "name": "American Barleywine",
+                  "co2_min": 1.3,
+                  "co2_max": 2.3,
                   "OG_Min": 1.080,
                   "OG_Max": 1.120,
                   "FG_Min": 1.016,
@@ -32,6 +37,8 @@ db.styles.insert([
                 },
                 {
                   "name": "American Brown Ale",
+                  "co2_min": 1.5,
+                  "co2_max": 2.5,
                   "OG_Min": 1.045,
                   "OG_Max": 1.060,
                   "FG_Min": 1.010,
@@ -47,6 +54,8 @@ db.styles.insert([
                 },
                 {
                   "name": "American IPA",
+                  "co2_min": 2.26,
+                  "co2_max": 2.78,
                   "OG_Min": 1.056,
                   "OG_Max": 1.075,
                   "FG_Min": 1.010,
@@ -62,6 +71,8 @@ db.styles.insert([
                 },
                 {
                   "name": "American Pale Ale",
+                  "co2_min": 2.26,
+                  "co2_max": 2.78,
                   "OG_Min": 1.045,
                   "OG_Max": 1.060,
                   "FG_Min": 1.010,
@@ -77,6 +88,8 @@ db.styles.insert([
                 },
                 {
                   "name": "American Stout",
+                  "co2_min": 2.3,
+                  "co2_max": 2.6,
                   "OG_Min": 1.050,
                   "OG_Max": 1.075,
                   "FG_Min": 1.010,
@@ -92,6 +105,8 @@ db.styles.insert([
                 },
                 {
                   "name": "American Wheat or Rye Beer",
+                  "co2_min": 2.3,
+                  "co2_max": 2.6,
                   "OG_Min": 1.040,
                   "OG_Max": 1.055,
                   "FG_Min": 1.008,
@@ -192,6 +207,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Belgian Blond Ale",
+                  "co2_min": 1.9,
+                  "co2_max": 2.4,
                   "OG_Min": 1.062,
                   "OG_Max": 1.075,
                   "FG_Min": 1.008,
@@ -207,6 +224,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Belgian Dark Strong Ale",
+                  "co2_min": 1.9,
+                  "co2_max": 2.5,
                   "OG_Min": 1.075,
                   "OG_Max": 1.110,
                   "FG_Min": 1.010,
@@ -222,6 +241,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Belgian Dubbel",
+                  "co2_min": 1.9,
+                  "co2_max": 2.4,
                   "OG_Min": 1.062,
                   "OG_Max": 1.075,
                   "FG_Min": 1.008,
@@ -237,6 +258,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Belgian Golden Strong Ale",
+                  "co2_min": 1.9,
+                  "co2_max": 2.4,
                   "OG_Min": 1.070,
                   "OG_Max": 1.095,
                   "FG_Min": 1.005,
@@ -252,6 +275,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Belgian Pale Ale",
+                  "co2_min": 1.9,
+                  "co2_max": 2.5,
                   "OG_Min": 1.048,
                   "OG_Max": 1.054,
                   "FG_Min": 1.010,
@@ -267,6 +292,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Belgian Specialty Ale",
+                  "co2_min": 1.9,
+                  "co2_max": 2.4,
                   "OG_Min": 1.030,
                   "OG_Max": 1.080,
                   "FG_Min": 1.006,
@@ -282,6 +309,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Belgian Tripel",
+                  "co2_min": 1.9,
+                  "co2_max": 2.4,
                   "OG_Min": 1.075,
                   "OG_Max": 1.085,
                   "FG_Min": 1.008,
@@ -297,6 +326,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Berliner Weisse",
+                  "co2_min": 3.45,
+                  "co2_max": 3.45,
                   "OG_Min": 1.028,
                   "OG_Max": 1.032,
                   "FG_Min": 1.003,
@@ -312,6 +343,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Biere de Garde",
+                  "co2_min": 1.9,
+                  "co2_max": 2.5,
                   "OG_Min": 1.060,
                   "OG_Max": 1.080,
                   "FG_Min": 1.008,
@@ -327,6 +360,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Blonde Ale",
+                  "co2_min": 2.3,
+                  "co2_max": 2.6,
                   "OG_Min": 1.038,
                   "OG_Max": 1.054,
                   "FG_Min": 1.008,
@@ -342,6 +377,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Bohemian Pilsener",
+                  "co2_min": 2.3,
+                  "co2_max": 2.5,
                   "OG_Min": 1.044,
                   "OG_Max": 1.056,
                   "FG_Min": 1.013,
@@ -357,6 +394,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Brown Porter",
+                  "co2_min": 1.7,
+                  "co2_max": 2.5,
                   "OG_Min": 1.040,
                   "OG_Max": 1.052,
                   "FG_Min": 1.008,
@@ -386,6 +425,8 @@ db.styles.insert([
                 },
                 {
                   "name": "California Common Beer",
+                  "co2_min": 2.4,
+                  "co2_max": 2.8,
                   "OG_Min": 1.048,
                   "OG_Max": 1.054,
                   "FG_Min": 1.011,
@@ -401,6 +442,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Christmas/Winter Specialty Spiced Beer",
+                  "co2_min": 1.9,
+                  "co2_max": 2.4,
                   "OG_Min": 1.030,
                   "OG_Max": 1.110,
                   "FG_Min": 1.005,
@@ -415,6 +458,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Classic American Pilsner",
+                  "co2_min": 2.3,
+                  "co2_max": 2.5,
                   "OG_Min": 1.044,
                   "OG_Max": 1.060,
                   "FG_Min": 1.010,
@@ -430,6 +475,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Classic Rauchbier",
+                  "co2_min": 2.16,
+                  "co2_max": 2.57,
                   "OG_Min": 1.050,
                   "OG_Max": 1.057,
                   "FG_Min": 1.012,
@@ -445,6 +492,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Cream Ale",
+                  "co2_min": 2.6,
+                  "co2_max": 2.7,
                   "OG_Min": 1.042,
                   "OG_Max": 1.055,
                   "FG_Min": 1.006,
@@ -460,6 +509,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Dark American Lager",
+                  "co2_min": 2.5,
+                  "co2_max": 2.7,
                   "OG_Min": 1.044,
                   "OG_Max": 1.056,
                   "FG_Min": 1.008,
@@ -474,6 +525,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Doppelbock",
+                  "co2_min": 2.26,
+                  "co2_max": 2.62,
                   "OG_Min": 1.072,
                   "OG_Max": 1.112,
                   "FG_Min": 1.016,
@@ -489,6 +542,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Dorada Pampeana",
+                  "co2_min": 2.3,
+                  "co2_max": 2.6,
                   "OG_Min": 1.042,
                   "OG_Max": 1.054,
                   "FG_Min": 1.009,
@@ -503,6 +558,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Dortmunder Export",
+                  "co2_min": 2.57,
+                  "co2_max": 2.57,
                   "OG_Min": 1.048,
                   "OG_Max": 1.056,
                   "FG_Min": 1.010,
@@ -517,6 +574,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Dry Stout",
+                  "co2_min": 1.6,
+                  "co2_max": 2.0,
                   "OG_Min": 1.036,
                   "OG_Max": 1.050,
                   "FG_Min": 1.007,
@@ -532,6 +591,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Dunkelweizen",
+                  "co2_min": 3.6,
+                  "co2_max": 4.48,
                   "OG_Min": 1.044,
                   "OG_Max": 1.056,
                   "FG_Min": 1.010,
@@ -547,6 +608,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Dusseldorf Altbier",
+                  "co2_min": 2.16,
+                  "co2_max": 3.09,
                   "OG_Min": 1.046,
                   "OG_Max": 1.054,
                   "FG_Min": 1.010,
@@ -562,6 +625,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Eisbock",
+                  "co2_min": 2.37,
+                  "co2_max": 2.37,
                   "OG_Min": 1.078,
                   "OG_Max": 1.120,
                   "FG_Min": 1.020,
@@ -577,6 +642,8 @@ db.styles.insert([
                 },
                 {
                   "name": "English Barleywine",
+                  "co2_min": 1.3,
+                  "co2_max": 2.3,
                   "OG_Min": 1.080,
                   "OG_Max": 1.120,
                   "FG_Min": 1.018,
@@ -592,6 +659,8 @@ db.styles.insert([
                 },
                 {
                   "name": "English IPA",
+                  "co2_min": 1.5,
+                  "co2_max": 2.3,
                   "OG_Min": 1.050,
                   "OG_Max": 1.075,
                   "FG_Min": 1.010,
@@ -607,6 +676,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Extra Special/Strong Bitter (English Pale Ale)",
+                  "co2_min": 0.75,
+                  "co2_max": 1.3,
                   "OG_Min": 1.048,
                   "OG_Max": 1.060,
                   "FG_Min": 1.010,
@@ -622,6 +693,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Flanders Brown Ale/Oud Bruin",
+                  "co2_min": 1.9,
+                  "co2_max": 2.5,
                   "OG_Min": 1.040,
                   "OG_Max": 1.074,
                   "FG_Min": 1.008,
@@ -637,6 +710,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Flanders Red Ale",
+                  "co2_min": 1.9,
+                  "co2_max": 2.5,
                   "OG_Min": 1.048,
                   "OG_Max": 1.057,
                   "FG_Min": 1.002,
@@ -652,6 +727,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Foreign Extra Stout",
+                  "co2_min": 2.3,
+                  "co2_max": 2.6,
                   "OG_Min": 1.056,
                   "OG_Max": 1.075,
                   "FG_Min": 1.010,
@@ -667,6 +744,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Fruit Beer",
+                  "co2_min": 2.0,
+                  "co2_max": 3.0,
                   "OG_Min": 1.030,
                   "OG_Max": 1.110,
                   "FG_Min": 1.004,
@@ -682,6 +761,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Fruit Lambic",
+                  "co2_min": 2.6,
+                  "co2_max": 4.5,
                   "OG_Min": 1.040,
                   "OG_Max": 1.060,
                   "FG_Min": 1.000,
@@ -697,6 +778,8 @@ db.styles.insert([
                 },
                 {
                   "name": "German Pilsner (Pils)",
+                  "co2_min": 2.52,
+                  "co2_max": 2.52,
                   "OG_Min": 1.044,
                   "OG_Max": 1.050,
                   "FG_Min": 1.008,
@@ -711,6 +794,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Gueuze",
+                  "co2_min": 3.0,
+                  "co2_max": 4.5,
                   "OG_Min": 1.040,
                   "OG_Max": 1.060,
                   "FG_Min": 1.000,
@@ -741,6 +826,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Imperial Stout",
+                  "co2_min": 1.5,
+                  "co2_max": 2.3,
                   "OG_Min": 1.075,
                   "OG_Max": 1.115,
                   "FG_Min": 1.018,
@@ -785,6 +872,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Kolsch",
+                  "co2_min": 2.42,
+                  "co2_max": 2.73,
                   "OG_Min": 1.044,
                   "OG_Max": 1.050,
                   "FG_Min": 1.007,
@@ -800,6 +889,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Lite American Lager",
+                  "co2_min": 2.57,
+                  "co2_max": 2.73,
                   "OG_Min": 1.028,
                   "OG_Max": 1.040,
                   "FG_Min": 0.998,
@@ -814,6 +905,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Maibock/Helles Bock",
+                  "co2_min": 2.16,
+                  "co2_max": 2.73,
                   "OG_Min": 1.064,
                   "OG_Max": 1.072,
                   "FG_Min": 1.011,
@@ -829,6 +922,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Mild",
+                  "co2_min": 1.3,
+                  "co2_max": 2.0,
                   "OG_Min": 1.030,
                   "OG_Max": 1.038,
                   "FG_Min": 1.008,
@@ -844,6 +939,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Munich Dunkel",
+                  "co2_min": 2.21,
+                  "co2_max": 2.66,
                   "OG_Min": 1.048,
                   "OG_Max": 1.056,
                   "FG_Min": 1.010,
@@ -859,6 +956,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Munich Helles",
+                  "co2_min": 2.26,
+                  "co2_max": 2.68,
                   "OG_Min": 1.045,
                   "OG_Max": 1.051,
                   "FG_Min": 1.008,
@@ -874,6 +973,8 @@ db.styles.insert([
                 },
                 {
                   "name": "North German Altbier",
+                  "co2_min": 2.16,
+                  "co2_max": 3.09,
                   "OG_Min": 1.046,
                   "OG_Max": 1.054,
                   "FG_Min": 1.010,
@@ -888,6 +989,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Northern English Brown Ale",
+                  "co2_min": 1.5,
+                  "co2_max": 2.3,
                   "OG_Min": 1.040,
                   "OG_Max": 1.052,
                   "FG_Min": 1.008,
@@ -903,6 +1006,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Oatmeal Stout",
+                  "co2_min": 2.0,
+                  "co2_max": 2.4,
                   "OG_Min": 1.048,
                   "OG_Max": 1.065,
                   "FG_Min": 1.010,
@@ -918,6 +1023,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Oktoberfest/Marzen",
+                  "co2_min": 2.57,
+                  "co2_max": 2.73,
                   "OG_Min": 1.050,
                   "OG_Max": 1.057,
                   "FG_Min": 1.012,
@@ -933,6 +1040,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Old Ale",
+                  "co2_min": 1.5,
+                  "co2_max": 2.3,
                   "OG_Min": 1.060,
                   "OG_Max": 1.090,
                   "FG_Min": 1.015,
@@ -948,6 +1057,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Other Smoked Beer",
+                  "co2_min": 2.16,
+                  "co2_max": 2.57,
                   "OG_Min": 1.030,
                   "OG_Max": 1.110,
                   "FG_Min": 1.006,
@@ -963,6 +1074,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Premium American Lager",
+                  "co2_min": 2.57,
+                  "co2_max": 2.73,
                   "OG_Min": 1.046,
                   "OG_Max": 1.056,
                   "FG_Min": 1.008,
@@ -978,6 +1091,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Robust Porter",
+                  "co2_min": 1.8,
+                  "co2_max": 2.5,
                   "OG_Min": 1.048,
                   "OG_Max": 1.065,
                   "FG_Min": 1.012,
@@ -993,6 +1108,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Roggenbier (German Rye Beer)",
+                  "co2_min": 3.45,
+                  "co2_max": 3.45,
                   "OG_Min": 1.046,
                   "OG_Max": 1.056,
                   "FG_Min": 1.010,
@@ -1007,6 +1124,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Saison",
+                  "co2_min": 1.9,
+                  "co2_max": 2.4,
                   "OG_Min": 1.048,
                   "OG_Max": 1.065,
                   "FG_Min": 1.002,
@@ -1022,6 +1141,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Schwarzbier",
+                  "co2_min": 2.2,
+                  "co2_max": 2.6,
                   "OG_Min": 1.046,
                   "OG_Max": 1.052,
                   "FG_Min": 1.010,
@@ -1037,6 +1158,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Scottish Light 60/-",
+                  "co2_min": 0.75,
+                  "co2_max": 1.3,
                   "OG_Min": 1.030,
                   "OG_Max": 1.035,
                   "FG_Min": 1.010,
@@ -1052,6 +1175,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Scottish Light 70/-",
+                  "co2_min": 0.75,
+                  "co2_max": 1.3,
                   "OG_Min": 1.035,
                   "OG_Max": 1.040,
                   "FG_Min": 1.010,
@@ -1067,6 +1192,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Scottish Light 80/-",
+                  "co2_min": 0.75,
+                  "co2_max": 1.3,
                   "OG_Min": 1.040,
                   "OG_Max": 1.054,
                   "FG_Min": 1.010,
@@ -1082,6 +1209,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Southern English Brown Ale",
+                  "co2_min": 1.5,
+                  "co2_max": 2.3,
                   "OG_Min": 1.033,
                   "OG_Max": 1.042,
                   "FG_Min": 1.011,
@@ -1097,6 +1226,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Special/Best/Premium Bitter",
+                  "co2_min": 0.75,
+                  "co2_max": 1.3,
                   "OG_Min": 1.040,
                   "OG_Max": 1.048,
                   "FG_Min": 1.008,
@@ -1112,6 +1243,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Specialty Beer",
+                  "co2_min": 2.2,
+                  "co2_max": 2.5,
                   "OG_Min": 1.030,
                   "OG_Max": 1.110,
                   "FG_Min": 1.006,
@@ -1127,6 +1260,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Spice, Herb, or Vegetable Beer",
+                  "co2_min": 2.0,
+                  "co2_max": 3.0,
                   "OG_Min": 1.030,
                   "OG_Max": 1.110,
                   "FG_Min": 1.005,
@@ -1141,6 +1276,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Standard American Lager",
+                  "co2_min": 2.57,
+                  "co2_max": 2.73,
                   "OG_Min": 1.040,
                   "OG_Max": 1.050,
                   "FG_Min": 1.004,
@@ -1156,6 +1293,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Standard/Ordinary Bitter",
+                  "co2_min": 0.75,
+                  "co2_max": 1.3,
                   "OG_Min": 1.032,
                   "OG_Max": 1.040,
                   "FG_Min": 1.007,
@@ -1171,6 +1310,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Straight (Unblended) Lambic",
+                  "co2_min": 3.0,
+                  "co2_max": 4.5,
                   "OG_Min": 1.040,
                   "OG_Max": 1.054,
                   "FG_Min": 1.001,
@@ -1186,6 +1327,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Strong Scotch Ale",
+                  "co2_min": 1.5,
+                  "co2_max": 2.3,
                   "OG_Min": 1.070,
                   "OG_Max": 1.130,
                   "FG_Min": 1.018,
@@ -1201,6 +1344,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Sweet Stout",
+                  "co2_min": 2.0,
+                  "co2_max": 2.4,
                   "OG_Min": 1.044,
                   "OG_Max": 1.060,
                   "FG_Min": 1.012,
@@ -1216,6 +1361,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Traditional Bock",
+                  "co2_min": 2.2,
+                  "co2_max": 2.7,
                   "OG_Min": 1.064,
                   "OG_Max": 1.072,
                   "FG_Min": 1.013,
@@ -1231,6 +1378,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Vienna Lager",
+                  "co2_min": 2.4,
+                  "co2_max": 2.6,
                   "OG_Min": 1.046,
                   "OG_Max": 1.052,
                   "FG_Min": 1.010,
@@ -1246,6 +1395,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Weizen/Weissbier",
+                  "co2_min": 3.6,
+                  "co2_max": 4.48,
                   "OG_Min": 1.044,
                   "OG_Max": 1.052,
                   "FG_Min": 1.010,
@@ -1261,6 +1412,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Weizenbock",
+                  "co2_min": 3.71,
+                  "co2_max": 4.74,
                   "OG_Min": 1.064,
                   "OG_Max": 1.090,
                   "FG_Min": 1.015,
@@ -1276,6 +1429,8 @@ db.styles.insert([
                 },
                 {
                   "name": "Witbier",
+                  "co2_min": 2.1,
+                  "co2_max": 2.6,
                   "OG_Min": 1.044,
                   "OG_Max": 1.052,
                   "FG_Min": 1.008,

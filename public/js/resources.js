@@ -32,7 +32,7 @@
         });
     });
     
-    var services = ['Style','Grain','Hop','Yeast','Misc'];
+    var services = ['Style','Grain','Hop','Yeast','Misc','Bottle'];
     angular.forEach(services,function(s) {
         res.factory(s,function($resource) {
             return $resource( s.toLowerCase() + '/:id',{}, {});

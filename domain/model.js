@@ -106,12 +106,24 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
         }]
     },
     bottling: {
-        sugarType: String, 
+        sugar: {
+            desiredVol: Number,
+            temperature: Number,
+            sugarType: String
+        },
+        must: {
+            temperature: Number
+        },
+        co2: {
+            temperature: Number
+        },
         bottles: [{
             bottleType: String,
             size: Number,
             amount: Number,
-            carbonatationType: String 
+            subTotal: Number,
+            carbonatationType: String,
+            colour: String
         }]
     },
     PRIMARY_TEMP: Number,
@@ -156,6 +168,13 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     mashTemp: Number,
     lossMashTemp: Number
     
+},{ _id: false }));
+
+exports.Bottle = mongoose.model("Bottle",new Schema({
+    _id: String,
+    name: String,
+    size: Number,
+    colour: String //'Ambar', 'Verde', 'Blanca'
 },{ _id: false }));
 
 exports.Grain = mongoose.model("Grain",new Schema({

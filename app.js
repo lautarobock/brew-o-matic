@@ -90,7 +90,7 @@ app.get('/recipe',filter,recipe.findAll)
 app.get('/recipe/:id',recipe.get)
 app.post('/recipe',filter,recipe.save)
 app.delete('/recipe/:id',filter,recipe.remove)
-var services = ['Style','Grain','Hop','Yeast','Misc'];
+var services = ['Style','Grain','Hop','Yeast','Misc','Bottle'];
 for (s in services ) {
   app.get('/' + services[s].toLowerCase(),data[services[s]].findAll);  
 }
