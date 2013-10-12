@@ -115,6 +115,7 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
             temperature: Number
         },
         co2: {
+            desiredVol: Number,
             temperature: Number
         },
         bottles: [{

@@ -76,9 +76,15 @@
         };
         $scope.obtainVolCO2Style();
         
+        $scope.presureInPsi = function(vol,temp) {
+            var tempF = ((212-32)/100 *temp + 32);
+            var psi =  BrewHelper.round(-16.6999- 0.0101059 *tempF+0.00116512*tempF*tempF+0.173354*tempF*vol+4.24267 *vol- 0.0684226*vol*vol,10);
+            $scope.presureInBar = BrewHelper.round(Math.round(1 / 14.5038 *psi* 1000000) / 1000000,100);
+            $scope.presureKgCm2 = BrewHelper.round($scope.presureInBar * 1.01972,100);
+            return psi;
+        };
         
-        
-        $scope.obtainMaxFermTemp = function() {
+        $scope.obtainMaxFermTemp = function(carbonatationType) {
             //Si no tiene cargada temperatura busco la mayor de la fermentacion
             var max = 0;
             angular.forEach($scope.recipe.fermentation.stages,function(stage) {
@@ -89,7 +95,7 @@
                     max = stage.temperatureEnd;
                 }
             });
-            $scope.recipe.bottling.sugar.temperature = max;
+            $scope.recipe.bottling[carbonatationType].temperature = max;
             $scope.changeBottles();
         };
         
