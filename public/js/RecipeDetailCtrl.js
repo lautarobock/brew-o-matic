@@ -553,7 +553,22 @@
                 });
             }
         };
-        
+
+        function fixEmptyValues(recipe) {
+            recipe.TrubChillerLosses = recipe.TrubChillerLosses || 0;
+            recipe.mashTemp = recipe.mashTemp || 66;
+            recipe.GrainTemp = recipe.GrainTemp || 25;
+            recipe.SpargeTempDesired = recipe.SpargeTempDesired || 75;
+            recipe.SpargeDeadSpace = recipe.SpargeDeadSpace || 0;
+            recipe.lossMashTemp = recipe.lossMashTemp || 0;
+            recipe.PercentEvap = recipe.PercentEvap || 10;
+            if ( !recipe.WatertoGrainRatio ) {
+                recipe.WatertoGrainRatio = 3;
+                recipe.StrikeWater = BrewHelper.round(recipe.WatertoGrainRatio * recipe.totalAmount,10);
+            }
+
+        };
+
         if ( $routeParams.recipeId ) {
             $scope.recipe = Recipe.get({id:$routeParams.recipeId},function() {
                 if ( $location.path().indexOf('/recipe/clone') == 0) {
@@ -566,6 +581,10 @@
                     //Al clonar elimino los comentarios de la original
                     $scope.recipe.comments = [];
                 }
+
+                //antes de cargar todos los datos verfico si hay valores en null y los reemplazo por el Default
+                fixEmptyValues($scope.recipe);
+
                 $scope.changeYeast();
                 //$scope.$emit("recipeLoaded");
             });
