@@ -1,7 +1,7 @@
 (function() {
 
 
-    var index = angular.module('index', ['ngResource','ngRoute','data','resources','helper','login','comments','googlechart']);
+    var index = angular.module('index', ['ngResource','ngRoute','data','resources','helper','login','comments','googlechart','brew-o-module.controller']);
 
     index.constant("version",'0.7')
  

@@ -29,21 +29,21 @@
                     </div>
                     <div class="col-lg-2">
                         <label for="grainTemp">Temp granos (Cº)</label>
-                        <input type="number" class="form-control input-sm" id="grainTemp" ng-model="recipe.GrainTemp" />
+                        <span class="form-control input-sm" id="grainTemp" ng-bind="recipe.GrainTemp" />
                     </div>
                     <div class="col-lg-2">
                         <label for="strikeWater">Agua inicial (L)</label>
-                        <input ng-change="recipe.WatertoGrainRatio=round1(recipe.StrikeWater/recipe.totalAmount)" type="number" class="form-control input-sm" id="strikeWater" step="0.1" ng-model="recipe.StrikeWater" />
+                        <span class="form-control input-sm" id="strikeWater" ng-bind="recipe.StrikeWater" />
                     </div>
                     <div class="col-lg-2">
                         <label for="watertoGrainRatio">Empaste (L/Kg)</label>
-                        <input ng-change="recipe.StrikeWater=round1(recipe.WatertoGrainRatio*recipe.totalAmount)" type="number" class="form-control input-sm" id="watertoGrainRatio" step="0.1" ng-model="recipe.WatertoGrainRatio" />
+                        <span class="form-control input-sm" id="watertoGrainRatio" ng-bind="recipe.WatertoGrainRatio" />
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-2">
                         <label for="initMashTemp">T. Macerado</label>
-                        <input type="number" class="form-control input-sm" id="initMashTemp" ng-model="recipe.mashTemp" />
+                        <span class="form-control input-sm" id="initMashTemp" ng-bind="recipe.mashTemp" />
                     </div>
                     <div class="col-lg-2">
                         <label for="tempStrikeWater">T. Agua Inicial</label>
@@ -53,7 +53,7 @@
                     </div>
                     <div class="col-lg-2">
                         <label for="lossMashTemp" title="Temperatura q pierden los granos luego de ser mezclados">Perdida (ºC)</label>
-                        <input type="number" class="form-control input-sm gt-preset" id="lossMashTemp" ng-model="recipe.lossMashTemp" />
+                        <span class="form-control input-sm gt-preset" id="lossMashTemp" ng-bind="recipe.lossMashTemp" />
                     </div>
                     <div class="col-lg-2">
                         <label for="mashVolume">Volumen Total</label>
@@ -75,7 +75,7 @@
                 <div class="row">
                     <div class="col-lg-2">
                         <label for="spargeTempDesired">Temperatura</label>
-                        <input type="number"  class="form-control input-sm" id="spargeTempDesired" step="0.1" ng-model="recipe.SpargeTempDesired" />
+                        <span class="form-control input-sm" id="spargeTempDesired" ng-bind="recipe.SpargeTempDesired" />
                     </div>
                     <div class="col-lg-2">
                         <label for="spargeWater">Cantidad Agua</label>
@@ -84,31 +84,15 @@
                     </div>
                     <div class="col-lg-2">
                         <label title="Litros perdidos en el lavado (por ejemplo debajo del FF)" for="spargeDeadSpace">Espacio Muerto</label>
-                        <input type="number"  class="form-control input-sm gt-preset" id="spargeDeadSpace" step="0.1" ng-model="recipe.SpargeDeadSpace" />
+                        <span class="form-control input-sm gt-preset" id="spargeDeadSpace" ng-bind="recipe.SpargeDeadSpace" />
                     </div>
                     <div class="col-lg-2">
                         <label title="Litros de agua que quedan en el bagazo por cada Kg de malta" for="grainAbsorbtion">Absorcion (L/Kg)</label>
-                        <input type="number"  class="form-control input-sm gt-preset" id="grainAbsorbtion" step="0.1" ng-model="recipe.GrainAbsorbtion" />
+                        <span class="form-control input-sm gt-preset" id="grainAbsorbtion" ng-bind="recipe.GrainAbsorbtion" />
                     </div>
                 </div>
             </div>
         </div>
-        <div style="overflow: hidden;margin-bottom: 1em;">
-            <div class="pull-left">
-                <a href="#/recipe/" type="button" class="btn btn-link glyphicon glyphicon-chevron-left"> Volver al listado</a>
-            </div>
-            <div class="pull-right">
-                <a href="#/recipe/" type="button" class="btn btn-default">Cancelar</a>
-                <button ng-click="save()" type="button" class="btn btn-primary">Guardar</button>
-            </div>
-        </div>
-        <div ng-repeat="notification in notifications">
-            <div class="alert alert-{{notification.type}} alert-dismissable">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <strong>{{notification.title}}</strong>
-                {{notification.text}}
-            </div>
-        </div>            
     </div>
     <div class="col-md-2" >
         <ng-include src="'partial/recipe-detail-indicators.html'"></ng-include>

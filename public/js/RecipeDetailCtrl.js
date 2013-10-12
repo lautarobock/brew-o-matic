@@ -145,42 +145,6 @@
             $scope.changeBottles();
         };
     });
-
-    index.controller("RecipeTabCtrl",function($scope) {
-        $scope.sortTabs = ['main','mash','boil','fermentation','bottling'];
-        $scope.tabs = {
-            main: {
-                title: 'Recipe',
-                template: 'recipe-detail-main'
-            },
-            mash: {
-                title: 'Macerado',
-                template: 'recipe-mash'
-            },
-            boil: {
-                title: 'Hervido',
-                template: 'recipe-boil'
-            },
-            fermentation: {
-                title: 'Fermentacion',
-                template: 'recipe-fermentation'
-            },
-            bottling: {
-                title: 'Embotellado',
-                template: 'recipe-bottling'
-            }};
-        
-        $scope.selectedTab = 'main';
-        
-        $scope.getActiveClass = function(tab) {
-            return $scope.selectedTab === tab ? 'active':'';
-        };
-        
-        $scope.changeTab = function(tab) {
-            $scope.selectedTab=tab;
-            $scope.$parent.notifications = [];
-        };
-    });
     
     index.controller("RecipeDetailCtrl",
                      function (

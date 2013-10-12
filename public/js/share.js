@@ -1,7 +1,13 @@
 (function() {
 
 
-    var share = angular.module('share', ['ngResource','data','resources','helper','login','comments']);
+    var share = angular.module('share', ['ngResource',
+                                        'data',
+                                        'resources',
+                                        'helper',
+                                        'login',
+                                        'comments',
+                                        'brew-o-module.controller']);
 
     share.controller("ShareController", function(
                     $scope,
