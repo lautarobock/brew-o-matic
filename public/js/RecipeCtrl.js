@@ -148,19 +148,21 @@
     });
 
     module.controller("RecipeBoilCtrl",function($scope,BrewHelper) {
+
         $scope.calculateSgBeforeBoil = function(BOIL_TIME, PercentEvap, OG) {
             //Porcentaje evaporado en todo el tiempo
             //TODO, esto en realidad deberia hacerse hora por hora (no es lo mismo)
             var percentageEvap = (BOIL_TIME/60)*PercentEvap/100;
             return BrewHelper.toPotential(BrewHelper.toPpg(OG) * (1-percentageEvap));
         };
+
     });
 
     module.controller("RecipeTabCtrl",function($scope) {
         $scope.sortTabs = ['main','mash','boil','fermentation','bottling'];
         $scope.tabs = {
             main: {
-                title: 'Recipe',
+                title: 'Receta',
                 template: 'detail-main'
             },
             mash: {

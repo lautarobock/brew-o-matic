@@ -8,7 +8,7 @@
             </div>
             <div class="col-lg-2">
                 <label for="boil_size">Litros a Hervir (L)</label>
-                <span class="form-control input-sm gt-calculated" id="beforeBoil" ng-bind="round1(calculateBoilSize(recipe.BATCH_SIZE, recipe.TrubChillerLosses, recipe.BOIL_TIME, recipe.PercentEvap, recipe.TopUpWater)) + ' Lts'" />
+                <span class="form-control input-sm gt-calculated" id="beforeBoil" ng-bind="round1(BrewCalc.calculateBoilSize(recipe.BATCH_SIZE, recipe.TrubChillerLosses, recipe.BOIL_TIME, recipe.PercentEvap, recipe.TopUpWater)) + ' Lts'" />
             </div>
             <div class="col-lg-2">
               <label for="boil_time">Hervido (min)</label>

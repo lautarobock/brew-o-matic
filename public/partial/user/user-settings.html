@@ -1,0 +1,151 @@
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading"><strong>Datos Generales</strong></div>
+        <div class="panel-body" >
+            <div class="row">
+                <div class="col-lg-6">
+                    <label for="name">Nombre</label>
+                    <input type="text" class="form-control input-sm" id="name" placeholder="(Tu Nombre)" ng-model="user.name">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><strong>Valores por defecto en tus recetas</strong></div>
+        <div class="panel-body" >
+            <div class="row">
+                <div class="col-md-3">        
+                    <label for="batchSize">Tamaño Batch (Lts)</label>
+                    <input type="number"
+                           step="0.1"
+                           class="form-control input-sm"
+                           id="batchSize"
+                           placeholder="(Tamaño del batch por defecto)"
+                           ng-model="user.settings.defaultValues.BATCH_SIZE">
+                </div>
+                <div class="col-md-3">        
+                    <label for="eficiency">Eficiencia</label>
+                    <input type="number"
+                           class="form-control input-sm"
+                           id="eficiency"
+                           placeholder="(Eficiencia del equipo)"
+                           ng-model="user.settings.defaultValues.EFFICIENCY">
+                </div>
+                <div class="col-md-3">        
+                    <label for="boilTime">Tiempo de hervido (min)</label>
+                    <input type="number"
+                           class="form-control input-sm"
+                           id="boilTime"
+                           placeholder="(Tiempo de hervido)"
+                           ng-model="user.settings.defaultValues.BOIL_TIME">
+                </div>
+                <div class="col-md-3">        
+                    <label for="brewer">Cervecero</label>
+                    <input type="text"
+                           class="form-control input-sm"
+                           id="brewer"
+                           placeholder="(Nombre del cervecero)"
+                           ng-model="user.settings.defaultValues.BREWER">
+                </div>
+            </div>
+                
+            <div class="row">
+                <div class="col-md-3">        
+                    <label for="GrainTemp">Temperatura del grano</label>
+                    <input type="number"
+                           step="0"
+                           class="form-control input-sm"
+                           id="GrainTemp"
+                           placeholder="(Temperatura del grano)"
+                           ng-model="user.settings.defaultValues.GrainTemp">
+                </div>
+                <div class="col-md-3">        
+                    <label for="WatertoGrainRatio">Relacion Empaste (Lts/Kg)</label>
+                    <input type="number"
+                           class="form-control input-sm"
+                           id="WatertoGrainRatio"
+                           placeholder="(Relacion Empaste)"
+                           ng-model="user.settings.defaultValues.WatertoGrainRatio">
+                </div>
+                <div class="col-md-3">        
+                    <label for="mashTemp">Temp. Macerado</label>
+                    <input type="number"
+                           class="form-control input-sm"
+                           id="mashTemp"
+                           placeholder="(Temperatura macerado)"
+                           ng-model="user.settings.defaultValues.mashTemp">
+                </div>
+                <div class="col-md-3">        
+                    <label for="lossMashTemp">Perdida (ºC)</label>
+                    <input type="text"
+                           class="form-control input-sm"
+                           id="lossMashTemp"
+                           placeholder="(Perdida)"
+                           ng-model="user.settings.defaultValues.lossMashTemp">
+                </div>
+            </div>
+                
+            <div class="row">
+                <div class="col-md-3">        
+                    <label for="SpargeTempDesired">Temperatura Lavado</label>
+                    <input type="number"
+                           class="form-control input-sm"
+                           id="SpargeTempDesired"
+                           placeholder="(Temperatura lavado)"
+                           ng-model="user.settings.defaultValues.SpargeTempDesired">
+                </div>
+                <div class="col-md-3">        
+                    <label for="SpargeDeadSpace">Espacio Muerto (Lts)</label>
+                    <input type="number"
+                           step="0.1"
+                           class="form-control input-sm"
+                           id="SpargeDeadSpace"
+                           placeholder="(Espacio Muerto Macerador)"
+                           ng-model="user.settings.defaultValues.SpargeDeadSpace">
+                </div>
+                <div class="col-md-3">        
+                    <label for="GrainAbsorbtion">Absorcion del grano Lts/Kg</label>
+                    <input type="number"
+                           step="0.1"
+                           class="form-control input-sm"
+                           id="GrainAbsorbtion"
+                           placeholder="(Absorcion del grano)"
+                           ng-model="user.settings.defaultValues.GrainAbsorbtion">
+                </div>
+                <div class="col-md-3">        
+                    <label for="PercentEvap">Evaporacion (%)</label>
+                    <input type="number"
+                           class="form-control input-sm"
+                           id="PercentEvap"
+                           placeholder="(Evaporacion)"
+                           ng-model="user.settings.defaultValues.PercentEvap">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">        
+                    <label for="TrubChillerLosses">Perdida Turb y Enfirador (Lts)</label>
+                    <input type="number"
+                           step="0.1"
+                           class="form-control input-sm"
+                           id="TrubChillerLosses"
+                           placeholder="(Perdida Turb y Enfirador)"
+                           ng-model="user.settings.defaultValues.TrubChillerLosses">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="overflow: hidden;margin-bottom: 1em;">
+        <div class="pull-right">
+            <a href="#/recipe/" type="button" class="btn btn-default">Cancelar</a>
+            <button ng-click="save()" type="button" class="btn btn-primary">Guardar</button>
+        </div>
+    </div>
+    <div ng-repeat="notification in notifications">
+        <div class="alert alert-{{notification.type}} alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>{{notification.title}}</strong>
+            {{notification.text}}
+        </div>
+    </div>
+</div>

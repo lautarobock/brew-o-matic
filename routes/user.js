@@ -9,10 +9,42 @@ exports.add = function(req,res) {
     var user = new model.User();
     user.google_id = req.body.google_id;
     user.name = req.body.name
+	user.settings= {
+		"defaultValues" : {
+			"BATCH_SIZE" : 20,
+			"EFFICIENCY" : 70,
+			"BREWER" : req.body.name,
+			"BOIL_TIME" : 90,
+			"GrainTemp" : 25,
+			"WatertoGrainRatio" : 3,
+			"mashTemp" : 66,
+			"lossMashTemp" : 0,
+			"SpargeTempDesired" : 75,
+			"SpargeDeadSpace" : 0,
+			"GrainAbsorbtion" : 0.9,
+			"PercentEvap" : 10,
+			"TrubChillerLosses" : 0
+		}
+	};
+    
     model.User.create(user,function(err,newuser) {
         res.send(newuser);
     });
     
+};
+
+exports.updateSettings = function(req,res) {
+    model.User.findOne({_id: req.session.user_id},
+                       function(err,user) {
+        if ( err ) {
+            res.send(500,{error:err});
+        } else {
+            user.settings = req.body.settings;
+            user.name = req.body.name;
+            user.save();
+            res.send(user);  
+        }
+    });
 };
 
 exports.findStats = function(req,res) {

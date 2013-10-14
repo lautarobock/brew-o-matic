@@ -11,7 +11,8 @@
             getByGoogleId: {method: 'GET', params: {type:'google_'}, isArray:false},
             addToFavorites: {method: 'PUT', params: {type:'favorite_add'}},
             removeFromFavorites: {method: 'PUT', params: {type:'favorite_drop'}},
-            findStats: {method: 'GET', params: {type:'stats'}}
+            findStats: {method: 'GET', params: {type:'stats'}},
+            updateSettings: {method: 'PUT', params: {type:'settings'}}
         });
     });
     

@@ -6,8 +6,7 @@
             </div>
             <div class="panel-body" >
                 <div class="alert alert-info" ng-hide="recipe.fermentation.stages.length!=0">
-                    No ha creado ninguna etapa de fermentacion aun  
-                    <a href="" ng-click="addFermentationStage()" class="alert-link">Agrega tu primera etapa!</a>
+                    No ha creado ninguna etapa de fermentacion.
                 </div>
                 <div ng-show="recipe.fermentation.stages.length!=0">
                     <div class="row" style="width: 100%;margin-bottom: 1em">
@@ -125,10 +124,10 @@
                                     <strong>Duracion Total: </strong>{{calculateDays(recipe.fermentation)}}
                                 </li>
                                 <li class="list-group-item">
-                                    <strong>Volumen final: </strong>{{estimateLiters(recipe.fermentation.stages.length)|number:1}} Litros
+                                    <strong>Volumen final: </strong>{{BrewCalc.estimateLiters(recipe.fermentation.stages.length,recipe.BATCH_SIZE,recipe.fermentation.stages)|number:1}} Litros
                                 </li>
                                 <li class="list-group-item">
-                                    <strong>Volumen perdido: </strong>{{recipe.BATCH_SIZE - estimateLiters(recipe.fermentation.stages.length)|number:1}} Litros
+                                    <strong>Volumen perdido: </strong>{{recipe.BATCH_SIZE - BrewCalc.estimateLiters(recipe.fermentation.stages.length,recipe.BATCH_SIZE,recipe.fermentation.stages)|number:1}} Litros
                                 </li>
                                 <li class="list-group-item">
                                     <strong>Si comienzo el: </strong>

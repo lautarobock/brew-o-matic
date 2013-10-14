@@ -57,6 +57,20 @@
                 });
 
                 return liters;
+            },
+            fixEmptyValues: function (recipe) {
+                recipe.TrubChillerLosses = recipe.TrubChillerLosses || 0;
+                recipe.mashTemp = recipe.mashTemp || 66;
+                recipe.GrainTemp = recipe.GrainTemp || 25;
+                recipe.SpargeTempDesired = recipe.SpargeTempDesired || 75;
+                recipe.SpargeDeadSpace = recipe.SpargeDeadSpace || 0;
+                recipe.lossMashTemp = recipe.lossMashTemp || 0;
+                recipe.PercentEvap = recipe.PercentEvap || 10;
+                if ( !recipe.WatertoGrainRatio ) {
+                    recipe.WatertoGrainRatio = 3;
+                    recipe.StrikeWater = BrewHelper.round(recipe.WatertoGrainRatio * recipe.totalAmount,10);
+                }
+    
             }
         };
     });

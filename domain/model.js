@@ -5,7 +5,24 @@ var Schema = mongoose.Schema;
 exports.User = mongoose.model("User",new Schema({
     google_id: String,
     name: String,
-    favorites: [String]
+    favorites: [String],
+    settings: {
+        defaultValues: {
+            BATCH_SIZE: Number,
+            EFFICIENCY: Number,
+            BREWER: String,
+            BOIL_TIME: Number,
+            GrainTemp: Number,
+            WatertoGrainRatio: Number,
+            mashTemp: Number,
+            lossMashTemp: Number,
+            SpargeTempDesired: Number,
+            SpargeDeadSpace: Number,
+            GrainAbsorbtion: Number,
+            PercentEvap: Number,
+            TrubChillerLosses: Number
+        }
+    }
 }));
 
 exports.Recipe = mongoose.model("Recipe", new Schema({

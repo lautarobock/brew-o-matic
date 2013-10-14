@@ -357,92 +357,86 @@
                 });
             }
         };
-
-        function fixEmptyValues(recipe) {
-            recipe.TrubChillerLosses = recipe.TrubChillerLosses || 0;
-            recipe.mashTemp = recipe.mashTemp || 66;
-            recipe.GrainTemp = recipe.GrainTemp || 25;
-            recipe.SpargeTempDesired = recipe.SpargeTempDesired || 75;
-            recipe.SpargeDeadSpace = recipe.SpargeDeadSpace || 0;
-            recipe.lossMashTemp = recipe.lossMashTemp || 0;
-            recipe.PercentEvap = recipe.PercentEvap || 10;
-            if ( !recipe.WatertoGrainRatio ) {
-                recipe.WatertoGrainRatio = 3;
-                recipe.StrikeWater = BrewHelper.round(recipe.WatertoGrainRatio * recipe.totalAmount,10);
+        
+        //busco la receta o creo una nueva solo una vez
+        //q ya este cargado el usuario en en $rootScope
+        $rootScope.$watch('user',function(user) {
+            if (user) {
+                if ( $routeParams.recipeId ) {
+                    $scope.recipe = Recipe.get({id:$routeParams.recipeId},function() {
+                        if ( $location.path().indexOf('/recipe/clone') == 0) {
+                            $scope.recipe.cloneFrom = $scope.recipe._id;
+                            $scope.recipe._id = undefined;
+                            $scope.recipe.date = new Date();
+                            $scope.recipe.starredBy = [];
+                            $scope.recipe.clonedBy = [];
+                            $scope.recipe.isPublic = false;
+                            //Al clonar elimino los comentarios de la original
+                            $scope.recipe.comments = [];
+                        }
+        
+                        //antes de cargar todos los datos verfico si hay valores en null y los reemplazo por el Default
+                        BrewCalc.fixEmptyValues($scope.recipe);
+        
+                        $scope.changeYeast();
+                        //$scope.$emit("recipeLoaded");
+                    });
+                } else {
+                    $scope.recipe = new Recipe({
+                        "GrainCalcMethod": "2",
+                        fixIngredients: "1",
+                        STYLE:{},
+                        date: new Date(),
+                        totalAmount: 0,
+                        totalHop: 0,
+                        CALCCOLOUR: 0,
+                        BATCH_SIZE: $scope.user.settings.defaultValues.BATCH_SIZE,
+                        EFFICIENCY: $scope.user.settings.defaultValues.EFFICIENCY,
+                        OG: 1,
+                        CALCIBU: 0,
+                        FG: 1,
+                        BOIL_TIME: $scope.user.settings.defaultValues.BOIL_TIME,
+                        BREWER: $scope.user.settings.defaultValues.BREWER,
+                        GrainAbsorbtion: $scope.user.settings.defaultValues.GrainAbsorbtion || 0.9,
+                        "FERMENTABLES": {
+                            "FERMENTABLE": []
+                        },
+                        "HOPS": {
+                            "HOP": []
+                        },
+                        "YEASTS": {
+                            "YEAST": [{
+                                "NAME": "",
+                                "VERSION": "1",
+                                "ATTENUATION": 75
+                            }]
+                        },
+                        MISCS: {
+                            MISC: []
+                        },
+                        fermentation: {
+                            view: 'expand',
+                            stages: []
+                        },
+                        bottling: {
+                            sugarType: 'cane', //'cane', 'corn'
+                            bottles: []
+                        },
+                        WatertoGrainRatio: $scope.user.settings.defaultValues.WatertoGrainRatio,
+                        mashTemp: $scope.user.settings.defaultValues.mashTemp,
+                        lossMashTemp: $scope.user.settings.defaultValues.lossMashTemp,
+                        GrainTemp: $scope.user.settings.defaultValues.GrainTemp,
+                        SpargeDeadSpace: $scope.user.settings.defaultValues.SpargeDeadSpace,
+                        SpargeTempDesired: $scope.user.settings.defaultValues.SpargeTempDesired,
+                        TopUpWater: 0,
+                        PercentEvap: $scope.user.settings.defaultValues.PercentEvap,
+                        TrubChillerLosses: $scope.user.settings.defaultValues.TrubChillerLosses
+                    });
+                    $scope.changeYeast();
+                }                
             }
-
-        };
-
-        if ( $routeParams.recipeId ) {
-            $scope.recipe = Recipe.get({id:$routeParams.recipeId},function() {
-                if ( $location.path().indexOf('/recipe/clone') == 0) {
-                    $scope.recipe.cloneFrom = $scope.recipe._id;
-                    $scope.recipe._id = undefined;
-                    $scope.recipe.date = new Date();
-                    $scope.recipe.starredBy = [];
-                    $scope.recipe.clonedBy = [];
-                    $scope.recipe.isPublic = false;
-                    //Al clonar elimino los comentarios de la original
-                    $scope.recipe.comments = [];
-                }
-
-                //antes de cargar todos los datos verfico si hay valores en null y los reemplazo por el Default
-                fixEmptyValues($scope.recipe);
-
-                $scope.changeYeast();
-                //$scope.$emit("recipeLoaded");
-            });
-        } else {
-            $scope.recipe = new Recipe({
-                "GrainCalcMethod": "2",
-                fixIngredients: "1",
-                date: new Date(),
-                totalAmount: 0,
-                totalHop: 0,
-                CALCCOLOUR: 0,
-                BATCH_SIZE: 20,
-                EFFICIENCY: 65,
-                OG: 1,
-                CALCIBU: 0,
-                FG: 1,
-                BOIL_TIME: 90,
-                GrainAbsorbtion: 0.9,
-                "FERMENTABLES": {
-                    "FERMENTABLE": []
-                },
-                "HOPS": {
-                    "HOP": []
-                },
-                "YEASTS": {
-                    "YEAST": [{
-                        "NAME": "",
-                        "VERSION": "1",
-                        "ATTENUATION": 75
-                    }]
-                },
-                MISCS: {
-                    MISC: []
-                },
-                fermentation: {
-                    view: 'expand',
-                    stages: []
-                },
-                bottling: {
-                    sugarType: 'cane', //'cane', 'corn'
-                    bottles: []
-                },
-                WatertoGrainRatio: 3,
-                mashTemp: 66,
-                lossMashTemp: 0,
-                GrainTemp: 25,
-                SpargeDeadSpace: 0,
-                SpargeTempDesired: 75,
-                TopUpWater: 0,
-                PercentEvap: 10,
-                TrubChillerLosses: 0
-            });
-            $scope.changeYeast();
-        }
+        });
+        
         
         $scope.tabLink = function(tab) {
             var base = "#/recipe/edit/" + $scope.recipe._id;
@@ -512,14 +506,26 @@
                         var scope = $scope;
                         scope.recipe = tree.RECIPES.RECIPE;
                         scope.recipe.CALCCOLOUR = parseFloat(scope.recipe.CALCCOLOUR);
-                        scope.recipe.BATCH_SIZE = parseFloat(scope.recipe.BATCH_SIZE);
-                        scope.recipe.EFFICIENCY = parseFloat(scope.recipe.EFFICIENCY);
+                        scope.recipe.BATCH_SIZE = parseFloat(scope.recipe.BATCH_SIZE) || $scope.user.settings.defaultValues.BATCH_SIZE;
+                        scope.recipe.EFFICIENCY = parseFloat(scope.recipe.EFFICIENCY) || $scope.user.settings.defaultValues.EFFICIENCY;
                         scope.recipe.OG = parseFloat(scope.recipe.OG);
                         scope.recipe.FG = parseFloat(scope.recipe.FG);
                         scope.recipe.CALCIBU = parseFloat(scope.recipe.CALCIBU);
                         scope.recipe.BOIL_SIZE = parseFloat(scope.recipe.BOIL_SIZE);
-                        scope.recipe.BOIL_TIME = parseFloat(scope.recipe.BOIL_TIME);
+                        scope.recipe.BOIL_TIME = parseFloat(scope.recipe.BOIL_TIME) || $scope.user.settings.defaultValues.BOIL_TIME;
                         scope.recipe.PRIMARY_TEMP = parseFloat(scope.recipe.PRIMARY_TEMP);
+                        scope.recipe.BREWER = scope.recipe.BREWER || $scope.user.settings.defaultValues.BREWER;
+                        
+                        scope.recipe.TrubChillerLosses = parseFloat(scope.recipe.TrubChillerLosses) || $scope.user.settings.defaultValues.TrubChillerLosses;
+                        scope.recipe.mashTemp = parseFloat(scope.recipe.mashTemp) || $scope.user.settings.defaultValues.mashTemp;
+                        scope.recipe.GrainTemp = parseFloat(scope.recipe.GrainTemp) || $scope.user.settings.defaultValues.GrainTemp;
+                        scope.recipe.SpargeTempDesired = parseFloat(scope.recipe.SpargeTempDesired) || $scope.user.settings.defaultValues.SpargeTempDesired;
+                        scope.recipe.SpargeDeadSpace = parseFloat(scope.recipe.SpargeDeadSpace) || $scope.user.settings.defaultValues.SpargeDeadSpace;
+                        scope.recipe.lossMashTemp = parseFloat(scope.recipe.lossMashTemp) || $scope.user.settings.defaultValues.lossMashTemp;
+                        scope.recipe.PercentEvap = parseFloat(scope.recipe.PercentEvap) || $scope.user.settings.defaultValues.PercentEvap;
+                        scope.recipe.WatertoGrainRatio = parseFloat(scope.recipe.WatertoGrainRatio) || $scope.user.settings.defaultValues.WatertoGrainRatio;
+                        scope.recipe.StrikeWater = parseFloat(scope.recipe.StrikeWater) || BrewHelper.round(scope.recipe.WatertoGrainRatio * scope.recipe.totalAmount,10);
+                        scope.recipe.GrainAbsorbtion = parseFloat(scope.recipe.GrainAbsorbtion) || $scope.user.settings.defaultValues.GrainAbsorbtion || 0.9;
                         
                         scope.recipe.totalAmount = 0;
                         function convertFerm(ferm) {
@@ -581,6 +587,16 @@
                         scope.recipe.YEASTS.YEAST = [scope.recipe.YEASTS.YEAST];
                         scope.recipe.YEASTS.YEAST[0].ATTENUATION = parseFloat(scope.recipe.YEASTS.YEAST[0].ATTENUATION);
                         scope.recipe.GrainCalcMethod = '2';
+                
+                        scope.recipe.fermentation= {
+                            view: 'expand',
+                            stages: []
+                        };
+                        scope.recipe.bottling= {
+                            sugarType: 'cane', //'cane', 'corn'
+                            bottles: []
+                        };
+                        
                         scope.changeYeast();
                         scope.recipe.date = new Date();
                         scope.$apply();

@@ -83,6 +83,7 @@ app.post('/user', user.add);
 app.put('/user/favorite_add',filter,user.addToFavorites)
 app.put('/user/favorite_drop',filter,user.removeFromFavorites)
 app.get('/user/stats',filter,user.findStats)
+app.put('/user/settings',filter,user.updateSettings)
 app.get('/recipe/public',filter,recipe.findPublic)
 app.put('/recipe/comment',filter,recipe.addComment)
 app.put('/recipe/remove_comment',filter,recipe.deleteComment)

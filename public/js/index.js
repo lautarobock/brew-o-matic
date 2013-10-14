@@ -3,7 +3,7 @@
 
     var index = angular.module('index', ['ngResource','ngRoute','data','resources','helper','login','comments','googlechart','brew-o-module.controller']);
 
-    index.constant("version",'0.7')
+    index.constant("version",'0.9')
  
     index.
         config(['$routeProvider', function($routeProvider) {
@@ -13,9 +13,37 @@
                 when('/recipe/clone/:recipeId', {templateUrl: 'partial/recipe-detail.html', controller: 'RecipeDetailCtrl'}).
                 when('/recipe/new', {templateUrl: 'partial/recipe-detail.html', controller: 'RecipeDetailCtrl'}).
                 when('/stats', {templateUrl: 'partial/user/user-stats.html', controller: 'UserStatsCtrl'}).
+                when('/settings', {templateUrl: 'partial/user/user-settings.html', controller: 'UserSettingsCtrl'}).
                 otherwise({redirectTo: '/recipe'});
     }]);
 
+    index.controller("UserSettingsCtrl",function($scope,User,$rootScope) {
+        //$scope.$watch('user',function() {
+        //    $scope.stats = User.findStats();
+        //});
+        
+        $rootScope.breadcrumbs = [{
+            link: '#',
+            title: 'Home'
+        },{
+            link: '#',
+            title: 'Configuracion'
+        }];
+        
+        $scope.notifications = [];
+        $scope.save = function() {
+            //$scope.user.settings.defaultValues = $scope.dv;      
+            User.updateSettings($scope.user, function() {
+                $scope.notifications.push({
+                    type:'success',
+                    title:'Configuracion guardada!',
+                    text:'Tus cambios han sido guardados con exito!'
+                });    
+            });
+            
+        };
+    });
+    
     index.controller("UserStatsCtrl",function($scope,User,$rootScope) {
         $scope.$watch('user',function() {
             $scope.stats = User.findStats();

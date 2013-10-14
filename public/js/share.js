@@ -59,6 +59,7 @@
                 $scope.notFound = true;
                 console.log("Receta no encotrada");
             }
+            BrewCalc.fixEmptyValues($scope.recipe);
         });
 
         $scope.calulateBUGU = function(bu,gu) {

@@ -34,9 +34,6 @@
                             <span style="display: inline" ng-class="leftClass(estimated-bottled)" class="form-control input-sm ">
                                 {{estimated-bottled|number:2}} Ltrs
                             </span>
-                            <span  ng-class="restClass" style="margin-left: 2em">
-                                {{restComment}}
-                            </span>
                         </div>
                     </li>
                 </ul>
@@ -68,13 +65,13 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <span ng-bind="bottle.size" />
+                                    <span ng-bind="bottle.size" /> Lts
                                 </td>
                                 <td>
                                     <span ng-bind="bottle.amount"/>
                                 </td>
                                 <td>
-                                    <span ng-bind="bottle.subTotal"/>
+                                    <span ng-bind="bottle.subTotal"/> Lts
                                 </td>
                                 <td>
                                     <span ng-show="bottle.carbonatationType=='sugar'">Azucar</span>
