@@ -92,18 +92,18 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
         MASH_STEPS: {
             MASH_STEP: [ {
                 NAME: String,
-                TYPE: String,
-                INFUSE_AMOUNT: String,
-                STEP_TIME: Number,
-                STEP_TEMP: Number,
-                DESCRIPTION: String,
-                WATER_GRAIN_RATIO: Number,
-                DECOCTION_AMT: Number
+                TYPE: String, //'Infusion' fijo por ahora
+                INFUSE_AMOUNT: String, //Agua agregada
+                INFUSE_TEMP: Number,   //Temp agua agregada
+                STEP_TIME: Number,     //Duracion
+                STEP_TEMP: Number,     //Temperatura buscada (si pongo INFUSE se calcula sola, pero se puede pisar)
+                END_TEMP: Number,      //Temp final de la etapa.
+                DESCRIPTION: String,   //texto libre
+                WATER_GRAIN_RATIO: Number, //relacion final (calculada, INFUSE_AMOUNT y DECOCTION_AMT)
+                DECOCTION_AMT: Number  //cantidad sacada para decocction
                 //Others data not used yet
-                //RAMP_TIME: Number,
-                //END_TEMP: Number,
-                //INFUSE_TEMP: Number,
-                //DISPLAY_STEP_TEMP: Number,
+                //RAMP_TIME: Number,   //Este es redundante con END_TEMP
+                //DISPLAY_STEP_TEMP: Number, 
                 //DISPLAY_INFUSE_AMT: Number,
             }]
         }

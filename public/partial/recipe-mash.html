@@ -63,13 +63,82 @@
                     </div>
                 </div>
             </div>
-            <!--<div class="panel-heading"><strong>Escalones</strong></div>-->
-            <!--<div class="panel-body" >-->
-            <!--    <ul class="list-group">-->
-            <!--        <li class="list-group-item">Mash-in</li>-->
-            <!--        <li class="list-group-item">Mash-out</li>-->
-            <!--    </ul>-->
-            <!--</div>-->
+            <div class="panel-heading"><strong>Escalones</strong></div>
+            <div class="panel-body" >
+                <div class="alert alert-info" ng-hide="recipe.MASH.MASH_STEPS.MASH_STEP.length!=0">
+                    No ha creado ningun escalon.
+                    <a href="" ng-click="addMashStep()" class="alert-link">Agrega el primero!</a>
+                </div>
+                <div ng-show="recipe.MASH.MASH_STEPS.MASH_STEP.length!=0">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th style="width:6em">T. Inicial</th>
+                                <th style="width:6em">T. Final</th>
+                                <th style="width:4em">Duracion (min)</th>
+                                <th title="Agua agregada" style="width:6em">Agua Ag.</th>
+                                <th title="Temperatura del Agua agregada" style="width:6em">T. Agua Ag.</th>
+                                <th style="width:3em">Vol. Decoccion</th>
+                                <th style="width:3em">Volumen Final</th>
+                                <th>Notas</th>
+                                <th style="width:7em"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="stage in recipe.fermentation.stages">
+                                <td>
+                                    <input ng-blur="updateChart()" class="form-control input-sm" type="text" ng-model="stage.title" placeholder="(Titulo)"/>
+                                </td>
+                                <td>
+                                    <input ng-change="updateChart()" ng-blur="changeTemp(stage);updateChart();" class="form-control input-sm" type="number" ng-model="stage.temperature" placeholder="Temperatura"/>
+                                </td>
+                                <td>
+                                    <input ng-change="updateChart();" ng-focus="changeTemp(stage);" ng-blur="changeTemp(stage)" class="form-control input-sm" type="number" ng-model="stage.temperatureEnd" placeholder="Temperatura Final"/>
+                                </td>
+                                <td>
+                                    <input ng-change="updateChart();" class="form-control input-sm" type="number" ng-model="stage.duration" placeholder="Duracion"/>
+                                </td>
+                                <td>
+                                    <select ng-change="updateChart()" class="form-control input-sm" ng-model="stage.durationMode">
+                                        <option value="Dias">Dias</option>
+                                        <option value="Horas">Horas</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <span class="form-control input-sm gt-calculated">
+                                        {{estimateLiters($index)|number:1}}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="checkbox" title="Transvasara al final del la etapa?" >
+                                        <input ng-change="updateChart()" type="checkbox" ng-model="stage.transferring" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <input ng-disabled="!stage.transferring" class="form-control input-sm" type="number" step="0.1" ng-model="stage.losses" placeholder="Litros Perdidos"/>
+                                </td>
+                                <td>
+                                    <input ng-change="updateChart();" class="form-control input-sm" ng-model="stage.action" placeholder="(Notas)"/>
+                                </td>
+                                <td>
+                                    <button ng-click="recipe.fermentation.stages.splice($index,1);updateChart();"
+                                            type="button"
+                                            class="close" aria-hidden="true">&times;</button>
+                                    <button ng-disabled="$first"
+                                            ng-click="moveUp(stage,$index);updateChart();"
+                                            type="button"
+                                            class="gt-fermentation-stage-btn-move pull-right glyphicon glyphicon-chevron-up"></button>
+                                    <button ng-disabled="$last"
+                                            ng-click="moveDown(stage,$index);updateChart();"
+                                            type="button"
+                                            class="gt-fermentation-stage-btn-move pull-right glyphicon glyphicon-chevron-down"></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>                    
+                </div>
+            </div>
             <div class="panel-heading"><strong>Lavado</strong></div>
             <div class="panel-body" >
                 <div class="row">
