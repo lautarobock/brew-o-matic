@@ -7,7 +7,8 @@
                                         'helper',
                                         'login',
                                         'comments',
-                                        'brew-o-module.controller']);
+                                        'brew-o-module.controller',
+                                        'googlechart']);
 
     share.controller("ShareController", function(
                     $scope,
@@ -18,8 +19,13 @@
                     HopForm,
                     User,
                     $rootScope,
-                    $filter) {
-        
+                    $filter,
+                    BrewCalc) {
+
+        $rootScope.BrewCalc = BrewCalc;
+
+        $rootScope.BrewHelper = BrewHelper;
+
         $scope.formatDate = function(date) {
             date = new Date(date);
             //Fecha de hoy en segundos

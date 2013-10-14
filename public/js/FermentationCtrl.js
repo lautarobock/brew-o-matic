@@ -1,7 +1,7 @@
 (function() {
-    var index = angular.module('index');
+    var module = angular.module('brew-o-module.controller');
 
-    index.controller("FermentationCtrl", function($scope) {
+    module.controller("FermentationCtrl", function($scope) {
         $scope.addFermentationStage = function() {
             var temp = null;
             //cada etapa nueva la creo con la temperatura final de la anterior

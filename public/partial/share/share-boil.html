@@ -14,10 +14,9 @@
                                     </div>
                                     <div class="col-lg-6">
                                       <label for="beforeBoil">Litros antes de hervor</label>
-                                      <!--<span class="form-control input-sm gt-calculated" id="beforeBoil" ng-bind="round1((recipe.BATCH_SIZE/0.94+recipe.TrubChillerLosses)/( 1-((recipe.BOIL_TIME/60)*recipe.PercentEvap/100) )+recipe.TopUpWater) + ' Lts'" />-->
                                       <span class="form-control input-sm gt-calculated"
                                             id="beforeBoil"
-                                            ng-bind="round1(BrewCalc.calculateBoilSize(recipe.BATCH_SIZE, recipe.TrubChillerLosses, recipe.BOIL_TIME, recipe.PercentEvap, recipe.TopUpWater)) + ' Lts'" />
+                                            ng-bind="BrewHelper.round(BrewCalc.calculateBoilSize(recipe.BATCH_SIZE, recipe.TrubChillerLosses, recipe.BOIL_TIME, recipe.PercentEvap, recipe.TopUpWater),10) + ' Lts'" />
                                     </div>
                                 </div>
                                 <!--<div class="row">-->
@@ -59,7 +58,7 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <label for="afterBoil">Volumen</label>
-                                        <span class="form-control input-sm gt-calculated" id="afterBoil" ng-bind="round1(recipe.BATCH_SIZE/0.94+recipe.TrubChillerLosses) + ' Lts'" />
+                                        <span class="form-control input-sm gt-calculated" id="afterBoil" ng-bind="BrewHelper.round(recipe.BATCH_SIZE/0.94+recipe.TrubChillerLosses,10) + ' Lts'" />
                                     </div>                                    
                                 </div>
                                 <div class="row">
@@ -69,7 +68,7 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <label for="finalVolume">Volumen Final</label>
-                                        <span class="form-control input-sm gt-calculated" id="finalVolume" ng-bind="round1(recipe.BATCH_SIZE/0.94) + ' Lts'" />
+                                        <span class="form-control input-sm gt-calculated" id="finalVolume" ng-bind="BrewHelper.round(recipe.BATCH_SIZE/0.94,10) + ' Lts'" />
                                     </div>                                
                                 </div>
                             </div>
@@ -92,22 +91,6 @@
                 </div>
             </div>
         </div>
-        <div style="overflow: hidden;margin-bottom: 1em;">
-            <div class="pull-left">
-                <a href="#/recipe/" type="button" class="btn btn-link glyphicon glyphicon-chevron-left"> Volver al listado</a>
-            </div>
-            <div class="pull-right">
-                <a href="#/recipe/" type="button" class="btn btn-default">Cancelar</a>
-                <button ng-click="save()" type="button" class="btn btn-primary">Guardar</button>
-            </div>
-        </div>
-        <div ng-repeat="notification in notifications">
-            <div class="alert alert-{{notification.type}} alert-dismissable">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <strong>{{notification.title}}</strong>
-                {{notification.text}}
-            </div>
-        </div>            
     </div>
     <div class="col-md-2" >
         <ng-include src="'partial/recipe-detail-indicators.html'"></ng-include>

@@ -24,6 +24,42 @@
         }
     }]);
 
+    helper.factory("BrewCalc",function() {
+        return {
+            calculateBoilSize: function (BATCH_SIZE, TrubChillerLosses, BOIL_TIME, PercentEvap, TopUpWater) {
+                var ltsAfterBoil = BATCH_SIZE/0.94+TrubChillerLosses;
+
+                //Porcentaje evaporado en todo el tiempo
+                //TODO, esto en realidad deberia hacerse hora por hora (no es lo mismo)
+                var percentageEvap = (BOIL_TIME/60)*PercentEvap/100;
+                var tuw = TopUpWater ? TopUpWater : 0;
+                return ltsAfterBoil / ( 1 - percentageEvap ) + tuw;
+            },
+            estimateLiters: function($index,BATCH_SIZE,stages) {
+                var liters = BATCH_SIZE;
+                for ( var i=0; i<$index; i++ ) {
+                    var it = stages[i];
+                    if ( it.transferring ) {
+                        liters -= it.losses;
+                    }
+                }
+                return liters;
+            },
+            bottledLiters: function(volumeByCarbonatationType,bottles) {
+                var liters = 0;
+                volumeByCarbonatationType.sugar= 0;
+                volumeByCarbonatationType.must= 0;
+                volumeByCarbonatationType.co2= 0;
+
+                angular.forEach(bottles,function(bottle){
+                    liters += bottle.size * bottle.amount;
+                    volumeByCarbonatationType[bottle.carbonatationType] += bottle.size * bottle.amount;
+                });
+
+                return liters;
+            }
+        };
+    });
 
     helper.factory("BrewHelper",function() {
         return {

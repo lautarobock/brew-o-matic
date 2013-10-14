@@ -47,7 +47,10 @@
 
 
     
-    index.run(function($rootScope,version,$filter,$location) {
+    index.run(function($rootScope,version,$filter,$location,BrewCalc) {
+
+        $rootScope.BrewCalc = BrewCalc;
+
         $rootScope.version = version;
 
         $rootScope.encodeName = function(name) {

@@ -1,0 +1,236 @@
+<div ng-controller="BottlingCtrl">
+    <div class="col-md-10">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>Embotellado</strong>
+            </div>
+            <div class="panel-body" >
+                <ul class="list-group">
+                    <li class="list-group-item" style="overflow: hidden;">
+                        <div class="col-md-2">
+                            <strong>A embotellar:</strong>
+                        </div>
+                        <div class="col-md-10">
+                            <span style="display: inline" class="form-control input-sm gt-calculated " ng-init="estimated=BrewCalc.estimateLiters(recipe.fermentation.stages.length,recipe.BATCH_SIZE,recipe.fermentation.stages)">
+                                {{estimated|number:2}} Ltrs
+                            </span>
+                        </div>
+                    </li>
+                    <li class="list-group-item" style="overflow: hidden;">
+                        <div class="col-md-2">
+                            <strong>Embotellado:</strong>
+                        </div>
+                        <div class="col-md-10">
+                            <span style="display: inline" class="form-control input-sm gt-calculated " ng-init="volumeByCarbonatationType={};bottled=BrewCalc.bottledLiters(volumeByCarbonatationType,recipe.bottling.bottles)">
+                                {{bottled|number:2}} Ltrs
+                            </span>
+                        </div>
+                    </li>
+                    <li class="list-group-item" style="overflow: hidden;">
+                        <div class="col-md-2">
+                            <strong>Restante:</strong>
+                        </div>
+                        <div class="col-md-10">
+                            <span style="display: inline" ng-class="leftClass(estimated-bottled)" class="form-control input-sm ">
+                                {{estimated-bottled|number:2}} Ltrs
+                            </span>
+                            <span  ng-class="restClass" style="margin-left: 2em">
+                                {{restComment}}
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+                
+                
+                <div class="alert alert-info" ng-hide="recipe.bottling.bottles.length!=0">
+                    No ha cargado ninguna botella,
+                </div>
+                <div ng-show="recipe.bottling.bottles.length!=0">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Tipo</th>
+                                <th style="width:3em">Color</th>                                
+                                <th style="width:10em">Tamaño</th>
+                                <th style="width:10em">Cantidad</th>
+                                <th style="width:10em">Total</th>
+                                <th style="width:10em">Carbonatacion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="bottle in recipe.bottling.bottles">
+                                <td>
+                                    <span ng-bind="bottle.bottleType"/>
+                                </td>
+                                <td>
+                                    <div ng-style="{'height': '28px','border':'1px solid','border-radius': '5px','background-color':getBottleColor(bottle.colour)}" >
+                
+                                    </div>
+                                </td>
+                                <td>
+                                    <span ng-bind="bottle.size" />
+                                </td>
+                                <td>
+                                    <span ng-bind="bottle.amount"/>
+                                </td>
+                                <td>
+                                    <span ng-bind="bottle.subTotal"/>
+                                </td>
+                                <td>
+                                    <span ng-show="bottle.carbonatationType=='sugar'">Azucar</span>
+                                    <!--<option value="must">Mosto</option>-->
+                                    <span ng-show="bottle.carbonatationType=='co2'">CO2</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- CARBONATACION AZUCAR -->
+                <div class="panel panel-default" style="margin-top: 5em" ng-show="volumeByCarbonatationType['sugar']>0">
+                    <div class="panel-heading"><strong>Carbonatacion Natural (Azucar)</strong></div>
+                    <div class="panel-body" >
+                        <ul class="list-group">
+                            <li class="list-group-item" style="overflow: hidden;">
+                                <div class="col-md-3">
+                                    <strong>Volumen: </strong>
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="form-control input-sm gt-calculated">
+                                        {{volumeByCarbonatationType['sugar']|number:1}} Lts
+                                    </span>
+                                </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-3">
+                                    <strong>Vol. de CO<sub>2</sub> residual:</strong>
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="form-control input-sm gt-calculated" ng-bind="restCO2|number:2"/>
+                                </div>
+                            </li>
+                            <li class="list-group-item" style="overflow: hidden;">
+                                <div class="col-md-3">
+                                    <strong>Vol. de CO<sub>2</sub> deseados: </strong> 
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="form-control input-sm" ng-bind="recipe.bottling.sugar.desiredVol" />
+                                </div>
+                                <div class="col-md-1">
+
+                                </div>
+                                <div class="col-md-3">
+                                    <strong title="Es la temperatura maxima a la que ha fermentado la cerveza">
+                                        Temperatura:
+                                    </strong>
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="form-control input-sm" ng-bind="recipe.bottling.sugar.temperature" />
+                                </div>
+                                <div class="col-md-1">
+
+                                </div>
+                            </li>
+                            <li class="list-group-item" style="overflow: hidden;">
+                                <div class="col-md-3">
+                                    <strong>Tipo de Azucar:</strong>
+                                </div>
+                                <div class="col-md-2">
+                                    <span ng-show="recipe.bottling.sugar.sugarType=='cane'">Caña</span>
+                                    <span ng-show="recipe.bottling.sugar.sugarType=='corn'">Maiz</span>
+                                    <span ng-show="recipe.bottling.sugar.sugarType=='honey'">Miel</span>
+                                </div>
+                            </li>
+                            <li class="list-group-item" style="overflow: hidden;">
+                                <div class="col-md-3">
+                                    <strong>g/L:</strong>
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="form-control input-sm gt-calculated" ng-bind="gramsLiter"/>
+                                </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-3">
+                                    <strong>Azucar Total:</strong>
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="form-control input-sm gt-calculated" >
+                                        {{gramsLiter*volumeByCarbonatationType['sugar']|number:0}}
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Carbonatacion con CO2 -->
+
+                <div class="panel panel-default" style="margin-top: 5em" ng-show="volumeByCarbonatationType['co2']>0">
+                    <div class="panel-heading"><strong>Carbonatacion Artificial (CO<sub>2</sub>)</strong></div>
+                    <div class="panel-body" >
+                        <ul class="list-group">
+                            <li class="list-group-item" style="overflow: hidden;">
+                                <div class="col-md-3">
+                                    <strong>Volumen: </strong>
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="form-control input-sm gt-calculated">
+                                        {{volumeByCarbonatationType['co2']|number:1}} Lts
+                                    </span>
+                                </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-3">
+                                    <strong title="Es la temperatura en la que se esta haciendo el proceso de carbonatacion">
+                                        Temperatura:
+                                    </strong>
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="form-control input-sm" ng-bind="recipe.bottling.co2.temperature"/>
+                                </div>
+                            </li>
+                            <li class="list-group-item" style="overflow: hidden;">
+                                <div class="col-md-3">
+                                    <strong>Vol. de CO<sub>2</sub> deseados: </strong>
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="form-control input-sm" ng-bind="recipe.bottling.co2.desiredVol" />
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                                <div class="col-md-2">
+                                    <strong>Presion:</strong>
+                                </div>
+                                <div class="col-md-4">
+                                    <span class="form-control input-sm gt-calculated" >
+                                        {{ presureInPsi(recipe.bottling.co2.desiredVol,recipe.bottling.co2.temperature) }} psi / {{ presureInBar }} bar / {{ presureKgCm2 }} Kg/cm<sup>2</sup>
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- <div class="panel-body" >
+                     <div google-chart chart="chart" ng-style="chart.cssStyle"></div>
+                </div>-->
+            </div>
+        </div>
+        <div style="overflow: hidden;margin-bottom: 1em;">
+            <div class="pull-left">
+                <a href="#/recipe/" type="button" class="btn btn-link glyphicon glyphicon-chevron-left"> Volver al listado</a>
+            </div>
+            <div class="pull-right">
+                <a href="#/recipe/" type="button" class="btn btn-default">Cancelar</a>
+                <button ng-click="save()" type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+        <div ng-repeat="notification in notifications">
+            <div class="alert alert-{{notification.type}} alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>{{notification.title}}</strong>
+                {{notification.text}}
+            </div>
+        </div>            
+    </div>
+    <div class="col-md-2" >
+        <ng-include src="'partial/recipe-detail-indicators.html'"></ng-include>
+        <ng-include src="'partial/recipe-detail-social.html'"></ng-include>
+    </div>
+</div>

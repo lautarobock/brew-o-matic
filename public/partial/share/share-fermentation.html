@@ -1,0 +1,154 @@
+<div ng-controller="FermentationCtrl">
+    <div class="col-md-10">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>Etapas de Fermentacion</strong>
+            </div>
+            <div class="panel-body" >
+                <div class="alert alert-info" ng-hide="recipe.fermentation.stages.length!=0">
+                    No ha creado ninguna etapa de fermentacion aun  
+                    <a href="" ng-click="addFermentationStage()" class="alert-link">Agrega tu primera etapa!</a>
+                </div>
+                <div ng-show="recipe.fermentation.stages.length!=0">
+                    <div class="row" style="width: 100%;margin-bottom: 1em">
+                        <button style="margin-left: 1em" ng-disabled="(recipe.fermentation.view||'expand')=='expand'" ng-click="recipe.fermentation.view='expand'" type="button" class="btn btn-default btn-xs pull-right">Expandida</button>
+                        <button ng-disabled="(recipe.fermentation.view||'expand')=='compact'" ng-click="recipe.fermentation.view='compact'" type="button" class="btn btn-default btn-xs pull-right">Compacta</button>
+                    </div>
+                    <!-- COMPACT -->
+                    <table class="table table-striped table-hover" ng-show="(recipe.fermentation.view||'expand')=='compact'">
+                        <thead>
+                            <tr>
+                                <th>Titulo</th>
+                                <th style="width:6em">T. Inicial</th>
+                                <th style="width:6em">T. Final</th>
+                                <th style="width:3em">Duracion</th>
+                                <th style="width:3em">Volumen</th>
+                                <th style="width:3em">Trasvasa?</th>
+                                <th style="width:7em">Vol Perdido</th>
+                                <th>Notas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="stage in recipe.fermentation.stages">
+                                <td>
+                                    <span ng-bind="stage.title" />
+                                </td>
+                                <td>
+                                    <span ng-bind="stage.temperature" />
+                                </td>
+                                <td>
+                                    <span ng-bind="stage.temperatureEnd" />
+                                </td>
+                                <td>
+                                    <span ng-bind="stage.duration" />
+                                    <span ng-bind="stage.durationMode" />
+                                </td>
+                                <td>
+                                    <span>
+                                        {{BrewCalc.estimateLiters($index,recipe.BATCH_SIZE,recipe.fermentation.stages)|number:1}}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span ng-show="stage.transferring">si</span>
+                                    <span ng-hide="stage.transferring">no</span>
+                                </td>
+                                <td>
+                                    <span ng-show="stage.transferring">
+                                        {{ stage.losses }} Lts
+                                    </span>
+                                </td>
+                                <td>
+                                    <span ng-bind="stage.action" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- COMPACT END -->
+
+                    <!-- EXPANDED -->
+                    <div ng-repeat="stage in recipe.fermentation.stages" class="panel panel-default" ng-show="(recipe.fermentation.view||'expand')=='expand'">
+                        <div class="panel-heading">{{ stage.title }}</div>
+                        <div class="panel-body" >
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="temp">Temperatura</label>
+                                    <span id="temp" class="form-control input-sm" ng-bind="stage.temperature" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="tempf">Temperatura Final</label>
+                                    <span id="tempf" class="form-control input-sm" ng-bind="stage.temperatureEnd" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="duration">Duracion</label>
+                                    <span id="duration" class="form-control input-sm" ng-bind="stage.duration" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="durationMode">Modo</label>
+                                    <span id="durationMode" class="form-control input-sm" ng-bind="stage.durationMode"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="actual">Lts Estimados</label>
+                                    <span id="actual" class="form-control input-sm gt-calculated">
+                                        {{BrewCalc.estimateLiters($index,recipe.BATCH_SIZE,recipe.fermentation.stages)|number:1}}
+                                    </span>
+                                </div>
+                                <div class="col-md-3">
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="checkbox" style="margin-top: 2em;">
+                                        <label title="Transvasara al final del la etapa?" for="transferring">Trasvase?</label>
+                                        <span id="transferring" ng-show="stage.transferring" >Si</span>
+                                        <span ng-hide="stage.transferring" >No</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3"  ng-show="stage.transferring">
+                                    <label for="losses">Lts perdidos</label>
+                                    <span id="losses" class="form-control input-sm" ng-bind="stage.losses" />
+                                </div>
+                            </div>
+                            <div class="row" ng-show="stage.action">
+                                <div class="col-md-12">
+                                    <label for="action"></label>
+                                    <span id="action" class="form-control input-sm" ng-bind="stage.action" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default" style="margin-top: 5em">
+                        <div class="panel-heading"><strong>Resumen y graficos</strong></div>
+                        <div class="panel-body" >
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <strong>Duracion Total: </strong>{{calculateDays(recipe.fermentation)}}
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Volumen final: </strong>{{estimateLiters(recipe.fermentation.stages.length)|number:1}} Litros
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Volumen perdido: </strong>{{recipe.BATCH_SIZE - estimateLiters(recipe.fermentation.stages.length)|number:1}} Litros
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Si comienzo el: </strong>
+                                    {{ simulatedDate_day }}-{{ simulatedDate_month }}-{{ simulatedDate_year }}
+                                    <span style="margin-left: 1em;">terminaria en</span> 
+                                    <span title="Fecha estimada de fin de proceso de fermentacion/maduracion, a esto falta sumarle el tiempo de carbonatacion"
+                                          style="font-weight: bold; width:90px; display: inline"
+                                          class="form-control input-sm gt-calculated ">{{estimateEnd(simulatedDate_day,simulatedDate_month,simulatedDate_year,recipe.fermentation)|date:'dd-MM-yyyy'}}</span> 
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="panel-body" >
+                            <div google-chart chart="chart" ng-style="chart.cssStyle"></div>    
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2" >
+        <ng-include src="'partial/recipe-detail-indicators.html'"></ng-include>
+        <ng-include src="'partial/recipe-detail-social.html'"></ng-include>
+    </div>
+</div>
