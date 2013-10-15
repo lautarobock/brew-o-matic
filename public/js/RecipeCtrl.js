@@ -2,6 +2,55 @@
 
     var module = angular.module("brew-o-module.controller",[]);
 
+    module.controller("RecipeMashCtrl",function($scope) {
+
+        $scope.addMashStep = function() {
+            //ahora pongo esa, luego debeira obtene la del ultimo step.
+            var temp = $scope.recipe.mashTemp;
+            //Idem anterior
+            var ratio = $scope.recipe.WatertoGrainRatio;
+            //Copiar ultimo
+            var recirculate = false;
+
+            $scope.recipe.MASH.MASH_STEPS.MASH_STEP.push({
+                NAME: null,
+                TYPE: 'Infusion',
+                infuse: false,
+                INFUSE_AMOUNT: 0, //Agua agregada
+                INFUSE_TEMP: 100,   //Temp agua agregada
+                STEP_TIME: 0,     //Duracion
+                STEP_TEMP: temp,     //Temperatura buscada (si pongo INFUSE se calcula sola, pero se puede pisar)
+                END_TEMP: temp,      //Temp final de la etapa.
+                DESCRIPTION: null,   //texto libre
+                WATER_GRAIN_RATIO: ratio, //relacion final (calculada, INFUSE_AMOUNT y DECOCTION_AMT)
+                DECOCTION_AMT: 0,  //cantidad sacada para decocction
+                recirculate: recirculate
+            });
+        };
+
+        $scope.calculateVolume = function(step_index) {
+            return 0;
+        };
+
+        $scope.updateChart = function() {
+
+        };
+
+        $scope.moveUp = function(STEP,$index) {
+            $scope.recipe.MASH.MASH_STEPS.MASH_STEP.splice($index,1);
+            $scope.recipe.MASH.MASH_STEPS.MASH_STEP.splice($index-1,0,STEP);
+        };
+
+        $scope.moveDown = function(STEP,$index) {
+            $scope.recipe.MASH.MASH_STEPS.MASH_STEP.splice($index,1);
+            $scope.recipe.MASH.MASH_STEPS.MASH_STEP.splice($index+1,0,STEP);
+        };
+
+    });
+
+    /**
+     * BottlingControler
+     */
     module.controller("BottlingCtrl",function($scope,Bottle,BrewHelper) {
 
         $scope.bottleColor = {
@@ -147,6 +196,9 @@
         };
     });
 
+    /**
+     * BoilControler
+     */
     module.controller("RecipeBoilCtrl",function($scope,BrewHelper) {
 
         $scope.calculateSgBeforeBoil = function(BOIL_TIME, PercentEvap, OG) {
@@ -158,6 +210,9 @@
 
     });
 
+    /**
+     * TabControler
+     */
     module.controller("RecipeTabCtrl",function($scope) {
         $scope.sortTabs = ['main','mash','boil','fermentation','bottling'];
         $scope.tabs = {

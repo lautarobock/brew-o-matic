@@ -1,4 +1,4 @@
-<div>
+<div ng-controller="RecipeMashCtrl">
     <div class="col-md-10">
         <div class="panel panel-default">
             <div class="panel-heading"><strong>Empaste</strong></div>
@@ -63,6 +63,9 @@
                     </div>
                 </div>
             </div>
+
+            <!--STEPS-->
+
             <div class="panel-heading"><strong>Escalones</strong></div>
             <div class="panel-body" >
                 <div class="alert alert-info" ng-hide="recipe.MASH.MASH_STEPS.MASH_STEP.length!=0">
@@ -77,66 +80,74 @@
                                 <th style="width:6em">T. Inicial</th>
                                 <th style="width:6em">T. Final</th>
                                 <th style="width:4em">Duracion (min)</th>
+                                <th style="width:3em">Agrega Agua?</th>
                                 <th title="Agua agregada" style="width:6em">Agua Ag.</th>
                                 <th title="Temperatura del Agua agregada" style="width:6em">T. Agua Ag.</th>
                                 <th style="width:3em">Vol. Decoccion</th>
                                 <th style="width:3em">Volumen Final</th>
+                                <th style="width:3em">Recircula</th>
                                 <th>Notas</th>
                                 <th style="width:7em"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="stage in recipe.fermentation.stages">
+                            <tr ng-repeat="STEP in recipe.MASH.MASH_STEPS.MASH_STEP">
                                 <td>
-                                    <input ng-blur="updateChart()" class="form-control input-sm" type="text" ng-model="stage.title" placeholder="(Titulo)"/>
+                                    <input ng-blur="updateChart()" class="form-control input-sm" type="text" ng-model="STEP.NAME" placeholder="(Nombre)"/>
                                 </td>
                                 <td>
-                                    <input ng-change="updateChart()" ng-blur="changeTemp(stage);updateChart();" class="form-control input-sm" type="number" ng-model="stage.temperature" placeholder="Temperatura"/>
+                                    <input ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.STEP_TEMP" placeholder="Temperatura"/>
                                 </td>
                                 <td>
-                                    <input ng-change="updateChart();" ng-focus="changeTemp(stage);" ng-blur="changeTemp(stage)" class="form-control input-sm" type="number" ng-model="stage.temperatureEnd" placeholder="Temperatura Final"/>
+                                    <input ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.END_TEMP" placeholder="Temperatura Final"/>
                                 </td>
                                 <td>
-                                    <input ng-change="updateChart();" class="form-control input-sm" type="number" ng-model="stage.duration" placeholder="Duracion"/>
+                                    <input ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.STEP_TIME" placeholder="Duracion"/>
                                 </td>
                                 <td>
-                                    <select ng-change="updateChart()" class="form-control input-sm" ng-model="stage.durationMode">
-                                        <option value="Dias">Dias</option>
-                                        <option value="Horas">Horas</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <span class="form-control input-sm gt-calculated">
-                                        {{estimateLiters($index)|number:1}}
-                                    </span>
-                                </td>
-                                <td>
-                                    <div class="checkbox" title="Transvasara al final del la etapa?" >
-                                        <input ng-change="updateChart()" type="checkbox" ng-model="stage.transferring" />
+                                    <div class="checkbox" title="Agrega agua al macerado?" >
+                                        <input ng-change="updateChart()" type="checkbox" ng-model="STEP.infuse" />
                                     </div>
                                 </td>
                                 <td>
-                                    <input ng-disabled="!stage.transferring" class="form-control input-sm" type="number" step="0.1" ng-model="stage.losses" placeholder="Litros Perdidos"/>
+                                    <input ng-disabled="!STEP.infuse" ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.INFUSE_AMOUNT" placeholder="(Litros)"/>
                                 </td>
                                 <td>
-                                    <input ng-change="updateChart();" class="form-control input-sm" ng-model="stage.action" placeholder="(Notas)"/>
+                                    <input ng-disabled="!STEP.infuse" ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.INFUSE_TEMP" placeholder="(C°)"/>
                                 </td>
                                 <td>
-                                    <button ng-click="recipe.fermentation.stages.splice($index,1);updateChart();"
+                                    <input ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.DECOCTION_AMT" placeholder="(Litros)"/>
+                                </td>
+                                <td>
+                                    <span class="form-control input-sm" >
+                                        {{ calculateVolume($index) }} Lts
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="checkbox" title="Recircula?" >
+                                        <input ng-change="updateChart()" type="checkbox" ng-model="STEP.recirculate" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <input ng-blur="updateChart();" class="form-control input-sm" type="text" ng-model="STEP.DESCRIPTION" placeholder="(Notas)"/>
+                                </td>
+                                <td>
+                                    <button ng-click="recipe.MASH.MASH_STEPS.MASH_STEP.splice($index,1);updateChart();"
                                             type="button"
                                             class="close" aria-hidden="true">&times;</button>
                                     <button ng-disabled="$first"
-                                            ng-click="moveUp(stage,$index);updateChart();"
+                                            ng-click="moveUp(STEP,$index);updateChart();"
                                             type="button"
                                             class="gt-fermentation-stage-btn-move pull-right glyphicon glyphicon-chevron-up"></button>
                                     <button ng-disabled="$last"
-                                            ng-click="moveDown(stage,$index);updateChart();"
+                                            ng-click="moveDown(STEP,$index);updateChart();"
                                             type="button"
                                             class="gt-fermentation-stage-btn-move pull-right glyphicon glyphicon-chevron-down"></button>
                                 </td>
                             </tr>
                         </tbody>
-                    </table>                    
+                    </table>
+                    <button type="button" ng-click="addMashStep()" class="btn btn-default pull-right">Agregar Escalon</button>
                 </div>
             </div>
             <div class="panel-heading"><strong>Lavado</strong></div>
