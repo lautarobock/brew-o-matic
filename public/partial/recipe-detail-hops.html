@@ -9,7 +9,7 @@
           <th style="width:26%">Lupulo</th>
           <th style="width:8%">Alpha</th>
           <th style="width:12%">Modo</th>
-          <th style="width:10%">Kg</th>
+          <th style="width:10%">Grs</th>
           <th style="width:8%">g/L</th>
           <th style="width:8%">%</th>
           <th style="width:12%">Uso</th>
@@ -35,7 +35,9 @@
                     <option ng-repeat="form in hopForms">{{form.name}}</option>
                 </select>
             </td>
-            <td><input ng-change="changeHop()" class="form-control input-sm" type="number" step="0.001" ng-model="hop.AMOUNT" placeholder="Kg"/></td>
+            <td>
+                <input ng-init="amountGrs=hop.AMOUNT*1000" ng-change="hop.AMOUNT=amountGrs/1000;changeHop()" class="form-control input-sm" type="number" step="1" ng-model="amountGrs" placeholder="Kg"/>
+            </td>
             <td><span class="form-control input-sm gt-calculated">{{hopGramsPerLiter(hop,recipe.BATCH_SIZE)|number:2}}</span></td>
             <td><span class="form-control input-sm gt-calculated">{{hopPercentage(hop,recipe.totalHop)|number:2}}</span></td>
             <td>
@@ -51,7 +53,7 @@
         </tr>
         <tr>
             <td colspan="3"><strong class="pull-right">Total:</strong></td>
-            <td>{{recipe.totalHop | number:3}}</td>
+            <td>{{recipe.totalHop*1000 | number:0}} Grs</td>
             <td colspan="4"><strong class="pull-right">IBUs:</strong></td>
             <td>{{recipe.CALCIBU|number:2}}</td>
             <td></td>
