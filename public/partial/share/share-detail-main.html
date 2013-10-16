@@ -76,7 +76,7 @@
                         </tr>
                         <tr>
                             <td colspan="4"><strong class="pull-right">Total:</strong></td>
-                            <td>{{recipe.totalAmount | number:3}}</td>
+                            <td>{{recipe.totalAmount | number:3}} Kg</td>
                         </tr>
                         </tbody>
                     </table>
@@ -92,7 +92,7 @@
                             <th style="width:26%">Lupulo</th>
                             <th style="width:8%">Alpha</th>
                             <th style="width:12%">Modo</th>
-                            <th style="width:10%">Kg</th>
+                            <th style="width:10%">Grs</th>
                             <th style="width:8%">g/L</th>
                             <th style="width:8%">%</th>
                             <th style="width:12%">Uso</th>
@@ -105,7 +105,7 @@
                             <td><span ng-bind="hop.NAME"/></td>
                             <td><span ng-bind="hop.ALPHA"/></td>
                             <td><span ng-bind="hop.FORM"/></td>
-                            <td><span ng-bind="hop.AMOUNT"/></td>
+                            <td><span ng-bind="hop.AMOUNT*1000"/></td>
                             <td><span>{{hopGramsPerLiter(hop,recipe.BATCH_SIZE)|number:2}}</span></td>
                             <td><span>{{hopPercentage(hop,recipe.totalHop)|number:2}}</span></td>
                             <td><span ng-bind="hop.USE" /></td>
@@ -114,7 +114,7 @@
                         </tr>
                         <tr>
                             <td colspan="3"><strong class="pull-right">Total:</strong></td>
-                            <td>{{recipe.totalHop | number:3}}</td>
+                            <td>{{recipe.totalHop * 1000| number:0}} Grs</td>
                             <td colspan="4"><strong class="pull-right">IBUs:</strong></td>
                             <td>{{recipe.CALCIBU|number:2}}</td>
                             <td></td>
@@ -151,7 +151,7 @@
                             <th>Tipo</th>
                             <th>Uso</th>
                             <th>Tiempo</th>
-                            <th>Kg</th>
+                            <th>Grs</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -160,7 +160,7 @@
                             <td><span ng-bind="misc.TYPE" /></td>
                             <td><span ng-bind="misc.USE" /></td>
                             <td><span ng-bind="misc.TIME" /></td>
-                            <td><span ng-bind="misc.AMOUNT" /></td>
+                            <td><span ng-bind="misc.AMOUNT*1000" /></td>
                         </tr>
                         </tbody>
                     </table>

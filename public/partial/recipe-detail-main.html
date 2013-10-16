@@ -29,13 +29,13 @@
         <div class="panel-heading"><strong>Opciones</strong></div>
         <div class="panel-body" >
             <div style="margin: 0">
-                <strong title="Ingredientes: Al modificar los litros ajusta la OG y no modifica la cantidad de ingredientes. OG: Al modificar los litros ajusta los ingredientes y no modifica la OG" >Dejar Fijo:</strong>
+                <strong title="Ingredientes: Al modificar los litros ajusta la OG y no modifica la cantidad de ingredientes. OG: Al modificar los litros ajusta los ingredientes y no modifica la OG" >Fijar Ingredientes:</strong>
                 <select class="form-control input-sm" ng-model="recipe.fixIngredients">
                     <option ng-selected="recipe.fixIngredients=='1'" value="1">
-                        Ingredientes
+                        Si
                     </option>
                     <option ng-selected="!recipe.fixIngredients || recipe.fixIngredients=='0'" value="0">
-                        OG
+                        No
                     </option>
                 </select>                        
             </div>

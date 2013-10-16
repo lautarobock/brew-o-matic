@@ -10,7 +10,7 @@
           <th>Tipo</th>
           <th>Uso</th>
           <th style="width: 8em">Tiempo (min)</th>
-          <th style="width: 8em">Peso (Kg)</th>
+          <th style="width: 8em">Peso (Grs)</th>
           <th></th>
         </tr>
       </thead>
@@ -37,7 +37,10 @@
                 </select>
             </td>
             <td><input class="form-control input-sm" type="number" ng-model="misc.TIME" placeholder="Tiempo" /></td>
-            <td><input class="form-control input-sm" type="number" step="0.001" ng-model="misc.AMOUNT" placeholder="Kg"/></td>
+            <td>
+                <input ng-init="amountGrs=misc.AMOUNT*1000" ng-change="misc.AMOUNT=amountGrs/1000;" class="form-control input-sm" type="number" step="1" ng-model="amountGrs" placeholder="Kg"/>
+
+            </td>
             <td>
                 <button type="button" class="close" aria-hidden="true" ng-click="removeMisc(misc)">&times;</button>
             </td>

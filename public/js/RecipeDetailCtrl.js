@@ -94,6 +94,12 @@
 
         $scope.tempAmount = null;
 
+        $scope.$watch("recipe.EFFICIENCY", function(newValue,oldValue) {
+            if ( !oldValue || !$scope.recipe ) return;
+
+            $scope.recipe.BATCH_SIZE = BrewHelper.round($scope.recipe.BATCH_SIZE * newValue / oldValue,10);
+        });
+
         $scope.$watch("recipe.BATCH_SIZE", function(newValue,oldValue) {
             if ( !oldValue || !$scope.recipe || !$scope.recipe.FERMENTABLES ) return;
             
@@ -122,7 +128,8 @@
             }
             $scope.changeAmount();
         });
-       
+
+
         
         /**
          * si fijo la OG, al aumentar los litros debo aumentar materiales en la misma proporcion.
