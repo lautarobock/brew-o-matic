@@ -27,7 +27,10 @@ exports.remove= function(req, res) {
 
 
 function generateId(name,user_id) {
-    return name.replace(/ /g, "_").replace(/#/g,"_Nro_") + "-" + user_id + "-" + (new Date()).getTime();
+    return name.replace(/ /g, "_")
+                .replace(/#/g,"_Nro_")
+                .replace(/%/g,"_Per_")
+                + "-" + user_id + "-" + (new Date()).getTime();
 }
 
 exports.addComment = function(req,res) {

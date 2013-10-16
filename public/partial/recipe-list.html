@@ -48,8 +48,8 @@
                     <a href="#/recipe/edit/{{encodeName(recipe._id)}}" type="button" class="btn btn-primary btn-xs">editar</a>
                     <a href="#/recipe/clone/{{encodeName(recipe._id)}}" type="button" class="btn btn-default btn-xs">clonar</a>
                     <!--<button type="button" class="close" aria-hidden="true" ng-click="removeRecipe(recipe._id)">&times;</button>-->
-                    <button data-target="#confirmation{{recipe._id}}" data-toggle="modal"  type="button" class="close" aria-hidden="true">&times;</button>
-                    <div class="modal fade" id="confirmation{{recipe._id}}" role="dialog" aria-labelledby="#label">
+                    <button data-target="#{{confirmationID(recipe._id)}}" data-toggle="modal"  type="button" class="close" aria-hidden="true">&times;</button>
+                    <div class="modal fade" id="{{confirmationID(recipe._id)}}" role="dialog" aria-labelledby="#label">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">

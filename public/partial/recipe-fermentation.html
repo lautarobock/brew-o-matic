@@ -85,18 +85,21 @@
                     <!-- COMPACT END -->
 
                     <!-- EXPANDED -->
-                    <div ng-repeat="stage in recipe.fermentation.stages" class="panel panel-default" ng-show="(recipe.fermentation.view||'expand')=='expand'">
-                        <div class="panel-heading">
+                    <div ng-repeat="stage in recipe.fermentation.stages" style="padding: 0px" class="panel panel-default" ng-show="(recipe.fermentation.view||'expand')=='expand'">
+                        <div class="panel-heading" style="padding: 0;">
                             <button ng-click="recipe.fermentation.stages.splice($index,1);updateChart();"
                                     type="button"
+                                    style="margin-top: 7px;margin-right: 5px;"
                                     class="close" aria-hidden="true">&times;</button>
                             <button ng-disabled="$first"
                                     ng-click="moveUp(stage,$index);updateChart();"
                                     type="button"
+                                    style="margin-top: 7px;"
                                     class="gt-fermentation-stage-btn-move pull-right glyphicon glyphicon-chevron-up"></button>
                             <button ng-disabled="$last"
                                     ng-click="moveDown(stage,$index);updateChart();"
                                     type="button"
+                                    style="margin-top: 7px;"
                                     class="gt-fermentation-stage-btn-move pull-right glyphicon glyphicon-chevron-down"></button>
                             <input ng-focus="onFocus=true" ng-blur="onFocus=false;updateChart();" id="step_title" ng-style="styleTitle(onFocus)" class="form-control gt-fermentation-stage-title" type="text" ng-model="stage.title" placeholder="(Clic para ingresar un titulo)"/>
                         </div>

@@ -51,9 +51,13 @@
             $scope.published = Recipe.findPublic({limit:$scope.publishedCount});
         };
         
+        $scope.confirmationID = function(id) {
+            return 'confirmation' + id.replace('(','_').replace(')','_');
+        };
+        
         $scope.removeRecipe = function(_id) {
             Recipe.remove({id:_id}, function() {
-                $('#confirmation' + _id).modal('hide');
+                $('#'+$scope.confirmationID(_id)).modal('hide');
                 $timeout(function() {
                     $scope.recipes = Recipe.query();
                 },500);

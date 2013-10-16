@@ -94,20 +94,34 @@
 
         $scope.tempAmount = null;
 
+        $scope.noUpdate = false;
         $scope.$watch("recipe.EFFICIENCY", function(newValue,oldValue) {
             if ( !oldValue || !$scope.recipe ) return;
-
-            $scope.recipe.BATCH_SIZE = BrewHelper.round($scope.recipe.BATCH_SIZE * newValue / oldValue,10);
+        
+            //Si se da esto es porque estoy fijando la OG
+            if ( !$scope.recipe.fixIngredients || $scope.recipe.fixIngredients == '0' ) {
+                $scope.noUpdate = true;
+                $scope.recipe.BATCH_SIZE = BrewHelper.round($scope.recipe.BATCH_SIZE * newValue / oldValue,10);
+                $scope.changeAmount();
+            } else {
+                $scope.changeAmount();
+            }
         });
 
         $scope.$watch("recipe.BATCH_SIZE", function(newValue,oldValue) {
             if ( !oldValue || !$scope.recipe || !$scope.recipe.FERMENTABLES ) return;
+            
+            if ( $scope.noUpdate ) {
+                $scope.noUpdate = false;
+                return; 
+            }
             
             if ( !newValue || newValue == 0) {
                 $scope.tempAmount = oldValue;
                 return;
             }
             
+            //Entra si FIJO la OG
             if ( !$scope.recipe.fixIngredients || $scope.recipe.fixIngredients == '0' ) {
                 var cohef = newValue / oldValue;
                 
