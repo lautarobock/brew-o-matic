@@ -101,7 +101,7 @@
             if ( onFocus ) {
                 return {background: 'white','border-color':'#ccc'};
             } else {
-                return {background: '#f5f5f5','border-color':'#f5f5f5'};
+                return {background: '#f5f5f5','border-color':'#f5f5f5',cursor:'pointer'};
             }
         };
 

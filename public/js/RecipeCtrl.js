@@ -3,6 +3,15 @@
     var module = angular.module("brew-o-module.controller",[]);
 
     module.controller("RecipeMashCtrl",function($scope) {
+        
+        $scope.styleTitle = function(onFocus) {
+            if ( onFocus ) {
+                return {background: 'white','border-color':'#ccc'};
+            } else {
+                return {background: 'white','border-color':'white',cursor:'pointer'};
+            }
+        };
+
 
         $scope.addMashStep = function() {
             //ahora pongo esa, luego debeira obtene la del ultimo step.
