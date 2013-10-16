@@ -12,6 +12,28 @@
             }
         };
 
+        $scope.changeAction = function(STEP, actionValue) {
+            if (actionValue == '0') {
+                STEP.infuse = false;
+                STEP.decoction = false;
+            } else if (actionValue == '1') {
+                STEP.infuse = true;
+                STEP.decoction = false;
+            } else if (actionValue == '2') {
+                STEP.infuse = false;
+                STEP.decoction = true;
+            }
+        };
+        
+        $scope.initActionValue = function(STEP) {
+            if (STEP.infuse) {
+                return '1';
+            } else if (STEP.decoction) {
+                return '2';
+            } else {
+                return '0';
+            }
+        };
 
         $scope.addMashStep = function() {
             //ahora pongo esa, luego debeira obtene la del ultimo step.

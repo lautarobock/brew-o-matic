@@ -362,7 +362,9 @@
                 }
                 $scope.recipe.BOIL_SIZE = $scope.BrewCalc.calculateBoilSize($scope.recipe.BATCH_SIZE, $scope.recipe.TrubChillerLosses, $scope.recipe.BOIL_TIME, $scope.recipe.PercentEvap, $scope.recipe.TopUpWater);
                 
+                $scope.saving = true;
                 $scope.recipe.$save(function(saved){
+                    $scope.saving = false;
                     $scope.notifications.push({
                         type:'success',
                         title:'Receta Guardada!',

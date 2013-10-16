@@ -11,7 +11,7 @@
         </div>
         <div class="pull-right">
             <a href="#/recipe/" type="button" class="btn btn-default">Cancelar</a>
-            <button ng-click="save()" type="button" class="btn btn-primary">Guardar</button>
+            <button ng-disable="saving" ng-click="save()" type="button" class="btn btn-primary">Guardar</button>
         </div>
     </div>
     <div ng-repeat="notification in notifications">
