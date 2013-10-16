@@ -35,6 +35,19 @@
                 var tuw = TopUpWater ? TopUpWater : 0;
                 return ltsAfterBoil / ( 1 - percentageEvap ) + tuw;
             },
+            initialMashVolume: function(StrikeWater,totalAmount) {
+                return StrikeWater+totalAmount;
+            },
+            actualMashVolume: function($index,initVol,steps) {
+                var liters = initVol;
+                for ( var i=0; i<=$index; i++ ) {
+                    var it = steps[i];
+                    if ( it.infuse ) {
+                        liters += it.INFUSE_AMOUNT;
+                    }
+                }
+                return liters;
+            },
             estimateLiters: function($index,BATCH_SIZE,stages) {
                 var liters = BATCH_SIZE;
                 for ( var i=0; i<$index; i++ ) {

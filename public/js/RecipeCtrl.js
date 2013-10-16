@@ -2,7 +2,7 @@
 
     var module = angular.module("brew-o-module.controller",[]);
 
-    module.controller("RecipeMashCtrl",function($scope) {
+    module.controller("RecipeMashCtrl",function($scope,BrewCalc) {
         
         $scope.styleTitle = function(onFocus) {
             if ( onFocus ) {
@@ -12,6 +12,93 @@
             }
         };
 
+        /**
+         * strikeTemp: temperatura del agua agregada
+         * currentT: temp del grano y del agua actual.
+         * 
+         * addVolume: agua agregada
+         * ratio: Empaste previo
+         */
+        $scope.addWaterVol = function(strikeTemp, currentT,$index, addVolume) {
+            //volumen actual (Solo liquido)
+            var currentVol = BrewCalc.actualMashVolume(
+                        $index,
+                        $scope.recipe.StrikeWater,
+                        $scope.recipe.MASH.MASH_STEPS.MASH_STEP); 
+            /*
+             * temp: es la mezcla del agua agregada y la q ya tenemos
+             */
+            var temp = ((currentVol+addVolume)/currentVol)*(strikeTemp-currentT) + currentT;
+            var ratio = (currentVol+addVolume) / $scope.recipe.totalAmount;
+            return (temp-currentT)*0.417/ratio + temp;
+        };
+        
+        function restCalc(rest) {
+            weight=parseFloat(document.rest.weight.value)
+            thick=parseFloat(document.rest.thick.value)
+            botvol=parseFloat(document.rest.botvol.value)
+            eqvol=parseFloat(document.rest.eqvol.value)
+            curtemp=parseFloat(document.rest.curtemp.value)
+            tartemp=parseFloat(document.rest.tartemp.value)
+            boiltemp=parseFloat(document.rest.boiltemp.value)
+            if (weight<=0 | isNaN(weight)) {
+                alert("Grain weight must be a number greater than 0!")
+                return
+                }
+            if (thick<=0 | isNaN(thick)) {
+                alert("Mash thickness must be a number greater than 0!")
+                return
+                }
+            if (botvol<0 | isNaN(botvol)) {
+                alert("Volume below false bottom must be a number greater than or equal to 0!")
+                return
+                }
+            if (eqvol<0 | isNaN(eqvol)) {
+                alert("Mash tun equivalent water volume must be a number greater than or equal to 0!")
+                return
+                }
+            if (curtemp<=0 | isNaN(curtemp)) {
+                alert("Current temperature must be a number greater than 0!")
+                return
+                }
+            if (tartemp<=0 | isNaN(tartemp)) {
+                alert("Target temperature must be a number greater than 0!")
+                return
+                }
+            if (boiltemp<=0 | isNaN(boiltemp)) {
+                alert("Temperature of Boiling Water must be a number greater than 0!")
+                return
+                }
+            if (curtemp>=tartemp) {
+                alert("Target temperature must be greater than the current temperature.")
+                return
+                }
+            if (curtemp>boiltemp) {
+                alert("Current temperature must be lower than boiling temperature!")
+                return
+                }
+            if (tartemp>boiltemp) {
+                alert("Target temperature must be lower than boiling (temperature!")
+                return
+                }
+            if (document.rest.measure[0].checked) {
+                vol=weight*(.192+thick)+botvol+eqvol
+                watvol=vol*(tartemp-curtemp)/(boiltemp-tartemp)
+              document.rest.watvol.value=round(watvol,1)+" quarts"
+                }
+            else {
+                vol=weight*(.4+thick)+botvol+eqvol
+                watvol=vol*(tartemp-curtemp)/(boiltemp-tartemp)
+            document.rest.watvol.value=round(watvol,1)+" liters"
+                }		
+            }
+        
+        $scope.strikeWaterTemp = function() {
+            return ($scope.recipe.mashTemp-$scope.recipe.GrainTemp)*0.417/$scope.recipe.WatertoGrainRatio
+                    +$scope.recipe.mashTemp
+                    +$scope.recipe.lossMashTemp;
+        };
+        
         $scope.changeAction = function(STEP, actionValue) {
             if (actionValue == '0') {
                 STEP.infuse = false;
@@ -59,8 +146,15 @@
             });
         };
 
+        $scope.updateInfuse = function() {
+            
+        };
+        
         $scope.calculateVolume = function(step_index) {
-            return 0;
+            return BrewCalc.actualMashVolume(
+                        step_index,
+                        BrewCalc.initialMashVolume($scope.recipe.StrikeWater,$scope.recipe.totalAmount),
+                        $scope.recipe.MASH.MASH_STEPS.MASH_STEP);
         };
 
         $scope.updateChart = function() {
