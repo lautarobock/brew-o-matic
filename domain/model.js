@@ -100,6 +100,7 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
                 END_TEMP: Number,      //Temp final de la etapa.
                 DESCRIPTION: String,   //texto libre
                 WATER_GRAIN_RATIO: Number, //relacion final (calculada, INFUSE_AMOUNT y DECOCTION_AMT)
+                decoction: Boolean,
                 DECOCTION_AMT: Number,  //cantidad sacada para decocction
                 infuse: Boolean,        //Indica si agrega agua o no.
                 recirculate: Boolean    //Si recircula o no
