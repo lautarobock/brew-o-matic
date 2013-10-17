@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <label for="temp_fin">Final (Cº): </label>
-                                    <input ng-change="addWaterTemp(STEP.INFUSE_TEMP, STEP.STEP_TEMP,$index, addVolume)" id="temp_fin" ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.END_TEMP" placeholder="Temperatura Final"/>
+                                    <input ng-change="addWaterVol(STEP)" id="temp_fin" ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.END_TEMP" placeholder="Temperatura Final"/>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="duration">Duracion (min): </label>
@@ -142,17 +142,17 @@
                                         <strong ng-show="STEP.decoction" >Decoccion</strong>
                                     </div>
                                     <div class="col-md-2" style="text-align: right;">
-                                        <label ng-show="STEP.infuse||STEP.decoction" for="INFUSE_AMOUNT">Volumen: </label>
+                                        <label ng-show="STEP.infuse||STEP.decoction" >Volumen: </label>
                                     </div>
                                     <div class="col-md-2">
-                                        <input ng-change="updateInfuse()" ng-show="STEP.infuse" ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.INFUSE_AMOUNT" placeholder="(Litros)"/>
+                                        <input ng-show="STEP.infuse" ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.INFUSE_AMOUNT" placeholder="(Litros)"/>
                                         <input ng-show="STEP.decoction" ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.DECOCTION_AMT" placeholder="(Litros)"/>
                                     </div>
                                     <div class="col-md-2" style="text-align: right;">
-                                        <label ng-change="updateInfuse()" ng-show="STEP.infuse" for="INFUSE_TEMP">Temp (Cº): </label>
+                                        <label ng-show="STEP.infuse" for="INFUSE_TEMP">Temp (Cº): </label>
                                     </div>
                                     <div class="col-md-2">
-                                        <input ng-show="STEP.infuse" ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.INFUSE_TEMP" placeholder="(C°)"/>
+                                        <input ng-change="addWaterVol(STEP)" id="INFUSE_TEMP" ng-show="STEP.infuse" ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.INFUSE_TEMP" placeholder="(C°)"/>
                                     </div>
                                 </form>
                             </div>
