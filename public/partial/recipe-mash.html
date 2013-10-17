@@ -17,7 +17,7 @@
                     <div class="col-lg-3">
                         <label for="totalWater">Agua total</label>
                         <span class="form-control input-sm gt-calculated" id="totalWater"
-                              ng-bind="round1(BrewCalc.calculateBoilSize(recipe.BATCH_SIZE, recipe.TrubChillerLosses, recipe.BOIL_TIME, recipe.PercentEvap, recipe.TopUpWater)+recipe.SpargeDeadSpace+(recipe.GrainAbsorbtion*recipe.totalAmount)) + ' Lts'" />
+                              ng-bind="round1(totalWater()) + ' Lts'" />
                     </div>
                 </div>
                 <div class="row">
@@ -74,87 +74,92 @@
                 <div ng-show="recipe.MASH.MASH_STEPS.MASH_STEP.length!=0">
                     <ul class="list-group">
                         <li style="padding-top: 5px;" class="list-group-item" ng-repeat="STEP in recipe.MASH.MASH_STEPS.MASH_STEP">
-                            <button ng-click="recipe.MASH.MASH_STEPS.MASH_STEP.splice($index,1);updateChart();"
-                                    type="button"
-                                    style="margin-top: 7px;margin-right: 5px;"
-                                    class="close" aria-hidden="true">&times;</button>
-                            <button ng-disabled="$first"
-                                    ng-click="moveUp(STEP,$index);updateChart();"
-                                    type="button"
-                                    style="margin-top: 7px;"
-                                    class="gt-fermentation-stage-btn-move pull-right glyphicon glyphicon-chevron-up"></button>
-                            <button ng-disabled="$last"
-                                    ng-click="moveDown(STEP,$index);updateChart();"
-                                    type="button"
-                                    style="margin-top: 7px;"
-                                    class="gt-fermentation-stage-btn-move pull-right glyphicon glyphicon-chevron-down"></button>
-                            
-                            <input ng-focus="onFocus=true"
-                                   title="Haga click para editar el titulo"
-                                   ng-blur="onFocus=false;updateChart();"
-                                   id="step_title"
-                                   style="padding-left: 5px;margin-left: -5px;margin-bottom: 1em"
-                                   ng-style="styleTitle(onFocus)"
-                                   class="form-control gt-fermentation-stage-title"
-                                   type="text"
-                                   ng-model="STEP.NAME"
-                                   placeholder="(Clic para ingresar un titulo)"/>
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label for="temp">Temp (Cº): </label>
-                                    <input id="temp" ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.STEP_TEMP" placeholder="Temperatura"/>
-                                </div>
-                                <div class="col-md-2">
-                                    <label for="temp_fin">Final (Cº): </label>
-                                    <input ng-change="addWaterVol(STEP)" id="temp_fin" ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.END_TEMP" placeholder="Temperatura Final"/>
-                                </div>
-                                <div class="col-md-2">
-                                    <label for="duration">Duracion (min): </label>
-                                    <input id="duration" ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.STEP_TIME" placeholder="Duracion"/>
-                                </div>
-                                <div class="col-md-2">
-                                    <label title="Volumen final del escalon (malta+agua)" for="finalVol">Vol. final (Lts): </label>
-                                    <span class="form-control input-sm gt-calculated" >
-                                        {{ calculateVolume($index) }} Lts
-                                    </span>
-                                </div>
-                                <div class="col-md-2">
-                                    <label s>Modo: </label>
-                                    <select class="form-control input-sm" ng-change="changeAction(STEP, actionValue)" ng-model="actionValue" ng-init="actionValue=initActionValue(STEP)">
-                                        <option value="0">(Sin accion)</option>
-                                        <option value="1">Agregar Agua</option>
-                                        <option value="2">Decoccion</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                   <div class="checkbox" title="Recircula?" style="margin-top: 2em;">
-                                        <label>
-                                            <input ng-change="updateChart()" type="checkbox" ng-model="STEP.recirculate" />
-                                            Recircula? 
-                                        </label>
-                                    </div>
-                                </div>
+                            <div ng-init="compact=true" ng-show="compact" ng-click="compact=!compact">
+                                <strong>{{ STEP.NAME }}</strong> - {{ STEP.STEP_TEMP }} - {{ STEP.END_TEMP }}
                             </div>
-                            <div class="row" style="margin-top: 1em">
-                                <form class="form-inline" role="form">
+                            <div ng-hide="compact">
+                                <button ng-click="recipe.MASH.MASH_STEPS.MASH_STEP.splice($index,1);updateChart();"
+                                        type="button"
+                                        style="margin-top: 7px;margin-right: 5px;"
+                                        class="close" aria-hidden="true">&times;</button>
+                                <button ng-disabled="$first"
+                                        ng-click="moveUp(STEP,$index);updateChart();"
+                                        type="button"
+                                        style="margin-top: 7px;"
+                                        class="gt-fermentation-stage-btn-move pull-right glyphicon glyphicon-chevron-up"></button>
+                                <button ng-disabled="$last"
+                                        ng-click="moveDown(STEP,$index);updateChart();"
+                                        type="button"
+                                        style="margin-top: 7px;"
+                                        class="gt-fermentation-stage-btn-move pull-right glyphicon glyphicon-chevron-down"></button>
+                                
+                                <input ng-focus="onFocus=true"
+                                       title="Haga click para editar el titulo"
+                                       ng-blur="onFocus=false;updateChart();"
+                                       id="step_title"
+                                       style="padding-left: 5px;margin-left: -5px;margin-bottom: 1em"
+                                       ng-style="styleTitle(onFocus)"
+                                       class="form-control gt-fermentation-stage-title"
+                                       type="text"
+                                       ng-model="STEP.NAME"
+                                       placeholder="(Clic para ingresar un titulo)"/>
+                                <div class="row">
                                     <div class="col-md-2">
-                                        <strong ng-show="STEP.infuse" >Agregar agua</strong>
-                                        <strong ng-show="STEP.decoction" >Decoccion</strong>
-                                    </div>
-                                    <div class="col-md-2" style="text-align: right;">
-                                        <label ng-show="STEP.infuse||STEP.decoction" >Volumen: </label>
+                                        <label for="temp">Temp (Cº): </label>
+                                        <input ng-change="addWaterVol(STEP,$index)" id="temp" ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.STEP_TEMP" placeholder="Temperatura"/>
                                     </div>
                                     <div class="col-md-2">
-                                        <input ng-show="STEP.infuse" ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.INFUSE_AMOUNT" placeholder="(Litros)"/>
-                                        <input ng-show="STEP.decoction" ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.DECOCTION_AMT" placeholder="(Litros)"/>
-                                    </div>
-                                    <div class="col-md-2" style="text-align: right;">
-                                        <label ng-show="STEP.infuse" for="INFUSE_TEMP">Temp (Cº): </label>
+                                        <label for="temp_fin">Final (Cº): </label>
+                                        <input ng-change="addWaterVol(STEP,$index)" id="temp_fin" ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.END_TEMP" placeholder="Temperatura Final"/>
                                     </div>
                                     <div class="col-md-2">
-                                        <input ng-change="addWaterVol(STEP)" id="INFUSE_TEMP" ng-show="STEP.infuse" ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.INFUSE_TEMP" placeholder="(C°)"/>
+                                        <label for="duration">Duracion (min): </label>
+                                        <input id="duration" ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.STEP_TIME" placeholder="Duracion"/>
                                     </div>
-                                </form>
+                                    <div class="col-md-2">
+                                        <label title="Volumen final del escalon (malta+agua)" for="finalVol">Vol. final (Lts): </label>
+                                        <span class="form-control input-sm gt-calculated" >
+                                            {{ calculateVolume($index) | number:1 }} Lts
+                                        </span>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label s>Modo: </label>
+                                        <select class="form-control input-sm" ng-change="changeAction(STEP, actionValue)" ng-model="actionValue" ng-init="actionValue=initActionValue(STEP)">
+                                            <option value="0">(Sin accion)</option>
+                                            <option value="1">Agregar Agua</option>
+                                            <option value="2">Decoccion</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                       <div class="checkbox" title="Recircula?" style="margin-top: 2em;">
+                                            <label>
+                                                <input ng-change="updateChart()" type="checkbox" ng-model="STEP.recirculate" />
+                                                Recircula? 
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 1em">
+                                    <form class="form-inline" role="form">
+                                        <div class="col-md-2">
+                                            <strong ng-show="STEP.infuse" >Agregar agua</strong>
+                                            <strong ng-show="STEP.decoction" >Decoccion</strong>
+                                        </div>
+                                        <div class="col-md-2" style="text-align: right;">
+                                            <label ng-show="STEP.infuse||STEP.decoction" >Volumen: </label>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <input id="infuse_amount{{$index}}" ng-show="STEP.infuse" ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.INFUSE_AMOUNT" placeholder="(Litros)"/>
+                                            <input ng-show="STEP.decoction" ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.DECOCTION_AMT" placeholder="(Litros)"/>
+                                        </div>
+                                        <div class="col-md-2" style="text-align: right;">
+                                            <label ng-show="STEP.infuse" for="INFUSE_TEMP">Temp (Cº): </label>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <input ng-change="addWaterVol(STEP,$index)" id="INFUSE_TEMP" ng-show="STEP.infuse" ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.INFUSE_TEMP" placeholder="(C°)"/>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -246,6 +251,35 @@
                     <button type="button" ng-click="addMashStep()" class="btn btn-default pull-right">Agregar Escalon</button>
                 </div>
             </div>-->
+            <div class="panel panel-default" style="margin: 1em 1em">
+                <div class="panel-heading"><strong>Resumen y graficos</strong></div>
+                <div class="panel-body" >
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <strong>Duracion Total: </strong>{{totalTime()}} minutos
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Litros agregados: </strong>{{BrewCalc.actualMashVolume(recipe.MASH.MASH_STEPS.MASH_STEP.length-1,0,recipe.MASH.MASH_STEPS.MASH_STEP)|number:1}} Litros
+                        </li>
+                        <!--<li class="list-group-item">-->
+                        <!--    <strong>Volumen perdido: </strong>{{recipe.BATCH_SIZE - estimateLiters(recipe.fermentation.stages.length)|number:1}} Litros-->
+                        <!--</li>-->
+                        <!--<li class="list-group-item">-->
+                        <!--    <strong>Si comienzo el: </strong>-->
+                        <!--    <input ng-change="updateChart()" ng-model="simulatedDate_day" type="number" class="form-control input-sm " style="width: 50px;display: inline" />-->
+                        <!--    <input ng-change="updateChart()" ng-model="simulatedDate_month" type="number" class="form-control input-sm " style="width: 50px;display: inline" />-->
+                        <!--    <input ng-change="updateChart()" ng-model="simulatedDate_year" type="number" class="form-control input-sm " style="width: 70px;display: inline" />-->
+                        <!--    <span style="margin-left: 1em;">terminaria en</span> -->
+                        <!--    <span title="Fecha estimada de fin de proceso de fermentacion/maduracion, a esto falta sumarle el tiempo de carbonatacion"-->
+                        <!--          style="font-weight: bold; width:90px; display: inline"-->
+                        <!--          class="form-control input-sm gt-calculated ">{{estimateEnd(simulatedDate_day,simulatedDate_month,simulatedDate_year,recipe.fermentation)|date:'dd-MM-yyyy'}}</span> -->
+                        <!--</li>-->
+                    </ul>
+                </div>
+                <div class="panel-body" >
+                    <div google-chart chart="chart" ng-style="chart.cssStyle"></div>    
+                </div>
+            </div>            
             <div class="panel-heading"><strong>Lavado</strong></div>
             <div class="panel-body" >
                 <div class="row">
@@ -256,7 +290,7 @@
                     <div class="col-lg-2">
                         <label for="spargeWater">Cantidad Agua</label>
                         <span class="form-control input-sm gt-calculated" id="spargeWater"
-                              ng-bind="round1(BrewCalc.calculateBoilSize(recipe.BATCH_SIZE, recipe.TrubChillerLosses, recipe.BOIL_TIME, recipe.PercentEvap, recipe.TopUpWater)-recipe.StrikeWater-recipe.TopUpWater+recipe.SpargeDeadSpace+(recipe.GrainAbsorbtion*recipe.totalAmount)) + ' Lts'" />
+                              ng-bind="round1(spargeWater()) + ' Lts'" />
                     </div>
                     <div class="col-lg-2">
                         <label title="Litros perdidos en el lavado (por ejemplo debajo del FF)" for="spargeDeadSpace">Espacio Muerto</label>

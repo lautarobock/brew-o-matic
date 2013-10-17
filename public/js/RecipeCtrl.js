@@ -12,19 +12,52 @@
             }
         };
 
-        /**
-         * strikeTemp: temperatura del agua agregada
-         * currentT: temp del grano y del agua actual.
-         * 
-         * addVolume: agua agregada
-         * ratio: Empaste previo
-         */
-        $scope.addWaterVol = function(STEP) {
-            STEP.INFUSE_AMOUNT = restCalc($scope.recipe.totalAmount,$scope.recipe.WatertoGrainRatio,0,0,STEP.STEP_TEMP,STEP.END_TEMP,STEP.INFUSE_TEMP);
+        $scope.totalTime = function() {
+            var time = 0;
+            angular.forEach($scope.recipe.MASH.MASH_STEPS.MASH_STEP,function(step) {
+                time += step.STEP_TIME;
+            });
+            return time;
+        };
+        
+        $scope.spargeWater = function() {
+            return $scope.totalWater()
+                    -BrewCalc.actualMashVolume($scope.recipe.MASH.MASH_STEPS.MASH_STEP.length-1,
+                                               0,
+                                               $scope.recipe.MASH.MASH_STEPS.MASH_STEP)*2
+                    -$scope.recipe.StrikeWater
+                    -$scope.recipe.TopUpWater;
+        };
+        
+        $scope.totalWater = function() {
+            return BrewCalc
+                        .calculateBoilSize($scope.recipe.BATCH_SIZE,
+                                           $scope.recipe.TrubChillerLosses,
+                                           $scope.recipe.BOIL_TIME,
+                                           $scope.recipe.PercentEvap,
+                                           $scope.recipe.TopUpWater)
+                    +BrewCalc.actualMashVolume($scope.recipe.MASH.MASH_STEPS.MASH_STEP.length-1,
+                                               0,
+                                               $scope.recipe.MASH.MASH_STEPS.MASH_STEP)
+                    +$scope.recipe.SpargeDeadSpace
+                    +$scope.recipe.GrainAbsorbtion*$scope.recipe.totalAmount;
+        };
+        
+        $scope.addWaterVol = function(STEP,$index) {
+            var ratio;
+            if ( $index == 0 ) {
+                ratio = $scope.recipe.WatertoGrainRatio;
+            } else {
+                var vol = BrewCalc.actualMashVolume($index-1,$scope.recipe.StrikeWater,$scope.recipe.MASH.MASH_STEPS.MASH_STEP);
+                ratio = vol/$scope.recipe.totalAmount;
+            }
+            var botvol = 0.7; //Equivalente en agua del barril (absorcion de temp), por ahora desprecio y dejo en 0.
+            //el otro cero es los litros perdidos debejo del FF, que deberia calcularlos antes.
+            STEP.INFUSE_AMOUNT = restCalc($scope.recipe.totalAmount,ratio,0,0,STEP.STEP_TEMP,STEP.END_TEMP,STEP.INFUSE_TEMP);
         };
         
         function restCalc(weight,thick,botvol,eqvol,curtemp,tartemp,boiltemp) {
-            var vol=weight*(.4+thick)+botvol+eqvol;
+            var vol=weight*(0.417+thick)+botvol+eqvol;
             var watvol=vol*(tartemp-curtemp)/(boiltemp-tartemp);
             return BrewHelper.round(watvol,10);
         }
