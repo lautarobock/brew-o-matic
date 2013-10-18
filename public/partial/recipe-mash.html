@@ -74,7 +74,11 @@
                 <div ng-show="recipe.MASH.MASH_STEPS.MASH_STEP.length!=0">
                     <ul class="list-group">
                         <li style="padding-top: 5px;" class="list-group-item" ng-repeat="STEP in recipe.MASH.MASH_STEPS.MASH_STEP">
-                            <div ng-init="compact=true" ng-show="compact" ng-click="compact=!compact">
+                            <div style="cursor: pointer" ng-init="compact=true" ng-show="compact" ng-click="compact=!compact" title="Expandir los datos del escalon">
+                                <button 
+                                        type="button"
+                                        style="height: 20px;"
+                                        class="gt-fermentation-stage-btn-move pull-right glyphicon glyphicon-collapse-down"></button>
                                 <strong>{{ STEP.NAME }}</strong> - {{ STEP.STEP_TEMP }} - {{ STEP.END_TEMP }}
                             </div>
                             <div ng-hide="compact">
@@ -92,7 +96,11 @@
                                         type="button"
                                         style="margin-top: 7px;"
                                         class="gt-fermentation-stage-btn-move pull-right glyphicon glyphicon-chevron-down"></button>
-                                
+                                <button ng-click="compact=!compact"
+                                        title="Colapsar los datos del escalon"
+                                        type="button"
+                                        style="height: 20px;margin-top: 2px;"
+                                        class="gt-fermentation-stage-btn-move pull-right glyphicon glyphicon-collapse-up"></button>
                                 <input ng-focus="onFocus=true"
                                        title="Haga click para editar el titulo"
                                        ng-blur="onFocus=false;updateChart();"

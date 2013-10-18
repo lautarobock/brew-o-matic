@@ -293,12 +293,10 @@
     /**
      * BoilControler
      */
-    module.controller("RecipeBoilCtrl",function($scope,BrewHelper) {
+    module.controller("RecipeBoilCtrl",function($scope,BrewHelper,BrewCalc) {
 
         $scope.calculateSgBeforeBoil = function(BOIL_TIME, PercentEvap, OG) {
-            //Porcentaje evaporado en todo el tiempo
-            //TODO, esto en realidad deberia hacerse hora por hora (no es lo mismo)
-            var percentageEvap = (BOIL_TIME/60)*PercentEvap/100;
+            var percentageEvap = BrewCalc.evapTotal(BOIL_TIME,PercentEvap);
             return BrewHelper.toPotential(BrewHelper.toPpg(OG) * (1-percentageEvap));
         };
 

@@ -26,12 +26,28 @@
 
     helper.factory("BrewCalc",function() {
         return {
+            /**
+             * Calcula el porcentaje final de evaporacion.
+             * Evaporacion horaria extendida a todo el tiempo de coccion
+             *
+             * @param BOIL_TIME tiempo total de hervor en minutos.
+             * @param EvapPerHour porcentaje de evaporacion por hora.
+             */
+            evapTotal: function(BOIL_TIME, EvapPerHour) {
+                var hours = Math.floor(BOIL_TIME/60);
+                var rest = (BOIL_TIME % 60) / 60;
+                
+                var percentageEvap = 1 - rest * EvapPerHour/100;
+                
+                for (var i=0; i < hours; i++ ) {
+                    percentageEvap *= 1 - EvapPerHour/100;
+                }
+                return 1-percentageEvap;
+            },
             calculateBoilSize: function (BATCH_SIZE, TrubChillerLosses, BOIL_TIME, PercentEvap, TopUpWater) {
                 var ltsAfterBoil = BATCH_SIZE/0.94+TrubChillerLosses;
 
-                //Porcentaje evaporado en todo el tiempo
-                //TODO, esto en realidad deberia hacerse hora por hora (no es lo mismo)
-                var percentageEvap = (BOIL_TIME/60)*PercentEvap/100;
+                var percentageEvap = this.evapTotal(BOIL_TIME,PercentEvap);
                 var tuw = TopUpWater ? TopUpWater : 0;
                 return ltsAfterBoil / ( 1 - percentageEvap ) + tuw;
             },

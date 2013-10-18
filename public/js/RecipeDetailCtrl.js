@@ -385,12 +385,14 @@
         //q ya este cargado el usuario en en $rootScope
         $rootScope.$watch('user',function(user) {
             if (user) {
+                var now = new Date();
                 if ( $routeParams.recipeId ) {
                     $scope.recipe = Recipe.get({id:$routeParams.recipeId},function() {
                         if ( $location.path().indexOf('/recipe/clone') == 0) {
                             $scope.recipe.cloneFrom = $scope.recipe._id;
                             $scope.recipe._id = undefined;
-                            $scope.recipe.date = new Date();
+                            $scope.recipe.date = now;
+                            $scope.recipe.modificationDate = now;
                             $scope.recipe.starredBy = [];
                             $scope.recipe.clonedBy = [];
                             $scope.recipe.isPublic = false;
@@ -409,7 +411,8 @@
                         "GrainCalcMethod": "2",
                         fixIngredients: "1",
                         STYLE:{},
-                        date: new Date(),
+                        date: now,
+                        modificationDate: now,
                         totalAmount: 0,
                         totalHop: 0,
                         CALCCOLOUR: 0,

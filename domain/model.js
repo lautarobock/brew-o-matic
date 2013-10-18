@@ -6,6 +6,8 @@ exports.User = mongoose.model("User",new Schema({
     google_id: String,
     name: String,
     favorites: [String],
+    singInDate: Date,
+    lastLogin: Date,
     settings: {
         defaultValues: {
             BATCH_SIZE: Number,
@@ -30,6 +32,7 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     owner: {type:String, ref:'User'},
     GrainCalcMethod: String,
     date: Date,
+    modificationDate: Date,
     totalAmount: Number,
     totalHop: Number,
     NAME: String,

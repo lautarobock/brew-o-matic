@@ -8,7 +8,9 @@ var Arrays = require("../public/js/util/util.js").Arrays;
 exports.add = function(req,res) {
     var user = new model.User();
     user.google_id = req.body.google_id;
-    user.name = req.body.name
+    user.name = req.body.name;
+    user.singInDate = new Date();
+    user.lastLogin = new Date();
 	user.settings= {
 		"defaultValues" : {
 			"BATCH_SIZE" : 20,
@@ -112,6 +114,12 @@ exports.getByGoogleId = function(req, res){
             //console.log(req);
             s.user_id = user._id;
             s.user_name = user.name;
+            
+            
+            user.lastLogin = new Date();
+            user.singInDate = user.singInDate || user.lastLogin;
+            
+            user.save();
         }
         res.send(user);
     });   

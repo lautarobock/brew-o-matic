@@ -94,6 +94,7 @@ exports.save = function(req, res) {
         var id = req.body._id;
         delete req.body._id;
         req.body.owner = req.body.owner._id;
+        req.body.modificationDate = new Date();
         //console.log("UPDATE POST", req.body);
         model.Recipe.findByIdAndUpdate(id,req.body).populate('owner').exec(callback);
     }
