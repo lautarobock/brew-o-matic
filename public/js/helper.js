@@ -124,6 +124,18 @@
             round: function (value, zeros) {
                 return Math.round(value*zeros)/zeros;
             },
+            pad: function(value,zeros) {
+                value = value.toString();
+                if (value.length > zeros) {
+                    return value;
+                } else {
+                    var result = value;
+                    for ( var i=0; i<zeros-value.length; i++) {
+                        result = "0" + result;
+                    }
+                    return result;
+                }
+            },
             calculateU: function(gravity,time) {
                 var g = this.toPpg(gravity);
                 var m = 30;

@@ -21,6 +21,9 @@
                                Recipe,
                                $location) {
 
+                               
+        $scope.BrewHelper = BrewHelper;
+                               
         $rootScope.breadcrumbs = [{
             link: '#',
             title: 'Home'

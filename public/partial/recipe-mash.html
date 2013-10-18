@@ -74,14 +74,21 @@
                 <div ng-show="recipe.MASH.MASH_STEPS.MASH_STEP.length!=0">
                     <ul class="list-group">
                         <li style="padding-top: 5px;" class="list-group-item" ng-repeat="STEP in recipe.MASH.MASH_STEPS.MASH_STEP">
-                            <div style="cursor: pointer" ng-init="compact=true" ng-show="compact" ng-click="compact=!compact" title="Expandir los datos del escalon">
+                            <div style="cursor: pointer" ng-init="STEP.compact=true" ng-show="STEP.compact" ng-click="STEP.compact=!STEP.compact" title="Expandir los datos del escalon">
                                 <button 
                                         type="button"
                                         style="height: 20px;"
                                         class="gt-fermentation-stage-btn-move pull-right glyphicon glyphicon-collapse-down"></button>
-                                <strong>{{ STEP.NAME }}</strong> - {{ STEP.STEP_TEMP }} - {{ STEP.END_TEMP }}
+                                {{BrewHelper.pad(moment($index),2)}} min
+                                - <strong style="width: 10em">{{ STEP.NAME||'(click para editar)' }}:</strong>
+                                {{ STEP.STEP_TEMP }}ºC
+                                <span ng-hide="STEP.STEP_TEMP == STEP.END_TEMP">a {{ STEP.END_TEMP }}ºC</span>
+                                - {{ STEP.STEP_TIME }} min
+                                <span ng-show="stepAction(STEP)">- {{ stepAction(STEP) }}</span>
+                                <span ng-show="STEP.recirculate">- Recirculando</span>
+                                - ({{ calculateVolume($index) | number:1 }} Lts)
                             </div>
-                            <div ng-hide="compact">
+                            <div ng-hide="STEP.compact">
                                 <button ng-click="recipe.MASH.MASH_STEPS.MASH_STEP.splice($index,1);updateChart();"
                                         type="button"
                                         style="margin-top: 7px;margin-right: 5px;"
@@ -96,7 +103,7 @@
                                         type="button"
                                         style="margin-top: 7px;"
                                         class="gt-fermentation-stage-btn-move pull-right glyphicon glyphicon-chevron-down"></button>
-                                <button ng-click="compact=!compact"
+                                <button ng-click="STEP.compact=!STEP.compact"
                                         title="Colapsar los datos del escalon"
                                         type="button"
                                         style="height: 20px;margin-top: 2px;"
@@ -171,122 +178,41 @@
                             </div>
                         </li>
                     </ul>
-                    <button type="button" ng-click="addMashStep()" class="btn btn-default pull-right">Agregar Escalon</button>
+                    <button type="button" ng-click="addMashStep()" class="btn btn-default pull-right">
+                        <span class="glyphicon glyphicon-plus"></span> Agregar Escalon
+                    </button>
                 </div>
             </div>
-            <!--STEPS compacta-->
-<!--            <div class="panel-heading"><strong>Escalones</strong></div>
-            <div class="panel-body" >
-                <div class="alert alert-info" ng-hide="recipe.MASH.MASH_STEPS.MASH_STEP.length!=0">
-                    No ha creado ningun escalon.
-                    <a href="" ng-click="addMashStep()" class="alert-link">Agrega el primero!</a>
-                </div>
-                <div ng-show="recipe.MASH.MASH_STEPS.MASH_STEP.length!=0">
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th style="width:6em">T. Inicial</th>
-                                <th style="width:6em">T. Final</th>
-                                <th style="width:4em">Duracion (min)</th>
-                                <th style="width:3em">Agrega Agua?</th>
-                                <th title="Agua agregada" style="width:6em">Agua Ag.</th>
-                                <th title="Temperatura del Agua agregada" style="width:6em">T. Agua Ag.</th>
-                                <th style="width:3em">Vol. Decoccion</th>
-                                <th style="width:3em">Volumen Final</th>
-                                <th style="width:3em">Recircula</th>
-                                <th>Notas</th>
-                                <th style="width:7em"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="STEP in recipe.MASH.MASH_STEPS.MASH_STEP">
-                                <td>
-                                    <input ng-blur="updateChart()" class="form-control input-sm" type="text" ng-model="STEP.NAME" placeholder="(Nombre)"/>
-                                </td>
-                                <td>
-                                    <input ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.STEP_TEMP" placeholder="Temperatura"/>
-                                </td>
-                                <td>
-                                    <input ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.END_TEMP" placeholder="Temperatura Final"/>
-                                </td>
-                                <td>
-                                    <input ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.STEP_TIME" placeholder="Duracion"/>
-                                </td>
-                                <td>
-                                    <div class="checkbox" title="Agrega agua al macerado?" >
-                                        <input ng-change="updateChart()" type="checkbox" ng-model="STEP.infuse" />
-                                    </div>
-                                </td>
-                                <td>
-                                    <input ng-disabled="!STEP.infuse" ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.INFUSE_AMOUNT" placeholder="(Litros)"/>
-                                </td>
-                                <td>
-                                    <input ng-disabled="!STEP.infuse" ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.INFUSE_TEMP" placeholder="(C°)"/>
-                                </td>
-                                <td>
-                                    <input ng-blur="updateChart();" class="form-control input-sm" type="number" ng-model="STEP.DECOCTION_AMT" placeholder="(Litros)"/>
-                                </td>
-                                <td>
-                                    <span class="form-control input-sm gt-calculated" >
-                                        {{ calculateVolume($index) }} Lts
-                                    </span>
-                                </td>
-                                <td>
-                                    <div class="checkbox" title="Recircula?" >
-                                        <input ng-change="updateChart()" type="checkbox" ng-model="STEP.recirculate" />
-                                    </div>
-                                </td>
-                                <td>
-                                    <input ng-blur="updateChart();" class="form-control input-sm" type="text" ng-model="STEP.DESCRIPTION" placeholder="(Notas)"/>
-                                </td>
-                                <td>
-                                    <button ng-click="recipe.MASH.MASH_STEPS.MASH_STEP.splice($index,1);updateChart();"
-                                            type="button"
-                                            class="close" aria-hidden="true">&times;</button>
-                                    <button ng-disabled="$first"
-                                            ng-click="moveUp(STEP,$index);updateChart();"
-                                            type="button"
-                                            class="gt-fermentation-stage-btn-move pull-right glyphicon glyphicon-chevron-up"></button>
-                                    <button ng-disabled="$last"
-                                            ng-click="moveDown(STEP,$index);updateChart();"
-                                            type="button"
-                                            class="gt-fermentation-stage-btn-move pull-right glyphicon glyphicon-chevron-down"></button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <button type="button" ng-click="addMashStep()" class="btn btn-default pull-right">Agregar Escalon</button>
-                </div>
-            </div>-->
-            <div class="panel panel-default" style="margin: 1em 1em">
-                <div class="panel-heading"><strong>Resumen y graficos</strong></div>
-                <div class="panel-body" >
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <strong>Duracion Total: </strong>{{totalTime()}} minutos
-                        </li>
-                        <li class="list-group-item">
-                            <strong>Litros agregados: </strong>{{BrewCalc.actualMashVolume(recipe.MASH.MASH_STEPS.MASH_STEP.length-1,0,recipe.MASH.MASH_STEPS.MASH_STEP)|number:1}} Litros
-                        </li>
-                        <!--<li class="list-group-item">-->
-                        <!--    <strong>Volumen perdido: </strong>{{recipe.BATCH_SIZE - estimateLiters(recipe.fermentation.stages.length)|number:1}} Litros-->
-                        <!--</li>-->
-                        <!--<li class="list-group-item">-->
-                        <!--    <strong>Si comienzo el: </strong>-->
-                        <!--    <input ng-change="updateChart()" ng-model="simulatedDate_day" type="number" class="form-control input-sm " style="width: 50px;display: inline" />-->
-                        <!--    <input ng-change="updateChart()" ng-model="simulatedDate_month" type="number" class="form-control input-sm " style="width: 50px;display: inline" />-->
-                        <!--    <input ng-change="updateChart()" ng-model="simulatedDate_year" type="number" class="form-control input-sm " style="width: 70px;display: inline" />-->
-                        <!--    <span style="margin-left: 1em;">terminaria en</span> -->
-                        <!--    <span title="Fecha estimada de fin de proceso de fermentacion/maduracion, a esto falta sumarle el tiempo de carbonatacion"-->
-                        <!--          style="font-weight: bold; width:90px; display: inline"-->
-                        <!--          class="form-control input-sm gt-calculated ">{{estimateEnd(simulatedDate_day,simulatedDate_month,simulatedDate_year,recipe.fermentation)|date:'dd-MM-yyyy'}}</span> -->
-                        <!--</li>-->
-                    </ul>
-                </div>
-                <div class="panel-body" >
-                    <div google-chart chart="chart" ng-style="chart.cssStyle"></div>    
-                </div>
+            <!--<div class="panel panel-default" style="margin: 1em 1em">-->
+            <!--    <div class="panel-heading"><strong>Resumen</strong></div>-->
+            <!--    <div class="panel-body" >-->
+            <div class="container">
+                <!--<h4>Resumen</h4>-->
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <strong>Duracion Total: </strong>{{totalTime()}} minutos
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Litros agregados: </strong>{{BrewCalc.actualMashVolume(recipe.MASH.MASH_STEPS.MASH_STEP.length-1,0,recipe.MASH.MASH_STEPS.MASH_STEP)|number:1}} Litros
+                    </li>
+                    <!--<li class="list-group-item">-->
+                    <!--    <strong>Volumen perdido: </strong>{{recipe.BATCH_SIZE - estimateLiters(recipe.fermentation.stages.length)|number:1}} Litros-->
+                    <!--</li>-->
+                    <!--<li class="list-group-item">-->
+                    <!--    <strong>Si comienzo el: </strong>-->
+                    <!--    <input ng-change="updateChart()" ng-model="simulatedDate_day" type="number" class="form-control input-sm " style="width: 50px;display: inline" />-->
+                    <!--    <input ng-change="updateChart()" ng-model="simulatedDate_month" type="number" class="form-control input-sm " style="width: 50px;display: inline" />-->
+                    <!--    <input ng-change="updateChart()" ng-model="simulatedDate_year" type="number" class="form-control input-sm " style="width: 70px;display: inline" />-->
+                    <!--    <span style="margin-left: 1em;">terminaria en</span> -->
+                    <!--    <span title="Fecha estimada de fin de proceso de fermentacion/maduracion, a esto falta sumarle el tiempo de carbonatacion"-->
+                    <!--          style="font-weight: bold; width:90px; display: inline"-->
+                    <!--          class="form-control input-sm gt-calculated ">{{estimateEnd(simulatedDate_day,simulatedDate_month,simulatedDate_year,recipe.fermentation)|date:'dd-MM-yyyy'}}</span> -->
+                    <!--</li>-->
+                </ul>
+                <!--</div>-->
+                <!--<div class="panel-body" >-->
+                <!--    <div google-chart chart="chart" ng-style="chart.cssStyle"></div>    -->
+                <!--</div>-->
             </div>            
             <div class="panel-heading"><strong>Lavado</strong></div>
             <div class="panel-body" >

@@ -4,6 +4,7 @@
 
     module.controller("RecipeMashCtrl",function($scope,BrewCalc,BrewHelper) {
         
+        
         $scope.styleTitle = function(onFocus) {
             if ( onFocus ) {
                 return {background: 'white','border-color':'#ccc'};
@@ -12,6 +13,14 @@
             }
         };
 
+        $scope.moment = function($index) {
+            var time = 0;
+            for (var i=0; i<$index; i++) {
+                time += $scope.recipe.MASH.MASH_STEPS.MASH_STEP[i].STEP_TIME;
+            }
+            return time;
+        };
+        
         $scope.totalTime = function() {
             var time = 0;
             angular.forEach($scope.recipe.MASH.MASH_STEPS.MASH_STEP,function(step) {
@@ -26,7 +35,7 @@
                                                0,
                                                $scope.recipe.MASH.MASH_STEPS.MASH_STEP)*2
                     -$scope.recipe.StrikeWater
-                    -$scope.recipe.TopUpWater;
+                    -($scope.recipe.TopUpWater||0);
         };
         
         $scope.totalWater = function() {
@@ -44,6 +53,8 @@
         };
         
         $scope.addWaterVol = function(STEP,$index) {
+            
+            //Hago los caclulos para el agregado de agua
             var ratio;
             if ( $index == 0 ) {
                 ratio = $scope.recipe.WatertoGrainRatio;
@@ -54,6 +65,9 @@
             var botvol = 0.7; //Equivalente en agua del barril (absorcion de temp), por ahora desprecio y dejo en 0.
             //el otro cero es los litros perdidos debejo del FF, que deberia calcularlos antes.
             STEP.INFUSE_AMOUNT = restCalc($scope.recipe.totalAmount,ratio,0,0,STEP.STEP_TEMP,STEP.END_TEMP,STEP.INFUSE_TEMP);
+            
+            //Calculos para tamaño de la decoccion
+            
         };
         
         function restCalc(weight,thick,botvol,eqvol,curtemp,tartemp,boiltemp) {
@@ -81,6 +95,15 @@
             }
         };
         
+        $scope.stepAction = function(STEP) {
+            if (STEP.infuse) {
+                return "Agregar Agua"
+            } else if (STEP.decoction) {
+                return "Decoccion";
+            }
+            return null;
+        };
+        
         $scope.initActionValue = function(STEP) {
             if (STEP.infuse) {
                 return '1';
@@ -94,6 +117,9 @@
         $scope.addMashStep = function() {
             //ahora pongo esa, luego debeira obtene la del ultimo step.
             var temp = $scope.recipe.mashTemp;
+            angular.forEach($scope.recipe.MASH.MASH_STEPS.MASH_STEP,function(step) {
+                temp = step.END_TEMP;
+            });
             //Idem anterior
             var ratio = $scope.recipe.WatertoGrainRatio;
             //Copiar ultimo
@@ -111,7 +137,8 @@
                 DESCRIPTION: null,   //texto libre
                 WATER_GRAIN_RATIO: ratio, //relacion final (calculada, INFUSE_AMOUNT y DECOCTION_AMT)
                 DECOCTION_AMT: 0,  //cantidad sacada para decocction
-                recirculate: recirculate
+                recirculate: recirculate,
+                compact:false
             });
         };
 
