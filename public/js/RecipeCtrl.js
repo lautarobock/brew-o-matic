@@ -53,7 +53,6 @@
         };
         
         $scope.addWaterVol = function(STEP,$index) {
-            
             //Hago los caclulos para el agregado de agua
             var ratio;
             if ( $index == 0 ) {
@@ -67,7 +66,11 @@
             STEP.INFUSE_AMOUNT = restCalc($scope.recipe.totalAmount,ratio,0,0,STEP.STEP_TEMP,STEP.END_TEMP,STEP.INFUSE_TEMP);
             
             //Calculos para tamaño de la decoccion
+            var volMash = BrewCalc.actualMashVolume($index-1,$scope.recipe.StrikeWater+$scope.recipe.totalAmount,$scope.recipe.MASH.MASH_STEPS.MASH_STEP);
             
+            //Supongo q siempre decocciono a 100
+            var decoctionTemp = 100;
+            STEP.DECOCTION_AMT = BrewHelper.round(volMash * ( STEP.END_TEMP - STEP.STEP_TEMP ) / ( decoctionTemp - STEP.STEP_TEMP ),10);
         };
         
         function restCalc(weight,thick,botvol,eqvol,curtemp,tartemp,boiltemp) {
