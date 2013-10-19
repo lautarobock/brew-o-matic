@@ -3,7 +3,7 @@
 
     var index = angular.module('index', ['ngResource','ngRoute','data','resources','helper','login','comments','googlechart','brew-o-module.controller']);
 
-    index.constant("version",'0.9')
+    index.constant("version",'0.10')
  
     index.
         config(['$routeProvider', function($routeProvider) {
