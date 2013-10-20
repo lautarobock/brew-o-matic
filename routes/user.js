@@ -1,34 +1,43 @@
 var model = require('../domain/model.js');
+var actions = require('./actions.js');
 var mongoose = require('mongoose');
 var Arrays = require("../public/js/util/util.js").Arrays;
 /*
  * GET users listing.
  */
 
-exports.add = function(req,res) {
+function buildNewUser(google_id, name) {
     var user = new model.User();
-    user.google_id = req.body.google_id;
-    user.name = req.body.name;
+    user.google_id = google_id;
+    user.name = name;
     user.singInDate = new Date();
     user.lastLogin = new Date();
-	user.settings= {
-		"defaultValues" : {
-			"BATCH_SIZE" : 20,
-			"EFFICIENCY" : 70,
-			"BREWER" : req.body.name,
-			"BOIL_TIME" : 90,
-			"GrainTemp" : 25,
-			"WatertoGrainRatio" : 3,
-			"mashTemp" : 66,
-			"lossMashTemp" : 0,
-			"SpargeTempDesired" : 75,
-			"SpargeDeadSpace" : 0,
-			"GrainAbsorbtion" : 0.9,
-			"PercentEvap" : 10,
-			"TrubChillerLosses" : 0
-		}
-	};
-    
+    user.settings = {
+        "defaultValues":{
+            "BATCH_SIZE":20,
+            "EFFICIENCY":70,
+            "BREWER":name,
+            "BOIL_TIME":90,
+            "GrainTemp":25,
+            "WatertoGrainRatio":3,
+            "mashTemp":66,
+            "lossMashTemp":0,
+            "SpargeTempDesired":75,
+            "SpargeDeadSpace":0,
+            "GrainAbsorbtion":0.9,
+            "PercentEvap":10,
+            "TrubChillerLosses":0,
+            isPublic: false
+        }
+    };
+    return user;
+}
+exports.add = function(req,res) {
+    var name = req.body.name;
+    var google_id = req.body.google_id;
+
+    var user = buildNewUser(google_id, name);
+
     model.User.create(user,function(err,newuser) {
         res.send(newuser);
     });
@@ -44,7 +53,9 @@ exports.updateSettings = function(req,res) {
             user.settings = req.body.settings;
             user.name = req.body.name;
             user.save();
-            res.send(user);  
+            res.send(user);
+
+            actions.log(req.session.user_id, "UPDATE_SETTINGS","User: " + user.name);
         }
     });
 };
@@ -100,8 +111,10 @@ exports.findStats = function(req,res) {
                 
             res.send(stats);
             
-        }); 
-    });    
+        });
+    });
+
+    actions.log(req.session.user_id, "FIND_STATS");
 };
 
 exports.getByGoogleId = function(req, res){
@@ -120,8 +133,16 @@ exports.getByGoogleId = function(req, res){
             user.singInDate = user.singInDate || user.lastLogin;
             
             user.save();
+            res.send(user);
+            actions.log(req.session.user_id, "LOG_IN","User: " + req.query.name);
+        } else {
+            var newUser = buildNewUser(req.params.google_id,req.query.name);
+            model.User.create(newUser,function(err,newuser) {
+                res.send(newuser);
+            });
+            actions.log(req.session.user_id, "SING_IN","User: " + req.query.name);
         }
-        res.send(user);
+
     });   
 };
 
@@ -138,11 +159,13 @@ exports.addToFavorites = function(req,res) {
                     name: user.name
                 });
                 recipe.save();
+                actions.log(req.session.user_id, "ADD_FAVORITES","El usuario '"+user.name+"' agrego la receta '"+recipe.NAME+"' de '"+recipe.BREWER+"'. recipe_id: "+req.body._id);
             });
             
             user.save(function(err,user) {
                 res.send(user);
             });
+
     });
 };
 
@@ -169,6 +192,8 @@ exports.removeFromFavorites = function(req,res) {
                 }
             });
             recipe.save();
+            actions.log(req.session.user_id, "REMOVE_FAVORITES","El usuario '"+user.name+"' removio la receta '"+recipe.NAME+"' de '"+recipe.BREWER+"'. recipe_id: "+req.body._id);
         });
+
     });
 };

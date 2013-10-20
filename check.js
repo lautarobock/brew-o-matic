@@ -11,6 +11,7 @@ mongoose.connect(process.env.MONGOLAB_URI);
 
 console.log("comenzando");
 model.User.find({}).sort('name').exec(function(err,users) {
+  var googleid="";
   var username = "";
   var _id = "";
   var repeated = {};
@@ -18,13 +19,14 @@ model.User.find({}).sort('name').exec(function(err,users) {
   for (var i=0; i<users.length; i++) {
     var user = users[i];
     //console.log("name",user.name);
-    if ( user.name == username) {
-      if ( !repeated[user.name] ) {
-        repeated[user.name] = [_id];
+    if ( user.google_id == googleid) {
+      if ( !repeated[googleid] ) {
+        repeated[googleid] = [_id];
       }
-      repeated[user.name].push(user._id);
+      repeated[googleid].push(user._id);
     } else {
       username = user.name;
+      googleid = user.google_id;
       _id = user._id;
     }
   }

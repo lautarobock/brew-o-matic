@@ -2,7 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c59171e-aa4c-4ed3-b378-24487c86d6a8" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/actions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/check.js" afterPath="$PROJECT_DIR$/check.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/domain/model.js" afterPath="$PROJECT_DIR$/domain/model.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/LoginController.js" afterPath="$PROJECT_DIR$/public/js/LoginController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/RecipeDetailCtrl.js" afterPath="$PROJECT_DIR$/public/js/RecipeDetailCtrl.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/index.js" afterPath="$PROJECT_DIR$/public/js/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/partial/nav.html" afterPath="$PROJECT_DIR$/public/partial/nav.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/partial/user/user-settings.html" afterPath="$PROJECT_DIR$/public/partial/user/user-settings.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/recipe.js" afterPath="$PROJECT_DIR$/routes/recipe.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/user.js" afterPath="$PROJECT_DIR$/routes/user.js" />
     </list>
     <ignored path="brew-o-matic.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -22,91 +32,49 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="recipe-detail-main.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/partial/recipe-detail-main.html">
+      <file leaf-file-name="user-settings.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/partial/user/user-settings.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="26" selection-start="2261" selection-end="2261" vertical-scroll-proportion="0.0">
+            <state line="150" column="22" selection-start="7472" selection-end="7472" vertical-scroll-proportion="0.71022725">
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#1;n#div#3;n#div#1;n#div#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#3;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="nav.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/partial/nav.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="24" column="83" selection-start="1286" selection-end="1341" vertical-scroll-proportion="-15.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="recipe-detail-general.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/partial/recipe-detail-general.html">
+      <file leaf-file-name="LoginController.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/LoginController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="21" selection-start="2370" selection-end="2370" vertical-scroll-proportion="0.0">
+            <state line="53" column="0" selection-start="2175" selection-end="2175" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RecipeDetailCtrl.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/RecipeDetailCtrl.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="116" column="36" selection-start="3707" selection-end="3707" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="recipe-detail-indicators.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/partial/recipe-detail-indicators.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RecipeCtrl.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/RecipeCtrl.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="72" column="67" selection-start="3363" selection-end="3363" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="94" selection-start="949" selection-end="1070" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="check.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/check.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="0" selection-start="477" selection-end="477" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="index.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="34" selection-start="206" selection-end="206" vertical-scroll-proportion="0.14150943">
+            <state line="24" column="10" selection-start="1306" selection-end="1306" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="recipe-mash.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/partial/recipe-mash.html">
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="43" selection-start="4501" selection-end="4501" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="model.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/domain/model.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="101" column="16" selection-start="2494" selection-end="2503" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.6756757">
               <folding />
             </state>
           </provider>
@@ -125,22 +93,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/public/partial/share/share-boil.html" />
-        <option value="$PROJECT_DIR$/public/partial/share/share-fermentation.html" />
-        <option value="$PROJECT_DIR$/public/js/helper.js" />
-        <option value="$PROJECT_DIR$/public/partial/share/share-bottling.html" />
-        <option value="$PROJECT_DIR$/etc/data/grains.json" />
-        <option value="$PROJECT_DIR$/domain/model.js" />
-        <option value="$PROJECT_DIR$/public/partial/recipe-detail-hops.html" />
-        <option value="$PROJECT_DIR$/public/partial/recipe-detail-miscs.html" />
         <option value="$PROJECT_DIR$/public/partial/recipe-detail-fermentables.html" />
         <option value="$PROJECT_DIR$/public/partial/share/share-detail-main.html" />
         <option value="$PROJECT_DIR$/public/partial/recipe-detail-general.html" />
         <option value="$PROJECT_DIR$/public/partial/recipe-detail-main.html" />
-        <option value="$PROJECT_DIR$/public/js/RecipeDetailCtrl.js" />
         <option value="$PROJECT_DIR$/public/partial/recipe-mash.html" />
         <option value="$PROJECT_DIR$/public/js/RecipeCtrl.js" />
+        <option value="$PROJECT_DIR$/check.js" />
+        <option value="$PROJECT_DIR$/routes/actions.js" />
+        <option value="$PROJECT_DIR$/routes/recipe.js" />
+        <option value="$PROJECT_DIR$/domain/model.js" />
+        <option value="$PROJECT_DIR$/routes/user.js" />
+        <option value="$PROJECT_DIR$/public/js/RecipeDetailCtrl.js" />
+        <option value="$PROJECT_DIR$/public/js/LoginController.js" />
         <option value="$PROJECT_DIR$/public/js/index.js" />
+        <option value="$PROJECT_DIR$/public/partial/nav.html" />
+        <option value="$PROJECT_DIR$/public/partial/user/user-settings.html" />
       </list>
     </option>
   </component>
@@ -164,7 +132,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1" splitterProportion="0.5">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -175,7 +143,75 @@
       <autoscrollFromSource />
       <sortByType />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brew-o-matic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brew-o-matic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brew-o-matic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brew-o-matic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brew-o-matic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="routes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brew-o-matic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brew-o-matic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brew-o-matic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brew-o-matic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -255,11 +291,11 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3288889" sideWeight="0.99874216" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24968554" sideWeight="0.64" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15691008" sideWeight="0.6594286" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39666668" sideWeight="0.49748427" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15691008" sideWeight="0.66057146" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39657143" sideWeight="0.49748427" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32955974" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.49811321" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34057143" sideWeight="0.9201258" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33942857" sideWeight="0.9201258" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32777777" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -323,111 +359,124 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="10" />
+      <option name="time" value="18" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/js/FermentationCtrl.js">
+    <entry file="file://$PROJECT_DIR$/check.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="0" selection-start="3231" selection-end="3634" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/partial/recipe-fermentation.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="158" column="20" selection-start="11606" selection-end="11719" vertical-scroll-proportion="0.6465517" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/partial/recipe-detail-hops.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="13" selection-start="2983" selection-end="2983" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/partial/recipe-detail-miscs.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="172" selection-start="2028" selection-end="2028" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/partial/recipe-detail-fermentables.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="52" selection-start="2316" selection-end="2316" vertical-scroll-proportion="0.0">
+        <state line="20" column="0" selection-start="459" selection-end="459" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/partial/share/share-detail-main.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="68" selection-start="4677" selection-end="4677" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/partial/recipe-detail-main.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="26" selection-start="2261" selection-end="2261" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/partial/recipe-detail-general.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="21" selection-start="2370" selection-end="2370" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/RecipeDetailCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="116" column="36" selection-start="3707" selection-end="3707" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/partial/recipe-detail-indicators.html">
+    <entry file="file://$PROJECT_DIR$/etc/data/users.json">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/partial/recipe-mash.html">
+    <entry file="file://$PROJECT_DIR$/dump/af_brew-o-matic-lautaromail/users.metadata.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="43" selection-start="4501" selection-end="4501" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/domain/model.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="101" column="16" selection-start="2494" selection-end="2503" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/RecipeCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="67" selection-start="3363" selection-end="3363" vertical-scroll-proportion="0.0">
+        <state line="0" column="1" selection-start="1" selection-end="1" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="94" selection-start="949" selection-end="1070" vertical-scroll-proportion="0.0">
+        <state line="98" column="23" selection-start="3219" selection-end="3219" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/check.js">
+    <entry file="file://$PROJECT_DIR$/public/partial/recipe-mash.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="477" selection-end="477" vertical-scroll-proportion="0.0">
+        <state line="74" column="43" selection-start="4501" selection-end="4501" vertical-scroll-proportion="-0.625">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/actions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="30" selection-start="234" selection-end="234" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#158#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/recipe.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="104" column="19" selection-start="3694" selection-end="3705" vertical-scroll-proportion="-6.92">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/domain/model.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="29" selection-start="739" selection-end="739" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="27" selection-start="878" selection-end="878" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/RecipeDetailCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="558" column="92" selection-start="22854" selection-end="22854" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/partial/recipe-fermentation.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="140" column="42" selection-start="10101" selection-end="10458" vertical-scroll-proportion="-9.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.6756757">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/LoginController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="53" column="0" selection-start="2175" selection-end="2175" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="34" selection-start="206" selection-end="206" vertical-scroll-proportion="0.14150943">
+        <state line="24" column="10" selection-start="1306" selection-end="1306" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/partial/nav.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="83" selection-start="1286" selection-end="1341" vertical-scroll-proportion="-15.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/partial/user/user-settings.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="150" column="22" selection-start="7472" selection-end="7472" vertical-scroll-proportion="0.71022725">
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#3;n#div#1;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#3;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -1,3 +1,4 @@
+var actions = require('./actions.js');
 var model = require('../domain/model.js');
 var Arrays = require('../public/js/util/util.js').Arrays;
 
@@ -22,6 +23,7 @@ exports.get = function(req, res) {
 exports.remove= function(req, res) {
     model.Recipe.findByIdAndRemove(req.params.id,function(err,results) {
         res.send(results);
+        actions.log(req.session.user_id, "REMOVE_RECIPE","NAME: '"+results.NAME+"'. recipe_id: "+results._id);
     });    
 };
 
@@ -44,6 +46,7 @@ exports.addComment = function(req,res) {
         });
         recipe.save();
         res.send(recipe.comments);
+        actions.log(req.session.user_id, "ADD_COMMENT","NAME: '"+recipe.NAME+"'. recipe_id: "+recipe._id);
     });
 };
 
@@ -54,6 +57,7 @@ exports.deleteComment = function(req,res) {
         });
         recipe.save();
         res.send(recipe.comments);
+        actions.log(req.session.user_id, "REMOVE_COMMENT","NAME: '"+recipe.NAME+"'. recipe_id: "+recipe._id);
     });
 };
 
@@ -88,6 +92,7 @@ exports.save = function(req, res) {
                 recipe.save();
             });
         }
+        actions.log(req.session.user_id, "ADD_RECIPE","NAME: '"+req.body.NAME+"'. recipe_id: "+id);
     } else {
         console.log("FERMENTABLES",req.body.FERMENTABLES);
         console.log("bottling",req.body.bottling);
@@ -97,6 +102,7 @@ exports.save = function(req, res) {
         req.body.modificationDate = new Date();
         //console.log("UPDATE POST", req.body);
         model.Recipe.findByIdAndUpdate(id,req.body).populate('owner').exec(callback);
+        actions.log(req.session.user_id, "UPDATE_RECIPE","NAME: '"+req.body.NAME+"'. recipe_id: "+id);
     }
     
 };

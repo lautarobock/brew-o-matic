@@ -17,18 +17,21 @@
                 
                 request.execute(function (obj){
                     User.getByGoogleId({
-                        id:obj.id
+                        id:obj.id,
+                        name: obj.name
                     },function(user){
-                        if ( angular.isDefined(user.google_id) ) {
-                            $rootScope.user = user;
-                            console.log(user);
-                        } else {
-                            var newUser = new User({google_id:obj.id,name:obj.name});
-                            newUser.$save(function(user) {
-                                $rootScope.user = user;
-                            });
-                            console.log("Server Login Error");
-                        }
+                        $rootScope.user = user;
+                        console.log(user);
+//                        if ( angular.isDefined(user.google_id) ) {
+//                            $rootScope.user = user;
+//                            console.log(user);
+//                        } else {
+//                            var newUser = new User({google_id:obj.id,name:obj.name});
+//                            newUser.$save(function(user) {
+//                                $rootScope.user = user;
+//                            });
+//                            console.log("Server Login Error");
+//                        }
                     });
                     
                 });
@@ -48,29 +51,7 @@
             }
         });
         
-        $scope.disconnectUser = function() {
-            var revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' +
-                    gapi.auth.getToken().access_token;
-            // Realiza una solicitud GET asíncrona.
-            $.ajax({
-                type: 'GET',
-                url: revokeUrl,
-                async: false,
-                contentType: "application/json",
-                dataType: 'jsonp',
-                success: function(nullResponse) {
-                    //document.getElementById('signinButton').setAttribute('style', 'display: block');
-                    $rootScope.user = undefined;
-                    $scope.$apply();
-                },
-                error: function(e) {
-                    // Gestiona el error
-                    // console.log(e);
-                    // Puedes indicar a los usuarios que se desconecten de forma manual si se produce un error
-                    // https://plus.google.com/apps
-                }
-            });
-        }
+
     });
 
 })();

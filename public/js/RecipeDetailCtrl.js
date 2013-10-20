@@ -398,7 +398,7 @@
                             $scope.recipe.modificationDate = now;
                             $scope.recipe.starredBy = [];
                             $scope.recipe.clonedBy = [];
-                            $scope.recipe.isPublic = false;
+                            $scope.recipe.isPublic = $scope.user.settings.defaultValues.isPublic;
                             //Al clonar elimino los comentarios de la original
                             $scope.recipe.comments = [];
                         }
@@ -459,7 +459,8 @@
                         SpargeTempDesired: $scope.user.settings.defaultValues.SpargeTempDesired,
                         TopUpWater: 0,
                         PercentEvap: $scope.user.settings.defaultValues.PercentEvap,
-                        TrubChillerLosses: $scope.user.settings.defaultValues.TrubChillerLosses
+                        TrubChillerLosses: $scope.user.settings.defaultValues.TrubChillerLosses,
+                        isPublic: $scope.user.settings.defaultValues.isPublic
                     });
                     $scope.changeYeast();
                 }                
@@ -555,6 +556,7 @@
                         scope.recipe.WatertoGrainRatio = parseFloat(scope.recipe.WatertoGrainRatio) || $scope.user.settings.defaultValues.WatertoGrainRatio;
                         scope.recipe.StrikeWater = parseFloat(scope.recipe.StrikeWater) || BrewHelper.round(scope.recipe.WatertoGrainRatio * scope.recipe.totalAmount,10);
                         scope.recipe.GrainAbsorbtion = parseFloat(scope.recipe.GrainAbsorbtion) || $scope.user.settings.defaultValues.GrainAbsorbtion || 0.9;
+                        scope.recipe.isPublic = $scope.user.settings.defaultValues.isPublic;
                         
                         scope.recipe.totalAmount = 0;
                         function convertFerm(ferm) {

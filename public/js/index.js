@@ -21,7 +21,30 @@
         //$scope.$watch('user',function() {
         //    $scope.stats = User.findStats();
         //});
-        
+        $scope.disconnectUser = function() {
+            var revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' +
+                gapi.auth.getToken().access_token;
+            // Realiza una solicitud GET asíncrona.
+            $.ajax({
+                type: 'GET',
+                url: revokeUrl,
+                async: false,
+                contentType: "application/json",
+                dataType: 'jsonp',
+                success: function(nullResponse) {
+                    //document.getElementById('signinButton').setAttribute('style', 'display: block');
+                    $rootScope.user = undefined;
+                    $scope.$apply();
+                },
+                error: function(e) {
+                    // Gestiona el error
+                    // console.log(e);
+                    // Puedes indicar a los usuarios que se desconecten de forma manual si se produce un error
+                    // https://plus.google.com/apps
+                }
+            });
+        };
+
         $rootScope.breadcrumbs = [{
             link: '#',
             title: 'Home'

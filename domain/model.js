@@ -22,7 +22,8 @@ exports.User = mongoose.model("User",new Schema({
             SpargeDeadSpace: Number,
             GrainAbsorbtion: Number,
             PercentEvap: Number,
-            TrubChillerLosses: Number
+            TrubChillerLosses: Number,
+            isPublic: Boolean
         }
     }
 }));
@@ -238,3 +239,10 @@ exports.Style = mongoose.model("Style",new Schema({
     "ABV_Max": Number,
     "link": String
 },{ _id: false }));
+
+exports.Action = mongoose.model("Action",new Schema({
+    "user_id": {type:String, ref:'User'},
+    "date": Date,
+    "actionType": String,
+    "data": String
+}));

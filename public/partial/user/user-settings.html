@@ -132,7 +132,23 @@
                            placeholder="(Perdida Turb y Enfirador)"
                            ng-model="user.settings.defaultValues.TrubChillerLosses">
                 </div>
+                <div class="col-md-3">
+                    <div class="checkbox" style="margin-top: 2em;">
+                        <label title="Las recetas seran visibles por todos los usuarios (podra deshabilitar esta opcion en cada receta)" for="isPublic">Publica receta</label>
+                        <input id="isPublic" type="checkbox" ng-model="user.settings.defaultValues.isPublic" />
+                    </div>
+                </div>
             </div>
+        </div>
+
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><strong>Dar de baja el usuario y desconectarse de google+</strong></div>
+        <div class="panel-body" >
+            <p>
+                Si desea darse de baja del sistema y desconetar la aplicacion de google+ haga click en el siguitente link
+            </p>
+            <a href="" ng-click="disconnectUser()">Desconectarse</a>
         </div>
     </div>
     <div style="overflow: hidden;margin-bottom: 1em;">
