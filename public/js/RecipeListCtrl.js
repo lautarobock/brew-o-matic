@@ -78,6 +78,10 @@
                 $rootScope.user.favorites = user.favorites;
             });
         };
+
+        $scope.publish = function(recipe) {
+            recipe.$publish({isPublic: true});
+        };
         
         //$scope.sharedUrl = function(_id) {
         //    return 'http://'+$location.host() + ":" + $location.port() + '/share.html#/' + _id;

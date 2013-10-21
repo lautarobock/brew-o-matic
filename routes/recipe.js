@@ -67,7 +67,7 @@ exports.save = function(req, res) {
         if (err) {
             console.log("error", err);
         }
-        console.log("response bottling",s.bottling);
+//        console.log("response bottling",s.bottling);
         res.send(s);
     }
     
@@ -105,4 +105,17 @@ exports.save = function(req, res) {
         actions.log(req.session.user_id, "UPDATE_RECIPE","NAME: '"+req.body.NAME+"'. recipe_id: "+id);
     }
     
+};
+
+exports.publish = function(req, res) {
+    model.Recipe.findOne({_id:req.params.id}).populate('owner').exec(function(err,recipe) {
+        recipe.isPublic = req.query.isPublic;
+        recipe.save(function(err) {
+            if ( err ) {
+                res.send(500,{error: 'Error al publicar la receta'});
+            } else {
+                res.send(recipe);
+            }
+        });
+    });
 };

@@ -20,8 +20,9 @@
         var params = function() {
             return $rootScope.user ? $rootScope.user.google_id : null;
         };
-        return $resource('recipe/:operation:id',{google_id:params}, {
+        return $resource('recipe/:operation:id',{google_id:params,id:'@_id'}, {
             findPublic: {method:'GET',params: {operation:'public'}, isArray:true },
+            publish: {method:'POST', params: {operation: 'publish_'}},
             addComment: {
                 method:'PUT',
                 params: {operation:'comment'},
