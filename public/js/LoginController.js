@@ -3,7 +3,7 @@
     var index = angular.module('login',[]);
 
  
-    index.controller("LoginController",function($scope,$rootScope,User) {
+    index.controller("LoginController",function($scope,$rootScope,User,Notification) {
         $scope.$on('g+login',function(event,authResult) {
             if (authResult['access_token']) {
               // Autorizado correctamente
@@ -22,16 +22,6 @@
                     },function(user){
                         $rootScope.user = user;
                         console.log(user);
-//                        if ( angular.isDefined(user.google_id) ) {
-//                            $rootScope.user = user;
-//                            console.log(user);
-//                        } else {
-//                            var newUser = new User({google_id:obj.id,name:obj.name});
-//                            newUser.$save(function(user) {
-//                                $rootScope.user = user;
-//                            });
-//                            console.log("Server Login Error");
-//                        }
                     });
                     
                 });
@@ -50,7 +40,19 @@
                 console.log('Error inesperado');
             }
         });
+
+        $scope.$watch('user',function(user) {
+            if (user) {
+                $scope.findNotificationsCount();
+            }
+        });
         
+        $rootScope.notificationCount = 0;
+        $scope.findNotificationsCount = function() {
+            Notification.findNews(function(nots) {
+                $rootScope.notificationCount = nots.length;
+            });
+        };
 
     });
 

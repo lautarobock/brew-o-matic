@@ -9,8 +9,13 @@
 var model = require('../domain/model.js');
 
 exports.log = function(user_id,actionType,data) {
-    model.Action.create(new model.Action({user_id:user_id,date: new Date(),actionType:actionType,data:data}), function(err,action) {
-        console.log("err",err)
-        console.log("action",action)
+    model.Action.create(new model.Action({
+            user_id:user_id,
+            date: new Date(),
+            actionType:actionType,
+            data:data
+        }), function(err,action) {
+            console.log("err",err)
+            console.log("action",action)
     });
 };

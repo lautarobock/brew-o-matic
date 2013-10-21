@@ -246,3 +246,11 @@ exports.Action = mongoose.model("Action",new Schema({
     "actionType": String,
     "data": String
 }));
+
+exports.Notification = mongoose.model("Notification",new Schema({
+    "user_id": {type:String, ref:'User'},
+    "date": Date,
+    "status": String, //new,unread,read
+    "data": String,
+    "link": String
+}));

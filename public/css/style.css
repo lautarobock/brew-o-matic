@@ -44,3 +44,20 @@ a {
     -webkit-appearance: none !important;
 }
 
+.gt-notification-unread {
+    background: #F9F9F9 !important;
+}
+
+.gt-notification {
+    display: block;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    font-size: 13px;
+    line-height: 1.428571429;
+    color: #333;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: Monaco,Menlo,Consolas,"Courier New",monospace;
+    
+}

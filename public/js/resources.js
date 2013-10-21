@@ -34,10 +34,16 @@
         });
     });
     
+    res.factory('Notification',function($resource) {
+        return $resource('notification/:_id',{_id:"@_id"}, {
+            findNews: {method:'GET',params:{_id:'news'},isArray:true}
+        });
+    });    
+    
     var services = ['Style','Grain','Hop','Yeast','Misc','Bottle'];
     angular.forEach(services,function(s) {
         res.factory(s,function($resource) {
-            return $resource( s.toLowerCase() + '/:id',{}, {});
+            return $resource( s.toLowerCase() + '/:_id',{_id:"@_id"}, {});
         });    
     });
     

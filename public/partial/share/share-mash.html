@@ -1,4 +1,4 @@
-<div>
+<div ng-controller="RecipeMashCtrl">
     <div class="col-md-10">
         <div class="panel panel-default">
             <div class="panel-heading"><strong>Empaste</strong></div>
@@ -63,13 +63,41 @@
                     </div>
                 </div>
             </div>
-            <!--<div class="panel-heading"><strong>Escalones</strong></div>-->
-            <!--<div class="panel-body" >-->
-            <!--    <ul class="list-group">-->
-            <!--        <li class="list-group-item">Mash-in</li>-->
-            <!--        <li class="list-group-item">Mash-out</li>-->
-            <!--    </ul>-->
-            <!--</div>-->
+            <div class="panel-heading"><strong>Escalones</strong></div>
+            <div class="panel-body" >
+                <div class="alert alert-info" ng-hide="recipe.MASH.MASH_STEPS.MASH_STEP.length!=0">
+                    No hay escalones en esta receta.
+                </div>
+                <div ng-show="recipe.MASH.MASH_STEPS.MASH_STEP.length!=0">
+                    <ul class="list-group">
+                        <li style="padding-top: 5px;" class="list-group-item" ng-repeat="STEP in recipe.MASH.MASH_STEPS.MASH_STEP">
+                            <div>
+                                {{BrewHelper.pad(moment($index),2)}} min
+                                - <strong style="width: 10em">{{ STEP.NAME||'(click para editar)' }}:</strong>
+                                {{ STEP.STEP_TEMP }}ºC
+                                <span ng-hide="STEP.STEP_TEMP == STEP.END_TEMP">a {{ STEP.END_TEMP }}ºC</span>
+                                - {{ STEP.STEP_TIME }} min
+                                <span ng-show="stepAction(STEP)">- {{ stepAction(STEP) }}</span>
+                                <span ng-show="STEP.recirculate">- Recirculando</span>
+                                - ({{ calculateVolume($index) | number:1 }} Lts)
+                            </div>
+                        </li>
+                    </ul>
+                    <button type="button" ng-click="addMashStep()" class="btn btn-default pull-right">
+                        <span class="glyphicon glyphicon-plus"></span> Agregar Escalon
+                    </button>
+                </div>
+            </div>
+            <div class="container">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <strong>Duracion Total: </strong>{{totalTime()}} minutos
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Litros agregados: </strong>{{BrewCalc.actualMashVolume(recipe.MASH.MASH_STEPS.MASH_STEP.length-1,0,recipe.MASH.MASH_STEPS.MASH_STEP)|number:1}} Litros
+                    </li>
+                </ul>
+            </div>  
             <div class="panel-heading"><strong>Lavado</strong></div>
             <div class="panel-body" >
                 <div class="row">

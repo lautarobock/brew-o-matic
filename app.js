@@ -7,6 +7,7 @@ var express = require('express');
 //var routes = require('./routes');
 var user = require('./routes/user');
 var model = require('./domain/model.js');
+var notifications = require('./util/notifications.js');
 var http = require('http');
 var path = require('path');
 var mongoose = require('mongoose');
@@ -93,9 +94,15 @@ app.get('/recipe/:id',recipe.get)
 app.post('/recipe/:id',filter,recipe.save)
 app.post('/recipe',filter,recipe.save)
 app.delete('/recipe/:id',filter,recipe.remove)
+
+app.get('/notification',filter,notifications.findAll);
+app.get('/notification/news',filter,notifications.findNews);
+app.post("/notification/:id",filter,notifications.update);
+
+
 var services = ['Style','Grain','Hop','Yeast','Misc','Bottle'];
 for (s in services ) {
-  app.get('/' + services[s].toLowerCase(),data[services[s]].findAll);  
+  app.get('/' + services[s].toLowerCase(),data[services[s]].findAll);
 }
 
 http.createServer(app).listen(app.get('port'), function(){

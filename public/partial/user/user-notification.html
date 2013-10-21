@@ -1,0 +1,13 @@
+    <!--<div class="panel panel-default">-->
+    <!--    <div class="panel-heading"><strong>Notificaciones</strong></div>-->
+    <!--    <div class="panel-body" >-->
+    <h3>Notificaciones</h3>
+    <ul class="list-group">
+        <li ng-click="markAsRead(notification)" class="list-group-item" ng-repeat="notification in notifications" ng-class="statusClass(notification)">
+            <span title="{{comment.date|date:'dd/MM/yyyy HH:mm'}}">{{formatDate(notification.date)}}</span>
+            <div class="gt-notification" ng-bind-html="notification.data"></div>
+            <a href="{{notification.link}}">ver detalles</a>
+        </li>
+    </ul>
+    <!--    </div>-->
+    <!--</div>-->

@@ -1,4 +1,5 @@
 var actions = require('./actions.js');
+var notifications = require('../util/notifications.js');
 var model = require('../domain/model.js');
 var Arrays = require('../public/js/util/util.js').Arrays;
 
@@ -46,7 +47,21 @@ exports.addComment = function(req,res) {
         });
         recipe.save();
         res.send(recipe.comments);
+        
+        //LOG action
         actions.log(req.session.user_id, "ADD_COMMENT","NAME: '"+recipe.NAME+"'. recipe_id: "+recipe._id);
+        
+        //Add Notification
+        notifications.notifyCommentOnRecipe(
+            recipe.owner,
+            req.session.user_id,
+            req.session.user_name ,
+            recipe._id,
+            recipe.NAME);
+        notifications.notifyCommentOnFavorite(
+            recipe,
+            req.session.user_id,
+            req.session.user_name);
     });
 };
 
@@ -68,6 +83,7 @@ exports.save = function(req, res) {
             console.log("error", err);
         }
 //        console.log("response bottling",s.bottling);
+        notifications.notifyUpdateFavorite(s);
         res.send(s);
     }
     

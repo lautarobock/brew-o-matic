@@ -129,7 +129,7 @@
                     <a ng-show="user.favorites.indexOf(recipe._id) != -1" href="#/recipe" type="button" class="glyphicon glyphicon-star" ng-click="removeFavorites(recipe)"></a>
                 </td>
                 <td>{{ recipe.date|date:'dd-MM-yyyy' }}</td>
-                <td title="{{recipe.NAME}}"><a target="_blank" href="{{sharedUrl(recipe._id)}}">{{ recipe.NAME|limitText:30}}</a></td>
+                <td title="{{recipe.NAME}}"><a href="{{sharedUrl(recipe._id)}}">{{ recipe.NAME|limitText:30}}</a></td>
                 <td>{{ recipe.STYLE.NAME }}</td>
                 <td>{{ recipe.OG  }}</td>
                 <td>{{ recipe.FG  }}</td>
@@ -196,7 +196,7 @@
                     <a ng-show="user.favorites.indexOf(recipe._id) != -1" href="#/recipe" type="button" class="glyphicon glyphicon-star" ng-click="removeFavorites(recipe)"></a>
                 </td>
                 <td>{{ recipe.date|date:'dd-MM-yyyy' }}</td>
-                <td title="{{recipe.NAME}}"><a target="_blank" href="{{sharedUrl(recipe._id)}}">{{ recipe.NAME|limitText:30}}</a></td>
+                <td title="{{recipe.NAME}}"><a href="{{sharedUrl(recipe._id)}}">{{ recipe.NAME|limitText:30}}</a></td>
                 <td>{{ recipe.STYLE.NAME }}</td>
                 <td>{{ recipe.OG  }}</td>
                 <td>{{ recipe.FG  }}</td>

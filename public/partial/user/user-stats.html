@@ -51,7 +51,7 @@
                 <h4 title="Comentarios hechos por mi en recetas de otros">Mis Comentarios en otras recetas ({{stats.myCommented.length}})</h4>
                 <ul class="list-group">
                     <li class="list-group-item" ng-repeat="commented in stats.myCommented">
-                        <a target="_blank" href="{{sharedUrl(commented._id)}}">{{commented.NAME}}</a> (de: {{commented.owner.name}})
+                        <a href="{{sharedUrl(commented._id)}}">{{commented.NAME}}</a> (de: {{commented.owner.name}})
                         <span  style="cursor: pointer" ng-click="show=!show" class="badge">{{commented.comments.length}}</span>
                         <div ng-show="show">
                                 <div ng-repeat="comment in commented.comments | orderBy:'-date'"">

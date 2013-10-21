@@ -1,9 +1,19 @@
 (function() {
 
 
-    var index = angular.module('index', ['ngResource','ngRoute','data','resources','helper','login','comments','googlechart','brew-o-module.controller']);
+    var index = angular.module('index', [
+                                'ngResource',
+                                'ngRoute',
+                                'ngSanitize',
+                                'data',
+                                'resources',
+                                'helper',
+                                'login',
+                                'comments',
+                                'googlechart',
+                                'brew-o-module.controller']);
 
-    index.constant("version",'0.10')
+    index.constant("version",'0.12');
  
     index.
         config(['$routeProvider', function($routeProvider) {
@@ -14,9 +24,43 @@
                 when('/recipe/new', {templateUrl: 'partial/recipe-detail.html', controller: 'RecipeDetailCtrl'}).
                 when('/stats', {templateUrl: 'partial/user/user-stats.html', controller: 'UserStatsCtrl'}).
                 when('/settings', {templateUrl: 'partial/user/user-settings.html', controller: 'UserSettingsCtrl'}).
+                when('/notification', {templateUrl: 'partial/user/user-notification.html', controller: 'NotificationsCtrl'}).
                 otherwise({redirectTo: '/recipe'});
     }]);
 
+    index.controller("NotificationsCtrl",function($scope,Notification,$rootScope) {
+        $scope.$watch('user',function() {
+            $scope.notifications = Notification.query();
+        });
+        
+        $rootScope.breadcrumbs = [{
+            link: '#',
+            title: 'Home'
+        },{
+            link: '#',
+            title: 'Notificaciones'
+        }];
+        
+        $scope.markAsRead = function(notification) {
+            if ( notification.status == 'unread' ) {
+                notification.status = 'read';
+                notification.$save();
+            }
+        };
+        
+        $scope.statusClass = function(notification) {
+            if ( notification.status == 'unread') { 
+                return 'gt-notification-unread';
+            }
+            return '';
+        };
+        
+        $rootScope.notificationCount = 0;
+        
+    });
+    
+    
+    
     index.controller("UserSettingsCtrl",function($scope,User,$rootScope) {
         //$scope.$watch('user',function() {
         //    $scope.stats = User.findStats();
