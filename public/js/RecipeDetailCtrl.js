@@ -558,6 +558,9 @@
                         scope.recipe.GrainAbsorbtion = parseFloat(scope.recipe.GrainAbsorbtion) || $scope.user.settings.defaultValues.GrainAbsorbtion || 0.9;
                         scope.recipe.isPublic = $scope.user.settings.defaultValues.isPublic;
                         
+                        //FIXME, por ahora lo dejo en 0, ya q no lo uso ni lo muestro.
+                        scope.recipe.TopUpWater = 0;
+                        
                         scope.recipe.totalAmount = 0;
                         function convertFerm(ferm) {
                             ferm.AMOUNT = parseFloat(ferm.AMOUNT);
@@ -614,6 +617,9 @@
                                 MISC: []
                             };
                         }
+                        
+                        //Elimino los escalones
+                        scope.recipe.MASH.MASH_STEPS.MASH_STEP = [];
                         
                         scope.recipe.YEASTS.YEAST = [scope.recipe.YEASTS.YEAST];
                         scope.recipe.YEASTS.YEAST[0].ATTENUATION = parseFloat(scope.recipe.YEASTS.YEAST[0].ATTENUATION);

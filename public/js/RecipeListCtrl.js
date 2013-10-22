@@ -26,6 +26,54 @@
         }
     });
     
+    index.controller("RecipeFavoriteCtrl", function ($scope,$rootScope,Recipe,User) {
+        
+        $rootScope.breadcrumbs = [{
+            link: '#',
+            title: 'Home'
+        },{
+            link: '#',
+            title: 'Recetas Favoritas'
+        }];
+        
+        $rootScope.$watch('user',function() {
+            $scope.published = Recipe.findPublic();
+        });
+        
+        $scope.removeFavorites = function(recipe) {
+            User.removeFromFavorites(recipe,function(user) {
+                $rootScope.user.favorites = user.favorites;
+            });
+        };
+        
+    });
+    
+    index.controller("RecipePublicCtrl", function ($scope,$rootScope,Recipe,User) {
+        $rootScope.$watch('user',function() {
+            $scope.published = Recipe.findPublic();
+        });
+        
+        $rootScope.breadcrumbs = [{
+            link: '#',
+            title: 'Home'
+        },{
+            link: '#',
+            title: 'Recetas Publicadas'
+        }];
+        
+        $scope.addFavorites = function(recipe) {
+            User.addToFavorites(recipe,function(user) {
+                $rootScope.user.favorites = user.favorites;
+            });
+        };
+
+        $scope.removeFavorites = function(recipe) {
+            User.removeFromFavorites(recipe,function(user) {
+                $rootScope.user.favorites = user.favorites;
+            });
+        };
+    });
+    
     index.controller("RecipeListCtrl", function (
                 $scope,
                 $rootScope,
@@ -34,8 +82,6 @@
                 $location,
                 $timeout) {
 
-        $scope.publishedCount = 10;
-    
         $rootScope.breadcrumbs = [{
             link: '#',
             title: 'Home'
@@ -43,13 +89,7 @@
 
         $rootScope.$watch('user',function() {
             $scope.recipes = Recipe.query();
-            $scope.published = Recipe.findPublic();
         });
-        
-        $scope.findMore = function() {
-            $scope.publishedCount+=10;
-            $scope.published = Recipe.findPublic({limit:$scope.publishedCount});
-        };
         
         $scope.confirmationID = function(id) {
             return 'confirmation' + id.replace('(','_').replace(')','_');
@@ -65,27 +105,10 @@
             
         };
         
-        $scope.addFavorites = function(recipe) {
-            User.addToFavorites(recipe,function(user) {
-                console.log(user);
-                $rootScope.user.favorites = user.favorites;
-            });
-        };
-        
-        $scope.removeFavorites = function(recipe) {
-            User.removeFromFavorites(recipe,function(user) {
-                console.log(user);
-                $rootScope.user.favorites = user.favorites;
-            });
-        };
-
         $scope.publish = function(recipe) {
             recipe.$publish({isPublic: true});
         };
         
-        //$scope.sharedUrl = function(_id) {
-        //    return 'http://'+$location.host() + ":" + $location.port() + '/share.html#/' + _id;
-        //};
     });
 
 })();

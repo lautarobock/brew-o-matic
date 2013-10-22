@@ -81,20 +81,21 @@ var data = require("./routes/data.js");
 //app.get('/', routes.index);findStats
 app.get('/user/google_:google_id', user.getByGoogleId);
 app.post('/user', user.add);
-app.put('/user/favorite_add',filter,user.addToFavorites)
-app.put('/user/favorite_drop',filter,user.removeFromFavorites)
+app.get('/user/id_:id', user.get);
+app.put('/user/favorite_add',filter,user.addToFavorites);
+app.put('/user/favorite_drop',filter,user.removeFromFavorites);
 //app.get('/user/stats',filter,user.findStats)
-app.put('/user/settings',filter,user.updateSettings)
-app.get('/recipe/public',filter,recipe.findPublic)
-app.put('/recipe/comment',filter,recipe.addComment)
-app.post('/recipe/publish_:id',filter,recipe.publish)
-app.put('/recipe/remove_comment',filter,recipe.deleteComment)
-app.get('/recipe',filter,recipe.findAll)
-app.get('/recipe/:id',recipe.get)
-app.post('/recipe/:id',filter,recipe.save)
-app.post('/recipe',filter,recipe.save)
-app.delete('/recipe/:id',filter,recipe.remove)
-
+app.put('/user/settings',filter,user.updateSettings);
+app.get('/recipe/public',filter,recipe.findPublic);
+app.put('/recipe/comment',filter,recipe.addComment);
+app.post('/recipe/publish_:id',filter,recipe.publish);
+app.put('/recipe/remove_comment',filter,recipe.deleteComment);
+app.get('/recipe',filter,recipe.findAll);
+app.get('/recipe/by_user_:id',filter,recipe.findByUser);
+app.get('/recipe/:id',recipe.get);
+app.post('/recipe/:id',filter,recipe.save);
+app.post('/recipe',filter,recipe.save);
+app.delete('/recipe/:id',filter,recipe.remove);
 app.get('/notification',filter,notifications.findAll);
 app.get('/notification/news',filter,notifications.findNews);
 app.post("/notification/:id",filter,notifications.update);

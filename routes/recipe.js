@@ -4,9 +4,15 @@ var model = require('../domain/model.js');
 var Arrays = require('../public/js/util/util.js').Arrays;
 
 exports.findPublic = function (req, res) {
-    model.Recipe.find({isPublic:true}).where('owner').populate('owner').ne(req.session.user_id).sort('-date').limit(req.query.limit).exec(function(err,results) {
+    model.Recipe.find({isPublic:true}).where('owner').populate('owner').ne(req.session.user_id).sort('-publishDate').limit(req.query.limit).exec(function(err,results) {
         res.send(results);
     });
+};
+
+exports.findByUser = function(req, res) {
+    model.Recipe.find({owner:req.params.id,isPublic:true}).sort('-publishDate').exec(function(err,results) {
+        res.send(results);
+    });        
 };
 
 exports.findAll = function(req, res) {
@@ -30,10 +36,11 @@ exports.remove= function(req, res) {
 
 
 function generateId(name,user_id) {
-    return name.replace(/ /g, "_")
+    return encodeURIComponent(name.replace(/ /g, "_")
                 .replace(/#/g,"_Nro_")
                 .replace(/%/g,"_Per_")
-                + "-" + user_id + "-" + (new Date()).getTime();
+                .replace(/,/g,"_")
+                + "-" + user_id + "-" + (new Date()).getTime());
 }
 
 exports.addComment = function(req,res) {
@@ -86,12 +93,14 @@ exports.save = function(req, res) {
         notifications.notifyUpdateFavorite(s);
         res.send(s);
     }
-    
     if (!req.body._id) {
         var recipe = new model.Recipe(req.body);
         var id = generateId(req.body.NAME,req.session.user_id);
         recipe._id = id;
         recipe.owner = req.session.user_id;
+        if ( req.body.isPublic ) {
+            recipe.publishDate = new Date();
+        }
         recipe.save(callback);
         
         /**
@@ -126,6 +135,7 @@ exports.save = function(req, res) {
         model.Recipe.findById(id).exec(function (err,old) {
             if ( !old.isPublic && req.body.isPublic ) {
                 notifications.notifyOnPublish(req.body.NAME,id,req.session.user_name,req.session.user_id);
+                req.body.publishDate = new Date();
             }
             model.Recipe.findByIdAndUpdate(id,req.body).populate('owner').exec(callback);
         });
@@ -138,6 +148,9 @@ exports.save = function(req, res) {
 exports.publish = function(req, res) {
     model.Recipe.findOne({_id:req.params.id}).populate('owner').exec(function(err,recipe) {
         recipe.isPublic = req.query.isPublic;
+        if (recipe.isPublic) {
+            recipe.publishDate = new Date();
+        }
         recipe.save(function(err) {
             if ( err ) {
                 res.send(500,{error: 'Error al publicar la receta'});

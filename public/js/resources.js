@@ -11,6 +11,7 @@
             getByGoogleId: {method: 'GET', params: {type:'google_'}, isArray:false},
             addToFavorites: {method: 'PUT', params: {type:'favorite_add'}},
             removeFromFavorites: {method: 'PUT', params: {type:'favorite_drop'}},
+            get:{method:'GET',params: {type:'id_'}},
             //findStats: {method: 'GET', params: {type:'stats'}},
             updateSettings: {method: 'PUT', params: {type:'settings'}}
         });
@@ -23,6 +24,7 @@
         return $resource('recipe/:operation:id',{google_id:params,id:'@_id'}, {
             findPublic: {method:'GET',params: {operation:'public'}, isArray:true },
             publish: {method:'POST', params: {operation: 'publish_'}},
+            findByUser: {method:'GET',params: {operation:'by_user_'},isArray:true},
             addComment: {
                 method:'PUT',
                 params: {operation:'comment'},

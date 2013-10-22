@@ -24,7 +24,7 @@
         }
     }]);
 
-    helper.factory("BrewCalc",function() {
+    helper.factory("BrewCalc",function(BrewHelper) {
         return {
             /**
              * Calcula el porcentaje final de evaporacion.

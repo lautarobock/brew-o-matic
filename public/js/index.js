@@ -19,6 +19,9 @@
         config(['$routeProvider', function($routeProvider) {
             $routeProvider.
                 when('/recipe', {templateUrl: 'partial/recipe-list.html',   controller: 'RecipeListCtrl'}).
+                when('/favorites', {templateUrl: 'partial/recipe-favorite.html',   controller: 'RecipeFavoriteCtrl'}).
+                when('/public', {templateUrl: 'partial/recipe-public.html',   controller: 'RecipePublicCtrl'}).
+                when('/home/:userId', {templateUrl: 'partial/user/home.html',   controller: 'HomeCtrl'}).
                 when('/recipe/edit/:recipeId', {templateUrl: 'partial/recipe-detail.html', controller: 'RecipeDetailCtrl'}).
                 when('/recipe/clone/:recipeId', {templateUrl: 'partial/recipe-detail.html', controller: 'RecipeDetailCtrl'}).
                 when('/recipe/new', {templateUrl: 'partial/recipe-detail.html', controller: 'RecipeDetailCtrl'}).
@@ -28,9 +31,38 @@
                 otherwise({redirectTo: '/recipe'});
     }]);
 
+    index.controller("HomeCtrl",function($scope,$rootScope,User,Recipe,$routeParams) {
+        
+        $scope.$watch('user',function() {
+            //$scope.notifications = Notification.query($scope.updateCount);
+            $scope.viewUser = User.get({id:$routeParams.userId},function() {
+                $rootScope.breadcrumbs = [{
+                    link: '#',
+                    title: 'Home'
+                },{
+                    link: '#',
+                    title: $scope.viewUser.name
+                }];
+            });
+            
+            $scope.recipes = Recipe.findByUser({id:$routeParams.userId});
+        });
+        
+        $scope.addFavorites = function(recipe) {
+            User.addToFavorites(recipe,function(user) {
+                $rootScope.user.favorites = user.favorites;
+            });
+        };
+
+        $scope.removeFavorites = function(recipe) {
+            User.removeFromFavorites(recipe,function(user) {
+                $rootScope.user.favorites = user.favorites;
+            });
+        };        
+        
+    });    
+    
     index.controller("NotificationsCtrl",function($scope,Notification,$rootScope) {
-
-
         $scope.updateCount = function(notifications) {
             $scope.countUnread = 0;
             $scope.countNew = 0;
@@ -74,6 +106,7 @@
         };
         
         $rootScope.notificationCount = 0;
+        $rootScope.notificationClass = '';
         
     });
     
@@ -125,20 +158,6 @@
             
         };
     });
-    
-    //index.controller("UserStatsCtrl",function($scope,User,$rootScope) {
-    //    $scope.$watch('user',function() {
-    //        $scope.stats = User.findStats();
-    //    });
-    //    
-    //    $rootScope.breadcrumbs = [{
-    //        link: '#',
-    //        title: 'Home'
-    //    },{
-    //        link: '#',
-    //        title: 'Estadisticas'
-    //    }];
-    //});
     
     index.controller("ShareController", function($scope) {
         $scope.recipe = Recipe.get({id:$routeParams.recipeId});
