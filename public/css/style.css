@@ -48,6 +48,10 @@ a {
     background: #F9F9F9 !important;
 }
 
+.gt-notification-new {
+    background: lightgoldenrodyellow !important;
+}
+
 .gt-notification {
     display: block;
     padding: 9.5px;

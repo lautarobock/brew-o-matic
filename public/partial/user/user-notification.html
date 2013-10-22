@@ -2,6 +2,8 @@
     <!--    <div class="panel-heading"><strong>Notificaciones</strong></div>-->
     <!--    <div class="panel-body" >-->
     <h3>Notificaciones</h3>
+    <span><b>{{countNew}}</b> nuevas</span>
+    <span><b>{{countUnread}}</b> sin leer</span>
     <ul class="list-group">
         <li ng-click="markAsRead(notification)" class="list-group-item" ng-repeat="notification in notifications" ng-class="statusClass(notification)">
             <span title="{{comment.date|date:'dd/MM/yyyy HH:mm'}}">{{formatDate(notification.date)}}</span>

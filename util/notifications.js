@@ -7,6 +7,21 @@ exports.Status = {
     Read: 'read'
 };
 
+exports.notifyOnPublish = function(recipe_name,recipe_id,user_name,user_id) {
+    model.User.find().exec(function(err,users) {
+        for ( var i=0; i<users.length; i++) {
+            if ( users[i]._id != user_id) {
+                var data = "El usuario <b>{{user_name}}</b> ha publicado la receta <b>{{recipe_name}}</b>";
+                data = data.replace('{{user_name}}',user_name);
+                data = data.replace('{{recipe_name}}',recipe_name);
+
+                var link = "/share.html#/" + encodeURIComponent(recipe_id);
+                notify(users[i]._id, data, link);
+            }
+        }
+    });
+};
+
 /**
  * Notifica al owner q han agregado a favoritos su receta.
  *
@@ -59,13 +74,14 @@ exports.notifyUpdateFavorite = function(recipe) {
 };
 
 /**
- * Cuando se hace una modificacion en una receta favorita. Esto le llegaria a varios
+ * Cuando se hace una modificacion en una receta favorita. Esto le llegaria a varios.
+ * Tambien notifica a los que hicieron algun comentario
  * @param recipe la receta en la cual se hizo el comentario
  * @param user_id usuario el cual comenta
  * @param user_name nombre del usuario que comento la receta.
  */
 exports.notifyCommentOnFavorite = function(recipe, user_id , user_name) {
-    
+    var notified = [];
     for (var i=0; i<recipe.starredBy.length; i++) {
         if ( recipe.starredBy[i]._id != user_id) {
             var data = "<b>{{user_name}}</b> ha comentado tu receta favorita <b>{{recipe.NAME}}</b>";
@@ -73,7 +89,22 @@ exports.notifyCommentOnFavorite = function(recipe, user_id , user_name) {
             data = data.replace('{{recipe.NAME}}',recipe.NAME);
             
             var link = "/share.html#/" + encodeURIComponent(recipe._id);
+            notified.push(recipe.starredBy[i]._id);
             notify(recipe.starredBy[i]._id, data, link);
+        }
+    }
+    for (var i=0; i<recipe.comments.length; i++) {
+        //salteo q los que ya notifique por favoritos, al q comenta y al owner
+        if ( recipe.comments[i].user_id != user_id
+                && notified.indexOf(recipe.comments[i].user_id.toString()) == -1
+                && recipe.comments[i].user_id != recipe.owner ) {
+            var data = "<b>{{user_name}}</b> ha comentado en una receta q has comentado <b>{{recipe.NAME}}</b>";
+            data = data.replace('{{user_name}}',user_name);
+            data = data.replace('{{recipe.NAME}}',recipe.NAME);
+
+            var link = "/share.html#/" + encodeURIComponent(recipe._id);
+            notified.push(recipe.comments[i].user_id.toString());
+            notify(recipe.comments[i].user_id, data, link);
         }
     }
 };
@@ -116,11 +147,11 @@ exports.notify = notify;
  * Service web.
  */
 exports.findAll = function(req,res) {
-    model.Notification.update({user_id:req.session.user_id,status:'new'},{$set:{status:'unread'}},{multi:true}).exec(function() {
-        model.Notification.find({user_id:req.session.user_id}).sort("-date").exec(function(err,notifications) {
-            res.send(notifications);
-        });
-    });    
+    model.Notification.find({user_id:req.session.user_id}).sort("-date").exec(function(err,notifications) {
+        model.Notification.update({user_id:req.session.user_id,status:'new'},{$set:{status:'unread'}},{multi:true}).exec();
+        res.send(notifications);
+    });
+
 };
 
 exports.findNews = function(req, res) {

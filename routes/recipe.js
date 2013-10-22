@@ -111,6 +111,9 @@ exports.save = function(req, res) {
 
         }
         actions.log(req.session.user_id, "ADD_RECIPE","NAME: '"+req.body.NAME+"'. recipe_id: "+id);
+        if ( req.body.isPublic ) {
+            notifications.notifyOnPublish(req.body.NAME,id,req.session.user_name,req.session.user_id);
+        }
     } else {
         console.log("FERMENTABLES",req.body.FERMENTABLES);
         console.log("bottling",req.body.bottling);
@@ -119,7 +122,14 @@ exports.save = function(req, res) {
         req.body.owner = req.body.owner._id;
         req.body.modificationDate = new Date();
         //console.log("UPDATE POST", req.body);
-        model.Recipe.findByIdAndUpdate(id,req.body).populate('owner').exec(callback);
+//        model.Recipe.findByIdAndUpdate(id,req.body).populate('owner').exec(callback);
+        model.Recipe.findById(id).exec(function (err,old) {
+            if ( !old.isPublic && req.body.isPublic ) {
+                notifications.notifyOnPublish(req.body.NAME,id,req.session.user_name,req.session.user_id);
+            }
+            model.Recipe.findByIdAndUpdate(id,req.body).populate('owner').exec(callback);
+        });
+
         actions.log(req.session.user_id, "UPDATE_RECIPE","NAME: '"+req.body.NAME+"'. recipe_id: "+id);
     }
     
@@ -132,6 +142,7 @@ exports.publish = function(req, res) {
             if ( err ) {
                 res.send(500,{error: 'Error al publicar la receta'});
             } else {
+                notifications.notifyOnPublish(recipe.NAME,recipe._id,req.session.user_name,req.session.user_id);
                 res.send(recipe);
             }
         });
