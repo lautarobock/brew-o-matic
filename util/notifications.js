@@ -7,6 +7,47 @@ exports.Status = {
     Read: 'read'
 };
 
+/**
+ * Notifica al owner q han agregado a favoritos su receta.
+ *
+ * @param owner_id id de usuario que es el dueño original de la receta
+ * @param recipe
+ * @param user_id id de usuario q clono la receta
+ * @param user_name nombre de usuario q clono la receta
+ */
+exports.notifyAddFavorite = function(owner_id, recipe, user_id, user_name) {
+    var data = "<b>{{user_name}}</b> ha agregado a favoritos tu receta <b>{{recipe.NAME}}</b>";
+    data = data.replace('{{user_name}}',user_name);
+    data = data.replace('{{recipe.NAME}}',recipe.NAME);
+
+    var link = "#/recipe/edit/" + encodeURIComponent(recipe._id);
+    notify(owner_id, data, link);
+};
+
+/**
+ * Notifica al owner q han clonado su receta.
+ *
+ * @param owner_id id de usuario que es el dueño original de la receta
+ * @param recipe
+ * @param user_id id de usuario q clono la receta
+ * @param user_name nombre de usuario q clono la receta
+ * @param recipe_name nombre de la receta original
+ */
+exports.notifyRecipeCloned = function(owner_id, recipe,user_id,user_name,recipe_name) {
+    if (owner_id != user_id) {
+        var data = "<b>{{user_name}}</b> ha clonado tu receta <b>{{recipe.NAME}}</b>";
+        data = data.replace('{{user_name}}',user_name);
+        data = data.replace('{{recipe.NAME}}',recipe_name);
+
+        var link = "/share.html#/" + encodeURIComponent(recipe._id);
+        notify(owner_id, data, link);
+    }
+};
+
+/**
+ * Notifica modificacion de receta a los q la tienen como favorita.
+ * @param recipe receta en la que se hizo update
+ */
 exports.notifyUpdateFavorite = function(recipe) {
     for (var i=0; i<recipe.starredBy.length; i++) {
         var data = "Han actualizado tu receta favorita <b>{{recipe.NAME}}</b>";

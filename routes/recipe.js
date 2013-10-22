@@ -99,14 +99,16 @@ exports.save = function(req, res) {
          * poner que fue clonada por mi.
          */
         if (recipe.cloneFrom ) {
-            model.Recipe.findOne({_id:recipe.cloneFrom}).exec(function(err,recipe){
-                recipe.clonedBy.push({
+            model.Recipe.findOne({_id:recipe.cloneFrom}).exec(function(err,original){
+                original.clonedBy.push({
                     _id: req.session.user_id,
                     name: req.session.user_name,
                     recipe_id: id
                 });
-                recipe.save();
+                original.save();
+                notifications.notifyRecipeCloned(original.owner,recipe,req.session.user_id,req.session.user_name,original.NAME);
             });
+
         }
         actions.log(req.session.user_id, "ADD_RECIPE","NAME: '"+req.body.NAME+"'. recipe_id: "+id);
     } else {
