@@ -22,7 +22,7 @@
                 when('/recipe/edit/:recipeId', {templateUrl: 'partial/recipe-detail.html', controller: 'RecipeDetailCtrl'}).
                 when('/recipe/clone/:recipeId', {templateUrl: 'partial/recipe-detail.html', controller: 'RecipeDetailCtrl'}).
                 when('/recipe/new', {templateUrl: 'partial/recipe-detail.html', controller: 'RecipeDetailCtrl'}).
-                when('/stats', {templateUrl: 'partial/user/user-stats.html', controller: 'UserStatsCtrl'}).
+                //when('/stats', {templateUrl: 'partial/user/user-stats.html', controller: 'UserStatsCtrl'}).
                 when('/settings', {templateUrl: 'partial/user/user-settings.html', controller: 'UserSettingsCtrl'}).
                 when('/notification', {templateUrl: 'partial/user/user-notification.html', controller: 'NotificationsCtrl'}).
                 otherwise({redirectTo: '/recipe'});
@@ -80,9 +80,6 @@
     
     
     index.controller("UserSettingsCtrl",function($scope,User,$rootScope) {
-        //$scope.$watch('user',function() {
-        //    $scope.stats = User.findStats();
-        //});
         $scope.disconnectUser = function() {
             var revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' +
                 gapi.auth.getToken().access_token;
@@ -129,19 +126,19 @@
         };
     });
     
-    index.controller("UserStatsCtrl",function($scope,User,$rootScope) {
-        $scope.$watch('user',function() {
-            $scope.stats = User.findStats();
-        });
-        
-        $rootScope.breadcrumbs = [{
-            link: '#',
-            title: 'Home'
-        },{
-            link: '#',
-            title: 'Estadisticas'
-        }];
-    });
+    //index.controller("UserStatsCtrl",function($scope,User,$rootScope) {
+    //    $scope.$watch('user',function() {
+    //        $scope.stats = User.findStats();
+    //    });
+    //    
+    //    $rootScope.breadcrumbs = [{
+    //        link: '#',
+    //        title: 'Home'
+    //    },{
+    //        link: '#',
+    //        title: 'Estadisticas'
+    //    }];
+    //});
     
     index.controller("ShareController", function($scope) {
         $scope.recipe = Recipe.get({id:$routeParams.recipeId});

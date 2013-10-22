@@ -41,18 +41,26 @@
             }
         });
 
+        
+        $rootScope.notificationClass = '';
+        $rootScope.notificationCount = 0;
+        
         $scope.$watch('user',function(user) {
             if (user) {
                 $scope.findNotificationsCount();
+                setInterval($scope.findNotificationsCount,60*1000);
             }
         });
-        
-        $rootScope.notificationCount = 0;
+
         $scope.findNotificationsCount = function() {
+            console.log("Actualizacion notificaciones");
             Notification.findNews(function(nots) {
                 $rootScope.notificationCount = nots.length;
+                $rootScope.notificationClass = nots.length != 0 ? 'gt-notificaction-count-alert' : '';
             });
-        };
+        };            
+        
+
 
     });
 

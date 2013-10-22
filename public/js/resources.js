@@ -11,7 +11,7 @@
             getByGoogleId: {method: 'GET', params: {type:'google_'}, isArray:false},
             addToFavorites: {method: 'PUT', params: {type:'favorite_add'}},
             removeFromFavorites: {method: 'PUT', params: {type:'favorite_drop'}},
-            findStats: {method: 'GET', params: {type:'stats'}},
+            //findStats: {method: 'GET', params: {type:'stats'}},
             updateSettings: {method: 'PUT', params: {type:'settings'}}
         });
     });
@@ -34,8 +34,11 @@
         });
     });
     
-    res.factory('Notification',function($resource) {
-        return $resource('notification/:_id',{_id:"@_id"}, {
+    res.factory('Notification',function($resource,$rootScope) {
+        var params = function() {
+            return $rootScope.user ? $rootScope.user.google_id : null;
+        };
+        return $resource('notification/:_id',{google_id:params,_id:"@_id"}, {
             findNews: {method:'GET',params:{_id:'news'},isArray:true}
         });
     });    

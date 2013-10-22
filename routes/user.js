@@ -61,62 +61,62 @@ exports.updateSettings = function(req,res) {
     });
 };
 
-exports.findStats = function(req,res) {
-    var stats = {};
-    model.Recipe
-        .find({
-            $and:[
-                {owner:req.session.user_id}
-                //,{comments:{$ne:[]}}
-                //,{comments:{$ne:null}}
-            ]})
-        //.populate('cloneFrom')
-        .sort('-date')
-        .exec(function(err,results) {
-        
-        //stats.commented = results;
-        stats.commented = [];
-        stats.cloned = [];
-        stats.clones = [];
-        stats.starredBy = [];
-        
-        for (var i=0; i<results.length; i++ ) {
-            var recipe = results[i];
-            if ( recipe.comments && recipe.comments.length > 0 ) {
-                stats.commented.push(recipe);
-            }
-            if ( recipe.clonedBy && recipe.clonedBy.length > 0 ) {
-                stats.cloned.push(recipe);
-            }
-            if ( recipe.cloneFrom ) {
-                stats.clones.push(recipe);
-            }
-            if ( recipe.starredBy && recipe.starredBy.length != 0) {
-                stats.starredBy.push(recipe);
-            }
-        }
-        
-        
-        model.Recipe
-            .find( { $and: [
-                    { owner: {$ne:req.session.user_id} },
-                    { comments: { $elemMatch:
-                    { user_id: new mongoose.Types.ObjectId(req.session.user_id)  }
-                }}
-                ]})
-            .populate('owner')
-            .sort('-date')
-            .exec(function(err,results) {
-            
-            stats.myCommented = results;
-                
-            res.send(stats);
-            
-        });
-    });
-
-    actions.log(req.session.user_id, "FIND_STATS");
-};
+//exports.findStats = function(req,res) {
+//    var stats = {};
+//    model.Recipe
+//        .find({
+//            $and:[
+//                {owner:req.session.user_id}
+//                //,{comments:{$ne:[]}}
+//                //,{comments:{$ne:null}}
+//            ]})
+//        //.populate('cloneFrom')
+//        .sort('-date')
+//        .exec(function(err,results) {
+//        
+//        //stats.commented = results;
+//        stats.commented = [];
+//        stats.cloned = [];
+//        stats.clones = [];
+//        stats.starredBy = [];
+//        
+//        for (var i=0; i<results.length; i++ ) {
+//            var recipe = results[i];
+//            if ( recipe.comments && recipe.comments.length > 0 ) {
+//                stats.commented.push(recipe);
+//            }
+//            if ( recipe.clonedBy && recipe.clonedBy.length > 0 ) {
+//                stats.cloned.push(recipe);
+//            }
+//            if ( recipe.cloneFrom ) {
+//                stats.clones.push(recipe);
+//            }
+//            if ( recipe.starredBy && recipe.starredBy.length != 0) {
+//                stats.starredBy.push(recipe);
+//            }
+//        }
+//        
+//        
+//        model.Recipe
+//            .find( { $and: [
+//                    { owner: {$ne:req.session.user_id} },
+//                    { comments: { $elemMatch:
+//                    { user_id: new mongoose.Types.ObjectId(req.session.user_id)  }
+//                }}
+//                ]})
+//            .populate('owner')
+//            .sort('-date')
+//            .exec(function(err,results) {
+//            
+//            stats.myCommented = results;
+//                
+//            res.send(stats);
+//            
+//        });
+//    });
+//
+//    actions.log(req.session.user_id, "FIND_STATS");
+//};
 
 exports.getByGoogleId = function(req, res){
     console.log('getByGoogleId with id: ' + req.params.google_id);

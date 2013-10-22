@@ -35,11 +35,13 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label for="BOIL_TIME_2">Tiempo Hervor</label>
-                                        <input type="number" class="form-control input-sm" id="BOIL_TIME_2" ng-model="recipe.BOIL_TIME" />
+                                        <span class="form-control input-sm" id="BOIL_TIME_2" >
+                                            {{recipe.BOIL_TIME}} min
+                                        </span>
                                     </div>
                                     <div class="col-lg-6">
                                         <label title="% por hora" for="percentEvap">Evaporacion %</label>
-                                        <input type="number" class="form-control input-sm gt-preset" id="percentEvap" step="0.1" ng-model="recipe.PercentEvap" />
+                                        <span class="form-control input-sm gt-preset" id="percentEvap" ng-bind="recipe.PercentEvap" />
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +66,9 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label for="trubChillerLosses">Perdida Turb y Enfirador</label>
-                                        <input type="number" class="form-control input-sm gt-preset" id="trubChillerLosses" step="0.1" ng-model="recipe.TrubChillerLosses" />
+                                        <span class="form-control input-sm gt-preset" id="trubChillerLosses" >
+                                            {{recipe.TrubChillerLosses}} Lts
+                                        </span>
                                     </div>
                                     <div class="col-lg-6">
                                         <label for="finalVolume">Volumen Final</label>

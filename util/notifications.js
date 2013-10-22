@@ -89,7 +89,7 @@ exports.notifyCommentOnFavorite = function(recipe, user_id , user_name) {
             data = data.replace('{{recipe.NAME}}',recipe.NAME);
             
             var link = "/share.html#/" + encodeURIComponent(recipe._id);
-            notified.push(recipe.starredBy[i]._id);
+            notified.push(recipe.starredBy[i]._id.toString());
             notify(recipe.starredBy[i]._id, data, link);
         }
     }

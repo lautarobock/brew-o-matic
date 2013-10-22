@@ -7,15 +7,16 @@
         </a>
         <div class="collapse navbar-collapse navbar-ex1-collapse" >
             <ul class="nav navbar-nav" ng-show="user">
-                <li>
+<!--                <li>
                     <a href="/#/stats">Estadisticas</a>
-                </li>
+                </li>-->
                 <li>
                     <a href="/#/settings">Configuracion</a>
                 </li>
-                <li style="padding: 1em;">
-                    <a style="display: inline" href="/#/notification">Notificaciones</a>
-                    <span class="badge">{{notificationCount}}</span>
+                <li style="padding: 1.1em 0">
+                    <a style="display: inline" href="/#/notification">Notificaciones 
+                        <span style="margin-left: 5px" title="{{notificationCount}} sin leer" class="badge" ng-class="notificationClass">{{notificationCount}}</span>
+                    </a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right" ng-show="user">
