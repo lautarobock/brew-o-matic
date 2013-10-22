@@ -11,7 +11,8 @@
                                 'login',
                                 'comments',
                                 'googlechart',
-                                'brew-o-module.controller']);
+                                'brew-o-module.controller',
+                                'notification']);
 
     index.constant("version",'0.12');
  
@@ -62,7 +63,23 @@
         
     });    
     
-    index.controller("NotificationsCtrl",function($scope,Notification,$rootScope) {
+    var notification = angular.module("notification",[]);
+    
+    notification.factory("notificationData", function() {
+        return {
+            listener: null,
+            reset: function() {
+                if ( this.listener ) {
+                    this.listener();
+                }
+            }
+        };
+    });
+    
+    notification.controller("NotificationsCtrl",function($scope,Notification,$rootScope,notificationData) {
+        
+        notificationData.reset();
+        
         $scope.updateCount = function(notifications) {
             $scope.countUnread = 0;
             $scope.countNew = 0;
@@ -105,8 +122,8 @@
             return '';
         };
         
-        $rootScope.notificationCount = 0;
-        $rootScope.notificationClass = '';
+        //$rootScope.notificationCount = 0;
+        //$rootScope.notificationClass = '';
         
     });
     

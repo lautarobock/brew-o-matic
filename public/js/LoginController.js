@@ -3,7 +3,8 @@
     var index = angular.module('login',[]);
 
  
-    index.controller("LoginController",function($scope,$rootScope,User,Notification) {
+    index.controller("LoginController",function($scope,$rootScope,User,Notification,notificationData) {
+        
         $scope.$on('g+login',function(event,authResult) {
             if (authResult['access_token']) {
               // Autorizado correctamente
@@ -42,9 +43,14 @@
         });
 
         
-        $rootScope.notificationClass = '';
-        $rootScope.notificationCount = 0;
-        
+        notificationData.listener = function() {
+            $scope.notificationClass = '';
+            $scope.notificationCount = 0;            
+        };
+                
+        $scope.notificationClass = '';
+        $scope.notificationCount = 0;
+
         $scope.$watch('user',function(user) {
             if (user) {
                 $scope.findNotificationsCount();
@@ -55,8 +61,8 @@
         $scope.findNotificationsCount = function() {
             console.log("Actualizacion notificaciones");
             Notification.findNews(function(nots) {
-                $rootScope.notificationCount = nots.length;
-                $rootScope.notificationClass = nots.length != 0 ? 'gt-notificaction-count-alert' : '';
+                $scope.notificationCount = nots.length;
+                $scope.notificationClass = nots.length != 0 ? 'gt-notificaction-count-alert' : '';
             });
         };            
         

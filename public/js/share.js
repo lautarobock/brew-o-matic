@@ -8,7 +8,8 @@
                                         'login',
                                         'comments',
                                         'brew-o-module.controller',
-                                        'googlechart']);
+                                        'googlechart',
+                                        'notification']);
 
     share.controller("ShareController", function(
                     $scope,
