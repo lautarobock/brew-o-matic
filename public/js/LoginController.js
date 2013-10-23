@@ -2,6 +2,11 @@
 
     var index = angular.module('login',[]);
 
+    index.run(function($rootScope) {
+        
+        $rootScope.loginSuccess = false;
+        
+    });
  
     index.controller("LoginController",function($scope,$rootScope,User,Notification,notificationData) {
         
@@ -21,6 +26,7 @@
                         id:obj.id,
                         name: obj.name
                     },function(user){
+                        $rootScope.loginSuccess = true;
                         $rootScope.user = user;
                         console.log(user);
                     });
@@ -30,14 +36,19 @@
               
               //document.getElementById('signinButton').setAttribute('style', 'display: none');
             } else if (authResult['error'] == "immediate_failed") {
-
+                $rootScope.loginSuccess = true;
+                $rootScope.$apply();
             } else if ( authResult['error'] ) {
+                $rootScope.loginSuccess = true;
                 $scope.loginError = authResult['error'];
                 $scope.$apply();
+                $rootScope.$apply();
                 console.log('There was an error: ' + authResult['error']);
             } else {
+                $rootScope.loginSuccess = true;
                 $scope.loginError = JSON.stringify(authResult);
                 $scope.$apply();
+                $rootScope.$apply();
                 console.log('Error inesperado');
             }
         });

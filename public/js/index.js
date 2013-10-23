@@ -14,7 +14,7 @@
                                 'brew-o-module.controller',
                                 'notification']);
 
-    index.constant("version",'0.12');
+    index.constant("version",'0.13');
  
     index.
         config(['$routeProvider', function($routeProvider) {

@@ -9,22 +9,24 @@
         <a><b>Publicadas ({{stats.publics}})</b></a>
     </li>
 </ul>
-<div>
+<div ng-cloak>
     <div class="panel panel-default" ng-show="published.length!=0">
         <div class="panel-body" >
-            <div class="input-group" style="width: 400px">
-                <input type="text"  class="form-control input-sm" ng-model="publicSearchCriteria">
-                <span class="input-group-btn">
-                    <button ng-click="publicSearchCriteria=''" class="btn btn-default btn-sm" type="button">
-                        <span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                </span>
+            <div class="col-md-6" >
+                <div class="input-group" style="width: 400px">
+                    <input type="text"  class="form-control input-sm" ng-model="publicSearchCriteria" placeholder="(Busqueda)" >
+                    <span class="input-group-btn">
+                        <button ng-init="publicSearchCriteria=''" ng-hide="publicSearchCriteria==''" ng-click="publicSearchCriteria=''" class="btn btn-default btn-sm" type="button">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </span>
+                </div>
             </div>
         </div>
         <table class="table table-striped table-hover">
           <thead>
             <tr>
-                <th><span class="glyphicon glyphicon-star"></span></th>
+                <th style="width:1em"><span class="glyphicon glyphicon-star"></span></th>
                 <th style="width:7em">Fecha</th>
                 <th>Nombre</th>
                 <th style="width:13em">Estilo</th>

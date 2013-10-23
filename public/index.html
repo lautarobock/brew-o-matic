@@ -57,6 +57,7 @@
       </div>
     </div>
     
+    <div ng-show="loginSuccess">
     <!-- Content -->
     <div class="container" ng-hide="user">     
         <div class="jumbotron" >
@@ -73,6 +74,7 @@
     </div>
     <div class="container" ng-show="user">   
         <div ng-view></div>
+    </div>
     </div>
     <footer >
         <!--<p>-->

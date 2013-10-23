@@ -9,13 +9,13 @@
         <a href="/#/public">Publicadas ({{stats.publics}})</a>
     </li>
 </ul>
-<div class="panel panel-default" ng-show="recipes.length!=0">
+<div class="panel panel-default" ng-show="recipes.length!=0" ng-cloak>
     <div class="panel-body" >
         <div class="col-md-6" >
             <div class="input-group" style="width: 400px">
                 <input type="text"  class="form-control input-sm" ng-model="searchCriteria" placeholder="(Busqueda)" />
                 <span class="input-group-btn">
-                    <button ng-click="searchCriteria=''" class="btn btn-default btn-sm" type="button">
+                    <button ng-init="searchCriteria=''" ng-hide="searchCriteria==''"  ng-click="searchCriteria=''" class="btn btn-default btn-sm" type="button">
                         <span class="glyphicon glyphicon-remove"></span>
                     </button>
                 </span>
@@ -110,7 +110,7 @@
         </div>
     </div>
 </div>
-<div class="panel panel-default" ng-hide="recipes.length!=0">
+<div class="panel panel-default" ng-hide="recipes.length!=0" ng-cloak>
     <div class="panel-body">
       <div class="alert alert-info">
             Aun no tiene recetas creadas 
