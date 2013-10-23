@@ -30,15 +30,29 @@
     <table class="table table-striped table-hover">
       <thead>
         <tr>
-          <!--<th style="width:4.5em">#</th>-->
+          <th ng-click="resort('code')" class="gt-sorted" style="width:1em;" title="Codigo unico que identifica la receta para el cervecero">
+            # <span ng-class="orderStyle['code']"></span>
+          </th>
           <!--<th style="width:7em">Fecha</th>-->
-          <th>Nombre</th>
-          <th style="width:14em">Estilo</th>
-          <th style="width:4em">DI</th>
+          <th ng-click="resort('NAME')" class="gt-sorted">
+            Nombre <span ng-class="orderStyle['NAME']"></span>
+          </th>
+          <th style="width:14em;" class="gt-sorted" ng-click="resort('STYLE.NAME')">
+            Estilo <span ng-class="orderStyle['STYLE.NAME']"></span>
+          </th>
+          <th style="width:4em" class="gt-sorted" ng-click="resort('OG')">
+            DI <span ng-class="orderStyle['OG']"></span>
+          </th>
           <!--<th style="width:4em">DF</th>-->
-          <th style="width:4em">%Alc</th>
-          <th style="width:4em">IBUs</th>
-          <th style="width:6em">Batch (L)</th>
+          <th style="width:5em" class="gt-sorted" ng-click="resort('ABV')">
+            %Alc <span ng-class="orderStyle['ABV']"></span>
+          </th>
+          <th style="width:5em" class="gt-sorted" ng-click="resort('CALCIBU')">
+            IBUs <span ng-class="orderStyle['CALCIBU']"></span>
+          </th>
+          <th style="width:7em" class="gt-sorted" ng-click="resort('BATCH_SIZE')">
+            Batch (L) <span ng-class="orderStyle['BATCH_SIZE']"></span>
+          </th>
           <th style="width:10em">Cervecero</th>
           <th style="width: 1em"></th>
           <th style="width: 1em"></th>
@@ -47,7 +61,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="recipe in recipes | filter:searchCriteria">
+        <tr ng-repeat="recipe in recipes | filter:searchCriteria | orderBy:asc+field">
+            <td>
+                <a href="#/recipe/edit/{{encodeName(recipe._id)}}">{{ recipe.code }}</a>
+            </td>            
             <!--<td>-->
                 <!--<a href="#/recipe/edit/{{encodeName(recipe._id)}}">#{{ $index+1 }}</a>-->
                 <!--&lt;!&ndash;<span class="glyphicon glyphicon-check" title="Esta receta es publica, puede ser vista por todos los usuarios" ng-show="recipe.isPublic"/>&ndash;&gt;-->

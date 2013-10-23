@@ -88,6 +88,32 @@
                 $location,
                 $timeout) {
 
+        $scope.asc='-';
+        $scope.field='code';
+        
+        $scope.orderStyle = {
+            code:'glyphicon glyphicon-chevron-down'
+        };
+        
+        $scope.resort = function(field) {
+            if ( field == $scope.field) {
+                if ($scope.asc == '-' ) {
+                    $scope.asc = '';
+                    $scope.orderStyle[field] = 'glyphicon glyphicon-chevron-up';
+                } else {
+                    $scope.asc = '-';
+                    $scope.orderStyle[field] = 'glyphicon glyphicon-chevron-down';
+                }    
+            } else {
+                angular.forEach($scope.orderStyle, function(style ,key) {
+                    $scope.orderStyle[key] = '';
+                });
+                $scope.orderStyle[field] = 'glyphicon glyphicon-chevron-up';
+                $scope.field = field;
+                $scope.asc = '';
+            }
+        };
+        
         $rootScope.breadcrumbs = [{
             link: '#',
             title: 'Home'

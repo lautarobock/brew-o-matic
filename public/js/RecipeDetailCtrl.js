@@ -394,6 +394,7 @@
                         if ( $location.path().indexOf('/recipe/clone') == 0) {
                             $scope.recipe.cloneFrom = $scope.recipe._id;
                             $scope.recipe._id = undefined;
+                            $scope.recipe.code = undefined;
                             $scope.recipe.date = now;
                             $scope.recipe.modificationDate = now;
                             $scope.recipe.starredBy = [];

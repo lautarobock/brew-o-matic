@@ -70,3 +70,11 @@ a {
     font-family: Monaco,Menlo,Consolas,"Courier New",monospace;
     
 }
+
+.gt-sorted {
+    cursor: pointer
+}
+
+.gt-sorted:hover {
+    text-decoration: underline;
+}
