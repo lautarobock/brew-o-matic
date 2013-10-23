@@ -4,7 +4,7 @@ var model = require('../domain/model.js');
 var Arrays = require('../public/js/util/util.js').Arrays;
 
 exports.findPublic = function (req, res) {
-    model.Recipe.find({isPublic:true}).where('owner').populate('owner').ne(req.session.user_id).sort('-publishDate').limit(req.query.limit).exec(function(err,results) {
+    model.Recipe.find({isPublic:true}).where('owner').ne(req.session.user_id).populate('owner').sort('-publishDate').limit(req.query.limit).exec(function(err,results) {
         res.send(results);
     });
 };
@@ -158,6 +158,17 @@ exports.publish = function(req, res) {
                 notifications.notifyOnPublish(recipe.NAME,recipe._id,req.session.user_name,req.session.user_id);
                 res.send(recipe);
             }
+        });
+    });
+};
+
+exports.stats = function(req, res) {
+    model.Recipe.count({isPublic:true,owner:{$ne:req.session.user_id}},function(err, publicCount) {
+        model.Recipe.count({owner:req.session.user_id},function(err,ownCount) {
+            res.send({
+                publics: publicCount,
+                owns: ownCount
+            });
         });
     });
 };

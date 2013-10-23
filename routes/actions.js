@@ -15,7 +15,9 @@ exports.log = function(user_id,actionType,data) {
             actionType:actionType,
             data:data
         }), function(err,action) {
-            console.log("err",err)
-            console.log("action",action)
+            if ( err ) {
+                console.log("err",err)
+                console.log("action",action)
+            }
     });
 };

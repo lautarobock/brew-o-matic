@@ -91,6 +91,7 @@ app.put('/recipe/comment',filter,recipe.addComment);
 app.post('/recipe/publish_:id',filter,recipe.publish);
 app.put('/recipe/remove_comment',filter,recipe.deleteComment);
 app.get('/recipe',filter,recipe.findAll);
+app.get('/recipe/stats',recipe.stats);
 app.get('/recipe/by_user_:id',filter,recipe.findByUser);
 app.get('/recipe/:id',recipe.get);
 app.post('/recipe/:id',filter,recipe.save);
@@ -105,6 +106,11 @@ var services = ['Style','Grain','Hop','Yeast','Misc','Bottle'];
 for (s in services ) {
   app.get('/' + services[s].toLowerCase(),data[services[s]].findAll);
 }
+
+//setInterval(function() {
+//    console.log("RUNNING SCHEDULE");
+//    notifications.removeOld();
+//},5000);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

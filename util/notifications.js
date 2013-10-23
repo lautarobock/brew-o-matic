@@ -144,6 +144,18 @@ var notify = function(user_id,data,link) {
 exports.notify = notify;
 
 /**
+ * Elimina las notificaciones viejas.
+ * Por ahora limpia las mas viejas q una semana q ya hayan sido leidas.
+ *
+ * Luego si veo q la DB crece mucho, deberia limpiar todas por ejemplo del ulitmo mes.
+ */
+exports.removeOld = function() {
+    var from  = new Date(new Date().getTime()-7*24*60*60*1000);
+    console.log("Eliminando desde",from);
+    model.Notification.remove({date:{$lt:from},status:'read'}).exec();
+};
+
+/**
  * Service web.
  */
 exports.findAll = function(req,res) {

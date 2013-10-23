@@ -25,6 +25,7 @@
             findPublic: {method:'GET',params: {operation:'public'}, isArray:true },
             publish: {method:'POST', params: {operation: 'publish_'}},
             findByUser: {method:'GET',params: {operation:'by_user_'},isArray:true},
+            stats: {method:'GET',params: {operation:'stats'}},
             addComment: {
                 method:'PUT',
                 params: {operation:'comment'},
