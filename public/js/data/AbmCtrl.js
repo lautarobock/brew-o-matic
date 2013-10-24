@@ -149,12 +149,21 @@
         }
     };
     
-    abm.controller("AbmCtrl",function($scope,$routeParams,Grain, Hop, Bottle, Misc,Yeast,Style) {
+    abm.controller("AbmCtrl",function($scope,$rootScope,$routeParams,Grain, Hop, Bottle, Misc,Yeast,Style) {
         
         $scope.allConfigs = config;
         
-        
         $scope.entity = $routeParams.entity;
+        
+        $scope.config = config[$scope.entity];
+        
+        $rootScope.breadcrumbs = [{
+            link: '#',
+            title: 'Home'
+        },{
+            link: '#',
+            title: $scope.config.name
+        }];        
         
         $scope.data = {
             Grain: Grain,
@@ -225,9 +234,8 @@
             
         };
         
-        $scope.config = config[$scope.entity];
-        
         $scope.rows = $scope.data[$scope.entity].query();
+        
     });
     
 })();
