@@ -3,8 +3,78 @@
     var abm = angular.module("abm",[]);
     
     var config = {
+        Style:  {
+            name: "Estilos",
+            singular: "Estilo",
+            orderBy: "name",
+            headers: [
+                {
+                    field:'name',
+                    caption: 'Nombre'
+                },{
+                    field:'OG_Min',
+                    caption: 'OG min'
+                },{
+                    field:'OG_Max',
+                    caption: 'OG max'
+                },{
+                    field:'FG_Min',
+                    caption: 'FG min'
+                },{
+                    field:'FG_Max',
+                    caption: 'FG max'
+                },{
+                    field:'IBU_Min',
+                    caption: 'IBU min'
+                },{
+                    field:'IBU_Max',
+                    caption: 'IBU max'
+                },{
+                    field:'Colour_Min',
+                    caption: 'Color min'
+                },{
+                    field:'Colour_Max',
+                    caption: 'Color max'
+                },{
+                    field:'ABV_Min',
+                    caption: '%Alc min'
+                },{
+                    field:'ABV_Max',
+                    caption: '%Alc max'
+                //},{
+                //    field:'link',
+                //    caption: 'BJCP'
+                },{
+                    field:'co2_min',
+                    caption: 'CO2 min'
+                },{
+                    field:'co2_max',
+                    caption: 'CO2 max'
+                //},{
+                //    field:'related',
+                //    caption: 'RateBeer.com'
+                }
+            ]
+        },
+        Yeast:  {
+            name: "Levaduras",
+            singular: "Levadura",
+            orderBy: "name",
+            headers: [
+                {
+                    field:'name',
+                    caption: 'Nombre',
+                    width:70
+                },{
+                    field:'aa',
+                    caption: 'Atenuacion',
+                    width:20
+                }
+            ]
+        },
         Misc:  {
-            name: "'Otros'",
+            name: "Miscs",
+            singular: "Misc",
             orderBy: "name",
             headers: [
                 {
@@ -21,6 +91,7 @@
         },
         Bottle:  {
             name: "Botellas",
+            singular: "Botella",
             orderBy: "name",
             headers: [
                 {
@@ -44,6 +115,7 @@
         },
         Grain: {
             name: "Granos",
+            singular: "Grano",
             orderBy: "name",
             headers: [
                 {
@@ -63,6 +135,7 @@
         },
         Hop: {
             name: "Lupulos",
+            singular: "Lupulo",
             orderBy: "name",
             headers: [
                 {
@@ -76,7 +149,7 @@
         }
     };
     
-    abm.controller("AbmCtrl",function($scope,$routeParams,Grain, Hop, Bottle, Misc) {
+    abm.controller("AbmCtrl",function($scope,$routeParams,Grain, Hop, Bottle, Misc,Yeast,Style) {
         
         $scope.allConfigs = config;
         
@@ -87,7 +160,9 @@
             Grain: Grain,
             Hop: Hop,
             Bottle: Bottle,
-            Misc: Misc
+            Misc: Misc,
+            Yeast: Yeast,
+            Style: Style
         };
         
         $scope.getActiveClass = function(tab) {
@@ -106,6 +181,17 @@
         
         $scope.copy = function(row) {
             return angular.copy(row);
+        };
+        
+        $scope.remove = function(row) {
+            var clean = function() {
+                util.Arrays.remove($scope.rows,row);
+            };
+            if (!row.$delete) {
+                $scope.data[$scope.entity].delete(row,clean);
+            } else {
+                row.$delete(clean);    
+            }
         };
         
         $scope.cancel = function (row,value) {

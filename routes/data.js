@@ -1,3 +1,4 @@
+var actions = require('./actions.js');
 var model = require('../domain/model.js');
 var mongoose = require('mongoose');
 var Arrays = require("../public/js/util/util.js").Arrays;
@@ -14,7 +15,7 @@ function createRest(exports,service) {
     exports[service] = {
         findAll: function(req, res) {
             console.log(service + " .findAll");
-            model[service].find({}).exec(function(err,results) {
+            model[service].find().exec(function(err,results) {
                 res.send(results);
             });    
         },
@@ -28,6 +29,12 @@ function createRest(exports,service) {
             }
             model[service].findByIdAndUpdate(id,req.body,{upsert:true}).exec(function(err,results) {
                 res.send(results);
+            });
+        },
+        remove: function(req, res) {
+            model[service].findByIdAndRemove(req.params.id,function(err,results) {
+                res.send(results);
+                actions.log(req.session.user_id, "REMOVE_" + service,JSON.stringify(results));
             });
         }
     };

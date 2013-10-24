@@ -229,6 +229,8 @@ exports.Hop = mongoose.model("Hop",new Schema({
 
 exports.Style = mongoose.model("Style",new Schema({
     "name": String,
+    "co2_min": Number,
+    "co2_max": Number,
     "OG_Min": Number,
     "OG_Max": Number,
     "FG_Min": Number,
@@ -239,7 +241,8 @@ exports.Style = mongoose.model("Style",new Schema({
     "Colour_Max": Number,
     "ABV_Min": Number,
     "ABV_Max": Number,
-    "link": String
+    "link": String,
+    "related": String
 }));
 
 exports.Action = mongoose.model("Action",new Schema({
