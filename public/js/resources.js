@@ -46,7 +46,7 @@
         });
     });    
     
-    var services = ['Style','Grain','Hop','Yeast','Misc','Bottle'];
+    var services = ['Style','Grain','Hop','Yeast','Misc','Bottle','Tag'];
     angular.forEach(services,function(s) {
         res.factory(s,function($resource) {
             return $resource( s.toLowerCase() + '/:_id',{_id:"@_id"}, {});

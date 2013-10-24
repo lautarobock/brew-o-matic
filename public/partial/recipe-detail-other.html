@@ -35,5 +35,25 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <label for="tags">Tags</label>
+                <div style="display:inline-table;" class="form-control">
+                    <button ng-repeat="tag in recipe.tags"
+                            type="button"
+                            style="margin: 5px;"
+                            class="btn btn-info btn-xs"
+                            ng-click="recipe.tags.splice($index,1)">
+                        {{tag}} <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                    <input placeholder="Ingrese tag" ng-model="recipe.newTag" type="text" style="margin-top: 5px;width: 200px" class="gt-tagbox" ng-keydown="addTag($event)" list="tags"/>
+                    <datalist id="tags">
+                        <option ng-repeat="tag in tags" value="{{tag._id}}">
+                            {{tag._id}}
+                        </option>
+                    </datalist>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

@@ -34,7 +34,7 @@ if ('development' == app.get('env')) {
 }
 
 //Initialize Mongoose
-//mongoose.connect('localhost', 'brew-o-matic');
+//mongoose.connect('localhost', 'emarcialsys');
 //mongodb://af_brew-o-matic-lautaromail:mngn0k588adkt5er4h758tp1im@ds047948.mongolab.com:47948/af_brew-o-matic-lautaromail
 mongoose.connect(process.env.MONGOLAB_URI);
 
@@ -102,7 +102,7 @@ app.get('/notification/news',filter,notifications.findNews);
 app.post("/notification/:id",filter,notifications.update);
 
 
-var services = ['Style','Grain','Hop','Yeast','Misc','Bottle'];
+var services = ['Style','Grain','Hop','Yeast','Misc','Bottle','Tag'];
 for (s in services ) {
   app.get('/' + services[s].toLowerCase(),data[services[s]].findAll);
 }

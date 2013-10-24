@@ -193,8 +193,8 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     }],
     fixIngredients: String,
     mashTemp: Number,
-    lossMashTemp: Number
-    
+    lossMashTemp: Number,
+    tags: [String]
 },{ _id: false }));
 
 exports.Bottle = mongoose.model("Bottle",new Schema({
@@ -255,4 +255,8 @@ exports.Notification = mongoose.model("Notification",new Schema({
     "status": String, //new,unread,read
     "data": String,
     "link": String
+}));
+
+exports.Tag = mongoose.model("Tag",new Schema({
+    "_id": String
 }));

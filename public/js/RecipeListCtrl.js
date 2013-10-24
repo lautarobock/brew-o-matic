@@ -134,6 +134,18 @@
 
         $scope.sort = sortData("code","-");
         
+        $scope.showTags = function(recipe) {
+            if (recipe.tags && recipe.tags.length != 0) {
+                var txt = "- Tags: [" + recipe.tags[0];
+                for (var i=1;i<recipe.tags.length; i++) {
+                    txt += ", " + recipe.tags[i];
+                }
+                return txt + "]";
+            } else {
+                return '';
+            }
+        };
+        
         $rootScope.breadcrumbs = [{
             link: '#',
             title: 'Home'

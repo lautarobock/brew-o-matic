@@ -13,6 +13,7 @@
                                HopForm,
                                Yeast,
                                Style,
+                               Tag,
                                Misc,
                                MiscType,
                                MiscUse,
@@ -49,6 +50,8 @@
         $scope.miscTypes = MiscType.query();
         
         $scope.miscUses = MiscUse.query();
+        
+        $scope.tags = Tag.query();
 
         //Helper functions
         
@@ -489,34 +492,21 @@
             co2: 0
         };
         
+        $scope.addTag = function($event) {
+            if ( $event.keyCode == 13) {
+                if ( !$scope.recipe.tags) {
+                    $scope.recipe.tags = [];
+                }
+                $scope.recipe.tags.push($scope.recipe.newTag);
+                $scope.recipe.newTag = '';
+            }
+        };
         
         $scope.bottledLiters = function() {
-//            var liters = 0;
-//            $scope.volumeByCarbonatationType = {
-//                sugar: 0,
-//                must: 0,
-//                co2: 0
-//            };
-//            angular.forEach($scope.recipe.bottling.bottles,function(bottle){
-//                liters += bottle.size * bottle.amount;
-//                $scope.volumeByCarbonatationType[bottle.carbonatationType] += bottle.size * bottle.amount;
-//            });
-//
-//            //$scope.carbonatationStrategy.sugar();
-//
-//            return liters;
             return BrewCalc.bottledLiters($scope.volumeByCarbonatationType,$scope.recipe.bottling.bottles);
         };
         
         $scope.estimateLiters = function($index) {
-//            var liters = $scope.recipe.BATCH_SIZE;
-//            for ( var i=0; i<$index; i++ ) {
-//                var it = $scope.recipe.fermentation.stages[i];
-//                if ( it.transferring ) {
-//                    liters -= it.losses;
-//                }
-//            }
-//            return liters;
             return BrewCalc.estimateLiters($index,$scope.recipe.BATCH_SIZE,$scope.recipe.fermentation.stages);
         };
         

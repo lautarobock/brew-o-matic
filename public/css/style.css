@@ -78,3 +78,11 @@ a {
 .gt-sorted:hover {
     text-decoration: underline;
 }
+
+.gt-tagbox {
+    border:0 !important;
+}
+
+.gt-tagbox:focus {
+    border:0 !important;
+}

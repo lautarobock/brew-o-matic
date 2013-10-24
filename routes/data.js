@@ -5,7 +5,7 @@ var Arrays = require("../public/js/util/util.js").Arrays;
  * GET users listing.
  */
 
-var services = ['Style','Grain','Hop','Yeast','Misc','Bottle'];
+var services = ['Style','Grain','Hop','Yeast','Misc','Bottle','Tag'];
 
 function createRest(exports,service) {
     exports[service] = {

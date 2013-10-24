@@ -93,6 +93,12 @@ exports.save = function(req, res) {
 //        console.log("response bottling",s.bottling);
         notifications.notifyUpdateFavorite(s);
         res.send(s);
+        
+        //Update tags
+        for (var i=0; i<s.tags.length; i++) {
+            var tag = new model.Tag({_id:s.tags[i]});
+            tag.save();
+        }
     }
     if (!req.body._id) {
         var recipe = new model.Recipe(req.body);
