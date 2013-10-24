@@ -105,6 +105,8 @@ app.post("/notification/:id",filter,notifications.update);
 var services = ['Style','Grain','Hop','Yeast','Misc','Bottle','Tag'];
 for (s in services ) {
   app.get('/' + services[s].toLowerCase(),data[services[s]].findAll);
+  app.post('/' + services[s].toLowerCase() + "/:id",data[services[s]].save);
+  app.post('/' + services[s].toLowerCase(),data[services[s]].save);
 }
 
 //setInterval(function() {

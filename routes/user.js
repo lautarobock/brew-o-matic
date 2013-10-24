@@ -76,7 +76,7 @@ exports.get = function(req, res) {
 };
 
 exports.getByGoogleId = function(req, res){
-    console.log('getByGoogleId with id: ' + req.params.google_id);
+    //console.log('getByGoogleId with id: ' + req.params.google_id);
     model.User.findOne({'google_id':req.params.google_id}).exec(function(err,user) {
         console.log(user);
         if (user) {

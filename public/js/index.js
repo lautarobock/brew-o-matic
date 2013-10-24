@@ -12,7 +12,8 @@
                                 'comments',
                                 'googlechart',
                                 'brew-o-module.controller',
-                                'notification']);
+                                'notification',
+                                'abm']);
 
     index.constant("version",'0.13');
  
@@ -29,6 +30,7 @@
                 //when('/stats', {templateUrl: 'partial/user/user-stats.html', controller: 'UserStatsCtrl'}).
                 when('/settings', {templateUrl: 'partial/user/user-settings.html', controller: 'UserSettingsCtrl'}).
                 when('/notification', {templateUrl: 'partial/user/user-notification.html', controller: 'NotificationsCtrl'}).
+                when('/data/:entity', {templateUrl: 'partial/data/abm.html', controller: 'AbmCtrl'}).
                 otherwise({redirectTo: '/recipe'});
     }]);
 

@@ -209,23 +209,23 @@ exports.Grain = mongoose.model("Grain",new Schema({
     "type": String,
     "colour": Number,
     "potential": Number
-},{ _id: false }));
+}));
 
 exports.Misc = mongoose.model("Misc",new Schema({
     "name": String,
     "type": String,
     "use": String
-},{ _id: false }));
+}));
 
 exports.Yeast = mongoose.model("Yeast",new Schema({
     "name": String,
     "aa": Number
-},{ _id: false }));
+}));
 
 exports.Hop = mongoose.model("Hop",new Schema({
     "name": String,
     "alpha": Number
-},{ _id: false }));
+}));
 
 exports.Style = mongoose.model("Style",new Schema({
     "name": String,
@@ -240,7 +240,7 @@ exports.Style = mongoose.model("Style",new Schema({
     "ABV_Min": Number,
     "ABV_Max": Number,
     "link": String
-},{ _id: false }));
+}));
 
 exports.Action = mongoose.model("Action",new Schema({
     "user_id": {type:String, ref:'User'},
@@ -259,4 +259,4 @@ exports.Notification = mongoose.model("Notification",new Schema({
 
 exports.Tag = mongoose.model("Tag",new Schema({
     "_id": String
-}));
+},{ _id: false }));
