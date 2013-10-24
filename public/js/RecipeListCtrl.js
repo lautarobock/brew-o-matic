@@ -26,8 +26,10 @@
         }
     });
     
-    index.controller("RecipeFavoriteCtrl", function ($scope,$rootScope,Recipe,User) {
-        
+    index.controller("RecipeFavoriteCtrl", function ($scope,$rootScope,Recipe,User,sortData) {
+
+        $scope.sort = sortData("NAME","");
+
         $rootScope.breadcrumbs = [{
             link: '#',
             title: 'Home'
@@ -51,7 +53,10 @@
         
     });
     
-    index.controller("RecipePublicCtrl", function ($scope,$rootScope,Recipe,User) {
+    index.controller("RecipePublicCtrl", function ($scope,$rootScope,Recipe,User,sortData) {
+
+        $scope.sort = sortData("publishDate","-");
+
         $rootScope.$watch('user',function(user) {
             if ( user ) {
                 $scope.published = Recipe.findPublic();
@@ -79,40 +84,55 @@
             });
         };
     });
-    
+
+    index.factory("sortData",function() {
+        return function(startField, startAsc) {
+            var data = {
+                asc: startAsc,
+                field: startField,
+                orderStyle:{},
+                orderBy: function() {
+                    return this.asc+this.field;
+                },
+                resort: function(field) {
+                    if ( field == this.field) {
+                        if (this.asc == '-' ) {
+                            this.asc = '';
+                            this.orderStyle[field] = 'glyphicon glyphicon-chevron-up';
+                        } else {
+                            this.asc = '-';
+                            this.orderStyle[field] = 'glyphicon glyphicon-chevron-down';
+                        }
+                    } else {
+                        angular.forEach(this.orderStyle, function(style ,key) {
+                            data.orderStyle[key] = '';
+                        });
+                        this.orderStyle[field] = 'glyphicon glyphicon-chevron-up';
+                        this.field = field;
+                        this.asc = '';
+                    }
+                }
+            };
+            if ( startAsc == '-') {
+                data.orderStyle[startField] = 'glyphicon glyphicon-chevron-down';
+            } else {
+                data.orderStyle[startField] = 'glyphicon glyphicon-chevron-up';
+            }
+
+            return data;
+        };
+    });
+
     index.controller("RecipeListCtrl", function (
                 $scope,
                 $rootScope,
                 Recipe,
                 User,
                 $location,
-                $timeout) {
+                $timeout,
+                sortData) {
 
-        $scope.asc='-';
-        $scope.field='code';
-        
-        $scope.orderStyle = {
-            code:'glyphicon glyphicon-chevron-down'
-        };
-        
-        $scope.resort = function(field) {
-            if ( field == $scope.field) {
-                if ($scope.asc == '-' ) {
-                    $scope.asc = '';
-                    $scope.orderStyle[field] = 'glyphicon glyphicon-chevron-up';
-                } else {
-                    $scope.asc = '-';
-                    $scope.orderStyle[field] = 'glyphicon glyphicon-chevron-down';
-                }    
-            } else {
-                angular.forEach($scope.orderStyle, function(style ,key) {
-                    $scope.orderStyle[key] = '';
-                });
-                $scope.orderStyle[field] = 'glyphicon glyphicon-chevron-up';
-                $scope.field = field;
-                $scope.asc = '';
-            }
-        };
+        $scope.sort = sortData("code","-");
         
         $rootScope.breadcrumbs = [{
             link: '#',

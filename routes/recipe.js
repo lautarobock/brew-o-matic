@@ -4,7 +4,8 @@ var model = require('../domain/model.js');
 var Arrays = require('../public/js/util/util.js').Arrays;
 
 exports.findPublic = function (req, res) {
-    model.Recipe.find({isPublic:true}).where('owner').ne(req.session.user_id).populate('owner').sort('-publishDate').limit(req.query.limit).exec(function(err,results) {
+    //where('owner').ne(req.session.user_id).
+    model.Recipe.find({isPublic:true}).populate('owner').sort('-publishDate').limit(req.query.limit).exec(function(err,results) {
         res.send(results);
     });
 };
@@ -163,7 +164,8 @@ exports.publish = function(req, res) {
 };
 
 exports.stats = function(req, res) {
-    model.Recipe.count({isPublic:true,owner:{$ne:req.session.user_id}},function(err, publicCount) {
+    //,owner:{$ne:req.session.user_id}
+    model.Recipe.count({isPublic:true},function(err, publicCount) {
         model.Recipe.count({owner:req.session.user_id},function(err,ownCount) {
             res.send({
                 publics: publicCount,

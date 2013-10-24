@@ -12,8 +12,8 @@
 <div>
     <div class="panel panel-default" ng-show="(published | filterFavorites:user.favorites).length!=0">
         <div class="panel-body" >
-            <div class="col-md-6" >
-                <div class="input-group" style="width: 400px">
+            <div class="col-md-5" >
+                <div class="input-group" style="width: 100%">
                     <input type="text"  class="form-control input-sm" ng-model="searchCriteria" placeholder="(Busqueda)" >
                     <span class="input-group-btn">
                         <button ng-init="searchCriteria=''" ng-hide="searchCriteria==''"  ng-click="searchCriteria=''" class="btn btn-default btn-sm" type="button">
@@ -22,26 +22,46 @@
                     </span>
                 </div>
             </div>
+            <div class="col-md-6" ng-hide="searchCriteria==''" style="padding-top: 5px;">
+                <ng-pluralize count="(published | filterFavorites:user.favorites | filter:searchCriteria).length"
+                              when="{'0':'No se ha encontrado ningun resultado con su busqueda','one': '1 receta encontrada','other':'{} recetas encontradas'}"></ng-pluralize>
+            </div>
         </div>        
         <table class="table table-striped table-hover">
           <thead>
             <tr>
                 <th style="width:1em"><span class="glyphicon glyphicon-star"></span></th>
                 <!--<th style="width:7em">Fecha</th>-->
-                <th>Nombre</th>
-                <th style="width:13em">Estilo</th>
-                <th style="width:4em">DI</th>
+                <th ng-click="sort.resort('NAME')" class="gt-sorted">
+                    Nombre <span ng-class="sort.orderStyle['NAME']"></span>
+                </th>
+                <th style="width:13em" ng-click="sort.resort('STYLE.NAME')" class="gt-sorted">
+                    Estilo <span ng-class="sort.orderStyle['STYLE.NAME']"></span>
+                </th>
+                <th style="width:4em" ng-click="sort.resort('OG')" class="gt-sorted">
+                    DI <span ng-class="sort.orderStyle['OG']"></span>
+                </th>
                 <!--<th style="width:4em">DF</th>-->
-                <th style="width:4em">%Alc</th>
-                <th style="width:4em">IBUs</th>
-                <th style="width:6em">Batch (L)</th>
-                <th style="width:10em">Cervecero</th>
-                <th style="width:10em">Compartida por</th>
+                <th style="width:5em" ng-click="sort.resort('ABV')" class="gt-sorted">
+                    %Alc <span ng-class="sort.orderStyle['ABV']"></span>
+                </th>
+                <th style="width:5em" ng-click="sort.resort('CALCIBU')" class="gt-sorted">
+                    IBUs <span ng-class="sort.orderStyle['CALCIBU']"></span>
+                </th>
+                <th style="width:7em" ng-click="sort.resort('BATCH_SIZE')" class="gt-sorted">
+                    Batch (L) <span ng-class="sort.orderStyle['BATCH_SIZE']"></span>
+                </th>
+                <th style="width:10em" ng-click="sort.resort('BREWER')" class="gt-sorted">
+                    Cervecero <span ng-class="sort.orderStyle['BREWER']"></span>
+                </th>
+                <th style="width:10em" ng-click="sort.resort('owner.name')" class="gt-sorted">
+                    Compartida por <span ng-class="sort.orderStyle['owner.name']"></span>
+                </th>
                 <th style="width:90px"></th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="recipe in published | filterFavorites:user.favorites | filter:searchCriteria">
+            <tr ng-repeat="recipe in published | filterFavorites:user.favorites | filter:searchCriteria | orderBy:sort.orderBy()">
                 <td>
                     <a ng-hide="user.favorites.indexOf(recipe._id) != -1" href="" type="button" class="glyphicon glyphicon-star-empty" ng-click="addFavorites(recipe)"></a>
                     <a ng-show="user.favorites.indexOf(recipe._id) != -1" href="" type="button" class="glyphicon glyphicon-star" ng-click="removeFavorites(recipe)"></a>

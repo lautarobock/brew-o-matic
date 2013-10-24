@@ -1,6 +1,6 @@
 <div class="col-md-12">
     <div class="panel panel-default">
-        <div class="panel-heading"><strong>Recetas de {{viewUser.name}}</strong></div>
+        <div class="panel-heading"><strong>Recetas compartidas por {{viewUser.name}} ({{recipes.length}})</strong></div>
         <div class="panel-body" ng-show="recipes.length==0">
           <div class="alert alert-info">
                 El usuario no tiene ninguna receta publicadas!
@@ -36,8 +36,10 @@
               <tbody>
                 <tr ng-repeat="recipe in recipes | filter:publicSearchCriteria">
                     <td>
-                        <a ng-hide="user.favorites.indexOf(recipe._id) != -1" type="button" class="glyphicon glyphicon-star-empty" ng-click="addFavorites(recipe)"></a>
-                        <a ng-show="user.favorites.indexOf(recipe._id) != -1" type="button" class="glyphicon glyphicon-star" ng-click="removeFavorites(recipe)"></a>
+                        <span ng-hide="recipe.owner == user._id">
+                            <a ng-hide="user.favorites.indexOf(recipe._id) != -1" type="button" class="glyphicon glyphicon-star-empty" ng-click="addFavorites(recipe)"></a>
+                            <a ng-show="user.favorites.indexOf(recipe._id) != -1" type="button" class="glyphicon glyphicon-star" ng-click="removeFavorites(recipe)"></a>
+                        </span>
                     </td>
                     <td>{{ recipe.publishDate|date:'dd-MM-yyyy' }}</td>
                     <td title="{{recipe.NAME}}"><a href="{{sharedUrl(recipe._id)}}">{{ recipe.NAME|limitText:30}}</a></td>

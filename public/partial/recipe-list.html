@@ -11,8 +11,8 @@
 </ul>
 <div class="panel panel-default" ng-show="recipes.length!=0" ng-cloak>
     <div class="panel-body" >
-        <div class="col-md-6" >
-            <div class="input-group" style="width: 400px">
+        <div class="col-md-5" >
+            <div class="input-group" style="width: 100%">
                 <input type="text"  class="form-control input-sm" ng-model="searchCriteria" placeholder="(Busqueda)" />
                 <span class="input-group-btn">
                     <button ng-init="searchCriteria=''" ng-hide="searchCriteria==''"  ng-click="searchCriteria=''" class="btn btn-default btn-sm" type="button">
@@ -21,7 +21,13 @@
                 </span>
             </div>
         </div>
-        <div class="col-md-6" >
+        <div class="col-md-5" style="padding-top: 5px;">
+            <span ng-hide="searchCriteria==''" >
+                <ng-pluralize count="(recipes | filter:searchCriteria).length"
+                              when="{'0':'No se ha encontrado ningun resultado con su busqueda','one': '1 receta encontrada','other':'{} recetas encontradas'}"></ng-pluralize>
+            </span>
+        </div>
+        <div class="col-md-2" >
             <a type="button" class="btn btn-default pull-right" href="#/recipe/new">
                 <span class="glyphicon glyphicon-plus"></span> Nueva receta
             </a>
@@ -30,28 +36,28 @@
     <table class="table table-striped table-hover">
       <thead>
         <tr>
-          <th ng-click="resort('code')" class="gt-sorted" style="width:1em;" title="Codigo unico que identifica la receta para el cervecero">
-            # <span ng-class="orderStyle['code']"></span>
+          <th ng-click="sort.resort('code')" class="gt-sorted" style="width:3em;" title="Codigo unico que identifica la receta para el cervecero">
+            # <span ng-class="sort.orderStyle['code']"></span>
           </th>
           <!--<th style="width:7em">Fecha</th>-->
-          <th ng-click="resort('NAME')" class="gt-sorted">
-            Nombre <span ng-class="orderStyle['NAME']"></span>
+          <th ng-click="sort.resort('NAME')" class="gt-sorted">
+            Nombre <span ng-class="sort.orderStyle['NAME']"></span>
           </th>
-          <th style="width:14em;" class="gt-sorted" ng-click="resort('STYLE.NAME')">
-            Estilo <span ng-class="orderStyle['STYLE.NAME']"></span>
+          <th style="width:14em;" class="gt-sorted" ng-click="sort.resort('STYLE.NAME')">
+            Estilo <span ng-class="sort.orderStyle['STYLE.NAME']"></span>
           </th>
-          <th style="width:4em" class="gt-sorted" ng-click="resort('OG')">
-            DI <span ng-class="orderStyle['OG']"></span>
+          <th style="width:4em" class="gt-sorted" ng-click="sort.resort('OG')">
+            DI <span ng-class="sort.orderStyle['OG']"></span>
           </th>
           <!--<th style="width:4em">DF</th>-->
-          <th style="width:5em" class="gt-sorted" ng-click="resort('ABV')">
-            %Alc <span ng-class="orderStyle['ABV']"></span>
+          <th style="width:5em" class="gt-sorted" ng-click="sort.resort('ABV')">
+            %Alc <span ng-class="sort.orderStyle['ABV']"></span>
           </th>
-          <th style="width:5em" class="gt-sorted" ng-click="resort('CALCIBU')">
-            IBUs <span ng-class="orderStyle['CALCIBU']"></span>
+          <th style="width:5em" class="gt-sorted" ng-click="sort.resort('CALCIBU')">
+            IBUs <span ng-class="sort.orderStyle['CALCIBU']"></span>
           </th>
-          <th style="width:7em" class="gt-sorted" ng-click="resort('BATCH_SIZE')">
-            Batch (L) <span ng-class="orderStyle['BATCH_SIZE']"></span>
+          <th style="width:7em" class="gt-sorted" ng-click="sort.resort('BATCH_SIZE')">
+            Batch (L) <span ng-class="sort.orderStyle['BATCH_SIZE']"></span>
           </th>
           <th style="width:10em">Cervecero</th>
           <th style="width: 1em"></th>
@@ -61,7 +67,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="recipe in recipes | filter:searchCriteria | orderBy:asc+field">
+        <tr ng-repeat="recipe in recipes | filter:searchCriteria | orderBy:sort.orderBy()">
             <td>
                 <a href="#/recipe/edit/{{encodeName(recipe._id)}}">{{ recipe.code }}</a>
             </td>            
