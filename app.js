@@ -44,6 +44,19 @@ mongoose.connect(process.env.MONGOLAB_URI);
 //    next();
 //});
 
+function filterAdmin(req,res,next){
+    console.log("checking admin session");
+    var s = req.session;
+
+    if (s.user_isAdmin ) {
+        console.log("sigue");
+        next();
+    } else {
+        console.log("null");
+        res.send(500,{error:'No tiene permisos para acceder a estos datos'});
+    }
+}
+
 function filter (req,res,next){
     console.log("checking session");
     var s = req.session;
@@ -61,6 +74,7 @@ function filter (req,res,next){
                 //console.log(req);
                 s.user_id = user._id;
                 s.user_name = user.name;
+                s.user_isAdmin = user.isAdmin;
                 next();
             } else {
                 console.log("null");
@@ -108,6 +122,14 @@ for (s in services ) {
   app.post('/' + services[s].toLowerCase() + "/:id",data[services[s]].save);
   app.post('/' + services[s].toLowerCase(),data[services[s]].save);
   app.delete('/' + services[s].toLowerCase()+ "/:id",data[services[s]].remove);
+}
+
+var admin = ['Recipe','User'];
+for (s in admin ) {
+  app.get('/admin/' + admin[s].toLowerCase(),[filter,filterAdmin],data[admin[s]].findAll);
+  app.post('/admin/' + admin[s].toLowerCase() + "/:id",[filter,filterAdmin],data[admin[s]].save);
+  app.post('/admin/' + admin[s].toLowerCase(),[filter,filterAdmin],data[admin[s]].save);
+  app.delete('/admin/' + admin[s].toLowerCase()+ "/:id",[filter,filterAdmin],data[admin[s]].remove);
 }
 
 //setInterval(function() {

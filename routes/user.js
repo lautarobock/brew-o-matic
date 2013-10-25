@@ -85,7 +85,7 @@ exports.getByGoogleId = function(req, res){
             //console.log(req);
             s.user_id = user._id;
             s.user_name = user.name;
-            
+            s.user_isAdmin = user.isAdmin;
             
             user.lastLogin = new Date();
             user.singInDate = user.singInDate || user.lastLogin;

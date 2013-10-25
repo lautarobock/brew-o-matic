@@ -49,7 +49,14 @@
     var services = ['Style','Grain','Hop','Yeast','Misc','Bottle','Tag'];
     angular.forEach(services,function(s) {
         res.factory(s,function($resource) {
-            return $resource( s.toLowerCase() + '/:_id',{_id:"@_id"}, {});
+            return $resource( s[0].toLowerCase() + s.substr(1) + '/:_id',{_id:"@_id"}, {});
+        });    
+    });
+    
+    var admin = ['User','Recipe'];
+    angular.forEach(admin,function(s) {
+        res.factory('Admin' + s,function($resource) {
+            return $resource( 'admin/' + s.toLowerCase() + '/:_id',{_id:"@_id"}, {});
         });    
     });
     

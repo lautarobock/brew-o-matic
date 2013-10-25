@@ -6,7 +6,7 @@ var Arrays = require("../public/js/util/util.js").Arrays;
  * GET users listing.
  */
 
-var services = ['Style','Grain','Hop','Yeast','Misc','Bottle','Tag'];
+var services = ['Style','Grain','Hop','Yeast','Misc','Bottle','Tag','Recipe','User'];
 
 //Aca van las que tiene customId
 var customIds = ['Bottle'];
@@ -44,3 +44,9 @@ for (s in services ) {
     var service = services[s];
     createRest(exports,service);
 }
+
+exports.Recipe.findAll = function(req, res) {
+    model.Recipe.find().populate('owner').exec(function(err,results) {
+        res.send(results);
+    });    
+};

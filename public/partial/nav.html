@@ -7,9 +7,6 @@
         </a>
         <div class="collapse navbar-collapse navbar-ex1-collapse" >
             <ul class="nav navbar-nav" ng-show="user">
-<!--                <li>
-                    <a href="/#/stats">Estadisticas</a>
-                </li>-->
                 <li>
                     <a href="/#/settings">Configuracion</a>
                 </li>
@@ -18,13 +15,15 @@
                         <span style="margin-left: 5px" title="{{notificationCount}} sin leer" class="badge" ng-class="notificationClass">{{notificationCount}}</span>
                     </a>
                 </li>
+                <li ng-show="user.isAdmin">
+                    <a href="/#/admin/Recipe">Admin</a>
+                </li>                
             </ul>
             <ul class="nav navbar-nav navbar-right" ng-show="user">
                 <li class="dropdown">
                     <a  href="" class="dropdown-toggle" data-toggle="dropdown"><span>{{user.name}}</span> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="https://docs.google.com/document/d/1lH9tL2bq6RDdG1ljv8Bg62HCdAb5yvbpGzec09ahi2M/edit" target="_blank">Ayuda V. {{version}}</a></li>
-                        <!--<li><a ng-click="disconnectUser()">Desconectar</a></li>-->
                     </ul>
                 </li>
             </ul>

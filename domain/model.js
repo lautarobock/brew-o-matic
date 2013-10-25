@@ -8,6 +8,7 @@ exports.User = mongoose.model("User",new Schema({
     favorites: [String],
     singInDate: Date,
     lastLogin: Date,
+    isAdmin: Boolean,
     settings: {
         defaultValues: {
             BATCH_SIZE: Number,
