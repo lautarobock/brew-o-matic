@@ -34,15 +34,15 @@
     <table class="table table-striped table-hover">
         <thead>
             <tr>
-                <th ng-repeat="header in config.headers" style="width: {{header.width}}%">
-                    {{header.caption}}    
+                <th ng-click="sort.resort(header.field)" class="gt-sorted"  ng-repeat="header in config.headers" style="width: {{header.width}}%">
+                    {{header.caption}} <span ng-class="sort.orderStyle[header.field]"></span>
                 </th>
                 <th style="width: 1em"></th>
                 <th style="width: 1em"></th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-init="value=copy(row)" ng-repeat="row in rows | filter:searchCriteria | orderBy:config.orderBy">
+            <tr ng-init="value=copy(row)" ng-repeat="row in rows | filter:searchCriteria | pageFilter:page | orderBy:sort.orderBy()">
                 <td ng-repeat="header in config.headers">
                     <input ng-show="row._id == edit_id" type="text" class="form-control input-sm" ng-model="value[header.field]"/>
                     <span ng-hide="row._id == edit_id">{{row[header.field]}}</span>
@@ -58,6 +58,13 @@
             </tr>
         </tbody>
     </table>
+    <ul class="pagination">
+        <li><a href="" ng-click="page=1">&laquo;</a></li>
+        <li ng-repeat="p in pages">
+            <a href="" ng-click="toPage(p.page)">{{p.page}}</a>
+        </li>
+        <li><a href="" ng-click="page=pages.length">&raquo;</a></li>
+    </ul>
     <div class="panel-body">
         <div class="col-md-12" >
             <a ng-show="searchCriteria==''" ng-click="rows.push({_draft:true})" href="" type="button" class="btn btn-default btn-sm pull-right">

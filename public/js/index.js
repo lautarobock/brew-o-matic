@@ -13,7 +13,8 @@
                                 'googlechart',
                                 'brew-o-module.controller',
                                 'notification',
-                                'abm']);
+                                'abm',
+                                'ui.bootstrap']);
 
     index.constant("version",'0.13');
  

@@ -58,6 +58,7 @@
         },
         Yeast:  {
             name: "Levaduras",
+            pageSize: 10,
             singular: "Levadura",
             orderBy: "name",
             headers: [
@@ -92,7 +93,7 @@
         Bottle:  {
             name: "Botellas",
             singular: "Botella",
-            orderBy: "name",
+            orderBy: "size",
             headers: [
                 {
                     field:'_id',
@@ -120,16 +121,20 @@
             headers: [
                 {
                     field:'name',
-                    caption: 'Nombre'
+                    caption: 'Nombre',
+                    width: 50
                 },{
                     field:'type',
-                    caption: 'Tipo'
+                    caption: 'Tipo',
+                    width: 15
                 },{
                     field:'colour',
-                    caption: 'Color'
+                    caption: 'Color',
+                    width: 15
                 },{
                     field:'potential',
-                    caption: 'Potencial'
+                    caption: 'Potencial',
+                    width: 15
                 }
             ]
         },
@@ -140,22 +145,36 @@
             headers: [
                 {
                     field:'name',
-                    caption: 'Nombre'
+                    caption: 'Nombre',
+                    width: 70
                 },{
                     field:'alpha',
-                    caption: 'AA%'
+                    caption: 'AA%',
+                    width: 25
                 }
             ]
         }
     };
-    
-    abm.controller("AbmCtrl",function($scope,$rootScope,$routeParams,Grain, Hop, Bottle, Misc,Yeast,Style) {
-        
+
+    var PAGE_SIZE = 10;
+
+    abm.filter("pageFilter",function() {
+        return function(rows,page) {
+            var from = (page-1)*PAGE_SIZE;
+            var to = from + PAGE_SIZE;
+            return rows.slice(from,to);
+        };
+    });
+
+    abm.controller("AbmCtrl",function($scope,$rootScope,$routeParams,Grain, Hop, Bottle, Misc,Yeast,Style,sortData) {
+
         $scope.allConfigs = config;
         
         $scope.entity = $routeParams.entity;
         
         $scope.config = config[$scope.entity];
+
+        $scope.sort = sortData($scope.config.orderBy,"");
         
         $rootScope.breadcrumbs = [{
             link: '#',
@@ -233,8 +252,35 @@
             
             
         };
-        
-        $scope.rows = $scope.data[$scope.entity].query();
+
+        $scope.$watch("searchCriteria",function() {
+            $scope.page = 1;
+            var pageSize = $scope.config.pageSize || 10;
+
+            var pagesCount = Math.floor($scope.rows.length/pageSize)+1;
+            $scope.pages = [];
+            for ( var i=1; i <= pagesCount; i++ ) {
+                $scope.pages.push({
+                    page: i
+                });
+            }
+        });
+
+        $scope.page = 1;
+        $scope.rows = $scope.data[$scope.entity].query(function() {
+            var pageSize = $scope.config.pageSize || 10;
+            var pagesCount = Math.floor($scope.rows.length/pageSize)+1;
+            $scope.pages = [];
+            for ( var i=1; i <= pagesCount; i++ ) {
+                $scope.pages.push({
+                    page: i
+                });
+            }
+        });
+
+        $scope.toPage = function(page) {
+            $scope.page = page;
+        }
         
     });
     
