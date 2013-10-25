@@ -58,7 +58,6 @@
         },
         Yeast:  {
             name: "Levaduras",
-            pageSize: 10,
             singular: "Levadura",
             orderBy: "name",
             headers: [
@@ -69,6 +68,7 @@
                 },{
                     field:'aa',
                     caption: 'Atenuacion',
+                    type: 'number',
                     width:20
                 }
             ]
@@ -106,6 +106,8 @@
                 },{
                     field:'size',
                     caption: 'Tamaño',
+                    type: "number",
+                    step: "0.01",
                     width: 25
                 },{
                     field:'colour',
@@ -130,10 +132,14 @@
                 },{
                     field:'colour',
                     caption: 'Color',
+                    type: 'number',
+                    step: 0.1,
                     width: 15
                 },{
                     field:'potential',
                     caption: 'Potencial',
+                    type: 'number',
+                    step: 0.001,
                     width: 15
                 }
             ]
@@ -150,6 +156,8 @@
                 },{
                     field:'alpha',
                     caption: 'AA%',
+                    type: 'number',
+                    step: 0.1,
                     width: 25
                 }
             ]
@@ -201,6 +209,11 @@
             }
         };
         
+        $scope.addNew = function() {
+            $scope.rows.push({_draft:true});
+            $scope.page = $scope.getPageCount($scope.rows.length);
+        };
+        
         $scope.edit_id = null;
         
         $scope.edit = function(row) {
@@ -249,38 +262,24 @@
                     row._id = n._id;
                 });
             }
-            
-            
         };
-
-        $scope.$watch("searchCriteria",function() {
-            $scope.page = 1;
-            var pageSize = $scope.config.pageSize || 10;
-
-            var pagesCount = Math.floor($scope.rows.length/pageSize)+1;
-            $scope.pages = [];
-            for ( var i=1; i <= pagesCount; i++ ) {
-                $scope.pages.push({
-                    page: i
-                });
-            }
-        });
+        //
+        //$scope.$watch("searchCriteria",function() {
+        //    var pageSize = $scope.config.pageSize || 10;
+        //    $scope.pagesCount = Math.floor($scope.rows.length/pageSize)+1;
+        //});
 
         $scope.page = 1;
-        $scope.rows = $scope.data[$scope.entity].query(function() {
-            var pageSize = $scope.config.pageSize || 10;
-            var pagesCount = Math.floor($scope.rows.length/pageSize)+1;
-            $scope.pages = [];
-            for ( var i=1; i <= pagesCount; i++ ) {
-                $scope.pages.push({
-                    page: i
-                });
-            }
-        });
-
-        $scope.toPage = function(page) {
-            $scope.page = page;
-        }
+        $scope.rows = $scope.data[$scope.entity].query();
+        
+        $scope.pageSize = function() {
+            return $scope.config.pageSize || PAGE_SIZE;
+        };
+        
+        $scope.getPageCount = function(length) {
+            var pageSize = $scope.pageSize();
+            return Math.ceil(length/pageSize);
+        };
         
     });
     

@@ -6,6 +6,8 @@ a {
   color: #00b7ff;
 }
 
+.pager, .nav, .pagination, .carousel a { cursor: pointer; }
+
 .gt-warning {
     background: yellow !important
 }

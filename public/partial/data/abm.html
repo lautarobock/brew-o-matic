@@ -25,16 +25,15 @@
             </span>
         </div>
         <div class="col-md-2" >
-            <a ng-show="searchCriteria==''" ng-click="rows.push({_draft:true})" href="" type="button" class="btn btn-default btn-sm pull-right">
+            <a ng-show="searchCriteria==''" ng-click="addNew()" href="" type="button" class="btn btn-default btn-sm pull-right">
                 <span class="glyphicon glyphicon-plus"></span> nuevo
             </a>
         </div>
     </div>
-    
     <table class="table table-striped table-hover">
         <thead>
             <tr>
-                <th ng-click="sort.resort(header.field)" class="gt-sorted"  ng-repeat="header in config.headers" style="width: {{header.width}}%">
+                <th ng-click="sort.resort(header.field)" class="gt-sorted"  ng-repeat="header in config.headers" ng-style="{width: header.width+'%'}">
                     {{header.caption}} <span ng-class="sort.orderStyle[header.field]"></span>
                 </th>
                 <th style="width: 1em"></th>
@@ -42,9 +41,9 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-init="value=copy(row)" ng-repeat="row in rows | filter:searchCriteria | pageFilter:page | orderBy:sort.orderBy()">
+            <tr ng-init="value=copy(row)" ng-repeat="row in rows | orderBy:sort.orderBy() | filter:searchCriteria | pageFilter:page ">
                 <td ng-repeat="header in config.headers">
-                    <input ng-show="row._id == edit_id" type="text" class="form-control input-sm" ng-model="value[header.field]"/>
+                    <input ng-show="row._id == edit_id" type="{{header.type||'text'}}" step="{{header.step}}" class="form-control input-sm" ng-model="value[header.field]"/>
                     <span ng-hide="row._id == edit_id">{{row[header.field]}}</span>
                 </td>
                 <td>
@@ -58,13 +57,11 @@
             </tr>
         </tbody>
     </table>
-    <ul class="pagination">
-        <li><a href="" ng-click="page=1">&laquo;</a></li>
-        <li ng-repeat="p in pages">
-            <a href="" ng-click="toPage(p.page)">{{p.page}}</a>
-        </li>
-        <li><a href="" ng-click="page=pages.length">&raquo;</a></li>
-    </ul>
+    <div class="container">
+        <pager total-items="(rows | filter:searchCriteria).length" page="page" items-per-page="pageSize()"></pager>
+        <pre>Pagina: {{page}} / {{getPageCount((rows | filter:searchCriteria).length)}}
+Items: {{(rows | filter:searchCriteria).length}}</pre>
+    </div>
     <div class="panel-body">
         <div class="col-md-12" >
             <a ng-show="searchCriteria==''" ng-click="rows.push({_draft:true})" href="" type="button" class="btn btn-default btn-sm pull-right">
