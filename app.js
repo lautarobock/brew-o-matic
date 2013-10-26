@@ -37,7 +37,8 @@ if ('development' == app.get('env')) {
 //mongoose.connect('localhost', 'emarcialsys');
 //mongodb://af_brew-o-matic-lautaromail:mngn0k588adkt5er4h758tp1im@ds047948.mongolab.com:47948/af_brew-o-matic-lautaromail
 //mongoose.connect(process.env.MONGOLAB_URI);
-mongoose.connect('mongodb://app:lac713@ds047948.mongolab.com:47948/af_brew-o-matic-lautaromail');
+//mongoose.connect('mongodb://app:lac713@ds047948.mongolab.com:47948/af_brew-o-matic-lautaromail');
+mongoose.connect('mongodb://app-dev:app-dev@ds051838.mongolab.com:51838/brew-o-matic-dev');
 
 //app.get('/user/google_*', function(req,res,next){
 //    
