@@ -15,7 +15,7 @@ var mongoose = require('mongoose');
 var app = express();
 
 // all environments
-app.set('port', process.env.PORT || 5000);
+app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(express.favicon("public/images/favicon.ico"));
@@ -36,8 +36,8 @@ if ('development' == app.get('env')) {
 //Initialize Mongoose
 //mongoose.connect('localhost', 'emarcialsys');
 //mongodb://af_brew-o-matic-lautaromail:mngn0k588adkt5er4h758tp1im@ds047948.mongolab.com:47948/af_brew-o-matic-lautaromail
-//mongoose.connect(process.env.MONGOLAB_URI);
-mongoose.connect('mongodb://app:lac713@ds047948.mongolab.com:47948/af_brew-o-matic-lautaromail');
+mongoose.connect(process.env.MONGOLAB_URI);
+
 
 //app.get('/user/google_*', function(req,res,next){
 //    
