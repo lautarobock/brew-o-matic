@@ -9,7 +9,7 @@ var Arrays = require("../public/js/util/util.js").Arrays;
 var services = ['Style','Grain','Hop','Yeast','Misc','Bottle','Tag','Recipe','User'];
 
 //Aca van las que tiene customId
-var customIds = ['Bottle'];
+var customIds = ['Bottle','Recipe'];
 
 function createRest(exports,service) {
     exports[service] = {
@@ -49,4 +49,13 @@ exports.Recipe.findAll = function(req, res) {
     model.Recipe.find().populate('owner').exec(function(err,results) {
         res.send(results);
     });    
+};
+
+exports.Recipe.save = function(req, res) {
+    delete req.body._id;
+    var id = req.params.id;
+    req.body.owner = req.body.owner._id;
+    model.Recipe.findByIdAndUpdate(id,req.body,{upsert:true}).populate('owner').exec(function(err,results) {
+        res.send(results);
+    });
 };

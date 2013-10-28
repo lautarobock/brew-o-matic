@@ -19,7 +19,10 @@
             replace : true,
             scope : {
                 config: '&',
-                entity: '&'
+                entity: '&',
+                canRemove: '=',
+                canEdit: '=',
+                canAdd: '='
             },
             templateUrl: 'template/abm.html',
             link : function(scope, element, attrs) {
@@ -43,6 +46,26 @@
                 };
                 
                 $scope.edit_id = null;
+
+                $scope.isEditing = function(row) {
+                    return row._id == $scope.edit_id;
+                };
+
+                $scope.valueTemplate = function(row,header) {
+                    if ( $scope.isEditing(row) && !header.readonly) {
+                        if ( !header.type || header.type == 'text' || header.type == 'number'  ) {
+                            return 'template/abm-input.html';
+                        } if ( header.type == 'checkbox' ) {
+                            return 'template/abm-checkbox.html';
+                        } if ( header.type == 'combo' ) {
+                            return 'template/abm-combo.html';
+                        }
+                    } else if ( header.type == 'checkbox' ) {
+                        return 'template/abm-value-checkbox.html';
+                    } else {
+                        return 'template/abm-value.html';
+                    }
+                };
                 
                 $scope.edit = function(row) {
                     $scope.edit_id = row._id;

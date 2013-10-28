@@ -19,6 +19,7 @@
                                 'ui.bootstrap']);
 
     index.constant("version",'0.13');
+    index.constant("env",'stage');
  
     index.
         config(['$routeProvider', function($routeProvider) {
@@ -199,11 +200,13 @@
 
 
     
-    index.run(function($rootScope,version,$filter,$location,BrewCalc) {
+    index.run(function($rootScope,version,$filter,$location,BrewCalc,env) {
 
         $rootScope.BrewCalc = BrewCalc;
 
         $rootScope.version = version;
+
+        $rootScope.env = env;
 
         $rootScope.encodeName = function(name) {
             return encodeURIComponent(name);
