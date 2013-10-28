@@ -1,33 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9c59171e-aa4c-4ed3-b378-24487c86d6a8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dump/af_brew-o-matic-lautaromail/notifications.bson" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dump/af_brew-o-matic-lautaromail/notifications.metadata.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dump/af_brew-o-matic-lautaromail/tags.bson" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dump/af_brew-o-matic-lautaromail/tags.metadata.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/template/abm-checkbox.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/template/abm-combo.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/template/abm-input.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/template/abm-value-checkbox.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/template/abm-value.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dump/af_brew-o-matic-lautaromail/actions.bson" afterPath="$PROJECT_DIR$/dump/af_brew-o-matic-lautaromail/actions.bson" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dump/af_brew-o-matic-lautaromail/objectlabs-system.admin.collections.bson" afterPath="$PROJECT_DIR$/dump/af_brew-o-matic-lautaromail/objectlabs-system.admin.collections.bson" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dump/af_brew-o-matic-lautaromail/recipes.bson" afterPath="$PROJECT_DIR$/dump/af_brew-o-matic-lautaromail/recipes.bson" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dump/af_brew-o-matic-lautaromail/system.indexes.bson" afterPath="$PROJECT_DIR$/dump/af_brew-o-matic-lautaromail/system.indexes.bson" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dump/af_brew-o-matic-lautaromail/users.bson" afterPath="$PROJECT_DIR$/dump/af_brew-o-matic-lautaromail/users.bson" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dump/af_brew-o-matic-lautaromail/yeasts.bson" afterPath="$PROJECT_DIR$/dump/af_brew-o-matic-lautaromail/yeasts.bson" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/admin/AdminCtrl.js" afterPath="$PROJECT_DIR$/public/js/admin/AdminCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/directive/abm.js" afterPath="$PROJECT_DIR$/public/js/directive/abm.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/index.js" afterPath="$PROJECT_DIR$/public/js/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/partial/admin/admin.html" afterPath="$PROJECT_DIR$/public/partial/admin/admin.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/partial/nav.html" afterPath="$PROJECT_DIR$/public/partial/nav.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/template/abm.html" afterPath="$PROJECT_DIR$/public/template/abm.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/data.js" afterPath="$PROJECT_DIR$/routes/data.js" />
-    </list>
+    <list default="true" id="9c59171e-aa4c-4ed3-b378-24487c86d6a8" name="Default" comment="" />
     <ignored path="brew-o-matic.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
