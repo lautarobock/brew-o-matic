@@ -11,6 +11,20 @@
                                         'googlechart',
                                         'notification']);
 
+    share.constant("version",'0.13');
+    share.constant("env",'dev');
+
+    share.run(function($rootScope,version,env,$location) {
+
+        $rootScope.version = version;
+        $rootScope.env = env;
+
+        $rootScope.sharedUrl = function(_id) {
+            return 'http://'+$location.host() + ":" + $location.port() + '/share.html#/' + _id;
+        };
+
+    });
+
     share.controller("ShareController", function(
                     $scope,
                     Recipe,
@@ -23,6 +37,8 @@
                     $filter,
                     BrewCalc) {
 
+
+                    
         $rootScope.BrewCalc = BrewCalc;
 
         $rootScope.BrewHelper = BrewHelper;
@@ -54,14 +70,18 @@
         
         $scope.hopForms = HopForm.query();
         
-        $scope.notFound = false;
-        $scope.recipe = Recipe.get({id:$location.path().substr(1,$location.path().length-1)},function() {
-            if (!$scope.recipe._id) {
-                $scope.notFound = true;
-                console.log("Receta no encotrada");
-            }
-            BrewCalc.fixEmptyValues($scope.recipe);
+        $scope.$on('$locationChangeSuccess', function(event) {
+            console.log("cambio");
+            $scope.notFound = false;
+            $scope.recipe = Recipe.get({id:$location.path().substr(1,$location.path().length-1)},function() {
+                if (!$scope.recipe._id) {
+                    $scope.notFound = true;
+                    console.log("Receta no encotrada");
+                }
+                BrewCalc.fixEmptyValues($scope.recipe);
+            });            
         });
+        
 
         $scope.calulateBUGU = function(bu,gu) {
             return bu/(gu * 1000 - 1000);
