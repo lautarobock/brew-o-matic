@@ -19,7 +19,7 @@
                                 'ui.bootstrap']);
 
     index.constant("version",'0.13');
-    index.constant("env",'stage');
+    index.constant("env",'beta');
  
     index.
         config(['$routeProvider', function($routeProvider) {
