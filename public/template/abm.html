@@ -18,7 +18,7 @@
             </span>
         </div>
         <div class="col-md-2" >
-            <a ng-show="searchCriteria==''" ng-click="addNew()" href="" type="button" class="btn btn-default btn-sm pull-right">
+            <a ng-show="searchCriteria=='' && canAdd" ng-click="addNew()" href="" type="button" class="btn btn-default btn-sm pull-right">
                 <span class="glyphicon glyphicon-plus"></span> nuevo
             </a>
         </div>
@@ -36,16 +36,16 @@
         <tbody>
             <tr ng-init="value=copy(row)" ng-repeat="row in rows | orderBy:sort.orderBy() | filter:searchCriteria | pageFilter:page ">
                 <td ng-repeat="header in config().headers">
-                    <input ng-show="row._id == edit_id" type="{{header.type||'text'}}" step="{{header.step}}" class="form-control input-sm" ng-model="value[header.field]"/>
-                    <span ng-hide="row._id == edit_id">{{getValue(row,header.field)}}</span>
+                    <ng-include src="valueTemplate(row,header)"></ng-include>
+                </td>
+                <!-- BUTTONS -->
+                <td>
+                    <a ng-show="!isEditing(row) && canEdit" ng-click="edit(row)" href="" type="button" class="btn btn-primary btn-xs">editar</a>
+                    <a ng-show="isEditing(row)" ng-click="save(value,row)" href="" type="button" class="btn btn-success btn-xs">guardar</a>
                 </td>
                 <td>
-                    <a ng-hide="row._id == edit_id" ng-click="edit(row)" href="" type="button" class="btn btn-primary btn-xs">editar</a>
-                    <a ng-show="row._id == edit_id" ng-click="save(value,row)" href="" type="button" class="btn btn-success btn-xs">guardar</a>
-                </td>
-                <td>
-                    <a ng-hide="row._id == edit_id" ng-click="remove(row)" href="" type="button" class="btn btn-danger btn-xs">eliminar</a>
-                    <a ng-show="row._id == edit_id" ng-click="cancel(row,value)" href="" type="button" class="btn btn-warning btn-xs">cancelar</a>
+                    <a ng-show="!isEditing(row) && canRemove" ng-click="remove(row)" href="" type="button" class="btn btn-danger btn-xs">eliminar</a>
+                    <a ng-show="isEditing(row)" ng-click="cancel(row,value)" href="" type="button" class="btn btn-warning btn-xs">cancelar</a>
                 </td>
             </tr>
         </tbody>
@@ -57,7 +57,7 @@ Items: {{(rows | filter:searchCriteria).length}}</pre>
     </div>
     <div class="panel-body">
         <div class="col-md-12" >
-            <a ng-show="searchCriteria==''" ng-click="rows.push({_draft:true})" href="" type="button" class="btn btn-default btn-sm pull-right">
+            <a ng-show="searchCriteria=='' && canAdd" ng-click="rows.push({_draft:true})" href="" type="button" class="btn btn-default btn-sm pull-right">
                 <span class="glyphicon glyphicon-plus"></span> nuevo
             </a>
         </div>
