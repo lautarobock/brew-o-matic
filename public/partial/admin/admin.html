@@ -1,1 +1,17 @@
-<gt-table can-remove="config.canRemove" can-edit="config.canEdit" can-add="true" config="config" entity="entity"></gt-table>
+<div style="margin-bottom: -0.1em;">
+    <ul class="nav nav-tabs">
+        <li ng-class="getActiveClass(key)" ng-repeat="(key,value) in allConfigs">
+            <a style="cursor: pointer" href="/#/admin/{{key}}">{{value.name}}</a>
+        </li>
+    </ul>
+</div>
+
+<gt-table
+          can-remove="config.canRemove"
+          can-edit="config.canEdit"
+          can-add="canAdd"
+          config="config"
+          entity="entity"
+          context="context"
+          >
+</gt-table>
