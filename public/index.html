@@ -51,13 +51,18 @@
             </div>
           </div>
         </div>
-        <div class="col-md-10" >
+        <div class="col-md-10" style="overflow: hidden">
             <ol class="breadcrumb">
               <li ng-repeat="item in breadcrumbs">
                 <a ng-hide="$last" href="{{item.link}}">{{item.title}}</a>
                 <span ng-show="$last" class="active" >{{item.title}}</span>
               </li>
             </ol>
+            <div class="alert alert-{{alert.type}} alert-dismissable" ng-repeat="alert in getAlerts()">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong ng-show="alert.title">{{alert.title}}</strong>
+                {{alert.text}}
+            </div>
         </div>
       </div>
     </div>
