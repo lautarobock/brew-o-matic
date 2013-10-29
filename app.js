@@ -124,7 +124,7 @@ for (s in services ) {
   app.delete('/' + services[s].toLowerCase()+ "/:id",data[services[s]].remove);
 }
 
-var admin = ['Recipe','User'];
+var admin = ['Recipe','User','Action'];
 for (s in admin ) {
   app.get('/admin/' + admin[s].toLowerCase(),[filter,filterAdmin],data[admin[s]].findAll);
   app.post('/admin/' + admin[s].toLowerCase() + "/:id",[filter,filterAdmin],data[admin[s]].save);

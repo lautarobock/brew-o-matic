@@ -41,6 +41,11 @@ function generateId(name,user_id) {
                 .replace(/#/g,"_Nro_")
                 .replace(/%/g,"_Per_")
                 .replace(/,/g,"_")
+                .replace(/á/g,"a")
+                .replace(/é/g,"e")
+                .replace(/í/g,"i")
+                .replace(/ó/g,"o")
+                .replace(/ú/g,"u")
                 + "-" + user_id + "-" + (new Date()).getTime());
 }
 

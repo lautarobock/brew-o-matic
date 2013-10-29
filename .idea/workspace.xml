@@ -2,7 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c59171e-aa4c-4ed3-b378-24487c86d6a8" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/partial/admin/abm-value-user-link.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dump/af_brew-o-matic-lautaromail/actions.bson" afterPath="$PROJECT_DIR$/dump/af_brew-o-matic-lautaromail/actions.bson" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dump/af_brew-o-matic-lautaromail/notifications.bson" afterPath="$PROJECT_DIR$/dump/af_brew-o-matic-lautaromail/notifications.bson" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dump/af_brew-o-matic-lautaromail/recipes.bson" afterPath="$PROJECT_DIR$/dump/af_brew-o-matic-lautaromail/recipes.bson" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dump/af_brew-o-matic-lautaromail/users.bson" afterPath="$PROJECT_DIR$/dump/af_brew-o-matic-lautaromail/users.bson" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/RecipeDetailCtrl.js" afterPath="$PROJECT_DIR$/public/js/RecipeDetailCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/RecipeListCtrl.js" afterPath="$PROJECT_DIR$/public/js/RecipeListCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/admin/AdminCtrl.js" afterPath="$PROJECT_DIR$/public/js/admin/AdminCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/directive/abm.js" afterPath="$PROJECT_DIR$/public/js/directive/abm.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/index.js" afterPath="$PROJECT_DIR$/public/js/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/resources.js" afterPath="$PROJECT_DIR$/public/js/resources.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/partial/admin/admin.html" afterPath="$PROJECT_DIR$/public/partial/admin/admin.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/partial/user/home.html" afterPath="$PROJECT_DIR$/public/partial/user/home.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/data.js" afterPath="$PROJECT_DIR$/routes/data.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/recipe.js" afterPath="$PROJECT_DIR$/routes/recipe.js" />
     </list>
     <ignored path="brew-o-matic.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -22,55 +39,57 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AdminCtrl.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/admin/AdminCtrl.js">
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="29" selection-start="389" selection-end="389" vertical-scroll-proportion="0.0">
+            <state line="62" column="44" selection-start="3495" selection-end="3495" vertical-scroll-proportion="-18.75">
+              <folding>
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="210" column="32" selection-start="7873" selection-end="7873" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="abm.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/directive/abm.js">
+      <file leaf-file-name="RecipeDetailCtrl.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/RecipeDetailCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="78" column="53" selection-start="2792" selection-end="2792" vertical-scroll-proportion="0.0">
+            <state line="364" column="16" selection-start="12451" selection-end="12514" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="abm-input.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/template/abm-input.html">
+      <file leaf-file-name="RecipeListCtrl.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/js/RecipeListCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="107" selection-start="107" selection-end="107" vertical-scroll-proportion="0.0">
+            <state line="177" column="88" selection-start="5639" selection-end="5639" vertical-scroll-proportion="0.67509025">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="abm-value.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/template/abm-value.html">
+      <file leaf-file-name="recipe-detail-main.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/partial/recipe-detail-main.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="34" selection-start="8" selection-end="34" vertical-scroll-proportion="0.0">
+            <state line="17" column="55" selection-start="1067" selection-end="1067" vertical-scroll-proportion="-10.625">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="admin.html" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/partial/admin/admin.html">
+      <file leaf-file-name="recipe-detail.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/partial/recipe-detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="64" selection-start="64" selection-end="64" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="recipe-list.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/partial/recipe-list.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="52" selection-start="2279" selection-end="2289" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
               <folding />
             </state>
           </provider>
@@ -89,22 +108,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/public/js/data/AbmCtrl.js" />
-        <option value="$PROJECT_DIR$/public/partial/data/abm.html" />
-        <option value="$PROJECT_DIR$/app.js" />
-        <option value="$PROJECT_DIR$/public/template/abm-value.html" />
-        <option value="$PROJECT_DIR$/public/template/abm-combo.html" />
-        <option value="$PROJECT_DIR$/public/index.html" />
-        <option value="$PROJECT_DIR$/public/partial/nav.html" />
-        <option value="$PROJECT_DIR$/public/js/index.js" />
-        <option value="$PROJECT_DIR$/public/template/abm.html" />
-        <option value="$PROJECT_DIR$/routes/data.js" />
-        <option value="$PROJECT_DIR$/public/js/directive/abm.js" />
         <option value="$PROJECT_DIR$/public/template/abm-value-checkbox.html" />
         <option value="$PROJECT_DIR$/public/template/abm-checkbox.html" />
         <option value="$PROJECT_DIR$/public/template/abm-input.html" />
-        <option value="$PROJECT_DIR$/public/js/admin/AdminCtrl.js" />
         <option value="$PROJECT_DIR$/public/partial/admin/admin.html" />
+        <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/routes/data.js" />
+        <option value="$PROJECT_DIR$/public/js/resources.js" />
+        <option value="$PROJECT_DIR$/public/js/directive/abm.js" />
+        <option value="$PROJECT_DIR$/public/js/admin/AdminCtrl.js" />
+        <option value="$PROJECT_DIR$/public/partial/admin/abm-value-user-link.html" />
+        <option value="$PROJECT_DIR$/public/partial/user/home.html" />
+        <option value="$PROJECT_DIR$/routes/recipe.js" />
+        <option value="$PROJECT_DIR$/public/js/RecipeDetailCtrl.js" />
+        <option value="$PROJECT_DIR$/public/js/index.js" />
+        <option value="$PROJECT_DIR$/public/index.html" />
+        <option value="$PROJECT_DIR$/public/js/RecipeListCtrl.js" />
       </list>
     </option>
   </component>
@@ -128,7 +147,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1" splitterProportion="0.5">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -139,18 +158,131 @@
       <autoscrollFromSource />
       <sortByType />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brew-o-matic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brew-o-matic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brew-o-matic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brew-o-matic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brew-o-matic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brew-o-matic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brew-o-matic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="template" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brew-o-matic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brew-o-matic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="partial" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brew-o-matic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brew-o-matic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="partial" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brew-o-matic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="brew-o-matic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="restartRequiresConfirmation" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app.js" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
     <property name="GoToClass.includeJavaFiles" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/partial/admin" />
       <recent name="$PROJECT_DIR$/public/template" />
       <recent name="$PROJECT_DIR$/public/partial/share" />
       <recent name="$PROJECT_DIR$/public/partial" />
@@ -235,12 +367,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="31" width="1682" height="1023" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3288889" sideWeight="0.99874216" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914287" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24968554" sideWeight="0.64" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14302957" sideWeight="0.60342854" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14302957" sideWeight="0.6628571" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39657143" sideWeight="0.49748427" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32955974" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.49811321" order="10" side_tool="true" content_ui="tabs" />
@@ -312,73 +444,39 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/partial/nav.html">
+    <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="95" selection-start="325" selection-end="325" vertical-scroll-proportion="-3.125" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="208" column="29" selection-start="7681" selection-end="7681" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="21" selection-start="37" selection-end="37" vertical-scroll-proportion="0.018472906" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/template/abm-combo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="38" selection-start="76" selection-end="76" vertical-scroll-proportion="-0.625" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/template/abm-value-checkbox.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="79" selection-start="158" selection-end="158" vertical-scroll-proportion="-0.625" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/template/abm.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="50" selection-start="2163" selection-end="2176" vertical-scroll-proportion="-12.958333" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/partial/recipe-fermentation.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="36" selection-start="4058" selection-end="4289" vertical-scroll-proportion="-19.375" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/data.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="54" selection-start="1805" selection-end="1811" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/template/abm-checkbox.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="27" selection-start="76" selection-end="76" vertical-scroll-proportion="-0.625" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/domain/model.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="204" column="21" selection-start="5695" selection-end="5721" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/partial/recipe-list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="52" selection-start="2279" selection-end="2289" vertical-scroll-proportion="0.0">
+        <state line="126" column="36" selection-start="4415" selection-end="4415" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/partial/recipe-public.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="n#style#0;n#ul#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/admin/AdminCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="29" selection-start="389" selection-end="389" vertical-scroll-proportion="0.0">
+        <state line="51" column="72" selection-start="1690" selection-end="1690" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/domain/model.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="246" column="4" selection-start="6586" selection-end="6586" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/directive/abm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="53" selection-start="2792" selection-end="2792" vertical-scroll-proportion="0.0">
+        <state line="33" column="79" selection-start="966" selection-end="974" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -392,14 +490,72 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/template/abm-value.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="34" selection-start="8" selection-end="34" vertical-scroll-proportion="-0.0">
+        <state line="0" column="34" selection-start="8" selection-end="28" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/partial/admin/admin.html">
+    <entry file="file://$PROJECT_DIR$/public/partial/admin/abm-value-user-link.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="64" selection-start="64" selection-end="64" vertical-scroll-proportion="0.0">
+        <state line="2" column="4" selection-start="64" selection-end="64" vertical-scroll-proportion="-1.25">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/partial/user/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="45" selection-start="330" selection-end="330" vertical-scroll-proportion="-3.125">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/recipe.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="32" selection-start="1663" selection-end="1663" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/partial/recipe-detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/partial/recipe-detail-main.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="55" selection-start="1067" selection-end="1067" vertical-scroll-proportion="-10.625">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="62" column="44" selection-start="3495" selection-end="3495" vertical-scroll-proportion="-18.75">
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="210" column="32" selection-start="7873" selection-end="7873" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/RecipeDetailCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="364" column="16" selection-start="12451" selection-end="12514" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/RecipeListCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="177" column="88" selection-start="5639" selection-end="5639" vertical-scroll-proportion="0.67509025">
           <folding />
         </state>
       </provider>

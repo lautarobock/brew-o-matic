@@ -1,3 +1,17 @@
+<!--<div class="checkbox" >-->
+    <!--<label>-->
+        <!--Eliminar-->
+        <!--<input type="checkbox" ng-init="canRemove=false" ng-model="canRemove" />-->
+    <!--</label>-->
+<!--</div>-->
+
+<!--<div class="checkbox" >-->
+    <!--<label>-->
+        <!--Editar-->
+        <!--<input type="checkbox" ng-init="canEdit=false" ng-model="canEdit" />-->
+    <!--</label>-->
+<!--</div>-->
+
 <div style="margin-bottom: -0.1em;">
     <ul class="nav nav-tabs">
         <li ng-class="getActiveClass(key)" ng-repeat="(key,value) in allConfigs">
@@ -9,7 +23,7 @@
 <gt-table
           can-remove="config.canRemove"
           can-edit="config.canEdit"
-          can-add="canAdd"
+          can-add="config.canAdd"
           config="config"
           entity="entity"
           context="context"

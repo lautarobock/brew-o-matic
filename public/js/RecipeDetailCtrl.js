@@ -20,7 +20,8 @@
                                $routeParams,
                                $rootScope,
                                Recipe,
-                               $location) {
+                               $location,
+                               alertFactory) {
 
                                
         $scope.BrewHelper = BrewHelper;
@@ -361,6 +362,7 @@
                     title:'Nombre obligatorio',
                     text:'La receta debe tener un nombre'
                 });
+                alertFactory.create('danger','El nombre debe ser obligatorio');
             } else {
                 //var recipe = new Recipe($scope.recipe);
                 if (!$scope.recipe.$save) {
@@ -376,8 +378,10 @@
                         title:'Receta Guardada!',
                         text:'Ya puedes acceder a esta receta desde cualquier lugar!'
                     });
+                    alertFactory.create('success','Receta Guardada!');
                     $location.path('/recipe/edit/' + saved._id) 
                 },function(error) {
+                    alertFactory.create('danger',error.data.error);
                     $scope.notifications.push({
                         type:'danger',
                         title:'Error!',

@@ -3,7 +3,7 @@
         <div class="panel-heading"><strong>Recetas compartidas por {{viewUser.name}} ({{recipes.length}})</strong></div>
         <div class="panel-body" ng-show="recipes.length==0">
           <div class="alert alert-info">
-                El usuario no tiene ninguna receta publicadas!
+                El usuario no tiene <recetas></recetas> publicadas!
           </div>
         </div>
         <div ng-hide="recipes.length==0">

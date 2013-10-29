@@ -3,9 +3,40 @@
     var abm = angular.module("admin",[]);
     
 
-    abm.controller("AdminCtrl",function($scope,$rootScope,$routeParams,AdminUser,AdminRecipe,Bottle,$filter,$location) {
+    abm.controller("AdminCtrl",function($scope,$rootScope,$routeParams,AdminUser,AdminRecipe,Bottle,$filter,$location,AdminAction) {
 
         $scope.allConfigs = {
+            Action:  {
+                data: AdminAction,
+                name: "Acciones",
+                singular: "Accion",
+                canAdd: false,
+                canRemove: false,
+                canEdit: false,
+                orderBy: "date",
+                orderDir: "-",
+                headers: [
+                    {
+                        field:'date',
+                        caption: 'Fecha',
+                        format: function(value) {
+                            return $filter('date')(value,'dd-MM-yyyy HH:mm');
+                        }
+                    },
+                    {
+                        field:'actionType',
+                        caption: 'Accion'
+                    },
+                    {
+                        field:'data',
+                        caption: 'Datos'
+                    },
+                    {
+                        field:'_id',
+                        caption: 'ID'
+                    }
+                ]
+            },
             User:  {
                 data: AdminUser,
                 name: "Usuarios",
@@ -17,7 +48,8 @@
                 headers: [
                     {
                         field:'name',
-                        caption: 'Nombre'
+                        caption: 'Nombre',
+                        valueTemplateUrl: 'partial/admin/abm-value-user-link.html'
                     },
                     {
                         field:'singInDate',

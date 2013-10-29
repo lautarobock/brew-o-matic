@@ -31,7 +31,7 @@
             },
             controller: function($scope) {
                 
-                $scope.sort = sortData($scope.config().orderBy,"");
+                $scope.sort = sortData($scope.config().orderBy,$scope.config().orderDir||"");
                 
                 $scope.getActiveClass = function(tab) {
                     if (tab == $scope.entity()) {
