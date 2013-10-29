@@ -26,7 +26,10 @@
     <table class="table table-striped table-hover">
         <thead>
             <tr>
-                <th ng-click="sort.resort(header.field)" class="gt-sorted"  ng-repeat="header in config().headers" ng-style="{width: header.width+'%'}">
+                <th ng-click="sort.resort(header.field)"
+                    class="gt-sorted"
+                    ng-repeat="header in config().headers"
+                    ng-style="{width: header.width}">
                     {{header.caption}} <span ng-class="sort.orderStyle[header.field]"></span>
                 </th>
                 <th style="width: 1em"></th>

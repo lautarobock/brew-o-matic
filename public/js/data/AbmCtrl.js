@@ -263,11 +263,6 @@
                 });
             }
         };
-        //
-        //$scope.$watch("searchCriteria",function() {
-        //    var pageSize = $scope.config.pageSize || 10;
-        //    $scope.pagesCount = Math.floor($scope.rows.length/pageSize)+1;
-        //});
 
         $scope.page = 1;
         $scope.rows = $scope.data[$scope.entity].query();
