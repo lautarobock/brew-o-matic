@@ -222,13 +222,15 @@
 
 
     
-    index.run(function($rootScope,version,$filter,$location,BrewCalc,env,alertFactory) {
+    index.run(function($rootScope,version,$filter,$location,BrewCalc,env,color,alertFactory) {
 
         $rootScope.BrewCalc = BrewCalc;
 
         $rootScope.version = version;
 
         $rootScope.env = env;
+        
+        $rootScope.color = color;
 
         $rootScope.getAlerts = function() {
             return alertFactory.getAlerts();
