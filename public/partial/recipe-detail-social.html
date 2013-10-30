@@ -1,9 +1,9 @@
 <div class="panel panel-default">
     <div class="panel-heading"><strong>Social</strong></div>
     <div class="panel-body" >
-        <div class="row" >
+        <div class="row" ng-show="recipe.starredBy.length!=0">
             <div style="margin:0 0.5em">
-                <strong>Tu receta le gusta a:</strong>
+                <strong>La receta le gusta a:</strong>
                 <ul>
                     <li ng-repeat="user in recipe.starredBy">
                         {{user.name}}
@@ -11,16 +11,28 @@
                 </ul>
             </div>
         </div>
-        <div class="row" >
+        <div class="row" ng-show="recipe.clonedBy.length!=0">
             <div style="margin:0 0.5em">
                 <strong>Clonada por:</strong>
                 <ul>
-                    <li ng-repeat="user in recipe.clonedBy">
-                        {{user.name}}
+                    <li ng-repeat="clonData in recipe.clonedBy" >
+                        {{clonData.name}}
+                        <a ng-hide="clonData._id == user._id" href="{{sharedUrl(clonData.recipe_id)}}">
+                            <span class="glyphicon glyphicon-link"></span>
+                        </a>
+                        <a ng-show="clonData._id == user._id" href="/#/recipe/edit/{{encodeName(clonData.recipe_id)}}">
+                            <span class="glyphicon glyphicon-link"></span>
+                        </a>
                     </li>
                 </ul>
             </div>
         </div>
-
+        <div class="row" >
+            <div style="margin:0 0.5em">
+                <strong>Clonada de:</strong>
+                <a ng-hide="recipe.cloneFrom.owner == user._id" href="{{sharedUrl(recipe.cloneFrom._id)}}">{{recipe.cloneFrom.NAME}}</a>
+                <a ng-show="recipe.cloneFrom.owner == user._id" href="/#/recipe/edit/{{encodeName(recipe.cloneFrom._id)}}">{{ recipe.cloneFrom.NAME}}</a>
+            </div>
+        </div>
     </div>
 </div>

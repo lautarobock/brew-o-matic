@@ -22,7 +22,8 @@
                 entity: '&',
                 canRemove: '=',
                 canEdit: '=',
-                canAdd: '='
+                canAdd: '=',
+                context: '&'
             },
             templateUrl: 'template/abm.html',
             link : function(scope, element, attrs) {
@@ -30,7 +31,7 @@
             },
             controller: function($scope) {
                 
-                $scope.sort = sortData($scope.config().orderBy,"");
+                $scope.sort = sortData($scope.config().orderBy,$scope.config().orderDir||"");
                 
                 $scope.getActiveClass = function(tab) {
                     if (tab == $scope.entity()) {
@@ -59,7 +60,11 @@
                             return 'template/abm-checkbox.html';
                         } if ( header.type == 'combo' ) {
                             return 'template/abm-combo.html';
+                        } else {
+                            return 'template/abm-input.html';
                         }
+                    } else if (header.valueTemplateUrl) {
+                        return header.valueTemplateUrl;
                     } else if ( header.type == 'checkbox' ) {
                         return 'template/abm-value-checkbox.html';
                     } else {
@@ -75,16 +80,24 @@
                     return angular.copy(row);
                 };
                 
-                $scope.getValue = function(entity,field) {
-                    if ( field.indexOf(".") != -1 ) {
-                        var chain = field.split(".");
+                $scope.getValue = function(entity,header) {
+                    var value;
+                    if ( header.field.indexOf(".") != -1 ) {
+                        var chain = header.field.split(".");
                         
                         for ( var i=0; i<chain.length; i++) {
-                            entity = entity[chain[i]];
+                            if (entity) {
+                                entity = entity[chain[i]];    
+                            }
                         }
-                        return entity;
+                        value = entity||'-';
                     } else {
-                        return entity[field];
+                        value = entity[header.field];
+                    }
+                    if ( header.format ) {
+                        return header.format(value);    
+                    } else {
+                        return value;    
                     }
                 };
                 

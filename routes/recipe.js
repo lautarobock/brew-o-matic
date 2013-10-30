@@ -23,7 +23,7 @@ exports.findAll = function(req, res) {
 };
 
 exports.get = function(req, res) {
-    model.Recipe.findOne({_id:req.params.id}).populate('owner').exec(function(err,results) {
+    model.Recipe.findOne({_id:req.params.id}).populate('owner').populate('cloneFrom').exec(function(err,results) {
         res.send(results);
     });    
 };
@@ -41,6 +41,11 @@ function generateId(name,user_id) {
                 .replace(/#/g,"_Nro_")
                 .replace(/%/g,"_Per_")
                 .replace(/,/g,"_")
+                .replace(/á/g,"a")
+                .replace(/é/g,"e")
+                .replace(/í/g,"i")
+                .replace(/ó/g,"o")
+                .replace(/ú/g,"u")
                 + "-" + user_id + "-" + (new Date()).getTime());
 }
 
@@ -131,11 +136,16 @@ exports.save = function(req, res) {
             notifications.notifyOnPublish(req.body.NAME,id,req.session.user_name,req.session.user_id);
         }
     } else {
-        console.log("FERMENTABLES",req.body.FERMENTABLES);
-        console.log("bottling",req.body.bottling);
+        if ( req.body.owner._id != req.session.user_id ) {
+            res.send(500,{error: "No tiene permisos para modificar esta receta"});
+            return;
+        }
         var id = req.body._id;
         delete req.body._id;
         req.body.owner = req.body.owner._id;
+        if (req.body.cloneFrom) {
+            req.body.cloneFrom = req.body.cloneFrom._id;
+        }
         req.body.modificationDate = new Date();
         //console.log("UPDATE POST", req.body);
 //        model.Recipe.findByIdAndUpdate(id,req.body).populate('owner').exec(callback);
@@ -144,7 +154,7 @@ exports.save = function(req, res) {
                 notifications.notifyOnPublish(req.body.NAME,id,req.session.user_name,req.session.user_id);
                 req.body.publishDate = new Date();
             }
-            model.Recipe.findByIdAndUpdate(id,req.body).populate('owner').exec(callback);
+            model.Recipe.findByIdAndUpdate(id,req.body).populate('owner').populate('cloneFrom').exec(callback);
         });
 
         actions.log(req.session.user_id, "UPDATE_RECIPE","NAME: '"+req.body.NAME+"'. recipe_id: "+id);

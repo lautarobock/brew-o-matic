@@ -130,7 +130,8 @@
                 User,
                 $location,
                 $timeout,
-                sortData) {
+                sortData,
+                alertFactory) {
 
         $scope.sort = sortData("code","-");
         
@@ -173,7 +174,10 @@
         };
         
         $scope.publish = function(recipe) {
-            recipe.$publish({isPublic: true});
+            recipe.$publish({isPublic: true},function() {
+                alertFactory.create('success','La receta ha sido publicada con exito!');
+            });
+
         };
         
     });
