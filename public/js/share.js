@@ -12,10 +12,11 @@
                                         'notification',
                                         'env']);
 
-    share.run(function($rootScope,version,env,$location) {
+    share.run(function($rootScope,version,env,color,$location) {
 
         $rootScope.version = version;
         $rootScope.env = env;
+        $rootScope.color = color;
 
         $rootScope.sharedUrl = function(_id) {
             return 'http://'+$location.host() + ":" + $location.port() + '/share.html#/' + _id;
