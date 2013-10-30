@@ -9,10 +9,8 @@
                                         'comments',
                                         'brew-o-module.controller',
                                         'googlechart',
-                                        'notification']);
-
-    share.constant("version",'0.14');
-    share.constant("env",'dev');
+                                        'notification',
+                                        'env']);
 
     share.run(function($rootScope,version,env,$location) {
 

@@ -17,11 +17,9 @@
                                 'gt.abm',
                                 'admin',
                                 'ui.bootstrap',
-                                'alerts']);
-
-    index.constant("version",'0.14');
-    index.constant("env",'dev');
- 
+                                'alerts',
+                                'env']);
+    
     index.
         config(['$routeProvider', function($routeProvider) {
             $routeProvider.
