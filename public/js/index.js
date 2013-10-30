@@ -19,7 +19,7 @@
                                 'ui.bootstrap',
                                 'alerts']);
 
-    index.constant("version",'0.13');
+    index.constant("version",'0.14');
     index.constant("env",'dev');
  
     index.

@@ -11,7 +11,7 @@
                                         'googlechart',
                                         'notification']);
 
-    share.constant("version",'0.13');
+    share.constant("version",'0.14');
     share.constant("env",'dev');
 
     share.run(function($rootScope,version,env,$location) {
