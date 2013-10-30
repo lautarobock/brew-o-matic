@@ -69,7 +69,7 @@ function filter (req,res,next){
         next();
     } else if ( req.query.google_id ) {
         model.User.findOne({'google_id':req.query.google_id}).exec(function(err,user) {
-            console.log(user);
+            //console.log(user);
             if (user) {
                 var s = req.session;
                 console.log("Set User_Id in session: " + user._id);
@@ -107,7 +107,7 @@ app.put('/recipe/comment',filter,recipe.addComment);
 app.post('/recipe/publish_:id',filter,recipe.publish);
 app.put('/recipe/remove_comment',filter,recipe.deleteComment);
 app.get('/recipe',filter,recipe.findAll);
-app.get('/recipe/stats',recipe.stats);
+app.get('/recipe/stats',filter,recipe.stats);
 app.get('/recipe/by_user_:id',filter,recipe.findByUser);
 app.get('/recipe/:id',recipe.get);
 app.post('/recipe/:id',filter,recipe.save);

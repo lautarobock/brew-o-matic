@@ -175,7 +175,7 @@
         
         $scope.publish = function(recipe) {
             recipe.$publish({isPublic: true},function() {
-                alertFactory.create('success','La receta ha sido publicada con exito!');
+                alertFactory.create('success','La misma ya estara disponible para el resto de los usuarios!','Receta publicada con exito!');
             });
 
         };
