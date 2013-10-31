@@ -53,10 +53,27 @@
         
     });
     
-    index.controller("RecipePublicCtrl", function ($scope,$rootScope,Recipe,User,sortData) {
+    index.controller("RecipePublicCtrl", function ($scope,$rootScope,Recipe,User,sortData,Style) {
 
         $scope.sort = sortData("publishDate","-");
+        
+        $scope.styles = Style.query();
 
+        $scope.filterData = {};
+        $scope.filterData['STYLE.NAME'] = {
+            comparator: 'equal',
+            ignoreCase: false
+        };
+        $scope.filterData['NAME'] = {
+            comparator: 'like',
+            ignoreCase: true
+        };
+        $scope.reset = function() {
+            angular.forEach($scope.filterData,function(val) {
+                delete val.value;
+            });
+        };
+        
         $rootScope.$watch('user',function(user) {
             if ( user ) {
                 $scope.published = Recipe.findPublic();
