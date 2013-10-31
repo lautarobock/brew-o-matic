@@ -4,6 +4,23 @@
 
     gt.constant("PAGE_SIZE",10);
     
+    function getValue(entity,field) {
+        var value;
+        if ( field.indexOf(".") != -1 ) {
+            var chain = field.split(".");
+            
+            for ( var i=0; i<chain.length; i++) {
+                if (entity) {
+                    entity = entity[chain[i]];    
+                }
+            }
+            value = entity||'-';
+        } else {
+            value = entity[field];
+        }
+        return value;
+    }
+    
     gt.filter("pageFilter",function(PAGE_SIZE) {
         return function(rows,page) {
             var from = (page-1)*PAGE_SIZE;
@@ -12,7 +29,53 @@
         };
     });
 
-
+    function convert(value,ic) {
+        if (ic) {
+            return value.toLowerCase();
+        } else {
+            return value;
+        }
+    }
+    
+    var fixedFilters = {
+        equal: function(fieldName,value,ic) {
+            return function(item) {
+                return convert(getValue(item,fieldName),ic) == convert(value,ic) ? 0 : -1;
+            };
+        },
+        like: function(fieldName,value,ic) {
+            return function(item) {
+                var patt = new RegExp(".*"+convert(value,ic)+".*");
+                
+                return patt.exec(convert(getValue(item,fieldName),ic)) != null ? 0 : -1;
+            };
+        }
+    };
+    
+    gt.filter("advanced",function() {
+        return function(rows,filterData) {
+            if ( !rows) return rows;
+            
+            if (!filterData) {
+                return rows;
+            } else {
+                var filters = [];
+                angular.forEach(filterData,function(filter,field){
+                    if (filter.value) {
+                        var f = fixedFilters[filter.comparator](field,filter.value,filter.ignoreCase);
+                        filters.push(f);
+                    }
+                });
+                
+                angular.forEach(filters,function(f) {
+                    rows = util.Arrays.filter(rows,f);
+                });
+                return rows;
+            }
+            
+        };
+    });
+    
     gt.directive('gtTable', function($compile, $rootScope, sortData, PAGE_SIZE) {
         return {
             restrict : 'EA',
