@@ -35,8 +35,8 @@
                     <option ng-repeat="form in hopForms">{{form.name}}</option>
                 </select>
             </td>
-            <td>
-                <input ng-init="amountGrs=hop.AMOUNT*1000" ng-change="hop.AMOUNT=amountGrs/1000;changeHop()" class="form-control input-sm" type="number" step="1" ng-model="amountGrs" placeholder="Kg"/>
+            <td ng-controller="RecipeDetailHopAmountCtrl">
+                <input ng-change="hop.AMOUNT=amountGrs/1000;changeHop()" class="form-control input-sm" type="number" step="1" ng-model="amountGrs" placeholder="Kg"/>
             </td>
             <td><span class="form-control input-sm gt-calculated">{{hopGramsPerLiter(hop,recipe.BATCH_SIZE)|number:2}}</span></td>
             <td><span class="form-control input-sm gt-calculated">{{hopPercentage(hop,recipe.totalHop)|number:2}}</span></td>
