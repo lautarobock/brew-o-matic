@@ -1,6 +1,14 @@
 (function() {
     var index = angular.module('index');
 
+    index.controller("RecipeDetailHopAmountCtrl",function($scope) {
+        
+        $scope.$watch("hop.AMOUNT",function() {
+            $scope.amountGrs=$scope.hop.AMOUNT*1000;
+        });
+        
+        $scope.amountGrs=$scope.hop.AMOUNT*1000;
+    });
     
     index.controller("RecipeDetailCtrl",
                      function (

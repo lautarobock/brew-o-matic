@@ -99,3 +99,20 @@ exports.testRemoveObjectByComparator = function(test) {
     
     test.done();
 };
+
+exports.testFindObject = function(test) {
+    var name = 'Jose';
+    var compByName = function(item) {
+        if ( item.name === name) {
+            return 0;
+        } else {
+            return -1;
+        }
+    };
+    
+    var array = [{name:'a'},{name:'b'},{name:'Jose'},{name:'d'}]
+    var filtered = util.Arrays.filter(array,compByName);
+    test.equal(filtered.length,1);
+    
+    test.done();
+};

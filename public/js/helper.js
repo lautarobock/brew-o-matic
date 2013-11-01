@@ -151,6 +151,9 @@
                 }
                 var diff = M-m;
                 var p = (g-m)/diff; //proporcion
+                if ( p == Infinity || isNaN(p) ) {
+                    p = 0;
+                }
                 
                 var valm;
                 var valM;
