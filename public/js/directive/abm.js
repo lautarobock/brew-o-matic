@@ -219,4 +219,42 @@
         };
     });
 
+    gt.factory("sortData",function() {
+        return function(startField, startAsc) {
+            var data = {
+                asc: startAsc,
+                field: startField,
+                orderStyle:{},
+                orderBy: function() {
+                    return this.asc+this.field;
+                },
+                resort: function(field) {
+                    if ( field == this.field) {
+                        if (this.asc == '-' ) {
+                            this.asc = '';
+                            this.orderStyle[field] = 'glyphicon glyphicon-chevron-up';
+                        } else {
+                            this.asc = '-';
+                            this.orderStyle[field] = 'glyphicon glyphicon-chevron-down';
+                        }
+                    } else {
+                        angular.forEach(this.orderStyle, function(style ,key) {
+                            data.orderStyle[key] = '';
+                        });
+                        this.orderStyle[field] = 'glyphicon glyphicon-chevron-up';
+                        this.field = field;
+                        this.asc = '';
+                    }
+                }
+            };
+            if ( startAsc == '-') {
+                data.orderStyle[startField] = 'glyphicon glyphicon-chevron-down';
+            } else {
+                data.orderStyle[startField] = 'glyphicon glyphicon-chevron-up';
+            }
+
+            return data;
+        };
+    });
+
 })();

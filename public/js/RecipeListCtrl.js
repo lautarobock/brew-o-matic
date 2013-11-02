@@ -37,7 +37,7 @@
             link: '#',
             title: 'Recetas Favoritas'
         }];
-        
+
         $rootScope.$watch('user',function(user) {
             if ( user ) {
                 $scope.published = Recipe.findPublic();
@@ -102,43 +102,6 @@
         };
     });
 
-    index.factory("sortData",function() {
-        return function(startField, startAsc) {
-            var data = {
-                asc: startAsc,
-                field: startField,
-                orderStyle:{},
-                orderBy: function() {
-                    return this.asc+this.field;
-                },
-                resort: function(field) {
-                    if ( field == this.field) {
-                        if (this.asc == '-' ) {
-                            this.asc = '';
-                            this.orderStyle[field] = 'glyphicon glyphicon-chevron-up';
-                        } else {
-                            this.asc = '-';
-                            this.orderStyle[field] = 'glyphicon glyphicon-chevron-down';
-                        }
-                    } else {
-                        angular.forEach(this.orderStyle, function(style ,key) {
-                            data.orderStyle[key] = '';
-                        });
-                        this.orderStyle[field] = 'glyphicon glyphicon-chevron-up';
-                        this.field = field;
-                        this.asc = '';
-                    }
-                }
-            };
-            if ( startAsc == '-') {
-                data.orderStyle[startField] = 'glyphicon glyphicon-chevron-down';
-            } else {
-                data.orderStyle[startField] = 'glyphicon glyphicon-chevron-up';
-            }
-
-            return data;
-        };
-    });
 
     index.controller("RecipeListCtrl", function (
                 $scope,
@@ -151,7 +114,7 @@
                 alertFactory) {
 
         $scope.sort = sortData("code","-");
-        
+
         $scope.showTags = function(recipe) {
             if (recipe.tags && recipe.tags.length != 0) {
                 var txt = "- Tags: [" + recipe.tags[0];

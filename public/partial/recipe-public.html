@@ -108,8 +108,9 @@
                 </td>
                 <td>{{ recipe.publishDate|date:'dd-MM-yyyy' }}</td>
                 <td title="{{recipe.NAME}}">
-                    <a ng-hide="recipe.owner._id == user._id" href="{{sharedUrl(recipe._id)}}">{{ recipe.NAME|limitText:30}}</a>
-                    <a ng-show="recipe.owner._id == user._id" href="#/recipe/edit/{{encodeName(recipe._id)}}">{{ recipe.NAME|limitText:30}}</a>
+                    <a ng-hide="recipe.owner._id == user._id" href="{{sharedUrl(recipe._id)}}">{{ recipe.NAME|limitText:100}}</a>
+                    <a ng-show="recipe.owner._id == user._id" href="#/recipe/edit/{{encodeName(recipe._id)}}">{{ recipe.NAME|limitText:100}}</a>
+                    <show-tags tags="recipe.tags"></show-tags>
                 </td>
                 <td>{{ recipe.STYLE.NAME }}</td>
                 <td>{{ recipe.OG  }}</td>

@@ -29,7 +29,8 @@
                                $rootScope,
                                Recipe,
                                $location,
-                               alertFactory) {
+                               alertFactory,
+                               TagColor) {
 
                                
         $scope.BrewHelper = BrewHelper;
@@ -39,8 +40,10 @@
             title: 'Home'
         },{
             link: '#',
-            title: 'Recipe'
+            title: 'Receta'
         }];
+
+        $scope.color = TagColor;
 
         $scope.grains = Grain.query();
 
@@ -424,6 +427,14 @@
         
                         $scope.changeYeast();
                         //$scope.$emit("recipeLoaded");
+
+                        $rootScope.breadcrumbs = [{
+                            link: '#',
+                            title: 'Home'
+                        },{
+                            link: '#',
+                            title: 'Receta - ' + $scope.recipe.NAME
+                        }];
                     });
                 } else {
                     $scope.recipe = new Recipe({
@@ -509,7 +520,9 @@
                 if ( !$scope.recipe.tags) {
                     $scope.recipe.tags = [];
                 }
-                $scope.recipe.tags.push($scope.recipe.newTag);
+                if ( $scope.recipe.tags.indexOf($scope.recipe.newTag) == -1) {
+                    $scope.recipe.tags.push($scope.recipe.newTag);
+                }
                 $scope.recipe.newTag = '';
             }
         };

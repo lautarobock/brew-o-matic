@@ -88,3 +88,9 @@ a {
 .gt-tagbox:focus {
     border:0 !important;
 }
+
+.btn-yellow {
+    color: #fff;
+    background-color: #DDDD00;
+    border-color: #DDDD00;
+}

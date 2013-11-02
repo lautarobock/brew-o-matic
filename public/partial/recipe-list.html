@@ -70,14 +70,10 @@
         <tr ng-repeat="recipe in recipes | filter:searchCriteria | orderBy:sort.orderBy()">
             <td>
                 <a href="#/recipe/edit/{{encodeName(recipe._id)}}">{{ recipe.code }}</a>
-            </td>            
-            <!--<td>-->
-                <!--<a href="#/recipe/edit/{{encodeName(recipe._id)}}">#{{ $index+1 }}</a>-->
-                <!--&lt;!&ndash;<span class="glyphicon glyphicon-check" title="Esta receta es publica, puede ser vista por todos los usuarios" ng-show="recipe.isPublic"/>&ndash;&gt;-->
-            <!--</td>-->
-            <!--<td>{{ recipe.date|date:'dd-MM-yyyy' }}</td>-->
-            <td title="{{recipe.NAME}} {{showTags(recipe)}}">
-                <a href="#/recipe/edit/{{encodeName(recipe._id)}}">{{ recipe.NAME|limitText:40}}</a>
+            </td>
+            <td title="{{recipe.NAME}}">
+                <a href="#/recipe/edit/{{encodeName(recipe._id)}}">{{ recipe.NAME|limitText:100}}</a>
+                <show-tags tags="recipe.tags"></show-tags>
             </td>
             <td>{{ recipe.STYLE.NAME }}</td>
             <td>{{ recipe.OG  }}</td>

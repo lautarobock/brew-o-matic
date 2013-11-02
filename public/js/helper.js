@@ -2,28 +2,46 @@
     
     var helper = angular.module("helper",[]);
 
-    //Agregados en la version 1.2.0-RC-1
-    //helper.directive('ngFocus', ['$parse', function($parse) {
-    //    return function(scope, element, attr) {
-    //        var fn = $parse(attr['ngFocus']);
-    //        element.bind('focus', function(event) {
-    //            scope.$apply(function() {
-    //                fn(scope, {$event:event});
-    //            });
-    //        });
-    //    }
-    //}]);
-    //
-    //helper.directive('ngBlur', ['$parse', function($parse) {
-    //    return function(scope, element, attr) {
-    //        var fn = $parse(attr['ngBlur']);
-    //        element.bind('blur', function(event) {
-    //            scope.$apply(function() {
-    //                fn(scope, {$event:event});
-    //            });
-    //        });
-    //    }
-    //}]);
+    helper.directive('showTags', function($compile,TagColor) {
+        return {
+            restrict : 'EA',
+            replace : true,
+            scope : {
+                tags: '&',
+                removable: '@'
+            },
+            template: "<button style='margin:2px' ng-click='removeTag($index)' ng-repeat='tag in tags() track by $index' type='button' class='btn btn-xs' ng-class='color(tag)'>"
+                    + "{{tag}}"
+                    + "<span ng-show='removable' class='glyphicon glyphicon-remove'></span>"
+                    + "</button>",
+            controller: function($scope) {
+                $scope.color = TagColor;
+
+                $scope.removeTag = function($index) {
+                    if ( $scope.removable ) {
+                        $scope.tags().splice($index,1);
+                    }
+                };
+            }
+        };
+    });
+
+    helper.factory("TagColor",function() {
+        var colorsStyles = ['btn-primary','btn-success','btn-yellow','btn-info','btn-warning','btn-danger'];
+        var colorPos = 0;
+        var colorsTags = {};
+
+        return function(tag) {
+            if ( colorsTags[tag] ) {
+                return colorsTags[tag];
+            } else {
+                var ret=colorsStyles[colorPos++];
+                colorPos %= colorsStyles.length;
+                colorsTags[tag] = ret;
+                return ret;
+            }
+        };
+    });
 
     helper.factory("BrewCalc",function(BrewHelper) {
         return {
