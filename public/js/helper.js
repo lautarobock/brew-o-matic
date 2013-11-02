@@ -8,7 +8,8 @@
             replace : true,
             scope : {
                 tags: '&',
-                removable: '@'
+                removable: '@',
+                itemClick: '&'
             },
             template: "<button style='margin:2px' ng-click='removeTag($index)' ng-repeat='tag in tags() track by $index' type='button' class='btn btn-xs' ng-class='color(tag)'>"
                     + "{{tag}}"
@@ -20,6 +21,8 @@
                 $scope.removeTag = function($index) {
                     if ( $scope.removable ) {
                         $scope.tags().splice($index,1);
+                    } else if ( $scope.itemClick ) {
+                        $scope.itemClick()($scope.tags()[$index]);
                     }
                 };
             }

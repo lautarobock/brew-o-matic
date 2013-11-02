@@ -53,13 +53,15 @@
         
     });
     
-    index.controller("RecipePublicCtrl", function ($scope,$rootScope,Recipe,User,sortData,Style,Tag) {
+    index.controller("RecipePublicCtrl", function ($scope,$rootScope,$location,Recipe,User,sortData,Style,Tag) {
 
         $scope.sort = sortData("publishDate","-");
         
         $scope.styles = Style.query();
 
         $scope.tags = Tag.query();
+
+        $scope.showAd=false;
 
         $scope.filterData = {};
         $scope.filterData['STYLE.NAME'] = {
@@ -75,6 +77,26 @@
             type: 'list',
             ignoreCase: true
         };
+        angular.forEach($scope.filterData,function(f,key){
+            if ( $location.$$search[key] ) {
+                $scope.showAd=true;
+                if (f.type == 'list' ) {
+                    $scope.filterData[key].value = $location.$$search[key].split(",");
+                } else {
+                    $scope.filterData[key].value = $location.$$search[key];
+                }
+
+            }
+        });
+        $scope.filterByTag = function(tag) {
+//            $location.$$search['tags']= tag;
+//            $location.path('/public?tags=' + tag);
+            window.location.href = '/#/public?tags=' + tag;
+        };
+//        if ( $location.$$search.tags ) {
+//            $scope.showAd=true;
+//            $scope.filterData['tags'].value = $location.$$search.tags.split(",");
+//        }
         $scope.reset = function() {
             angular.forEach($scope.filterData,function(val) {
                 delete val.value;

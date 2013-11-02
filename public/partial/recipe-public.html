@@ -27,7 +27,7 @@
                         when="{'0':'No se ha encontrado ningun resultado con su busqueda','one': '1 receta encontrada','other':'{} recetas encontradas'}"></ng-pluralize>
             </div>
             <div class="col-md-2">
-                <button ng-init="showAd=false" ng-click="showAd=!showAd;reset()" type="button" class="pull-right btn btn-default btn-xs">avanzada</button>
+                <button ng-click="showAd=!showAd;reset()" type="button" class="pull-right btn btn-default btn-xs">avanzada</button>
             </div>
         </div>
         <div class="panel panel-default" ng-show="showAd" style="margin: 0 1em">
@@ -119,9 +119,11 @@
                 <td title="{{recipe.NAME}}">
                     <a ng-hide="recipe.owner._id == user._id" href="{{sharedUrl(recipe._id)}}">{{ recipe.NAME|limitText:100}}</a>
                     <a ng-show="recipe.owner._id == user._id" href="#/recipe/edit/{{encodeName(recipe._id)}}">{{ recipe.NAME|limitText:100}}</a>
-                    <show-tags tags="recipe.tags"></show-tags>
+                    <show-tags item-click="filterByTag" tags="recipe.tags"></show-tags>
                 </td>
-                <td>{{ recipe.STYLE.NAME }}</td>
+                <td>
+                    <a title="Busca todas las recetas del mismo estilo" ng-href="/#/public?STYLE.NAME={{ recipe.STYLE.NAME }}">{{ recipe.STYLE.NAME }}</a>
+                </td>
                 <td>{{ recipe.OG  }}</td>
                 <td>{{ recipe.ABV  }}</td>
                 <td>{{ recipe.CALCIBU }}</td>
