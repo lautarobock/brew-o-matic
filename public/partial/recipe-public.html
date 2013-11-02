@@ -46,7 +46,6 @@
                     </div>
                     <div class="col-lg-4">
                         <label for="filter.style">Estilo</label>
-                        <!--<input type="text" class="form-control input-sm" id="filter.style" placeholder="Estilo" ng-model="filterData['STYLE.NAME'].value">-->
                         <div class="input-group">
                             <select class="form-control input-sm" id="filter.style" ng-model="filterData['STYLE.NAME'].value">
                                 <option ng-repeat="style in styles">{{style.name}}</option>
@@ -56,6 +55,18 @@
                                     <span class="glyphicon glyphicon-remove"></span>
                                 </button>
                             </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <label for="tags">Tags</label>
+                        <div style="display:inline-table;height: 0; padding-top: 3px;padding-top: 3px;margin-bottom: 0; margin-top: 0" class="form-control">
+                            <show-tags removable="true" tags="filterData['tags'].value"></show-tags>
+                            <input placeholder="Ingrese tag" ng-model="newTag" type="text" style="margin-bottom: 0; margin-top: 0;width: 200px" class="gt-tagbox" ng-keydown="addTag($event)" list="tags"/>
+                            <datalist id="tags">
+                                <option ng-repeat="tag in tags" value="{{tag._id}}">
+                                    {{tag._id}}
+                                </option>
+                            </datalist>
                         </div>
                     </div>
                 </div>
@@ -93,8 +104,6 @@
                 <th style="width:10em" ng-click="sort.resort('owner.name')" class="gt-sorted">
                     Compartida por <span ng-class="sort.orderStyle['owner.name']"></span>
                 </th>
-                <!--<th style="width:1em"></th>-->
-                <!--<th style="width:1em"></th>-->
                 <th style="width:1em"></th>
             </tr>
           </thead>
@@ -114,7 +123,6 @@
                 </td>
                 <td>{{ recipe.STYLE.NAME }}</td>
                 <td>{{ recipe.OG  }}</td>
-                <!--<td>{{ recipe.FG  }}</td>-->
                 <td>{{ recipe.ABV  }}</td>
                 <td>{{ recipe.CALCIBU }}</td>
                 <td>{{ recipe.BATCH_SIZE }}</td>
@@ -125,12 +133,6 @@
                         <span ng-hide="recipe.owner._id == user._id">{{ recipe.owner.name }}</span>
                     </a>
                 </td>
-                <!--<td>-->
-                    <!--<a ng-show="recipe.owner._id == user._id" href="#/recipe/edit/{{encodeName(recipe._id)}}" type="button" class="btn btn-primary btn-xs">editar</a>-->
-                <!--</td>-->
-                <!--<td>-->
-                    <!--<a target="_blank" href="{{sharedUrl(recipe._id)}}"><span class="glyphicon glyphicon-link"></a></span>-->
-                <!--</td>-->
                 <td>
                     <a href="#/recipe/clone/{{encodeName(recipe._id)}}" type="button" class="btn btn-default btn-xs">clonar</a>
                 </td>

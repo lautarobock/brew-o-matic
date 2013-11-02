@@ -514,7 +514,7 @@
             must: 0,
             co2: 0
         };
-        
+
         $scope.addTag = function($event) {
             if ( $event.keyCode == 13) {
                 if ( !$scope.recipe.tags) {
@@ -526,7 +526,7 @@
                 $scope.recipe.newTag = '';
             }
         };
-        
+
         $scope.bottledLiters = function() {
             return BrewCalc.bottledLiters($scope.volumeByCarbonatationType,$scope.recipe.bottling.bottles);
         };

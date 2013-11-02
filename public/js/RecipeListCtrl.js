@@ -53,11 +53,13 @@
         
     });
     
-    index.controller("RecipePublicCtrl", function ($scope,$rootScope,Recipe,User,sortData,Style) {
+    index.controller("RecipePublicCtrl", function ($scope,$rootScope,Recipe,User,sortData,Style,Tag) {
 
         $scope.sort = sortData("publishDate","-");
         
         $scope.styles = Style.query();
+
+        $scope.tags = Tag.query();
 
         $scope.filterData = {};
         $scope.filterData['STYLE.NAME'] = {
@@ -66,6 +68,11 @@
         };
         $scope.filterData['NAME'] = {
             comparator: 'like',
+            ignoreCase: true
+        };
+        $scope.filterData['tags'] = {
+            comparator: 'in',
+            type: 'list',
             ignoreCase: true
         };
         $scope.reset = function() {
@@ -100,6 +107,20 @@
                 $rootScope.user.favorites = user.favorites;
             });
         };
+
+        $scope.newTag = '';
+        $scope.addTag = function($event) {
+            if ( $event.keyCode == 13) {
+                if ( !$scope.filterData['tags'].value ) {
+                    $scope.filterData['tags'].value = [];
+                }
+                if ( $scope.filterData['tags'].value.indexOf($scope.newTag) == -1) {
+                    $scope.filterData['tags'].value.push($scope.newTag);
+                }
+                $scope.newTag = '';
+            }
+        };
+
     });
 
 

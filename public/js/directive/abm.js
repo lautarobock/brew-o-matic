@@ -49,6 +49,23 @@
                 
                 return patt.exec(convert(getValue(item,fieldName),ic)) != null ? 0 : -1;
             };
+        },
+        in: function(fieldName,value,ic,type) {
+            return function(item) {
+                if ( !type || type == 'value') {
+                    return value.indexOf(getValue(item,fieldName)) != -1  ? 0 : -1;
+                } else {
+                    var list = getValue(item,fieldName);
+                    var ret = 0;
+                    angular.forEach(value,function(l) {
+                        if ( list.indexOf(l) == -1 ) {
+                            ret = -1;
+                        }
+                    });
+                    return ret;
+                }
+
+            };
         }
     };
     
@@ -61,8 +78,8 @@
             } else {
                 var filters = [];
                 angular.forEach(filterData,function(filter,field){
-                    if (filter.value) {
-                        var f = fixedFilters[filter.comparator](field,filter.value,filter.ignoreCase);
+                    if (filter.type != 'list' && filter.value || (filter.type == 'list' && filter.value && filter.value.length != 0) ) {
+                        var f = fixedFilters[filter.comparator](field,filter.value,filter.ignoreCase,filter.type);
                         filters.push(f);
                     }
                 });
