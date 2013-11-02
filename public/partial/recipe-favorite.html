@@ -66,8 +66,10 @@
                     <a ng-hide="user.favorites.indexOf(recipe._id) != -1" href="" type="button" class="glyphicon glyphicon-star-empty" ng-click="addFavorites(recipe)"></a>
                     <a ng-show="user.favorites.indexOf(recipe._id) != -1" href="" type="button" class="glyphicon glyphicon-star" ng-click="removeFavorites(recipe)"></a>
                 </td>
-                <!--<td>{{ recipe.date|date:'dd-MM-yyyy' }}</td>-->
-                <td title="{{recipe.NAME}}"><a href="{{sharedUrl(recipe._id)}}">{{ recipe.NAME|limitText:30}}</a></td>
+                <td title="{{recipe.NAME}}">
+                    <a href="{{sharedUrl(recipe._id)}}">{{ recipe.NAME|limitText:100}}</a>
+                    <show-tags tags="recipe.tags"></show-tags>
+                </td>
                 <td>{{ recipe.STYLE.NAME }}</td>
                 <td>{{ recipe.OG  }}</td>
                 <!--<td>{{ recipe.FG  }}</td>-->

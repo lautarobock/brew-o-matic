@@ -37,7 +37,7 @@
             link: '#',
             title: 'Recetas Favoritas'
         }];
-        
+
         $rootScope.$watch('user',function(user) {
             if ( user ) {
                 $scope.published = Recipe.findPublic();
@@ -53,11 +53,15 @@
         
     });
     
-    index.controller("RecipePublicCtrl", function ($scope,$rootScope,Recipe,User,sortData,Style) {
+    index.controller("RecipePublicCtrl", function ($scope,$rootScope,$location,Recipe,User,sortData,Style,Tag) {
 
         $scope.sort = sortData("publishDate","-");
         
         $scope.styles = Style.query();
+
+        $scope.tags = Tag.query();
+
+        $scope.showAd=false;
 
         $scope.filterData = {};
         $scope.filterData['STYLE.NAME'] = {
@@ -68,6 +72,31 @@
             comparator: 'like',
             ignoreCase: true
         };
+        $scope.filterData['tags'] = {
+            comparator: 'in',
+            type: 'list',
+            ignoreCase: true
+        };
+        angular.forEach($scope.filterData,function(f,key){
+            if ( $location.$$search[key] ) {
+                $scope.showAd=true;
+                if (f.type == 'list' ) {
+                    $scope.filterData[key].value = $location.$$search[key].split(",");
+                } else {
+                    $scope.filterData[key].value = $location.$$search[key];
+                }
+
+            }
+        });
+        $scope.filterByTag = function(tag) {
+//            $location.$$search['tags']= tag;
+//            $location.path('/public?tags=' + tag);
+            window.location.href = '/#/public?tags=' + tag;
+        };
+//        if ( $location.$$search.tags ) {
+//            $scope.showAd=true;
+//            $scope.filterData['tags'].value = $location.$$search.tags.split(",");
+//        }
         $scope.reset = function() {
             angular.forEach($scope.filterData,function(val) {
                 delete val.value;
@@ -100,45 +129,22 @@
                 $rootScope.user.favorites = user.favorites;
             });
         };
-    });
 
-    index.factory("sortData",function() {
-        return function(startField, startAsc) {
-            var data = {
-                asc: startAsc,
-                field: startField,
-                orderStyle:{},
-                orderBy: function() {
-                    return this.asc+this.field;
-                },
-                resort: function(field) {
-                    if ( field == this.field) {
-                        if (this.asc == '-' ) {
-                            this.asc = '';
-                            this.orderStyle[field] = 'glyphicon glyphicon-chevron-up';
-                        } else {
-                            this.asc = '-';
-                            this.orderStyle[field] = 'glyphicon glyphicon-chevron-down';
-                        }
-                    } else {
-                        angular.forEach(this.orderStyle, function(style ,key) {
-                            data.orderStyle[key] = '';
-                        });
-                        this.orderStyle[field] = 'glyphicon glyphicon-chevron-up';
-                        this.field = field;
-                        this.asc = '';
-                    }
+        $scope.newTag = '';
+        $scope.addTag = function($event) {
+            if ( $event.keyCode == 13) {
+                if ( !$scope.filterData['tags'].value ) {
+                    $scope.filterData['tags'].value = [];
                 }
-            };
-            if ( startAsc == '-') {
-                data.orderStyle[startField] = 'glyphicon glyphicon-chevron-down';
-            } else {
-                data.orderStyle[startField] = 'glyphicon glyphicon-chevron-up';
+                if ( $scope.filterData['tags'].value.indexOf($scope.newTag) == -1) {
+                    $scope.filterData['tags'].value.push($scope.newTag);
+                }
+                $scope.newTag = '';
             }
-
-            return data;
         };
+
     });
+
 
     index.controller("RecipeListCtrl", function (
                 $scope,
@@ -151,7 +157,7 @@
                 alertFactory) {
 
         $scope.sort = sortData("code","-");
-        
+
         $scope.showTags = function(recipe) {
             if (recipe.tags && recipe.tags.length != 0) {
                 var txt = "- Tags: [" + recipe.tags[0];

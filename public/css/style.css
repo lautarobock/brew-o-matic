@@ -88,3 +88,27 @@ a {
 .gt-tagbox:focus {
     border:0 !important;
 }
+
+.btn-yellow {
+    color: #fff;
+    background-color: #DDDD00;
+    border-color: #DDDD00;
+}
+
+.btn-yellow:hover {
+    color: #fff !important;
+    background-color: #d0d000 !important;
+    border-color: #d0d000 !important;
+}
+
+.btn-brown {
+    color: #fff;
+    background-color: #a52a2a;
+    border-color: #a52a2a;
+}
+
+.btn-brown:hover {
+    color: #fff !important;
+    background-color: #951a1a !important;
+    border-color: #951a1a !important;
+}
