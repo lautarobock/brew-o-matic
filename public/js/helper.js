@@ -27,7 +27,7 @@
     });
 
     helper.factory("TagColor",function() {
-        var colorsStyles = ['btn-primary','btn-success','btn-yellow','btn-info','btn-warning','btn-danger'];
+        var colorsStyles = ['btn-primary','btn-success','btn-yellow','btn-info','btn-warning','btn-danger','btn-brown'];
         var colorPos = 0;
         var colorsTags = {};
 
