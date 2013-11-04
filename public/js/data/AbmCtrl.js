@@ -11,7 +11,7 @@
                 name: "Estilos",
                 singular: "Estilo",
                 orderBy: "name",
-                pageSize: 50,
+                pageSize: 10,
                 headers: [
                     {
                         field:'name',
