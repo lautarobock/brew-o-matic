@@ -22,9 +22,9 @@
     }
     
     gt.filter("pageFilter",function(PAGE_SIZE) {
-        return function(rows,page) {
-            var from = (page-1)*PAGE_SIZE;
-            var to = from + PAGE_SIZE;
+        return function(rows,page,pageSize) {
+            var from = (page-1)*(pageSize||PAGE_SIZE);
+            var to = from + (pageSize||PAGE_SIZE);
             return rows.slice(from,to);
         };
     });

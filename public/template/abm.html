@@ -36,7 +36,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-init="value=copy(row)" ng-repeat="row in rows | orderBy:sort.orderBy() | filter:searchCriteria | pageFilter:page ">
+            <tr ng-init="value=copy(row)" ng-repeat="row in rows | orderBy:sort.orderBy() | filter:searchCriteria | pageFilter:page:pageSize() ">
                 <td ng-repeat="header in config().headers">
                     <ng-include src="valueTemplate(row,header)"></ng-include>
                 </td>
@@ -53,7 +53,8 @@
         </tbody>
     </table>
     <div class="container">
-        <pager total-items="(rows | filter:searchCriteria).length" page="page" items-per-page="pageSize()"></pager>
+        <!--<pager total-items="(rows | filter:searchCriteria).length" page="page" items-per-page="pageSize()"></pager>-->
+        <pagination boundary-links="true" total-items="(rows | filter:searchCriteria).length" items-per-page="pageSize()" page="page" max-size="20" class="pagination-small"></pagination>
         <pre>Pagina: {{page}} / {{getPageCount((rows | filter:searchCriteria).length)}}
 Items: {{(rows | filter:searchCriteria).length}}</pre>
     </div>
