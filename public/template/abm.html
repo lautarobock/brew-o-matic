@@ -52,11 +52,21 @@
             </tr>
         </tbody>
     </table>
+    <script id="template/pagination/pagination.html" type="text/ng-template">
+        <div>
+            <ul class="pagination">
+              <li ng-repeat="page in pages" ng-class="{active: page.active, disabled: page.disabled}">
+                <a ng-click="selectPage(page.number)">{{page.text}}</a>
+              </li>
+            </ul>
+            <pre>{{(page-1)*itemsPerPage + 1}} - <span ng-hide="page == pages.length-4">{{page*itemsPerPage}}</span><span ng-show="page == pages.length-4">{{totalItems}}</span> de {{totalItems}}</pre>
+        </div>
+    </script>
     <div class="container">
         <!--<pager total-items="(rows | filter:searchCriteria).length" page="page" items-per-page="pageSize()"></pager>-->
         <pagination boundary-links="true" total-items="(rows | filter:searchCriteria).length" items-per-page="pageSize()" page="page" max-size="20" class="pagination-small"></pagination>
-        <pre>Pagina: {{page}} / {{getPageCount((rows | filter:searchCriteria).length)}}
-Items: {{(rows | filter:searchCriteria).length}}</pre>
+<!--        <pre>Pagina: {{page}} / {{getPageCount((rows | filter:searchCriteria).length)}}
+Items: {{(page-1)*pageSize() + 1}} - {{(page-1)*pageSize() + pageSize()}} de {{(rows | filter:searchCriteria).length}}</pre>-->
     </div>
     <div class="panel-body">
         <div class="col-md-12" >
