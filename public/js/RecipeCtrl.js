@@ -2,6 +2,36 @@
 
     var module = angular.module("brew-o-module.controller",[]);
 
+    
+    
+    module.controller("RecipeLogCtrl",function($scope,BrewCalc,BrewHelper) {
+        
+        
+        
+        function addMinutes(date, minutes) {
+            date.setMinutes(date.getMinutes()+minutes);
+            return date;
+        }
+        
+        $scope.pendingLogs = [{
+            time: new Date(),
+            delay: 0,
+            detail: 'Encender Fuego',
+            type: 'START'
+        },{
+            time: addMinutes(new Date(),40),
+            delay: 40,
+            detail: 'Encender Fuego',
+            type: 'START'
+        }];
+        
+        $scope.push = function(log) {
+            if ( !$scope.recipe.logs ) $scope.recipe.logs = [];
+            $scope.recipe.logs.push(log);
+            util.Arrays.remove($scope.pendingLogs,log);
+        };
+    });
+    
     module.controller("RecipeMashCtrl",function($scope,BrewCalc,BrewHelper) {
         
         
@@ -336,7 +366,7 @@
      * TabControler
      */
     module.controller("RecipeTabCtrl",function($scope) {
-        $scope.sortTabs = ['main','mash','boil','fermentation','bottling'];
+        $scope.sortTabs = ['main','mash','boil','fermentation','bottling','log'];
         $scope.tabs = {
             main: {
                 title: 'Receta',
@@ -357,6 +387,10 @@
             bottling: {
                 title: 'Embotellado',
                 template: 'bottling'
+            },
+            log: {
+                title: 'Bitacora',
+                template: 'log'
             }};
 
         $scope.selectedTab = 'main';

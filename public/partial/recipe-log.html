@@ -1,0 +1,70 @@
+<div ng-controller="RecipeLogCtrl">
+    <div class="col-md-10">
+        <div class="panel panel-default">
+            <div class="panel-body" >
+                <table class="table table-condensed table-hover" ng-show="recipe.FERMENTABLES.FERMENTABLE.length != 0" style="margin-top: 1em;">
+                    <thead>
+                      <tr>
+                        <th style="width: 10em">Fecha y Hora</th>
+                        <th>Detalle</th>
+                        <th style="width:2%"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="log in recipe.logs">
+                        <td>{{log.time|date:'dd-MM-yyyy HH:mm'}}</td>
+                        <td>{{log.detail}}</td>
+                        <td>
+                            <span class="glyphicon glyphicon-remove"/>
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>                
+                <div class="panel panel-default" style="height: 150px;">
+                    <div class="panel-body" >
+                    </div>
+                </div>
+                <table class="table table-condensed table-hover" ng-show="recipe.FERMENTABLES.FERMENTABLE.length != 0" style="margin-top: 1em;">
+                    <thead style="visibility:hidden">
+                      <tr>
+                        <th style="width: 10em">Fecha y Hora</th>
+                        <th>Detalle</th>
+                        <th style="width:2%"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="log in pendingLogs">
+                        <td>{{log.time|date:'dd-MM-yyyy HH:mm'}}</td>
+                        <td>{{log.detail}}</td>
+                        <td>
+                            <button ng-click="push(log)" type="button" class="btn btn-default btn-xs">
+                                <span class="glyphicon glyphicon-hand-up"/>
+                            </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>                
+            </div>
+        </div>
+        <div style="overflow: hidden;margin-bottom: 1em;">
+            <div class="pull-left">
+                <a href="#/recipe/" type="button" class="btn btn-link glyphicon glyphicon-chevron-left"> Volver al listado</a>
+            </div>
+            <div class="pull-right">
+                <a href="#/recipe/" type="button" class="btn btn-default">Cancelar</a>
+                <button ng-click="save()" type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+        <div ng-repeat="notification in notifications">
+            <div class="alert alert-{{notification.type}} alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>{{notification.title}}</strong>
+                {{notification.text}}
+            </div>
+        </div>            
+    </div>
+    <div class="col-md-2" >
+        <ng-include src="'partial/recipe-detail-indicators.html'"></ng-include>
+        <ng-include src="'partial/recipe-detail-social.html'"></ng-include>
+    </div>
+</div>
