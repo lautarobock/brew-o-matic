@@ -19,7 +19,7 @@
                                 'ui.bootstrap',
                                 'alerts',
                                 'env']);
-    
+
     index.
         config(['$routeProvider', function($routeProvider) {
             $routeProvider.
