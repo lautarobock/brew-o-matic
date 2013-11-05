@@ -51,10 +51,10 @@
                 return "Ahora";
             } else if ( diffSec>-60) {
                 return "En menos de un minuto"
-            } else if (diffSec < (60*60)) { // Si es menos de una hora
+            } else if (diffSec > -(60*60)) { // Si es menos de una hora
                 return "En " + Math.round(-diffSec/60) + " minutos";
             } else if ( date.getDate() == new Date().getDate()) { //si aun es el mismo dia, pero mas adelante
-                return "Hoy" + " en " + Math.round(-diffSec/60/60) + " horas";
+                return "Hoy" + " en " + Math.floor(-diffSec/60/60) + ":" + exports.pad(Math.floor((-diffSec/60) % 60),2) + " Horas";
             } else if (date.getDate() == new Date().getDate()+1 ) { // Si sera mañana
                 return "Mañana " + defaultFormatter(date,'HH:mm');
             }  else {
@@ -77,5 +77,18 @@
         }
 
     };
+
+    exports.pad = function(value,zeros) {
+        value = value.toString();
+        if (value.length > zeros) {
+            return value;
+        } else {
+            var result = value;
+            for ( var i=0; i<zeros-value.length; i++) {
+                result = "0" + result;
+            }
+            return result;
+        }
+    }
 
 })(typeof exports === 'undefined'? this['util'] = {} : exports );

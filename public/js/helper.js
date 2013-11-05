@@ -153,16 +153,7 @@
                 return Math.round(value*zeros)/zeros;
             },
             pad: function(value,zeros) {
-                value = value.toString();
-                if (value.length > zeros) {
-                    return value;
-                } else {
-                    var result = value;
-                    for ( var i=0; i<zeros-value.length; i++) {
-                        result = "0" + result;
-                    }
-                    return result;
-                }
+                return util.pad(value,zeros);
             },
             calculateU: function(gravity,time) {
                 var g = this.toPpg(gravity);

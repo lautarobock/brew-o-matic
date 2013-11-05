@@ -6,40 +6,159 @@
     
     module.controller("RecipeLogCtrl",function($scope,BrewCalc,BrewHelper) {
         
-        $scope.now = new Date();
-        
+        //Constantes (Esto tengo q poder configurarlo)
+        var MASH_TEMP_TIME = 40;
+
+        $scope.now = function() {
+            if ( $scope.recipe.log.logs.length != 0 ) {
+                return $scope.recipe.log.logs[$scope.recipe.log.logs.length-1].time;
+            } else {
+                return new Date();
+            }
+        };
+
+        var mashFixed = [{
+            delay: 0,
+            detail: 'Encender Fuego',
+            logType: 'START'
+        }];
+
+        var spargeFixed = [{
+            delay: 60,
+            detail: 'Comenzar Lavado',
+            logType: 'SPARGE'
+        }];
+
+        var boilFixed = [{
+            delay: 120,
+            delayUnit: 'm',
+            detail: 'Comenzar Hervor',
+            logType: 'BOIL'
+        }];
+
+
         function addMinutes(date, minutes) {
-            var d = new Date();
+            var d = new Date(date.getTime());
             d.setMinutes(d.getMinutes()+minutes);
             return d;
         }
 
+        function prevTime() {
+            if ( $scope.pendingLogs.length != 0) {
+                return $scope.pendingLogs[$scope.pendingLogs.length-1].time();
+            } else {
+                return $scope.now();
+            }
+        }
+
+        function addFixed(list) {
+            for (var i=0; i<list.length; i++) {
+                var filter = util.Arrays.filter($scope.recipe.log.logs,function(item) {
+                    return item.logType == list[i].logType ? 0 : -1;
+                });
+                if ( filter.length != 0 ) continue;
+                var prev = prevTime(); 
+                $scope.pendingLogs.push({
+                    prev: prev,
+                    time: function() {
+                        return addMinutes(this.prev,this.delay);
+                    },
+                    delay: list[i].delay,
+                    detail: list[i].detail,
+                    logType: list[i].logType
+                }); 
+            }
+        }
+
+        function stepAction (STEP) {
+            if (STEP.infuse) {
+                return "Agregar Agua"
+            } else if (STEP.decoction) {
+                return "Decoccion";
+            }
+            return null;
+        }
+
         $scope.calculatePending = function() {
             $scope.pendingLogs = [];
-            var actual = $scope.now;
-            $scope.pendingLogs.push({
-                time: actual,
-                delay: 0,
-                detail: 'Encender Fuego',
-                logType: 'START'
-            });
-            actual = addMinutes(actual,40);
-            $scope.pendingLogs.push({
-                time: actual,
-                delay: 40,
-                detail: 'Comenzar Macerado',
-                logType: 'MASH'
-            });
-        };
+            
+            addFixed(mashFixed);
+            var delay = MASH_TEMP_TIME;
+            
+            //add mash step
+            for ( var i=0; i<$scope.recipe.MASH.MASH_STEPS.MASH_STEP.length; i ++ ) {
+                step = $scope.recipe.MASH.MASH_STEPS.MASH_STEP[i];
 
+                var filter = util.Arrays.filter($scope.recipe.log.logs,function(item) {
+                    return item.logType == 'MASH_STEP' && item.logRef == step._id.toString() ? 0 : -1;
+                });
+                if ( filter.length != 0 ) {
+                    delay = step.STEP_TIME;
+                    continue;
+                }
+
+                var name = step.NAME + ' - ' + step.STEP_TEMP + 'ºC ';
+                if ( step.END_TEMP != step.STEP_TEMP ) name += ' a ' + step.END_TEMP + 'ºC';
+                name += ' - ' + step.STEP_TIME + ' min';
+                if ( stepAction(step) ) name += ' - ' + stepAction(step);
+                if ( step.recirculate ) name += ' - Recirculando';
+
+                $scope.pendingLogs.push({
+                    prev: prevTime(),
+                    time: function() {
+                        return addMinutes(this.prev,this.delay);
+                    },
+                    delay: delay,
+                    detail: name,
+                    logType: 'MASH_STEP',
+                    logRef: step._id.toString()
+                });
+                delay = step.STEP_TIME;
+            };
+            //Sparge
+            for (var i=0; i<spargeFixed.length; i++) {
+                var f = spargeFixed[i];
+                var filter = util.Arrays.filter($scope.recipe.log.logs,function(item) {
+                    return item.logType == f.logType ? 0 : -1;
+                });
+                if ( filter.length != 0 ) {
+                    delay = f.delay;
+                    continue;
+                }
+                $scope.pendingLogs.push({
+                    prev: prevTime(),
+                    time: function() {
+                        return addMinutes(this.prev,this.delay);
+                    },
+                    delay: delay,
+                    detail: f.detail,
+                    logType: f.logType
+                });
+                delay = f.delay;
+            };
+
+
+            addFixed(boilFixed);
+        };
         $scope.calculatePending();
 
         
         $scope.push = function(log) {
-//            if ( !$scope.recipe.logs ) $scope.recipe.logs = [];
             log.time = new Date();
-            $scope.recipe.log.logs.push(log);
+            $scope.recipe.log.logs.push({
+                time: new Date(),
+                delay: log.delay,
+                detail: log.detail,
+                logType: log.logType,
+                logRef: log.logRef
+            });
             util.Arrays.remove($scope.pendingLogs,log);
+            if ( $scope.pendingLogs != 0 ) {
+                $scope.pendingLogs[0].prev = $scope.now();
+                for (var i=1; i<$scope.pendingLogs.length; i++) {
+                    $scope.pendingLogs[i].prev = $scope.pendingLogs[i-1].time();
+                }
+            }
         };
     });
     

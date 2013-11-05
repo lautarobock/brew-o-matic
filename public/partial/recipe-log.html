@@ -5,7 +5,7 @@
                 <table class="table table-condensed table-hover">
                     <thead>
                       <tr>
-                        <th style="width: 10em">Fecha y Hora</th>
+                        <th style="width: 13em">Fecha y Hora</th>
                         <th>Detalle</th>
                         <th style="width:2%"></th>
                       </tr>
@@ -27,14 +27,14 @@
                 <table class="table table-condensed table-hover" ng-show="recipe.FERMENTABLES.FERMENTABLE.length != 0" style="margin-top: 1em;">
                     <thead style="visibility:hidden">
                       <tr>
-                        <th style="width: 10em">Fecha y Hora</th>
+                        <th style="width: 13em">Fecha y Hora</th>
                         <th>Detalle</th>
                         <th style="width:2%"></th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr ng-repeat="log in pendingLogs">
-                        <td>{{log.time|formatDate}}</td>
+                        <td>{{log.time()|formatDate}}</td>
                         <td>{{log.detail}}</td>
                         <td>
                             <button ng-click="push(log)" type="button" class="btn btn-default btn-xs">
