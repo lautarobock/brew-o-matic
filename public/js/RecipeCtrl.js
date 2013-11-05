@@ -6,28 +6,39 @@
     
     module.controller("RecipeLogCtrl",function($scope,BrewCalc,BrewHelper) {
         
-        
+        $scope.now = new Date();
         
         function addMinutes(date, minutes) {
-            date.setMinutes(date.getMinutes()+minutes);
-            return date;
+            var d = new Date();
+            d.setMinutes(d.getMinutes()+minutes);
+            return d;
         }
-        
-        $scope.pendingLogs = [{
-            time: new Date(),
-            delay: 0,
-            detail: 'Encender Fuego',
-            type: 'START'
-        },{
-            time: addMinutes(new Date(),40),
-            delay: 40,
-            detail: 'Encender Fuego',
-            type: 'START'
-        }];
+
+        $scope.calculatePending = function() {
+            $scope.pendingLogs = [];
+            var actual = $scope.now;
+            $scope.pendingLogs.push({
+                time: actual,
+                delay: 0,
+                detail: 'Encender Fuego',
+                logType: 'START'
+            });
+            actual = addMinutes(actual,40);
+            $scope.pendingLogs.push({
+                time: actual,
+                delay: 40,
+                detail: 'Comenzar Macerado',
+                logType: 'MASH'
+            });
+        };
+
+        $scope.calculatePending();
+
         
         $scope.push = function(log) {
-            if ( !$scope.recipe.logs ) $scope.recipe.logs = [];
-            $scope.recipe.logs.push(log);
+//            if ( !$scope.recipe.logs ) $scope.recipe.logs = [];
+            log.time = new Date();
+            $scope.recipe.log.logs.push(log);
             util.Arrays.remove($scope.pendingLogs,log);
         };
     });

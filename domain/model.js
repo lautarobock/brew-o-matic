@@ -153,6 +153,14 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
             colour: String
         }]
     },
+    log: {
+       logs: [{
+           time: Date,
+           detail: String,
+           logType: String,
+           logRef: String
+       }]
+    },
     PRIMARY_TEMP: Number,
     BIAB: String,
     IBUCalcMethod: String,

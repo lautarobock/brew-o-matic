@@ -2,7 +2,7 @@
     <div class="col-md-10">
         <div class="panel panel-default">
             <div class="panel-body" >
-                <table class="table table-condensed table-hover" ng-show="recipe.FERMENTABLES.FERMENTABLE.length != 0" style="margin-top: 1em;">
+                <table class="table table-condensed table-hover">
                     <thead>
                       <tr>
                         <th style="width: 10em">Fecha y Hora</th>
@@ -11,8 +11,8 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="log in recipe.logs">
-                        <td>{{log.time|date:'dd-MM-yyyy HH:mm'}}</td>
+                      <tr ng-repeat="log in recipe.log.logs">
+                        <td>{{log.time|formatDate}}</td>
                         <td>{{log.detail}}</td>
                         <td>
                             <span class="glyphicon glyphicon-remove"/>
@@ -34,7 +34,7 @@
                     </thead>
                     <tbody>
                       <tr ng-repeat="log in pendingLogs">
-                        <td>{{log.time|date:'dd-MM-yyyy HH:mm'}}</td>
+                        <td>{{log.time|formatDate}}</td>
                         <td>{{log.detail}}</td>
                         <td>
                             <button ng-click="push(log)" type="button" class="btn btn-default btn-xs">

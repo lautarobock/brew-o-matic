@@ -35,4 +35,47 @@
             return result;
         }
     };
+
+    exports.formatDate = function(date,defaultFormatter) {
+        date = new Date(date);
+        //Fecha de hoy en segundos
+        var today = new Date().getTime()/1000;
+        //Fecha del comentario en segundos
+        var dateSec = date.getTime()/1000;
+
+        //Diferencia en segundos
+        var diffSec = today-dateSec;
+
+        if ( diffSec < 0 ) { //En el futuro
+            if ( diffSec>-10) {
+                return "Ahora";
+            } else if ( diffSec>-60) {
+                return "En menos de un minuto"
+            } else if (diffSec < (60*60)) { // Si es menos de una hora
+                return "En " + Math.round(-diffSec/60) + " minutos";
+            } else if ( date.getDate() == new Date().getDate()) { //si aun es el mismo dia, pero mas adelante
+                return "Hoy" + " en " + Math.round(-diffSec/60/60) + " horas";
+            } else if (date.getDate() == new Date().getDate()+1 ) { // Si sera mañana
+                return "Mañana " + defaultFormatter(date,'HH:mm');
+            }  else {
+                return defaultFormatter(date,'dd/MM/yyyy HH:mm');
+            }
+        } else {// en el pasado
+            if (diffSec<10) { // Si es menos de un minuto
+                return "Ahora";
+            } else if (diffSec<60) { // Si es menos de un minuto
+                return "Hace menos de un minuto"
+            } else if (diffSec < (60*60)) { // Si es menos de una hora
+                return "Hace " + Math.round(diffSec/60) + " minutos";
+            } else if (date.getDate() == new Date().getDate()) { //si aun es el mismo dia
+                return "Hoy" + " hace " + Math.round(diffSec/60/60) + " horas";
+            } else if (date.getDate() == new Date().getDate()-1 ) { // Si fue durane el dia de ayer
+                return "Ayer " + defaultFormatter(date,'HH:mm');
+            } else {
+                return defaultFormatter(date,'dd/MM/yyyy HH:mm');
+            }
+        }
+
+    };
+
 })(typeof exports === 'undefined'? this['util'] = {} : exports );
