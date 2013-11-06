@@ -4,14 +4,30 @@
 
     
     
-    module.controller("RecipeLogCtrl",function($scope,BrewCalc,BrewHelper) {
-        
+    module.controller("RecipeLogCtrl",function($scope,BrewCalc,BrewHelper,$timeout) {
+
         //Constantes (Esto tengo q poder configurarlo)
         var MASH_TEMP_TIME = 40;
 
+        $scope.opened = false;
+        $scope.openDp = function() {
+            $timeout(function() {
+                $scope.opened = true;
+            });
+        };
+
+        $scope.edit = {
+            time: new Date(),
+            date: new Date()
+        };
+
         $scope.now = function() {
             if ( $scope.recipe.log.logs.length != 0 ) {
-                return $scope.recipe.log.logs[$scope.recipe.log.logs.length-1].time;
+                var time = $scope.recipe.log.logs[$scope.recipe.log.logs.length - 1].time;
+                if ( typeof(time) == 'string') {
+                    time = new Date(time);
+                }
+                return  time;
             } else {
                 return new Date();
             }

@@ -157,6 +157,8 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
        logs: [{
            time: Date,
            detail: String,
+           delay: Number,
+           delayUnit: String,
            logType: String,
            logRef: String
        }]

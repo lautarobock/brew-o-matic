@@ -54,7 +54,7 @@
             } else if (diffSec > -(60*60)) { // Si es menos de una hora
                 return "En " + Math.round(-diffSec/60) + " minutos";
             } else if ( date.getDate() == new Date().getDate()) { //si aun es el mismo dia, pero mas adelante
-                return "Hoy" + " en " + Math.floor(-diffSec/60/60) + ":" + exports.pad(Math.floor((-diffSec/60) % 60),2) + " Horas";
+                return "En " + Math.floor(-diffSec/60/60) + ":" + exports.pad(Math.floor((-diffSec/60) % 60),2) + " Horas";
             } else if (date.getDate() == new Date().getDate()+1 ) { // Si sera mañana
                 return "Mañana " + defaultFormatter(date,'HH:mm');
             }  else {

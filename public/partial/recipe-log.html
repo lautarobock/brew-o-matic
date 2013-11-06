@@ -22,6 +22,23 @@
                 </table>                
                 <div class="panel panel-default" style="height: 150px;">
                     <div class="panel-body" >
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" show-weeks="false" datepicker-popup="dd-MMMM-yyyy" ng-model="edit.date" is-open="opened" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default btn-sm" ng-click="openDp()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div ng-model="edit.time" style="display:inline-block;">
+                                    <timepicker hour-step="1" readonly-input="false" minute-step="1" show-meridian="false"></timepicker>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <table class="table table-condensed table-hover" ng-show="recipe.FERMENTABLES.FERMENTABLE.length != 0" style="margin-top: 1em;">
@@ -29,6 +46,7 @@
                       <tr>
                         <th style="width: 13em">Fecha y Hora</th>
                         <th>Detalle</th>
+                        <th style="width:2%"></th>
                         <th style="width:2%"></th>
                       </tr>
                     </thead>
@@ -39,6 +57,11 @@
                         <td>
                             <button ng-click="push(log)" type="button" class="btn btn-default btn-xs">
                                 <span class="glyphicon glyphicon-hand-up"/>
+                            </button>
+                        </td>
+                        <td>
+                            <button ng-click="push(log)" type="button" class="btn btn-default btn-xs">
+                                <span class="glyphicon glyphicon-edit"/>
                             </button>
                         </td>
                       </tr>
