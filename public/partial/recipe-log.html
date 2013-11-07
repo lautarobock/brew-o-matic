@@ -8,6 +8,7 @@
                         <th style="width: 13em">Fecha y Hora</th>
                         <th>Detalle</th>
                         <th style="width:2%"></th>
+                        <th style="width:2%"></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -15,37 +16,53 @@
                         <td>{{log.time|formatDate}}</td>
                         <td>{{log.detail}}</td>
                         <td>
+                            <button ng-click="goEdit(log)" type="button" class="btn btn-default btn-xs">
+                                <span class="glyphicon glyphicon-edit"/>
+                            </button>
+                        </td>
+                        <td>
                             <span class="glyphicon glyphicon-remove"/>
                         </td>
                       </tr>
                     </tbody>
-                </table>                
-                <div class="panel panel-default" style="height: 150px;">
+                </table>
+                <div class="panel panel-default" style="height: 150px; ">
                     <div class="panel-body" >
-                        <div class="row">
+                        <span ng-show="edit">
                             <div class="col-lg-4">
-                                <div class="input-group">
-                                    <input type="text" class="form-control input-sm" show-weeks="false" datepicker-popup="dd-MMMM-yyyy" ng-model="edit.date" is-open="opened" />
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default btn-sm" ng-click="openDp()"><i class="glyphicon glyphicon-calendar"></i></button>
-                                    </span>
+                                <div class="row">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control input-sm" show-weeks="false" datepicker-popup="dd-MMMM-yyyy" ng-model="edit.time" is-open="opened" />
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default btn-sm" ng-click="openDp()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-9">
+                                        <div ng-model="edit.time" style="display:inline-block;">
+                                            <timepicker hour-step="1" readonly-input="false" minute-step="1" show-meridian="false"></timepicker>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div ng-model="edit.time" style="display:inline-block;">
-                                    <timepicker hour-step="1" readonly-input="false" minute-step="1" show-meridian="false"></timepicker>
-                                </div>
+                            <div class="col-lg-8">
+                                <textarea rows="3" class="form-control" id="detail" placeholder="(Detalle)" ng-model="edit.detail"/>
+                                <button ng-click="goEdit(null)" type="button" class="btn btn-default pull-right" style="margin-top:0.5em">Cerrar</button>
                             </div>
-                        </div>
+                        </span>
+                        <span ng-hide="edit">
+                            <div style="margin: 2em 2em 0;" class="alert alert-info">
+                                Agregue mensajes personalizados en la bitacora desde <a class="btn btn-link" ng-click="goNew()" href=""><b>aqui</b></a>
+                            </div>
+                        </span>
                     </div>
                 </div>
                 <table class="table table-condensed table-hover" ng-show="recipe.FERMENTABLES.FERMENTABLE.length != 0" style="margin-top: 1em;">
-                    <thead style="visibility:hidden">
+                    <thead>
                       <tr>
-                        <th style="width: 13em">Fecha y Hora</th>
-                        <th>Detalle</th>
+                        <th style="width: 13em">Fecha y Hora estimada</th>
+                        <th>Detalle Sugerido</th>
                         <th style="width:2%"></th>
                         <th style="width:2%"></th>
                       </tr>

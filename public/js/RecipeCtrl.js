@@ -16,18 +16,37 @@
             });
         };
 
-        $scope.edit = {
-            time: new Date(),
-            date: new Date()
+        $scope.edit = null;
+
+        $scope.goEdit = function(log) {
+            $scope.edit = log;
+        };
+
+        $scope.goNew = function() {
+            var log = {
+                time: new Date(),
+                delay: 0,
+                detail: null,
+                logType: 'CUSTOM'
+            };
+            $scope.recipe.log.logs.push(log);
+            $scope.goEdit(log);
+            updatePendingTime();
         };
 
         $scope.now = function() {
             if ( $scope.recipe.log.logs.length != 0 ) {
-                var time = $scope.recipe.log.logs[$scope.recipe.log.logs.length - 1].time;
-                if ( typeof(time) == 'string') {
-                    time = new Date(time);
+                for ( var i=$scope.recipe.log.logs.length - 1; i>=0; i--) {
+                    var log = $scope.recipe.log.logs[i];
+                    if ( log.logType != 'CUSTOM') {
+                        var time = log.time;
+                        if ( typeof(time) == 'string') {
+                            time = new Date(time);
+                        }
+                        return  time;
+                    }
                 }
-                return  time;
+                return new Date();
             } else {
                 return new Date();
             }
@@ -158,6 +177,18 @@
         };
         $scope.calculatePending();
 
+        function updatePendingTime() {
+            if ( $scope.pendingLogs != 0 ) {
+                $scope.pendingLogs[0].prev = $scope.now();
+                for (var i=1; i<$scope.pendingLogs.length; i++) {
+                    $scope.pendingLogs[i].prev = $scope.pendingLogs[i-1].time();
+                }
+            }
+        }
+
+        $scope.$watch("edit.time", function(value) {
+            updatePendingTime();
+        });
         
         $scope.push = function(log) {
             log.time = new Date();
@@ -169,12 +200,7 @@
                 logRef: log.logRef
             });
             util.Arrays.remove($scope.pendingLogs,log);
-            if ( $scope.pendingLogs != 0 ) {
-                $scope.pendingLogs[0].prev = $scope.now();
-                for (var i=1; i<$scope.pendingLogs.length; i++) {
-                    $scope.pendingLogs[i].prev = $scope.pendingLogs[i-1].time();
-                }
-            }
+            updatePendingTime();
         };
     });
     
