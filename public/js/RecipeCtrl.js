@@ -8,6 +8,7 @@
 
         //Constantes (Esto tengo q poder configurarlo)
         var MASH_TEMP_TIME = 40;
+        var COOLING_TIME = 30;
 
         $scope.opened = false;
         $scope.openDp = function() {
@@ -67,8 +68,20 @@
         var boilFixed = [{
             delay: 120,
             delayUnit: 'm',
-            detail: 'Comenzar Hervor',
+            detail: 'Romper Hervor',
             logType: 'BOIL'
+        }];
+
+        var coolingFixed = [{
+            delay: 0,
+            delayUnit: 'm',
+            detail: 'Apagar fuego y Whirpool',
+            logType: 'COOLING'
+        },{
+            delay: 10,
+            delayUnit: 'm',
+            detail: 'Enfriado',
+            logType: 'COOLING'
         }];
 
 
@@ -92,16 +105,8 @@
                     return item.logType == list[i].logType ? 0 : -1;
                 });
                 if ( filter.length != 0 ) continue;
-                var prev = prevTime(); 
-                $scope.pendingLogs.push({
-                    prev: prev,
-                    time: function() {
-                        return addMinutes(this.prev,this.delay);
-                    },
-                    delay: list[i].delay,
-                    detail: list[i].detail,
-                    logType: list[i].logType
-                }); 
+
+                addPending(list[i].delay,list[i].detail,list[i].logType);
             }
         }
 
@@ -138,16 +143,7 @@
                 if ( stepAction(step) ) name += ' - ' + stepAction(step);
                 if ( step.recirculate ) name += ' - Recirculando';
 
-                $scope.pendingLogs.push({
-                    prev: prevTime(),
-                    time: function() {
-                        return addMinutes(this.prev,this.delay);
-                    },
-                    delay: delay,
-                    detail: name,
-                    logType: 'MASH_STEP',
-                    logRef: step._id.toString()
-                });
+                addPending(delay,name,'MASH_STEP',step._id.toString());
                 delay = step.STEP_TIME;
             };
             //Sparge
@@ -160,21 +156,48 @@
                     delay = f.delay;
                     continue;
                 }
-                $scope.pendingLogs.push({
-                    prev: prevTime(),
-                    time: function() {
-                        return addMinutes(this.prev,this.delay);
-                    },
-                    delay: delay,
-                    detail: f.detail,
-                    logType: f.logType
-                });
+                addPending(delay, f.detail, f.logType);
                 delay = f.delay;
             };
 
-
             addFixed(boilFixed);
+
+            var prevDelay = $scope.recipe.BOIL_TIME;
+            //Hoping
+            for( var i=0; i<$scope.recipe.HOPS.HOP.length; i++ ) {
+                var hop = $scope.recipe.HOPS.HOP[i];
+
+                var filter = util.Arrays.filter($scope.recipe.log.logs,function(item) {
+                    return item.logType == 'BOIL_HOP' && item.logRef == hop._id.toString() ? 0 : -1;
+                });
+                if ( filter.length != 0 ) {
+                    prevDelay = hop.TIME;
+                    continue;
+                }
+                var name = hop.AMOUNT*1000 + 'g de ' + hop.NAME + ' (' + hop.USE + ' '+hop.TIME+'\')';
+                addPending(prevDelay - hop.TIME,name,'BOIL_HOP',hop._id.toString());
+                prevDelay = hop.TIME;
+            }
+
+            addFixed(coolingFixed);
+
+            //Hasta la inoculacion tomo el tiempo fijo de enfriado.
+            prevDelay = COOLING_TIME;
         };
+
+        function addPending(delay,detail,type,ref) {
+            $scope.pendingLogs.push({
+                prev: prevTime(),
+                time: function() {
+                    return addMinutes(this.prev,this.delay);
+                },
+                delay: delay,
+                detail: detail,
+                logType: type,
+                logRef: ref
+            });
+        }
+
         $scope.calculatePending();
 
         function updatePendingTime() {
