@@ -183,7 +183,32 @@
 
             //Hasta la inoculacion tomo el tiempo fijo de enfriado.
             prevDelay = COOLING_TIME;
+            for( var i=0; i<$scope.recipe.fermentation.stages.length; i++ ) {
+                var stage = $scope.recipe.fermentation.stages[i];
+
+                var filter = util.Arrays.filter($scope.recipe.log.logs,function(item) {
+                    return item.logType == 'FERM_STAGE' && item.logRef == stage._id.toString() ? 0 : -1;
+                });
+                if ( filter.length != 0 ) {
+                    prevDelay = convert2Minutes(stage);
+                    continue;
+                }
+                addPending(prevDelay,stage.title,'FERM_STAGE',stage._id.toString());
+                prevDelay = convert2Minutes(stage);
+            }
+
+            //en prevDelay me queda ya cargado el timpo del ultimo paso de fermentacion.
+            //Embotellado
+
         };
+
+        function convert2Minutes(stage) {
+            if ( stage.durationMode =='Horas') {
+                return stage.duration * 60;
+            } else if ( stage.durationMode =='Dias') {
+                return stage.duration * 60 * 24;
+            }
+        }
 
         function addPending(delay,detail,type,ref) {
             $scope.pendingLogs.push({
