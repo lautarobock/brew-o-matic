@@ -160,7 +160,8 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
            delay: Number,
            delayUnit: String,
            logType: String,
-           logRef: String
+           logRef: String,
+           discard: Boolean
        }]
     },
     PRIMARY_TEMP: Number,

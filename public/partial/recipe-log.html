@@ -9,23 +9,32 @@
                         <th>Detalle</th>
                         <th style="width:2%"></th>
                         <th style="width:2%"></th>
+                        <th style="width:2%"></th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="log in recipe.log.logs">
+                      <tr ng-repeat="log in recipe.log.logs | filter:{discard:false}" ng-class="{'gt-log-active': edit == log }">
                         <td>{{log.time|formatDate}}</td>
                         <td>{{log.detail}}</td>
                         <td>
-                            <button ng-click="goEdit(log)" type="button" class="btn btn-default btn-xs">
+                            <button ng-disabled="edit==log" ng-click="goEdit(log)" type="button" class="btn btn-default btn-xs" title="Editar entrada">
                                 <span class="glyphicon glyphicon-edit"/>
                             </button>
                         </td>
                         <td>
-                            <span class="glyphicon glyphicon-remove"/>
+                            <button ng-disabled="edit==log" ng-click="restore(log)" type="button" class="btn btn-default btn-xs" title="Descarta la entrada y la pasa a la lista de disponibles (abajo)">
+                                <span class="glyphicon glyphicon-hand-down"/>
+                            </button>
+                        </td>
+                        <td>
+                            <button ng-disabled="edit==log" ng-click="discard(log)" type="button" class="btn btn-default btn-xs" title="Descarta la entrada y elimina permanentemente">
+                                <span class="glyphicon glyphicon-remove"/>
+                            </button>
                         </td>
                       </tr>
                     </tbody>
                 </table>
+
                 <div class="panel panel-default" style="height: 150px; ">
                     <div class="panel-body" >
                         <span ng-show="edit">
@@ -58,11 +67,13 @@
                         </span>
                     </div>
                 </div>
+
                 <table class="table table-condensed table-hover" ng-show="recipe.FERMENTABLES.FERMENTABLE.length != 0" style="margin-top: 1em;">
                     <thead>
                       <tr>
                         <th style="width: 13em">Fecha y Hora estimada</th>
                         <th>Detalle Sugerido</th>
+                        <th style="width:2%"></th>
                         <th style="width:2%"></th>
                         <th style="width:2%"></th>
                       </tr>
@@ -72,13 +83,18 @@
                         <td>{{log.time()|formatDate}}</td>
                         <td>{{log.detail}}</td>
                         <td>
-                            <button ng-click="push(log)" type="button" class="btn btn-default btn-xs">
+                            <button ng-click="push(log)" type="button" class="btn btn-default btn-xs" title="Pasa la entrada directamente a la bitacora">
                                 <span class="glyphicon glyphicon-hand-up"/>
                             </button>
                         </td>
                         <td>
-                            <button ng-click="push(log)" type="button" class="btn btn-default btn-xs">
+                            <button ng-click="pushAndEdit(log)" type="button" class="btn btn-default btn-xs" title="Pasa la entrada a la bitacora y la deja abierta para edicion">
                                 <span class="glyphicon glyphicon-edit"/>
+                            </button>
+                        </td>
+                        <td>
+                            <button ng-click="pushAndDiscard(log)" type="button" class="btn btn-default btn-xs" title="Descarta la entrada y elimina permanentemente">
+                                <span class="glyphicon glyphicon-remove"/>
                             </button>
                         </td>
                       </tr>

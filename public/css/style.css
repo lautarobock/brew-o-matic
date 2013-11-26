@@ -112,3 +112,7 @@ a {
     background-color: #951a1a !important;
     border-color: #951a1a !important;
 }
+
+.gt-log-active {
+    background: lightblue !important;
+}
