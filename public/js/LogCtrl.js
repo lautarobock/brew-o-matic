@@ -34,6 +34,14 @@
             updatePendingTime();
         };
 
+        $scope.orderLog = function(value) {
+            if ( value.time instanceof Date ) {
+                return value.time;
+            } else {
+                return new Date(value.time);
+            }
+        };
+
         $scope.now = function() {
             if ( $scope.recipe.log.logs.length != 0 ) {
                 for ( var i=$scope.recipe.log.logs.length - 1; i>=0; i--) {
