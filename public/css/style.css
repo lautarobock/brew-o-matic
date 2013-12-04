@@ -116,3 +116,11 @@ a {
 .gt-log-active {
     background: lightblue !important;
 }
+
+.gt-log-removed {
+    background: red !important;
+}
+
+.gt-log-removed:hover {
+    background: lightpink !important;
+}

@@ -8,6 +8,21 @@
         var MASH_TEMP_TIME = 40;
         var COOLING_TIME = 30;
 
+        $scope.discardFilter = {discard:false};
+        $scope.isFiltering = true;
+
+        $scope.toogleRemovedFilter = function() {
+            if ( $scope.isFiltering ) {
+                $scope.discardFilter = {};
+                $scope.isFiltering = false;
+            } else {
+                $scope.discardFilter = {discard:false};
+                $scope.isFiltering = true;
+            }
+        };
+
+        $scope.removed = false;
+
         $scope.opened = false;
         $scope.openDp = function() {
             $timeout(function() {

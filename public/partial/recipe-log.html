@@ -2,6 +2,12 @@
     <div class="col-md-10">
         <div class="panel panel-default">
             <div class="panel-body" >
+                <div class="row" style="width: 100%;margin-bottom: 1em">
+                    <button style="margin-left: 1em" ng-click="toogleRemovedFilter()" type="button" class="btn btn-default btn-xs pull-right">
+                        <span ng-show="isFiltering">Ver eliminados</span>
+                        <span ng-hide="isFiltering">Ocultar eliminados</span>
+                    </button>
+                </div>
                 <table class="table table-condensed table-hover">
                     <thead>
                       <tr>
@@ -13,22 +19,25 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="log in recipe.log.logs | orderBy:orderLog | filter:{discard:false}" ng-class="{'gt-log-active': edit == log }">
+                      <tr ng-repeat="log in recipe.log.logs | orderBy:orderLog | filter:discardFilter" ng-class="{'gt-log-active': edit == log,'gt-log-removed': log.discard }">
                         <td>{{log.time|formatDate}}</td>
                         <td>{{log.detail}}</td>
                         <td>
-                            <button ng-disabled="edit==log" ng-click="goEdit(log)" type="button" class="btn btn-default btn-xs" title="Editar entrada">
+                            <button ng-disabled="edit==log || log.discard" ng-click="goEdit(log)" type="button" class="btn btn-default btn-xs" title="Editar entrada">
                                 <span class="glyphicon glyphicon-edit"/>
                             </button>
                         </td>
                         <td>
-                            <button ng-disabled="edit==log" ng-click="restore(log)" type="button" class="btn btn-default btn-xs" title="Descarta la entrada y la pasa a la lista de disponibles (abajo)">
+                            <button ng-disabled="edit==log || log.discard" ng-click="restore(log)" type="button" class="btn btn-default btn-xs" title="Descarta la entrada y la pasa a la lista de disponibles (abajo)">
                                 <span class="glyphicon glyphicon-hand-down"/>
                             </button>
                         </td>
                         <td>
-                            <button ng-disabled="edit==log" ng-click="discard(log)" type="button" class="btn btn-default btn-xs" title="Descarta la entrada y elimina permanentemente">
+                            <button ng-disabled="edit==log" ng-hide="log.discard" ng-click="discard(log)" type="button" class="btn btn-default btn-xs" title="Descarta la entrada y elimina permanentemente">
                                 <span class="glyphicon glyphicon-remove"/>
+                            </button>
+                            <button ng-show="log.discard" ng-click="log.discard=false" type="button" class="btn btn-default btn-xs" title="Restaura entrada eliminada de la bitacora">
+                                <span class="glyphicon glyphicon-retweet"/>
                             </button>
                         </td>
                       </tr>
