@@ -487,7 +487,8 @@
                         TopUpWater: 0,
                         PercentEvap: $scope.user.settings.defaultValues.PercentEvap,
                         TrubChillerLosses: $scope.user.settings.defaultValues.TrubChillerLosses,
-                        isPublic: $scope.user.settings.defaultValues.isPublic
+                        isPublic: $scope.user.settings.defaultValues.isPublic,
+                        collaborators: []
                     });
                     $scope.changeYeast();
                 }                

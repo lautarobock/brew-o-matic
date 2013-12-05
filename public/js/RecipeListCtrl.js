@@ -25,6 +25,42 @@
             return ret;
         }
     });
+
+    /**
+     * RecipeCollaboratedCtrl
+     */
+    index.controller("RecipeCollaboratedCtrl",function($scope,$rootScope,Recipe,sortData) {
+
+        $scope.sort = sortData("NAME","");
+
+        $scope.showTags = function(recipe) {
+            if (recipe.tags && recipe.tags.length != 0) {
+                var txt = "- Tags: [" + recipe.tags[0];
+                for (var i=1;i<recipe.tags.length; i++) {
+                    txt += ", " + recipe.tags[i];
+                }
+                return txt + "]";
+            } else {
+                return '';
+            }
+        };
+
+        $rootScope.breadcrumbs = [{
+            link: '#',
+            title: 'Home'
+        },{
+            link: '#',
+            title: 'Colaboraciones'
+        }];
+
+        $rootScope.$watch('user',function(user) {
+            if ( user ) {
+                $scope.collaborated = Recipe.findCollaborated();
+                $scope.stats = Recipe.stats();
+            }
+        });
+        
+    });
     
     index.controller("RecipeFavoriteCtrl", function ($scope,$rootScope,Recipe,User,sortData) {
 

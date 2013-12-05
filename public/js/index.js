@@ -24,6 +24,7 @@
         config(['$routeProvider', function($routeProvider) {
             $routeProvider.
                 when('/recipe', {templateUrl: 'partial/recipe-list.html',   controller: 'RecipeListCtrl'}).
+                when('/collaborated', {templateUrl: 'partial/recipe-collaborated.html',   controller: 'RecipeCollaboratedCtrl'}).
                 when('/favorites', {templateUrl: 'partial/recipe-favorite.html',   controller: 'RecipeFavoriteCtrl'}).
                 when('/public', {templateUrl: 'partial/recipe-public.html',   controller: 'RecipePublicCtrl'}).
                 when('/home/:userId', {templateUrl: 'partial/user/home.html',   controller: 'HomeCtrl'}).

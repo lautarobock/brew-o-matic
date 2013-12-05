@@ -6,16 +6,33 @@
                     <thead>
                       <tr>
                         <th>Nombre</th>
-                        <th style="width:1px">Acciones</th>
+                        <th style="width:1px">Eliminar</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr ng-repeat="collaborator in recipe.collaborators">
                         <td>{{collaborator.name}}</td>
-                        <td></td>
+                        <td>
+                            <!-- <button ng-click="removeUser(collaborator)" class="btn btn-default btn-xs" type="button">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button> -->
+                            <button ng-click="removeUser(collaborator)" type="button" class="close" aria-hidden="true">&times;</button>
+                        </td>
                       </tr>
                     </tbody>
                 </table>
+                <div class="input-group">
+                    <select class="form-control input" ng-model="userToAdd">
+                        <option ng-repeat="user in users | orderBy:'name'" value="{{user._id}}">
+                            {{user.name}}
+                        </option>
+                    </select>
+                    <span class="input-group-btn">
+                        <button ng-click="userToAdd && addUser(userToAdd)" class="btn btn-default" type="button">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </span>
+                </div>
             </div>
         </div>
         <div style="overflow: hidden;margin-bottom: 1em;">

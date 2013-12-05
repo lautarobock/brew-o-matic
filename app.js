@@ -99,9 +99,11 @@ app.post('/user', user.add);
 app.get('/user/id_:id', user.get);
 app.put('/user/favorite_add',filter,user.addToFavorites);
 app.put('/user/favorite_drop',filter,user.removeFromFavorites);
+app.get('/user',filter,data.User.findAll);
 //app.get('/user/stats',filter,user.findStats)
 app.put('/user/settings',filter,user.updateSettings);
 app.get('/recipe/public',filter,recipe.findPublic);
+app.get('/recipe/collaborated',filter,recipe.findCollaborated);
 app.put('/recipe/comment',filter,recipe.addComment);
 app.post('/recipe/publish_:id',filter,recipe.publish);
 app.put('/recipe/remove_comment',filter,recipe.deleteComment);

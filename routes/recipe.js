@@ -3,6 +3,13 @@ var notifications = require('../util/notifications.js');
 var model = require('../domain/model.js');
 var Arrays = require('../public/js/util/util.js').Arrays;
 
+
+exports.findCollaborated = function (req, res) {
+    model.Recipe.find({collaborators: { $in : [req.session.user_id] } }).populate('owner').limit(req.query.limit).exec(function(err,results) {
+        res.send(results);
+    });
+};
+
 exports.findPublic = function (req, res) {
     //where('owner').ne(req.session.user_id).
     model.Recipe.find({isPublic:true}).populate('owner').sort('-publishDate').limit(req.query.limit).exec(function(err,results) {
@@ -162,7 +169,7 @@ exports.save = function(req, res) {
                 notifications.notifyOnPublish(req.body.NAME,id,req.session.user_name,req.session.user_id);
                 req.body.publishDate = new Date();
             }
-            model.Recipe.findByIdAndUpdate(id,req.body).populate('owner').populate('cloneFrom').exec(callback);
+            model.Recipe.findByIdAndUpdate(id,req.body).populate('owner').populate('collaborators').populate('cloneFrom').exec(callback);
         });
 
         actions.log(req.session.user_id, "UPDATE_RECIPE","NAME: '"+req.body.NAME+"'. recipe_id: "+id);

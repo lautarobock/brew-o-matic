@@ -333,11 +333,42 @@
 
     });
 
-    /**
-     * BoilControler
-     */
-    module.controller("RecipeCollaboratorsCtrl",function($scope) {
 
+    /**
+     * RecipeCollaboratorsCtrl
+     */
+    module.controller("RecipeCollaboratorsCtrl",function($scope,User,alertFactory) {
+
+        $scope.users = User.query();
+
+        $scope.removeUser = function(collaborator) {
+            util.Arrays.remove($scope.recipe.collaborators,collaborator);
+        };
+
+        $scope.addUser = function(user_id) {
+
+            //Filter by user_id
+            var filter = function(item) {
+                return item._id == user_id ? 0 : -1;
+            };
+
+            //Veo si quiero agregar un colaborador existente
+            var exists = util.Arrays.filter($scope.recipe.collaborators,filter).length != 0;
+            if ( exists ) {
+                alertFactory.create("warning","El usuario seleccionado ya es un colaborador","Error al agregar usuario");
+                return;   
+            }
+
+            if ( user_id == $scope.recipe.owner._id ) {
+                alertFactory.create("warning","No puede agregar al dueño de la receta como colaborador","Error al agregar usuario");
+                return;
+            }
+
+            //Busco el objeto usuario compelto y lo agrego
+            var user = util.Arrays.filter($scope.users,filter)[0];
+            $scope.recipe.collaborators.push(user);
+
+        };
 
     });
 

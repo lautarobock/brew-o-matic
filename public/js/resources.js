@@ -23,6 +23,7 @@
         };
         return $resource('recipe/:operation:id',{google_id:params,id:'@_id'}, {
             findPublic: {method:'GET',params: {operation:'public'}, isArray:true },
+            findCollaborated: {method:'GET',params: {operation:'collaborated'}, isArray:true },
             publish: {method:'POST', params: {operation: 'publish_'}},
             findByUser: {method:'GET',params: {operation:'by_user_'},isArray:true},
             stats: {method:'GET',params: {operation:'stats'}},
