@@ -182,9 +182,9 @@
         };
     });
     
-    index.controller("ShareController", function($scope) {
-        $scope.recipe = Recipe.get({id:$routeParams.recipeId});
-    });
+    // index.controller("ShareController", function($scope) {
+    //     $scope.recipe = Recipe.get({id:$routeParams.recipeId});
+    // });
 
     index.controller("MainController",function($scope,$rootScope) {
         $rootScope.breadcrumbs = [];

@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Jasmine Spec Runner</title>
+
+  <link rel="stylesheet" type="text/css" href="lib/jasmine.css">
+  <script type="text/javascript" src="lib/jasmine.js"></script>
+  <script type="text/javascript" src="lib/jasmine-html.js"></script>
+
+  <!-- include source files here... -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular-resource.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular-route.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular-sanitize.min.js"></script>
+  <script src="../public/js/index.js"></script>
+  <script src="../public/js/helper.js"></script>
+  <script src="../public/js/RecipeCtrl.js"></script>
+  <script src="../public/js/RecipeListCtrl.js"></script>
+  <script src="../public/js/RecipeDetailCtrl.js"></script>
+  <script src="../public/js/LoginController.js"></script>
+  <script src="../public/js/CommentController.js"></script>
+  <script src="../public/js/FermentationCtrl.js"></script>
+  <script src="../public/js/LogCtrl.js"></script>
+  <script src="../public/js/notification.js"></script>
+  <script src="../public/js/data/AbmCtrl.js"></script>
+  <script src="../public/js/admin/AdminCtrl.js"></script>
+  <script src="../public/js/resources.js"></script>
+  <script src="../public/js/util/util.js"></script>
+  <script src="../public/js/Data.js"></script>
+  <script src="../public/js/env.js"></script>
+  <script src="../public/js/ObjTree.js"></script>
+  <script src="../public/js/directive/abm.js"></script>
+  <!-- include spec files here... -->
+  <script type="text/javascript" src="indexSpec.js"></script>
+
+  <script type="text/javascript">
+    (function() {
+      var jasmineEnv = jasmine.getEnv();
+      jasmineEnv.updateInterval = 1000;
+
+      var htmlReporter = new jasmine.HtmlReporter();
+
+      jasmineEnv.addReporter(htmlReporter);
+
+      jasmineEnv.specFilter = function(spec) {
+        return htmlReporter.specFilter(spec);
+      };
+
+      var currentWindowOnload = window.onload;
+
+      window.onload = function() {
+        if (currentWindowOnload) {
+          currentWindowOnload();
+        }
+        execJasmine();
+      };
+
+      function execJasmine() {
+        jasmineEnv.execute();
+      }
+
+    })();
+  </script>
+
+</head>
+
+<body>
+</body>
+</html>
