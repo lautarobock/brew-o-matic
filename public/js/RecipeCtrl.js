@@ -334,10 +334,19 @@
     });
 
     /**
+     * BoilControler
+     */
+    module.controller("RecipeCollaboratorsCtrl",function($scope) {
+
+
+    });
+
+
+    /**
      * TabControler
      */
     module.controller("RecipeTabCtrl",function($scope) {
-        $scope.sortTabs = ['main','mash','boil','fermentation','bottling','log'];
+        $scope.sortTabs = ['main','mash','boil','fermentation','bottling','log','collaborators'];
         $scope.tabs = {
             main: {
                 title: 'Receta',
@@ -362,6 +371,10 @@
             log: {
                 title: 'Bitacora',
                 template: 'log'
+            },
+            collaborators: {
+                title: 'Colaboradores',
+                template: 'collaborators'
             }};
 
         $scope.selectedTab = 'main';

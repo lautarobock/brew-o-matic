@@ -1,7 +1,7 @@
 <div class="panel panel-default" ng-show="recipe._id" ng-controller="CommentController">
     <div class="panel-heading"><strong>Comentarios</strong></div>
     <div class="panel-body" >
-        <div class="row container" ng-show="user">
+        <div class="row col-lg-12" ng-show="user">
             <label for="text">Comentario</label>
             <textarea ng-blur="blur(comment)" ng-focus="focus(comment)" rows="{{rows}}" class="form-control" id="text" placeholder="Escriba su comentario" ng-model="comment"/>
             <button ng-click="addComment(comment)" style="margin-top: 1em;" type="button" class="btn btn-primary">Aceptar</button>

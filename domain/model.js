@@ -33,6 +33,7 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     _id: String,
     code: String,
     owner: {type:String, ref:'User'},
+    collaborators: [{type:String, ref:'User'}],
     GrainCalcMethod: String,
     date: Date,
     modificationDate: Date,

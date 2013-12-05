@@ -23,7 +23,7 @@ exports.findAll = function(req, res) {
 };
 
 exports.get = function(req, res) {
-    model.Recipe.findOne({_id:req.params.id}).populate('owner').populate('cloneFrom').exec(function(err,results) {
+    model.Recipe.findOne({_id:req.params.id}).populate('collaborators').populate('owner').populate('cloneFrom').exec(function(err,results) {
         res.send(results);
     });    
 };
@@ -136,13 +136,14 @@ exports.save = function(req, res) {
             notifications.notifyOnPublish(req.body.NAME,id,req.session.user_name,req.session.user_id);
         }
     } else {
-        if ( req.body.owner._id != req.session.user_id ) {
-            res.send(500,{error: "No tiene permisos para modificar esta receta"});
-            return;
-        }
+        
+
         var id = req.body._id;
         delete req.body._id;
         req.body.owner = req.body.owner._id;
+        for ( var i=0; i<req.body.collaborators.length; i++ ) {
+            req.body.collaborators[i] = req.body.collaborators[i]._id;
+        }
         if (req.body.cloneFrom) {
             req.body.cloneFrom = req.body.cloneFrom._id;
         }
@@ -150,6 +151,13 @@ exports.save = function(req, res) {
         //console.log("UPDATE POST", req.body);
 //        model.Recipe.findByIdAndUpdate(id,req.body).populate('owner').exec(callback);
         model.Recipe.findById(id).exec(function (err,old) {
+            //Verifico los permisos de la receta contra la version guardada de la misma
+            if ( old.owner != req.session.user_id ) {
+                if ( old.collaborators.indexOf(req.session.user_id) == -1 ) {
+                    res.send(500,{error: "No tiene permisos para modificar esta receta"});
+                    return;   
+                }
+            }
             if ( !old.isPublic && req.body.isPublic ) {
                 notifications.notifyOnPublish(req.body.NAME,id,req.session.user_name,req.session.user_id);
                 req.body.publishDate = new Date();
