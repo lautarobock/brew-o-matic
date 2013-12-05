@@ -76,9 +76,6 @@
           <thead>
             <tr>
                 <th style="width:1em"><span class="glyphicon glyphicon-star"></span></th>
-                <th style="width:7em" ng-click="sort.resort('publishDate')" class="gt-sorted">
-                    Fecha <span ng-class="sort.orderStyle['publishDate']"></span>
-                </th>
                 <th ng-click="sort.resort('NAME')" class="gt-sorted">
                     Nombre <span ng-class="sort.orderStyle['NAME']"></span>
                 </th>
@@ -104,6 +101,9 @@
                 <th style="width:10em" ng-click="sort.resort('owner.name')" class="gt-sorted">
                     Compartida por <span ng-class="sort.orderStyle['owner.name']"></span>
                 </th>
+                <th style="width:7em" ng-click="sort.resort('publishDate')" class="gt-sorted">
+                    Fecha <span ng-class="sort.orderStyle['publishDate']"></span>
+                </th>
                 <th style="width:1em"></th>
             </tr>
           </thead>
@@ -115,7 +115,6 @@
                         <a ng-show="user.favorites.indexOf(recipe._id) != -1" type="button" class="glyphicon glyphicon-star" ng-click="removeFavorites(recipe)"></a>
                     </span>
                 </td>
-                <td>{{ recipe.publishDate|date:'dd-MM-yyyy' }}</td>
                 <td title="{{recipe.NAME}}">
                     <a ng-hide="recipe.owner._id == user._id" href="{{sharedUrl(recipe._id)}}">{{ recipe.NAME|limitText:100}}</a>
                     <a ng-show="recipe.owner._id == user._id" href="#/recipe/edit/{{encodeName(recipe._id)}}">{{ recipe.NAME|limitText:100}}</a>
@@ -135,6 +134,7 @@
                         <span ng-hide="recipe.owner._id == user._id">{{ recipe.owner.name }}</span>
                     </a>
                 </td>
+                <td>{{ recipe.publishDate|date:'dd-MM-yyyy' }}</td>
                 <td>
                     <a href="#/recipe/clone/{{encodeName(recipe._id)}}" type="button" class="btn btn-default btn-xs">clonar</a>
                 </td>
