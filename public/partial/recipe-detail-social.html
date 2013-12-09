@@ -34,5 +34,13 @@
                 <a ng-show="recipe.cloneFrom.owner == user._id" href="/#/recipe/edit/{{encodeName(recipe.cloneFrom._id)}}">{{ recipe.cloneFrom.NAME}}</a>
             </div>
         </div>
+        <div class="row" ng-show="recipe.version.length!=0">
+            <div style="margin:0 0.5em">
+                <strong>Actualizacion:</strong>
+                <div><b>User:</b> {{recipe.version[recipe.version.length-1].user_name}}</div>
+                <div><b>Fecha:</b> {{recipe.version[recipe.version.length-1].timeStamp | formatDate}}</div>
+                <div><b>Version:</b> {{recipe.version[recipe.version.length-1].number}}</div>
+            </div>
+        </div>
     </div>
 </div>

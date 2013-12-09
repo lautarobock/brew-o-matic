@@ -392,12 +392,22 @@
                     alertFactory.create('success','Receta Guardada!');
                     $location.path('/recipe/edit/' + saved._id) 
                 },function(error) {
-                    alertFactory.create('danger',error.data.error);
-                    $scope.notifications.push({
-                        type:'danger',
-                        title:'Error!',
-                        text:error.data.error
-                    });
+                    if ( error.status == 501 ) {
+                        alertFactory.create('warning',error.data.error,"Cuidado!");
+                        $scope.notifications.push({
+                            type:'warning',
+                            title:'Cuidado!',
+                            text:error.data.error
+                        });
+                    } else {
+                        alertFactory.create('danger',error.data.error);
+                        $scope.notifications.push({
+                            type:'danger',
+                            title:'Error!',
+                            text:error.data.error
+                        });
+                    }
+
                 });
             }
         };
@@ -488,7 +498,8 @@
                         PercentEvap: $scope.user.settings.defaultValues.PercentEvap,
                         TrubChillerLosses: $scope.user.settings.defaultValues.TrubChillerLosses,
                         isPublic: $scope.user.settings.defaultValues.isPublic,
-                        collaborators: []
+                        collaborators: [],
+                        version: []
                     });
                     $scope.changeYeast();
                 }                

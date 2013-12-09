@@ -120,6 +120,12 @@ exports.save = function(req, res) {
         if ( req.body.isPublic ) {
             recipe.publishDate = new Date();
         }
+        recipe.version.push({
+            number: 1,
+            user_id: req.session.user_id,
+            timeStamp: new Date(),
+            user_name: req.session.user_name
+        });
         recipe.save(callback);
         
         /**
@@ -165,6 +171,34 @@ exports.save = function(req, res) {
                     return;   
                 }
             }
+
+            var oldNumber = 0;
+            var actualNumber = 0;
+            if ( old.version.length != 0 ) {
+                oldNumber = old.version[old.version.length-1].number;
+
+            }
+            if ( req.body.version.length != 0 ) {
+                actualNumber = req.body.version[req.body.version.length-1].number;
+            }
+
+
+            if ( oldNumber != actualNumber ) {
+                res.send(501,{
+                    error: "La receta fue actualizada por " + old.version[old.version.length-1].user_name + ". debe actualizar (F5) antes de proseguir, perdera los cambios hechos.",
+                    recipe: old
+                });
+                return;
+            }
+
+            req.body.version.push({
+                number: oldNumber+1,
+                user_id: req.session.user_id,
+                timeStamp: new Date(),
+                user_name: req.session.user_name
+            });
+
+
             if ( !old.isPublic && req.body.isPublic ) {
                 notifications.notifyOnPublish(req.body.NAME,id,req.session.user_name,req.session.user_id);
                 req.body.publishDate = new Date();

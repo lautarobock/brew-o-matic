@@ -207,7 +207,13 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     fixIngredients: String,
     mashTemp: Number,
     lossMashTemp: Number,
-    tags: [String]
+    tags: [String],
+    version: [{
+        number: Number,
+        user_id: String,
+        timeStamp: Date,
+        user_name: String
+    }]
 },{ _id: false }));
 
 exports.Bottle = mongoose.model("Bottle",new Schema({
