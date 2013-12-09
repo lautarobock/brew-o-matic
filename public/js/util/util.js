@@ -1,5 +1,44 @@
 (function(exports) {
     
+    function compare(o1,o2,field,result,parent) {
+        if ( o1[field] instanceof Date && o2[field] instanceof Date ) {
+            
+            if ( o1[field].getTime() != o2[field].getTime() ) {
+                result.push("$."+(parent||'')+field);    
+            }
+            return;
+        } else if ( o1[field] instanceof Object && o2[field] instanceof Object ) {
+            
+            var diff = exports.diff(o1[field],o2[field],field+".");
+            for (var i = 0; i<diff.length; i++ ) {
+                result.push(diff[i]);
+            }
+            
+            return;
+        } else if ( o1[field] != o2[field] ) {
+            
+            result.push("$."+(parent||'')+field);
+            return;
+        }
+        
+    }
+
+    exports.diff = function(obj1,obj2,parent) {
+        var r = [];
+        var ready = [];
+        for( var i in obj1 ) {
+            ready.push(i);
+            compare(obj1,obj2,i,r,parent);
+        }
+        for( var i in obj2 ) {
+            if ( ready.indexOf(i) == -1 ) {
+                ready.push(i);
+                compare(obj1,obj2,i,r,parent);
+            }
+        }
+        return r;
+    };
+
     /**
      * Heleper class to manage arrays
      */
