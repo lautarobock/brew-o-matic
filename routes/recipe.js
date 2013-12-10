@@ -228,14 +228,33 @@ exports.publish = function(req, res) {
     });
 };
 
+
 exports.stats = function(req, res) {
-    //,owner:{$ne:req.session.user_id}
+
+    var values = {
+        publics: null,
+        owns: null,
+        collaborations: null
+    };
+
+    function complete() {
+        if ( values.publics != null && values.owns != null && values.collaborations != null ) {
+            res.send(values);
+        }
+    }
+
     model.Recipe.count({isPublic:true},function(err, publicCount) {
-        model.Recipe.count({owner:req.session.user_id},function(err,ownCount) {
-            res.send({
-                publics: publicCount,
-                owns: ownCount
-            });
-        });
+        values.publics = publicCount;
+        complete();
+    });
+
+    model.Recipe.count({owner:req.session.user_id},function(err,ownCount) {
+        values.owns = ownCount;
+        complete();
+    });
+
+    model.Recipe.count({collaborators: { $in : [req.session.user_id] } },function(err,collabCount) {
+        values.collaborations = collabCount;
+        complete();
     });
 };
