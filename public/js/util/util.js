@@ -1,8 +1,8 @@
 (function(exports) {
     
     function DiffHelper() {
-        var ready = [];
-        var result = [];
+        var ready;
+        var result;
 
         function parentArray(parent) {
             return {
@@ -22,38 +22,37 @@
             };
         }
 
-
         this.compareAll = function(obj1,obj2,parent) {
             for( var i in obj1 ) {
                 if ( ready.indexOf(i) == -1 ) {
                     ready.push(i);
+                    var p;
                     if ( obj1 instanceof Array ) {
-                        this.compare(obj1,obj2,i,parent||parentArray("$"));
+                        p = parentArray("$")
                     } else {
-                        this.compare(obj1,obj2,i,parent||parentObject("$"));
+                        p = parentObject("$");
                     }
+                    this.compare(obj1,obj2,i,parent||p);
                 }
                 
             }
         };
 
         this.compare = function(o1,o2,field,parent) {
+            var diff = [];
             if ( o1[field] instanceof Date && o2[field] instanceof Date ) {
                 if ( o1[field].getTime() != o2[field].getTime() ) {
-                    result.push(parent.wrap(field));
+                    diff = [parent.wrap(field)];
                 }
             } else if ( o1[field] instanceof Array && o2[field] instanceof Array ) {
-                var diff = new DiffHelper().diff(o1[field],o2[field],parentArray(parent.wrap(field)));
-                for (var i = 0; i<diff.length; i++ ) {
-                    result.push(diff[i]);
-                }
+                diff = new DiffHelper().diff(o1[field],o2[field],parentArray(parent.wrap(field)));
             } else if ( o1[field] instanceof Object && o2[field] instanceof Object ) {
-                var diff = new DiffHelper().diff(o1[field],o2[field],parentObject(parent.wrap(field)));
-                for (var i = 0; i<diff.length; i++ ) {
-                    result.push(diff[i]);
-                }
+                diff = new DiffHelper().diff(o1[field],o2[field],parentObject(parent.wrap(field)));
             } else if ( o1[field] != o2[field] ) {
-                result.push(parent.wrap(field));
+                diff = [parent.wrap(field)];
+            }
+            for ( var i = 0; i<diff.length; i++ ) {
+                result.push(diff[i]);
             }
         };
 
