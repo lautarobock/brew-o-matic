@@ -18,6 +18,6 @@
   },
   "scripts": {
     "start": "node app.js",
-    "test": "node_modules/nodeunit/bin/nodeunit test"
+    "test": "./run-test.sh"
   }
 }
