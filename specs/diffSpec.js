@@ -256,7 +256,7 @@ describe("Diff", function() {
 		 * Add fermentable
 		 */
 		diff = util.diff(recipe2,recipe3);
-		console.log("diff",diff);
+		// console.log("diff",diff);
 		expect(diff.length).toBe(15);
 		expect(diff.indexOf("$.FERMENTABLES.FERMENTABLE[5]")).not.toBe(-1);
 		expect(diff.indexOf("$.FERMENTABLES.FERMENTABLE[0].PERCENTAGE")).not.toBe(-1);

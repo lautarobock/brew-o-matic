@@ -1,79 +1,73 @@
 (function(exports) {
     
-    function parentArray(parent) {
-        var p = {
-            parent: parent,
-            wrap: function(field) {
-                if ( parent ) {
+    function DiffHelper() {
+        var ready = [];
+        var result = [];
+
+        function parentArray(parent) {
+            return {
+                parent: parent,
+                wrap: function(field) {
                     return parent+"["+field+"]";
-                } else {
-                    return field;
                 }
-            }
-        };
-        return p;
-    }
+            };
+        }
 
-    function parentObject(parent) {
-        var p = {
-            parent: parent,
-            wrap: function(field) {
-                if ( parent ) {
+        function parentObject(parent) {
+            return {
+                parent: parent,
+                wrap: function(field) {
                     return parent+"."+field;
-                } else {
-                    return field;
                 }
+            };
+        }
+
+
+        this.compareAll = function(obj1,obj2,parent) {
+            for( var i in obj1 ) {
+                if ( ready.indexOf(i) == -1 ) {
+                    ready.push(i);
+                    if ( obj1 instanceof Array ) {
+                        this.compare(obj1,obj2,i,parent||parentArray("$"));
+                    } else {
+                        this.compare(obj1,obj2,i,parent||parentObject("$"));
+                    }
+                }
+                
             }
         };
-        return p;
-    }
 
-    function compare(o1,o2,field,result,parent) {
-
-        if ( o1[field] instanceof Date && o2[field] instanceof Date ) {
-            
-            if ( o1[field].getTime() != o2[field].getTime() ) {
+        this.compare = function(o1,o2,field,parent) {
+            if ( o1[field] instanceof Date && o2[field] instanceof Date ) {
+                if ( o1[field].getTime() != o2[field].getTime() ) {
+                    result.push(parent.wrap(field));
+                }
+            } else if ( o1[field] instanceof Array && o2[field] instanceof Array ) {
+                var diff = new DiffHelper().diff(o1[field],o2[field],parentArray(parent.wrap(field)));
+                for (var i = 0; i<diff.length; i++ ) {
+                    result.push(diff[i]);
+                }
+            } else if ( o1[field] instanceof Object && o2[field] instanceof Object ) {
+                var diff = new DiffHelper().diff(o1[field],o2[field],parentObject(parent.wrap(field)));
+                for (var i = 0; i<diff.length; i++ ) {
+                    result.push(diff[i]);
+                }
+            } else if ( o1[field] != o2[field] ) {
                 result.push(parent.wrap(field));
             }
-        } else if ( o1[field] instanceof Array && o2[field] instanceof Array ) {
-            var diff = exports.diff(o1[field],o2[field],parentArray(parent.wrap(field)));
-            for (var i = 0; i<diff.length; i++ ) {
-                result.push(diff[i]);
-            }
-        } else if ( o1[field] instanceof Object && o2[field] instanceof Object ) {
-            
-            var diff = exports.diff(o1[field],o2[field],parentObject(parent.wrap(field)));
-            for (var i = 0; i<diff.length; i++ ) {
-                result.push(diff[i]);
-            }
-        } else if ( o1[field] != o2[field] ) {
-            result.push(parent.wrap(field));
-        }
-        
+        };
+
+        this.diff = function(obj1,obj2,parent) {
+            ready = [];
+            result = [];
+            this.compareAll(obj1,obj2,parent);
+            this.compareAll(obj2,obj1,parent);
+            return result;
+        };
     }
 
-    exports.diff = function(obj1,obj2,parent) {
-        var r = [];
-        var ready = [];
-        for( var i in obj1 ) {
-            ready.push(i);
-            if ( obj1 instanceof Array ) {
-                compare(obj1,obj2,i,r,parent||parentArray("$"));
-            } else {
-                compare(obj1,obj2,i,r,parent||parentObject("$"));
-            }
-        }
-        for( var i in obj2 ) {
-            if ( ready.indexOf(i) == -1 ) {
-                ready.push(i);
-                if ( obj2 instanceof Array ) {
-                    compare(obj1,obj2,i,r,parent||parentArray("$"));
-                } else {
-                    compare(obj1,obj2,i,r,parent||parentObject("$"));
-                }
-            }
-        }
-        return r;
+    exports.diff = function(obj1,obj2) {
+        return new DiffHelper().diff(obj1,obj2);
     };
 
     /**
