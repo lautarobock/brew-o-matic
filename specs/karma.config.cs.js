@@ -31,13 +31,14 @@ module.exports = function(config) {
     // list of files to exclude
     exclude: [
         'lib/*.js',
+        '../public/js/all.js',
         'lib/*.css'
     ],
 
 
     // test results reporter to use
     // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-    reporters: ['progress'],
+    reporters: ['dots','progress'],
 
 
     // web server port

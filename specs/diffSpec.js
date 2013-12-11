@@ -13,6 +13,7 @@ describe("Diff", function() {
 	};
 
 	var obj4 = {
+	
 	};
 	
 	var big1 = {
