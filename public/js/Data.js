@@ -38,7 +38,7 @@ data.factory("HopUse",function() {
                 },{
                     name:'Mash',
                     utilization: 0.2
-                },
+                }
                 ];
         }
     };

@@ -109,7 +109,7 @@
             ignoreCase: true
         };
         $scope.filterData['tags'] = {
-            comparator: 'in',
+            comparator: 'searchIn',
             type: 'list',
             ignoreCase: true
         };

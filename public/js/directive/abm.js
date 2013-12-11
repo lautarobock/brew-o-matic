@@ -50,7 +50,7 @@
                 return patt.exec(convert(getValue(item,fieldName),ic)) != null ? 0 : -1;
             };
         },
-        in: function(fieldName,value,ic,type) {
+        searchIn: function(fieldName,value,ic,type) {
             return function(item) {
                 if ( !type || type == 'value') {
                     return value.indexOf(getValue(item,fieldName)) != -1  ? 0 : -1;
@@ -186,7 +186,7 @@
                         util.Arrays.remove($scope.rows,row);
                     };
                     if (!row.$delete) {
-                        $scope.config().data.delete(row,clean);
+                        $scope.config().data.remove(row,clean);
                     } else {
                         row.$delete(clean);    
                     }
