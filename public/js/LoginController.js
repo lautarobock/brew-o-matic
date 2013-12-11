@@ -53,6 +53,9 @@
             }
         });
 
+        $scope.googleSignIn = function() {
+            gapi.auth.signIn(additionalParams);
+        };
         
         notificationData.listener = function() {
             $scope.notificationClass = '';
