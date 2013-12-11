@@ -14,9 +14,7 @@
   "dependencies": {
     "express": "3.3.5",
     "ejs": "*",
-    "stylus": "*",
-    "mongoose": "*"
-
+    "stylus": "*"
   },
   "engines": {
     "node": "0.10.x",
