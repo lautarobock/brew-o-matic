@@ -81,12 +81,27 @@
     </div>
     <script type="text/javascript">
         (function() {
-            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-            po.src = 'https://apis.google.com/js/client:plusone.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+            var po = document.createElement('script');
+            po.type = 'text/javascript'; po.async = true;
+            po.src = 'https://apis.google.com/js/client:plusone.js?onload=apiLoaded';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(po, s);
         })();
-      
-        function signinCallback(authResult) {
+
+        var additionalParams = {
+            'callback': cb,
+            'clientid': "819410194566.apps.googleusercontent.com",
+            'cookiepolicy': "single_host_origin",
+            'scope': "https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile",
+            'requestvisibleactions': "http://schemas.google.com/AddActivity",
+            approvalprompt: 'auto'
+        };
+
+        function apiLoaded() {
+            gapi.auth.signIn(additionalParams);
+        }
+
+        function cb(authResult) {
             var $scope = angular.element(document.getElementById('LoginController')).scope();
             $scope.$emit('g+login', authResult)
         }
