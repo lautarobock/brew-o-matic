@@ -22,6 +22,13 @@
                     <a href="/#/data/Bottle">Datos</a>
                 </li>
             </ul>
+            <ul class="nav navbar-nav navbar-right" ng-hide="user">
+                <li >
+                  <button class="btn btn-danger" style="margin-top: 0.5em" id="signinButton" ng-hide="user" ng-click="googleSignIn()">
+                      Google Sign-In
+                  </button>
+                </li>
+            </ul>
             <ul class="nav navbar-nav navbar-right" ng-show="user">
                 <li class="dropdown">
                     <a  href="" class="dropdown-toggle" data-toggle="dropdown"><span>{{user.name}}</span> <b class="caret"></b></a>
@@ -30,31 +37,7 @@
                     </ul>
                 </li>
             </ul>
-            <span class="navbar-form navbar-right">
-              <!-- Place this tag where you want the +1 button to render. -->
-              <div class="g-plusone" data-annotation="inline" data-width="300"></div>
-              
-              <!-- Place this tag after the last +1 button tag. -->
-              <script type="text/javascript">
-                window.___gcfg = {lang: 'es-419'};
-              
-                (function() {
-                  var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-                  po.src = 'https://apis.google.com/js/plusone.js';
-                  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-                })();
-              </script>
-            </span>
-            <span id="signinButton" class="navbar-form navbar-right" ng-hide="user">
-              <span
-                class="g-signin"
-                data-callback="signinCallback"
-                data-clientid="819410194566.apps.googleusercontent.com"
-                data-cookiepolicy="single_host_origin"
-                data-requestvisibleactions="http://schemas.google.com/AddActivity"
-                data-scope="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile">
-              </span>
-            </span>
+           
         </div>
       </div>
     </nav>
