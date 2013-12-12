@@ -274,6 +274,15 @@ describe("Diff", function() {
 			.toBe(recipe3.FERMENTABLES.FERMENTABLE[2].PERCENTAGE);
 	});
 
+	it ("Should ignore some values by RegExp", function() {
+		var diff = util.diff(comments1,comments2,["\\[[0-9]\\]*\\.\\$\\$hashKey"]);
+		console.log("diff",diff);
+		expect(diff.length).toBe(0);
+	});	
+
+	var comments1 = [{"_id":"5245bff54b11374753000005_1382345605233","user_id":"5245bff54b11374753000005","name":"Lautaro Cozzani","text":"Receta experimental, no probada aun. \nPretende ser un clon de esta birra http://www.ratebeer.com/beer/brewdog-cocoa-psycho/194513/","date":"2013-10-21T08:53:25.233Z","$$hashKey":"1J2"},{"_id":"5245bff54b11374753000005_1383951398588","user_id":"5245bff54b11374753000005","name":"Lautaro Cozzani","text":"ufff.. volvi a tomar esta birra. ahora de botella, increible!! mas ganas de hacerla todavia!","date":"2013-11-08T22:56:38.588Z","$$hashKey":"1J1"},{"_id":"5245bff54b11374753000005_1386858034642","user_id":"5245bff54b11374753000005","name":"Lautaro Cozzani","text":"Otro comentario a ver q onda","date":"2013-12-12T14:20:34.642Z","$$hashKey":"1J0"},{"_id":"5245bff54b11374753000005_1386858042192","user_id":"5245bff54b11374753000005","name":"Lautaro Cozzani","text":"Again","date":"2013-12-12T14:20:42.192Z","$$hashKey":"1IZ"},{"_id":"52a9c31ff4842af42a00000a_1386858054762","user_id":"52a9c31ff4842af42a00000a","name":"Lautaro Mail","text":"Respuesta","date":"2013-12-12T14:20:54.762Z","$$hashKey":"1IY"}];
+	var comments2 = [{"_id":"5245bff54b11374753000005_1382345605233","user_id":"5245bff54b11374753000005","name":"Lautaro Cozzani","text":"Receta experimental, no probada aun. \nPretende ser un clon de esta birra http://www.ratebeer.com/beer/brewdog-cocoa-psycho/194513/","date":"2013-10-21T08:53:25.233Z"},{"_id":"5245bff54b11374753000005_1383951398588","user_id":"5245bff54b11374753000005","name":"Lautaro Cozzani","text":"ufff.. volvi a tomar esta birra. ahora de botella, increible!! mas ganas de hacerla todavia!","date":"2013-11-08T22:56:38.588Z"},{"_id":"5245bff54b11374753000005_1386858034642","user_id":"5245bff54b11374753000005","name":"Lautaro Cozzani","text":"Otro comentario a ver q onda","date":"2013-12-12T14:20:34.642Z"},{"_id":"5245bff54b11374753000005_1386858042192","user_id":"5245bff54b11374753000005","name":"Lautaro Cozzani","text":"Again","date":"2013-12-12T14:20:42.192Z"},{"_id":"52a9c31ff4842af42a00000a_1386858054762","user_id":"52a9c31ff4842af42a00000a","name":"Lautaro Mail","text":"Respuesta","date":"2013-12-12T14:20:54.762Z"}];
+
 	var recipe3 = {
 	  "ABV": 12.14,
 	  "BATCH_SIZE": 10,

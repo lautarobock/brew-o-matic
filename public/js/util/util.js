@@ -3,6 +3,7 @@
     function DiffHelper() {
         var ready;
         var result;
+        this.excludes = [];
 
         function parentArray(parent) {
             return {
@@ -45,14 +46,25 @@
                     diff = [parent.wrap(field)];
                 }
             } else if ( o1[field] instanceof Array && o2[field] instanceof Array ) {
-                diff = new DiffHelper().diff(o1[field],o2[field],parentArray(parent.wrap(field)));
+                var helper = new DiffHelper();
+                helper.excludes = this.excludes;
+                diff = helper.diff(o1[field],o2[field],parentArray(parent.wrap(field)));
             } else if ( o1[field] instanceof Object && o2[field] instanceof Object ) {
-                diff = new DiffHelper().diff(o1[field],o2[field],parentObject(parent.wrap(field)));
+                var helper = new DiffHelper();
+                helper.excludes = this.excludes;
+                diff = helper.diff(o1[field],o2[field],parentObject(parent.wrap(field)));
             } else if ( o1[field] != o2[field] ) {
                 diff = [parent.wrap(field)];
             }
             for ( var i = 0; i<diff.length; i++ ) {
-                result.push(diff[i]);
+                var fail = false;
+                for ( var ri=0; ri<this.excludes.length; ri++) {
+                    var reg = new RegExp(this.excludes[ri]);
+                    var fail = fail || reg.test(diff[i]);
+                }
+                if ( !fail ) {
+                    result.push(diff[i]);
+                }    
             }
         };
 
@@ -65,8 +77,10 @@
         };
     }
 
-    exports.diff = function(obj1,obj2) {
-        return new DiffHelper().diff(obj1,obj2);
+    exports.diff = function(obj1,obj2,excludes) {
+        var helper = new DiffHelper();
+        helper.excludes = excludes || [];
+        return helper.diff(obj1,obj2);
     };
 
     /**

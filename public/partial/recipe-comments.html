@@ -5,6 +5,10 @@
             <label for="text">Comentario</label>
             <textarea ng-blur="blur(comment)" ng-focus="focus(comment)" rows="{{rows}}" class="form-control" id="text" placeholder="Escriba su comentario" ng-model="comment"/>
             <button ng-click="addComment(comment)" style="margin-top: 1em;" type="button" class="btn btn-primary">Aceptar</button>
+            
+            <p class="text-info" ng-show="loadNewComments">
+                Se han actualizado nuevos comentarios!
+            </p>
         </div>
         <ul class="list-group" style="margin-top: 1em;">
             <li class="list-group-item" ng-repeat="comment in recipe.comments | orderBy:'-date'">

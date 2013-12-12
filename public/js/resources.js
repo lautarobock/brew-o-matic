@@ -31,6 +31,10 @@
                 method:'PUT',
                 params: {operation:'comment'},
                 isArray:true },
+            getComments: {
+                method:'GET',
+                params: {operation:'comment'},
+                isArray:true },
             removeComment: {
                 method:'PUT',
                 params: {operation:'remove_comment'},

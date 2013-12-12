@@ -32,7 +32,13 @@ exports.findAll = function(req, res) {
 exports.get = function(req, res) {
     model.Recipe.findOne({_id:req.params.id}).populate('collaborators').populate('owner').populate('cloneFrom').exec(function(err,results) {
         res.send(results);
-    });    
+    });
+};
+
+exports.getComments = function(req,res) {
+    model.Recipe.findOne({_id:req.params.id}).exec(function(err,results) {
+        res.send(results.comments);
+    });
 };
 
 exports.remove= function(req, res) {
