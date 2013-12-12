@@ -5,6 +5,7 @@
         <link rel='stylesheet' href='/css/style.css' />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        <script src="https://apis.google.com/js/client:plusone.js"></script>
 
         <link rel="canonical" href="http://brew-o-matic.eu01.aws.af.cm" />
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css">
@@ -75,25 +76,41 @@
     </div>
     </div>
     <script type="text/javascript">
+
         (function() {
-            var po = document.createElement('script'); 
-            po.type = 'text/javascript'; po.async = true;
-            po.src = 'https://apis.google.com/js/client:plusone.js?onload=apiLoaded';
-            var s = document.getElementsByTagName('script')[0]; 
-            s.parentNode.insertBefore(po, s);
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = 'https://apis.google.com/js/plusone.js?onload=onLoadSuccess';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
         })();
 
-        var additionalParams = {
-              'callback': cb,
-              'clientid': "819410194566.apps.googleusercontent.com",
-              'cookiepolicy': "single_host_origin",
-              'scope': "https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile",
-              'requestvisibleactions': "http://schemas.google.com/AddActivity",
-              approvalprompt: 'auto'
-        };
-      
-        function apiLoaded() {
-            gapi.auth.signIn(additionalParams);
+        // var additionalParams = {
+        //       'callback': cb,
+        //       'clientid': "819410194566.apps.googleusercontent.com",
+        //       'cookiepolicy': "single_host_origin",
+        //       'scope': "https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile",
+        //       'requestvisibleactions': "http://schemas.google.com/AddActivity",
+        //       approvalprompt: 'auto'
+        // };
+
+        var google_client_id = '819410194566.apps.googleusercontent.com';
+        var google_scope = ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'];
+
+        function googleSignIn() {
+            gapi.auth.authorize({
+                client_id: google_client_id,
+                scope: google_scope,
+                immediate:false
+            },
+            cb);
+        }
+
+        function onLoadSuccess() {
+            gapi.auth.authorize({
+                client_id: google_client_id,
+                scope: google_scope,
+                immediate:true
+            },
+            cb);
         }
 
         function cb(authResult) {
