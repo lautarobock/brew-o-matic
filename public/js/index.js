@@ -191,8 +191,7 @@
         $rootScope.breadcrumbs = [];
         
         $scope.login = function() {
-            var button = $("#signinButton");
-            button.click();
+            googleSignIn();
         };
     });
     

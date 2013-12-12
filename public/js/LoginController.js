@@ -11,7 +11,11 @@
     index.controller("LoginController",function($scope,$rootScope,User,Notification,notificationData) {
         
         $scope.$on('g+login',function(event,authResult) {
-            if (authResult['access_token']) {
+            if ( authResult == null ) {
+                $rootScope.loginSuccess = true;
+                $scope.loginError = '';
+                $rootScope.$apply();
+            } else if ( authResult['access_token']) {
               // Autorizado correctamente
               // Oculta el botón de inicio de sesión ahora que el usuario está autorizado, por ejemplo:
               //Guardo el token
@@ -35,8 +39,9 @@
               });
               
               //document.getElementById('signinButton').setAttribute('style', 'display: none');
-            } else if (authResult['error'] == "immediate_failed") {
+            } else if ( authResult['error'] == "immediate_failed") {
                 $rootScope.loginSuccess = true;
+                $scope.loginError = '';
                 $rootScope.$apply();
             } else if ( authResult['error'] ) {
                 $rootScope.loginSuccess = true;
@@ -54,7 +59,7 @@
         });
 
         $scope.googleSignIn = function() {
-            gapi.auth.signIn(additionalParams);
+            googleSignIn();
         };
         
         notificationData.listener = function() {
