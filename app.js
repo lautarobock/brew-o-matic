@@ -105,6 +105,7 @@ app.put('/user/settings',filter,user.updateSettings);
 app.get('/recipe/public',filter,recipe.findPublic);
 app.get('/recipe/collaborated',filter,recipe.findCollaborated);
 app.put('/recipe/comment',filter,recipe.addComment);
+app.get('/recipe/comment:id',filter,recipe.getComments);
 app.post('/recipe/publish_:id',filter,recipe.publish);
 app.put('/recipe/remove_comment',filter,recipe.deleteComment);
 app.get('/recipe',filter,recipe.findAll);
