@@ -204,6 +204,9 @@ exports.save = function(req, res) {
                 user_name: req.session.user_name
             });
 
+            //The comments is not update in this operation, only add/remove in other operation. Justo take del commments of previous version.
+
+            req.body.comments = old.comments;
 
             if ( !old.isPublic && req.body.isPublic ) {
                 notifications.notifyOnPublish(req.body.NAME,id,req.session.user_name,req.session.user_id);
