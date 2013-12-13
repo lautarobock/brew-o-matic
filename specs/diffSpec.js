@@ -276,7 +276,7 @@ describe("Diff", function() {
 
 	it ("Should ignore some values by RegExp", function() {
 		var diff = util.diff(comments1,comments2,["\\[[0-9]\\]*\\.\\$\\$hashKey"]);
-		console.log("diff",diff);
+		// console.log("diff",diff);
 		expect(diff.length).toBe(0);
 	});	
 

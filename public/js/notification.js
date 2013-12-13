@@ -58,8 +58,5 @@
             return '';
         };
         
-        //$rootScope.notificationCount = 0;
-        //$rootScope.notificationClass = '';
-        
     });
 })();

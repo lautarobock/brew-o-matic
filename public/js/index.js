@@ -31,7 +31,6 @@
                 when('/recipe/edit/:recipeId', {templateUrl: 'partial/recipe-detail.html', controller: 'RecipeDetailCtrl'}).
                 when('/recipe/clone/:recipeId', {templateUrl: 'partial/recipe-detail.html', controller: 'RecipeDetailCtrl'}).
                 when('/recipe/new', {templateUrl: 'partial/recipe-detail.html', controller: 'RecipeDetailCtrl'}).
-                //when('/stats', {templateUrl: 'partial/user/user-stats.html', controller: 'UserStatsCtrl'}).
                 when('/settings', {templateUrl: 'partial/user/user-settings.html', controller: 'UserSettingsCtrl'}).
                 when('/notification', {templateUrl: 'partial/user/user-notification.html', controller: 'NotificationsCtrl'}).
                 when('/data/:entity', {templateUrl: 'partial/data/abm.html', controller: 'AbmCtrl'}).
@@ -42,7 +41,6 @@
     index.controller("HomeCtrl",function($scope,$rootScope,User,Recipe,$routeParams) {
         
         $scope.$watch('user',function() {
-            //$scope.notifications = Notification.query($scope.updateCount);
             $scope.viewUser = User.get({id:$routeParams.userId},function() {
                 $rootScope.breadcrumbs = [{
                     link: '#',
@@ -69,72 +67,6 @@
         };        
         
     });    
-    
-    var notification = angular.module("notification",[]);
-    
-    notification.factory("notificationData", function() {
-        return {
-            listener: null,
-            reset: function() {
-                if ( this.listener ) {
-                    this.listener();
-                }
-            }
-        };
-    });
-    
-    notification.controller("NotificationsCtrl",function($scope,Notification,$rootScope,notificationData) {
-        
-        notificationData.reset();
-        
-        $scope.updateCount = function(notifications) {
-            $scope.countUnread = 0;
-            $scope.countNew = 0;
-            angular.forEach(notifications, function(not) {
-                if ( not.status == 'new') {
-                    $scope.countNew++;
-                } else if ( not.status == 'unread') {
-                    $scope.countUnread++;
-                }
-            });
-        };
-
-        $scope.$watch('user',function() {
-            $scope.notifications = Notification.query($scope.updateCount);
-        });
-
-
-        $rootScope.breadcrumbs = [{
-            link: '#',
-            title: 'Home'
-        },{
-            link: '#',
-            title: 'Notificaciones'
-        }];
-        
-        $scope.markAsRead = function(notification) {
-            if ( notification.status != 'read' ) {
-                notification.status = 'read';
-                notification.$save();
-                $scope.updateCount($scope.notifications);
-            }
-        };
-        
-        $scope.statusClass = function(notification) {
-            if ( notification.status == 'unread') { 
-                return 'gt-notification-unread';
-            } else if ( notification.status == 'new') {
-                return 'gt-notification-new';
-            }
-            return '';
-        };
-        
-        //$rootScope.notificationCount = 0;
-        //$rootScope.notificationClass = '';
-        
-    });
-    
-    
     
     index.controller("UserSettingsCtrl",function($scope,User,$rootScope) {
         $scope.disconnectUser = function() {
@@ -183,10 +115,6 @@
         };
     });
     
-    // index.controller("ShareController", function($scope) {
-    //     $scope.recipe = Recipe.get({id:$routeParams.recipeId});
-    // });
-
     index.controller("MainController",function($scope,$rootScope) {
         $rootScope.breadcrumbs = [];
         

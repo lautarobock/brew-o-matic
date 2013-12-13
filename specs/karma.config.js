@@ -32,6 +32,7 @@ module.exports = function(config) {
     exclude: [
         'lib/*.js',
         '../public/js/all.js',
+        '../public/js/fb.js',
         'lib/*.css'
     ],
 
