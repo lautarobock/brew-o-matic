@@ -93,6 +93,7 @@
                 return liters;
             },
             estimateLiters: function($index,BATCH_SIZE,stages) {
+                if ( $index >= stages.length) throw {message:'El indice esta fuera de intervalo'};
                 var liters = BATCH_SIZE;
                 for ( var i=0; i<$index; i++ ) {
                     var it = stages[i];
@@ -138,7 +139,7 @@
                 return kg / 0.45359;
             },
             toOz: function(kg) {
-                return kg * 1000 * 0.035274;
+                return kg * 35.274;
             },
             toGal: function(liters) {
                 return liters * 0.264172052637296;
@@ -149,6 +150,10 @@
             toPotential: function(ppg) {
                 return this.round((ppg + 1000) / 1000,1000);
             },
+            /**
+             * Redondea con la cantidad de zeros. Pero zeros es un numero potencia de 10. 
+             * Si no lo es, el comportamiento esta no especificado.
+             */
             round: function (value, zeros) {
                 return Math.round(value*zeros)/zeros;
             },
