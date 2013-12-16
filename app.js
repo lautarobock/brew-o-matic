@@ -34,16 +34,10 @@ if ('development' == app.get('env')) {
 }
 
 //Initialize Mongoose
-//mongoose.connect('localhost', 'emarcialsys');
 //mongodb://af_brew-o-matic-lautaromail:mngn0k588adkt5er4h758tp1im@ds047948.mongolab.com:47948/af_brew-o-matic-lautaromail
 mongoose.connect(process.env.MONGOLAB_URI);
 //mongoose.connect('mongodb://app:lac713@ds047948.mongolab.com:47948/af_brew-o-matic-lautaromail');
 
-
-//app.get('/user/google_*', function(req,res,next){
-//    
-//    next();
-//});
 
 function filterAdmin(req,res,next){
     console.log("checking admin session");
@@ -88,19 +82,15 @@ function filter (req,res,next){
     }
 }
 
-//app.all('/user*', filter);
-//app.all('/recipe*', filter);
 var recipe = require("./routes/recipe.js");
 var data = require("./routes/data.js");
 
-//app.get('/', routes.index);findStats
 app.get('/user/google_:google_id', user.getByGoogleId);
 app.post('/user', user.add);
 app.get('/user/id_:id', user.get);
 app.put('/user/favorite_add',filter,user.addToFavorites);
 app.put('/user/favorite_drop',filter,user.removeFromFavorites);
 app.get('/user',filter,data.User.findAll);
-//app.get('/user/stats',filter,user.findStats)
 app.put('/user/settings',filter,user.updateSettings);
 app.get('/recipe/public',filter,recipe.findPublic);
 app.get('/recipe/collaborated',filter,recipe.findCollaborated);
@@ -140,6 +130,9 @@ for (s in admin ) {
   app.post('/admin/' + admin[s].toLowerCase(),[filter,filterAdmin],data[admin[s]].save);
   app.delete('/admin/' + admin[s].toLowerCase()+ "/:id",[filter,filterAdmin],data[admin[s]].remove);
 }
+
+var push = require("./routes/push.js");
+push.initOn(app);
 
 //setInterval(function() {
 //    console.log("RUNNING SCHEDULE");

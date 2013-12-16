@@ -15,7 +15,8 @@
     "express": "3.3.5",
     "ejs": "*",
     "stylus": "*",
-    "mongoose": "*"
+    "mongoose": "*",
+    "socket.io": "*"
   },
   "engines": {
     "node": "0.10.x",
