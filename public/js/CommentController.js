@@ -2,7 +2,7 @@
     
     var comments = angular.module("comments",[]);
 
-    comments.controller("CommentController",function($scope,Recipe,$filter,$timeout,$interval,Observer) {
+    comments.controller("CommentController",function($scope,Recipe,$filter,$timeout,$interval,observable) {
         
         $scope.rows = 1;
 
@@ -38,16 +38,37 @@
 //            });
 //        },30*1000);
 
-        var d = $interval(function () {
-            var updates = Observer.query({}, function() {
-                var changes = false;
-                for ( var i=0; i<updates.length; i++ ) {
-                    var u = updates[i].value;
-                    if ( u.indexOf('RECIPE_COMMENT_ADD_') == 0 ) {
-                        changes = true;
-                    }
-                }
-                if ( changes ) {
+        // var d = $interval(function () {
+        //     var updates = Observer.query({}, function() {
+        //         var changes = false;
+        //         for ( var i=0; i<updates.length; i++ ) {
+        //             var u = updates[i].value;
+        //             if ( u.indexOf('RECIPE_COMMENT_ADD_') == 0 ) {
+        //                 changes = true;
+        //             }
+        //         }
+        //         if ( changes ) {
+        //             Recipe.getComments({id:$scope.recipe._id},function(comments) {
+        //                 console.log("comments",comments);
+        //                 var diff = util.diff($scope.recipe.comments,comments,
+        //                     ["\\[[0-9]*\\]*\\.\\$\\$hashKey","\\[[0-9]\\]*\\.\\$.*","\\$\\[\\$promise\\]", "\\$\\[\\$resolved\\]"]);
+        //                 if ( diff.length != 0 ) {
+        //                     console.log("diff",diff);
+        //                     $scope.loadNewComments = true;
+        //                     $timeout(function() {
+        //                         $scope.loadNewComments = false;
+        //                     },3000);
+        //                     $scope.recipe.comments = comments;
+        //                 }
+        //             });
+        //         }
+        //     });
+        // },10*1000);
+
+        var obs;
+        $scope.$watch("recipe._id", function () {
+            if ( $scope.recipe && $scope.recipe._id ) {
+                obs = observable.register("RECIPE_COMMENT_ADD_" + $scope.recipe._id, function() {
                     Recipe.getComments({id:$scope.recipe._id},function(comments) {
                         console.log("comments",comments);
                         var diff = util.diff($scope.recipe.comments,comments,
@@ -61,20 +82,15 @@
                             $scope.recipe.comments = comments;
                         }
                     });
-                }
-            });
-        },10*1000);
-
-        $scope.$watch("recipe._id", function () {
-            if ( $scope.recipe && $scope.recipe._id ) {
-                Observer.save({id:"RECIPE_COMMENT_ADD_" + $scope.recipe._id});
+                });
             };
         });
 
 
         $scope.$on('$destroy',function() {
-            $interval.cancel(d);
-            Observer.remove({id:"RECIPE_COMMENT_ADD_" + recipe._id});
+            // $interval.cancel(d);
+            // Observer.remove({id:"RECIPE_COMMENT_ADD_" + recipe._id});
+            obs.cancel();
         });
 
 

@@ -18,7 +18,8 @@
                                 'admin',
                                 'ui.bootstrap',
                                 'alerts',
-                                'env']);
+                                'env',
+                                'observer']);
 
     index.
         config(['$routeProvider', function($routeProvider) {
