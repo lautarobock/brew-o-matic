@@ -4,7 +4,7 @@
  */
 
 //var routes = require('./routes');
-var model = require('./domain/model.js');
+var model = require('./../../domain/model.js');
 var mongoose = require('mongoose');
 
 mongoose.connect(process.env.MONGOLAB_URI);

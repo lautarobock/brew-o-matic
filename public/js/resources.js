@@ -41,6 +41,10 @@
                 isArray:true }
         });
     });
+
+    res.factory("Observer", function($resource) {
+       return $resource("observer/:id",{id:"@id"});
+    });
     
     res.factory('Notification',function($resource,$rootScope) {
         var params = function() {

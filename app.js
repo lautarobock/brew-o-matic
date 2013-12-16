@@ -119,6 +119,11 @@ app.get('/notification',filter,notifications.findAll);
 app.get('/notification/news',filter,notifications.findNews);
 app.post("/notification/:id",filter,notifications.update);
 
+//Observer
+var webobserver = require("./routes/web-observer");
+app.post("/observer/:id",filter,webobserver.when);
+app.delete("/observer/:id",filter,webobserver.cancel);
+app.get("/observer",filter,webobserver.poll);
 
 var services = ['Style','Grain','Hop','Yeast','Misc','Bottle','Tag'];
 for (s in services ) {

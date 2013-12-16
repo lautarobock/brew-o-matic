@@ -1,6 +1,7 @@
 var actions = require('./actions.js');
 var notifications = require('../util/notifications.js');
 var model = require('../domain/model.js');
+var observer = require("./observer");
 var Arrays = require('../public/js/util/util.js').Arrays;
 
 
@@ -88,6 +89,8 @@ exports.addComment = function(req,res) {
             recipe,
             req.session.user_id,
             req.session.user_name);
+
+        observer.change("RECIPE_COMMENT_ADD_" + recipe._id);
     });
 };
 
