@@ -110,10 +110,10 @@ app.get('/notification/news',filter,notifications.findNews);
 app.post("/notification/:id",filter,notifications.update);
 
 //Observer
-var webobserver = require("./routes/web-observer");
-app.post("/observer/:id",filter,webobserver.when);
-app.delete("/observer/:id",filter,webobserver.cancel);
-app.get("/observer",filter,webobserver.poll);
+// var webobserver = require("./routes/web-observer");
+// app.post("/observer/:id",filter,webobserver.when);
+// app.delete("/observer/:id",filter,webobserver.cancel);
+// app.get("/observer",filter,webobserver.poll);
 
 var services = ['Style','Grain','Hop','Yeast','Misc','Bottle','Tag'];
 for (s in services ) {
@@ -131,16 +131,18 @@ for (s in admin ) {
   app.delete('/admin/' + admin[s].toLowerCase()+ "/:id",[filter,filterAdmin],data[admin[s]].remove);
 }
 
-var push = require("./routes/push.js");
-push.initOn(app);
 
 //setInterval(function() {
 //    console.log("RUNNING SCHEDULE");
 //    notifications.removeOld();
 //},5000);
 
-http.createServer(app).listen(app.get('port'), function(){
+var server = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+var push = require("./routes/push.js");
+push.initOn(server);
+
 
 //mongoose.disconnect();

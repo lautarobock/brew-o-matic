@@ -7,7 +7,7 @@
 	};
 
 	observer.run(function(observable) {
-		observable.start();
+		// observable.start();
 	});
 
     observer.factory("Observer", function($resource) {

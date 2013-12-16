@@ -72,8 +72,11 @@ exports.addComment = function(req,res) {
             text: req.body.text,
             date: new Date()
         });
-        recipe.save();
-        res.send(recipe.comments);
+        recipe.save(function() {
+            res.send(recipe.comments);
+            require("./push").emit("RECIPE_COMMENT_ADD_" + recipe._id,{});
+        });
+        
         
         //LOG action
         actions.log(req.session.user_id, "ADD_COMMENT","NAME: '"+recipe.NAME+"'. recipe_id: "+recipe._id);
@@ -90,7 +93,7 @@ exports.addComment = function(req,res) {
             req.session.user_id,
             req.session.user_name);
 
-        observer.change("RECIPE_COMMENT_ADD_" + recipe._id);
+        // observer.change("RECIPE_COMMENT_ADD_" + recipe._id);
     });
 };
 

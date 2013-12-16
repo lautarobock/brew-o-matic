@@ -1,19 +1,25 @@
 
-var app = require('http').createServer(handler);
 var io = require('socket.io');
 
+var util = require("../public/js/util/util.js");
 
-var _socket;
+var _socket = [];
 
 exports.initOn = function(app) {
-	io.listen(app);
-
-	io.socket.on("connection", function(socket) {
+	var i = io.listen(app);
+	i.sockets.on("connection", function(socket) {
 		console.log("INFO", "WebSocket start");
-		_socket = socket;
+		_socket.push(socket);
+		
+		socket.on('disconnect', function () {
+		    util.Arrays.remove(_socket,socket);
+		});
 	});
 };
 
 exports.emit = function(id, data) {
-	_socket.emit(id, data);
+	for ( var i=0; i<_socket.length; i++ ) {
+		_socket[i].volatile.emit(id, data);	
+	}
+	
 };
