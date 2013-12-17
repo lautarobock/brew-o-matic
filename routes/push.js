@@ -7,6 +7,7 @@ var _socket = [];
 
 exports.initOn = function(app) {
 	var i = io.listen(app);
+    i.set('transports', ['websocket','xhr-polling']);
 	i.sockets.on("connection", function(socket) {
 		console.log("INFO", "WebSocket start");
 		_socket.push(socket);

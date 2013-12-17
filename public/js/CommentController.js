@@ -2,7 +2,7 @@
     
     var comments = angular.module("comments",[]);
 
-    comments.controller("CommentController",function($scope,Recipe,$filter,$timeout,$interval,observable) {
+    comments.controller("CommentController",function($scope,Recipe,$filter,$timeout,$interval,observable,$location) {
         
         $scope.rows = 1;
 
@@ -40,7 +40,7 @@
                 //         }
                 //     });
                 // });
-            var socket = io.connect('http://localhost');
+            var socket = io.connect('http://'+$location.host());
             socket.on("RECIPE_COMMENT_ADD_" + $scope.recipe._id, function (data) {
                 console.log(data);
                 Recipe.getComments({id:$scope.recipe._id},function(comments) {
