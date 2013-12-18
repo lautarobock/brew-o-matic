@@ -9,60 +9,69 @@
         $scope.loadNewComments = false;
         
         $scope.removeComment = function(comment) {
-            var remove = {
-                comment: comment,
-                recipe_id: $scope.recipe._id
-            };
-            Recipe.removeComment(remove,function(comments){
-                    $('#confirmation').modal('hide');
-                    $timeout(function() {
-                        $scope.recipe.comments = comments;
-                    },500);
-                    
-                });
+            $('#confirmation-'+comment._id).modal('hide');
+            $timeout(function() {
+                var remove = {
+                    comment: comment,
+                    recipe_id: $scope.recipe._id
+                };
+                Recipe.removeComment(remove);    
+            }, 1*1000);
+            
         };
 
-        var obs;
+        $scope.comment_new_id = null;
+
+        function updateComments(comments) {
+            var diff = util.diff($scope.recipe.comments,comments,[
+                "\\[[0-9]*\\]*\\.\\$\\$hashKey",
+                "\\[[0-9]*\\]*\\.\\$.*",
+                "\\$\\[\\$promise\\]", 
+                "\\$\\[\\$resolved\\]"]);
+
+            if ( diff.length != 0 ) {
+                console.log("diff",diff);
+
+                //En este momento solo puede haber un comentario extra o uno menos.
+                if ( comments.length > $scope.recipe.comments.length ) {
+                    $scope.comment_new_id = comments[comments.length-1]._id;
+                    $scope.recipe.comments = comments;
+                    $timeout(function() {
+                        $scope.comment_new_id = null;
+                    },3000);
+                } else {
+                    $scope.comment_new_id = jsonPath($scope.recipe.comments,diff[0]);
+                    $timeout(function() {
+                        $scope.comment_new_id = null;
+                        $scope.recipe.comments = comments;
+                    },3000);
+                }
+                
+            }
+        }
+
+        function loadComments() {
+            Recipe.getComments({id:$scope.recipe._id},function(comments) {
+                updateComments(comments);
+            });
+        }
+
         $scope.$watch("recipe._id", function () {
             if ( $scope.recipe && $scope.recipe._id ) {
-                // obs = observable.register("RECIPE_COMMENT_ADD_" + $scope.recipe._id, function() {
-                //     Recipe.getComments({id:$scope.recipe._id},function(comments) {
-                //         console.log("comments",comments);
-                //         var diff = util.diff($scope.recipe.comments,comments,
-                //             ["\\[[0-9]*\\]*\\.\\$\\$hashKey","\\[[0-9]\\]*\\.\\$.*","\\$\\[\\$promise\\]", "\\$\\[\\$resolved\\]"]);
-                //         if ( diff.length != 0 ) {
-                //             console.log("diff",diff);
-                //             $scope.loadNewComments = true;
-                //             $timeout(function() {
-                //                 $scope.loadNewComments = false;
-                //             },3000);
-                //             $scope.recipe.comments = comments;
-                //         }
-                //     });
-                // });
-//            var socket = io.connect('http://'+$location.host());
-                Recipe.getComments({id:$scope.recipe._id},function(comments) {
-                    $scope.recipe.comments = comments;
-                });
+                loadComments();
                 pushListener.on("RECIPE_COMMENT_ADD_" + $scope.recipe._id, function (data) {
-                    Recipe.getComments({id:$scope.recipe._id},function(comments) {
-                        $scope.loadNewComments = true;
-                        $timeout(function() {
-                            $scope.loadNewComments = false;
-                        },3000);
-                        $scope.recipe.comments = comments;
-                    });
+                    loadComments();
+                });
+                pushListener.on("RECIPE_COMMENT_REMOVE_" + $scope.recipe._id, function (data) {
+                    loadComments();
                 });
             };
         });
 
 
         $scope.$on('$destroy',function() {
-            // obs.cancel();
             pushListener.off("RECIPE_COMMENT_ADD_" + $scope.recipe._id);
         });
-
-
 
         
         $scope.addComment = function(comment) {
@@ -71,7 +80,7 @@
                 text: comment
             };
             Recipe.addComment(newComment,function(comments){
-                    $scope.recipe.comments = comments;
+                    // updateComments(comments);
                     $scope.comment = '';
                     $scope.rows = 1;
                 });

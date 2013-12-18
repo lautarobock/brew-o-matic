@@ -102,8 +102,11 @@ exports.deleteComment = function(req,res) {
         Arrays.remove(recipe.comments,req.body.comment,function(comment,iter){
             return comment._id == iter._id ? 0 : -1;
         });
-        recipe.save();
-        res.send(recipe.comments);
+        recipe.save( function() {
+            res.send(recipe.comments);
+            require("./push").emit("RECIPE_COMMENT_REMOVE_" + recipe._id,{});
+        });
+        
         actions.log(req.session.user_id, "REMOVE_COMMENT","NAME: '"+recipe.NAME+"'. recipe_id: "+recipe._id);
     });
 };

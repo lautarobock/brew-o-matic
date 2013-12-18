@@ -11,13 +11,13 @@
             </p>
         </div>
         <ul class="list-group" style="margin-top: 1em;">
-            <li class="list-group-item" ng-repeat="comment in recipe.comments | orderBy:'-date'">
+            <li class="list-group-item" ng-class="{'gt-notification-new':comment._id==comment_new_id}" ng-repeat="comment in recipe.comments | orderBy:'-date'">
                 <label for="text_{{comment.name}}">{{comment.name}}</label> -
                 <span title="{{comment.date|date:'dd/MM/yyyy HH:mm'}}">{{formatDate(comment.date)}}</span>
-                <!--<button ng-click="removeComment(comment)" ng-show="user._id == comment.user_id" type="button" class="close" aria-hidden="true">&times;</button>                -->
-                <button ng-show="user._id == comment.user_id" type="button" data-target="#confirmation" data-toggle="modal" class="close" aria-hidden="true">&times;</button>
+
+                <button ng-show="user._id == comment.user_id" type="button" data-target="#confirmation-{{comment._id}}" data-toggle="modal" class="close" aria-hidden="true">&times;</button>
                 <pre id="text_{{comment.name}}" ng-bind="comment.text"/>
-                <div class="modal fade" id="confirmation" role="dialog" aria-labelledby="#label">
+                <div class="modal fade" id="confirmation-{{comment._id}}" role="dialog" aria-labelledby="#label">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">

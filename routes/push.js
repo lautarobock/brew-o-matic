@@ -9,11 +9,12 @@ exports.initOn = function(app) {
 	var i = io.listen(app);
     i.set('transports', ['websocket','xhr-polling']);
 	i.sockets.on("connection", function(socket) {
-		console.log("INFO", "WebSocket start");
 		_socket.push(socket);
+		console.log("INFO", "Connect WebSocket", _socket.length);
 		
 		socket.on('disconnect', function () {
 		    util.Arrays.remove(_socket,socket);
+		    console.log("INFO", "Disconnect WebSocket", _socket.length);
 		});
 	});
 };
