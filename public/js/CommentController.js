@@ -2,7 +2,7 @@
     
     var comments = angular.module("comments",[]);
 
-    comments.controller("CommentController",function($scope,Recipe,$filter,$timeout,$interval,observable,$location) {
+    comments.controller("CommentController",function($scope,Recipe,$filter,$timeout,$interval,pushListener) {
         
         $scope.rows = 1;
 
@@ -40,26 +40,26 @@
                 //         }
                 //     });
                 // });
-            var socket = io.connect('http://'+$location.host());
-            socket.on("RECIPE_COMMENT_ADD_" + $scope.recipe._id, function (data) {
-                console.log(data);
+//            var socket = io.connect('http://'+$location.host());
                 Recipe.getComments({id:$scope.recipe._id},function(comments) {
-                    console.log("comments",comments);
-                    $scope.loadNewComments = true;
-                    $timeout(function() {
-                        $scope.loadNewComments = false;
-                    },3000);
                     $scope.recipe.comments = comments;
                 });
-           
-            });
-                
+                pushListener.on("RECIPE_COMMENT_ADD_" + $scope.recipe._id, function (data) {
+                    Recipe.getComments({id:$scope.recipe._id},function(comments) {
+                        $scope.loadNewComments = true;
+                        $timeout(function() {
+                            $scope.loadNewComments = false;
+                        },3000);
+                        $scope.recipe.comments = comments;
+                    });
+                });
             };
         });
 
 
         $scope.$on('$destroy',function() {
             // obs.cancel();
+            pushListener.off("RECIPE_COMMENT_ADD_" + $scope.recipe._id);
         });
 
 
