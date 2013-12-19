@@ -8,11 +8,17 @@
                 if ( this.listener ) {
                     this.listener();
                 }
+            },
+            updateListener : null,
+            update: function() {
+                if ( this.updateListener ) {
+                    this.updateListener();
+                }  
             }
         };
     });
     
-    notification.controller("NotificationsCtrl",function($scope,Notification,$rootScope,notificationData) {
+    notification.controller("NotificationsCtrl",function($scope,Notification,$rootScope,notificationData,pushListener) {
         
         notificationData.reset();
         
@@ -28,8 +34,15 @@
             });
         };
 
-        $scope.$watch('user',function() {
-            $scope.notifications = Notification.query($scope.updateCount);
+        $scope.$watch('user._id',function(user_id) {
+            if ( user_id ) {
+                $scope.notifications = Notification.query($scope.updateCount);
+                pushListener.on("NOTIFICATION_ADD_" + user_id, function(data) {
+                    // $scope.notifications = Notification.query($scope.updateCount);
+                    $scope.notifications.splice(0,0,data);
+                    $scope.updateCount($scope.notifications);
+                });
+            }                
         });
 
 
@@ -41,10 +54,27 @@
             title: 'Notificaciones'
         }];
         
-        $scope.markAsRead = function(notification) {
+        $scope.markAllAsRead = function() {
+            angular.forEach($scope.notifications, function(n) {
+                $scope.markAsRead(n,false);
+            });
+            notificationData.reset();
+        };
+
+        $scope.markAsRead = function(notification,update) {
+            function callback() {
+                if ( update ) {
+
+                    notificationData.update();
+                }    
+            }
             if ( notification.status != 'read' ) {
                 notification.status = 'read';
-                notification.$save();
+                if ( notification.$save ) {
+                    notification.$save(callback);    
+                } else {
+                    Notification.save(notification,callback);
+                }
                 $scope.updateCount($scope.notifications);
             }
         };
@@ -57,9 +87,6 @@
             }
             return '';
         };
-        
-        //$rootScope.notificationCount = 0;
-        //$rootScope.notificationClass = '';
         
     });
 })();

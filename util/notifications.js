@@ -131,17 +131,18 @@ exports.notifyCommentOnRecipe = function(owner_id, user_id,user_name , recipe_id
 };
 
 var notify = function(user_id,data,link) {
-    push.emit("NOTIFICATION_ADD_" + user_id);
     model.Notification.create(new model.Notification({
             user_id:user_id,
             date: new Date(),
             status: exports.Status.New,
             data: data,
             link: link
-        }), function(err,action) {
+        }), function(err,notification) {
             if ( err) {
                 console.log("err",err);
-                console.log("action",action);
+                console.log("notification",notification);
+            } else {
+                push.emit("NOTIFICATION_ADD_" + user_id,notification);
             }
     });
 };

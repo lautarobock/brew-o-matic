@@ -64,7 +64,11 @@
         
         notificationData.listener = function() {
             $scope.notificationClass = '';
-            $scope.notificationCount = 0;            
+            $scope.notificationCount = 0;
+        };
+
+        notificationData.updateListener = function() {
+            $scope.findNotificationsCount();
         };
                 
         $scope.notificationClass = '';
