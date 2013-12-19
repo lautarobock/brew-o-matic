@@ -8,7 +8,7 @@
         
     });
  
-    index.controller("LoginController",function($scope,$rootScope,User,Notification,notificationData) {
+    index.controller("LoginController",function($scope,$rootScope,User,Notification,notificationData,pushListener) {
         
         $scope.$on('g+login',function(event,authResult) {
             if ( authResult == null ) {
@@ -64,7 +64,11 @@
         
         notificationData.listener = function() {
             $scope.notificationClass = '';
-            $scope.notificationCount = 0;            
+            $scope.notificationCount = 0;
+        };
+
+        notificationData.updateListener = function() {
+            $scope.findNotificationsCount();
         };
                 
         $scope.notificationClass = '';
@@ -73,7 +77,10 @@
         $scope.$watch('user',function(user) {
             if (user) {
                 $scope.findNotificationsCount();
-                setInterval($scope.findNotificationsCount,60*1000);
+                //setInterval($scope.findNotificationsCount,60*1000);
+                pushListener.on("NOTIFICATION_ADD_" + user._id, function(data) {
+                    $scope.findNotificationsCount();
+                });
             }
         });
 

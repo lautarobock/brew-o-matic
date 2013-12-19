@@ -52,7 +52,6 @@
 
         function loadComments() {
             Recipe.getComments({id:$scope.recipe._id},function(comments) {
-//                updateComments(comments);
                 $scope.recipe.comments = comments;
             });
         }
