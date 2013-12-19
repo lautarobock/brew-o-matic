@@ -21,7 +21,7 @@ exports.initOn = function(app) {
 
 exports.emit = function(id, data) {
 	for ( var i=0; i<_socket.length; i++ ) {
-		_socket[i].volatile.emit(id, data);	
+		_socket[i].emit(id, data);	
 	}
 	
 };

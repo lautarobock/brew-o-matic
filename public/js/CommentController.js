@@ -82,6 +82,7 @@
 
         $scope.$on('$destroy',function() {
             pushListener.off("RECIPE_COMMENT_ADD_" + $scope.recipe._id);
+            pushListener.off("RECIPE_COMMENT_REMOVE_" + $scope.recipe._id);
         });
 
         
