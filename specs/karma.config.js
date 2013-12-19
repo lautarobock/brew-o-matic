@@ -20,6 +20,7 @@ module.exports = function(config) {
       'https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular-animate.min.js',
       'https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular-sanitize.min.js',
       'https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular-mocks.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js',
       '../public/js/index.js',
       '../public/js/RecipeCtrl.js',
       '../public/js/*.js',
