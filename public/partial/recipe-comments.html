@@ -11,7 +11,7 @@
             </p>
         </div>
         <ul class="list-group" style="margin-top: 1em;">
-            <li class="list-group-item" ng-class="{'gt-notification-new':comment._id==comment_new_id}" ng-repeat="comment in recipe.comments | orderBy:'-date'">
+            <li class="list-group-item animate-repeat" ng-class="{'gt-notification-new':comment._id==comment_new_id}" ng-repeat="comment in recipe.comments | orderBy:'-date'">
                 <label for="text_{{comment.name}}">{{comment.name}}</label> -
                 <span title="{{comment.date|date:'dd/MM/yyyy HH:mm'}}">{{formatDate(comment.date)}}</span>
 

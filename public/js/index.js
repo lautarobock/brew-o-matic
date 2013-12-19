@@ -5,6 +5,7 @@
                                 'ngResource',
                                 'ngRoute',
                                 'ngSanitize',
+                                'ngAnimate',
                                 'data',
                                 'resources',
                                 'helper',

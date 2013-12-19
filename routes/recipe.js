@@ -65,16 +65,17 @@ function generateId(name,user_id) {
 
 exports.addComment = function(req,res) {
     model.Recipe.findOne({_id:req.body.recipe_id}).exec(function(err,recipe) {
-        recipe.comments.push({
+        var newComment = {
             _id: req.session.user_id + "_" + new Date().getTime(),
             user_id: req.session.user_id,
             name: req.session.user_name,
             text: req.body.text,
             date: new Date()
-        });
+        };
+        recipe.comments.push(newComment);
         recipe.save(function() {
             res.send(recipe.comments);
-            require("./push").emit("RECIPE_COMMENT_ADD_" + recipe._id,{});
+            require("./push").emit("RECIPE_COMMENT_ADD_" + recipe._id,newComment);
         });
         
         
@@ -104,7 +105,7 @@ exports.deleteComment = function(req,res) {
         });
         recipe.save( function() {
             res.send(recipe.comments);
-            require("./push").emit("RECIPE_COMMENT_REMOVE_" + recipe._id,{});
+            require("./push").emit("RECIPE_COMMENT_REMOVE_" + recipe._id,req.body.comment);
         });
         
         actions.log(req.session.user_id, "REMOVE_COMMENT","NAME: '"+recipe.NAME+"'. recipe_id: "+recipe._id);
