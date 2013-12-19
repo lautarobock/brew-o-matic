@@ -8,7 +8,7 @@
         
     });
  
-    index.controller("LoginController",function($scope,$rootScope,User,Notification,notificationData) {
+    index.controller("LoginController",function($scope,$rootScope,User,Notification,notificationData,pushListener) {
         
         $scope.$on('g+login',function(event,authResult) {
             if ( authResult == null ) {
@@ -73,7 +73,10 @@
         $scope.$watch('user',function(user) {
             if (user) {
                 $scope.findNotificationsCount();
-                setInterval($scope.findNotificationsCount,60*1000);
+                //setInterval($scope.findNotificationsCount,60*1000);
+                pushListener.on("NOTIFICATION_ADD_" + user._id, function(data) {
+                    $scope.findNotificationsCount();
+                });
             }
         });
 

@@ -1,5 +1,6 @@
 var model = require('../domain/model.js');
 var mongoose = require('mongoose');
+var push = require("../routes/push");
 
 exports.Status = {
     New: 'new',
@@ -130,6 +131,7 @@ exports.notifyCommentOnRecipe = function(owner_id, user_id,user_name , recipe_id
 };
 
 var notify = function(user_id,data,link) {
+    push.emit("NOTIFICATION_ADD_" + user_id);
     model.Notification.create(new model.Notification({
             user_id:user_id,
             date: new Date(),
