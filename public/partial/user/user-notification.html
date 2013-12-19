@@ -1,6 +1,3 @@
-    <!--<div class="panel panel-default">-->
-    <!--    <div class="panel-heading"><strong>Notificaciones</strong></div>-->
-    <!--    <div class="panel-body" >-->
     <h3>Notificaciones</h3>
     <div  ng-show="notifications.length==0">
           <div class="alert alert-info">
@@ -10,13 +7,14 @@
     <div ng-hide="notifications.length==0">
         <span><b>{{countNew}}</b> nuevas</span>,
         <span><b>{{countUnread}}</b> sin leer</span>
+        <div style="margin-bottom: 1em;margin-top: 1em;" class="animate-show" ng-show="countUnread+countNew!=0">
+          <button type="button" class="btn btn-primary btn-sm" ng-click="markAllAsRead()">Marcar como leidas</button>
+        </div>
         <ul class="list-group">
-            <li ng-click="markAsRead(notification)" class="list-group-item" ng-repeat="notification in notifications" ng-class="statusClass(notification)">
+            <li ng-click="markAsRead(notification, true)" class="animate-repeat list-group-item" ng-repeat="notification in notifications" ng-class="statusClass(notification)">
                 <span title="{{comment.date|date:'dd/MM/yyyy HH:mm'}}">{{formatDate(notification.date)}}</span>
                 <div class="gt-notification" ng-bind-html="notification.data"></div>
                 <a href="{{notification.link}}">ver detalles</a>
             </li>
         </ul>
     </div>
-    <!--    </div>-->
-    <!--</div>-->
