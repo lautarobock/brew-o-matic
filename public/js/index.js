@@ -5,6 +5,7 @@
                                 'ngResource',
                                 'ngRoute',
                                 'ngSanitize',
+                                'ngAnimate',
                                 'data',
                                 'resources',
                                 'helper',
@@ -18,7 +19,8 @@
                                 'admin',
                                 'ui.bootstrap',
                                 'alerts',
-                                'env']);
+                                'env',
+                                'observer']);
 
     index.
         config(['$routeProvider', function($routeProvider) {

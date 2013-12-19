@@ -137,8 +137,10 @@ var notify = function(user_id,data,link) {
             data: data,
             link: link
         }), function(err,action) {
-            console.log("err",err)
-            console.log("action",action)
+            if ( err) {
+                console.log("err",err);
+                console.log("action",action);
+            }
     });
 };
 exports.notify = notify;

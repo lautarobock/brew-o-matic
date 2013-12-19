@@ -64,7 +64,8 @@ function min() {
         "public/js/Data.js",
         "public/js/env.js",
         "public/js/ObjTree.js",
-        "public/js/directive/abm.js"
+        "public/js/directive/abm.js",
+        "public/js/observer/observer.js"
 	];
 
 	var compressor = require('node-minify');

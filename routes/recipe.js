@@ -1,6 +1,7 @@
 var actions = require('./actions.js');
 var notifications = require('../util/notifications.js');
 var model = require('../domain/model.js');
+var observer = require("./observer");
 var Arrays = require('../public/js/util/util.js').Arrays;
 
 
@@ -64,15 +65,19 @@ function generateId(name,user_id) {
 
 exports.addComment = function(req,res) {
     model.Recipe.findOne({_id:req.body.recipe_id}).exec(function(err,recipe) {
-        recipe.comments.push({
+        var newComment = {
             _id: req.session.user_id + "_" + new Date().getTime(),
             user_id: req.session.user_id,
             name: req.session.user_name,
             text: req.body.text,
             date: new Date()
+        };
+        recipe.comments.push(newComment);
+        recipe.save(function() {
+            res.send(recipe.comments);
+            require("./push").emit("RECIPE_COMMENT_ADD_" + recipe._id,newComment);
         });
-        recipe.save();
-        res.send(recipe.comments);
+        
         
         //LOG action
         actions.log(req.session.user_id, "ADD_COMMENT","NAME: '"+recipe.NAME+"'. recipe_id: "+recipe._id);
@@ -88,6 +93,8 @@ exports.addComment = function(req,res) {
             recipe,
             req.session.user_id,
             req.session.user_name);
+
+        // observer.change("RECIPE_COMMENT_ADD_" + recipe._id);
     });
 };
 
@@ -96,8 +103,11 @@ exports.deleteComment = function(req,res) {
         Arrays.remove(recipe.comments,req.body.comment,function(comment,iter){
             return comment._id == iter._id ? 0 : -1;
         });
-        recipe.save();
-        res.send(recipe.comments);
+        recipe.save( function() {
+            res.send(recipe.comments);
+            require("./push").emit("RECIPE_COMMENT_REMOVE_" + recipe._id,req.body.comment);
+        });
+        
         actions.log(req.session.user_id, "REMOVE_COMMENT","NAME: '"+recipe.NAME+"'. recipe_id: "+recipe._id);
     });
 };
