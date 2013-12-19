@@ -9,13 +9,19 @@
     observer.factory("pushListener", function() {
         return {
             on: function(id, callback) {
-                this.socket.on(id, function (data) {
-                    console.log("INFO", data);
-                    callback(data);
-                });
+                // this.socket.on(id, function (data) {
+                //     console.log("INFO", data);
+                //     callback(data);
+                // });
+                this.socket.on(id, callback);
             },
-            off: function(id) {
-                this.socket.removeAllListeners(id);
+            off: function(id, fn) {
+                if ( fn ) {
+                    this.socket.removeListener(id,fn);    
+                } else {
+                    this.socket.removeAllListeners(id);    
+                }
+                
             }
         };
     });

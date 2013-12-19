@@ -34,17 +34,23 @@
             });
         };
 
+        function onNewNotification(data) {
+            console.log("INFO","New Notification (Data)", data);
+            // $scope.notifications = Notification.query($scope.updateCount);
+            $scope.notifications.splice(0,0,data);
+            $scope.updateCount($scope.notifications);
+        }
+
         $scope.$watch('user._id',function(user_id) {
             if ( user_id ) {
                 $scope.notifications = Notification.query($scope.updateCount);
-                pushListener.on("NOTIFICATION_ADD_" + user_id, function(data) {
-                    // $scope.notifications = Notification.query($scope.updateCount);
-                    $scope.notifications.splice(0,0,data);
-                    $scope.updateCount($scope.notifications);
-                });
+                pushListener.on("NOTIFICATION_ADD_" + user_id, onNewNotification);
             }                
         });
 
+        $scope.$on('$destroy',function() {
+            pushListener.off("NOTIFICATION_ADD_" + $scope.user._id, onNewNotification);
+        });
 
         $rootScope.breadcrumbs = [{
             link: '#',

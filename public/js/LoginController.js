@@ -79,6 +79,7 @@
                 $scope.findNotificationsCount();
                 //setInterval($scope.findNotificationsCount,60*1000);
                 pushListener.on("NOTIFICATION_ADD_" + user._id, function(data) {
+                    console.log("INFO","New Notification (Count)", data);
                     $scope.findNotificationsCount();
                 });
             }

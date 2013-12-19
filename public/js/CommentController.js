@@ -56,33 +56,39 @@
             });
         }
 
+        function onAddComment(data) {
+            console.log("INFO","New comment", data);
+            //Antes de agregar el comentario nuevo me fijo si no es que ya lo tengo
+            //Esto puede pasar porque justo pude haber hecho un loadComments()
+            var f = util.Arrays.filter($scope.recipe, data, function(data, iter) {
+                return data._id == iter._id ? 0 : -1;
+            });
+            if ( f.length == 0 ) {
+                $scope.recipe.comments.push(data);
+                $scope.$apply();
+            }
+        }
+
+        function onRemoveComment(removed) {
+            console.log("INFO","Remove comment", data);
+            util.Arrays.remove($scope.recipe.comments,removed, function(removed, iter) {
+                return removed._id == iter._id ? 0 : -1;
+            });
+            $scope.$apply();
+        }
+
         $scope.$watch("recipe._id", function () {
             if ( $scope.recipe && $scope.recipe._id ) {
                 loadComments();
-                pushListener.on("RECIPE_COMMENT_ADD_" + $scope.recipe._id, function (data) {
-                    //Antes de agregar el comentario nuevo me fijo si no es que ya lo tengo
-                    //Esto puede pasar porque justo pude haber hecho un loadComments()
-                    var f = util.Arrays.filter($scope.recipe, data, function(data, iter) {
-                        return data._id == iter._id ? 0 : -1;
-                    });
-                    if ( f.length == 0 ) {
-                        $scope.recipe.comments.push(data);
-                        $scope.$apply();
-                    }
-                });
-                pushListener.on("RECIPE_COMMENT_REMOVE_" + $scope.recipe._id, function (removed) {
-                    util.Arrays.remove($scope.recipe.comments,removed, function(removed, iter) {
-                        return removed._id == iter._id ? 0 : -1;
-                    });
-                    $scope.$apply();
-                });
+                pushListener.on("RECIPE_COMMENT_ADD_" + $scope.recipe._id, onAddComment);
+                pushListener.on("RECIPE_COMMENT_REMOVE_" + $scope.recipe._id, onRemoveComment);
             };
         });
 
 
         $scope.$on('$destroy',function() {
-            pushListener.off("RECIPE_COMMENT_ADD_" + $scope.recipe._id);
-            pushListener.off("RECIPE_COMMENT_REMOVE_" + $scope.recipe._id);
+            pushListener.off("RECIPE_COMMENT_ADD_" + $scope.recipe._id, onAddComment);
+            pushListener.off("RECIPE_COMMENT_REMOVE_" + $scope.recipe._id, onRemoveComment);
         });
 
         
