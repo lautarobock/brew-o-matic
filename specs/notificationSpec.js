@@ -50,6 +50,7 @@ describe("notification module", function() {
 
 			//change user to fire $watch
 			$rootScope.user = {
+				_id: 'Jose_id',
 				name: "Jose"
 			}
 			$rootScope.$apply();

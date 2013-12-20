@@ -10,7 +10,8 @@
                                         'brew-o-module.controller',
                                         'googlechart',
                                         'notification',
-                                        'env']);
+                                        'env',
+                                        'observer']);
 
     share.run(function($rootScope,version,env,color,$location) {
 

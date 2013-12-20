@@ -1,5 +1,6 @@
 var model = require('../domain/model.js');
 var mongoose = require('mongoose');
+var push = require("../routes/push");
 
 exports.Status = {
     New: 'new',
@@ -136,9 +137,13 @@ var notify = function(user_id,data,link) {
             status: exports.Status.New,
             data: data,
             link: link
-        }), function(err,action) {
-            console.log("err",err)
-            console.log("action",action)
+        }), function(err,notification) {
+            if ( err) {
+                console.log("err",err);
+                console.log("notification",notification);
+            } else {
+                push.emit("NOTIFICATION_ADD_" + user_id,notification);
+            }
     });
 };
 exports.notify = notify;

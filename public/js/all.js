@@ -39,7 +39,9 @@ var imports = [ "index.js",
         "Data.js",
         "env.js",
         "ObjTree.js",
-        "directive/abm.js"
+        "directive/abm.js",
+        "observer/observer.js",
+        "lib/jsonpath-0.8.0.js"
 ];
 
 for ( var i = 0; i < imports.length; i++) {
