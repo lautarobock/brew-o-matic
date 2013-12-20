@@ -8,6 +8,21 @@ exports.Status = {
     Read: 'read'
 };
 
+exports.notifyNewCollaborators = function(recipe, collaborators) {
+    for ( var i=0; i<collaborators.length; i++ ) {
+        var c = collaborators[i];
+        var c_id = c._id || c;
+
+        var data = "Ha sido agregado como colaborador de la receta <b>";
+        data += recipe.NAME + "</b>";
+
+
+        var link = "#/recipe/edit/" + encodeURIComponent(recipe._id);
+
+        notify(c_id,data,link)
+    }
+};
+
 exports.notifyOnPublish = function(recipe_name,recipe_id,user_name,user_id) {
     model.User.find().exec(function(err,users) {
         for ( var i=0; i<users.length; i++) {
@@ -71,6 +86,35 @@ exports.notifyUpdateFavorite = function(recipe) {
         
         var link = "/share.html#/" + encodeURIComponent(recipe._id);
         notify(recipe.starredBy[i]._id, data, link);
+    }
+};
+
+/**
+ * Notifica modificacion de receta a los q son colaboradores.
+ * @param recipe receta en la que se hizo update
+ */
+exports.notifyUpdateCollaborators = function(recipe, user_id, user_name) {
+    console.log("OWNER", recipe.owner);
+    if ( recipe.owner._id != user_id ) {
+        var data = "<b>{{user_name}}</b> ha actualizado tu receta <b>{{recipe.NAME}}</b>";
+        data = data.replace('{{recipe.NAME}}',recipe.NAME);
+        data = data.replace('{{user_name}}',user_name);
+        
+        var link = "#/recipe/edit/" + encodeURIComponent(recipe._id);
+
+        notify(recipe.owner._id, data, link);
+    }
+    for (var i=0; i<recipe.collaborators.length; i++) {
+        var col_id = recipe.collaborators[i]._id || recipe.collaborators[i];
+        if ( col_id != user_id ) {
+            var data = "<b>{{user_name}}</b> ha actualizado la receta <b>{{recipe.NAME}}</b> en la que eres colaborador";
+            data = data.replace('{{recipe.NAME}}',recipe.NAME);
+            data = data.replace('{{user_name}}',user_name);
+            
+            var link = "#/recipe/edit/" + encodeURIComponent(recipe._id);
+            
+            notify(col_id, data, link);    
+        }
     }
 };
 

@@ -120,6 +120,7 @@ exports.save = function(req, res) {
         }
 //        console.log("response bottling",s.bottling);
         notifications.notifyUpdateFavorite(s);
+        notifications.notifyUpdateCollaborators(s,req.session.user_id,req.session.user_name);
         res.send(s);
         
         //Update tags
@@ -164,6 +165,7 @@ exports.save = function(req, res) {
         if ( req.body.isPublic ) {
             notifications.notifyOnPublish(req.body.NAME,id,req.session.user_name,req.session.user_id);
         }
+        notifications.notifyNewCollaborators(recipe,recipe.collaborators);
     } else {
         
 
@@ -222,6 +224,18 @@ exports.save = function(req, res) {
                 notifications.notifyOnPublish(req.body.NAME,id,req.session.user_name,req.session.user_id);
                 req.body.publishDate = new Date();
             }
+
+            //Compruebo los colaboradores nuevos
+            var newCollaborators = [];
+            for( var i=0; i<req.body.collaborators.length; i++ ) {
+                var col_id = req.body.collaborators[i];
+                if ( old.collaborators.indexOf(col_id) == -1 ) {
+                    newCollaborators.push(col_id);
+                }
+            }
+            notifications.notifyNewCollaborators(old,newCollaborators);
+
+
             model.Recipe.findByIdAndUpdate(id,req.body).populate('owner').populate('collaborators').populate('cloneFrom').exec(callback);
         });
 
