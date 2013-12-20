@@ -359,7 +359,9 @@
                 return;   
             }
 
-            if ( user_id == $scope.recipe.owner._id ) {
+            // if ( user_id == $scope.recipe.owner._id ) {
+            if ( ($scope.recipe.owner && user_id == $scope.recipe.owner._id) ||
+                    ($scope.recipe.owner && user_id == $scope.user._id) ) {                
                 alertFactory.create("warning","No puede agregar al dueño de la receta como colaborador","Error al agregar usuario");
                 return;
             }
