@@ -140,12 +140,14 @@ a {
 .animate-repeat.ng-move,
 .animate-repeat.ng-enter {
     opacity:0;
+    background: yellow;
 }
 
 .animate-repeat.ng-leave,
 .animate-repeat.ng-move.ng-move-active,
 .animate-repeat.ng-enter.ng-enter-active {
     opacity:1;
+    background: none;
 }
 
 

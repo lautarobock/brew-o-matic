@@ -35,13 +35,16 @@ describe("notification module", function() {
 					$controller,
 					$rootScope,
 					notificationData,
-					Notification) {
+					Notification,
+					pushListener) {
 
 			//Mock Notification.query()
 			spyOn(Notification,'query').andCallFake(function(callback) {
 				$scope.notification = [{_id:'not_1',status:'new'},{_id:'not_2',status:'unread'}];
 				callback($scope.notification);
 			});
+
+			spyOn(pushListener,'on');
 
 			var $scope = $rootScope.$new();
 			$controller("NotificationsCtrl", {
@@ -57,6 +60,7 @@ describe("notification module", function() {
 
 			//Verify
 			expect(Notification.query).toHaveBeenCalled();
+			expect(pushListener.on).toHaveBeenCalledWith("NOTIFICATION_ADD_Jose_id", jasmine.any(Function));
 			expect($scope.countUnread).toBe(1);
 			expect($scope.countNew).toBe(1);
 
