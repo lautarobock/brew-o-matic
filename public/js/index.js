@@ -19,6 +19,7 @@
                                 'admin',
                                 'ui.bootstrap',
                                 'alerts',
+                                'settings',
                                 'env',
                                 'observer']);
 
@@ -136,58 +137,6 @@
         
     });
     
-    
-    
-    index.controller("UserSettingsCtrl",function($scope,User,$rootScope) {
-        $scope.disconnectUser = function() {
-            var revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' +
-                gapi.auth.getToken().access_token;
-            // Realiza una solicitud GET asíncrona.
-            $.ajax({
-                type: 'GET',
-                url: revokeUrl,
-                async: false,
-                contentType: "application/json",
-                dataType: 'jsonp',
-                success: function(nullResponse) {
-                    //document.getElementById('signinButton').setAttribute('style', 'display: block');
-                    $rootScope.user = undefined;
-                    $scope.$apply();
-                },
-                error: function(e) {
-                    // Gestiona el error
-                    // console.log(e);
-                    // Puedes indicar a los usuarios que se desconecten de forma manual si se produce un error
-                    // https://plus.google.com/apps
-                }
-            });
-        };
-
-        $rootScope.breadcrumbs = [{
-            link: '#',
-            title: 'Home'
-        },{
-            link: '#',
-            title: 'Configuracion'
-        }];
-        
-        $scope.notifications = [];
-        $scope.save = function() {
-            //$scope.user.settings.defaultValues = $scope.dv;      
-            User.updateSettings($scope.user, function() {
-                $scope.notifications.push({
-                    type:'success',
-                    title:'Configuracion guardada!',
-                    text:'Tus cambios han sido guardados con exito!'
-                });    
-            });
-            
-        };
-    });
-    
-    // index.controller("ShareController", function($scope) {
-    //     $scope.recipe = Recipe.get({id:$routeParams.recipeId});
-    // });
 
     index.controller("MainController",function($scope,$rootScope) {
         $rootScope.breadcrumbs = [];

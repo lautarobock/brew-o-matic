@@ -9,6 +9,7 @@
                                         'comments',
                                         'brew-o-module.controller',
                                         'googlechart',
+                                        'settings',
                                         'notification',
                                         'env',
                                         'observer']);
