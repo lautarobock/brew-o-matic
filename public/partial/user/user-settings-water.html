@@ -1,0 +1,78 @@
+<div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><strong>Reportes de agua</strong></div>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th style="width: 10em">
+                        Fecha
+                    </th>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        Cationes
+                    </th>
+                    <th>
+                        Aniones
+                    </th>
+                    <th>
+                        Balance
+                    </th>
+                    <th style="width:1em">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="report in reports | orderBy:'-date'">
+                    <td>
+                        {{report.date | date:'dd/MM/yyyy'}}
+                    </td>
+                    <td>
+                        <a href="#/settings/water/{{report._id}}">
+                            {{report.name}}
+                        </a>
+                    </td>
+                    <td>
+                        {{BrewCalc.totalCations(report.cations) | number:2 }}
+                    </td>
+                    <td>
+                        {{BrewCalc.totalAnions(report.anions) | number:2 }}
+                    </td>
+                    <td>
+                        {{BrewCalc.waterBalance(report) | number:2 }}
+                    </td>
+                    <td>
+                        <button data-target="#confirmation-{{water._id}}" data-toggle="modal"  type="button" class="close" aria-hidden="true">&times;</button>
+                        <div class="modal fade" id="confirmation-{{water._id}}" role="dialog" aria-labelledby="#label">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="label">Confirmacion</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        ¿Esta seguro que desea eliminar el reporte de agua?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn" data-dismiss="modal">No</a>
+                                        <button type="button" ng-click="removeReport(report)" data-dismiss="modal" class="btn btn-primary" >
+                                            Si
+                                        </button >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="panel-body">
+            <div class="col-md-12" >
+                <a type="button" class="btn btn-default btn-sm pull-right" href="#/settings/water/new">
+                    <span class="glyphicon glyphicon-plus"></span> Nuevo reporte
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

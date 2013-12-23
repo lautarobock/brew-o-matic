@@ -412,10 +412,6 @@
 
         $scope.selectedTab = 'main';
 
-        $scope.getActiveClass = function(tab) {
-            return $scope.selectedTab === tab ? 'active':'';
-        };
-
         $scope.changeTab = function(tab) {
             $scope.selectedTab=tab;
             $scope.$parent.notifications = [];

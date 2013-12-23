@@ -19,6 +19,8 @@
                                 'admin',
                                 'ui.bootstrap',
                                 'alerts',
+                                'settings',
+                                'water',
                                 'env',
                                 'observer']);
 
@@ -34,6 +36,9 @@
                 when('/recipe/clone/:recipeId', {templateUrl: 'partial/recipe-detail.html', controller: 'RecipeDetailCtrl'}).
                 when('/recipe/new', {templateUrl: 'partial/recipe-detail.html', controller: 'RecipeDetailCtrl'}).
                 //when('/stats', {templateUrl: 'partial/user/user-stats.html', controller: 'UserStatsCtrl'}).
+                when('/settings/water', {templateUrl: 'partial/user/user-settings-water.html', controller: 'SettingsWaterCtrl'}).
+                when('/settings/water/new', {templateUrl: 'partial/user/settings/user-settings-water-detail.html', controller: 'SettingsWaterDetailCtrl'}).
+                when('/settings/water/:waterId', {templateUrl: 'partial/user/settings/user-settings-water-detail.html', controller: 'SettingsWaterDetailCtrl'}).
                 when('/settings', {templateUrl: 'partial/user/user-settings.html', controller: 'UserSettingsCtrl'}).
                 when('/notification', {templateUrl: 'partial/user/user-notification.html', controller: 'NotificationsCtrl'}).
                 when('/data/:entity', {templateUrl: 'partial/data/abm.html', controller: 'AbmCtrl'}).
@@ -136,58 +141,6 @@
         
     });
     
-    
-    
-    index.controller("UserSettingsCtrl",function($scope,User,$rootScope) {
-        $scope.disconnectUser = function() {
-            var revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' +
-                gapi.auth.getToken().access_token;
-            // Realiza una solicitud GET asíncrona.
-            $.ajax({
-                type: 'GET',
-                url: revokeUrl,
-                async: false,
-                contentType: "application/json",
-                dataType: 'jsonp',
-                success: function(nullResponse) {
-                    //document.getElementById('signinButton').setAttribute('style', 'display: block');
-                    $rootScope.user = undefined;
-                    $scope.$apply();
-                },
-                error: function(e) {
-                    // Gestiona el error
-                    // console.log(e);
-                    // Puedes indicar a los usuarios que se desconecten de forma manual si se produce un error
-                    // https://plus.google.com/apps
-                }
-            });
-        };
-
-        $rootScope.breadcrumbs = [{
-            link: '#',
-            title: 'Home'
-        },{
-            link: '#',
-            title: 'Configuracion'
-        }];
-        
-        $scope.notifications = [];
-        $scope.save = function() {
-            //$scope.user.settings.defaultValues = $scope.dv;      
-            User.updateSettings($scope.user, function() {
-                $scope.notifications.push({
-                    type:'success',
-                    title:'Configuracion guardada!',
-                    text:'Tus cambios han sido guardados con exito!'
-                });    
-            });
-            
-        };
-    });
-    
-    // index.controller("ShareController", function($scope) {
-    //     $scope.recipe = Recipe.get({id:$routeParams.recipeId});
-    // });
 
     index.controller("MainController",function($scope,$rootScope) {
         $rootScope.breadcrumbs = [];
@@ -224,9 +177,11 @@
 
 
     
-    index.run(function($rootScope,version,$filter,$location,BrewCalc,env,color,alertFactory) {
+    index.run(function($rootScope,version,$filter,$location,BrewCalc,env,color,alertFactory,BrewHelper) {
 
         $rootScope.BrewCalc = BrewCalc;
+
+        $rootScope.BrewHelper = BrewHelper;
 
         $rootScope.version = version;
 
