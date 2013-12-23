@@ -1,0 +1,18 @@
+<div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><strong>Reporte de agua</strong></div>
+        <div class="panel-body" >
+            <label>Nombre</label>
+            <input class="form-control" type="text" ng-model="water.name" placeholder="(nombre)"/>
+        </div>
+        <water-report water="water"></water-report>
+        <div class="panel-body" >
+            <div style="overflow: hidden;margin-bottom: 1em;margin-top: 3em;">
+                  <div class="pull-right">
+                      <a href="#/settings/water/" type="button" class="btn btn-default">Cancelar</a>
+                      <button ng-click="save()" type="button" class="btn btn-primary">Guardar</button>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>

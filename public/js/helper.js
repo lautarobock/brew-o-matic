@@ -128,6 +128,30 @@
                     recipe.StrikeWater = BrewHelper.round(recipe.WatertoGrainRatio * recipe.totalAmount,10);
                 }
     
+            },
+            totalCations: function(cations) {
+                if ( !cations ) return null;
+                var B4=cations.calcium || 0;
+                var B5=cations.magnesium || 0;
+                var B6=cations.sodium || 0;
+                var B7=cations.potassium || 0;
+                var B8=cations.iron || 0;
+                return (B4/20.05)+(B5/12.15)+(B6/23)+(B7/39.1)+(B8/28);
+            },
+            totalAnions: function(anions) {
+                if ( !anions ) return null;
+                var C4=anions.bicarbonate || 0;
+                var C5=anions.carbonate || 0;
+                var C6=anions.sulfate || 0;
+                var C7=anions.chloride || 0;
+                var C8=anions.nitrate || 0;
+                var C9=anions.nitrite || 0;
+                var C10=anions.fluoride || 0;
+                return (C4/61)+(C5/30)+(C6/48)+(C7/35.45)+(C8/62)+(C9/46)+(C10/19)
+            },
+            waterBalance: function(water) {
+                if ( !water ) return null;
+                return Math.abs(this.totalAnions(water.anions)-this.totalCations(water.cations));
             }
         };
     });

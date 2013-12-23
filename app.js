@@ -109,9 +109,10 @@ app.get('/notification',filter,notifications.findAll);
 app.get('/notification/news',filter,notifications.findNews);
 app.post("/notification/:id",filter,notifications.update);
 
-var services = ['Style','Grain','Hop','Yeast','Misc','Bottle','Tag'];
+var services = ['Style','Grain','Hop','Yeast','Misc','Bottle','Tag','WaterReport'];
 for (s in services ) {
   app.get('/' + services[s].toLowerCase(),data[services[s]].findAll);
+  app.get('/' + services[s].toLowerCase()+ "/:id", data[services[s]].findById)
   app.post('/' + services[s].toLowerCase() + "/:id",data[services[s]].save);
   app.post('/' + services[s].toLowerCase(),data[services[s]].save);
   app.delete('/' + services[s].toLowerCase()+ "/:id",data[services[s]].remove);
