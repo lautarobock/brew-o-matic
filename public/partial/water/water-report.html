@@ -67,4 +67,55 @@
             </div>
         </div>
     </div>            
+    <div class="col-md-12" style="margin-top:3em">
+        <h4>Dureza y Alcalinidad</h4>
+        <div>
+            <div class="row">
+                <div class="col-md-4">        
+                    <label for="totalHardness">Tureza total como CaCO3 (ppm)</label>
+                    <span class="form-control input-sm"
+                           id="totalHardness">
+                           {{ BrewCalc.totalHardness(water().cations) | number:2 }}
+                    </span>
+                </div>
+                <div class="col-md-4">        
+                    <label for="totalCations">Dureza permanente como CaCO3 (ppm)</label>
+                    <span class="form-control input-sm"
+                           id="totalCations">
+                           {{ BrewCalc.permanentHardness(water()) | number:2 }}
+                    </span>
+                </div>
+                <div class="col-md-4">        
+                    <label for="totalCations">Dureza temporal como CaCO3 (ppm)</label>
+                    <span class="form-control input-sm"
+                           id="totalCations">
+                           {{ BrewCalc.temporaryHardness(water()) | number:2 }}
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">        
+                    <label for="totalCations">Alcalindad (ppm como CaCO3)</label>
+                    <span class="form-control input-sm"
+                           id="totalCations">
+                           {{ BrewCalc.alkalinity(water().anions) | number:2 }}
+                    </span>
+                </div>
+                <div class="col-md-4">        
+                    <label for="totalCations">RA Dureza efectiva (ppm como CaCO3)</label>
+                    <span class="form-control input-sm"
+                           id="totalCations">
+                           {{ BrewCalc.effectiveHardness(water().cations) | number:2 }}
+                    </span>
+                </div>
+                <div class="col-md-4">        
+                    <label for="totalCations">Alcalinidad Residual (RA) (ppm como CaCO3)</label>
+                    <span class="form-control input-sm"
+                           id="totalCations">
+                           {{ BrewCalc.residualAlkalinity(water()) | number:2 }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
