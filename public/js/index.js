@@ -20,6 +20,7 @@
                                 'ui.bootstrap',
                                 'alerts',
                                 'settings',
+                                'water',
                                 'env',
                                 'observer']);
 

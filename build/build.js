@@ -62,6 +62,8 @@ function min() {
         "public/js/resources.js",
         "public/js/util/util.js",
         "public/js/Data.js",
+        "public/js/user/SettingsCtrl.js",
+        "public/js/water/water.js",
         "public/js/env.js",
         "public/js/ObjTree.js",
         "public/js/directive/abm.js",
