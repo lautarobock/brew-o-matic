@@ -2,13 +2,60 @@
 
 	var settings = angular.module("settings", []);
 
-	settings.controller("UserSettingsCtrl",function($scope,User,$rootScope) {
+    settings.controller("SettingsWaterDetailCtrl", function($scope,WaterReport,$routeParams,$rootScope,alertFactory,$location) {
 
-        $scope.water = {
-            cations: {},
-            anions: {}
+        $rootScope.$watch('user',function(user) {
+            if ( !user) return;
+            if ($routeParams.waterId) {
+                console.log("INFO", "Edit Water report");
+                $scope.water = WaterReport.get({_id: $routeParams.waterId});
+            } else {
+                console.log("INFO", "New Water report");
+                $scope.water = new WaterReport({
+                    date: new Date(),
+                    name: 'Mi Reporte de agua',
+                    owner: $scope.user._id,
+                    cations: {},
+                    anions: {}
+                });
+            }
+        });
+
+        $scope.save = function() {
+            $scope.water.$save(function(saved) {
+                alertFactory.create('success','Reporte de agua Guardado!');
+                $location.path('/settings/water/' + saved._id) 
+            });
         };
+    });
 
+    settings.controller("SettingsWaterCtrl", function($scope,WaterReport,$rootScope,$timeout) {
+        $rootScope.$watch('user',function(user) {
+            if (user) {
+                $scope.reports = WaterReport.query();
+            }
+        });
+
+
+        $rootScope.breadcrumbs = [{
+            link: '#',
+            title: 'Home'
+        },{
+            link: '#',
+            title: 'Agua'
+        }];
+
+        $scope.removeReport = function(report) {
+            $('#confirmation'+report._id).modal('hide');
+            $timeout(function() {
+                report.$remove(function() {
+                    $scope.reports = WaterReport.query();
+                });    
+            },500);
+        };
+    });
+
+	settings.controller("UserSettingsCtrl",function($scope,User,$rootScope) {
 
         $scope.disconnectUser = function() {
             var revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' +
@@ -57,7 +104,7 @@
     
 
     settings.controller("SettingsTabCtrl",function($scope) {
-        $scope.sortTabs = ['data','water'];
+        $scope.sortTabs = ['data'];
         $scope.tabs = {
             data: {
                 title: 'Datos',

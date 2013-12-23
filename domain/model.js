@@ -29,6 +29,29 @@ exports.User = mongoose.model("User",new Schema({
     }
 }));
 
+exports.WaterReport = mongoose.model("WaterReport",new Schema({
+    date: Date,
+    name: String,
+    owner: {type:String, ref:'User'},
+    cations: {
+        calcium: {type: Number, default: null},
+        magnesium: {type: Number, default: null},
+        sodium: {type: Number, default: null},
+        potassium: {type: Number, default: null},
+        iron: {type: Number, default: null}
+    },
+    anions: {
+        bicarbonate: {type: Number, default: null},
+        carbonate: {type: Number, default: null},
+        sulfate: {type: Number, default: null},
+        chloride: {type: Number, default: null},
+        nitrate: {type: Number, default: null},
+        nitrite: {type: Number, default: null},
+        fluoride: {type: Number, default: null}
+    }
+
+}));
+
 exports.Recipe = mongoose.model("Recipe", new Schema({
     _id: String,
     code: String,

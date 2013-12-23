@@ -6,7 +6,7 @@ var Arrays = require("../public/js/util/util.js").Arrays;
  * GET users listing.
  */
 
-var services = ['Style','Grain','Hop','Yeast','Misc','Bottle','Tag','Recipe','User','Action'];
+var services = ['Style','Grain','Hop','Yeast','Misc','Bottle','Tag','Recipe','User','Action','WaterReport'];
 
 //Aca van las que tiene customId
 var customIds = ['Bottle','Recipe'];
@@ -36,6 +36,11 @@ function createRest(exports,service) {
                 res.send(results);
                 actions.log(req.session.user_id, "REMOVE_" + service,JSON.stringify(results));
             });
+        },
+        findById: function(req, res) {
+            model[service].findOne({_id:req.params.id},function(err,results) {
+                res.send(results);
+            });  
         }
     };
 }
@@ -58,4 +63,10 @@ exports.Recipe.save = function(req, res) {
     model.Recipe.findByIdAndUpdate(id,req.body,{upsert:true}).populate('owner').exec(function(err,results) {
         res.send(results);
     });
+};
+
+exports.WaterReport.findAll = function(req, res) {
+    model.WaterReport.find({owner:req.session.user_id}).exec(function(err,results) {
+        res.send(results);
+    });  
 };

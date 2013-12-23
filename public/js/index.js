@@ -36,6 +36,9 @@
                 when('/recipe/clone/:recipeId', {templateUrl: 'partial/recipe-detail.html', controller: 'RecipeDetailCtrl'}).
                 when('/recipe/new', {templateUrl: 'partial/recipe-detail.html', controller: 'RecipeDetailCtrl'}).
                 //when('/stats', {templateUrl: 'partial/user/user-stats.html', controller: 'UserStatsCtrl'}).
+                when('/settings/water', {templateUrl: 'partial/user/user-settings-water.html', controller: 'SettingsWaterCtrl'}).
+                when('/settings/water/new', {templateUrl: 'partial/user/settings/user-settings-water-detail.html', controller: 'SettingsWaterDetailCtrl'}).
+                when('/settings/water/:waterId', {templateUrl: 'partial/user/settings/user-settings-water-detail.html', controller: 'SettingsWaterDetailCtrl'}).
                 when('/settings', {templateUrl: 'partial/user/user-settings.html', controller: 'UserSettingsCtrl'}).
                 when('/notification', {templateUrl: 'partial/user/user-notification.html', controller: 'NotificationsCtrl'}).
                 when('/data/:entity', {templateUrl: 'partial/data/abm.html', controller: 'AbmCtrl'}).
@@ -174,9 +177,11 @@
 
 
     
-    index.run(function($rootScope,version,$filter,$location,BrewCalc,env,color,alertFactory) {
+    index.run(function($rootScope,version,$filter,$location,BrewCalc,env,color,alertFactory,BrewHelper) {
 
         $rootScope.BrewCalc = BrewCalc;
+
+        $rootScope.BrewHelper = BrewHelper;
 
         $rootScope.version = version;
 
