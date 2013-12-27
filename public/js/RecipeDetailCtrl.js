@@ -114,7 +114,7 @@
 
         $scope.noUpdate = false;
         $scope.$watch("recipe.EFFICIENCY", function(newValue,oldValue) {
-            if ( !oldValue || !$scope.recipe ) return;
+            if ( $scope.disableWatchs || !oldValue || !$scope.recipe ) return;
         
             //Si se da esto es porque estoy fijando la OG
             if ( !$scope.recipe.fixIngredients || $scope.recipe.fixIngredients == '0' ) {
@@ -127,7 +127,7 @@
         });
 
         $scope.$watch("recipe.BATCH_SIZE", function(newValue,oldValue) {
-            if ( !oldValue || !$scope.recipe || !$scope.recipe.FERMENTABLES ) return;
+            if ( $scope.disableWatchs || !oldValue || !$scope.recipe || !$scope.recipe.FERMENTABLES ) return;
             
             if ( $scope.noUpdate ) {
                 $scope.noUpdate = false;
@@ -664,7 +664,9 @@
                         
                         scope.changeYeast();
                         scope.recipe.date = new Date();
+                        scope.disableWatchs = true;
                         scope.$apply();
+                        scope.disableWatchs = false;
                     };
                 })(f);
                 reader.readAsText(f);
