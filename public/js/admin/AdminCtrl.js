@@ -83,7 +83,11 @@
                     {
                         field:'NAME',
                         caption: 'Nombre',
-                        valueTemplateUrl: 'partial/admin/abm-value-link.html'
+                        type: 'link',
+                        href: function(row) {
+                            return '/share.html#/' + row._id;
+                        }
+                        // valueTemplateUrl: 'partial/admin/abm-value-link.html'
                     },{
                         field:'STYLE.NAME',
                         caption: 'Estilo'
