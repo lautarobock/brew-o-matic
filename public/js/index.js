@@ -46,6 +46,10 @@
                 otherwise({redirectTo: '/recipe'});
     }]);
 
+    index.config(['abmProvider',function(abmProvider) {
+        abmProvider.setTemplateDir('template');
+    }]);
+
     index.controller("HomeCtrl",function($scope,$rootScope,User,Recipe,$routeParams) {
         
         $scope.$watch('user',function() {

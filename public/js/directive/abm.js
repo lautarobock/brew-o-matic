@@ -69,10 +69,16 @@
         }
     };
     
+    gt.filter("textFilter", function($filter,$timeout) {
+        return function(rows, criteria) {
+            return $filter('filter')(rows,criteria);
+        };
+    });
+
     gt.filter("advanced",function() {
         return function(rows,filterData) {
             if ( !rows) return rows;
-            
+
             if (!filterData) {
                 return rows;
             } else {
@@ -93,7 +99,21 @@
         };
     });
     
-    gt.directive('gtTable', function($compile, $rootScope, sortData, PAGE_SIZE) {
+    // var templateDir = "abm";
+
+    gt.run(function($templateCache,abm) {
+        $templateCache.put(abm.templateDir +"/abm-checkbox.html",
+            '<div class="checkbox" style="margin-bottom: 0;">'+
+                '<input type="checkbox" ng-model="value[header.field]" />'+
+            '</div>');
+        $templateCache.put(abm.templateDir +"/abm-value.html",'<span ng-class="header.class(row)">{{getValue(row,header)}}</span>');
+        $templateCache.put(abm.templateDir +"/abm-link.html",
+            '<a href="{{header.href(row)}}" ng-class="header.class(row)">' +
+                '{{getValue(row,header)}}' +
+            '</a>');
+    });
+    
+    gt.directive('gtTable', function($compile, $rootScope, sortData, PAGE_SIZE, abm) {
         return {
             restrict : 'EA',
             replace : true,
@@ -103,15 +123,36 @@
                 canRemove: '=',
                 canEdit: '=',
                 canAdd: '=',
-                context: '&'
+                context: '&',
+                filterData: '=',
+                searchCriteria: '=?'
             },
-            templateUrl: 'template/abm.html',
+            templateUrl: abm.templateDir +'/abm.html',
             link : function(scope, element, attrs) {
                 
             },
-            controller: function($scope) {
+            controller: function($scope,$timeout) {
+
+                $scope.emptyResultText = $scope.config().emptyResultText || "La busqueda no ha devuelto ningun resultado";
+
+                $scope.searchCriteria = $scope.searchCriteria || "";
+                $scope._searchCriteria = $scope.searchCriteria;
+
+                var activeTimeout = null;
                 
-                $scope.sort = sortData($scope.config().orderBy,$scope.config().orderDir||"");
+                $scope.search = function() {
+                    if ( activeTimeout ) $timeout.cancel(activeTimeout);
+                    activeTimeout = $timeout(function() {
+                        $scope.searchCriteria = $scope._searchCriteria;
+                    },500);
+                };
+
+                $scope.clearSearch = function() {
+                    $scope.searchCriteria = ""
+                    $scope._searchCriteria = "";
+                };
+                
+                $scope.sort = sortData($scope.config().orderBy,$scope.config().orderDir||"",$scope.config().sort);
                 
                 $scope.getActiveClass = function(tab) {
                     if (tab == $scope.entity()) {
@@ -121,6 +162,18 @@
                     }
                 };
                 
+                $scope.urlTemplate = function(filter) {
+                    return abm.templateDir + '/abm-filter-' + filter.type + ".html";
+                };
+                
+                $scope.getHeaderStyle = function(header) {
+                    var style = header.headerStyle || {};
+                    if ( header.width ) {
+                        style.width= header.width;
+                    }
+                    return style;
+                };
+
                 $scope.addNew = function() {
                     $scope.rows.push({_draft:true});
                     $scope.page = $scope.getPageCount($scope.rows.length);
@@ -132,23 +185,26 @@
                     return row._id == $scope.edit_id;
                 };
 
+                
                 $scope.valueTemplate = function(row,header) {
                     if ( $scope.isEditing(row) && !header.readonly) {
                         if ( !header.type || header.type == 'text' || header.type == 'number'  ) {
-                            return 'template/abm-input.html';
-                        } if ( header.type == 'checkbox' ) {
-                            return 'template/abm-checkbox.html';
-                        } if ( header.type == 'combo' ) {
-                            return 'template/abm-combo.html';
+                            return abm.templateDir + '/abm-input.html';
+                        } else if ( header.type == 'checkbox' ) {
+                            return abm.templateDir + '/abm-checkbox.html';
+                        } else if ( header.type == 'combo' ) {
+                            return abm.templateDir + '/abm-combo.html';
                         } else {
-                            return 'template/abm-input.html';
+                            return abm.templateDir + '/abm-input.html';
                         }
                     } else if (header.valueTemplateUrl) {
                         return header.valueTemplateUrl;
                     } else if ( header.type == 'checkbox' ) {
-                        return 'template/abm-value-checkbox.html';
+                        return abm.templateDir + '/abm-value-checkbox.html';
+                    } else if ( header.type == 'link' ) {
+                        return abm.templateDir + '/abm-link.html';
                     } else {
-                        return 'template/abm-value.html';
+                        return abm.templateDir + '/abm-value.html';
                     }
                 };
                 
@@ -221,8 +277,11 @@
                     }
                 };
         
+                $scope.loading = true;
                 $scope.page = 1;
-                $scope.rows = $scope.config().data.query();
+                $scope.rows = $scope.config().data.query(function() {
+                    $scope.loading = false;
+                });
                 
                 $scope.pageSize = function() {
                     return $scope.config().pageSize || PAGE_SIZE;
@@ -235,17 +294,40 @@
             }
         };
     });
+    
+    gt.provider("abm", function() {
+        var service = {
+            templateDir: "abm"
+        };
+
+        this.setTemplateDir = function(dir) {
+            service.templateDir = dir;
+        };
+
+        this.$get = function() {
+            return service;
+        };
+    });
+
 
     gt.factory("sortData",function() {
-        return function(startField, startAsc) {
+        return function(startField, startAsc, startSort) {
             var data = {
+                sort: startSort,
                 asc: startAsc,
                 field: startField,
                 orderStyle:{},
                 orderBy: function() {
-                    return this.asc+this.field;
+                    if ( this.sort ) {
+                        return this.sort;
+                    } else  {
+                        return this.field; 
+                    }
                 },
-                resort: function(field) {
+                reverse: function() {
+                    return this.asc || this.asc == '-';
+                },
+                resort: function(field, sort) {
                     if ( field == this.field) {
                         if (this.asc == '-' ) {
                             this.asc = '';
@@ -259,6 +341,7 @@
                             data.orderStyle[key] = '';
                         });
                         this.orderStyle[field] = 'glyphicon glyphicon-chevron-up';
+                        this.sort = sort;
                         this.field = field;
                         this.asc = '';
                     }
