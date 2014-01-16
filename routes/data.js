@@ -51,8 +51,21 @@ for (s in services ) {
 }
 
 exports.Recipe.findAll = function(req, res) {
-    model.Recipe.find().populate('owner').exec(function(err,results) {
-        res.send(results);
+    model.Recipe
+        .find({},{
+            owner:1,
+            NAME: 1,
+            STYLE: 1,
+            date: 1,
+            modificationDate: 1,
+            OG: 1,
+            ABV: 1,
+            CALCIBU: 1,
+            isPublic: 1,
+            BREWER: 1
+        })
+        .populate({path:'owner',select:'name'}).exec(function(err,results) {
+            res.send(results);
     });    
 };
 
