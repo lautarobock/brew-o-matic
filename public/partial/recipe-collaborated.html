@@ -58,7 +58,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="recipe in collaborated | filter:searchCriteria | orderBy:sort.orderBy()">
+        <tr ng-repeat="recipe in collaborated | filter:searchCriteria | orderBy:sort.orderBy():sort.reverse()">
             <td title="{{recipe.NAME}}">
                 <a href="#/recipe/edit/{{encodeName(recipe._id)}}">{{ recipe.NAME|limitText:100}}</a>
                 <show-tags tags="recipe.tags"></show-tags>
