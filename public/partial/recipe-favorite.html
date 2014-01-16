@@ -64,7 +64,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="recipe in published | filterFavorites:user.favorites | filter:searchCriteria | orderBy:sort.orderBy()">
+            <tr ng-repeat="recipe in published | filterFavorites:user.favorites | filter:searchCriteria | orderBy:sort.orderBy():sort.reverse()">
                 <td>
                     <a ng-hide="user.favorites.indexOf(recipe._id) != -1" href="" type="button" class="glyphicon glyphicon-star-empty" ng-click="addFavorites(recipe)"></a>
                     <a ng-show="user.favorites.indexOf(recipe._id) != -1" href="" type="button" class="glyphicon glyphicon-star" ng-click="removeFavorites(recipe)"></a>

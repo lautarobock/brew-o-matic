@@ -70,7 +70,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="recipe in recipes | filter:searchCriteria | orderBy:sort.orderBy()">
+        <tr ng-repeat="recipe in recipes | filter:searchCriteria | orderBy:sort.orderBy():sort.reverse()">
             <td>
                 <a href="#/recipe/edit/{{encodeName(recipe._id)}}">{{ recipe.code }}</a>
             </td>

@@ -111,7 +111,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="recipe in published | filter:searchCriteria | advanced:filterData | orderBy:sort.orderBy()">
+            <tr ng-repeat="recipe in published | filter:searchCriteria | advanced:filterData | orderBy:sort.orderBy():sort.reverse()">
                 <td>
                     <span ng-hide="recipe.owner._id == user._id">
                         <a ng-hide="user.favorites.indexOf(recipe._id) != -1" type="button" class="glyphicon glyphicon-star-empty" ng-click="addFavorites(recipe)"></a>
