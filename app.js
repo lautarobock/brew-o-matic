@@ -127,10 +127,10 @@ for (s in admin ) {
 }
 
 
-//setInterval(function() {
-//    console.log("RUNNING SCHEDULE");
-//    notifications.removeOld();
-//},5000);
+// setInterval(function() {
+   console.log("RUNNING SCHEDULE");
+   notifications.removeOld();
+// },5000);
 
 var server = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
