@@ -195,13 +195,17 @@ exports.notify = notify;
 /**
  * Elimina las notificaciones viejas.
  * Por ahora limpia las mas viejas q una semana q ya hayan sido leidas.
- *
+ * Y desde 4 semanas atra limpia todas.
  * Luego si veo q la DB crece mucho, deberia limpiar todas por ejemplo del ulitmo mes.
  */
 exports.removeOld = function() {
     var from  = new Date(new Date().getTime()-7*24*60*60*1000);
-    console.log("Eliminando desde",from);
-    model.Notification.remove({date:{$lt:from},status:'read'}).exec();
+    console.log("Eliminando leidas desde",from);
+    model.Notification.remove({date:{$lt:from},status:'read'}).exec(function() {
+        from = new Date(new Date().getTime()-7*24*60*60*1000*4);
+        console.log("Eliminando todas desde ",from);
+        model.Notification.remove({date:{$lt:from}}).exec();
+    });
 };
 
 /**
