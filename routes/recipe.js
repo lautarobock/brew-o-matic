@@ -51,16 +51,7 @@ exports.remove= function(req, res) {
 
 
 function generateId(name,user_id) {
-    return encodeURIComponent(name.replace(/ /g, "_")
-                .replace(/#/g,"_Nro_")
-                .replace(/%/g,"_Per_")
-                .replace(/,/g,"_")
-                .replace(/á/g,"a")
-                .replace(/é/g,"e")
-                .replace(/í/g,"i")
-                .replace(/ó/g,"o")
-                .replace(/ú/g,"u")
-                + "-" + user_id + "-" + (new Date()).getTime());
+    return name.replace(/[^a-z0-9]/ig, '') + "-" + user_id + "-" + (new Date()).getTime();
 }
 
 exports.addComment = function(req,res) {
