@@ -84,6 +84,7 @@ function filter (req,res,next){
 
 var recipe = require("./routes/recipe.js");
 var data = require("./routes/data.js");
+var rating = require("./routes/rating.js");
 
 app.get('/user/google_:google_id', user.getByGoogleId);
 app.post('/user', user.add);
@@ -108,6 +109,7 @@ app.delete('/recipe/:id',filter,recipe.remove);
 app.get('/notification',filter,notifications.findAll);
 app.get('/notification/news',filter,notifications.findNews);
 app.post("/notification/:id",filter,notifications.update);
+app.get('/rating/beers',rating.findBeers);
 
 var services = ['Style','Grain','Hop','Yeast','Misc','Bottle','Tag','WaterReport'];
 for (s in services ) {

@@ -1,0 +1,56 @@
+<div ng-controller="RecipeRatingCtrl">
+    <div class="col-md-10">
+        <div class="panel panel-default">
+            <div class="panel-body" >
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label for="recipename">Cerveza de </label>
+                        <a target="_blank" href="http://www.birrasquehetomado.com.ar">www.BirrasQueHeTomado.com.ar</a>
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" id="recipename" ng-model="recipe.beer_id">
+                            <span class="input-group-btn">
+                                <button ng-click="updateBeer()" type="button"  class="btn btn-default btn-sm"><span class="glyphicon glyphicon-eye-open"></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <select class="form-control input" ng-model="recipe.beer_id">
+                        <option value=""></option>
+                        <option ng-repeat="beer in beers | orderBy:'name'" value="{{beer._id}}">
+                            {{beer.name}}
+                        </option>
+                    </select>
+                    <!-- <span class="input-group-btn">
+                        <button ng-click="userToAdd && addUser(userToAdd)" class="btn btn-default" type="button">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </span> -->
+                </div>
+                <div>
+                    <iframe src="{{iframeUrl}}" width="400" height="200" scrolling="no" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+        <div style="overflow: hidden;margin-bottom: 1em;">
+            <div class="pull-left">
+                <a href="#/recipe/" type="button" class="btn btn-link glyphicon glyphicon-chevron-left"> Volver al listado</a>
+            </div>
+            <div class="pull-right">
+                <a href="#/recipe/" type="button" class="btn btn-default">Cancelar</a>
+                <button ng-click="save()" type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+        <div ng-repeat="notification in notifications">
+            <div class="alert alert-{{notification.type}} alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>{{notification.title}}</strong>
+                {{notification.text}}
+            </div>
+        </div>            
+    </div>
+    <div class="col-md-2" >
+        <ng-include src="'partial/recipe-detail-indicators.html'"></ng-include>
+        <ng-include src="'partial/recipe-detail-social.html'"></ng-include>
+    </div>
+</div>
