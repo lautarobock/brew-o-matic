@@ -374,12 +374,42 @@
 
     });
 
+    /**
+     * RecipeRatingCtrl
+     */
+    module.controller("RecipeRatingCtrl",function($scope,$http,$sce) {
+
+        $http.get("rating/beers").success(function(beers) {
+            console.log(beers);
+            $scope.beers = beers;
+        });
+
+        $scope.updateBeer = function() {
+            // if ( $scope.recipe.beer_id ) {
+
+            // } else {
+
+            // }
+            updateIFrame();
+        }
+
+        function updateIFrame() {
+            if ( $scope.recipe.beer_id ) {
+                $scope.iframeUrl = $sce.trustAsResourceUrl("http://www.birrasquehetomado.com.ar/html/tag.html#/beer/tag/" + $scope.recipe.beer_id);
+            }    
+        }
+        updateIFrame();
+        
+        
+
+    });
+
 
     /**
      * TabControler
      */
     module.controller("RecipeTabCtrl",function($scope) {
-        $scope.sortTabs = ['main','mash','boil','fermentation','bottling','log','collaborators'];
+        $scope.sortTabs = ['main','mash','boil','fermentation','bottling','log','collaborators','rating'];
         $scope.tabs = {
             main: {
                 title: 'Receta',
@@ -408,6 +438,10 @@
             collaborators: {
                 title: 'Colaboradores',
                 template: 'collaborators'
+            },
+            rating: {
+                title: 'Calificaciones',
+                template: 'rating'
             }};
 
         $scope.selectedTab = 'main';

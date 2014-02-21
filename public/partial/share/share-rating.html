@@ -1,0 +1,21 @@
+<div ng-controller="RecipeRatingCtrl">
+    <div class="col-md-10">
+        <div class="panel panel-default">
+            <div class="panel-body" >
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label for="recipename">Cerveza de </label>
+                        <a target="_blank" href="http://www.birrasquehetomado.com.ar">www.BirrasQueHeTomado.com.ar</a>
+                    </div>
+                </div>
+                <div>
+                    <iframe src="{{iframeUrl}}" width="400" height="200" scrolling="no" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2" >
+        <ng-include src="'partial/recipe-detail-indicators.html'"></ng-include>
+        <ng-include src="'partial/recipe-detail-social.html'"></ng-include>
+    </div>
+</div>
