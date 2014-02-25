@@ -18,12 +18,14 @@
         <tr ng-repeat="fermentable in recipe.FERMENTABLES.FERMENTABLE">
             <!--<td><input class="form-control input-sm" type="text" ng-model="fermentable.NAME"/></td>-->
             <td>
-                <input ng-change="changeGrain(fermentable)" class="form-control input-sm" type="text" ng-model="fermentable.NAME" list="grainNames" placeholder="Buscar Fermentables"/>
+                <input typeahead-on-select="changeGrain(fermentable)" type="text" ng-model="fermentable.NAME" typeahead="grain.name for grain in grains | filter:$viewValue" class="form-control input-sm" placeholder="Buscar Fermentables">
+                
+                <!-- <input ng-change="changeGrain(fermentable)" class="form-control input-sm" type="text" ng-model="fermentable.NAME" list="grainNames" placeholder="Buscar Fermentables"/>
                 <datalist id="grainNames">
                     <option ng-repeat="grain in grains" value="{{grain.name}}">
                         {{grain.name}}
                     </option>
-                </datalist>
+                </datalist> -->
             </td>
             <td><input ng-change="changeAmount()" class="form-control input-sm" type="number" step="0.001" ng-model="fermentable.POTENTIAL" placeholder="PPG" /></td>
             <td><input ng-change="changeAmount()" class="form-control input-sm" type="number" step="0.1" ng-model="fermentable.COLOR" placeholder="SRM"/></td>
