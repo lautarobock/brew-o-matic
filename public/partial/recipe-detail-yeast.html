@@ -12,12 +12,14 @@
         <tr ng-repeat="yeast in recipe.YEASTS.YEAST">
             <!--<td><input class="form-control input-sm" type="text" ng-model="yeast.NAME"/></td>-->
             <td>
-                <input ng-change="onChangeYeast(yeast)" class="form-control input-sm" type="text" ng-model="yeast.NAME" list="yeastNames" placeholder="Buscar Levaduras"/>
+                <input typeahead-on-select="onChangeYeast(yeast)" class="form-control input-sm" type="text" ng-model="yeast.NAME" typeahead="yeast.name for yeast in yeasts | filter:$viewValue" placeholder="Buscar Levaduras"/>
+                <datalist id="yeastNames">
+                <!-- <input ng-change="onChangeYeast(yeast)" class="form-control input-sm" type="text" ng-model="yeast.NAME" list="yeastNames" placeholder="Buscar Levaduras"/>
                 <datalist id="yeastNames">
                     <option ng-repeat="yeast in yeasts" value="{{yeast.name}}">
                         {{yeast.name}}
                     </option>
-                </datalist>
+                </datalist> -->
             </td>
             <td>
                 <input class="form-control input-sm" type="number" ng-model="yeast.AMOUNT"/></td>

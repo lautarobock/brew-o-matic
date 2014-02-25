@@ -26,15 +26,16 @@
             <div class="col-lg-4">
                 <label for="style">Style</label>
                 <div class="input-group">
-                    <input type="text" class="form-control input-sm" id="style" placeholder="Estilo" ng-model="recipe.STYLE.NAME" list="styleNames">
+                    <input type="text" class="form-control input-sm" id="style" placeholder="Estilo" ng-model="recipe.STYLE.NAME" typeahead="style.name for style in styles | filter:$viewValue">
+                    <!-- <input type="text" class="form-control input-sm" id="style" placeholder="Estilo" ng-model="recipe.STYLE.NAME" list="styleNames"> -->
                     <span class="input-group-btn">
                         <a title="Link a la pagina del estilo en el BJCP" ng-disabled="!bjcpLink(recipe.STYLE.NAME)" class="btn btn-default btn-sm" target="_blank" href="{{bjcpLink(recipe.STYLE.NAME)}}" ><span class="glyphicon glyphicon-link"></a>
                     </span>
-                    <datalist id="styleNames">
+                    <!-- <datalist id="styleNames">
                         <option ng-repeat="style in styles" value="{{style.name}}">
                             {{style.name}}
                         </option>
-                    </datalist>
+                    </datalist> -->
                 </div>
                 <a ng-show="relatedLink(recipe.STYLE.NAME)" target="_blank" href="{{relatedLink(recipe.STYLE.NAME)}}" >Ver ejemplos en RateBeer.com</a>
             </div>

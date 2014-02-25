@@ -22,12 +22,13 @@
         <tr ng-repeat="hop in recipe.HOPS.HOP">
             <!--<td><input class="form-control input-sm" type="text" ng-model="hop.NAME"/></td>-->
             <td>
-                <input ng-change="onChangeHop(hop)" class="form-control input-sm" type="text" ng-model="hop.NAME" list="hopNames" placeholder="Buscar Lupulos"/>
+                <input typeahead-on-select="onChangeHop(hop)" class="form-control input-sm" type="text" ng-model="hop.NAME" typeahead="hop.name for hop in hops | filter:$viewValue" placeholder="Buscar Lupulos"/>
+                <!-- <input ng-change="onChangeHop(hop)" class="form-control input-sm" type="text" ng-model="hop.NAME" list="hopNames" placeholder="Buscar Lupulos"/>
                 <datalist id="hopNames">
                     <option ng-repeat="hop in hops" value="{{hop.name}}">
                         {{hop.name}}
                     </option>
-                </datalist>
+                </datalist> -->
             </td>
             <td><input ng-change="changeHop()" class="form-control input-sm" type="number" step="0.1" ng-model="hop.ALPHA" placeholder="%AA"/></td>
             <td>
