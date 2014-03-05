@@ -46,16 +46,23 @@ exports.add = function(req,res) {
 };
 
 exports.updateSettings = function(req,res) {
+    console.log("update settings", req.session.user_id);
     model.User.findOne({_id: req.session.user_id},
                        function(err,user) {
         if ( err ) {
+            console.log("err",err);
             res.send(500,{error:err});
         } else {
             user.settings = req.body.settings;
             user.name = req.body.name;
-            user.save();
-            res.send(user);
-            actions.log(req.session.user_id, "UPDATE_SETTINGS","User: " + user.name);
+
+            user.save(function(err, resp) {
+                console.log("err",err);
+                console.log(resp);
+                res.send(user);
+                actions.log(req.session.user_id, "UPDATE_SETTINGS","User: " + user.name);    
+            });
+            
         }
     });
 };
