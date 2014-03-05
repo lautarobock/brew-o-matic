@@ -146,12 +146,45 @@
     });
     
 
-    index.controller("MainController",function($scope,$rootScope) {
+    index.controller("MainController",function($scope,$rootScope,User) {
         $rootScope.breadcrumbs = [];
         
         $scope.login = function() {
             googleSignIn();
         };
+
+        var infos = [{
+            text: 'Si tenes 2 minutos, podes rellenar una encuesta sobre uso de Brew-o-Matic.',
+            link: {
+                text: 'Abrir Encuesta',
+                href: 'https://docs.google.com/forms/d/1lCObRGFtB2g3S3jiwwNweNUz5hRrLuyni2zFZz40R58/viewform'
+            },
+            id: 'closeUseSurvey'
+        }];
+
+        $scope.infos = []
+
+        $scope.closeInfo = function(index) {
+            $scope.infos.splice(index,1);
+        };
+
+        $scope.closeForEver = function(info, index) {
+            $scope.user.settings[info.id] = true;
+            User.updateSettings($scope.user, function() {
+                $scope.infos.splice(index,1);    
+            });
+        }
+
+        $scope.$watch("user", function(user) {
+            if ( user ) {
+                //elimino las info que ya cerre desde la configuracion del usuario
+                for ( var i=0; i<infos.length; i++ ) {
+                    if ( !user.settings[infos[i].id] ) {
+                        $scope.infos.push(infos[i]);
+                    }
+                }
+            }
+        })
     });
     
 

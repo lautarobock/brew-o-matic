@@ -50,6 +50,11 @@
                 <span ng-show="$last" class="active" >{{item.title}}</span>
               </li>
             </ol>
+            <alert ng-repeat="info in infos" type="'info'" close="closeInfo($index)">
+                {{info.text}}
+                <a target="_blank" ng-click="closeForEver(info,$index)" href="{{info.link.href}}">{{info.link.text}}</a>.
+                <a href="" ng-click="closeForEver(info,$index)">Cerrar y no volver a mostrar</a>
+            </alert>
             <div class="alert alert-{{alert.type}} alert-dismissable" ng-repeat="alert in getAlerts()">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <strong ng-show="alert.title">{{alert.title}}</strong>

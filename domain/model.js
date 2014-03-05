@@ -25,8 +25,10 @@ exports.User = mongoose.model("User",new Schema({
             PercentEvap: Number,
             TrubChillerLosses: Number,
             isPublic: Boolean
-        }
-    }
+        },
+        closeUseSurvey: Boolean
+    },
+    
 }));
 
 exports.WaterReport = mongoose.model("WaterReport",new Schema({
