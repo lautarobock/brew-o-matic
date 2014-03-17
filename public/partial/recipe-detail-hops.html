@@ -46,7 +46,7 @@
                     <option ng-repeat="use in hopUses">{{use.name}}</option>
                 </select>
             </td>
-            <td><select class="form-control input-sm" ng-change="changeHop()" ng-model="hop.TIME" ng-options="a for a in [0,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90,100,110,120]"></select></td>
+            <td><select class="form-control input-sm" ng-change="changeHop()" ng-model="hop.TIME" ng-options="a for a in [0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,90,100,110,120]"></select></td>
             <td><span class="form-control input-sm gt-calculated">{{hopIBU(hop)|number:2}}</span></td>
             <td>
                 <button type="button" class="close" aria-hidden="true" ng-click="removeHop(hop)">&times;</button>
