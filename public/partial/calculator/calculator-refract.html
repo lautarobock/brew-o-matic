@@ -1,0 +1,59 @@
+<div class="panel panel-default" >
+    <div class="panel-heading">Refractometro</div>
+    <div class="panel-body">
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-sm-4 control-label"></label>
+                <div class="col-sm-4">
+                    <label class="control-label">Gravity</label>
+                </div>
+                <div class="col-sm-4">
+                    <label class="control-label">Plato</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">DI</label>
+                <div class="col-sm-4">
+                    <input type="number" step="0.001" ng-model="refractometer.OG" class="form-control input-sm"/>
+                </div>
+                <div class="col-sm-4">
+                    <input ng-blur="updateOG()" type="number" step="0.01" ng-model="refractometer.OGP" class="form-control input-sm"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label" title="Valor medido con el refractometro">DF (Medida)</label>
+                <div class="col-sm-4">
+                    <input type="number" step="0.001" ng-model="refractometer.FG" class="form-control input-sm"/>
+                </div>
+                <div class="col-sm-4">
+                    <input ng-blur="updateFG()" type="number" step="0.01" ng-model="refractometer.FGP" class="form-control input-sm"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label" title="Factor de correccion">F.C</label>
+                <div class="col-sm-4">
+                    <input type="number" ng-model="refractometer.correction" class="form-control input-sm"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label" title="valor ajustado">Valor</label>
+                <div class="col-sm-4">
+                    <span class="form-control input-sm">
+                        {{refractometer.value|number:3}}
+                    </span>
+                </div>
+                <div class="col-sm-4">
+                    <span class="form-control input-sm">
+                        {{refractometer.valueP|number:2}}
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label" title="valor ajustado">Alcohol</label>
+                <div class="col-sm-4">
+                    <span ng-bind="refractometer.ABV" class="form-control input-sm"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

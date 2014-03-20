@@ -1,0 +1,46 @@
+<div class="panel panel-default" >
+    <div class="panel-heading">Densimetro</div>
+    <div class="panel-body">
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-sm-4 control-label"></label>
+                <div class="col-sm-4">
+                    <label class="control-label">Gravity</label>
+                </div>
+                <div class="col-sm-4">
+                    <label class="control-label">Plato</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Lectura</label>
+                <div class="col-sm-4">
+                    <input type="number" step="0.001" ng-model="hydrometer.gravity" class="form-control input-sm"/>
+                </div>
+                <div class="col-sm-4">
+                    <input ng-blur="updateGravity()" type="number" step="0.01" ng-model="hydrometer.gravityP" class="form-control input-sm"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Tº Medicion</label>
+                <div class="col-sm-4">
+                    <input type="number" ng-model="hydrometer.reading" class="form-control input-sm"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Tº Calibracion</label>
+                <div class="col-sm-4">
+                    <input type="number" ng-model="hydrometer.calibration" class="form-control input-sm"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label" title="valor ajustado">Valor</label>
+                <div class="col-sm-4">
+                    <span ng-bind="hydrometer.value" class="form-control input-sm"/>
+                </div>
+                <div class="col-sm-4">
+                    <span ng-bind="hydrometer.valueP" class="form-control input-sm"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
