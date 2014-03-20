@@ -52,6 +52,8 @@
         };
     });
 
+    var ABV_COHEF = 0.131;
+
     helper.factory("BrewCalc",function(BrewHelper) {
         return {
             /**
@@ -184,7 +186,28 @@
             waterBalance: function(water) {
                 if ( !water ) return null;
                 return Math.abs(this.totalAnions(water.anions)-this.totalCations(water.cations));
+            },
+            calculateABV: function(og, fg) {
+                var OG = BrewHelper.toPpg(og);
+                var FG = BrewHelper.toPpg(fg);
+                return BrewHelper.round((OG-FG)*ABV_COHEF,100);
+            },
+            calculateOG: function(fg, abv) {
+                var FG = BrewHelper.toPpg(fg);
+                var OG = abv/ABV_COHEF + FG;
+                return BrewHelper.toPotential(OG);
+            },
+            calculateFG: function(og, abv) {
+                var OG = BrewHelper.toPpg(og);
+                var FG = OG - abv/ABV_COHEF;
+                return BrewHelper.toPotential(FG);
+            },
+            attenuation: function(og, fg) {
+                var OG = BrewHelper.toPpg(og);
+                var FG = BrewHelper.toPpg(fg);
+                return ((OG - FG) / OG)*100;
             }
+
         };
     });
 

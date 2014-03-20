@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-xs-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Alcohol</div>
+            <div class="panel-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Calcular</label>
+                        <div class="col-sm-3">
+                            <select ng-model="alcohol.mode" class="form-control input-sm">
+                                <option value="ABV">Alcohol</option>
+                                <option value="OG">DI</option>
+                                <option value="FG">DF</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">DI</label>
+                        <div class="col-sm-3">
+                            <input ng-disabled="alcohol.mode=='OG'" type="number" step="0.001" ng-model="alcohol.OG" class="form-control input-sm"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">DF</label>
+                        <div class="col-sm-3">
+                            <input ng-disabled="alcohol.mode=='FG'" type="number" step="0.001" ng-model="alcohol.FG" class="form-control input-sm"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">% Alc</label>
+                        <div class="col-sm-3">
+                            <input ng-disabled="alcohol.mode=='ABV'" type="number" step="0.01" ng-model="alcohol.ABV" class="form-control input-sm"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Atenuacion aparente</label>
+                        <div class="col-sm-3">
+                            <span class="form-control input-sm">{{alcohol.attenuation|number:0}}%</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
