@@ -52,6 +52,8 @@
         };
     });
 
+    var ABV_COHEF = 0.131;
+
     helper.factory("BrewCalc",function(BrewHelper) {
         return {
             /**
@@ -184,6 +186,44 @@
             waterBalance: function(water) {
                 if ( !water ) return null;
                 return Math.abs(this.totalAnions(water.anions)-this.totalCations(water.cations));
+            },
+            calculateABV: function(og, fg) {
+                var OG = BrewHelper.toPpg(og);
+                var FG = BrewHelper.toPpg(fg);
+                return BrewHelper.round((OG-FG)*ABV_COHEF,100);
+            },
+            calculateOG: function(fg, abv) {
+                var FG = BrewHelper.toPpg(fg);
+                var OG = abv/ABV_COHEF + FG;
+                return BrewHelper.toPotential(OG);
+            },
+            calculateFG: function(og, abv) {
+                var OG = BrewHelper.toPpg(og);
+                var FG = OG - abv/ABV_COHEF;
+                return BrewHelper.toPotential(FG);
+            },
+            attenuation: function(og, fg) {
+                var OG = BrewHelper.toPpg(og);
+                var FG = BrewHelper.toPpg(fg);
+                return ((OG - FG) / OG)*100;
+            },
+            toPlato: function(sg) {
+                // var sg = BrewHelper.toPpg(gravity);
+                return BrewHelper.round((-1 * 616.868) + (1111.14 * sg) - (630.272 * Math.pow(sg,2)) + (135.997 * Math.pow(sg,3)),100);
+            },
+            fromPlato: function(plato) {
+                // console.log("plato", plato);
+                var r=1 + (plato / (258.6 - ( (plato/258.2) *227.1) ) );
+                // console.log("r", r);
+                var result = BrewHelper.round(r,1000);
+                // console.log("result", result);
+                return result;
+            },
+            adjustHydrometer: function(gravity, reading, calibration) {
+                return bfHydrometer.recalculate(gravity,reading,calibration);
+            },
+            adjustRefractometer: function(og, fg, correction) {
+                return bfRefractometer.recalculate(og,fg,correction);
             }
         };
     });
