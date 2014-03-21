@@ -1,22 +1,22 @@
-
-
-<div class="modal-header">
+<div ng-if="colClass=='col-xs-6'" class="modal-header">
+    <a href="" ng-click="cancel()" >
+        <span class="pull-right glyphicon glyphicon-remove"></span>
+    </a>
     <h3>Calculadoras</h3>
 </div>
 <div class="modal-body">
 	<div class="row">
 	 	<div class="col-xs-12">
-		    <div class="col-xs-12" calculator-abv></div>
-		    <div class="col-xs-12" calculator-hydro></div>
-		    <div class="col-xs-12" calculator-refract></div>
+		    <div ng-if="show.abv" class="{{colClass}}" calculator-abv></div>
+		    <div ng-if="show.hydrometer" class="{{colClass}}" calculator-hydro></div>
+		    <div ng-if="show.refractometer" class="{{colClass}}" calculator-refract></div>
 		</div>
 	</div>
 </div>
-<div class="modal-footer">
+<div ng-if="colClass!='col-xs-6'" class="modal-footer">
   <div class="form-group">
     <div class="col-lg-10 col-lg-offset-2">
-      <a class="btn btn-default" ng-click="cancel()" >Cerrar</a>
-      <!-- <button type="button" ng-click="ok()" class="btn btn-primary" >Guardar</button>  -->
+      <a class="btn btn-default btn-xs" ng-click="cancel()" >Cerrar</a>
     </div>
   </div>
 </div>

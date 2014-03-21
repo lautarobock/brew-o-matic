@@ -38,12 +38,12 @@
             <div class="form-group">
                 <label class="col-sm-4 control-label" title="valor ajustado">Valor</label>
                 <div class="col-sm-4">
-                    <span class="form-control input-sm">
+                    <span class="gt-calculated form-control input-sm">
                         {{refractometer.value|number:3}}
                     </span>
                 </div>
                 <div class="col-sm-4">
-                    <span class="form-control input-sm">
+                    <span class="gt-calculated form-control input-sm">
                         {{refractometer.valueP|number:2}}
                     </span>
                 </div>
@@ -51,7 +51,7 @@
             <div class="form-group">
                 <label class="col-sm-4 control-label" title="valor ajustado">Alcohol</label>
                 <div class="col-sm-4">
-                    <span ng-bind="refractometer.ABV" class="form-control input-sm"/>
+                    <span ng-bind="refractometer.ABV" class="gt-calculated form-control input-sm"/>
                 </div>
             </div>
         </form>

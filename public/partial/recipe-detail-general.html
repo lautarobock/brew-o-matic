@@ -11,7 +11,14 @@
             </div>
             <div class="col-lg-2">
               <label for="OG">OG</label>
-              <span class="form-control input-sm gt-calculated" id="OG" ng-bind="recipe.OG" />
+              <div class="input-group">
+                <span class="form-control input-sm gt-calculated" id="OG" ng-bind="recipe.OG" />
+                <span class="input-group-btn">
+                  <a class="btn btn-default btn-sm" href="" ng-click="openCalculatorOG()">
+                    <img src="images/calculator.png"/>
+                  </a>
+                </span>
+              </div>
             </div>
             <div class="col-lg-2">
               <label for="ibu">IBU</label>
@@ -27,15 +34,9 @@
                 <label for="style">Style</label>
                 <div class="input-group">
                     <input type="text" class="form-control input-sm" id="style" placeholder="Estilo" ng-model="recipe.STYLE.NAME" typeahead="style.name for style in styles | filter:$viewValue">
-                    <!-- <input type="text" class="form-control input-sm" id="style" placeholder="Estilo" ng-model="recipe.STYLE.NAME" list="styleNames"> -->
                     <span class="input-group-btn">
                         <a title="Link a la pagina del estilo en el BJCP" ng-disabled="!bjcpLink(recipe.STYLE.NAME)" class="btn btn-default btn-sm" target="_blank" href="{{bjcpLink(recipe.STYLE.NAME)}}" ><span class="glyphicon glyphicon-link"></a>
                     </span>
-                    <!-- <datalist id="styleNames">
-                        <option ng-repeat="style in styles" value="{{style.name}}">
-                            {{style.name}}
-                        </option>
-                    </datalist> -->
                 </div>
                 <a ng-show="relatedLink(recipe.STYLE.NAME)" target="_blank" href="{{relatedLink(recipe.STYLE.NAME)}}" >Ver ejemplos en RateBeer.com</a>
             </div>
@@ -45,7 +46,14 @@
             </div>
             <div class="col-lg-2">
               <label for="fg">FG</label>
-              <span class="form-control input-sm gt-calculated" id="fg" ng-bind="recipe.FG"/>
+              <div class="input-group">
+                <span class="form-control input-sm gt-calculated" id="fg" ng-bind="recipe.FG"/>
+                <span class="input-group-btn">
+                  <a class="btn btn-default btn-sm" href="" ng-click="openCalculatorFG()">
+                    <img src="images/calculator.png"/>
+                  </a>
+                </span>
+              </div>
             </div>
             <div class="col-lg-2">
               <label for="bugu">BU/GU</label>

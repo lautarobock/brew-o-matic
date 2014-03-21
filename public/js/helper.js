@@ -215,7 +215,7 @@
                 // console.log("plato", plato);
                 var r=1 + (plato / (258.6 - ( (plato/258.2) *227.1) ) );
                 // console.log("r", r);
-                var result = BrewHelper.round(r,1000);
+                var result = BrewHelper.round(r,10000);
                 // console.log("result", result);
                 return result;
             },

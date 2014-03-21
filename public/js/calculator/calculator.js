@@ -21,21 +21,21 @@
             controller: function($scope, BrewCalc) {
 
                 $scope.alcohol = {
-                    OG: 1.050,
-                    FG: 1.010,
+                    OG: $scope.values.OG || 1.050,
+                    FG: $scope.values.FG || 1.010,
                     mode: 'ABV' 
                 };
 
                 function updateABV() {
                     if ( $scope.alcohol.mode == 'ABV' ) {
-                        console.log("calculate ABV");
+                        // console.log("calculate ABV");
                         $scope.alcohol.ABV = BrewCalc.calculateABV($scope.alcohol.OG,$scope.alcohol.FG);    
                         
                     } else if ( $scope.alcohol.mode == 'OG' ) {
-                        console.log("calculate OG");
+                        // console.log("calculate OG");
                         $scope.alcohol.OG = BrewCalc.calculateOG($scope.alcohol.FG,$scope.alcohol.ABV);
                     } else if ( $scope.alcohol.mode == 'FG' ) {
-                        console.log("calculate FG");
+                        // console.log("calculate FG");
                         $scope.alcohol.FG = BrewCalc.calculateFG($scope.alcohol.OG,$scope.alcohol.ABV);
                     }
                     $scope.alcohol.attenuation = BrewCalc.attenuation($scope.alcohol.OG,$scope.alcohol.FG);
@@ -100,7 +100,7 @@
             controller: function($scope, BrewCalc) {
 
                 $scope.refractometer = {
-                    OG: 1.050,
+                    OG: $scope.values.OG || 1.050,
                     FG: 1.025,
                     correction: 1
                 };
@@ -132,18 +132,41 @@
         };
     });
 
-    calculator.factory("CalculatorPopup", function($modal) {
+    calculator.factory("CalculatorPopup", function($modal,$rootScope) {
         var obj = {
-            open : function () {
+            open : function (show,values) {
+                var scope = $rootScope.$new();
+                
+                /* Show/Hide */
+                scope.show = show || {
+                    abv: true,
+                    hydrometer: true,
+                    refractometer: true
+                };
+                var count = 0;
+                angular.forEach(scope.show, function(value, key) {
+                    count += value?1:0;
+                });
+                var windowClass='';
+                scope.colClass= 'col-xs-12';
+                if ( count != 1 ) {
+                    windowClass = 'modal-lg';
+                    scope.colClass= 'col-xs-6';
+                }
+
+                /* Default Values */
+                scope.values = values || {};
+
                 var modalInstance = $modal.open({
                     templateUrl: 'partial/calculator/calculator-popup.html',
                     controller: function($scope, $modalInstance) {
                         $scope.cancel = function () {
                             $modalInstance.dismiss('cancel');
                         };
-                    }
+                    },
+                    windowClass: windowClass,
+                    scope: scope
                 });
-
                 return modalInstance.result;
             }
         };
