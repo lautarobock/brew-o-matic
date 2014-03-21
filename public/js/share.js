@@ -8,6 +8,7 @@
                                         'login',
                                         'comments',
                                         'brew-o-module.controller',
+                                        'ui.bootstrap',
                                         'googlechart',
                                         'settings',
                                         'water',
