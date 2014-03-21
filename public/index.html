@@ -10,9 +10,10 @@
         <link rel="canonical" href="http://brew-o-matic.eu01.aws.af.cm" />
         <!-- <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"> -->
         <link rel='stylesheet' href='/css/bootstrap.min.css' />
-        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+        <!-- <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"> -->
         <script src="http://code.jquery.com/jquery.js"></script>
-        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>-->
         <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>-->
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js"></script>
@@ -26,6 +27,11 @@
         <script src="/socket.io/socket.io.js"></script>
 
         <script src="js/all.js"></script>
+        <script id="template/modal/window.html" type="text/ng-template">
+            <div tabindex="-1" class="modal fade " ng-class="{in: animate}" ng-style="{'z-index': 1050 + index*10, display: 'block'}" ng-click="close($event)">
+                <div class="modal-dialog {{ windowClass }}"><div class="modal-content" ng-transclude></div></div>
+            </div>
+        </script>
   </head>
   <body ng-controller="MainController" id="MainController">
     <div id="fb-root"></div>

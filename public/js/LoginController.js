@@ -1,6 +1,6 @@
 (function() {
 
-    var index = angular.module('login',[]);
+    var index = angular.module('login',['calculator']);
 
     index.run(function($rootScope) {
         
@@ -8,8 +8,12 @@
         
     });
  
-    index.controller("LoginController",function($scope,$rootScope,User,Notification,notificationData,pushListener) {
+    index.controller("LoginController",function($scope,$rootScope,User,Notification,notificationData,pushListener,CalculatorPopup) {
         
+        $scope.openCalcPopup = function() {
+            CalculatorPopup.open();
+        };
+
         $scope.$on('g+login',function(event,authResult) {
             if ( authResult == null ) {
                 $rootScope.loginSuccess = true;

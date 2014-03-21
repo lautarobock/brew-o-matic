@@ -30,7 +30,8 @@
                                Recipe,
                                $location,
                                alertFactory,
-                               TagColor) {
+                               TagColor,
+                               CalculatorPopup) {
 
                                
         $scope.BrewHelper = BrewHelper;
@@ -64,6 +65,28 @@
         $scope.miscUses = MiscUse.query();
         
         $scope.tags = Tag.query();
+
+        $scope.openCalculatorOG = function() {
+            CalculatorPopup.open({
+                abv: true,
+                hydrometer: false,
+                refractometer: false
+            },{
+                OG: $scope.recipe.OG,
+                FG: $scope.recipe.FG
+            });
+        };
+
+        $scope.openCalculatorFG = function() {
+            CalculatorPopup.open({
+                abv: false,
+                hydrometer: false,
+                refractometer: true
+            },{
+                OG: $scope.recipe.OG,
+                FG: $scope.recipe.FG
+            });
+        };
 
         //Helper functions
         
