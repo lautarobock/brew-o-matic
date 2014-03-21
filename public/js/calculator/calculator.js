@@ -12,6 +12,8 @@
             title: 'Herramientas'
         }];
 
+        $scope.values = $scope.values || {};
+
     });
 
     calculator.directive("calculatorAbv", function() {
@@ -132,6 +134,45 @@
         };
     });
 
+    calculator.directive("calculatorDilution", function() {
+        return {
+            restrict: 'AE',
+            templateUrl: 'partial/calculator/calculator-dilution.html',
+            controller: function($scope, BrewCalc) {
+
+                $scope.dilution = {
+                    currentGrav: 1.075,
+                    currentVol: 20,
+                    finalGrav: 1.050
+                };
+
+                function updateValue() {
+                    $scope.dilution.finalVol = BrewCalc.dilution(
+                        $scope.dilution.currentGrav,
+                        $scope.dilution.currentVol,
+                        $scope.dilution.finalGrav);
+                    // $scope.refractometer.value = BrewCalc.fromPlato($scope.refractometer.valueP);
+                    // $scope.refractometer.ABV = BrewCalc.calculateABV($scope.refractometer.OG, $scope.refractometer.value);
+                };
+
+                $scope.$watch("dilution.currentGrav+dilution.currentVol+dilution.finalGrav", function() {
+                    $scope.dilution.currentGravP = BrewCalc.toPlato($scope.dilution.currentGrav);
+                    $scope.dilution.finalGravP = BrewCalc.toPlato($scope.dilution.finalGrav);
+                    updateValue();
+                });
+
+                $scope.updateOG = function() {
+                    $scope.dilution.currentGrav = BrewCalc.fromPlato($scope.dilution.currentGravP);
+                };
+
+                $scope.updateFG = function() {
+                    $scope.dilution.finalGrav = BrewCalc.fromPlato($scope.dilution.finalGravP);
+                };
+                
+            }
+        };
+    });
+
     calculator.factory("CalculatorPopup", function($modal,$rootScope) {
         var obj = {
             open : function (show,values) {
@@ -141,7 +182,8 @@
                 scope.show = show || {
                     abv: true,
                     hydrometer: true,
-                    refractometer: true
+                    refractometer: true,
+                    dilution: true
                 };
                 var count = 0;
                 angular.forEach(scope.show, function(value, key) {

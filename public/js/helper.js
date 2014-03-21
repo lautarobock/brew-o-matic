@@ -224,6 +224,9 @@
             },
             adjustRefractometer: function(og, fg, correction) {
                 return bfRefractometer.recalculate(og,fg,correction);
+            },
+            dilution: function(currentGrav, currentVol, finalGrav) {
+                return bfDilution.recalculate(currentVol, currentGrav, finalGrav);
             }
         };
     });

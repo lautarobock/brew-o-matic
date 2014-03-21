@@ -1,54 +1,6 @@
 (function (exports) {
-    // var hydro = 1.050;
-    // var temp = 20;
-    // var calibration = 15;
-    // var tempunit = "C";
-
-    // function switchUnitsToUs() {
-    //     $(".tempunit").html("(F)");
-    //     tempunit = "F";
-    //     document.calc.txthydro.value = "1.020";
-    //     document.calc.txttemp.value = "80";
-    //     document.calc.txtcalibration.value = "68";
-    //     setCookie("bfmetric", "", -1);
-    //     updateAll()
-    // }
-
-    // function switchUnitsToMetric() {
-    //     $(".tempunit").html("(C)");
-    //     tempunit = "C";
-    //     document.calc.txthydro.value = "1.020";
-    //     document.calc.txttemp.value = "27";
-    //     document.calc.txtcalibration.value = "20";
-    //     setCookie("bfmetric", "metric", (365 * 3));
-    //     updateAll()
-    // }
-
-    function setVars(txthydro,txttemp,txtcalibration) {
-        // hydro = document.calc.txthydro.value;
-        // temp = document.calc.txttemp.value;
-        // calibration = document.calc.txtcalibration.value;
-        hydro = txthydro;
-        temp = txttemp;
-        calibration = txtcalibration;
-        hydro = parseFloat(hydro);
-        temp = parseFloat(temp);
-        calibration = parseFloat(calibration);
-        // setCookie("bf_hydrometer_calibration", calibration + "", (365 * 3))
-    }
-    exports.setVars = setVars;
-
-    function updateAll() {
-        // if (!checkInput()) {
-        //     return false
-        // }
-        recalculate()
-    }
 
     function recalculate(hydro, temp, calibration) {
-        // var hydro = 1.050;
-        // var temp = 20;
-        // var calibration = 15;
         var tempunit = "C";
         if (tempunit == "F") {
             temp = fahrenheitToCelsius(temp);
@@ -56,46 +8,9 @@
         }
         var difference = calculateHydrometerCorrection(temp, calibration);
         var result = rounddecimal(difference + hydro, 3);
-        // $('#divAdjusted').html(result)
         return result;
     }
     exports.recalculate = recalculate;
-
-    // function checkInput() {
-    //     setVars();
-    //     if (!isNumber(hydro)) {
-    //         // console.log('Hydrometer reading must be a number (format 1.xxx).');
-    //         return false
-    //     }
-    //     if (!isNumber(temp)) {
-    //         // alert('Temperature must be a number.');
-    //         return false
-    //     }
-    //     if (!isNumber(calibration)) {
-    //         // alert('Calibration must be a number.');
-    //         return false
-    //     }
-    //     if (tempunit == 'F') {
-    //         if (temp < 32 || temp > 159) {
-    //             // alert('Temperature must be between 32-159 (F).');
-    //             return false
-    //         }
-    //         if (calibration < 50 || calibration > 75) {
-    //             // alert('Calibration must be between 50-75 (F).');
-    //             return false
-    //         }
-    //     } else {
-    //         if (temp < 0 || temp > 71) {
-    //             // alert('Temperature must be between 0-71 (C).');
-    //             return false
-    //         }
-    //         if (calibration < 10 || calibration > 24) {
-    //             // alert('Calibration must be between 10-24 (C).');
-    //             return false
-    //         }
-    //     }
-    //     return true
-    // }
 
     function isNumber(s) {
         if (s === null) {
@@ -289,40 +204,7 @@
 })(typeof exports === 'undefined'? this['bfHydrometer'] = {} : exports );
 
 (function(exports) {
-    // var og1 = 12;
-    // var wortcorrection1 = 1.0;
-    // var divPart1CorrectedBrix;
-    // var divPart1ActualSG;
-    
-    // var divPart2OGCorrectedBrix;
-    // var divPart2OGActualSG;
-    // var divPart2FGCorrectedBrix;
-    // var divPart2FGActualSG;
-    // var divPart2ABV;
 
-    function setVars(og, fg, correction) {
-        // og1 = document.calc.txtPart1og.value;
-        // wortcorrection1 = document.calc.txtPart1wortcorrectionfactor.value;
-        // divPart1CorrectedBrix = document.getElementById('part1CorrectedBrix');
-        // divPart1ActualSG = document.getElementById('part1ActualSG');
-        og2 = og;
-        part2ogunit = "brixwri";
-        fg2 = fg;
-        wortcorrection2 = correction;
-        // divPart2OGCorrectedBrix = document.getElementById('part2OGCorrectedBrix');
-        // divPart2OGActualSG = document.getElementById('part2OGActualSG');
-        // divPart2FGCorrectedBrix = document.getElementById('part2FGCorrectedBrix');
-        // divPart2FGActualSG = document.getElementById('part2FGActualSG');
-        // divPart2ABV = document.getElementById('part2ABV')
-    }
-    exports.setVars = setVars;
-
-    // function updateAll() {
-    //     if (!checkInput()) {
-    //         return false
-    //     }
-    //     recalculate()
-    // }
 
     function recalculate(og2, fg2, wortcorrection2) {
         var part2ogunit = "brixwri";
@@ -355,36 +237,6 @@
     }
     exports.recalculate = recalculate;
 
-    // function checkInput() {
-    //     setVars();
-    //     if (!isNumber(og1) || og1 > 75 || og1 < 0) {
-    //         alert('Part 1 Brix WRI OG must be a number between 0 and 75.');
-    //         return false
-    //     }
-    //     if (!isNumber(wortcorrection1) || wortcorrection1 > 1.5 || wortcorrection1 < 0.5) {
-    //         alert('Part 1 Wort Correction Factor must be a number between 0.5 and 1.5.');
-    //         return false
-    //     }
-    //     if (part2ogunit == "sg") {
-    //         if (!isNumber(og2) || og2 > 1.5 || og2 < 0) {
-    //             alert('Part 2 OG must be a number between 0 and 1.500.');
-    //             return false
-    //         }
-    //     } else {
-    //         if (!isNumber(og2) || og2 > 75 || og2 < 0) {
-    //             alert('Part 2 OG must be a number between 0 and 75.');
-    //             return false
-    //         }
-    //     } if (!isNumber(fg2) || fg2 > 75 || fg2 < 0) {
-    //         alert('Part 2 Brix WRI FG must be a number between 0 and 75.');
-    //         return false
-    //     }
-    //     if (!isNumber(wortcorrection2) || wortcorrection2 > 1.5 || wortcorrection2 < 0.5) {
-    //         alert('Part 2 Wort Correction Factor must be a number between 0.5 and 1.5.');
-    //         return false
-    //     }
-    //     return true
-    // }
 
     function updateOGScale() {
         setVars();
@@ -478,3 +330,148 @@
         recalculate()
     }
 })(typeof exports === 'undefined'? this['bfRefractometer'] = {} : exports );
+
+(function(exports) {
+
+    var currentVolume2 = 7.5;
+    var currentGravity2 = 1.035;
+    var targetVolume = 5.5;
+
+    // function setVars() {
+    //     currentVolume = document.calc.txtcurrentvolume.value;
+    //     currentGravity = document.calc.txtcurrentgravity.value;
+    //     desiredGravity = document.calc.txtdesiredgravity.value;
+    //     currentVolume2 = document.calc.txtcurrentvolume2.value;
+    //     currentGravity2 = document.calc.txtcurrentgravity2.value;
+    //     targetVolume = document.calc.txttargetvolume.value
+    // }
+    
+    function recalculate(currentVolume, currentGravity, desiredGravity) {
+        // var currentVolume = 3.5;
+        // var currentGravity = 1.075;
+        // var desiredGravity = 1.05;
+
+        var newVolume = ((currentGravity - 1) / (desiredGravity - 1)) * currentVolume;
+        newVolume = rounddecimal(newVolume, 2);
+        if (isNaN(newVolume)) {
+            newVolume = 0
+        }
+        // $('#divNewVolume').html(newVolume);
+        // console.log("newVolume",newVolume);
+        return newVolume;
+        // var difference = rounddecimal(newVolume - currentVolume, 2);
+        // console.log("difference",difference);
+        // if (difference >= 0) {
+        //     $('#divVolumeDifference').html("<span style='color: green;'>" + difference + "</span>")
+        // } else {
+        //     $('#divVolumeDifference').html("<span style='color: red;'>" + difference + "</span>")
+        // }
+    }
+    exports.recalculate = recalculate;
+
+    function recalculate2() {
+        var newGravity = (currentGravity2 - 1) * (currentVolume2 / targetVolume);
+        newGravity = newGravity + 1;
+        newGravity = rounddecimal(newGravity, 3);
+        if (isNaN(newGravity)) {
+            newGravity = 0
+        }
+        $('#divNewGravity').html(newGravity);
+        var difference = rounddecimal(newGravity - currentGravity2, 3);
+        if (difference >= 0) {
+            $('#divGravityDifference').html("<span style='color: green;'>" + difference + "</span>")
+        } else {
+            $('#divGravityDifference').html("<span style='color: red;'>" + difference + "</span>")
+        }
+    }
+
+    function checkInput2() {
+        setVars();
+        if (!isNumber(currentVolume2)) {
+            alert('Wort Volume must be a number.');
+            return false
+        }
+        if (currentVolume2 <= 0) {
+            alert('Current Volume must be greater than zero.');
+            return false
+        }
+        if (!isNumber(currentGravity2)) {
+            alert('Current Gravity must be a number (format 1.xxx).');
+            return false
+        }
+        if (currentGravity2 <= 1) {
+            alert('Current Gravity must be greater than 1.00.');
+            return false
+        }
+        if (!isNumber(targetVolume)) {
+            alert('Target Volume must be a number.');
+            return false
+        }
+        if (targetVolume <= 0) {
+            alert('Target Volume must be greater than zero.');
+            return false
+        }
+        return true
+    }
+
+    function isNumber(s) {
+        if (s === null) {
+            return false
+        }
+        if (s === 0) {
+            return true
+        }
+        if (s == '') {
+            return false
+        }
+        if (isNaN(s)) {
+            return false
+        }
+        var i;
+        for (i = 0; i < s.length; i++) {
+            var c = s.charAt(i);
+            if (!((c >= "0") && (c <= "9")) && c != '.') {
+                return false
+            }
+        }
+        return true
+    }
+
+    function rounddecimal(n, places) {
+        if (n === null) {
+            return false
+        }
+        if (n === '') {
+            return false
+        }
+        if (isNaN(n)) {
+            return false
+        }
+        if (places < 0) {
+            return false
+        }
+        if (places > 10) {
+            return false
+        }
+        var rounded = Math.round(n * Math.pow(10, places)) / Math.pow(10, places);
+        var decimalPointPosition = (rounded + "").lastIndexOf(".");
+        if (decimalPointPosition == 0) {
+            rounded = "0" + rounded;
+            decimalPointPosition = 1
+        }
+        if (places != 0) {
+            decimalPointPosition = (rounded + "").lastIndexOf(".");
+            if (decimalPointPosition == -1 || decimalPointPosition == rounded.length - 1) {
+                rounded += "."
+            }
+        }
+        decimalPointPosition = (rounded + "").lastIndexOf(".");
+        var currentPlaces = ((rounded + "").length - 1) - decimalPointPosition;
+        if (currentPlaces < places) {
+            for (x = currentPlaces; x < places; x++) {
+                rounded += "0"
+            }
+        }
+        return rounded
+    }
+})(typeof exports === 'undefined'? this['bfDilution'] = {} : exports );

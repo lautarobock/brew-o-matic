@@ -1,0 +1,56 @@
+<div class="panel panel-default" >
+    <div class="panel-heading">Dilución</div>
+    <div class="panel-body">
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-sm-4 control-label"></label>
+                <div class="col-sm-4">
+                    <label class="control-label">Gravity</label>
+                </div>
+                <div class="col-sm-4">
+                    <label class="control-label">Plato</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Lts de mosto</label>
+                <div class="col-sm-4">
+                    <input type="number" step="0.1" ng-model="dilution.currentVol" class="form-control input-sm"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Dens. act.</label>
+                <div class="col-sm-4">
+                    <input type="number" step="0.001" ng-model="dilution.currentGrav" class="form-control input-sm"/>
+                </div>
+                <div class="col-sm-4">
+                    <input ng-blur="updateOG()" type="number" step="0.01" ng-model="dilution.currentGravP" class="form-control input-sm"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Dens. busc.</label>
+                <div class="col-sm-4">
+                    <input type="number" step="0.001" ng-model="dilution.finalGrav" class="form-control input-sm"/>
+                </div>
+                <div class="col-sm-4">
+                    <input ng-blur="updateFG()" type="number" step="0.01" ng-model="dilution.finalGravP" class="form-control input-sm"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label" title="valor ajustado">Volumen final</label>
+                <div class="col-sm-4">
+                    <span class="gt-calculated form-control input-sm">
+                        {{dilution.finalVol|number:1}}
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label" title="valor ajustado">Lts Agua</label>
+                <div class="col-sm-4">
+                    <span class="gt-calculated form-control input-sm">
+                        {{dilution.finalVol-dilution.currentVol|number:1}}
+                    </span>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
