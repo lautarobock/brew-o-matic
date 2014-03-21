@@ -132,4 +132,25 @@
         };
     });
 
+    calculator.factory("CalculatorPopup", function($modal) {
+        var obj = {
+            open : function () {
+                var modalInstance = $modal.open({
+                    templateUrl: 'partial/calculator/calculator-popup.html',
+                    controller: function($scope, $modalInstance) {
+                        $scope.cancel = function () {
+                            $modalInstance.dismiss('cancel');
+                        };
+                    }
+                });
+
+                return modalInstance.result;
+            }
+        };
+        return obj;
+    });
+
+
+    
+
 })();
