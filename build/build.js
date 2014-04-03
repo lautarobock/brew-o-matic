@@ -62,6 +62,7 @@ function min() {
         "public/js/calculator/calculator.js",
         "public/js/resources.js",
         "public/js/util/util.js",
+        "public/js/util/brewersfriend.js",
         "public/js/Data.js",
         "public/js/user/SettingsCtrl.js",
         "public/js/water/water.js",
