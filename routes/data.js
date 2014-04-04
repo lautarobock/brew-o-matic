@@ -2,11 +2,12 @@ var actions = require('./actions.js');
 var model = require('../domain/model.js');
 var mongoose = require('mongoose');
 var Arrays = require("../public/js/util/util.js").Arrays;
+var push = require("./push");
 /*
  * GET users listing.
  */
 
-var services = ['Style','Grain','Hop','Yeast','Misc','Bottle','Tag','Recipe','User','Action','WaterReport','TempDevice'];
+var services = ['Style','Grain','Hop','Yeast','Misc','Bottle','Tag','Recipe','User','Action','WaterReport','TempDevice','TempDeviceReport'];
 
 //Aca van las que tiene customId
 var customIds = ['Bottle','Recipe'];
@@ -83,3 +84,46 @@ exports.WaterReport.findAll = function(req, res) {
         res.send(results);
     });  
 };
+
+exports.TempDeviceReport.findAll = function(req, res) {
+    var filter = null;
+    if ( req.query.recipe_id ) {
+        filter = {recipe_id: req.query.recipe_id};
+    }
+    model.TempDeviceReport.find(filter).exec(function(err,results) {
+        res.send(results);
+    });  
+}
+
+exports.TempDeviceReport.save = function(req, res) {
+    var temp = req.body;
+    console.log("ACA!!!!",temp);
+    delete temp._id;
+
+    if ( !temp.timestamp ) {
+        temp.timestamp = new Date().getTime();
+    }
+    
+    var id = new mongoose.Types.ObjectId(req.params.id);
+
+    //Busco el dispositivo correspondiente y obtengo el ID de la receta que corresponde.
+    model.TempDevice.find({code:temp.code}).exec(function(err, device) {
+
+        if ( !err && device && device.length > 0 ) {
+            temp.recipe_id = device[0].recipe_id;
+        }
+
+        model.TempDeviceReport.findByIdAndUpdate(id,temp,{upsert:true}).exec(function(err,results) {
+            // console.log('err', err);
+            // console.log('results', results);
+            if ( temp.recipe_id ) {
+                push.emit("TEMP_DEVICE_REPORT_" + temp.recipe_id,results);    
+            }
+            res.send(results);
+        });
+
+    });
+
+    
+    
+}

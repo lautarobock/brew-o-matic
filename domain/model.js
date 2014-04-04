@@ -323,7 +323,8 @@ exports.TempDeviceReport = mongoose.model("TempDeviceReport",new Schema({
     source: String, //Esto es para cuando vienen datos de mas de 1 fermentador
     temperature: Number, //Temperatura interior medida (del liquido)
     temperatureExt: Number, //Temperatura exterior (opcional)
-    temperatureDev: Number, //Temperatura seteada en el dispositivo
+    temperatureMax: Number, //Temperatura seteada en el dispositivo
+    temperatureMin: Number, //Temperatura seteada en el dispositivo
     coldStatus: Boolean, //Satus switch frio
     heatStatus: Boolean //status switch calor
 }));

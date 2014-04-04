@@ -51,7 +51,7 @@
         });
     });    
     
-    var services = ['Style','Grain','Hop','Yeast','Misc','Bottle','Tag','WaterReport','TempDevice'];
+    var services = ['Style','Grain','Hop','Yeast','Misc','Bottle','Tag','WaterReport','TempDevice','TempDeviceReport'];
     angular.forEach(services,function(s) {
         res.factory(s,function($resource) {
             return $resource( s[0].toLowerCase() + s.substr(1) + '/:_id',{_id:"@_id"}, {});

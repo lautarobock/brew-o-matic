@@ -1,0 +1,61 @@
+<div ng-controller="RecipeTemperatureCtrl">
+    <div class="col-md-10">
+        <div class="panel panel-default">
+            <div class="panel-body" >
+                <table class="table table-bordered table-condensed table-hover">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">Hora</th>
+                            <th colspan="3">Cerveza</th>
+                            <th colspan="3">Dispositivo</th>
+                        </tr>
+                        <tr>
+                            <!-- <th>Hora</th> -->
+                            <th style="width:6em">Ferm. #</th>
+                            <th>Temp. Int</th>
+                            <th>Temp. Ext</th>
+                            <th>Temp. Max</th>
+                            <th>Temp. Min</th>
+                            <th>Modo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="temperature in temperatures | orderBy:'timestamp'">
+                        <td>{{temperature.timestamp|ts2date|date:'dd-MM-yyyy HH:mm'}}</td>
+                        <td>{{temperature.source}}</td>
+                        <td><b>{{temperature.temperature}}</b></td>
+                        <td>{{temperature.temperatureExt}}</td>
+                        <td>{{temperature.temperatureMax}}</td>
+                        <td>{{temperature.temperatureMin}}</td>
+                        <td>
+                            <span ng-if="temperature.coldStatus">Frio</span>
+                            <span ng-if="temperature.heatStatus">Calor</span>
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>
+                <div google-chart chart="chart" ng-style="chart.cssStyle"></div>
+            </div>
+        </div>
+        <div style="overflow: hidden;margin-bottom: 1em;">
+            <div class="pull-left">
+                <a href="#/recipe/" type="button" class="btn btn-link glyphicon glyphicon-chevron-left"> Volver al listado</a>
+            </div>
+            <div class="pull-right">
+                <a href="#/recipe/" type="button" class="btn btn-default">Cancelar</a>
+                <button ng-click="save()" type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+        <div ng-repeat="notification in notifications">
+            <div class="alert alert-{{notification.type}} alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>{{notification.title}}</strong>
+                {{notification.text}}
+            </div>
+        </div>            
+    </div>
+    <div class="col-md-2" >
+        <ng-include src="'partial/recipe-detail-indicators.html'"></ng-include>
+        <ng-include src="'partial/recipe-detail-social.html'"></ng-include>
+    </div>
+</div>

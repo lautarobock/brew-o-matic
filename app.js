@@ -111,7 +111,7 @@ app.get('/notification/news',filter,notifications.findNews);
 app.post("/notification/:id",filter,notifications.update);
 app.get('/rating/beers',rating.findBeers);
 
-var services = ['Style','Grain','Hop','Yeast','Misc','Bottle','Tag','WaterReport','TempDevice'];
+var services = ['Style','Grain','Hop','Yeast','Misc','Bottle','Tag','WaterReport','TempDevice','TempDeviceReport'];
 for (s in services ) {
   app.get('/' + services[s].toLowerCase(),data[services[s]].findAll);
   app.get('/' + services[s].toLowerCase()+ "/:id", data[services[s]].findById)
