@@ -13,6 +13,7 @@
                                 'comments',
                                 'googlechart',
                                 'calculator',
+                                'device',
                                 'brew-o-module.controller',
                                 'notification',
                                 'abm',
@@ -41,6 +42,7 @@
                 when('/settings/water/new', {templateUrl: 'partial/user/settings/user-settings-water-detail.html', controller: 'SettingsWaterDetailCtrl'}).
                 when('/settings/water/:waterId', {templateUrl: 'partial/user/settings/user-settings-water-detail.html', controller: 'SettingsWaterDetailCtrl'}).
                 when('/settings', {templateUrl: 'partial/user/user-settings.html', controller: 'UserSettingsCtrl'}).
+                when('/settings/device', {templateUrl: 'partial/device/device.html', controller: 'DeviceController'}).
                 when('/calculator', {templateUrl: 'partial/calculator/calculator.html', controller: 'CalculatorCtrl'}).
                 when('/notification', {templateUrl: 'partial/user/user-notification.html', controller: 'NotificationsCtrl'}).
                 when('/data/:entity', {templateUrl: 'partial/data/abm.html', controller: 'AbmCtrl'}).
