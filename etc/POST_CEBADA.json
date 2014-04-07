@@ -1,0 +1,10 @@
+{
+  "code": "1000",
+  "coldStatus": true,
+  "heatStatus": false,
+  "source": "1",
+  "temperature": 14.0,
+  "temperatureMax": 20,
+  "temperatureMin": 19,
+  "temperatureExt": 14.1
+}
