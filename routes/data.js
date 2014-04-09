@@ -97,7 +97,7 @@ exports.TempDeviceReport.findAll = function(req, res) {
 
 exports.TempDeviceReport.save = function(req, res) {
     var temp = req.body;
-    console.log("ACA!!!!",temp);
+    // console.log("ACA!!!!",temp);
     delete temp._id;
 
     if ( !temp.timestamp ) {
@@ -109,18 +109,57 @@ exports.TempDeviceReport.save = function(req, res) {
     //Busco el dispositivo correspondiente y obtengo el ID de la receta que corresponde.
     model.TempDevice.find({code:temp.code}).exec(function(err, device) {
 
-        if ( !err && device && device.length > 0 ) {
+        //Solo guardo si existe el dispositivo y si el mismo esta vinculado a una receta
+        if ( !err && device && device.length > 0 && device[0].recipe_id) {
             temp.recipe_id = device[0].recipe_id;
+
+            model.TempDeviceReport.findByIdAndUpdate(id,temp,{upsert:true}).exec(function(err,results) {
+                // console.log('err', err);
+                // console.log('results', results);
+                if ( temp.recipe_id ) {
+                    push.emit("TEMP_DEVICE_REPORT_" + temp.recipe_id,results);    
+                }
+                res.send(results);
+
+                //Elimino posibles duplicados de valores
+                model.TempDeviceReport.find({
+                    recipe_id: device[0].recipe_id
+                }).sort("timestamp").exec(function (err, duplicated) {
+                    if ( duplicated.length > 2 ) {
+                        
+                        var base = duplicated[duplicated.length-1];
+                        var toRemove = null;
+                        
+                        var finish = false;
+                        var i = duplicated.length-2;
+                        while ( !finish && i>=0 ) { 
+                            var actual = duplicated[i--];
+                            if ( 
+                                actual.source == base.source &&
+                                actual.temperature == base.temperature &&
+                                actual.temperatureExt == base.temperatureExt &&
+                                actual.temperatureMax == base.temperatureMax &&
+                                actual.temperatureMin == base.temperatureMin &&
+                                actual.coldStatus == base.coldStatus &&
+                                actual.heatStatus == base.heatStatus ) {
+                                // actual.remove();
+                                if ( toRemove ) toRemove.remove();
+                                toRemove = actual;
+                                console.log("ELIMIMAR");
+                            } else {
+                                console.log("FINiSH",actual,base);
+                                finish = true;
+                            }
+                        }
+                        
+                    }
+                });
+            });
+
+        } else {
+            res.send(500);
         }
 
-        model.TempDeviceReport.findByIdAndUpdate(id,temp,{upsert:true}).exec(function(err,results) {
-            // console.log('err', err);
-            // console.log('results', results);
-            if ( temp.recipe_id ) {
-                push.emit("TEMP_DEVICE_REPORT_" + temp.recipe_id,results);    
-            }
-            res.send(results);
-        });
 
     });
 
