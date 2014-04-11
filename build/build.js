@@ -60,6 +60,7 @@ function min() {
         "public/js/data/AbmCtrl.js",
         "public/js/admin/AdminCtrl.js",
         "public/js/calculator/calculator.js",
+        "public/js/device/device.js",
         "public/js/resources.js",
         "public/js/util/util.js",
         "public/js/util/brewersfriend.js",

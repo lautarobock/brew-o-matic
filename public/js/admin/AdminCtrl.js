@@ -3,7 +3,7 @@
     var abm = angular.module("admin",[]);
     
 
-    abm.controller("AdminCtrl",function($scope,$rootScope,$routeParams,AdminUser,AdminRecipe,Bottle,$filter,$location,AdminAction) {
+    abm.controller("AdminCtrl",function($scope,$rootScope,$routeParams,AdminUser,AdminRecipe,Bottle,$filter,$location,AdminAction,TempDeviceReport) {
 
         $scope.allConfigs = {
             Action:  {
@@ -130,6 +130,51 @@
                     {
                         field:'owner.name',
                         caption: 'Dueño'
+                    }
+                ]
+            },
+            TempDeviceReport: {
+                data: TempDeviceReport,
+                name: "Temperaturas",
+                singular: "Temperatura",
+                canAdd: true,
+                canRemove: true,
+                canEdit: true,
+                orderBy: "name",
+                headers: [{
+                        field:'code',
+                        caption: 'Codigo'
+                    },{
+                        field:'timestamp',
+                        caption: 'Timestamp',
+                        type: 'number'
+                    },{
+                        field:'recipe_id',
+                        caption: 'Receta'
+                    },{
+                        field:'source',
+                        caption: 'Source'
+                    },{
+                        field:'temperature',
+                        caption: 'Temp',
+                        type: 'number',
+                        step: 0.1
+                    },{
+                        field:'temperatureExt',
+                        caption: 'Temp Ext',
+                        type: 'number',
+                        step: 0.1
+                    },{
+                        field:'temperatureDev',
+                        caption: 'Temp Dev',
+                        type: 'number',
+                        step: 0.1
+                    },{
+                        field:'coldStatus',
+                        caption: 'Frio'
+                    },{
+                        field:'heatStatus',
+                        caption: 'Calor'
                     }
                 ]
             }

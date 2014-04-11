@@ -194,6 +194,8 @@
                             return abm.templateDir + '/abm-checkbox.html';
                         } else if ( header.type == 'combo' ) {
                             return abm.templateDir + '/abm-combo.html';
+                        } else if ( header.type == 'combo-object' ) {
+                            return abm.templateDir + '/abm-combo-object.html';
                         } else {
                             return abm.templateDir + '/abm-input.html';
                         }

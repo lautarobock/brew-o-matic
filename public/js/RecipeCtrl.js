@@ -409,7 +409,7 @@
      * TabControler
      */
     module.controller("RecipeTabCtrl",function($scope) {
-        $scope.sortTabs = ['main','mash','boil','fermentation','bottling','log','collaborators','rating'];
+        $scope.sortTabs = ['main','mash','boil','fermentation','bottling','log','collaborators','rating','temperature'];
         $scope.tabs = {
             main: {
                 title: 'Receta',
@@ -442,6 +442,10 @@
             rating: {
                 title: 'Calificaciones',
                 template: 'rating'
+            },
+            temperature: {
+                title: 'Temp. CEBADA',
+                template: 'temperature'
             }};
 
         $scope.selectedTab = 'main';
@@ -450,5 +454,97 @@
             $scope.selectedTab=tab;
             $scope.$parent.notifications = [];
         };
+    });
+
+    module.filter("ts2date", function() {
+        return function(timestamp) {
+            return new Date(timestamp);
+        };
+    });
+
+    module.controller("RecipeTemperatureCtrl", function($scope, TempDeviceReport, pushListener) {
+
+        $scope.reload = function() {
+            $scope.temperatures = TempDeviceReport.query({recipe_id: $scope.recipe._id}, function() {
+                $scope.updateChart();
+            });
+        };
+
+        $scope.reload();
+        
+        function onNewTemperature(temp) {
+            $scope.temperatures.push(temp);
+            $scope.updateChart();
+            $scope.$apply();
+        }
+
+        pushListener.on("TEMP_DEVICE_REPORT_" + $scope.recipe._id, onNewTemperature);
+
+        $scope.$on('$destroy',function() {
+            pushListener.off("TEMP_DEVICE_REPORT_" + $scope.recipe._id, onNewTemperature);
+        });
+
+
+        $scope.updateChart = function() {
+            var cols = [{
+                    "id": "day",
+                    "label": "Dias",
+                    "type": "date"
+                },{
+                    "id": "temp",
+                    "label": "Temperatura",
+                    "type": "number"
+                }];
+            
+            var rows = [];
+            // var day = 0;
+            // var today = new Date($scope.temperatures[0].timestamp);
+            angular.forEach($scope.temperatures,function(stage) {
+                rows.push({
+                    "c": [
+                        {
+                            "v": new Date(stage.timestamp)
+                        },
+                        {
+                            "v": stage.temperature|0,
+                            "f": (stage.temperature|0) + "º (" + stage.temperatureMax + ")"
+                        }
+                    ]
+                });                
+            });
+            $scope.chart.data.cols = cols;
+            $scope.chart.data.rows = rows;
+        };
+
+        $scope.chart = {
+            "type": "LineChart",
+            "displayed": true,
+            "cssStyle": {height:'300px', width:'100%'},
+            "data": {
+                "cols": [],
+                "rows": []
+            },
+            "options": {
+                "title": "Evolucion",
+                "isStacked": "false",
+                "fill": 20,
+                //"curveType": "function",
+                "displayExactValues": true,
+                "vAxis": {
+                    "title": "Temperatura",
+                    "gridlines": {
+                        "count": 10
+                    },
+                    minValue:0
+                },
+                "hAxis": {
+                    "title": "Dias"
+                }
+            },
+            "formatters": {}
+        };
+        
+        
+
     });
 })();
