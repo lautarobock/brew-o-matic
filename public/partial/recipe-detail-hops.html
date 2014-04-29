@@ -16,6 +16,7 @@
           <th style="width:8%">Tiempo</th>
           <th style="width:6%">IBU</th>
           <th style="width:2%"></th>
+          <th style="width:2%"></th>
         </tr>
       </thead>
       <tbody>
@@ -51,12 +52,16 @@
             <td>
                 <button type="button" class="close" aria-hidden="true" ng-click="removeHop(hop)">&times;</button>
             </td>
+            <td>
+                <a href="" ng-click="copyHop(hop)"><img src="images/copy.png"/></a>
+            </td>
         </tr>
         <tr>
             <td colspan="3"><strong class="pull-right">Total:</strong></td>
             <td>{{recipe.totalHop*1000 | number:0}} Grs</td>
             <td colspan="4"><strong class="pull-right">IBUs:</strong></td>
             <td>{{recipe.CALCIBU|number:2}}</td>
+            <td></td>
             <td></td>
         </tr>
       </tbody>

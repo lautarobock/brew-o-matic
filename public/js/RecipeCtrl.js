@@ -464,10 +464,14 @@
 
     module.controller("RecipeTemperatureCtrl", function($scope, TempDeviceReport, pushListener) {
 
-        $scope.temperatures = TempDeviceReport.query({recipe_id: $scope.recipe._id}, function() {
-            $scope.updateChart();
-        });
+        $scope.reload = function() {
+            $scope.temperatures = TempDeviceReport.query({recipe_id: $scope.recipe._id}, function() {
+                $scope.updateChart();
+            });
+        };
 
+        $scope.reload();
+        
         function onNewTemperature(temp) {
             $scope.temperatures.push(temp);
             $scope.updateChart();
@@ -479,6 +483,7 @@
         $scope.$on('$destroy',function() {
             pushListener.off("TEMP_DEVICE_REPORT_" + $scope.recipe._id, onNewTemperature);
         });
+
 
         $scope.updateChart = function() {
             var cols = [{

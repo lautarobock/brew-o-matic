@@ -199,6 +199,10 @@
         };
         
         $scope.updateChart();
+
+        $scope.emptyAlert = function() {
+            if ( $scope.recipe.fermentation.alertTime == "" ) delete $scope.recipe.fermentation.alertTime;
+        }
         
         
     });

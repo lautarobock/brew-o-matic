@@ -2,6 +2,14 @@
     <div class="col-md-10">
         <div class="panel panel-default">
             <div class="panel-body" >
+                <div class="row">
+                    <div class="col-md-12">
+                        <button ng-click="reload()" type="button" class="btn btn-default btn-xs pull-right">
+                            <span class="glyphicon glyphicon-refresh"></span>
+                        </button>
+                    </div>
+                </div>
+                <br/>
                 <table class="table table-bordered table-condensed table-hover">
                     <thead>
                         <tr>
@@ -20,8 +28,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="temperature in temperatures | orderBy:'timestamp'">
-                        <td>{{temperature.timestamp|ts2date|date:'dd-MM-yyyy HH:mm'}}</td>
+                      <tr class="animate-repeat" ng-repeat="temperature in temperatures | orderBy:'timestamp'">
+                        <td>{{temperature.timestamp|ts2date|date:'dd-MM-yyyy HH:mm:ss'}}</td>
                         <td>{{temperature.source}}</td>
                         <td><b>{{temperature.temperature}}</b></td>
                         <td>{{temperature.temperatureExt}}</td>
