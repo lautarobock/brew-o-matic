@@ -247,6 +247,12 @@
             return baseIBU * getUtilization(hop.USE,$scope.hopUses) * getUtilization(hop.FORM,$scope.hopForms);
         };
 
+        $scope.copyHop = function(hop) {
+            var copy = angular.copy(hop);
+            delete copy._id;
+            $scope.recipe["HOPS"]["HOP"].push(copy);
+        };  
+
         $scope.removeHop = function(hop) {
             var index = $scope.recipe["HOPS"]["HOP"].indexOf(hop);
             $scope.recipe["HOPS"]["HOP"].splice(index, 1);
