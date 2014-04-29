@@ -155,7 +155,8 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
             losses: Number, //Litros perdidos
             temperature: Number,
             temperatureEnd: Number,
-            action: String // 'Inoculacion', 'Dry-Hop', 'Otro'
+            action: String, // 'Inoculacion', 'Dry-Hop', 'Otro'
+            alertDone: Boolean
         }]
     },
     bottling: {

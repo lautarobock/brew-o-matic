@@ -26,6 +26,7 @@
                                 <th style="width:3em">Volumen</th>
                                 <th style="width:3em">Trasvasa?</th>
                                 <th style="width:3em">Vol Perdido</th>
+                                <th style="width:3em">Alerta</th>
                                 <th>Notas</th>
                                 <th style="width:7em"></th>
                             </tr>
@@ -62,6 +63,10 @@
                                 </td>
                                 <td>
                                     <input ng-disabled="!stage.transferring" class="form-control input-sm" type="number" step="0.1" ng-model="stage.losses" placeholder="Litros Perdidos"/>
+                                </td>
+                                <td>
+                                    <span ng-show="stage.alertDone" class="glyphicon glyphicon-check"></span>
+                                    <span ng-hide="stage.alertDone" class="glyphicon glyphicon-unchecked"></span>
                                 </td>
                                 <td>
                                     <input ng-change="updateChart();" class="form-control input-sm" ng-model="stage.action" placeholder="(Notas)"/>
@@ -182,10 +187,10 @@
                                     <select ng-change="emptyAlert()" style="width:20em;display:inline" class="form-control input-sm" ng-model="recipe.fermentation.alertTime">
                                         <option value="">No alertar</option>
                                         <option value="0">En el mismo momento</option>
-                                        <option value="30">30 minutos antes</option>
+                                        <!-- <option value="30">30 minutos antes</option>
                                         <option value="60">60 minutos antes</option>
                                         <option value="360">6 horas antes</option>
-                                        <option value="1440">1 dia antes</option>
+                                        <option value="1440">1 dia antes</option> -->
                                     </select>
                                 </li>
                                 <li class="list-group-item">
