@@ -178,6 +178,17 @@
                                     <strong>Volumen perdido: </strong>{{recipe.BATCH_SIZE - estimateLiters(recipe.fermentation.stages.length)|number:1}} Litros
                                 </li>
                                 <li class="list-group-item">
+                                    <strong>Alertas en cada etapa: </strong>
+                                    <select ng-change="emptyAlert()" style="width:20em;display:inline" class="form-control input-sm" ng-model="recipe.fermentation.alertTime">
+                                        <option value="">No alertar</option>
+                                        <option value="0">En el mismo momento</option>
+                                        <option value="30">30 minutos antes</option>
+                                        <option value="60">60 minutos antes</option>
+                                        <option value="360">6 horas antes</option>
+                                        <option value="1440">1 dia antes</option>
+                                    </select>
+                                </li>
+                                <li class="list-group-item">
                                     <strong>Si comienzo el: </strong>
                                     <input ng-change="updateChart()" ng-model="simulatedDate_day" type="number" class="form-control input-sm " style="width: 50px;display: inline" />
                                     <input ng-change="updateChart()" ng-model="simulatedDate_month" type="number" class="form-control input-sm " style="width: 50px;display: inline" />
