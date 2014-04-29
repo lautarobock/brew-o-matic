@@ -154,6 +154,28 @@ exports.notifyCommentOnFavorite = function(recipe, user_id , user_name) {
     }
 };
 
+exports.notifyChangeFermentationStage = function(owner_id, recipe_id, recipe_name, stageFrom, stageTo) {
+    var data = "";
+    if ( stageFrom ) {
+        data = "Tu receta <b>{{recipe.NAME}}</b> ha pasado de la etapa de fermentacion <b>{{stageFrom}}</b> "
+            + " (temperatura {{tempFrom}}º) a la <b>{{stageTo}}</b> (temperatura {{tempTo}}º).";
+        data = data.replace('{{recipe.NAME}}',recipe_name);    
+        data = data.replace('{{stageFrom}}',stageFrom.title);
+        data = data.replace('{{stageTo}}',stageTo.title);
+        data = data.replace('{{tempFrom}}',stageFrom.temperatureEnd);
+        data = data.replace('{{tempTo}}',stageTo.temperature);
+     } else {
+        data = "Tu receta <b>{{recipe.NAME}}</b> ha comenzado las etapas de fermentacion con <b>{{stageTo}}</b> "
+            + " (temperatura {{tempTo}}º).";
+        data = data.replace('{{recipe.NAME}}',recipe_name);    
+        data = data.replace('{{stageTo}}',stageTo.title);
+        data = data.replace('{{tempTo}}',stageTo.temperature);
+    }
+    
+    var link = "#/recipe/edit/" + encodeURIComponent(recipe_id);
+    notify(owner_id, data, link);
+}
+
 /**
  * Cuando se ha realizado un comentario de un tercero en una receta propia
  *

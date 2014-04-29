@@ -282,3 +282,50 @@ exports.stats = function(req, res) {
         complete();
     });
 };
+
+exports.fireFermentationNotification = function() {
+    model.Recipe.find({"fermentation.alertTime":{$exists:true}}).exec(function(err, recipes) {
+        console.log("POSIBLES", recipes.length);
+        var nowTime = new Date().getTime();
+
+        for( var i=0; i<recipes.length; i++ ) {
+            var recipe = recipes[i];
+
+            //Solo si tiene fecha de inicio estimada
+            if ( recipe.fermentation.estimateDate ) {
+                console.log("estimateDate", recipe.fermentation.estimateDate);
+                var timeFromEstimate = recipe.fermentation.estimateDate.getTime();
+
+                var previousStage = null;
+                for ( var j=0; j<recipe.fermentation.stages.length; j++ ) {
+                    var stage = recipe.fermentation.stages[j];
+                    
+                    if ( !stage.alertDone && timeFromEstimate<=nowTime ) {
+                        console.log("ESTA VA:",recipe._id,stage);
+
+                        stage.alertDone = true;
+
+                        recipe.save();
+
+                        notifications.notifyChangeFermentationStage(
+                            recipe.owner,
+                            recipe._id,
+                            recipe.NAME,
+                            previousStage,
+                            stage);
+                    }    
+
+                    if ( stage.durationMode && stage.duration ) {
+                        if ( stage.durationMode == 'Horas' ) {
+                            timeFromEstimate += stage.duration * 1000*60*60;
+                        }  else {
+                            timeFromEstimate += stage.duration * 1000*60*60*24;
+                        }
+                    }
+
+                    previousStage = stage;
+                }
+            }
+        }
+    });
+}

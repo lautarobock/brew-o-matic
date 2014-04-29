@@ -128,11 +128,12 @@ for (s in admin ) {
   app.delete('/admin/' + admin[s].toLowerCase()+ "/:id",[filter,filterAdmin],data[admin[s]].remove);
 }
 
+var scheduler = require("./util/scheduler");
 
-// setInterval(function() {
-   console.log("RUNNING SCHEDULE");
-   notifications.removeOld();
-// },5000);
+scheduler.runEveryDay(notifications.removeOld,false);
+scheduler.runEveryMinute(recipe.fireFermentationNotification,true);
+// scheduler.runEverySecond(recipe.fireFermentationNotification,true);
+
 
 var server = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

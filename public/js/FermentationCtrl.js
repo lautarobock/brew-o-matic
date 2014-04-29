@@ -1,6 +1,16 @@
 (function() {
     var module = angular.module('brew-o-module.controller');
 
+    // module.controller("FermentationStageCtrl", function($scope) {
+    //     $scope.$watch("recipe.fermentation.estimateDate", function(value) {
+    //         if ( value && $scope.stage.duration && $scope.stage.durationMode ) {
+    //             var estimatedTime = new Date(value).getTime();
+
+
+    //         }
+    //     });
+    // });
+
     module.controller("FermentationCtrl", function($scope) {
         $scope.addFermentationStage = function() {
             var temp = null;
@@ -34,6 +44,25 @@
         $scope.$watch("simulatedDate_day+simulatedDate_month+simulatedDate_year",function(value) {
             if ($scope.simulatedDate_day && $scope.simulatedDate_month && $scope.simulatedDate_year) {
                 $scope.recipe.fermentation.estimateDate = new Date($scope.simulatedDate_year,$scope.simulatedDate_month-1,$scope.simulatedDate_day);
+
+                var timeFromEstimate = $scope.recipe.fermentation.estimateDate.getTime();
+                var nowTime = new Date().getTime();
+                //Actualizo las alertas que ya fueron disparadas en caso de que se necesiten re-lanzar.
+                for ( var i=0; i<$scope.recipe.fermentation.stages.length; i++ ) {
+                    var stage = $scope.recipe.fermentation.stages[i];
+
+                    if ( stage.alertDone && timeFromEstimate>nowTime ) {
+                        stage.alertDone = false;
+                    }
+
+                    if ( stage.durationMode && stage.duration ) {
+                        if ( stage.durationMode == 'Horas' ) {
+                            timeFromEstimate += stage.duration * 1000*60*60;
+                        }  else {
+                            timeFromEstimate += stage.duration * 1000*60*60*24;
+                        }
+                    }
+                }
             }
         });
                 
