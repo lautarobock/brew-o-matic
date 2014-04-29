@@ -251,6 +251,7 @@
             var copy = angular.copy(hop);
             delete copy._id;
             $scope.recipe["HOPS"]["HOP"].push(copy);
+            $scope.changeHop();
         };  
 
         $scope.removeHop = function(hop) {
