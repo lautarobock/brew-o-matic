@@ -165,3 +165,8 @@ a {
 }
 
 
+@media print,screen {
+    .print-panel {
+        font-family: courier new;
+    }
+}
