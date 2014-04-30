@@ -56,6 +56,7 @@ function min() {
         "public/js/CommentController.js",
         "public/js/FermentationCtrl.js",
         "public/js/LogCtrl.js",
+        "public/js/print.js",
         "public/js/notification.js",
         "public/js/data/AbmCtrl.js",
         "public/js/admin/AdminCtrl.js",
