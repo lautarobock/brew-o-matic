@@ -17,7 +17,8 @@
                         $scope.print = function () {
                         	// angular.element("#print_content").html();
                         	var mywindow = window.open('', 'my div');
-					        mywindow.document.write('<html><head><title>my div</title>');
+					        mywindow.document.write('<html><head><title>' + recipe.NAME + '</title>');
+					        mywindow.document.write('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
 					        /*optional stylesheet*/ //mywindow.document.write('<link rel="stylesheet" href="main.css" type="text/css" />');
 					        mywindow.document.write('<link rel="stylesheet" href="/css/style.css" type="text/css" />');
 					        mywindow.document.write('<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />');
@@ -33,6 +34,8 @@
 					        
 				            // $modalInstance.close();
 				        };
+
+				        $scope.fontClass = 'print-panel-md';
 
                         $scope.recipe = recipe;
                     },

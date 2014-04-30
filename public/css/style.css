@@ -165,8 +165,26 @@ a {
 }
 
 
-@media print,screen {
-    .print-panel {
-        font-family: courier new;
-    }
+.print-panel {
+    font-family: courier new;
+}
+
+.print-panel-xs {
+    font-size: 8px !important;
+}
+
+.print-panel-sm {
+    font-size: 10px !important;
+}
+
+.print-panel-md {
+    font-size: 12px !important;
+}
+
+.print-panel-lg {
+    font-size: 14px !important;
+}
+
+.print-panel table {
+    font-size: inherit;
 }
