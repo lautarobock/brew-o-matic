@@ -31,7 +31,8 @@
                                $location,
                                alertFactory,
                                TagColor,
-                               CalculatorPopup) {
+                               CalculatorPopup,
+                               PrintRecipePopup) {
 
                                
         $scope.BrewHelper = BrewHelper;
@@ -701,6 +702,10 @@
                 })(f);
                 reader.readAsText(f);
             }
+        };
+
+        $scope.printRecipe = function() {
+            PrintRecipePopup.open($scope.recipe);
         };
     });
 })();

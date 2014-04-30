@@ -24,7 +24,8 @@
                                 'settings',
                                 'water',
                                 'env',
-                                'observer']);
+                                'observer',
+                                'print']);
 
     index.
         config(['$routeProvider', function($routeProvider) {
