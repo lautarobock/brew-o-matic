@@ -73,7 +73,7 @@
     angular.forEach(admin,function(s) {
         res.factory('Admin' + s,function($resource) {
             return $resource( 'admin/' + s.toLowerCase() + '/:operation:_id',{_id:"@_id"}, {
-                count: {method:'GET', params: {operation:'count'}, isArray:false},
+                count: {method:'GET', params: {operation:'count'}, isArray:false}
             });
         });    
     });
