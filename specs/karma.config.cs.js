@@ -25,6 +25,7 @@ module.exports = function(config) {
       '../public/js/RecipeCtrl.js',
       '../public/js/*.js',
       '../public/js/**/*.js',
+      '../public/bower_components/**/*.js',
       '**/*Spec.js'
     ],
 

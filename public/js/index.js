@@ -220,7 +220,9 @@
 
 
     
-    index.run(function($rootScope,version,$filter,$location,BrewCalc,env,color,alertFactory,BrewHelper) {
+    index.run(function($rootScope,version,$filter,$location,BrewCalc,env,color,alertFactory,BrewHelper,$templateCache) {
+
+        $rootScope.$templateCache = $templateCache;
 
         $rootScope.BrewCalc = BrewCalc;
 

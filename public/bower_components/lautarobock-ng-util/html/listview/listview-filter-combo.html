@@ -2,7 +2,7 @@
     <label for="{{filterName}}_id">{{filter.caption}}</label>
     <div class="input-group">
         <select 
-            ng-options="value._id as filter.getLabel(value) group by filter.groupBy(value) for value in filter.data | orderBy:filter.orderBy" 
+            ng-options="value[filter.valueKey] as filter.getLabel(value) group by filter.groupBy(value) for value in filter.data | orderBy:filter.orderBy" 
             class="form-control input-sm" 
             ng-change="search()"
             id="{{filterName}}_id" 

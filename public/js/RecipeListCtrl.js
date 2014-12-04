@@ -139,7 +139,7 @@
 
         $scope.config = {
             pageSize: 10,
-            filterOrder: [],
+            filterOrder: ['[STYLE.NAME]'],
             filterColSpan: 6,
             plural: 'Recetas',
             singular: 'Receta',
@@ -205,14 +205,26 @@
         ];
 
         $scope.filterData = {};
+        $scope.filterData['[STYLE.NAME]'] = {
+            caption: 'Estilo',
+            type: 'combo',
+            comparator: 'equal',
+            getLabel: function(value) {
+                return value.name;
+            },
+            valueKey: 'name',
+            ignoreCase: false,
+            data: Style.query(),
+            orderBy: 'name'
+        };
 
         // $scope.sort = sortData("publishDate","-");
         
-        $scope.styles = Style.query();
+        // $scope.styles = Style.query();
 
-        $scope.tags = Tag.query();
+        // $scope.tags = Tag.query();
 
-        $scope.showAd=false;
+        // $scope.showAd=false;
 
         // $scope.filterData = {};
         // $scope.filterData['STYLE.NAME'] = {

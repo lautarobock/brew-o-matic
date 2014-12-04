@@ -239,7 +239,7 @@
     "    <label for=\"{{filterName}}_id\">{{filter.caption}}</label>\n" +
     "    <div class=\"input-group\">\n" +
     "        <select \n" +
-    "            ng-options=\"value._id as filter.getLabel(value) group by filter.groupBy(value) for value in filter.data | orderBy:filter.orderBy\" \n" +
+    "            ng-options=\"value[filter.valueKey] as filter.getLabel(value) group by filter.groupBy(value) for value in filter.data | orderBy:filter.orderBy\" \n" +
     "            class=\"form-control input-sm\" \n" +
     "            ng-change=\"search()\"\n" +
     "            id=\"{{filterName}}_id\" \n" +
