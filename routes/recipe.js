@@ -4,6 +4,18 @@ var model = require('../domain/model.js');
 var observer = require("./observer");
 var Arrays = require('../public/js/util/util.js').Arrays;
 
+function processFilter(filter) {
+    if ( filter && filter.searchCriteria ) {
+        filter.$or = [
+            {NAME: {"$regex": filter.searchCriteria,"$options": 'i'}},
+            {BREWER: {"$regex": filter.searchCriteria,"$options": 'i'}},
+            {'STYLE.NAME': {"$regex": filter.searchCriteria,"$options": 'i'}}
+
+        ];
+        delete filter.searchCriteria;
+    }
+    return filter;
+}
 
 exports.findCollaborated = function (req, res) {
     model.Recipe.find({collaborators: { $in : [req.session.user_id] } }).populate('owner').limit(req.query.limit).exec(function(err,results) {
@@ -11,12 +23,51 @@ exports.findCollaborated = function (req, res) {
     });
 };
 
-exports.findPublic = function (req, res) {
-    //where('owner').ne(req.session.user_id).
-    model.Recipe.find({isPublic:true}).populate('owner').sort('-publishDate').limit(req.query.limit).exec(function(err,results) {
-        res.send(results);
-    });
+// exports.findPublic = function (req, res) {
+//     //where('owner').ne(req.session.user_id).
+//     model.Recipe.find({isPublic:true}).populate('owner').sort('-publishDate').limit(req.query.limit).skip(req.query.skip).exec(function(err,results) {
+//         res.send(results);
+//     });
+// };
+
+exports.findPublic = function(req, res) {
+    var filter = processFilter(req.query.filter);
+    
+    filter = filter||{};
+    filter.isPublic = true;
+
+    console.log("filter",JSON.stringify(filter));
+    model.Recipe.find(filter,'NAME STYLE OG ABV CALCIBU BATCH_SIZE BREWER owner publishDate')
+        .limit(req.query.limit)
+        .skip(req.query.skip)
+        .sort(req.query.sort)
+        // .sort('-publishDate')
+        .populate('owner','name _id')
+        .exec(function(err,results) {
+            res.send(results);
+    });    
 };
+
+exports.countPublic = function(req, res) {
+    var filter = processFilter(req.query.filter);
+
+    filter = filter||{};
+    filter.isPublic = true;
+
+    console.log("filter(count)", JSON.stringify(filter));
+    model.Recipe.count(filter)
+        .exec(function(err,results) {
+            res.send({count:results});
+    });    
+};
+
+// exports.countPublic = function (req, res) {
+//     //where('owner').ne(req.session.user_id).
+//     model.Recipe.count({isPublic:true}).exec(function(err,results) {
+//         res.send({count:results});
+//     });
+// };
+
 
 exports.findByUser = function(req, res) {
     model.Recipe.find({owner:req.params.id,isPublic:true}).sort('-publishDate').exec(function(err,results) {

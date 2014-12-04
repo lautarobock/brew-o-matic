@@ -16,6 +16,16 @@
             updateSettings: {method: 'PUT', params: {type:'settings'}}
         });
     });
+
+    res.factory('PublishedRecipe',function($resource,$rootScope) {
+        var params = function() {
+            return $rootScope.user ? $rootScope.user.google_id : null;
+        };
+        return $resource('recipe/:operation:id',{google_id:params,id:'@_id'}, {
+            query: {method:'GET',params: {operation:'public'}, isArray:true },
+            count: {method:'GET', params: {operation:'public_count'}, isArray:false}
+        });
+    });
     
     res.factory('Recipe',function($resource,$rootScope) {
         var params = function() {

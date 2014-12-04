@@ -89,9 +89,124 @@
         
     });
     
-    index.controller("RecipePublicCtrl", function ($scope,$rootScope,$location,Recipe,User,sortData,Style,Tag) {
+    index.controller("RecipePublicCtrl", function ($scope,$rootScope,$location,Recipe,User,sortData,Style,Tag, PublishedRecipe) {
 
-        $scope.sort = sortData("publishDate","-");
+        $scope.published = PublishedRecipe;
+
+        //Search
+        $scope.sort = {// initial: '-score.overall -score.avg score.position',
+            combo: [{
+                label: 'Fecha de publicacion',
+                sort: '-publishDate'
+            },{
+                label: 'Por nombre',
+                sort: 'NAME'
+            },{
+                label: 'Por nombre descendente',
+                sort: '-NAME'
+            },{
+                label: 'Por estilo',
+                sort: 'STYLE.NAME'
+            },{
+                label: 'Por estilo descendente',
+                sort: '-STYLE.NAME'
+            },{
+                label: 'Por DI',
+                sort: 'OG'
+            },{
+                label: 'Por DI descendente',
+                sort: '-OG'
+            },{
+                label: 'Por % alc',
+                sort: 'ABV'
+            },{
+                label: 'Por % alc descendente',
+                sort: '-ABV'
+            },{
+                label: 'Por IBU',
+                sort: 'CALCIBU'
+            },{
+                label: 'Por IBU descendente',
+                sort: '-CALCIBU'
+            },{
+                label: 'Por Litros',
+                sort: 'BATCH_SIZE'
+            },{
+                label: 'Por Litros descendente',
+                sort: '-BATCH_SIZE'
+            }]
+        };
+
+        $scope.config = {
+            pageSize: 10,
+            filterOrder: [],
+            filterColSpan: 6,
+            plural: 'Recetas',
+            singular: 'Receta',
+            searchCriteriaLabel: 'Buscar'
+        };
+
+        $scope.headers = [{
+                field:'NAME',
+                caption: 'Nombre',
+                tooltip: 'Nombre de la receta',
+                template:   '<a href="{{header.showUrl($model, header)}}">' +
+                                '{{$model.NAME}}' +
+                            '</a>',
+                user: function() {
+                    return $scope.user;
+                },
+                showUrl: function($model, header) {
+                    if ( !header.user() ) return '';
+                    if ( $model.owner._id == header.user()._id ) {
+                        return '#/recipe/edit/' + $model._id;    
+                    } else {
+                        return $scope.sharedUrl($model._id);
+                    }
+                }
+            },{
+                field: 'STYLE.NAME',
+                caption: 'Estilo'
+            },{
+                field: 'OG',
+                caption: 'DI',
+                tooltip: 'Densidad inicial'
+            },{
+                field: 'ABV',
+                caption: '% alc',
+                tooltip: 'graduacion alcoholica'
+            },{
+                field: 'CALCIBU',
+                caption: 'IBUs'
+            },{
+                field: 'BATCH_SIZE',
+                caption: 'Litros'
+            },{
+                field: 'BREWER',
+                caption: 'Cervecero'
+            },{
+                field: 'owner.name',
+                caption: 'Compartida por',
+                template:   '<a href="/#/home/{{$model.owner._id}}">' +
+                                '{{$model.owner.name}}' +
+                            '</a>'
+            },{
+                field: 'publishDate',
+                caption: 'Fecha',
+                template:   '{{$model.publishDate | date:"dd-MM-yyyy HH:mm"}}'
+            },{
+                field: 'clone',
+                caption: '',
+                template:   '<a class="btn btn-default btn-xs" href="#/recipe/clone/{{header.encodeName($model._id)}}">' +
+                                'clonar' +
+                            '</a>',
+                encodeName: $scope.encodeName
+            }
+        ];
+
+        $scope.filterData = {};
+
+        // $scope.sort = sortData("publishDate","-");
         
         $scope.styles = Style.query();
 
@@ -99,40 +214,35 @@
 
         $scope.showAd=false;
 
-        $scope.filterData = {};
-        $scope.filterData['STYLE.NAME'] = {
-            comparator: 'equal',
-            ignoreCase: false
-        };
-        $scope.filterData['NAME'] = {
-            comparator: 'like',
-            ignoreCase: true
-        };
-        $scope.filterData['tags'] = {
-            comparator: 'searchIn',
-            type: 'list',
-            ignoreCase: true
-        };
-        angular.forEach($scope.filterData,function(f,key){
-            if ( $location.$$search[key] ) {
-                $scope.showAd=true;
-                if (f.type == 'list' ) {
-                    $scope.filterData[key].value = $location.$$search[key].split(",");
-                } else {
-                    $scope.filterData[key].value = $location.$$search[key];
-                }
+        // $scope.filterData = {};
+        // $scope.filterData['STYLE.NAME'] = {
+        //     comparator: 'equal',
+        //     ignoreCase: false
+        // };
+        // $scope.filterData['NAME'] = {
+        //     comparator: 'like',
+        //     ignoreCase: true
+        // };
+        // $scope.filterData['tags'] = {
+        //     comparator: 'searchIn',
+        //     type: 'list',
+        //     ignoreCase: true
+        // };
+        // angular.forEach($scope.filterData,function(f,key){
+        //     if ( $location.$$search[key] ) {
+        //         $scope.showAd=true;
+        //         if (f.type == 'list' ) {
+        //             $scope.filterData[key].value = $location.$$search[key].split(",");
+        //         } else {
+        //             $scope.filterData[key].value = $location.$$search[key];
+        //         }
 
-            }
-        });
+        //     }
+        // });
         $scope.filterByTag = function(tag) {
-//            $location.$$search['tags']= tag;
-//            $location.path('/public?tags=' + tag);
             window.location.href = '/#/public?tags=' + tag;
         };
-//        if ( $location.$$search.tags ) {
-//            $scope.showAd=true;
-//            $scope.filterData['tags'].value = $location.$$search.tags.split(",");
-//        }
+
         $scope.reset = function() {
             angular.forEach($scope.filterData,function(val) {
                 delete val.value;
@@ -141,8 +251,9 @@
         
         $rootScope.$watch('user',function(user) {
             if ( user ) {
-                $scope.published = Recipe.findPublic();
+                // $scope.published = PublishedRecipe;
                 $scope.stats = Recipe.stats();
+                // skip += 10;
             }
         });
         

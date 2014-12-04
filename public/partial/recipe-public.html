@@ -13,7 +13,9 @@
     </li>
 </ul>
 <div ng-cloak>
+    <!-- 
     <div class="panel panel-default" ng-show="published.length!=0">
+        
         <div class="panel-body" >
             <div class="col-md-4" >
                 <div class="input-group" style="width: 100%">
@@ -88,7 +90,6 @@
                 <th style="width:4em" ng-click="sort.resort('OG')" class="gt-sorted">
                     DI <span ng-class="sort.orderStyle['OG']"></span>
                 </th>
-                <!--<th style="width:4em">DF</th>-->
                 <th style="width:5em" ng-click="sort.resort('ABV')" class="gt-sorted">
                     %Alc <span ng-class="sort.orderStyle['ABV']"></span>
                 </th>
@@ -111,7 +112,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="recipe in published | filter:searchCriteria | advanced:filterData | orderBy:sort.orderBy():sort.reverse()">
+            <tr ng-repeat="recipe in published | filter:searchCriteria | advanced:filterData | orderBy:sort.orderBy():sort.reverse() | limitTo:10">
                 <td>
                     <span ng-hide="recipe.owner._id == user._id">
                         <a ng-hide="user.favorites.indexOf(recipe._id) != -1" type="button" class="glyphicon glyphicon-star-empty" ng-click="addFavorites(recipe)"></a>
@@ -144,10 +145,19 @@
             </tr>
           </tbody>
         </table>
-        <!--<div class="panel-body">-->
+        
+
+    </div> -->
+            <!--<div class="panel-body">-->
             <!--<button type="button" class="btn btn-link pull-right" ng-click="findMore()">Buscar mas</button>-->
         <!--</div>-->
-    </div>
+    <listview ng-if="user"
+          listview-data="published" 
+          listview-sort="sort" 
+          listview-config="config" 
+          listview-filter="filterData"
+          listview-header="headers"></listview>
+
     <div class="panel panel-default" ng-hide="published.length!=0">
         <div class="panel-body">
           <div class="alert alert-info">

@@ -1,0 +1,89 @@
+<div class="panel panel-default">
+    <div class="panel-body" style="padding-bottom: 0;">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="well well-sm" style="padding: 7px;">
+                    <ng-pluralize ng-hide="loading" count="pagination.totalItems" when="pluralization"></ng-pluralize>
+                    <span ng-show="loading" class="glyphicon glyphicon-refresh"></span>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="btn-group">
+                    <button type="button" ng-change="changePageSize()" class="btn btn-default btn-sm" ng-model="pagination.pageSize" btn-radio="10">10</button>
+                    <button type="button" ng-change="changePageSize()" class="btn btn-default btn-sm" ng-model="pagination.pageSize" btn-radio="25">25</button>
+                    <button type="button" ng-change="changePageSize()" class="btn btn-default btn-sm" ng-model="pagination.pageSize" btn-radio="50">50</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="col-xs-2" style="font-size: 21px;">
+                    <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+                </div>
+                <div class="col-xs-10">
+                    <select class="form-control input-sm" ng-change="changeSort()" ng-model="query.sort" ><!-- style="background-color: #272b30; color: #c8c8c8;" -->
+                      <option ng-repeat="sort in listviewSort.combo" value="{{ sort.sort }}">
+                        {{ sort.label }}
+                      </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div  class="panel panel-default" style="margin: 0 1em 1em 1em">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-{{listviewConfig.filterColSpan||'12'}}" style="margin-bottom: 1em;">
+                    <label for="filter.name">{{listviewConfig.searchCriteriaLabel||'Busqueda'}}</label>
+                    <div class="input-group" style="width: 100%">
+                        <input ng-change="search()" type="text" id="filter.name"  class="form-control input-sm" ng-model="searchCriteria"/>
+                        <span class="input-group-btn">
+                            <button ng-disabled="searchCriteria==''"  ng-click="clearSearch()" class="btn btn-default btn-sm" type="button">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div ng-repeat="_value in listviewConfig.filterOrder" ng-init="filterName=_value; filter=listviewFilter[_value]">
+                    <ng-include src="urlTemplate(filter)"></ng-include>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body" ng-show="loading">
+        <center><span class="glyphicon glyphicon-refresh"></span></center>
+    </div>
+    <div class="panel-body" ng-show="(pagination.totalItems == 0) && !loading">
+        <div class="alert alert-info" >
+            {{emptyResultText}}
+        </div>
+    </div>
+    <div ng-hide="loading">
+        <table class="table table-striped table-hover" >
+            <thead>
+                <tr>
+                    <th ng-repeat="header in listviewHeader" 
+                        ng-class={'hidden-xs':header.hidden.xs,'hidden-sm':header.hidden.sm}
+                        ng-style="getStyle(header)">
+                        <span tooltip="{{header.tooltip}}" tooltip-append-to-body="true">
+                            {{header.caption}}
+                        </span> <!-- <span ng-class="sort.orderStyle[header.field]"></span> -->
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="$model in models">
+                    <td ng-repeat="header in listviewHeader" ng-class={'hidden-xs':header.hidden.xs,'hidden-sm':header.hidden.sm}>
+                        <span ng-if="header.templateUrl"> 
+                            <ng-include src="header.templateUrl"></ng-include>
+                        </span>
+                        <span ng-if="!header.templateUrl" ng-bind-html="getValue(header,$model)"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr/>
+        <div style="margin:1em">
+            <pagination boundary-links="true" total-items="pagination.totalItems" items-per-page="pagination.pageSize" page="pagination.page" max-size="15" class="pagination-small" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+            <div style="white-space: pre-wrap;box-sizing: border-box;">{{(pagination.page-1)*pagination.pageSize + 1}} - <span ng-hide="pagination.page == getPageCount(pagination.totalItems)">{{pagination.page*pagination.pageSize}}</span><span ng-show="pagination.page == getPageCount(pagination.totalItems)">{{pagination.totalItems}}</span> de {{pagination.totalItems}}</div>
+        </div>
+    </div>
+</div>

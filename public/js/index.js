@@ -25,7 +25,8 @@
                                 'water',
                                 'env',
                                 'observer',
-                                'print']);
+                                'print',
+                                'gt.listview']);
 
     index.
         config(['$routeProvider', function($routeProvider) {

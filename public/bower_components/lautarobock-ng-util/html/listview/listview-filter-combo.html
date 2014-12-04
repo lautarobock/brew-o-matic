@@ -1,0 +1,16 @@
+<div class="col-sm-{{filter.colSpan||listviewConfig.filterColSpan||'12'}}" style="margin-bottom: 1em;">
+    <label for="{{filterName}}_id">{{filter.caption}}</label>
+    <div class="input-group">
+        <select 
+            ng-options="value._id as filter.getLabel(value) group by filter.groupBy(value) for value in filter.data | orderBy:filter.orderBy" 
+            class="form-control input-sm" 
+            ng-change="search()"
+            id="{{filterName}}_id" 
+            ng-model="filter.value"></select>
+        <span class="input-group-btn">
+            <button ng-click="clearFilter(filter,filterName)" class="btn btn-default btn-sm" type="button">
+                <span class="glyphicon glyphicon-remove"></span>
+            </button>
+        </span>
+    </div>
+</div>

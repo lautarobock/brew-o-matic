@@ -1,0 +1,17 @@
+{
+  "name": "ng-util",
+  "version": "0.0.7",
+  "homepage": "https://github.com/lautarobock/ng-util",
+  "authors": [
+    "Lautaro <lautaromail@gmail.com>"
+  ],
+  "description": "Angular Utilities",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
