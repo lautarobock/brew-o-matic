@@ -14,119 +14,22 @@
 </ul>
 <div class="panel panel-default" ng-show="recipes.length!=0" ng-cloak>
     <div class="panel-body" >
-        <div class="col-md-5" >
-            <div class="input-group" style="width: 100%">
-                <input type="text"  class="form-control input-sm" ng-model="searchCriteria" placeholder="(Busqueda)" />
-                <span class="input-group-btn">
-                    <button ng-init="searchCriteria=''" ng-hide="searchCriteria==''"  ng-click="searchCriteria=''" class="btn btn-default btn-sm" type="button">
-                        <span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                </span>
-            </div>
-        </div>
-        <div class="col-md-5" style="padding-top: 5px;">
-            <span ng-hide="searchCriteria==''" >
-                <ng-pluralize count="(recipes | filter:searchCriteria).length"
-                              when="{'0':'No se ha encontrado ningun resultado con su busqueda','one': '1 receta encontrada','other':'{} recetas encontradas'}"></ng-pluralize>
-            </span>
-        </div>
-        <div class="col-md-2" >
-            <a type="button" class="btn btn-default pull-right" href="#/recipe/new">
+        <div class="col-md-12" >
+            <a type="button" class="btn btn-primary pull-right" href="#/recipe/new">
                 <span class="glyphicon glyphicon-plus"></span> Nueva receta
             </a>
         </div>
     </div>
-    <table class="table table-striped table-hover">
-      <thead>
-        <tr>
-          <th ng-click="sort.resort('code')" class="gt-sorted" style="width:3em;" title="Codigo unico que identifica la receta para el cervecero">
-            # <span ng-class="sort.orderStyle['code']"></span>
-          </th>
-          <!--<th style="width:7em">Fecha</th>-->
-          <th ng-click="sort.resort('NAME')" class="gt-sorted">
-            Nombre <span ng-class="sort.orderStyle['NAME']"></span>
-          </th>
-          <th style="width:14em;" class="gt-sorted" ng-click="sort.resort('STYLE.NAME')">
-            Estilo <span ng-class="sort.orderStyle['STYLE.NAME']"></span>
-          </th>
-          <th style="width:4em" class="gt-sorted" ng-click="sort.resort('OG')">
-            DI <span ng-class="sort.orderStyle['OG']"></span>
-          </th>
-          <!--<th style="width:4em">DF</th>-->
-          <th style="width:5em" class="gt-sorted" ng-click="sort.resort('ABV')">
-            %Alc <span ng-class="sort.orderStyle['ABV']"></span>
-          </th>
-          <th style="width:5em" class="gt-sorted" ng-click="sort.resort('CALCIBU')">
-            IBUs <span ng-class="sort.orderStyle['CALCIBU']"></span>
-          </th>
-          <th style="width:7em" class="gt-sorted" ng-click="sort.resort('BATCH_SIZE')">
-            Batch (L) <span ng-class="sort.orderStyle['BATCH_SIZE']"></span>
-          </th>
-          <th style="width:10em">Cervecero</th>
-          <!--<th style="width: 1em"></th>-->
-          <th style="width: 1em"></th>
-          <th style="width: 1em"></th>
-          <th style="width: 1em"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="recipe in recipes | filter:searchCriteria | orderBy:sort.orderBy():sort.reverse()">
-            <td>
-                <a href="#/recipe/edit/{{encodeName(recipe._id)}}">{{ recipe.code }}</a>
-            </td>
-            <td title="{{recipe.NAME}}">
-                <a href="#/recipe/edit/{{encodeName(recipe._id)}}">{{ recipe.NAME|limitText:100}}</a>
-                <show-tags tags="recipe.tags"></show-tags>
-            </td>
-            <td>{{ recipe.STYLE.NAME }}</td>
-            <td>{{ recipe.OG  }}</td>
-            <!--<td>{{ recipe.FG  }}</td>-->
-            <td>{{ recipe.ABV  }}</td>
-            <td>{{ recipe.CALCIBU }}</td>
-            <td>{{ recipe.BATCH_SIZE }}</td>
-            <td>{{ recipe.BREWER }}</td>
-            <!--<td>
-                <a href="#/recipe/edit/{{encodeName(recipe._id)}}" type="button" class="btn btn-primary btn-xs">editar</a>
-            </td>-->
-            <td>
-                <a href="#/recipe/clone/{{encodeName(recipe._id)}}" type="button" class="btn btn-default btn-xs">clonar</a>
-            </td>
-            <td>
-                <a href="" ng-click="publish(recipe)" type="button" class="btn btn-success btn-xs" ng-hide="recipe.isPublic" title="Compartir la receta con el resto de los cerveceros">
-                    <span class="glyphicon glyphicon-cloud-upload"></span>
-                     publicar
-                </a>
-                <span class="glyphicon glyphicon-check" title="Esta receta es publica, puede ser vista por todos los usuarios" ng-show="recipe.isPublic"/>
-            </td>
-            <td>
-                <!--<button type="button" class="close" aria-hidden="true" ng-click="removeRecipe(recipe._id)">&times;</button>-->
-                <button data-target="#{{confirmationID(recipe._id)}}" data-toggle="modal"  type="button" class="close" aria-hidden="true">&times;</button>
-                <div class="modal fade" id="{{confirmationID(recipe._id)}}" role="dialog" aria-labelledby="#label">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="label">Confirmacion</h4>
-                            </div>
-                            <div class="modal-body">
-                                ¿Esta seguro que desea eliminar la receta?
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn" data-dismiss="modal">No</a>
-                                <button type="button" ng-click="removeRecipe(recipe._id)" class="btn btn-primary" >
-                                    Si
-                                </button >
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </td>
-        </tr>
-      </tbody>
-    </table>
+    <listview ng-if="user"
+          listview-data="recipes" 
+          listview-sort="sort" 
+          listview-config="config" 
+          listview-filter="filterData"
+          listview-header="headers"></listview>
+
     <div class="panel-body">
         <div class="col-md-12" >
-            <a type="button" class="btn btn-default pull-right" href="#/recipe/new">
+            <a type="button" class="btn btn-primary pull-right" href="#/recipe/new">
                 <span class="glyphicon glyphicon-plus"></span> Nueva receta
             </a>
         </div>
@@ -138,7 +41,7 @@
             Aun no tiene recetas creadas 
             <a href="#/recipe/new" class="alert-link">Crea tu primera receta desde aca!</a>
       </div>
-      <a type="button" class="btn btn-default pull-right" href="#/recipe/new">
+      <a type="button" class="btn btn-primary pull-right" href="#/recipe/new">
         <span class="glyphicon glyphicon-plus"></span> Nueva receta
       </a>
     </div>

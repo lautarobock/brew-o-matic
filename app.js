@@ -100,6 +100,7 @@ app.put('/recipe/comment',filter,recipe.addComment);
 app.get('/recipe/comment:id',recipe.getComments);
 app.post('/recipe/publish_:id',filter,recipe.publish);
 app.put('/recipe/remove_comment',filter,recipe.deleteComment);
+app.get('/recipe/my_count',filter,recipe.countAll);
 app.get('/recipe',filter,recipe.findAll);
 app.get('/recipe/stats',filter,recipe.stats);
 app.get('/recipe/by_user_:id',filter,recipe.findByUser);

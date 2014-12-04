@@ -8,8 +8,10 @@ function processFilter(filter) {
     if ( filter && filter.searchCriteria ) {
         filter.$or = [
             {NAME: {"$regex": filter.searchCriteria,"$options": 'i'}},
+            {code: {"$regex": filter.searchCriteria,"$options": 'i'}},
             {BREWER: {"$regex": filter.searchCriteria,"$options": 'i'}},
-            {'STYLE.NAME': {"$regex": filter.searchCriteria,"$options": 'i'}}
+            {'STYLE.NAME': {"$regex": filter.searchCriteria,"$options": 'i'}},
+            {tags: filter.searchCriteria}
 
         ];
         delete filter.searchCriteria;
@@ -37,7 +39,7 @@ exports.findPublic = function(req, res) {
     filter.isPublic = true;
 
     console.log("filter",JSON.stringify(filter));
-    model.Recipe.find(filter,'NAME STYLE OG ABV CALCIBU BATCH_SIZE BREWER owner publishDate')
+    model.Recipe.find(filter,'NAME tags STYLE OG ABV CALCIBU BATCH_SIZE BREWER owner publishDate')
         .limit(req.query.limit)
         .skip(req.query.skip)
         .sort(req.query.sort)
@@ -75,9 +77,38 @@ exports.findByUser = function(req, res) {
     });        
 };
 
+// exports.findAll = function(req, res) {
+//     model.Recipe.find({owner:req.session.user_id}).sort('-date').exec(function(err,results) {
+//         res.send(results);
+//     });    
+// };
 exports.findAll = function(req, res) {
-    model.Recipe.find({owner:req.session.user_id}).sort('-date').exec(function(err,results) {
-        res.send(results);
+    var filter = processFilter(req.query.filter);
+    
+    filter = filter||{};
+    filter.owner = req.session.user_id;
+
+    console.log("filter",JSON.stringify(filter));
+    model.Recipe.find(filter,'NAME code tags STYLE OG ABV CALCIBU BATCH_SIZE BREWER owner publishDate isPublic')
+        .limit(req.query.limit)
+        .skip(req.query.skip)
+        .sort(req.query.sort)
+        .populate('owner','name _id')
+        .exec(function(err,results) {
+            res.send(results);
+    });    
+};
+
+exports.countAll = function(req, res) {
+    var filter = processFilter(req.query.filter);
+
+    filter = filter||{};
+    filter.owner = req.session.user_id;
+
+    console.log("filter(count)", JSON.stringify(filter));
+    model.Recipe.count(filter)
+        .exec(function(err,results) {
+            res.send({count:results});
     });    
 };
 

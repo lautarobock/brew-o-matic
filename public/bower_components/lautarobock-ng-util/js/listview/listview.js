@@ -29,6 +29,12 @@
             controller: ['$scope', '$interpolate', '$timeout',function($scope, $interpolate, $timeout) {
                 $scope.listviewConfig = $scope.listviewConfig || {};
 
+                $scope.listviewConfig.control = {
+                    refresh: function() {
+                        searchWithFilters();
+                    }
+                };
+
                 $scope.pluralization = {
                     '0':'No se ha encontrado ningun resultado con su busqueda',
                     'one': '1 ' +($scope.listviewConfig.singular||'')+ ' encontrada',
@@ -50,7 +56,16 @@
 
                 //Search
                 //SearchCriteria will be change for advanced text filter
-                $scope.searchCriteria = $scope.listviewConfig.searchCriteria || '';
+                // $scope.searchCriteria = $scope.listviewConfig.searchCriteria || '';
+                var first = true;
+                $scope.$watch('listviewConfig.searchCriteria', function(value) {
+                    if ( first ) {
+                        first = false;
+                        return;
+                    }
+                    $scope.searchCriteria = value;
+                    $scope.search();
+                });
                 var activeTimeout = null;
                 
                 $scope.search = function() {
@@ -79,11 +94,12 @@
                 }
 
                 $scope.clearSearch = function() {
-                    $scope.searchCriteria = ""
+                    // $scope.searchCriteria = ""
+                    $scope.listviewConfig.searchCriteria = '';
                     delete query["filter[searchCriteria]"];
                     // delete query["filter[name][$options]"];
-                    reloadCount();
-                    reload();
+                    // reloadCount();
+                    // reload();
                 };
 
                 $scope.clearFilter = function(filter,filterName) {

@@ -83,4 +83,6 @@ module.exports = function(grunt) {
 	grunt.registerTask('build', ['ngtemplates','concat','uglify']);
 
 	grunt.registerTask('test', ['karma:cont']);
+
+	grunt.registerTask('default', ['build']);
 };
