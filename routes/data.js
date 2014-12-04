@@ -20,6 +20,12 @@ function createRest(exports,service) {
                 res.send(results);
             });    
         },
+        count: function(req, res) {
+            console.log(service + " .count");
+            model[service].count().exec(function(err,results) {
+                res.send({count:results});
+            });    
+        },
         save: function(req, res) {
             delete req.body._id;
             var id;

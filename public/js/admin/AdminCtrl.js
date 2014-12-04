@@ -3,7 +3,7 @@
     var abm = angular.module("admin",[]);
     
 
-    abm.controller("AdminCtrl",function($scope,$rootScope,$routeParams,AdminUser,AdminRecipe,Bottle,$filter,$location,AdminAction,TempDeviceReport) {
+    abm.controller("AdminCtrl",function($scope,$rootScope,$routeParams,AdminUser,AdminRecipe,Bottle,$filter,$location,AdminAction,TempDeviceReport,PublishedRecipe) {
 
         $scope.allConfigs = {
             Action:  {
@@ -177,6 +177,9 @@
                         caption: 'Calor'
                     }
                 ]
+            },
+            Stats:  {
+                name: "Stats"
             }
         };
         
@@ -194,7 +197,7 @@
             }
         };
         
-        $scope.entity = $routeParams.entity;
+        $scope.entity = $routeParams.entity || 'Stats';
         
         $scope.config = $scope.allConfigs[$scope.entity];
         
@@ -204,7 +207,13 @@
         },{
             link: '#',
             title: $scope.config.name
-        }];         
+        }];
+
+        if ( $scope.entity == 'Stats' ) {
+            $scope.recipeCount = AdminRecipe.count();
+            $scope.userCount = AdminUser.count();
+            $scope.publicCount = PublishedRecipe.count();
+        }
         
         
     });

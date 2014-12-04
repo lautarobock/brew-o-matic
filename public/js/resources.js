@@ -72,7 +72,9 @@
     var admin = ['User','Recipe','Action'];
     angular.forEach(admin,function(s) {
         res.factory('Admin' + s,function($resource) {
-            return $resource( 'admin/' + s.toLowerCase() + '/:_id',{_id:"@_id"}, {});
+            return $resource( 'admin/' + s.toLowerCase() + '/:operation:_id',{_id:"@_id"}, {
+                count: {method:'GET', params: {operation:'count'}, isArray:false},
+            });
         });    
     });
     

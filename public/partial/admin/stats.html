@@ -1,0 +1,45 @@
+<div style="margin-bottom: -0.1em;">
+    <ul class="nav nav-tabs">
+        <li ng-class="getActiveClass(key)" ng-repeat="(key,value) in allConfigs">
+            <a style="cursor: pointer" href="/#/admin/{{key}}">{{value.name}}</a>
+        </li>
+    </ul>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading"><strong>Estadisticas</strong></div>
+    <div class="panel-body" >
+        <div class="row">
+            <div class="col-md-2">        
+                <label for="batchSize">Recetas</label>
+                <span  class="form-control input-sm">
+                  {{recipeCount.count}}         
+                </span>
+            </div>
+            <div class="col-md-2">        
+                <label for="batchSize">Publicas</label>
+                <span  class="form-control input-sm">
+                  {{publicCount.count}}         
+                </span>
+            </div>
+            <div class="col-md-2">        
+                <label for="batchSize">% Publicas</label>
+                <span  class="form-control input-sm">
+                  {{publicCount.count/recipeCount.count*100|number:0}}%
+                </span>
+            </div>
+            <div class="col-md-2">        
+                <label for="batchSize">Usuarios</label>
+                <span  class="form-control input-sm">
+                  {{userCount.count}}         
+                </span>
+            </div>
+            <div class="col-md-2">        
+                <label for="batchSize">Recetas x 100 Usuarios</label>
+                <span  class="form-control input-sm">
+                  {{recipeCount.count / userCount.count * 100 | number:0}}         
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

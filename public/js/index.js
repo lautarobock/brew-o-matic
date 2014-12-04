@@ -48,6 +48,7 @@
                 when('/calculator', {templateUrl: 'partial/calculator/calculator.html', controller: 'CalculatorCtrl'}).
                 when('/notification', {templateUrl: 'partial/user/user-notification.html', controller: 'NotificationsCtrl'}).
                 when('/data/:entity', {templateUrl: 'partial/data/abm.html', controller: 'AbmCtrl'}).
+                when('/admin/Stats', {templateUrl: 'partial/admin/stats.html', controller: 'AdminCtrl'}).
                 when('/admin/:entity', {templateUrl: 'partial/admin/admin.html', controller: 'AdminCtrl'}).
                 otherwise({redirectTo: '/recipe'});
     }]);
