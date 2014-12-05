@@ -63,7 +63,7 @@
                         first = false;
                         return;
                     }
-                    $scope.searchCriteria = value;
+                    // $scope.searchCriteria = value;
                     $scope.search();
                 });
                 var activeTimeout = null;
@@ -77,8 +77,8 @@
 
                 function searchWithFilters() {
 
-                    if ( $scope.searchCriteria ) {
-                        query["filter[searchCriteria]"] = $scope.searchCriteria;
+                    if ( $scope.listviewConfig.searchCriteria ) {
+                        query["filter[searchCriteria]"] = $scope.listviewConfig.searchCriteria;
                     } else {
                         delete query["filter[searchCriteria]"];
                     }

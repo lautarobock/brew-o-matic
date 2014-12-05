@@ -123,7 +123,7 @@
                         first = false;
                         return;
                     }
-                    $scope.searchCriteria = value;
+                    // $scope.searchCriteria = value;
                     $scope.search();
                 });
                 var activeTimeout = null;
@@ -137,8 +137,8 @@
 
                 function searchWithFilters() {
 
-                    if ( $scope.searchCriteria ) {
-                        query["filter[searchCriteria]"] = $scope.searchCriteria;
+                    if ( $scope.listviewConfig.searchCriteria ) {
+                        query["filter[searchCriteria]"] = $scope.listviewConfig.searchCriteria;
                     } else {
                         delete query["filter[searchCriteria]"];
                     }
@@ -307,9 +307,9 @@
     "                <div class=\"col-sm-{{listviewConfig.filterColSpan||'12'}}\" style=\"margin-bottom: 1em;\">\n" +
     "                    <label for=\"filter.name\">{{listviewConfig.searchCriteriaLabel||'Busqueda'}}</label>\n" +
     "                    <div class=\"input-group\" style=\"width: 100%\">\n" +
-    "                        <input ng-change=\"search()\" type=\"text\" id=\"filter.name\"  class=\"form-control input-sm\" ng-model=\"searchCriteria\"/>\n" +
+    "                        <input ng-change=\"search()\" type=\"text\" id=\"filter.name\"  class=\"form-control input-sm\" ng-model=\"listviewConfig.searchCriteria\"/>\n" +
     "                        <span class=\"input-group-btn\">\n" +
-    "                            <button ng-disabled=\"searchCriteria==''\"  ng-click=\"clearSearch()\" class=\"btn btn-default btn-sm\" type=\"button\">\n" +
+    "                            <button ng-disabled=\"listviewConfig.searchCriteria==''\"  ng-click=\"clearSearch()\" class=\"btn btn-default btn-sm\" type=\"button\">\n" +
     "                                <span class=\"glyphicon glyphicon-remove\"></span>\n" +
     "                            </button>\n" +
     "                        </span>\n" +
