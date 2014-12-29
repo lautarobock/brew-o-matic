@@ -39,7 +39,7 @@ exports.findPublic = function(req, res) {
     filter.isPublic = true;
 
     console.log("filter",JSON.stringify(filter));
-    model.Recipe.find(filter,'NAME tags STYLE OG ABV CALCIBU BATCH_SIZE BREWER owner publishDate')
+    model.Recipe.find(filter,'NAME tags STYLE OG ABV CALCCOLOUR CALCIBU BATCH_SIZE BREWER owner publishDate')
         .limit(req.query.limit)
         .skip(req.query.skip)
         .sort(req.query.sort)
@@ -89,7 +89,7 @@ exports.findAll = function(req, res) {
     filter.owner = req.session.user_id;
 
     console.log("filter",JSON.stringify(filter));
-    model.Recipe.find(filter,'NAME code tags STYLE OG ABV CALCIBU BATCH_SIZE BREWER owner publishDate isPublic')
+    model.Recipe.find(filter,'NAME code tags STYLE OG ABV CALCCOLOUR CALCIBU BATCH_SIZE BREWER owner publishDate isPublic')
         .limit(req.query.limit)
         .skip(req.query.skip)
         .sort(req.query.sort)

@@ -89,7 +89,7 @@
         
     });
     
-    index.controller("RecipePublicCtrl", function ($scope,$rootScope,$location,Recipe,User,sortData,Style,Tag, PublishedRecipe,$templateCache) {
+    index.controller("RecipePublicCtrl", function ($scope,$rootScope,$location,Recipe,User,sortData,Style,Tag, PublishedRecipe,$templateCache,BrewHelper) {
 
         $scope.published = PublishedRecipe;
 
@@ -98,6 +98,9 @@
             combo: [{
                 label: 'Fecha de publicacion',
                 sort: '-publishDate'
+            },{
+                label: 'Fecha de publicacion asc',
+                sort: 'publishDate'
             },{
                 label: 'Por nombre',
                 sort: 'NAME'
@@ -134,6 +137,12 @@
             },{
                 label: 'Por Litros descendente',
                 sort: '-BATCH_SIZE'
+            },{
+                label: 'Por Color',
+                sort: 'CALCCOLOUR'
+            },{
+                label: 'Por Color descendente',
+                sort: '-CALCCOLOUR'
             }]
         };
 
@@ -145,6 +154,10 @@
             singular: 'Receta',
             searchCriteriaLabel: 'Buscar'
         };
+
+        $templateCache.put('recipe-srm.html',
+                            '<div title="SRM {{$model.CALCCOLOUR|number:0}}" style="border: 1px solid; height: 20px; background-color: {{header.convertColor($model.CALCCOLOUR)}};border-radius: 3px;">' +
+                            '</div>');
 
         $templateCache.put('recipe-name.html',
                             '<a ng-href="{{header.showUrl($model, header)}}">' +
@@ -174,6 +187,13 @@
             },{
                 field: 'STYLE.NAME',
                 caption: 'Estilo'
+            },{
+                field: 'CALCCOLOUR',
+                caption: 'Color',
+                templateUrl: 'recipe-srm.html',
+                convertColor: function(srm) {
+                    return BrewHelper.convertColor(srm);
+                }
             },{
                 field: 'OG',
                 caption: 'DI',
@@ -225,39 +245,6 @@
             orderBy: 'name'
         };
 
-        // $scope.sort = sortData("publishDate","-");
-        
-        // $scope.styles = Style.query();
-
-        // $scope.tags = Tag.query();
-
-        // $scope.showAd=false;
-
-        // $scope.filterData = {};
-        // $scope.filterData['STYLE.NAME'] = {
-        //     comparator: 'equal',
-        //     ignoreCase: false
-        // };
-        // $scope.filterData['NAME'] = {
-        //     comparator: 'like',
-        //     ignoreCase: true
-        // };
-        // $scope.filterData['tags'] = {
-        //     comparator: 'searchIn',
-        //     type: 'list',
-        //     ignoreCase: true
-        // };
-        // angular.forEach($scope.filterData,function(f,key){
-        //     if ( $location.$$search[key] ) {
-        //         $scope.showAd=true;
-        //         if (f.type == 'list' ) {
-        //             $scope.filterData[key].value = $location.$$search[key].split(",");
-        //         } else {
-        //             $scope.filterData[key].value = $location.$$search[key];
-        //         }
-
-        //     }
-        // });
         $scope.filterByTag = function(tag) {
             // window.location.href = '/#/public?tags=' + tag;
             console.log(tag);
@@ -323,7 +310,8 @@
                 $timeout,
                 sortData,
                 alertFactory,
-                $templateCache) {
+                $templateCache,
+                BrewHelper) {
 
         // $scope.sort = sortData("code","-");
 
@@ -334,6 +322,9 @@
             combo: [{
                 label: 'Codigo',
                 sort: '-code'
+            },{
+                label: 'Codigo Asc',
+                sort: 'code'
             },{
                 label: 'Por nombre',
                 sort: 'NAME'
@@ -370,6 +361,12 @@
             },{
                 label: 'Por Litros descendente',
                 sort: '-BATCH_SIZE'
+            },{
+                label: 'Por Color',
+                sort: 'CALCCOLOUR'
+            },{
+                label: 'Por Color descendente',
+                sort: '-CALCCOLOUR'
             }]
         };
 
@@ -392,6 +389,10 @@
                             '<a ng-href="{{header.showUrl($model, header)}}">' +
                                 '{{$model.code}}' +
                             '</a>');
+        $templateCache.put('recipe-srm.html',
+                            '<div title="SRM {{$model.CALCCOLOUR|number:0}}" style="border: 1px solid; height: 20px; background-color: {{header.convertColor($model.CALCCOLOUR)}};border-radius: 3px;">' +
+                            '</div>');
+
         $templateCache.put('recipe-publish.html', 
             '<a href="" ng-click="header.publish($model)" type="button" class="btn btn-success btn-xs" ng-hide="$model.isPublic" title="Compartir la receta con el resto de los cerveceros">' +
                 '<span class="glyphicon glyphicon-cloud-upload"></span>' +
@@ -450,6 +451,13 @@
             },{
                 field: 'STYLE.NAME',
                 caption: 'Estilo'
+            },{
+                field: 'CALCCOLOUR',
+                caption: 'Color',
+                templateUrl: 'recipe-srm.html',
+                convertColor: function(srm) {
+                    return BrewHelper.convertColor(srm);
+                }
             },{
                 field: 'OG',
                 caption: 'DI',
