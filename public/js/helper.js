@@ -293,6 +293,11 @@
                 } else {
                     return SRM[Math.round(srm)];
                 }
+            },
+            complementary: function(color) {
+                var hexa = color.replace('#', '0x');
+                var colorDec = 0xffffff ^ hexa;
+                return '#' + colorDec.toString(16);
             }
         };
     });

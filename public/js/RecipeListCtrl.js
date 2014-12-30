@@ -156,7 +156,8 @@
         };
 
         $templateCache.put('recipe-srm.html',
-                            '<div title="SRM {{$model.CALCCOLOUR|number:0}}" style="border: 1px solid; height: 20px; background-color: {{header.convertColor($model.CALCCOLOUR)}};border-radius: 3px;">' +
+                            '<div title="SRM {{$model.CALCCOLOUR|number:0}}" style="text-align: center;border: 1px solid {{header.convertColor($model.CALCCOLOUR)}}; height: 20px; background-color: {{header.convertColor($model.CALCCOLOUR)}};color:{{header.complementary(header.convertColor($model.CALCCOLOUR))}};border-radius: 3px;">' +
+                                '{{$model.CALCCOLOUR|number:0}}' +
                             '</div>');
 
         $templateCache.put('recipe-name.html',
@@ -193,6 +194,9 @@
                 templateUrl: 'recipe-srm.html',
                 convertColor: function(srm) {
                     return BrewHelper.convertColor(srm);
+                },
+                complementary: function(color) {
+                    return BrewHelper.complementary(color);
                 }
             },{
                 field: 'OG',
@@ -390,7 +394,8 @@
                                 '{{$model.code}}' +
                             '</a>');
         $templateCache.put('recipe-srm.html',
-                            '<div title="SRM {{$model.CALCCOLOUR|number:0}}" style="border: 1px solid; height: 20px; background-color: {{header.convertColor($model.CALCCOLOUR)}};border-radius: 3px;">' +
+                            '<div title="SRM {{$model.CALCCOLOUR|number:0}}" style="text-align: center;border: 1px solid {{header.convertColor($model.CALCCOLOUR)}}; height: 20px; background-color: {{header.convertColor($model.CALCCOLOUR)}};color:{{header.complementary(header.convertColor($model.CALCCOLOUR))}};border-radius: 3px;">' +
+                                '{{$model.CALCCOLOUR|number:0}}' +
                             '</div>');
 
         $templateCache.put('recipe-publish.html', 
@@ -457,6 +462,9 @@
                 templateUrl: 'recipe-srm.html',
                 convertColor: function(srm) {
                     return BrewHelper.convertColor(srm);
+                },
+                complementary: function(color) {
+                    return BrewHelper.complementary(color);
                 }
             },{
                 field: 'OG',
