@@ -1,13 +1,13 @@
 (function() {
-    
+
     var comments = angular.module("comments",[]);
 
     comments.controller("CommentController",function($scope,Recipe,$filter,$timeout,$interval,pushListener) {
-        
+
         $scope.rows = 1;
 
         $scope.loadNewComments = false;
-        
+
         $scope.removeComment = function(comment) {
             $('#confirmation-'+comment._id).modal('hide');
             $timeout(function() {
@@ -15,9 +15,9 @@
                     comment: comment,
                     recipe_id: $scope.recipe._id
                 };
-                Recipe.removeComment(remove);    
+                Recipe.removeComment(remove);
             }, 1*1000);
-            
+
         };
 
         $scope.comment_new_id = null;
@@ -91,7 +91,7 @@
             pushListener.off("RECIPE_COMMENT_REMOVE_" + $scope.recipe._id, onRemoveComment);
         });
 
-        
+
         $scope.addComment = function(comment) {
             var newComment = {
                 recipe_id: $scope.recipe._id,
@@ -107,7 +107,7 @@
         $scope.focus = function(comment) {
             $scope.rows = 5;
         };
-        
+
         $scope.blur = function(comment) {
             if (!comment || comment == '') {
                 $scope.rows = 1;
@@ -115,6 +115,6 @@
         };
 
 
-        
+
     });
 })();

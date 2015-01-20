@@ -1,7 +1,7 @@
 (function() {
-    
+
     var res = angular.module('resources',[]);
-    
+
     res.factory('User',function($resource,$rootScope) {
         var params = function() {
             return $rootScope.user ? $rootScope.user.google_id : null;
@@ -26,7 +26,7 @@
             count: {method:'GET', params: {operation:'public_count'}, isArray:false}
         });
     });
-    
+
     res.factory('Recipe',function($resource,$rootScope) {
         var params = function() {
             return $rootScope.user ? $rootScope.user.google_id : null;
@@ -52,7 +52,7 @@
                 isArray:true }
         });
     });
-    
+
     res.factory('Notification',function($resource,$rootScope) {
         var params = function() {
             return $rootScope.user ? $rootScope.user.google_id : null;
@@ -60,22 +60,35 @@
         return $resource('notification/:_id',{google_id:params,_id:"@_id"}, {
             findNews: {method:'GET',params:{_id:'news'},isArray:true}
         });
-    });    
-    
+    });
+
+    res.factory('Stats',function($resource,$rootScope) {
+        var params = function() {
+            return $rootScope.user ? $rootScope.user.google_id : null;
+        };
+        return $resource('stats/',{google_id:params}, {
+            query: {
+                method:'GET',
+                params:{},
+                isArray:false
+            }
+        });
+    });
+
     var services = ['Style','Grain','Hop','Yeast','Misc','Bottle','Tag','WaterReport','TempDevice','TempDeviceReport'];
     angular.forEach(services,function(s) {
         res.factory(s,function($resource) {
             return $resource( s[0].toLowerCase() + s.substr(1) + '/:_id',{_id:"@_id"}, {});
-        });    
+        });
     });
-    
+
     var admin = ['User','Recipe','Action'];
     angular.forEach(admin,function(s) {
         res.factory('Admin' + s,function($resource) {
             return $resource( 'admin/' + s.toLowerCase() + '/:operation:_id',{_id:"@_id"}, {
                 count: {method:'GET', params: {operation:'count'}, isArray:false}
             });
-        });    
+        });
     });
-    
+
 })();

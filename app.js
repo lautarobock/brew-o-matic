@@ -73,9 +73,9 @@ function filter (req,res,next){
                 next();
             } else {
                 console.log("null");
-                res.send(500,{error:'Hubo un problema con la operacion, presion F5 y reintente'});              
+                res.send(500,{error:'Hubo un problema con la operacion, presion F5 y reintente'});
             }
-        });   
+        });
     } else {
         console.log("null");
         res.send(500,{error:'Hubo un problema con la operacion, presion F5 y reintente'});
@@ -85,6 +85,7 @@ function filter (req,res,next){
 var recipe = require("./routes/recipe.js");
 var data = require("./routes/data.js");
 var rating = require("./routes/rating.js");
+var stats = require("./routes/stats.js");
 
 app.get('/user/google_:google_id', user.getByGoogleId);
 app.post('/user', user.add);
@@ -93,6 +94,7 @@ app.put('/user/favorite_add',filter,user.addToFavorites);
 app.put('/user/favorite_drop',filter,user.removeFromFavorites);
 app.get('/user',filter,data.User.findAll);
 app.put('/user/settings',filter,user.updateSettings);
+app.get('/stats',filter,stats.all);
 app.get('/recipe/public',filter,recipe.findPublic);
 app.get('/recipe/public_count',filter,recipe.countPublic);
 app.get('/recipe/collaborated',filter,recipe.findCollaborated);

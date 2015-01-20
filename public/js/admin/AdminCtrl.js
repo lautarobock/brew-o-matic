@@ -1,9 +1,22 @@
 (function() {
-    
-    var abm = angular.module("admin",[]);
-    
 
-    abm.controller("AdminCtrl",function($scope,$rootScope,$routeParams,AdminUser,AdminRecipe,Bottle,$filter,$location,AdminAction,TempDeviceReport,PublishedRecipe) {
+    var abm = angular.module("admin",[]);
+
+
+    abm.controller("AdminCtrl",function(
+        $scope,
+        $rootScope,
+        $routeParams,
+        AdminUser,
+        AdminRecipe,
+        Bottle,
+        $filter,
+        $location,
+        AdminAction,
+        TempDeviceReport,
+        PublishedRecipe,
+        Stats
+    ) {
 
         $scope.allConfigs = {
             Action:  {
@@ -182,7 +195,7 @@
                 name: "Stats"
             }
         };
-        
+
         $scope.getActiveClass = function(tab) {
             if (tab == $scope.entity) {
                 return 'active';
@@ -196,11 +209,11 @@
                 return 'http://'+$location.host() + ":" + $location.port() + '/share.html#/' + _id;
             }
         };
-        
+
         $scope.entity = $routeParams.entity || 'Stats';
-        
+
         $scope.config = $scope.allConfigs[$scope.entity];
-        
+
         $rootScope.breadcrumbs = [{
             link: '#',
             title: 'Home'
@@ -213,9 +226,21 @@
             $scope.recipeCount = AdminRecipe.count();
             $scope.userCount = AdminUser.count();
             $scope.publicCount = PublishedRecipe.count();
+            $scope.stats = Stats.query();
+            $scope.fields = ['today','week','month','year','origin'];
+            var origin = new Date(2013,10,19).getTime();
+            var now = new Date().getTime();
+            var anios = (now-origin)/1000/60/60/24/365;
+            $scope.labels = {
+                today: 'Ultimas 24 hs',
+                week: 'Ultima semana',
+                month: 'Ulitmo mes',
+                year: 'Ultimo año',
+                origin: 'Origen de los tiempos (19-10-2013, ' + (Math.round(anios*100)/100) + ' años)'
+            };
         }
-        
-        
+
+
     });
-    
+
 })();

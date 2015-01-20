@@ -10,34 +10,72 @@
     <div class="panel-heading"><strong>Estadisticas</strong></div>
     <div class="panel-body" >
         <div class="row">
-            <div class="col-md-2">        
+            <div class="col-md-2">
                 <label for="batchSize">Recetas</label>
                 <span  class="form-control input-sm">
-                  {{recipeCount.count}}         
+                  {{recipeCount.count}}
                 </span>
             </div>
-            <div class="col-md-2">        
+            <div class="col-md-2">
                 <label for="batchSize">Publicas</label>
                 <span  class="form-control input-sm">
-                  {{publicCount.count}}         
+                  {{publicCount.count}}
                 </span>
             </div>
-            <div class="col-md-2">        
+            <div class="col-md-2">
                 <label for="batchSize">% Publicas</label>
                 <span  class="form-control input-sm">
                   {{publicCount.count/recipeCount.count*100|number:0}}%
                 </span>
             </div>
-            <div class="col-md-2">        
+            <div class="col-md-2">
                 <label for="batchSize">Usuarios</label>
                 <span  class="form-control input-sm">
-                  {{userCount.count}}         
+                  {{userCount.count}}
                 </span>
             </div>
-            <div class="col-md-2">        
+            <div class="col-md-2">
                 <label for="batchSize">Recetas x 100 Usuarios</label>
                 <span  class="form-control input-sm">
-                  {{recipeCount.count / userCount.count * 100 | number:0}}         
+                  {{recipeCount.count / userCount.count * 100 | number:0}}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-repeat="field in fields" class="panel panel-default">
+    <div class="panel-heading"><strong>{{labels[field]}}</strong></div>
+    <div class="panel-body" >
+        <div class="row">
+            <div class="col-md-2">
+                <label for="batchSize">Usuarios nuevos</label>
+                <span  class="form-control input-sm">
+                    {{stats.singInDate[field]}}
+                </span>
+            </div>
+            <div class="col-md-2">
+                <label for="batchSize">Accesos</label>
+                <span  class="form-control input-sm">
+                    {{stats.lastLogin[field]}}
+                </span>
+            </div>
+            <div class="col-md-2">
+                <label for="batchSize">Recetas nuevas</label>
+                <span  class="form-control input-sm">
+                    {{stats.date[field]}}
+                </span>
+            </div>
+            <div class="col-md-2">
+                <label for="batchSize">Recetas modificadas</label>
+                <span  class="form-control input-sm">
+                    {{stats.modificationDate[field]}}
+                </span>
+            </div>
+            <div class="col-md-2">
+                <label for="batchSize">Publicadas</label>
+                <span  class="form-control input-sm">
+                    {{stats.isPublic[field]}}
                 </span>
             </div>
         </div>
