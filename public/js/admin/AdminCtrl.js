@@ -238,9 +238,36 @@
                 year: 'Ultimo año',
                 origin: 'Origen de los tiempos (19-10-2013, ' + (Math.round(anios*100)/100) + ' años)'
             };
+            $scope.greaterThan = function(value) {
+                return value.total > ($scope.recipesFilter || 0);
+            };
         }
 
 
+    });
+
+    abm.filter('filterDate', function() {
+        return function(items, field, from) {
+            if ( !from || from === '' ) return items;
+            var result = [];
+            angular.forEach(items,function(item) {
+                var value;
+                if ( typeof field !== 'string' ) {
+                    value = item;
+                    for( var i=0;i<field.length; i++ ) {
+                        value = value[field[i]];
+                    }
+                } else {
+                    value = item[field];
+                }
+                var dateValue = new Date(value);
+                var dateFrom = new Date(from);
+                if ( dateValue.getTime() >= dateFrom.getTime() ) {
+                    result.push(item);
+                }
+            });
+            return result;
+        };
     });
 
 })();

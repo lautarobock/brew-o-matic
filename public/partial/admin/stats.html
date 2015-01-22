@@ -44,40 +44,116 @@
     </div>
 </div>
 
-<div ng-repeat="field in fields" class="panel panel-default">
-    <div class="panel-heading"><strong>{{labels[field]}}</strong></div>
-    <div class="panel-body" >
+<div class="panel panel-default">
+    <div class="panel-heading"><strong>En el tiempo</strong></div>
+    <table class="table table-hover table-condensed table-bordered">
+        <thead>
+            <tr>
+                <th></th>
+                <th colspan="3">Usuarios</th>
+                <th colspan="3">Recetas</th>
+            </tr>
+            <tr>
+                <th style="width: 300px">Desde</th>
+                <th>Nuevos</th>
+                <th>Accesos</th>
+                <th title="usuarios que crearon o modificaron una receta">Activos</th>
+                <th>Nuevas</th>
+                <th>Modificadas</th>
+                <th>Publicadas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="field in fields">
+                <th>{{labels[field]}}</th>
+                <td>{{stats.singInDate[field]}}</td>
+                <td>{{stats.lastLogin[field]}}</td>
+                <td>{{stats.active[field]}}</td>
+                <td>{{stats.date[field]}}</td>
+                <td>{{stats.modificationDate[field]}}</td>
+                <td>{{stats.isPublic[field]}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong>
+            Usuarios con Recetas ({{stats.recipesByUser.length}})
+            (filtradas: {{(stats.recipesByUser|filter:{'_id.name':nameFilter}|filterDate:['_id','singInDate']:singInDateFilter|filterDate:['_id','lastLogin']:lastLoginFilter|filter:greaterThan).length}})
+        </strong>
+    </div>
+    <div class="panel-body">
         <div class="row">
-            <div class="col-md-2">
-                <label for="batchSize">Usuarios nuevos</label>
-                <span  class="form-control input-sm">
-                    {{stats.singInDate[field]}}
-                </span>
+            <div class="col-lg-3">
+                <label for="filter.name">Nombre</label>
+                <div class="input-group" style="width: 100%">
+                    <input type="text" class="form-control input-sm" id="filter.name" placeholder="Nombre" ng-model="nameFilter">
+                    <span class="input-group-btn">
+                        <button ng-hide="!nameFilter" ng-click="nameFilter=undefined" class="btn btn-default btn-sm" type="button">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </span>
+                </div>
             </div>
-            <div class="col-md-2">
-                <label for="batchSize">Accesos</label>
-                <span  class="form-control input-sm">
-                    {{stats.lastLogin[field]}}
-                </span>
+            <div class="col-lg-3">
+                <label for="filter.lastLogin">Acceso mayor a</label>
+                <div class="input-group" style="width: 100%">
+                    <input type="text" class="form-control input-sm" id="filter.lastLogin" placeholder="Desde" ng-model="lastLoginFilter">
+                    <span class="input-group-btn">
+                        <button ng-hide="!lastLoginFilter" ng-click="lastLoginFilter=undefined" class="btn btn-default btn-sm" type="button">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </span>
+                </div>
             </div>
-            <div class="col-md-2">
-                <label for="batchSize">Recetas nuevas</label>
-                <span  class="form-control input-sm">
-                    {{stats.date[field]}}
-                </span>
+            <div class="col-lg-3">
+                <label for="filter.singInDate">Ingreso mayor a</label>
+                <div class="input-group" style="width: 100%">
+                    <input type="text" class="form-control input-sm" id="filter.singInDate" placeholder="Desde" ng-model="singInDateFilter">
+                    <span class="input-group-btn">
+                        <button ng-hide="!singInDateFilter" ng-click="singInDateFilter=undefined" class="btn btn-default btn-sm" type="button">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </span>
+                </div>
             </div>
-            <div class="col-md-2">
-                <label for="batchSize">Recetas modificadas</label>
-                <span  class="form-control input-sm">
-                    {{stats.modificationDate[field]}}
-                </span>
-            </div>
-            <div class="col-md-2">
-                <label for="batchSize">Publicadas</label>
-                <span  class="form-control input-sm">
-                    {{stats.isPublic[field]}}
-                </span>
+            <div class="col-lg-3">
+                <label for="filter.recipes">Recetas mayor a</label>
+                <div class="input-group" style="width: 100%">
+                    <input type="text" class="form-control input-sm" id="filter.recipes" placeholder="Desde" ng-model="recipesFilter">
+                    <span class="input-group-btn">
+                        <button ng-hide="!recipesFilter" ng-click="recipesFilter=undefined" class="btn btn-default btn-sm" type="button">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </span>
+                </div>
             </div>
         </div>
     </div>
+    <table class="table table-hover table-condensed table-bordered">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Ultimo acceso</th>
+                <th>Ingreso</th>
+                <th>Recetas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in stats.recipesByUser |
+                        filter:{'_id.name':nameFilter} |
+                        filterDate:['_id','singInDate']:singInDateFilter |
+                        filterDate:['_id','lastLogin']:lastLoginFilter |
+                        filter:greaterThan">
+                <th>{{$index+1}}</th>
+                <th>{{user._id.name}}</th>
+                <th>{{user._id.lastLogin|date:'dd-MM-yyyy'}}</th>
+                <th>{{user._id.singInDate|date:'dd-MM-yyyy'}}</th>
+                <th>{{user.total}}</th>
+            </tr>
+        </tbody>
+    </table>
 </div>

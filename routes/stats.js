@@ -45,6 +45,65 @@ function publicRecipes(date,name,values) {
     return deferred.promise;
 }
 
+function recipesByUser(values) {
+    var deferred = q.defer();
+
+    model.Recipe.aggregate([{
+        $group:{
+            _id: '$owner',
+            total: {$sum: 1}
+        }
+    },{
+        $sort: {total:-1}}
+    ],function (err, res) {
+        if ( err ) {
+            deferred.reject(err);
+        } else {
+            model.User.populate(res, {path: '_id'}, function(err, result) {
+                values.recipesByUser = result;
+                deferred.resolve();
+            });
+        }
+    });
+
+    return deferred.promise;
+}
+
+/**
+Se mide por la cantidad de usuarios que crearon o modificaron alguna receteta
+en el tiempo.
+*/
+function activeUsers(date,name,values) {
+    var deferred = q.defer();
+
+    var filter = {
+        '$or':[
+            {'date': {'$exists': true, '$gte': date }},
+            {'modificationDate': {'$exists': true, '$gte': date }}
+        ]
+    };
+
+    model.Recipe.find(filter).exec(function(err,results) {
+        if ( err ) {
+            deferred.reject(err);
+        } else {
+            var users = {};
+            var r = [];
+            for ( var i=0; i<results.length; i++ ) {
+                users[results[i].owner] = results[i].owner;
+            }
+            for ( var u in users ) {
+                r.push({
+                    _id: u
+                });
+            }
+            values.active[name] = r.length;
+            deferred.resolve();
+        }
+    });
+    return deferred.promise;
+}
+
 exports.all = function(req, res) {
     //Usuarios
     var now = new Date();
@@ -59,7 +118,8 @@ exports.all = function(req, res) {
         singInDate: {},
         date: {},
         modificationDate: {},
-        isPublic: {}
+        isPublic: {},
+        active: {}
     };
     q.all([
         lastLogin('User',yesterday,'today',result,'lastLogin'),
@@ -90,7 +150,16 @@ exports.all = function(req, res) {
         publicRecipes(week,'week',result),
         publicRecipes(month,'month',result),
         publicRecipes(year,'year',result),
-        publicRecipes(origin,'origin',result)
+        publicRecipes(origin,'origin',result),
+
+        recipesByUser(result),
+
+        activeUsers(yesterday,'today',result),
+        activeUsers(week,'week',result),
+        activeUsers(month,'month',result),
+        activeUsers(year,'year',result),
+        activeUsers(origin,'origin',result)
+
     ]).then(function(count) {
         res.send(result);
     });
