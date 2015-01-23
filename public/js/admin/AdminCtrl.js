@@ -238,6 +238,23 @@
                 year: 'Ultimo año',
                 origin: 'Origen de los tiempos (19-10-2013, ' + (Math.round(anios*100)/100) + ' años)'
             };
+            var MONTHS = [
+                'Enero',
+                'Febrero',
+                'Marzo',
+                'Abril',
+                'Mayo',
+                'Junio',
+                'Julio',
+                'Agosto',
+                'Septiembre',
+                'Octubre',
+                'Noviembre',
+                'Diciembre'
+            ];
+            $scope.monthName = function(date) {
+                return MONTHS[new Date(date).getMonth()];
+            };
             $scope.greaterThan = function(value) {
                 return value.total > ($scope.recipesFilter || 0);
             };

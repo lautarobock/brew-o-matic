@@ -104,6 +104,30 @@ function activeUsers(date,name,values) {
     return deferred.promise;
 }
 
+function newRecipesByPeriod(values) {
+    var deferred = q.defer();
+    model.Recipe.aggregate([
+        { $match: { date: { '$exists': true }  } },
+        { $group: {
+            _id:{year: {$year:"$date"}, month: {$month:"$date"} },
+            total: { $sum: 1 }
+        }},
+        { $sort: { '_id.year': 1, '_id.month': 1 } }
+    ], function(err, result) {
+        if ( err ) {
+            deferred.reject(err);
+        } else {
+            for ( var i=0; i<result.length; i++ ) {
+                var r = result[i];
+                r.date = new Date(r._id.year,r._id.month,0);
+            }
+            values.newRecipesByPeriod = result;
+            deferred.resolve();
+        }
+    });
+    return deferred.promise;
+}
+
 exports.all = function(req, res) {
     //Usuarios
     var now = new Date();
@@ -158,7 +182,9 @@ exports.all = function(req, res) {
         activeUsers(week,'week',result),
         activeUsers(month,'month',result),
         activeUsers(year,'year',result),
-        activeUsers(origin,'origin',result)
+        activeUsers(origin,'origin',result),
+
+        newRecipesByPeriod(result)
 
     ]).then(function(count) {
         res.send(result);
