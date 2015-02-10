@@ -20,10 +20,17 @@
             </a>
         </div>
     </div>
+    <div class="panel-body" >
+        <word-cloud words="tags" type="list" ng-click="filterByTag">
+            <button class="btn btn-primary btn-xs" style="margin: 2px 0" ng-click="clickFn(word)">
+                {{ word.word }}
+            </button>
+        </word-cloud>
+    </div>
     <listview ng-if="user"
-          listview-data="recipes" 
-          listview-sort="sort" 
-          listview-config="config" 
+          listview-data="recipes"
+          listview-sort="sort"
+          listview-config="config"
           listview-filter="filterData"
           listview-header="headers"></listview>
 
@@ -38,7 +45,7 @@
 <div class="panel panel-default" ng-hide="recipes.length!=0" ng-cloak>
     <div class="panel-body">
       <div class="alert alert-info">
-            Aun no tiene recetas creadas 
+            Aun no tiene recetas creadas
             <a href="#/recipe/new" class="alert-link">Crea tu primera receta desde aca!</a>
       </div>
       <a type="button" class="btn btn-primary pull-right" href="#/recipe/new">

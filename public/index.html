@@ -26,6 +26,7 @@
         <script src="js/lib/ui-bootstrap-tpls-0.10.0.min.js"></script>
         <script src="/socket.io/socket.io.js"></script>
         <script src="bower_components/lautarobock-ng-util/dist/lautarobock-ng-util.js"></script>
+        <script src="bower_components/angular-word-cloud/build/angular-word-cloud.min.js"></script>
 
         <script src="js/all.js"></script>
         <script id="template/modal/window.html" type="text/ng-template">
@@ -37,9 +38,9 @@
   <body ng-controller="MainController" id="MainController">
     <div id="fb-root"></div>
     <!--<script src="js/fb.js"></scsript>-->
-    
+
     <div ng-include="'partial/nav.html'"></div>
-    
+
     <!-- Logo & Breadcrumb -->
     <div class="container" style="margin-top: 1em;">
       <div class="row" >
@@ -70,12 +71,12 @@
         </div>
       </div>
     </div>
-    
+
     <div ng-show="loginSuccess">
     <!-- Content -->
-    <div class="container" ng-hide="user">     
+    <div class="container" ng-hide="user">
         <div class="jumbotron" >
-            <div class="container">    
+            <div class="container">
                 <h1>Bienvenido!</h1>
                 <p>Para poder comenzar a crear recetas debes primero loguearte, para esto necesitas una cuenta de Google/Gmail/Google+ (pronto mas opciones).</p>
                 <p>
@@ -86,7 +87,7 @@
             </div>
         </div>
     </div>
-    <div class="container" ng-show="user">   
+    <div class="container" ng-show="user">
         <div ng-view></div>
     </div>
     </div>
@@ -132,7 +133,7 @@
             var $scope = angular.element(document.getElementById('LoginController')).scope();
             $scope.$emit('g+login', authResult)
         }
-    </script>    
+    </script>
   </body>
-  
+
 </html>

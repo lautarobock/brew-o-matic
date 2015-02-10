@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Word Cloud directive for AngularJS</title>
+    <style>
+	    div.word-cloud-group {
+		    border: 1px solid green;
+		    text-align: center;
+		    display: inline-block;
+	    }
+	    div.word-cloud-group .word-cloud-group-item button {
+		    font-size: inherit;
+	    }
+		button {
+			border: 0px;
+			background: transparent;
+			color: blue;
+			text-decoration: underline;
+			cursor: pointer;
+		}
+    </style>
+</head>
+<body id='ng-app' ng-app="ExampleApp">
+
+	<div id='container' ng-controller="MainCtrl">
+		<h3>List</h3>
+	    <word-cloud words='words' ng-click='clickMe1' type='list' sort='{{ sort1 }}'>
+		    <button type="button" ng-click="clickFn(word.word)">{{ word.word }}</button>
+	    </word-cloud>
+		<br /><br />
+		<div>Clicked word: <span ng-bind='word1' ng-init="word1 = ''"></span></div>
+		<div>
+			Sort by:<br />
+		    Size:<button ng-click="sort1 = 'asc'">Asc</button><button ng-click="sort1 = 'desc'">Desc</button><br />
+		    Word:<button ng-click="sort1 = 'alphaAsc'">Asc</button><button ng-click="sort1 = 'alphaDesc'">Desc</button><br />
+		</div>
+		<br />
+		<hr />
+		<h3>Cloud</h3>
+	    <word-cloud words='words' ng-click='clickMe2' type='cloud' sort='{{ sort2 }}'>
+		    <button type="button" ng-click="clickFn(word.word)">{{ word.word }}</button>
+	    </word-cloud>
+		<br /><br />
+		<div>Clicked word: <span ng-bind='word2' ng-init="word2 = ''"></span></div>
+		<div>
+			Sort by:<br />
+		    Size:<button ng-click="sort2 = 'asc'">Asc</button><button ng-click="sort2 = 'desc'">Desc</button><br />
+		    Word:<button ng-click="sort2 = 'alphaAsc'">Asc</button><button ng-click="sort2 = 'alphaDesc'">Desc</button><br />
+		</div>
+		<br />
+		<hr />
+		<h3>Data</h3>
+		<div ng-repeat='word in words'>
+			<label for="word">Word:</label><input name='word' type="text" ng-model='word.word' />
+			<label for="size">Size:</label><input name='size' type="text" ng-model='word.size' />
+			<button ng-click='removeWord(word)'>Remove</button>
+		</div>
+		<button ng-click="words.push({word:'',size:''})">Add word</button>
+    </div>
+	<script src="app/components/angular/angular.js"></script>
+    <script src="src/angular-word-cloud.js"></script>
+    <script>
+	    var doc = null;
+        angular.module('ExampleApp', ['vr.directives.wordCloud'])
+			.controller('MainCtrl', ['$scope', function($scope) {
+			    $scope.words = [ {word:'one',size: '16px'}, {word:'two',size:'13px'}, {word:'three',size:'20px'} ];
+			    $scope.clickMe1 = function(word) {
+				    return $scope.word1 = word;
+			    };
+			    $scope.clickMe2 = function(word) {
+				    return $scope.word2 = word;
+			    };
+			    $scope.sort1 = 'no';
+			    $scope.sort2 = 'no';
+			    $scope.removeWord = function(word) {
+					var index = $scope.words.indexOf(word);
+				    $scope.words.splice(index,1);
+			    };
+			}]);
+    </script>
+</body>
+</html>

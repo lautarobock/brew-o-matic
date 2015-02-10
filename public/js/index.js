@@ -26,7 +26,8 @@
                                 'env',
                                 'observer',
                                 'print',
-                                'gt.listview']);
+                                'gt.listview',
+                                'vr.directives.wordCloud']);
 
     index.
         config(['$routeProvider', function($routeProvider) {
@@ -58,7 +59,7 @@
     }]);
 
     index.controller("HomeCtrl",function($scope,$rootScope,User,Recipe,$routeParams) {
-        
+
         $scope.$watch('user',function() {
             //$scope.notifications = Notification.query($scope.updateCount);
             $scope.viewUser = User.get({id:$routeParams.userId},function() {
@@ -70,10 +71,10 @@
                     title: $scope.viewUser.name
                 }];
             });
-            
+
             $scope.recipes = Recipe.findByUser({id:$routeParams.userId});
         });
-        
+
         $scope.addFavorites = function(recipe) {
             User.addToFavorites(recipe,function(user) {
                 $rootScope.user.favorites = user.favorites;
@@ -84,12 +85,12 @@
             User.removeFromFavorites(recipe,function(user) {
                 $rootScope.user.favorites = user.favorites;
             });
-        };        
-        
-    });    
-    
+        };
+
+    });
+
     var notification = angular.module("notification",[]);
-    
+
     notification.factory("notificationData", function() {
         return {
             listener: null,
@@ -100,11 +101,11 @@
             }
         };
     });
-    
+
     notification.controller("NotificationsCtrl",function($scope,Notification,$rootScope,notificationData) {
-        
+
         notificationData.reset();
-        
+
         $scope.updateCount = function(notifications) {
             $scope.countUnread = 0;
             $scope.countNew = 0;
@@ -129,7 +130,7 @@
             link: '#',
             title: 'Notificaciones'
         }];
-        
+
         $scope.markAsRead = function(notification) {
             if ( notification.status != 'read' ) {
                 notification.status = 'read';
@@ -137,25 +138,25 @@
                 $scope.updateCount($scope.notifications);
             }
         };
-        
+
         $scope.statusClass = function(notification) {
-            if ( notification.status == 'unread') { 
+            if ( notification.status == 'unread') {
                 return 'gt-notification-unread';
             } else if ( notification.status == 'new') {
                 return 'gt-notification-new';
             }
             return '';
         };
-        
+
         //$rootScope.notificationCount = 0;
         //$rootScope.notificationClass = '';
-        
+
     });
-    
+
 
     index.controller("MainController",function($scope,$rootScope,User) {
         $rootScope.breadcrumbs = [];
-        
+
         $scope.login = function() {
             googleSignIn();
         };
@@ -178,7 +179,7 @@
         $scope.closeForEver = function(info, index) {
             $scope.user.settings[info.id] = true;
             User.updateSettings($scope.user, function() {
-                $scope.infos.splice(index,1);    
+                $scope.infos.splice(index,1);
             });
         }
 
@@ -193,7 +194,7 @@
             }
         })
     });
-    
+
 
     var alerts = angular.module("alerts",[]);
 
@@ -220,7 +221,7 @@
     });
 
 
-    
+
     index.run(function($rootScope,version,$filter,$location,BrewCalc,env,color,alertFactory,BrewHelper,$templateCache) {
 
         $rootScope.$templateCache = $templateCache;
@@ -232,7 +233,7 @@
         $rootScope.version = version;
 
         $rootScope.env = env;
-        
+
         $rootScope.color = color;
 
         $rootScope.getAlerts = function() {
@@ -242,11 +243,11 @@
         $rootScope.encodeName = function(name) {
             return encodeURIComponent(name);
         };
-        
+
         $rootScope.sharedUrl = function(_id) {
             return 'http://'+$location.host() + ":" + $location.port() + '/share.html#/' + _id;
         };
-        
+
         $rootScope.formatDate = function(date) {
             return util.formatDate(date, $filter('date'))
         };
