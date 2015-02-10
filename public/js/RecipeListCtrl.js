@@ -11,7 +11,7 @@
             }
         };
     });
-    
+
     index.filter("filterFavorites",function() {
         return function(list, favorites) {
             var ret = [];
@@ -20,7 +20,7 @@
                     if ( favorites.indexOf(recipe._id) != -1) {
                         ret.push(recipe);
                     }
-                });     
+                });
             }
             return ret;
         }
@@ -59,9 +59,9 @@
                 $scope.stats = Recipe.stats();
             }
         });
-        
+
     });
-    
+
     index.controller("RecipeFavoriteCtrl", function ($scope,$rootScope,Recipe,User,sortData) {
 
         $scope.sort = sortData("NAME","");
@@ -80,15 +80,15 @@
                 $scope.stats = Recipe.stats();
             }
         });
-        
+
         $scope.removeFavorites = function(recipe) {
             User.removeFromFavorites(recipe,function(user) {
                 $rootScope.user.favorites = user.favorites;
             });
         };
-        
+
     });
-    
+
     index.controller("RecipePublicCtrl", function ($scope,$rootScope,$location,Recipe,User,sortData,Style,Tag, PublishedRecipe,$templateCache,BrewHelper) {
 
         $scope.published = PublishedRecipe;
@@ -147,7 +147,7 @@
         };
 
         $scope.config = {
-            pageSize: 10,
+            name: 'recipes.public',
             filterOrder: ['[STYLE.NAME]'],
             filterColSpan: 6,
             plural: 'Recetas',
@@ -180,7 +180,7 @@
                 showUrl: function($model, header) {
                     if ( !header.user() ) return '';
                     if ( $model.owner._id == header.user()._id ) {
-                        return '#/recipe/edit/' + $model._id;    
+                        return '#/recipe/edit/' + $model._id;
                     } else {
                         return $scope.sharedUrl($model._id);
                     }
@@ -259,7 +259,7 @@
                 delete val.value;
             });
         };
-        
+
         $rootScope.$watch('user',function(user) {
             if ( user ) {
                 // $scope.published = PublishedRecipe;
@@ -267,7 +267,7 @@
                 // skip += 10;
             }
         });
-        
+
         $rootScope.breadcrumbs = [{
             link: '#',
             title: 'Home'
@@ -275,7 +275,7 @@
             link: '#',
             title: 'Recetas Publicadas'
         }];
-        
+
         $scope.addFavorites = function(recipe) {
             User.addToFavorites(recipe,function(user) {
                 $rootScope.user.favorites = user.favorites;
@@ -375,7 +375,7 @@
         };
 
         $scope.config = {
-            pageSize: 10,
+            name: 'recipes.mines',
             filterOrder: ['[STYLE.NAME]'],
             filterColSpan: 6,
             plural: 'Recetas',
@@ -388,7 +388,7 @@
                                 '{{$model.NAME}}' +
                             '</a>' +
                             '<show-tags item-click="header.filterByTag" tags="$model.tags"></show-tags>');
-        
+
         $templateCache.put('recipe-code.html',
                             '<a ng-href="{{header.showUrl($model, header)}}">' +
                                 '{{$model.code}}' +
@@ -398,7 +398,7 @@
                                 '{{$model.CALCCOLOUR|number:0}}' +
                             '</div>');
 
-        $templateCache.put('recipe-publish.html', 
+        $templateCache.put('recipe-publish.html',
             '<a href="" ng-click="header.publish($model)" type="button" class="btn btn-success btn-xs" ng-hide="$model.isPublic" title="Compartir la receta con el resto de los cerveceros">' +
                 '<span class="glyphicon glyphicon-cloud-upload"></span>' +
                  'publicar' +
@@ -448,7 +448,7 @@
                 showUrl: function($model, header) {
                     if ( !header.user() ) return '';
                     if ( $model.owner._id == header.user()._id ) {
-                        return '#/recipe/edit/' + $model._id;    
+                        return '#/recipe/edit/' + $model._id;
                     } else {
                         return $scope.sharedUrl($model._id);
                     }
@@ -512,7 +512,7 @@
                         $timeout(function() {
                             $scope.recipes = $scope.config.control.refresh();
                         },500);
-                    });   
+                    });
                 }
             }
         ];
@@ -543,7 +543,7 @@
                 return '';
             }
         };
-        
+
         $rootScope.breadcrumbs = [{
             link: '#',
             title: 'Home'
@@ -555,11 +555,11 @@
                 $scope.stats = Recipe.stats();
             }
         });
-        
+
         $scope.confirmationID = function(id) {
             return 'confirmation' + id.replace('(','_').replace(')','_');
         };
-        
+
         $scope.removeRecipe = function(_id) {
             Recipe.remove({id:_id}, function() {
                 $('#'+$scope.confirmationID(_id)).modal('hide');
@@ -567,9 +567,9 @@
                     $scope.recipes = Recipe.query();
                 },500);
             });
-            
+
         };
-        
+
     });
 
 })();
