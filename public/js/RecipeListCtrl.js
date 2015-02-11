@@ -155,18 +155,30 @@
             searchCriteriaLabel: 'Buscar'
         };
 
-        $templateCache.put('recipe-srm.html',
-                            '<div title="SRM {{$model.CALCCOLOUR|number:0}}" style="text-align: center;border: 1px solid {{header.convertColor($model.CALCCOLOUR)}}; height: 20px; background-color: {{header.convertColor($model.CALCCOLOUR)}};color:{{header.complementary(header.convertColor($model.CALCCOLOUR))}};border-radius: 3px;">' +
-                                '{{$model.CALCCOLOUR|number:0}}' +
-                            '</div>');
+        $templateCache.put(
+            'recipe-srm.html',
+            '<div title="SRM {{$model.CALCCOLOUR|number:0}}" style="text-align: center;border: 1px solid {{header.convertColor($model.CALCCOLOUR)}}; height: 20px; background-color: {{header.convertColor($model.CALCCOLOUR)}};color:{{header.complementary(header.convertColor($model.CALCCOLOUR))}};border-radius: 3px;">' +
+                '{{$model.CALCCOLOUR|number:0}}' +
+            '</div>'
+        );
 
-        $templateCache.put('recipe-name.html',
-                            '<a ng-href="{{header.showUrl($model, header)}}">' +
-                                '{{$model.NAME}}' +
-                            '</a>' +
-                            '<show-tags item-click="header.filterByTag" tags="$model.tags"></show-tags>');
+        $templateCache.put(
+            'recipe-name.html',
+            '<a ng-href="{{header.showUrl($model, header)}}">' +
+                '{{$model.NAME}}' +
+            '</a>' +
+            '<show-tags item-click="header.filterByTag" tags="$model.tags"></show-tags>'
+        );
 
-        $scope.headers = [{
+        $templateCache.put(
+            'recipe-style.html',
+            '<a href="#/public?style={{$model.STYLE.NAME}}">' +
+                '{{$model.STYLE.NAME}}' +
+            '</a>'
+        );
+
+        $scope.headers = [
+            {
                 field:'NAME',
                 caption: 'Nombre',
                 tooltip: 'Nombre de la receta',
@@ -185,9 +197,13 @@
                         return $scope.sharedUrl($model._id);
                     }
                 }
+            // },{
+            //     field: 'STYLE.NAME',
+            //     caption: 'Estilo'
             },{
                 field: 'STYLE.NAME',
-                caption: 'Estilo'
+                caption: 'Estilo',
+                templateUrl: 'recipe-style.html'
             },{
                 field: 'CALCCOLOUR',
                 caption: 'Color',
@@ -248,6 +264,11 @@
             data: Style.query(),
             orderBy: 'name'
         };
+
+        //Take filter from showUrl
+        if ( $location.$$search.style ) {
+            $scope.filterData['[STYLE.NAME]'].value = $location.$$search.style;
+        }
 
         $scope.filterByTag = function(tag) {
             // window.location.href = '/#/public?tags=' + tag;
