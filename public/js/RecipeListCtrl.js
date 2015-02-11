@@ -147,7 +147,7 @@
         };
 
         $scope.config = {
-            pageSize: 10,
+            name: 'recipes.public',
             filterOrder: ['[STYLE.NAME]'],
             filterColSpan: 6,
             plural: 'Recetas',
@@ -413,7 +413,7 @@
         };
 
         $scope.config = {
-            pageSize: 10,
+            name: 'recipes.mines',
             filterOrder: ['[STYLE.NAME]'],
             filterColSpan: 6,
             plural: 'Recetas',

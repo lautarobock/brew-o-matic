@@ -1,6 +1,6 @@
 {
   "name": "ng-util",
-  "version": "0.0.16",
+  "version": "0.0.20",
   "homepage": "https://github.com/lautarobock/ng-util",
   "authors": [
     "Lautaro <lautaromail@gmail.com>"
@@ -14,13 +14,14 @@
     "test",
     "tests"
   ],
-  "_release": "0.0.16",
+  "_release": "0.0.20",
   "_resolution": {
     "type": "version",
-    "tag": "0.0.16",
-    "commit": "5d98d6946251b8a0723498bb63f44d72c0403669"
+    "tag": "0.0.20",
+    "commit": "aa1521b5a2621a67f77172e7a6f0a32cfdce9bbb"
   },
-  "_source": "git://github.com/lautarobock/ng-util.git",
-  "_target": "~0.0.10",
-  "_originalSource": "lautarobock-ng-util"
+  "_source": "https://github.com/lautarobock/ng-util.git",
+  "_target": "~0.0.20",
+  "_originalSource": "https://github.com/lautarobock/ng-util.git",
+  "_direct": true
 }
