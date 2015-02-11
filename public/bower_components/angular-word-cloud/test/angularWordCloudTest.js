@@ -26,12 +26,12 @@ describe("Word Cloud Directive", function() {
 			});
 
 			it('should add the elements to the dom', function() {
-				expect(element).toBeTag('DIV');
-				expect(element).toHaveClass('word-cloud-group');
+				// expect(element).toBeTag('DIV');
+				expect(element.hasClass('word-cloud-group')).toBeTruthy();
 
 				var words = element.find('span');
 				expect(words.length).toBe(3);
-				expect(words.eq(0)).toHaveClass('word-cloud-group-item');
+				expect(words.eq(0).hasClass('word-cloud-group-item')).toBeTruthy();
 				expect(words.eq(0).attr('style')).toBe(undefined);
 				expect(words.eq(0).find('a').text()).toBe('one');
 				expect(words.eq(1).find('a').text()).toBe('two');
@@ -93,6 +93,33 @@ describe("Word Cloud Directive", function() {
 
 	describe('with an array', function() {
 
+		describe('using custom properties', function() {
+			beforeEach(function() {
+				$rootScope.words = [
+					{word:'one',size:1, custom: 'value one'},
+					{word:'two',size:3, custom: 'value two'},
+					{word:'three',size:2, custom: 'value three'}
+				];
+
+				/*jshint quotmark: double */
+				element = $compile(
+					"<word-cloud words='words' type='list'>" +
+						"<p>" +
+							"{{ word.word }}-{{ word.custom }}" +
+						"</p>" +
+					"</word-cloud>")($rootScope);
+
+				$rootScope.$digest();
+			});
+
+			it('should use ', function() {
+				var buttons = element.find('span');
+				expect(buttons.eq(0).find('p').text()).toBe('one-value one');
+				expect(buttons.eq(1).find('p').text()).toBe('two-value two');
+				expect(buttons.eq(2).find('p').text()).toBe('three-value three');
+			});
+		});
+
 		describe('using integer sizes', function() {
 
 			beforeEach(function() {
@@ -115,8 +142,8 @@ describe("Word Cloud Directive", function() {
 
 				it('should not set the size of the buttons individually', function() {
 					//expect(element.find('span').eq(0).css('font-size')).not.toBeOneOf(['1em','16px']);
-					expect(element.find('span').eq(1).css('font-size')).not.toBeOneOf(['3em','48px']);
-					expect(element.find('span').eq(2).css('font-size')).not.toBeOneOf(['2em','32px']);
+					expect(['3em','48px'].indexOf(element.find('span').eq(1).css('font-size')) === -1);
+					expect(['2em','32px'].indexOf(element.find('span').eq(2).css('font-size')) === -1);
 				});
 
 			});
@@ -179,15 +206,16 @@ describe("Word Cloud Directive", function() {
 
 				it('should keep the words in the order they came in', function() {
 					var buttons = element.find('span');
+					expect(buttons.length).toBe(3);
 					expect(buttons.eq(0).find('p').text()).toBe('one');
 					expect(buttons.eq(1).find('p').text()).toBe('two');
 					expect(buttons.eq(2).find('p').text()).toBe('three');
 				});
 
 				it('should set the size of the buttons individually', function() {
-					expect(element.find('span').eq(0).css('font-size')).toBeOneOf(['1em','16px']);
-					expect(element.find('span').eq(1).css('font-size')).toBeOneOf(['3em','48px']);
-					expect(element.find('span').eq(2).css('font-size')).toBeOneOf(['2em','32px']);
+					expect(['1em','16px'].indexOf(element.find('span').eq(0).css('font-size')) !== -1);
+					expect(['3em','48px'].indexOf(element.find('span').eq(1).css('font-size')) !== -1);
+					expect(['2em','32px'].indexOf(element.find('span').eq(2).css('font-size')) !== -1);
 				});
 
 			});
@@ -207,9 +235,9 @@ describe("Word Cloud Directive", function() {
 				});
 
 				it('should set the size of the buttons individually', function() {
-					expect(element.find('span').eq(0).css('font-size')).toBeOneOf(['1em','16px']);
-					expect(element.find('span').eq(1).css('font-size')).toBeOneOf(['2em','32px']);
-					expect(element.find('span').eq(2).css('font-size')).toBeOneOf(['3em','48px']);
+					expect(['1em','16px'].indexOf(element.find('span').eq(0).css('font-size')) !== -1);
+					expect(['2em','32px'].indexOf(element.find('span').eq(1).css('font-size')) !== -1);
+					expect(['3em','48px'].indexOf(element.find('span').eq(2).css('font-size')) !== -1);
 				});
 
 			});
@@ -229,9 +257,9 @@ describe("Word Cloud Directive", function() {
 				});
 
 				it('should set the size of the buttons individually', function() {
-					expect(element.find('span').eq(0).css('font-size')).toBeOneOf(['3em','48px']);
-					expect(element.find('span').eq(1).css('font-size')).toBeOneOf(['2em','32px']);
-					expect(element.find('span').eq(2).css('font-size')).toBeOneOf(['1em','16px']);
+					expect(['3em','48px'].indexOf(element.find('span').eq(0).css('font-size')) !== -1);
+					expect(['2em','32px'].indexOf(element.find('span').eq(1).css('font-size')) !== -1);
+					expect(['1em','16px'].indexOf(element.find('span').eq(2).css('font-size')) !== -1);
 				});
 
 			});

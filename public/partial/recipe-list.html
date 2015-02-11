@@ -22,8 +22,8 @@
     </div>
     <div class="panel-body" >
         <word-cloud words="tags" type="list" ng-click="filterByTag">
-            <button class="btn btn-primary btn-xs" style="margin: 2px 0" ng-click="clickFn(word)">
-                {{ word.word }}
+            <button ng-class="word.color" class="btn btn-xs" style="margin: 2px 0" ng-click="clickFn(word)">
+                {{ word.word }} ({{word.count}})
             </button>
         </word-cloud>
     </div>

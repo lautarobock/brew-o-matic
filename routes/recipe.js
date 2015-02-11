@@ -34,7 +34,7 @@ exports.findCollaborated = function (req, res) {
 
 exports.findPublic = function(req, res) {
     var filter = processFilter(req.query.filter);
-    
+
     filter = filter||{};
     filter.isPublic = true;
 
@@ -47,7 +47,7 @@ exports.findPublic = function(req, res) {
         .populate('owner','name _id')
         .exec(function(err,results) {
             res.send(results);
-    });    
+    });
 };
 
 exports.countPublic = function(req, res) {
@@ -60,7 +60,7 @@ exports.countPublic = function(req, res) {
     model.Recipe.count(filter)
         .exec(function(err,results) {
             res.send({count:results});
-    });    
+    });
 };
 
 // exports.countPublic = function (req, res) {
@@ -74,17 +74,17 @@ exports.countPublic = function(req, res) {
 exports.findByUser = function(req, res) {
     model.Recipe.find({owner:req.params.id,isPublic:true}).sort('-publishDate').exec(function(err,results) {
         res.send(results);
-    });        
+    });
 };
 
 // exports.findAll = function(req, res) {
 //     model.Recipe.find({owner:req.session.user_id}).sort('-date').exec(function(err,results) {
 //         res.send(results);
-//     });    
+//     });
 // };
 exports.findAll = function(req, res) {
     var filter = processFilter(req.query.filter);
-    
+
     filter = filter||{};
     filter.owner = req.session.user_id;
 
@@ -96,7 +96,7 @@ exports.findAll = function(req, res) {
         .populate('owner','name _id')
         .exec(function(err,results) {
             res.send(results);
-    });    
+    });
 };
 
 exports.countAll = function(req, res) {
@@ -109,7 +109,23 @@ exports.countAll = function(req, res) {
     model.Recipe.count(filter)
         .exec(function(err,results) {
             res.send({count:results});
-    });    
+    });
+};
+
+exports.myTags = function(req, res) {
+    model.Recipe.aggregate([
+        {$match:{tags:{$exists:true},owner:'5245bff54b11374753000005' }},
+        {$unwind:'$tags'},
+        {$group:{_id:'$tags',total:{$sum:1}}},
+        {$sort:{total:-1}}],
+        function(err, result) {
+            if ( err ) {
+                res.status(500).send(err);
+            } else {
+                res.send(result);
+            }
+        }
+    );
 };
 
 exports.get = function(req, res) {
@@ -128,7 +144,7 @@ exports.remove= function(req, res) {
     model.Recipe.findByIdAndRemove(req.params.id,function(err,results) {
         res.send(results);
         actions.log(req.session.user_id, "REMOVE_RECIPE","NAME: '"+results.NAME+"'. recipe_id: "+results._id);
-    });    
+    });
 };
 
 
@@ -150,11 +166,11 @@ exports.addComment = function(req,res) {
             res.send(recipe.comments);
             require("./push").emit("RECIPE_COMMENT_ADD_" + recipe._id,newComment);
         });
-        
-        
+
+
         //LOG action
         actions.log(req.session.user_id, "ADD_COMMENT","NAME: '"+recipe.NAME+"'. recipe_id: "+recipe._id);
-        
+
         //Add Notification
         notifications.notifyCommentOnRecipe(
             recipe.owner,
@@ -180,13 +196,13 @@ exports.deleteComment = function(req,res) {
             res.send(recipe.comments);
             require("./push").emit("RECIPE_COMMENT_REMOVE_" + recipe._id,req.body.comment);
         });
-        
+
         actions.log(req.session.user_id, "REMOVE_COMMENT","NAME: '"+recipe.NAME+"'. recipe_id: "+recipe._id);
     });
 };
 
 exports.save = function(req, res) {
-    
+
     function callback(err,s){
         if (err) {
             console.log("error", err);
@@ -195,7 +211,7 @@ exports.save = function(req, res) {
         notifications.notifyUpdateFavorite(s);
         notifications.notifyUpdateCollaborators(s,req.session.user_id,req.session.user_name);
         res.send(s);
-        
+
         //Update tags
         for (var i=0; i<s.tags.length; i++) {
             var tag = new model.Tag({_id:s.tags[i]});
@@ -217,7 +233,7 @@ exports.save = function(req, res) {
             user_name: req.session.user_name
         });
         recipe.save(callback);
-        
+
         /**
          * Si la estoy clonando de otra, debo hacerle update para
          * poner que fue clonada por mi.
@@ -240,7 +256,7 @@ exports.save = function(req, res) {
         }
         notifications.notifyNewCollaborators(recipe,recipe.collaborators);
     } else {
-        
+
 
         var id = req.body._id;
         delete req.body._id;
@@ -259,7 +275,7 @@ exports.save = function(req, res) {
             if ( old.owner != req.session.user_id ) {
                 if ( old.collaborators.indexOf(req.session.user_id) == -1 ) {
                     res.send(500,{error: "No tiene permisos para modificar esta receta"});
-                    return;   
+                    return;
                 }
             }
 
@@ -314,7 +330,7 @@ exports.save = function(req, res) {
 
         actions.log(req.session.user_id, "UPDATE_RECIPE","NAME: '"+req.body.NAME+"'. recipe_id: "+id);
     }
-    
+
 };
 
 exports.publish = function(req, res) {
@@ -381,7 +397,7 @@ exports.fireFermentationNotification = function() {
                 var previousStage = null;
                 for ( var j=0; j<recipe.fermentation.stages.length; j++ ) {
                     var stage = recipe.fermentation.stages[j];
-                    
+
                     if ( !stage.alertDone && timeFromEstimate<=nowTime ) {
                         console.log("ESTA VA:",recipe._id,stage);
 
@@ -395,7 +411,7 @@ exports.fireFermentationNotification = function() {
                             recipe.NAME,
                             previousStage,
                             stage);
-                    }    
+                    }
 
                     if ( stage.durationMode && stage.duration ) {
                         if ( stage.durationMode == 'Horas' ) {

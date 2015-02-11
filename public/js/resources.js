@@ -36,6 +36,7 @@
             findCollaborated: {method:'GET',params: {operation:'collaborated'}, isArray:true },
             publish: {method:'POST', params: {operation: 'publish_'}},
             count: {method:'GET', params: {operation:'my_count'}, isArray:false},
+            tags: {method:'GET', params: {operation:'my_tags'}, isArray:true},
             findByUser: {method:'GET',params: {operation:'by_user_'},isArray:true},
             stats: {method:'GET',params: {operation:'stats'}},
             addComment: {

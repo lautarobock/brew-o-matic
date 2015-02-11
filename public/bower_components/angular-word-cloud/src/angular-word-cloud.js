@@ -68,11 +68,14 @@ angular.module('vr.directives.wordCloud',[])
 							words = [];
 						}
 
-						words = words.map(function(e) { return {word: e.word, size: e.size, rawSize: parseFloat(e.size) }; });
+						words = words.map(function(e) {
+							e.rawSize = parseFloat(e.size);
+							return e;
+						});
 
 						scope.mywords = words;
-					};
 
+					};
 					scope.fontSize = function(size) {
 						if((''+size).search("(px|em|in|cm|mm|ex|pt|pc|%)+") == -1) {
 							return size+'em';

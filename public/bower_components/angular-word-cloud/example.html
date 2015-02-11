@@ -25,7 +25,7 @@
 	<div id='container' ng-controller="MainCtrl">
 		<h3>List</h3>
 	    <word-cloud words='words' ng-click='clickMe1' type='list' sort='{{ sort1 }}'>
-		    <button type="button" ng-click="clickFn(word.word)">{{ word.word }}</button>
+		    <button type="button" ng-click="clickFn(word.word)">{{ word.word }}({{word.custom}})</button>
 	    </word-cloud>
 		<br /><br />
 		<div>Clicked word: <span ng-bind='word1' ng-init="word1 = ''"></span></div>
@@ -63,7 +63,11 @@
 	    var doc = null;
         angular.module('ExampleApp', ['vr.directives.wordCloud'])
 			.controller('MainCtrl', ['$scope', function($scope) {
-			    $scope.words = [ {word:'one',size: '16px'}, {word:'two',size:'13px'}, {word:'three',size:'20px'} ];
+			    $scope.words = [
+                    {word:'one',size: '16px',custom:'I'},
+                    {word:'two',size:'13px',custom:'II'},
+                    {word:'three',size:'20px',custom:'III'} 
+                ];
 			    $scope.clickMe1 = function(word) {
 				    return $scope.word1 = word;
 			    };

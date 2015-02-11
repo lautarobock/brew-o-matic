@@ -103,6 +103,7 @@ app.get('/recipe/comment:id',recipe.getComments);
 app.post('/recipe/publish_:id',filter,recipe.publish);
 app.put('/recipe/remove_comment',filter,recipe.deleteComment);
 app.get('/recipe/my_count',filter,recipe.countAll);
+app.get('/recipe/my_tags',filter,recipe.myTags);
 app.get('/recipe',filter,recipe.findAll);
 app.get('/recipe/stats',filter,recipe.stats);
 app.get('/recipe/by_user_:id',filter,recipe.findByUser);
@@ -118,7 +119,7 @@ app.get('/rating/beers',rating.findBeers);
 var services = ['Style','Grain','Hop','Yeast','Misc','Bottle','Tag','WaterReport','TempDevice','TempDeviceReport'];
 for (s in services ) {
   app.get('/' + services[s].toLowerCase(),data[services[s]].findAll);
-  app.get('/' + services[s].toLowerCase()+ "/:id", data[services[s]].findById)
+  app.get('/' + services[s].toLowerCase()+ "/:id", data[services[s]].findById);
   app.post('/' + services[s].toLowerCase() + "/:id",data[services[s]].save);
   app.post('/' + services[s].toLowerCase(),data[services[s]].save);
   app.delete('/' + services[s].toLowerCase()+ "/:id",data[services[s]].remove);

@@ -322,13 +322,13 @@
         // $scope.sort = sortData("code","-");
 
         $scope.tags = [];
-        $scope.tagColor = TagColor;
-        Tag.query(function(tags) {
-            tags.forEach(function(tags,i) {
+        Recipe.tags(function(tags) {
+            tags.forEach(function(tag,i) {
                 $scope.tags.push({
-                    word:tags._id,
-                    size: i + 'px',
-                    color: 'btn-primary'
+                    word:tag._id,
+                    size: tag.total + 'px',
+                    count: tag.total,
+                    color: TagColor(tag._id)
                 });
             });
         });
