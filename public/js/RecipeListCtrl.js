@@ -184,7 +184,7 @@
 
         $templateCache.put(
             'recipe-style.html',
-            '<a href="#/public?style={{$model.STYLE.NAME}}">' +
+            '<a href="" ng-click="header.filter($model.STYLE.NAME)">' +
                 '{{$model.STYLE.NAME}}' +
             '</a>'
         );
@@ -212,7 +212,10 @@
             },{
                 field: 'STYLE.NAME',
                 caption: 'Estilo',
-                templateUrl: 'recipe-style.html'
+                templateUrl: 'recipe-style.html',
+                filter: function(name) {
+                    $scope.filterByStyle(name);
+                }
             },{
                 field: 'CALCCOLOUR',
                 caption: 'Color',
@@ -278,10 +281,10 @@
         if ( $location.$$search.style ) {
             $scope.filterData['[STYLE.NAME]'].value = $location.$$search.style;
         }
-        // $scope.filterByStyle = function(name) {
-        //     $scope.filterData['[STYLE.NAME]'].value = name;
-        //     $scope.config.control.refresh();
-        // };
+        $scope.filterByStyle = function(name) {
+            $scope.filterData['[STYLE.NAME]'].value = name;
+            $scope.config.control.refresh();
+        };
 
         $scope.stylesCloud = Recipe.publicStyles();
 
