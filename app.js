@@ -97,6 +97,7 @@ app.put('/user/settings',filter,user.updateSettings);
 app.get('/stats',filter,stats.all);
 app.get('/recipe/public',filter,recipe.findPublic);
 app.get('/recipe/public_count',filter,recipe.countPublic);
+app.get('/recipe/public_styles',filter,recipe.publicStyles);
 app.get('/recipe/collaborated',filter,recipe.findCollaborated);
 app.put('/recipe/comment',filter,recipe.addComment);
 app.get('/recipe/comment:id',recipe.getComments);

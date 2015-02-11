@@ -113,11 +113,30 @@ exports.countAll = function(req, res) {
 };
 
 exports.myTags = function(req, res) {
-    model.Recipe.aggregate([
-        {$match:{tags:{$exists:true},owner:'5245bff54b11374753000005' }},
-        {$unwind:'$tags'},
-        {$group:{_id:'$tags',total:{$sum:1}}},
-        {$sort:{total:-1}}],
+    model.Recipe.aggregate(
+        [
+            {$match:{tags:{$exists:true},owner:req.session.user_id }},
+            {$unwind:'$tags'},
+            {$group:{_id:'$tags',total:{$sum:1}}},
+            {$sort:{total:-1}}
+        ],
+        function(err, result) {
+            if ( err ) {
+                res.status(500).send(err);
+            } else {
+                res.send(result);
+            }
+        }
+    );
+};
+
+exports.publicStyles = function(req, res) {
+    model.Recipe.aggregate(
+        [
+            {$match:{'STYLE.NAME':{$exists:true},'isPublic':true }},
+            {$group:{_id:'$STYLE.NAME',total:{$sum:1}}},
+            {$sort:{total:-1}}
+        ],
         function(err, result) {
             if ( err ) {
                 res.status(500).send(err);

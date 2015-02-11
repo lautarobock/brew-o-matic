@@ -89,7 +89,19 @@
 
     });
 
-    index.controller("RecipePublicCtrl", function ($scope,$rootScope,$location,Recipe,User,sortData,Style,Tag, PublishedRecipe,$templateCache,BrewHelper) {
+    index.controller("RecipePublicCtrl", function (
+        $scope,
+        $rootScope,
+        $location,
+        Recipe,
+        User,
+        sortData,
+        Style,
+        Tag,
+        PublishedRecipe,
+        $templateCache,
+        BrewHelper
+    ) {
 
         $scope.published = PublishedRecipe;
 
@@ -257,12 +269,12 @@
             type: 'combo',
             comparator: 'equal',
             getLabel: function(value) {
-                return value.name;
+                return value._id + ' (' + value.total + ')';
             },
-            valueKey: 'name',
+            valueKey: '_id',
             ignoreCase: false,
-            data: Style.query(),
-            orderBy: 'name'
+            data: Recipe.publicStyles(),
+            orderBy: '_id'
         };
 
         //Take filter from showUrl
