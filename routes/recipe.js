@@ -133,9 +133,24 @@ exports.myTags = function(req, res) {
 exports.publicStyles = function(req, res) {
     model.Recipe.aggregate(
         [
-            {$match:{'STYLE.NAME':{$exists:true},'isPublic':true }},
-            {$group:{_id:'$STYLE.NAME',total:{$sum:1}}},
-            {$sort:{total:-1}}
+            {
+                $match: {
+                    'STYLE.NAME': {
+                        $exists: true,
+                        $ne: ''
+                    },
+                    'isPublic': true
+                }
+            },
+            {
+                $group:{
+                    _id: '$STYLE.NAME',
+                    total: { $sum:1 }
+                }
+            },
+            {
+                $sort: { total:-1 }
+            }
         ],
         function(err, result) {
             if ( err ) {

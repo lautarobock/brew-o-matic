@@ -13,6 +13,20 @@
     </li>
 </ul>
 <div ng-cloak>
+    <div class="panel panel-default">
+        <div class="panel-body" >
+
+            <word-cloud words="styles" type="cloud" ng-click="filterByStyle">
+                <span class="label label-info" ng-show="word.getStyle()===word.word">{{ word.word }}</span>
+                <a href="#/public?style={{word.word}}"
+                    ng-hide="word.getStyle()===word.word"
+                    ng-click="clickFn(word.word)"
+                    tooltip="Mostrar {{word.count}} recetas">
+                    {{ word.word }}
+                </a>
+            </word-cloud>
+        </div>
+    </div>
     <listview ng-if="user"
           listview-data="published"
           listview-sort="sort"

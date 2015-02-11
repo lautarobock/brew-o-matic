@@ -209,9 +209,6 @@
                         return $scope.sharedUrl($model._id);
                     }
                 }
-            // },{
-            //     field: 'STYLE.NAME',
-            //     caption: 'Estilo'
             },{
                 field: 'STYLE.NAME',
                 caption: 'Estilo',
@@ -281,10 +278,29 @@
         if ( $location.$$search.style ) {
             $scope.filterData['[STYLE.NAME]'].value = $location.$$search.style;
         }
+        // $scope.filterByStyle = function(name) {
+        //     $scope.filterData['[STYLE.NAME]'].value = name;
+        //     $scope.config.control.refresh();
+        // };
 
+        $scope.stylesCloud = Recipe.publicStyles();
+
+        //Style stylesCloud
+        $scope.styles = [];
+        Recipe.publicStyles(function(styles) {
+            styles.forEach(function(style,i) {
+                $scope.styles.push({
+                    word:style._id,
+                    size: (style.total+10) + 'px',
+                    count: style.total,
+                    getStyle: function() {
+                        return $scope.filterData['[STYLE.NAME]'].value;
+                    }
+                });
+            });
+        });
         $scope.filterByTag = function(tag) {
-            // window.location.href = '/#/public?tags=' + tag;
-            console.log(tag);
+            $scope.config.searchCriteria = tag.word;
         };
 
         $scope.reset = function() {
