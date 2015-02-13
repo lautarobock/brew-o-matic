@@ -2,14 +2,14 @@
     var index = angular.module('index');
 
     index.controller("RecipeDetailHopAmountCtrl",function($scope) {
-        
+
         $scope.$watch("hop.AMOUNT",function() {
             $scope.amountGrs=$scope.hop.AMOUNT*1000;
         });
-        
+
         $scope.amountGrs=$scope.hop.AMOUNT*1000;
     });
-    
+
     index.controller("RecipeDetailCtrl",
                      function (
                                $scope,
@@ -32,11 +32,12 @@
                                alertFactory,
                                TagColor,
                                CalculatorPopup,
-                               PrintRecipePopup) {
+                               PrintRecipePopup,
+                               FermentableUses) {
 
-                               
+
         $scope.BrewHelper = BrewHelper;
-                               
+
         $rootScope.breadcrumbs = [{
             link: '#',
             title: 'Home'
@@ -50,21 +51,23 @@
         $scope.grains = Grain.query();
 
         $scope.hops = Hop.query();
-        
+
         $scope.hopUses = HopUse.query();
-        
+
         $scope.hopForms = HopForm.query();
 
         $scope.yeasts = Yeast.query();
-        
+
         $scope.miscs = Misc.query();
-        
+
         $scope.styles = Style.query();
-        
+
         $scope.miscTypes = MiscType.query();
-        
+
         $scope.miscUses = MiscUse.query();
-        
+
+        $scope.fermentableUses = FermentableUses.query();
+
         $scope.tags = Tag.query();
 
         $scope.openCalculatorOG = function() {
@@ -90,19 +93,19 @@
         };
 
         //Helper functions
-        
+
         $scope.round = function(value) {
             return Math.round(value);
         };
-        
+
         $scope.round1 = function(value) {
             return BrewHelper.round(value,10);
         };
-        
+
         $scope.round2 = function(value) {
             return BrewHelper.round(value,100);
         };
-        
+
         $scope.removeFermentable = function(fermentable) {
             var index = $scope.recipe["FERMENTABLES"]["FERMENTABLE"].indexOf(fermentable);
             $scope.recipe["FERMENTABLES"]["FERMENTABLE"].splice(index, 1);
@@ -139,7 +142,7 @@
         $scope.noUpdate = false;
         $scope.$watch("recipe.EFFICIENCY", function(newValue,oldValue) {
             if ( $scope.disableWatchs || !oldValue || !$scope.recipe ) return;
-        
+
             //Si se da esto es porque estoy fijando la OG
             if ( !$scope.recipe.fixIngredients || $scope.recipe.fixIngredients == '0' ) {
                 $scope.noUpdate = true;
@@ -152,29 +155,29 @@
 
         $scope.$watch("recipe.BATCH_SIZE", function(newValue,oldValue) {
             if ( $scope.disableWatchs || !oldValue || !$scope.recipe || !$scope.recipe.FERMENTABLES ) return;
-            
+
             if ( $scope.noUpdate ) {
                 $scope.noUpdate = false;
-                return; 
+                return;
             }
-            
+
             if ( !newValue || newValue == 0) {
                 $scope.tempAmount = oldValue;
                 return;
             }
-            
+
             //Entra si FIJO la OG
             if ( !$scope.recipe.fixIngredients || $scope.recipe.fixIngredients == '0' ) {
                 var cohef = newValue / oldValue;
-                
+
                 //Ajusto los ingredientes antes de re-hacer los calculos
-                
+
                 //Maltas
                 var newTotalAmount = $scope.recipe.totalAmount * cohef;
                 angular.forEach($scope.recipe.FERMENTABLES.FERMENTABLE,function(f) {
                     f.AMOUNT = BrewHelper.round((f.PERCENTAGE/100)*newTotalAmount,1000); ;
                 });
-                
+
                 //Lupulos
                 var newTotalHop = $scope.recipe.totalHop * cohef;
                 angular.forEach($scope.recipe.HOPS.HOP,function(hop) {
@@ -186,16 +189,21 @@
         });
 
 
-        
+
         /**
          * si fijo la OG, al aumentar los litros debo aumentar materiales en la misma proporcion.
          */
         $scope.changeAmount = function() {
             var amount = 0;
+            var amountMash = 0;
             angular.forEach($scope.recipe.FERMENTABLES.FERMENTABLE,function(f) {
                 amount += f.AMOUNT;
+                if ( FermentableUses.valueOf(f.USE).mash ) {
+                    amountMash += f.AMOUNT;
+                }
             });
             $scope.recipe.totalAmount = amount;
+            $scope.recipe.totalAmountMash = amountMash;
 
             //Percetajes
             angular.forEach($scope.recipe.FERMENTABLES.FERMENTABLE,function(f) {
@@ -218,7 +226,7 @@
             $scope.recipe.OG = BrewHelper.toPotential(og);
 
             //Calculo el agua para el macerado en
-            $scope.recipe.StrikeWater=BrewHelper.round($scope.recipe.WatertoGrainRatio*$scope.recipe.totalAmount,10);
+            $scope.recipe.StrikeWater=BrewHelper.round($scope.recipe.WatertoGrainRatio*$scope.recipe.totalAmountMash,10);
 
             $scope.changeHop();
         };
@@ -240,7 +248,7 @@
             });
             return utilization;
         }
-        
+
         $scope.hopIBU = function(hop) {
             var U = BrewHelper.calculateU($scope.recipe.OG,hop.TIME);
             var baseIBU = BrewHelper.toOz(hop.AMOUNT)*hop.ALPHA*U*(7489/100)/BrewHelper.toGal($scope.recipe.BATCH_SIZE);
@@ -253,7 +261,7 @@
             delete copy._id;
             $scope.recipe["HOPS"]["HOP"].push(copy);
             $scope.changeHop();
-        };  
+        };
 
         $scope.removeHop = function(hop) {
             var index = $scope.recipe["HOPS"]["HOP"].indexOf(hop);
@@ -275,7 +283,7 @@
         };
 
         $scope.suggests = [];
-        
+
         $scope.changeHop = function() {
             var amount = 0;
             var ibu = 0;
@@ -288,7 +296,7 @@
             $scope.recipe.totalHop = amount;
             $scope.recipe.CALCIBU = BrewHelper.round(ibu,10);
             $scope.changeYeast();
-            
+
         };
 
         $scope.changeYeast = function() {
@@ -351,7 +359,7 @@
                 AMOUNT: null
             });
         };
-        
+
         $scope.onChangeMisc = function(changed) {
             angular.forEach($scope.miscs,function(misc) {
                 if ( changed.NAME == misc.name) {
@@ -365,7 +373,7 @@
             var index = $scope.recipe.MISCS.MISC.indexOf(misc);
             $scope.recipe.MISCS.MISC.splice(index, 1);
         };
-        
+
         $scope.importEnabled = angular.isDefined(window.File)
             && angular.isDefined(window.FileReader)
             && angular.isDefined(window.FileList)
@@ -376,7 +384,7 @@
         //$scope.sharedUrl = function(_id) {
         //    return 'http://'+$location.host() + ":" + $location.port() + '/share.html#/' + _id;
         //};
-        
+
         $scope.bjcpLink = function(selected) {
             var link;
             angular.forEach($scope.styles,function(style) {
@@ -386,7 +394,7 @@
             });
             return link;
         };
-        
+
         $scope.relatedLink = function(selected) {
             var link;
             angular.forEach($scope.styles,function(style) {
@@ -411,7 +419,7 @@
                     $scope.recipe = new Recipe($scope.recipe);
                 }
                 $scope.recipe.BOIL_SIZE = $scope.BrewCalc.calculateBoilSize($scope.recipe.BATCH_SIZE, $scope.recipe.TrubChillerLosses, $scope.recipe.BOIL_TIME, $scope.recipe.PercentEvap, $scope.recipe.TopUpWater);
-                
+
                 $scope.saving = true;
                 $scope.recipe.$save(function(saved){
                     $scope.saving = false;
@@ -421,7 +429,7 @@
                         text:'Ya puedes acceder a esta receta desde cualquier lugar!'
                     });
                     alertFactory.create('success','Receta Guardada!');
-                    $location.path('/recipe/edit/' + saved._id) 
+                    $location.path('/recipe/edit/' + saved._id)
                 },function(error) {
                     if ( error.status == 501 ) {
                         alertFactory.create('warning',error.data.error,"Cuidado!");
@@ -442,7 +450,7 @@
                 });
             }
         };
-        
+
         //busco la receta o creo una nueva solo una vez
         //q ya este cargado el usuario en en $rootScope
         $rootScope.$watch('user',function(user) {
@@ -462,10 +470,10 @@
                             //Al clonar elimino los comentarios de la original
                             $scope.recipe.comments = [];
                         }
-        
+
                         //antes de cargar todos los datos verfico si hay valores en null y los reemplazo por el Default
                         BrewCalc.fixEmptyValues($scope.recipe);
-        
+
                         $scope.changeYeast();
                         //$scope.$emit("recipeLoaded");
 
@@ -533,11 +541,11 @@
                         version: []
                     });
                     $scope.changeYeast();
-                }                
+                }
             }
         });
-        
-        
+
+
         $scope.tabLink = function(tab) {
             var base = "#/recipe/edit/" + $scope.recipe._id;
             if ( tab == 'mash') {
@@ -545,12 +553,12 @@
             }
             return base;
         };
-        
+
         $scope.gravityBarValue = function(grav,max) {
             return BrewHelper.toPpg(grav) / max * 100;
         }
-       
-       
+
+
         //Carbonatation section
         $scope.volumeByCarbonatationType = {
             sugar: 0,
@@ -573,24 +581,24 @@
         $scope.bottledLiters = function() {
             return BrewCalc.bottledLiters($scope.volumeByCarbonatationType,$scope.recipe.bottling.bottles);
         };
-        
+
         $scope.estimateLiters = function($index) {
             return BrewCalc.estimateLiters($index,$scope.recipe.BATCH_SIZE,$scope.recipe.fermentation.stages);
         };
-        
+
         $scope.handleFileSelect = function(file) {
             var files = file.files; // FileList object
-        
+
             // files is a FileList of File objects. List some properties.
             for (var i = 0, f; f = files[i]; i++) {
                 var reader = new FileReader();
                 reader.onload = (function(theFile) {
                     return function(e) {
-                    
+
                         var xotree = new XML.ObjTree();
                         var xml = e.target.result;
                         var tree = xotree.parseXML( xml );       	// source to tree
-                        
+
                         //var scope = angular.element(document.getElementById('RecipeDetailCtrl')).scope();
                         var scope = $scope;
                         scope.recipe = tree.RECIPES.RECIPE;
@@ -604,7 +612,7 @@
                         scope.recipe.BOIL_TIME = parseFloat(scope.recipe.BOIL_TIME) || $scope.user.settings.defaultValues.BOIL_TIME;
                         scope.recipe.PRIMARY_TEMP = parseFloat(scope.recipe.PRIMARY_TEMP);
                         scope.recipe.BREWER = scope.recipe.BREWER || $scope.user.settings.defaultValues.BREWER;
-                        
+
                         scope.recipe.TrubChillerLosses = parseFloat(scope.recipe.TrubChillerLosses) || $scope.user.settings.defaultValues.TrubChillerLosses;
                         scope.recipe.mashTemp = parseFloat(scope.recipe.mashTemp) || $scope.user.settings.defaultValues.mashTemp;
                         scope.recipe.GrainTemp = parseFloat(scope.recipe.GrainTemp) || $scope.user.settings.defaultValues.GrainTemp;
@@ -613,30 +621,32 @@
                         scope.recipe.lossMashTemp = parseFloat(scope.recipe.lossMashTemp) || $scope.user.settings.defaultValues.lossMashTemp;
                         scope.recipe.PercentEvap = parseFloat(scope.recipe.PercentEvap) || $scope.user.settings.defaultValues.PercentEvap;
                         scope.recipe.WatertoGrainRatio = parseFloat(scope.recipe.WatertoGrainRatio) || $scope.user.settings.defaultValues.WatertoGrainRatio;
-                        scope.recipe.StrikeWater = parseFloat(scope.recipe.StrikeWater) || BrewHelper.round(scope.recipe.WatertoGrainRatio * scope.recipe.totalAmount,10);
+                        scope.recipe.StrikeWater = parseFloat(scope.recipe.StrikeWater) || BrewHelper.round(scope.recipe.WatertoGrainRatio * scope.recipe.totalAmountMash,10);
                         scope.recipe.GrainAbsorbtion = parseFloat(scope.recipe.GrainAbsorbtion) || $scope.user.settings.defaultValues.GrainAbsorbtion || 0.9;
                         scope.recipe.isPublic = $scope.user.settings.defaultValues.isPublic;
-                        
+
                         //FIXME, por ahora lo dejo en 0, ya q no lo uso ni lo muestro.
                         scope.recipe.TopUpWater = 0;
-                        
+
                         scope.recipe.totalAmount = 0;
+                        scope.recipe.totalAmountMash = 0;
                         function convertFerm(ferm) {
                             ferm.AMOUNT = parseFloat(ferm.AMOUNT);
                             ferm.COLOR = parseFloat(ferm.COLOR);
                             ferm.POTENTIAL = parseFloat(ferm.POTENTIAL);
                             ferm.PERCENTAGE = parseFloat(ferm.PERCENTAGE);
                             scope.recipe.totalAmount += ferm.AMOUNT;
+                            scope.recipe.totalAmountMash += ferm.AMOUNT;
                         }
                         if (scope.recipe.FERMENTABLES.FERMENTABLE instanceof Array) {
-                            angular.forEach(scope.recipe.FERMENTABLES.FERMENTABLE,convertFerm); 
+                            angular.forEach(scope.recipe.FERMENTABLES.FERMENTABLE,convertFerm);
                         } else {
                             convertFerm(scope.recipe.FERMENTABLES.FERMENTABLE);
                             scope.recipe.FERMENTABLES.FERMENTABLE = [scope.recipe.FERMENTABLES.FERMENTABLE];
                         }
-                        
+
                         var times = [0,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90,100,110,120];
-                        
+
                         function convertHop(hop) {
                             hop.ALPHA = parseFloat(hop.ALPHA);
                             hop.AMOUNT = parseFloat(hop.AMOUNT);
@@ -658,12 +668,12 @@
                             convertHop(scope.recipe.HOPS.HOP);
                             scope.recipe.HOPS.HOP = [scope.recipe.HOPS.HOP];
                         }
-                        
+
                         function convertMisc(misc) {
                             misc.TIME = parseFloat(misc.TIME);
                             misc.AMOUNT = parseFloat(misc.AMOUNT);
                         }
-                        
+
                         if ( scope.recipe.MISCS && scope.recipe.MISCS.MISC ) {
                             if ( scope.recipe.MISCS.MISC instanceof Array ) {
                                 angular.forEach(scope.recipe.MISCS.MISC,convertMisc);
@@ -676,14 +686,14 @@
                                 MISC: []
                             };
                         }
-                        
+
                         //Elimino los escalones
                         scope.recipe.MASH.MASH_STEPS.MASH_STEP = [];
-                        
+
                         scope.recipe.YEASTS.YEAST = [scope.recipe.YEASTS.YEAST];
                         scope.recipe.YEASTS.YEAST[0].ATTENUATION = parseFloat(scope.recipe.YEASTS.YEAST[0].ATTENUATION);
                         scope.recipe.GrainCalcMethod = '2';
-                
+
                         scope.recipe.fermentation= {
                             view: 'expand',
                             stages: []
@@ -692,7 +702,7 @@
                             sugarType: 'cane', //'cane', 'corn'
                             bottles: []
                         };
-                        
+
                         scope.changeYeast();
                         scope.recipe.date = new Date();
                         scope.disableWatchs = true;

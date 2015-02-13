@@ -1,5 +1,5 @@
 (function() {
-    
+
     var helper = angular.module("helper",[]);
 
     helper.directive('showTags', function($compile,TagColor) {
@@ -54,7 +54,10 @@
 
     var ABV_COHEF = 0.131;
 
-    helper.factory("BrewCalc",function(BrewHelper) {
+    helper.factory("BrewCalc",function(
+        BrewHelper,
+        FermentableUses
+    ) {
         return {
             /**
              * Calcula el porcentaje final de evaporacion.
@@ -66,9 +69,9 @@
             evapTotal: function(BOIL_TIME, EvapPerHour) {
                 var hours = Math.floor(BOIL_TIME/60);
                 var rest = (BOIL_TIME % 60) / 60;
-                
+
                 var percentageEvap = 1 - rest * EvapPerHour/100;
-                
+
                 for (var i=0; i < hours; i++ ) {
                     percentageEvap *= 1 - EvapPerHour/100;
                 }
@@ -127,9 +130,22 @@
                 recipe.PercentEvap = recipe.PercentEvap || 10;
                 if ( !recipe.WatertoGrainRatio ) {
                     recipe.WatertoGrainRatio = 3;
-                    recipe.StrikeWater = BrewHelper.round(recipe.WatertoGrainRatio * recipe.totalAmount,10);
+                    recipe.StrikeWater = BrewHelper.round(recipe.WatertoGrainRatio * recipe.totalAmountMash,10);
                 }
-    
+                //Fermentables Uses in mash
+                var amountMash = 0;
+                angular.forEach(recipe.FERMENTABLES.FERMENTABLE, function(ferm) {
+                    ferm.USE = ferm.USE || FermentableUses.defaultValue;
+                    if ( FermentableUses.valueOf(ferm.USE).mash ) {
+                        amountMash += ferm.AMOUNT;
+                    }
+                });
+                //fix recipe.StrikeWater issue #136
+                //Only when totalAmountMash is empty (First time)
+                if ( !recipe.totalAmountMash ) {
+                    recipe.StrikeWater = BrewHelper.round(recipe.WatertoGrainRatio * amountMash,10);
+                }
+                recipe.totalAmountMash = recipe.totalAmountMash || amountMash;
             },
             totalCations: function(cations) {
                 if ( !cations ) return null;
@@ -258,7 +274,7 @@
                 var g = this.toPpg(gravity);
                 var m = 30;
                 var M = 120;
-                for (var i=0; i<U_gravity.length; i++) {   
+                for (var i=0; i<U_gravity.length; i++) {
                     if (g < U_gravity[i]) {
                         M = U_gravity[i];
                         break;
@@ -271,7 +287,7 @@
                 if ( p == Infinity || isNaN(p) ) {
                     p = 0;
                 }
-                
+
                 var valm;
                 var valM;
                 if ( U[time.toString()] ) {
@@ -281,7 +297,7 @@
                     valm = 0;
                     valM = 0;
                 }
-                
+
                 var valDiff = valM-valm; //Diff de valores
                 var valP = valDiff*p;
                 return valm+valP;
@@ -301,7 +317,7 @@
             }
         };
     });
-    
+
     var SRM = ['#FFFFFF','FFE699' , '#FFD878' , '#FFCA5A' , '#FFBF42' , '#FBB123' , '#F8A600' , '#F39C00' , '#EA8F00' , '#E58500' , '#DE7C00',
         '#D77200' , '#CF6900' , '#CB6200' , '#C35900' , '#BB5100' , '#B54C00' , '#B04500' , '#A63E00' , '#A13700' , '#9B3200',
         '#952D00' , '#8E2900' , '#882300' , '#821E00' , '#7B1A00' , '#771900' , '#701400' , '#6A0E00' , '#660D00' , '#5E0B00',

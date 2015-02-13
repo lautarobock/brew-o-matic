@@ -24,7 +24,7 @@
                     <div class="col-lg-3">
                         <label for="totalGrain">Total Granos</label>
                         <span class="form-control input-sm gt-calculated" id="totalGrain">
-                            {{recipe.totalAmount|number:3}} Kg
+                            {{recipe.totalAmountMash|number:3}} Kg
                         </span>
                     </div>
                     <div class="col-lg-3">
@@ -33,11 +33,11 @@
                     </div>
                     <div class="col-lg-3">
                         <label for="strikeWater">Agua inicial (L)</label>
-                        <input ng-change="recipe.WatertoGrainRatio=round1(recipe.StrikeWater/recipe.totalAmount)" type="number" class="form-control input-sm" id="strikeWater" step="0.1" ng-model="recipe.StrikeWater" />
+                        <input ng-change="recipe.WatertoGrainRatio=round1(recipe.StrikeWater/recipe.totalAmountMash)" type="number" class="form-control input-sm" id="strikeWater" step="0.1" ng-model="recipe.StrikeWater" />
                     </div>
                     <div class="col-lg-3">
                         <label for="watertoGrainRatio">Empaste (L/Kg)</label>
-                        <input ng-change="recipe.StrikeWater=round1(recipe.WatertoGrainRatio*recipe.totalAmount)" type="number" class="form-control input-sm" id="watertoGrainRatio" step="0.1" ng-model="recipe.WatertoGrainRatio" />
+                        <input ng-change="recipe.StrikeWater=round1(recipe.WatertoGrainRatio*recipe.totalAmountMash)" type="number" class="form-control input-sm" id="watertoGrainRatio" step="0.1" ng-model="recipe.WatertoGrainRatio" />
                     </div>
                 </div>
                 <div class="row">
@@ -58,13 +58,13 @@
                     <div class="col-lg-3">
                         <label for="mashVolume">Volumen Total</label>
                         <span class="form-control input-sm gt-calculated" id="mashVolume" title="Valor Aproximado que ocupa la malta mas el agua en el macerador">
-                            {{BrewCalc.initialMashVolume(recipe.StrikeWater,recipe.totalAmount)|number:1}} Lts
+                            {{BrewCalc.initialMashVolume(recipe.StrikeWater,recipe.totalAmountMash)|number:1}} Lts
                         </span>
                     </div>
                 </div>
             </div>
             <!-- Expandida -->
-            
+
             <div class="panel-heading"><strong>Escalones</strong></div>
             <div class="panel-body" >
                 <div class="alert alert-info" ng-hide="recipe.MASH.MASH_STEPS.MASH_STEP.length!=0">
@@ -75,7 +75,7 @@
                     <ul class="list-group">
                         <li style="padding-top: 5px;" class="list-group-item" ng-repeat="STEP in recipe.MASH.MASH_STEPS.MASH_STEP">
                             <div style="cursor: pointer" ng-init="STEP.compact=true" ng-show="STEP.compact" ng-click="STEP.compact=!STEP.compact" title="Expandir los datos del escalon">
-                                <button 
+                                <button
                                         type="button"
                                         style="height: 20px;"
                                         class="gt-fermentation-stage-btn-move pull-right glyphicon glyphicon-collapse-down"></button>
@@ -149,7 +149,7 @@
                                        <div class="checkbox" title="Recircula?" style="margin-top: 2em;">
                                             <label>
                                                 <input ng-change="updateChart()" type="checkbox" ng-model="STEP.recirculate" />
-                                                Recircula? 
+                                                Recircula?
                                             </label>
                                         </div>
                                     </div>
@@ -213,24 +213,24 @@
                 <!--<div class="panel-body" >-->
                 <!--    <div google-chart chart="chart" ng-style="chart.cssStyle"></div>    -->
                 <!--</div>-->
-            </div>            
+            </div>
             <div class="panel-heading"><strong>Lavado</strong></div>
             <div class="panel-body" >
                 <div class="row">
-                    <div class="col-lg-2">
+                    <div class="col-lg-3">
                         <label for="spargeTempDesired">Temperatura</label>
                         <input type="number"  class="form-control input-sm" id="spargeTempDesired" step="0.1" ng-model="recipe.SpargeTempDesired" />
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-3">
                         <label for="spargeWater">Cantidad Agua</label>
                         <span class="form-control input-sm gt-calculated" id="spargeWater"
                               ng-bind="round1(spargeWater()) + ' Lts'" />
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-3">
                         <label title="Litros perdidos en el lavado (por ejemplo debajo del FF)" for="spargeDeadSpace">Espacio Muerto</label>
                         <input type="number"  class="form-control input-sm gt-preset" id="spargeDeadSpace" step="0.1" ng-model="recipe.SpargeDeadSpace" />
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-3">
                         <label title="Litros de agua que quedan en el bagazo por cada Kg de malta" for="grainAbsorbtion">Absorcion (L/Kg)</label>
                         <input type="number"  class="form-control input-sm gt-preset" id="grainAbsorbtion" step="0.1" ng-model="recipe.GrainAbsorbtion" />
                     </div>
@@ -252,7 +252,7 @@
                 <strong>{{notification.title}}</strong>
                 {{notification.text}}
             </div>
-        </div>            
+        </div>
     </div>
     <div class="col-md-2" >
         <ng-include src="'partial/recipe-detail-indicators.html'"></ng-include>

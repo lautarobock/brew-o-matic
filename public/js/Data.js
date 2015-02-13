@@ -39,7 +39,38 @@ data.factory("HopUse",function() {
                     name:'Mash',
                     utilization: 0.2
                 }
-                ];
+            ];
+        }
+    };
+});
+
+data.factory("FermentableUses",function() {
+    return {
+        defaultValue: 'Mash',
+        valueOf: function(name) {
+            for ( var i=0; i<this.query().length; i++ ) {
+                if ( name === this.query()[i].name ) {
+                    return this.query()[i];
+                }
+            }
+            return null;
+        },
+        query: function() {
+            return [
+                {
+                    name:'Mash',
+                    mash: true
+                },{
+                    name:'Recirculating',
+                    mash: true
+                },{
+                    name:'Boil',
+                    mash: false
+                },{
+                    name:'Fermentation',
+                    mash: false
+                }
+            ];
         }
     };
 });
@@ -66,4 +97,3 @@ data.factory("MiscUse",function() {
         }
     };
 });
-

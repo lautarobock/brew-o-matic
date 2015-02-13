@@ -2,10 +2,10 @@
 
     var module = angular.module("brew-o-module.controller",[]);
 
-    
+
     module.controller("RecipeMashCtrl",function($scope,BrewCalc,BrewHelper) {
-        
-        
+
+
         $scope.styleTitle = function(onFocus) {
             if ( onFocus ) {
                 return {background: 'white','border-color':'#ccc'};
@@ -21,7 +21,7 @@
             }
             return time;
         };
-        
+
         $scope.totalTime = function() {
             var time = 0;
             angular.forEach($scope.recipe.MASH.MASH_STEPS.MASH_STEP,function(step) {
@@ -29,7 +29,7 @@
             });
             return time;
         };
-        
+
         $scope.spargeWater = function() {
             return $scope.totalWater()
                     -BrewCalc.actualMashVolume($scope.recipe.MASH.MASH_STEPS.MASH_STEP.length-1,
@@ -38,7 +38,7 @@
                     -$scope.recipe.StrikeWater
                     -($scope.recipe.TopUpWater||0);
         };
-        
+
         $scope.totalWater = function() {
             return BrewCalc
                         .calculateBoilSize($scope.recipe.BATCH_SIZE,
@@ -50,9 +50,9 @@
                                                0,
                                                $scope.recipe.MASH.MASH_STEPS.MASH_STEP)
                     +$scope.recipe.SpargeDeadSpace
-                    +$scope.recipe.GrainAbsorbtion*$scope.recipe.totalAmount;
+                    +$scope.recipe.GrainAbsorbtion*$scope.recipe.totalAmountMash;
         };
-        
+
         $scope.addWaterVol = function(STEP,$index) {
             //Hago los caclulos para el agregado de agua
             var ratio;
@@ -60,32 +60,32 @@
                 ratio = $scope.recipe.WatertoGrainRatio;
             } else {
                 var vol = BrewCalc.actualMashVolume($index-1,$scope.recipe.StrikeWater,$scope.recipe.MASH.MASH_STEPS.MASH_STEP);
-                ratio = vol/$scope.recipe.totalAmount;
+                ratio = vol/$scope.recipe.totalAmountMash;
             }
             var botvol = 0.7; //Equivalente en agua del barril (absorcion de temp), por ahora desprecio y dejo en 0.
             //el otro cero es los litros perdidos debejo del FF, que deberia calcularlos antes.
-            STEP.INFUSE_AMOUNT = restCalc($scope.recipe.totalAmount,ratio,0,0,STEP.STEP_TEMP,STEP.END_TEMP,STEP.INFUSE_TEMP);
-            
+            STEP.INFUSE_AMOUNT = restCalc($scope.recipe.totalAmountMash,ratio,0,0,STEP.STEP_TEMP,STEP.END_TEMP,STEP.INFUSE_TEMP);
+
             //Calculos para tamaño de la decoccion
-            var volMash = BrewCalc.actualMashVolume($index-1,$scope.recipe.StrikeWater+$scope.recipe.totalAmount,$scope.recipe.MASH.MASH_STEPS.MASH_STEP);
-            
+            var volMash = BrewCalc.actualMashVolume($index-1,$scope.recipe.StrikeWater+$scope.recipe.totalAmountMash,$scope.recipe.MASH.MASH_STEPS.MASH_STEP);
+
             //Supongo q siempre decocciono a 100
             var decoctionTemp = 100;
             STEP.DECOCTION_AMT = BrewHelper.round(volMash * ( STEP.END_TEMP - STEP.STEP_TEMP ) / ( decoctionTemp - STEP.STEP_TEMP ),10);
         };
-        
+
         function restCalc(weight,thick,botvol,eqvol,curtemp,tartemp,boiltemp) {
             var vol=weight*(0.417+thick)+botvol+eqvol;
             var watvol=vol*(tartemp-curtemp)/(boiltemp-tartemp);
             return BrewHelper.round(watvol,10);
         }
-        
+
         $scope.strikeWaterTemp = function() {
             return ($scope.recipe.mashTemp-$scope.recipe.GrainTemp)*0.417/$scope.recipe.WatertoGrainRatio
                     +$scope.recipe.mashTemp
                     +$scope.recipe.lossMashTemp;
         };
-        
+
         $scope.changeAction = function(STEP, actionValue) {
             if (actionValue == '0') {
                 STEP.infuse = false;
@@ -98,7 +98,7 @@
                 STEP.decoction = true;
             }
         };
-        
+
         $scope.stepAction = function(STEP) {
             if (STEP.infuse) {
                 return "Agregar Agua"
@@ -107,7 +107,7 @@
             }
             return null;
         };
-        
+
         $scope.initActionValue = function(STEP) {
             if (STEP.infuse) {
                 return '1';
@@ -147,13 +147,13 @@
         };
 
         $scope.updateInfuse = function() {
-            
+
         };
-        
+
         $scope.calculateVolume = function(step_index) {
             return BrewCalc.actualMashVolume(
                         step_index,
-                        BrewCalc.initialMashVolume($scope.recipe.StrikeWater,$scope.recipe.totalAmount),
+                        BrewCalc.initialMashVolume($scope.recipe.StrikeWater,$scope.recipe.totalAmountMash),
                         $scope.recipe.MASH.MASH_STEPS.MASH_STEP);
         };
 
@@ -356,12 +356,12 @@
             var exists = util.Arrays.filter($scope.recipe.collaborators,filter).length != 0;
             if ( exists ) {
                 alertFactory.create("warning","El usuario seleccionado ya es un colaborador","Error al agregar usuario");
-                return;   
+                return;
             }
 
             // if ( user_id == $scope.recipe.owner._id ) {
             if ( ($scope.recipe.owner && user_id == $scope.recipe.owner._id) ||
-                    ($scope.recipe.owner && user_id == $scope.user._id) ) {                
+                    ($scope.recipe.owner && user_id == $scope.user._id) ) {
                 alertFactory.create("warning","No puede agregar al dueño de la receta como colaborador","Error al agregar usuario");
                 return;
             }
@@ -396,11 +396,11 @@
         function updateIFrame() {
             if ( $scope.recipe.beer_id ) {
                 $scope.iframeUrl = $sce.trustAsResourceUrl("http://www.birrasquehetomado.com.ar/html/tag.html#/beer/tag/" + $scope.recipe.beer_id);
-            }    
+            }
         }
         updateIFrame();
-        
-        
+
+
 
     });
 
@@ -471,7 +471,7 @@
         };
 
         $scope.reload();
-        
+
         function onNewTemperature(temp) {
             $scope.temperatures.push(temp);
             $scope.updateChart();
@@ -495,7 +495,7 @@
                     "label": "Temperatura",
                     "type": "number"
                 }];
-            
+
             var rows = [];
             // var day = 0;
             // var today = new Date($scope.temperatures[0].timestamp);
@@ -510,7 +510,7 @@
                             "f": (stage.temperature|0) + "º (" + stage.temperatureMax + ")"
                         }
                     ]
-                });                
+                });
             });
             $scope.chart.data.cols = cols;
             $scope.chart.data.rows = rows;
@@ -543,8 +543,8 @@
             },
             "formatters": {}
         };
-        
-        
+
+
 
     });
 })();

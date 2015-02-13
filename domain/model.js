@@ -28,7 +28,7 @@ exports.User = mongoose.model("User",new Schema({
         },
         closeUseSurvey: Boolean
     },
-    
+
 }));
 
 exports.WaterReport = mongoose.model("WaterReport",new Schema({
@@ -63,6 +63,7 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     date: Date,
     modificationDate: Date,
     totalAmount: Number,
+    totalAmountMash: Number,
     totalHop: Number,
     NAME: String,
     VERSION: String,
@@ -88,7 +89,8 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
             YIELD: Number,
             COLOR: Number,
             POTENTIAL: Number,
-            PERCENTAGE: Number
+            PERCENTAGE: Number,
+            USE: String
         } ]
     },
     HOPS: {
@@ -138,7 +140,7 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
                 recirculate: Boolean    //Si recircula o no
                 //Others data not used yet
                 //RAMP_TIME: Number,   //Este es redundante con END_TEMP
-                //DISPLAY_STEP_TEMP: Number, 
+                //DISPLAY_STEP_TEMP: Number,
                 //DISPLAY_INFUSE_AMT: Number,
             }]
         }
