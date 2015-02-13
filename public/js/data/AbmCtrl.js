@@ -1,5 +1,5 @@
 (function() {
-    
+
     var abm = angular.module("abm",[]);
 
 
@@ -152,6 +152,10 @@
                         type: 'number',
                         step: 0.001,
                         width: '15%'
+                    },{
+                        field:'use',
+                        caption: 'Uso',
+                        width: '15%'
                     }
                 ]
             },
@@ -175,9 +179,9 @@
                 ]
             }
         };
-        
+
         $scope.entity = $routeParams.entity;
-        
+
         $scope.config = $scope.allConfigs[$scope.entity];
 
         $rootScope.breadcrumbs = [{
@@ -186,8 +190,8 @@
         },{
             link: '#',
             title: $scope.config.name
-        }];        
-        
+        }];
+
         $scope.getActiveClass = function(tab) {
             if (tab == $scope.entity) {
                 return 'active';
@@ -195,7 +199,7 @@
                 return '';
             }
         };
-        
+
     });
-    
+
 })();

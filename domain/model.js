@@ -257,7 +257,8 @@ exports.Grain = mongoose.model("Grain",new Schema({
     "name": String,
     "type": String,
     "colour": Number,
-    "potential": Number
+    "potential": Number,
+    "use": String
 }));
 
 exports.Misc = mongoose.model("Misc",new Schema({

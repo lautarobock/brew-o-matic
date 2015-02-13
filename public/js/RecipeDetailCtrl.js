@@ -126,7 +126,8 @@
                 "YIELD": 0,
                 "COLOR": null,
                 "POTENTIAL": null,
-                "PERCENTAGE": 100
+                "PERCENTAGE": 100,
+                "USE": "Mash"
             });
             $scope.changeAmount();
         };
@@ -326,6 +327,7 @@
                 if ( fermentable.NAME == grain.name) {
                     fermentable.POTENTIAL = grain.potential;
                     fermentable.COLOR = grain.colour;
+                    fermentable.USE = grain.use;
                 }
             });
             $scope.changeAmount();
