@@ -78,6 +78,7 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     BV: Number,
     EFFICIENCY: Number,
     OG: Number,
+    OG_exclude: Number,
     CALCIBU: Number,
     FG: Number,
     FERMENTABLES: {
@@ -90,7 +91,8 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
             COLOR: Number,
             POTENTIAL: Number,
             PERCENTAGE: Number,
-            USE: String
+            USE: String,
+            excludeIBU: Boolean
         } ]
     },
     HOPS: {
@@ -258,7 +260,8 @@ exports.Grain = mongoose.model("Grain",new Schema({
     "type": String,
     "colour": Number,
     "potential": Number,
-    "use": String
+    "use": String,
+    "excludeIBU": Boolean
 }));
 
 exports.Misc = mongoose.model("Misc",new Schema({

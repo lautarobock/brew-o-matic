@@ -156,6 +156,10 @@
                         field:'use',
                         caption: 'Uso',
                         width: '15%'
+                    },{
+                        field:'excludeIBU',
+                        caption: 'Excluye IBU ',
+                        width: '15%'
                     }
                 ]
             },

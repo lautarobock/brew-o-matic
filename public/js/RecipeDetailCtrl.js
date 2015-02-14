@@ -220,11 +220,17 @@
 
             //OG
             var og = 0;
+            var OG_exclude = 0;
             angular.forEach($scope.recipe.FERMENTABLES.FERMENTABLE,function(f) {
                 og += BrewHelper.toLbs(f.AMOUNT) * BrewHelper.toPpg(f.POTENTIAL) * ($scope.recipe.EFFICIENCY/100)
                     / BrewHelper.toGal($scope.recipe.BATCH_SIZE);
+                if ( !f.excludeIBU ) {
+                    OG_exclude += BrewHelper.toLbs(f.AMOUNT) * BrewHelper.toPpg(f.POTENTIAL) * ($scope.recipe.EFFICIENCY/100)
+                    / BrewHelper.toGal($scope.recipe.BATCH_SIZE);
+                }
             });
             $scope.recipe.OG = BrewHelper.toPotential(og);
+            $scope.recipe.OG_exclude = BrewHelper.toPotential(OG_exclude);
 
             //Calculo el agua para el macerado en
             $scope.recipe.StrikeWater=BrewHelper.round($scope.recipe.WatertoGrainRatio*$scope.recipe.totalAmountMash,10);
@@ -251,7 +257,7 @@
         }
 
         $scope.hopIBU = function(hop) {
-            var U = BrewHelper.calculateU($scope.recipe.OG,hop.TIME);
+            var U = BrewHelper.calculateU($scope.recipe.OG_exclude,hop.TIME);
             var baseIBU = BrewHelper.toOz(hop.AMOUNT)*hop.ALPHA*U*(7489/100)/BrewHelper.toGal($scope.recipe.BATCH_SIZE);
             //add or remove by utilization (ej: mash use 20%)
             return baseIBU * getUtilization(hop.USE,$scope.hopUses) * getUtilization(hop.FORM,$scope.hopForms);
@@ -328,6 +334,7 @@
                     fermentable.POTENTIAL = grain.potential;
                     fermentable.COLOR = grain.colour;
                     fermentable.USE = grain.use;
+                    fermentable.excludeIBU = grain.excludeIBU;
                 }
             });
             $scope.changeAmount();

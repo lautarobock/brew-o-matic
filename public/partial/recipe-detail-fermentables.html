@@ -6,28 +6,20 @@
     <table class="table table-condensed table-hover" ng-show="recipe.FERMENTABLES.FERMENTABLE.length != 0" style="margin-top: 1em;">
       <thead>
         <tr>
-          <th style="width:48%">Grano/Fermentable</th>
+          <th style="width:40%">Grano/Fermentable</th>
           <th style="width:8%">Extracto</th>
           <th style="width:8%">Color</th>
           <th style="width:8%">%</th>
           <th style="width:8%">Kg</th>
           <th style="width:10%">Uso</th>
-          <!-- <th style="width:8%">IBU</th> -->
+          <th style="width:8%" tooltip="Si se excluye para el calculo de OG para IBU">Excl. OG</th>
           <th style="width:2%"></th>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="fermentable in recipe.FERMENTABLES.FERMENTABLE">
-            <!--<td><input class="form-control input-sm" type="text" ng-model="fermentable.NAME"/></td>-->
             <td>
                 <input typeahead-on-select="changeGrain(fermentable)" type="text" ng-model="fermentable.NAME" typeahead="grain.name for grain in grains | filter:$viewValue" class="form-control input-sm" placeholder="Buscar Fermentables">
-
-                <!-- <input ng-change="changeGrain(fermentable)" class="form-control input-sm" type="text" ng-model="fermentable.NAME" list="grainNames" placeholder="Buscar Fermentables"/>
-                <datalist id="grainNames">
-                    <option ng-repeat="grain in grains" value="{{grain.name}}">
-                        {{grain.name}}
-                    </option>
-                </datalist> -->
             </td>
             <td><input ng-change="changeAmount()" class="form-control input-sm" type="number" step="0.001" ng-model="fermentable.POTENTIAL" placeholder="PPG" /></td>
             <td><input ng-change="changeAmount()" class="form-control input-sm" type="number" step="0.1" ng-model="fermentable.COLOR" placeholder="SRM"/></td>
@@ -38,9 +30,13 @@
                     <option ng-repeat="use in fermentableUses">{{use.name}}</option>
                 </select>
             </td>
-            <!-- <td>
-                IBUs
-            </td> -->
+            <td>
+                <div class="checkbox">
+                    <label>
+                        <input style="margin-left: 20%;" ng-change="changeAmount()" type="checkbox" ng-model="fermentable.excludeIBU"/>
+                    </label>
+                </div>
+            </td>
             <td>
                 <button type="button" class="close" aria-hidden="true" ng-click="removeFermentable(fermentable)">&times;</button>
             </td>
