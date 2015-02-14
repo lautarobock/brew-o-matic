@@ -76,6 +76,11 @@
                         caption: 'Atenuacion',
                         type: 'number',
                         width:'20%'
+                    },{
+                        field:'density',
+                        caption: 'Densidad',
+                        type: 'number',
+                        width:'20%'
                     }
                 ]
             },

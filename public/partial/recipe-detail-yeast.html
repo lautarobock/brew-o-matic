@@ -5,6 +5,7 @@
         <tr>
           <th>Levadura</th>
           <th style="width:8em">Cantidad (g)</th>
+          <th style="width:6em" title="Billones de celulas x gramo">Densidad</th>
           <th style="width:6em">Atenuacion</th>
         </tr>
       </thead>
@@ -16,6 +17,9 @@
             </td>
             <td>
                 <input class="form-control input-sm" type="number" ng-model="yeast.AMOUNT"/></td>
+            </td>
+            <td>
+                <input class="form-control input-sm" type="number" ng-model="yeast.density"/></td>
             </td>
             <td>
                 <input ng-change="changeYeast()" class="form-control input-sm" type="number" ng-model="yeast.ATTENUATION"/>
@@ -31,22 +35,22 @@
                 </div>
                 <div class="col-md-2">
                     <span class="form-control input-sm gt-calculated ">
-                        {{-yeastNeed(recipe.BATCH_SIZE, recipe.OG, 0)}} Gramos
+                        {{-yeastNeed(recipe.BATCH_SIZE, recipe.OG, 0,totalDensity())}} Gramos
                     </span>
                 </div>
             </li>
-            <li class="list-group-item" style="overflow: hidden;" ng-show="yeastNeed(recipe.BATCH_SIZE, recipe.OG, totalYeast())<0">
+            <li class="list-group-item" style="overflow: hidden;" ng-show="yeastNeed(recipe.BATCH_SIZE, recipe.OG, totalYeast(),totalDensity())<0">
                 <div class="col-md-2">
                     <strong>Cantidad Faltante:</strong>
                 </div>
                 <div class="col-md-2">
                     <span class="form-control input-sm gt-calculated">
-                        {{-yeastNeed(recipe.BATCH_SIZE, recipe.OG, totalYeast())}} Gramos
+                        {{-yeastNeed(recipe.BATCH_SIZE, recipe.OG, totalYeast(),totalDensity())}} Gramos
                     </span>
                 </div>
                 <div class="col-md-6">
                     <span class="text-danger">
-                        Aun necesitas {{-yeastNeed(recipe.BATCH_SIZE, recipe.OG, totalYeast())}} gramos para una correcta fermentacion!
+                        Aun necesitas {{-yeastNeed(recipe.BATCH_SIZE, recipe.OG, totalYeast(),totalDensity())}} gramos para una correcta fermentacion!
                     </span>
                 </div>
                 <div class="col-md-2">
@@ -55,13 +59,13 @@
                     </button>
                 </div>
             </li>
-            <li class="list-group-item" style="overflow: hidden;" ng-show="yeastNeed(recipe.BATCH_SIZE, recipe.OG, totalYeast())>=0">
+            <li class="list-group-item" style="overflow: hidden;" ng-show="yeastNeed(recipe.BATCH_SIZE, recipe.OG, totalYeast(),totalDensity())>=0">
                 <div class="col-md-2">
                     <strong>Cantidad Sobrante:</strong>
                 </div>
                 <div class="col-md-2">
                     <span class="form-control input-sm gt-calculated">
-                        {{yeastNeed(recipe.BATCH_SIZE, recipe.OG, totalYeast())}} Gramos
+                        {{yeastNeed(recipe.BATCH_SIZE, recipe.OG, totalYeast(),totalDensity())}} Gramos
                     </span>
                 </div>
                 <div class="col-md-8">

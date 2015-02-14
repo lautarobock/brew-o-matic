@@ -176,15 +176,20 @@
                 //Maltas
                 var newTotalAmount = $scope.recipe.totalAmount * cohef;
                 angular.forEach($scope.recipe.FERMENTABLES.FERMENTABLE,function(f) {
-                    f.AMOUNT = BrewHelper.round((f.PERCENTAGE/100)*newTotalAmount,1000); ;
+                    f.AMOUNT = BrewHelper.round((f.PERCENTAGE/100)*newTotalAmount,1000);
                 });
 
                 //Lupulos
                 var newTotalHop = $scope.recipe.totalHop * cohef;
                 angular.forEach($scope.recipe.HOPS.HOP,function(hop) {
                     var percentage = $scope.hopPercentage(hop,$scope.recipe.totalHop);
-                    hop.AMOUNT = BrewHelper.round((percentage/100)*newTotalHop,10000); ;
+                    hop.AMOUNT = BrewHelper.round((percentage/100)*newTotalHop,10000);
                 });
+
+                //yeast
+                var newTotalYeast = $scope.totalYeast() * cohef;
+                //Asumo una sola levadura por ahora
+                $scope.recipe.YEASTS.YEAST[0].AMOUNT = Math.ceil(newTotalYeast);
             }
             $scope.changeAmount();
         });
@@ -353,6 +358,7 @@
             angular.forEach($scope.yeasts,function(yeast) {
                 if ( changed.NAME == yeast.name) {
                     changed.ATTENUATION = yeast.aa;
+                    changed.density = yeast.density || 10;
                 }
             });
             $scope.changeYeast();
@@ -522,7 +528,8 @@
                             "YEAST": [{
                                 "NAME": "",
                                 "VERSION": "1",
-                                "ATTENUATION": 75
+                                "ATTENUATION": 75,
+                                "density": 10
                             }]
                         },
                         MASH: {
@@ -746,8 +753,21 @@
             });
             return total;
         };
+        /*
+        aca deberia hacer los calculos por cad leva por separado para total
+        y densidad y luego juntarlos. Por ahora asumo una sola leva
+        */
+        $scope.totalDensity = function() {
+            if ( !$scope.recipe || !$scope.recipe.YEASTS ) return 0;
+            return $scope.recipe.YEASTS.YEAST[0].density;
+        };
         $scope.fixYeast = function() {
-            var need = -$scope.yeastNeed($scope.recipe.BATCH_SIZE, $scope.recipe.OG, 0);
+            var need = -$scope.yeastNeed(
+                $scope.recipe.BATCH_SIZE,
+                $scope.recipe.OG,
+                0,
+                $scope.totalDensity()
+            );
             need = Math.ceil(need);
             try {
                 $scope.recipe.YEASTS.YEAST[0].AMOUNT = need;
