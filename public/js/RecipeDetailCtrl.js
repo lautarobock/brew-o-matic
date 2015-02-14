@@ -525,6 +525,11 @@
                                 "ATTENUATION": 75
                             }]
                         },
+                        MASH: {
+                            MASH_STEPS: {
+                                MASH_STEP: [ ]
+                            }
+                        },
                         MISCS: {
                             MISC: []
                         },
@@ -547,7 +552,10 @@
                         TrubChillerLosses: $scope.user.settings.defaultValues.TrubChillerLosses,
                         isPublic: $scope.user.settings.defaultValues.isPublic,
                         collaborators: [],
-                        version: []
+                        version: [],
+                        log: {
+                            logs: []
+                        }
                     });
                     $scope.changeYeast();
                 }
