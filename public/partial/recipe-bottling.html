@@ -40,8 +40,8 @@
                         </div>
                     </li>
                 </ul>
-                
-                
+
+
                 <div class="alert alert-info" ng-hide="recipe.bottling.bottles.length!=0">
                     No ha cargado ninguna botella aun,
                     <a href="" ng-click="addBottle()" class="alert-link">Agrega una botella!</a>
@@ -51,7 +51,7 @@
                         <thead>
                             <tr>
                                 <th>Tipo</th>
-                                <th style="width:3em">Color</th>                                
+                                <th style="width:3em">Color</th>
                                 <th style="width:10em">Tamaño</th>
                                 <th style="width:10em">Cantidad</th>
                                 <th style="width:10em">Total</th>
@@ -60,7 +60,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="bottle in recipe.bottling.bottles">
+                            <tr ng-repeat="bottle in recipe.bottling.bottles" class="animate-repeat">
                                 <td>
                                     <input ng-change="changeBottleType(bottle)" class="form-control input-sm" type="text" ng-model="bottle.bottleType" placeholder="(Tipo: porron, medio, litro, corni)" list="bottleNames"/>
                                     <datalist id="bottleNames">
@@ -71,7 +71,7 @@
                                 </td>
                                 <td>
                                     <div ng-style="{'height': '28px','border':'1px solid','border-radius': '5px','background-color':getBottleColor(bottle.colour)}" >
-                
+
                                     </div>
                                 </td>
                                 <td>
@@ -97,7 +97,7 @@
                                 </td>
                             </tr>
                         </tbody>
-                    </table>                    
+                    </table>
                     <button type="button" ng-click="addBottle()" class="btn btn-default pull-right">
                         <span class="glyphicon glyphicon-plus"></span> Agregar Botella
                     </button>
@@ -126,7 +126,7 @@
                             </li>
                             <li class="list-group-item" style="overflow: hidden;">
                                 <div class="col-md-3">
-                                    <strong>Vol. de CO<sub>2</sub> deseados: </strong> 
+                                    <strong>Vol. de CO<sub>2</sub> deseados: </strong>
                                 </div>
                                 <div class="col-md-2">
                                     <input ng-change="changeBottles();" class="form-control input-sm" type="number" step="0.01" ng-model="recipe.bottling.sugar.desiredVol" placeholder="(Vol CO2)" />
@@ -158,7 +158,7 @@
                                         <option value="cane">Caña</option>
                                         <option value="corn">Maiz</option>
                                         <option value="honey">Miel</option>
-                                    </select>                                    
+                                    </select>
                                 </div>
                             </li>
                             <li class="list-group-item" style="overflow: hidden;">
@@ -251,7 +251,7 @@
                 <strong>{{notification.title}}</strong>
                 {{notification.text}}
             </div>
-        </div>            
+        </div>
     </div>
     <div class="col-md-2" >
         <ng-include src="'partial/recipe-detail-indicators.html'"></ng-include>

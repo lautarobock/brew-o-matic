@@ -17,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="fermentable in recipe.FERMENTABLES.FERMENTABLE">
+        <tr ng-repeat="fermentable in recipe.FERMENTABLES.FERMENTABLE" class="animate-repeat">
             <td>
                 <input typeahead-on-select="changeGrain(fermentable)" type="text" ng-model="fermentable.NAME" typeahead="grain.name for grain in grains | filter:$viewValue" class="form-control input-sm" placeholder="Buscar Fermentables">
             </td>
@@ -31,7 +31,7 @@
                 </select>
             </td>
             <td>
-                <div class="checkbox">
+                <div class="checkbox" style="margin-bottom: 0;">
                     <label>
                         <input style="margin-left: 20%;" ng-change="changeAmount()" type="checkbox" ng-model="fermentable.excludeIBU"/>
                     </label>

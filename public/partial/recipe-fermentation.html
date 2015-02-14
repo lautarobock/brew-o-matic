@@ -6,7 +6,7 @@
             </div>
             <div class="panel-body" >
                 <div class="alert alert-info" ng-hide="recipe.fermentation.stages.length!=0">
-                    No ha creado ninguna etapa de fermentacion aun  
+                    No ha creado ninguna etapa de fermentacion aun
                     <a href="" ng-click="addFermentationStage()" class="alert-link">Agrega la primera etapa!</a>
                 </div>
                 <div ng-show="recipe.fermentation.stages.length!=0">
@@ -32,7 +32,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="stage in recipe.fermentation.stages">
+                            <tr ng-repeat="stage in recipe.fermentation.stages" class="animate-repeat">
                                 <td>
                                     <input ng-blur="updateChart()" class="form-control input-sm" type="text" ng-model="stage.title" placeholder="(Titulo)"/>
                                 </td>
@@ -90,7 +90,7 @@
                     <!-- COMPACT END -->
 
                     <!-- EXPANDED -->
-                    <div ng-repeat="stage in recipe.fermentation.stages" style="padding: 0px" class="panel panel-default" ng-show="(recipe.fermentation.view||'expand')=='expand'">
+                    <div ng-repeat="stage in recipe.fermentation.stages" style="padding: 0px" class="panel panel-default animate-repeat" ng-show="(recipe.fermentation.view||'expand')=='expand'">
                         <div class="panel-heading" style="padding: 0;">
                             <button ng-click="recipe.fermentation.stages.splice($index,1);updateChart();"
                                     type="button"
@@ -167,7 +167,7 @@
                     <button type="button" ng-click="addFermentationStage()" class="btn btn-default pull-right">
                         <span class="glyphicon glyphicon-plus"></span> Agregar Etapa
                     </button>
-                    
+
                 </div>
                 <div class="panel panel-default" style="margin-top: 5em">
                         <div class="panel-heading"><strong>Resumen y graficos</strong></div>
@@ -198,15 +198,15 @@
                                     <input ng-change="updateChart()" ng-model="simulatedDate_day" type="number" class="form-control input-sm " style="width: 50px;display: inline" />
                                     <input ng-change="updateChart()" ng-model="simulatedDate_month" type="number" class="form-control input-sm " style="width: 50px;display: inline" />
                                     <input ng-change="updateChart()" ng-model="simulatedDate_year" type="number" class="form-control input-sm " style="width: 70px;display: inline" />
-                                    <span style="margin-left: 1em;">terminaria en</span> 
+                                    <span style="margin-left: 1em;">terminaria en</span>
                                     <span title="Fecha estimada de fin de proceso de fermentacion/maduracion, a esto falta sumarle el tiempo de carbonatacion"
                                           style="font-weight: bold; width:90px; display: inline"
-                                          class="form-control input-sm gt-calculated ">{{estimateEnd(simulatedDate_day,simulatedDate_month,simulatedDate_year,recipe.fermentation)|date:'dd-MM-yyyy'}}</span> 
+                                          class="form-control input-sm gt-calculated ">{{estimateEnd(simulatedDate_day,simulatedDate_month,simulatedDate_year,recipe.fermentation)|date:'dd-MM-yyyy'}}</span>
                                 </li>
                             </ul>
                         </div>
                         <div class="panel-body" >
-                            <div google-chart chart="chart" ng-style="chart.cssStyle"></div>    
+                            <div google-chart chart="chart" ng-style="chart.cssStyle"></div>
                         </div>
                     </div>
             </div>
@@ -226,7 +226,7 @@
                 <strong>{{notification.title}}</strong>
                 {{notification.text}}
             </div>
-        </div>            
+        </div>
     </div>
     <div class="col-md-2" >
         <ng-include src="'partial/recipe-detail-indicators.html'"></ng-include>

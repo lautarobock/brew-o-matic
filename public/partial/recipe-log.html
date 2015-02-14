@@ -19,7 +19,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="log in recipe.log.logs | orderBy:orderLog | filter:discardFilter" ng-class="{'gt-log-active': edit == log,'gt-log-removed': log.discard }">
+                      <tr ng-repeat="log in recipe.log.logs | orderBy:orderLog | filter:discardFilter" ng-class="{'gt-log-active': edit == log,'gt-log-removed': log.discard }" class="animate-repeat">
                         <td>{{log.time|formatDate}}</td>
                         <td>{{log.detail}}</td>
                         <td>
@@ -88,7 +88,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="log in pendingLogs">
+                      <tr ng-repeat="log in pendingLogs" class="animate-repeat">
                         <td>{{log.time()|formatDate}}</td>
                         <td>{{log.detail}}</td>
                         <td>
@@ -108,7 +108,7 @@
                         </td>
                       </tr>
                     </tbody>
-                </table>                
+                </table>
             </div>
         </div>
         <div style="overflow: hidden;margin-bottom: 1em;">
@@ -120,13 +120,13 @@
                 <button ng-click="save()" type="button" class="btn btn-primary">Guardar</button>
             </div>
         </div>
-        <div ng-repeat="notification in notifications">
+        <div ng-repeat="notification in notifications" class="animate-repeat">
             <div class="alert alert-{{notification.type}} alert-dismissable">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <strong>{{notification.title}}</strong>
                 {{notification.text}}
             </div>
-        </div>            
+        </div>
     </div>
     <div class="col-md-2" >
         <ng-include src="'partial/recipe-detail-indicators.html'"></ng-include>

@@ -20,7 +20,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="hop in recipe.HOPS.HOP">
+        <tr ng-repeat="hop in recipe.HOPS.HOP" class="animate-repeat">
             <!--<td><input class="form-control input-sm" type="text" ng-model="hop.NAME"/></td>-->
             <td>
                 <input typeahead-on-select="onChangeHop(hop)" class="form-control input-sm" type="text" ng-model="hop.NAME" typeahead="hop.name for hop in hops | filter:$viewValue" placeholder="Buscar Lupulos"/>

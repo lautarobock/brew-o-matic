@@ -15,7 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="misc in recipe.MISCS.MISC">
+        <tr ng-repeat="misc in recipe.MISCS.MISC" class="animate-repeat">
             <td>
                 <input typeahead-on-select="onChangeMisc(misc)" class="form-control input-sm" type="text" ng-model="misc.NAME" typeahead="misc.name for misc in miscs | filter:$viewValue" placeholder="Buscar Miscs"/>
                 <!-- <input ng-change="onChangeMisc(misc)" class="form-control input-sm" type="text" ng-model="misc.NAME" list="miscNames" placeholder="Buscar Miscs"/>

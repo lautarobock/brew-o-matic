@@ -73,7 +73,7 @@
                 </div>
                 <div ng-show="recipe.MASH.MASH_STEPS.MASH_STEP.length!=0">
                     <ul class="list-group">
-                        <li style="padding-top: 5px;" class="list-group-item" ng-repeat="STEP in recipe.MASH.MASH_STEPS.MASH_STEP">
+                        <li style="padding-top: 5px;" class="list-group-item animate-repeat" ng-repeat="STEP in recipe.MASH.MASH_STEPS.MASH_STEP">
                             <div style="cursor: pointer" ng-init="STEP.compact=true" ng-show="STEP.compact" ng-click="STEP.compact=!STEP.compact" title="Expandir los datos del escalon">
                                 <button
                                         type="button"
@@ -186,7 +186,7 @@
             <!--<div class="panel panel-default" style="margin: 1em 1em">-->
             <!--    <div class="panel-heading"><strong>Resumen</strong></div>-->
             <!--    <div class="panel-body" >-->
-            <div class="container">
+            <div class="panel-body">
                 <!--<h4>Resumen</h4>-->
                 <ul class="list-group">
                     <li class="list-group-item">
