@@ -146,6 +146,7 @@
                     recipe.StrikeWater = BrewHelper.round(recipe.WatertoGrainRatio * amountMash,10);
                 }
                 recipe.totalAmountMash = recipe.totalAmountMash || amountMash;
+                recipe.OG_exclude = recipe.OG;
             },
             totalCations: function(cations) {
                 if ( !cations ) return null;
