@@ -270,7 +270,7 @@
                     density
                 ).yeastDifference;
                 //diff is billon of cells
-                return diff/density; //10 is density (it may change)
+                return Math.ceil(diff/density); //10 is density (it may change)
             }
         };
     });
