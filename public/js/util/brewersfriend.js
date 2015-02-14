@@ -1,3 +1,6 @@
+/**
+ * bfHydrometer
+ */
 (function (exports) {
 
     function recalculate(hydro, temp, calibration) {
@@ -202,7 +205,9 @@
         return (5 / 9) * (fahrenheit - 32)
     }
 })(typeof exports === 'undefined'? this['bfHydrometer'] = {} : exports );
-
+/**
+ * bfRefractometer
+ */
 (function(exports) {
 
 
@@ -228,7 +233,7 @@
         var part2FGInBrix = convertGravityToPlato(part2FGInSG, 10);
 
         // console.log("divPart2OGCorrectedBrix",rounddecimal(part2OGInBrix, 2) + " ºP, " + rounddecimal(part2OGInSG, 3));
-        var valueStr = rounddecimal(part2FGInBrix, 2) + " ºP, " + rounddecimal(part2FGInSG, 3);        
+        var valueStr = rounddecimal(part2FGInBrix, 2) + " ºP, " + rounddecimal(part2FGInSG, 3);
         // console.log("divPart2FGCorrectedBrix",valueStr);
         var abw = 76.08 * (part2OGInSG - part2FGInSG) / (1.775 - part2OGInSG);
         var abv = abw * (part2FGInSG / 0.794);
@@ -330,7 +335,9 @@
         recalculate()
     }
 })(typeof exports === 'undefined'? this['bfRefractometer'] = {} : exports );
-
+/**
+ * bfDilution
+ */
 (function(exports) {
 
     var currentVolume2 = 7.5;
@@ -345,7 +352,7 @@
     //     currentGravity2 = document.calc.txtcurrentgravity2.value;
     //     targetVolume = document.calc.txttargetvolume.value
     // }
-    
+
     function recalculate(currentVolume, currentGravity, desiredGravity) {
         // var currentVolume = 3.5;
         // var currentGravity = 1.075;
@@ -475,3 +482,136 @@
         return rounded
     }
 })(typeof exports === 'undefined'? this['bfDilution'] = {} : exports );
+
+/**
+ * bfYeast
+ */
+(function(exports) {
+
+    /**
+     * @param wortVolume Liters
+     * @param wortGravity in gravity units
+     * @param pitchRate grams of yeast by liters
+     * @param yeastType 'dry'||'liquid'||'slurry'
+     * @param yeast_dry_grams grams of yeast
+     * @param yeast_dry_cells_per_gram density of yeast
+     *
+     * @return {
+     *  yeastNeeded yeast you need
+     *  yeastCount actual amout of yeast
+     *  yeastDifference difference (>0 is ok, <0 you need more)
+     *  actualPitchRate actual pitch rate
+     * }
+     */
+    function recalculate(
+        wortVolume,
+        wortGravity,
+        pitchRate,
+        yeastType,
+        yeast_dry_grams,
+        yeast_dry_cells_per_gram
+    ) {
+        var millilitersOfWort = wortVolume * 1000;
+        var wortPlato = convertGravityToPlato(wortGravity, 10)
+
+        var yeastNeeded = pitchRate * millilitersOfWort * wortPlato;
+        yeastNeeded = yeastNeeded / 1000;
+        //RES: Target Pitch Rate Cells
+        yeastNeeded = rounddecimal(yeastNeeded, 0); //billion cells
+
+        yeastCount = 0;
+        if (yeastType == 'dry') {
+            yeastCount = yeast_dry_cells_per_gram * yeast_dry_grams
+        }
+        //Dont use yet
+        if (yeastType == 'liquid') {
+            var daysOld = Math.floor((new Date() - Date.parse(yeast_liquid_mfg_date)) / 86400000);
+            if (daysOld < 0) {
+                daysOld = 0
+            }
+            var dayString = "days";
+            if (daysOld == 1) {
+                dayString = "day"
+            }
+            var viability = 100 - (daysOld * 0.7);
+            if (viability < 0) {
+                viability = 0
+            }
+            viability = rounddecimal(viability, 0);
+            $('#yeast_viability').html("Yeast is " + daysOld + " " + dayString + " old, the viability is estimated at " + viability + "%.");
+            yeastCount = 100 * (viability / 100) * yeast_liquid_packs
+        }
+        //Dont use yet
+        if (yeastType == 'slurry') {
+            yeastCount = yeast_slurry_density * yeast_slurry_amount * 1000
+        }
+
+        //RES: Cells Available
+        yeastCount = rounddecimal(yeastCount, 0);
+
+        //RES: Difference
+        var yeastDifference = yeastCount - yeastNeeded;
+
+        var actualPitchRate = ((yeastCount * 1000) / wortPlato) / millilitersOfWort;
+        //RES: Pitch Rate As-Is
+        actualPitchRate = rounddecimal(actualPitchRate, 2);
+
+        //Here goes starter calculations (See original JS)
+
+        return {
+            yeastNeeded: yeastNeeded,
+            yeastCount: yeastCount,
+            yeastDifference: yeastDifference,
+            actualPitchRate: actualPitchRate
+        }
+    }
+
+    function rounddecimal(n, places) {
+        if (n === null) {
+            return false
+        }
+        if (n === '') {
+            return false
+        }
+        if (isNaN(n)) {
+            return false
+        }
+        if (places < 0) {
+            return false
+        }
+        if (places > 10) {
+            return false
+        }
+        var rounded = Math.round(n * Math.pow(10, places)) / Math.pow(10, places);
+        var decimalPointPosition = (rounded + "").lastIndexOf(".");
+        if (decimalPointPosition == 0) {
+            rounded = "0" + rounded;
+            decimalPointPosition = 1
+        }
+        if (places != 0) {
+            decimalPointPosition = (rounded + "").lastIndexOf(".");
+            if (decimalPointPosition == -1 || decimalPointPosition == rounded.length - 1) {
+                rounded += "."
+            }
+        }
+        decimalPointPosition = (rounded + "").lastIndexOf(".");
+        var currentPlaces = ((rounded + "").length - 1) - decimalPointPosition;
+        if (currentPlaces < places) {
+            for (x = currentPlaces; x < places; x++) {
+                rounded += "0"
+            }
+        }
+        return rounded
+    }
+
+    function convertGravityToPlato(sg, n) {
+        if (!n) {
+            n = 1
+        }
+        var plato = (-1 * 616.868) + (1111.14 * sg) - (630.272 * Math.pow(sg, 2)) + (135.997 * Math.pow(sg, 3));
+        return rounddecimal(plato, n)
+    }
+
+    exports.recalculate = recalculate;
+
+})(typeof exports === 'undefined'? this['bfYeast'] = {} : exports );

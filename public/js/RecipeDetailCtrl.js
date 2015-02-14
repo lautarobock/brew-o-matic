@@ -734,5 +734,26 @@
         $scope.printRecipe = function() {
             PrintRecipePopup.open($scope.recipe);
         };
+
+        //Yeast section
+        $scope.yeastDiff = BrewCalc.yeastDiff;
+        $scope.yeastNeed = BrewCalc.yeastNeed;
+        $scope.totalYeast = function() {
+            if ( !$scope.recipe || !$scope.recipe.YEASTS ) return 0;
+            var total = 0;
+            angular.forEach($scope.recipe.YEASTS.YEAST, function(y) {
+                total += y.AMOUNT;
+            });
+            return total;
+        };
+        $scope.fixYeast = function() {
+            var need = -$scope.yeastNeed($scope.recipe.BATCH_SIZE, $scope.recipe.OG, 0);
+            need = Math.ceil(need);
+            try {
+                $scope.recipe.YEASTS.YEAST[0].AMOUNT = need;
+            } catch (e) {
+
+            }
+        };
     });
 })();

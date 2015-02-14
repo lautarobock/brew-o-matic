@@ -111,7 +111,8 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
             NAME: String,
             VERSION: String,
             ATTENUATION: Number,
-            AMOUNT: Number
+            AMOUNT: Number,
+            density: Number
         }]
     },
     MISCS: {
@@ -272,7 +273,8 @@ exports.Misc = mongoose.model("Misc",new Schema({
 
 exports.Yeast = mongoose.model("Yeast",new Schema({
     "name": String,
-    "aa": Number
+    "aa": Number,
+    "density": Number
 }));
 
 exports.Hop = mongoose.model("Hop",new Schema({

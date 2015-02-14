@@ -244,6 +244,29 @@
             },
             dilution: function(currentGrav, currentVol, finalGrav) {
                 return bfDilution.recalculate(currentVol, currentGrav, finalGrav);
+            },
+            yeastDiff: function(volume, gravity, grams) {
+                return bfYeast.recalculate(
+                    volume,
+                    gravity,
+                    0.75,
+                    'dry',
+                    grams,
+                    10
+                ).yeastDifference;
+            },
+            //In grams
+            yeastNeed: function(volume, gravity, grams) {
+                var diff = bfYeast.recalculate(
+                    volume,
+                    gravity,
+                    0.75,
+                    'dry',
+                    grams,
+                    10
+                ).yeastDifference;
+                //diff is billon of cells
+                return diff/10; //10 is density (it may change)
             }
         };
     });

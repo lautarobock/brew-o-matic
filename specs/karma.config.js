@@ -26,7 +26,8 @@ module.exports = function(config) {
       '../public/js/*.js',
       '../public/js/**/*.js',
       '../public/bower_components/**/*.js',
-      '**/*Spec.js'
+      '**/*Spec.js',
+      '**/*.spec.js'
     ],
 
 
@@ -40,7 +41,7 @@ module.exports = function(config) {
 
     // test results reporter to use
     // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-    reporters: ['dots', 'progress'],
+    reporters: ['progress'],
 
 
     // web server port
@@ -68,7 +69,7 @@ module.exports = function(config) {
     // - Safari (only Mac; has to be installed with `npm install karma-safari-launcher`)
     // - PhantomJS
     // - IE (only Windows; has to be installed with `npm install karma-ie-launcher`)
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
 
 
     // If browser does not capture in given timeout [ms], kill it
