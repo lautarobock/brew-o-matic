@@ -226,7 +226,16 @@
             $scope.recipeCount = AdminRecipe.count();
             $scope.userCount = AdminUser.count();
             $scope.publicCount = PublishedRecipe.count();
-            $scope.stats = Stats.query();
+            $scope.stats = {};
+            Stats.query({stats:['newRecipesByPeriod']}, mix);
+            Stats.query({stats:['lastLogin']}, mix);
+            Stats.query({stats:['singInDate']}, mix);
+            Stats.query({stats:['date']}, mix);
+            Stats.query({stats:['modificationDate']}, mix);
+            Stats.query({stats:['isPublic']}, mix);
+            Stats.query({stats:['recipesByUser']}, mix);
+            Stats.query({stats:['active']}, mix);
+            Stats.query({stats:['newRecipesByPeriod']}, mix);
             $scope.fields = ['today','week','month','year','origin'];
             var origin = new Date(2013,10,19).getTime();
             var now = new Date().getTime();
@@ -260,8 +269,15 @@
             };
         }
 
+        function mix(stats) {
+            angular.extend($scope.stats,stats);
+            console.log('stats.add', stats);
+            console.log('stats', $scope.stats);
+        }
 
     });
+
+
 
     abm.filter('filterDate', function() {
         return function(items, field, from) {

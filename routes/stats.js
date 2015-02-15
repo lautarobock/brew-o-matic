@@ -128,7 +128,18 @@ function newRecipesByPeriod(values) {
     return deferred.promise;
 }
 
+function isStat(types,type) {
+    return types.indexOf(type) !== -1;
+}
+
 exports.all = function(req, res) {
+
+    //fix QUERY
+    var types = req.query.stats || [];
+    if ( typeof(types) === 'string' ) {
+        types = [types];
+    }
+
     //Usuarios
     var now = new Date();
     var yesterday = new Date(now.getTime()-DAY);
@@ -138,55 +149,81 @@ exports.all = function(req, res) {
     var origin = new Date(now.getTime()-ORIGIN);
 
     var result = {
-        lastLogin: {},
-        singInDate: {},
-        date: {},
-        modificationDate: {},
-        isPublic: {},
-        active: {}
+        // lastLogin: {},
+        // singInDate: {},
+        // date: {},
+        // modificationDate: {},
+        // isPublic: {},
+        // active: {}
     };
-    q.all([
-        lastLogin('User',yesterday,'today',result,'lastLogin'),
-        lastLogin('User',week,'week',result,'lastLogin'),
-        lastLogin('User',month,'month',result,'lastLogin'),
-        lastLogin('User',year,'year',result,'lastLogin'),
-        lastLogin('User',origin,'origin',result,'lastLogin'),
 
-        lastLogin('User',yesterday,'today',result,'singInDate'),
-        lastLogin('User',week,'week',result,'singInDate'),
-        lastLogin('User',month,'month',result,'singInDate'),
-        lastLogin('User',year,'year',result,'singInDate'),
-        lastLogin('User',origin,'origin',result,'singInDate'),
+    var stats = [];
 
-        lastLogin('Recipe',yesterday,'today',result,'date'),
-        lastLogin('Recipe',week,'week',result,'date'),
-        lastLogin('Recipe',month,'month',result,'date'),
-        lastLogin('Recipe',year,'year',result,'date'),
-        lastLogin('Recipe',origin,'origin',result,'date'),
+    if ( isStat(types,'lastLogin') ) {
+        result.lastLogin = {};
+        stats.push(lastLogin('User',yesterday,'today',result,'lastLogin'));
+        stats.push(lastLogin('User',week,'week',result,'lastLogin'));
+        stats.push(lastLogin('User',month,'month',result,'lastLogin'));
+        stats.push(lastLogin('User',year,'year',result,'lastLogin'));
+        stats.push(lastLogin('User',origin,'origin',result,'lastLogin'));
+    }
 
-        lastLogin('Recipe',yesterday,'today',result,'modificationDate'),
-        lastLogin('Recipe',week,'week',result,'modificationDate'),
-        lastLogin('Recipe',month,'month',result,'modificationDate'),
-        lastLogin('Recipe',year,'year',result,'modificationDate'),
-        lastLogin('Recipe',origin,'origin',result,'modificationDate'),
+    if ( isStat(types,'singInDate') ) {
+        result.singInDate = {};
+        stats.push(lastLogin('User',yesterday,'today',result,'singInDate'));
+        stats.push(lastLogin('User',week,'week',result,'singInDate'));
+        stats.push(lastLogin('User',month,'month',result,'singInDate'));
+        stats.push(lastLogin('User',year,'year',result,'singInDate'));
+        stats.push(lastLogin('User',origin,'origin',result,'singInDate'));
+    }
 
-        publicRecipes(yesterday,'today',result),
-        publicRecipes(week,'week',result),
-        publicRecipes(month,'month',result),
-        publicRecipes(year,'year',result),
-        publicRecipes(origin,'origin',result),
+    if ( isStat(types,'date') ) {
+        result.date = {};
+        stats.push(lastLogin('Recipe',yesterday,'today',result,'date'));
+        stats.push(lastLogin('Recipe',week,'week',result,'date'));
+        stats.push(lastLogin('Recipe',month,'month',result,'date'));
+        stats.push(lastLogin('Recipe',year,'year',result,'date'));
+        stats.push(lastLogin('Recipe',origin,'origin',result,'date'));
+    }
 
-        recipesByUser(result),
+    if ( isStat(types,'modificationDate') ) {
+        result.modificationDate = {};
+        stats.push(lastLogin('Recipe',yesterday,'today',result,'modificationDate'));
+        stats.push(lastLogin('Recipe',week,'week',result,'modificationDate'));
+        stats.push(lastLogin('Recipe',month,'month',result,'modificationDate'));
+        stats.push(lastLogin('Recipe',year,'year',result,'modificationDate'));
+        stats.push(lastLogin('Recipe',origin,'origin',result,'modificationDate'));
+    }
 
-        activeUsers(yesterday,'today',result),
-        activeUsers(week,'week',result),
-        activeUsers(month,'month',result),
-        activeUsers(year,'year',result),
-        activeUsers(origin,'origin',result),
+    if ( isStat(types,'isPublic') ) {
+        result.isPublic = {};
+        stats.push(publicRecipes(yesterday,'today',result));
+        stats.push(publicRecipes(week,'week',result));
+        stats.push(publicRecipes(month,'month',result));
+        stats.push(publicRecipes(year,'year',result));
+        stats.push(publicRecipes(origin,'origin',result));
+    }
 
-        newRecipesByPeriod(result)
+    if ( isStat(types,'recipesByUser') ) {
+        result.recipesByUser = {};
+        stats.push(recipesByUser(result));
+    }
 
-    ]).then(function(count) {
+    if ( isStat(types,'active') ) {
+        result.active = {};
+        stats.push(activeUsers(yesterday,'today',result));
+        stats.push(activeUsers(week,'week',result));
+        stats.push(activeUsers(month,'month',result));
+        stats.push(activeUsers(year,'year',result));
+        stats.push(activeUsers(origin,'origin',result));
+    }
+
+    if ( types.indexOf('newRecipesByPeriod') !== -1 ) {
+        result.newRecipesByPeriod = {};
+        stats.push(newRecipesByPeriod(result));
+    }
+
+    q.all(stats).then(function(count) {
         res.send(result);
     });
 
