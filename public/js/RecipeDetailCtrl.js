@@ -363,6 +363,7 @@
                 if ( changed.NAME == yeast.name) {
                     changed.ATTENUATION = yeast.aa;
                     changed.density = yeast.density || 10;
+                    changed.packageSize = yeast.packageSize || 11;
                 }
             });
             $scope.changeYeast();
@@ -584,7 +585,7 @@
 
         $scope.gravityBarValue = function(grav,max) {
             return BrewHelper.toPpg(grav) / max * 100;
-        }
+        };
 
 
         //Carbonatation section

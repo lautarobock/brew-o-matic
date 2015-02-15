@@ -81,6 +81,11 @@
                         caption: 'Densidad',
                         type: 'number',
                         width:'20%'
+                    },{
+                        field:'packageSize',
+                        caption: 'Tamaño Paquete (g)',
+                        type: 'number',
+                        width:'20%'
                     }
                 ]
             },

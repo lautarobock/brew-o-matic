@@ -35,6 +35,12 @@
         };
     });
 
+    helper.filter('numberCeil', function() {
+        return function(value) {
+            return Math.ceil(value);
+        };
+    });
+
     helper.factory("TagColor",function() {
         var colorsStyles = ['btn-primary','btn-success','btn-yellow','btn-info','btn-warning','btn-danger','btn-brown'];
         var colorPos = 0;
@@ -150,6 +156,7 @@
                 recipe.OG_exclude = recipe.OG;
                 if ( recipe.YEASTS.YEAST ) {
                     recipe.YEASTS.YEAST[0].density = recipe.YEASTS.YEAST[0].density || 10;
+                    recipe.YEASTS.YEAST[0].packageSize = recipe.YEASTS.YEAST[0].packageSize || 11;
                 }
             },
             totalCations: function(cations) {
