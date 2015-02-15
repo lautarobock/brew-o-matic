@@ -31,26 +31,38 @@
         <ul class="list-group">
             <li class="list-group-item" style="overflow: hidden;">
                 <div class="col-md-2">
+                    <strong>Taza de inoculacion:</strong>
+                </div>
+                <div class="col-md-6">
+                    <select class="form-control input-sm" ng-model="recipe.pitchRate">
+                        <option ng-selected="pr.value === recipe.pitchRate" ng-repeat="pr in pitchRates" value="{{pr.value}}">
+                            {{pr.name}}
+                        </option>
+                    </select>
+                </div>
+            </li>
+            <li class="list-group-item" style="overflow: hidden;">
+                <div class="col-md-2">
                     <strong>Cantidad optima:</strong>
                 </div>
                 <div class="col-md-2">
                     <span class="form-control input-sm gt-calculated ">
-                        {{-yeastNeed(recipe.BATCH_SIZE, recipe.OG, 0,totalDensity())}} Gramos
+                        {{-yeastNeed(recipe.BATCH_SIZE, recipe.OG, 0,totalDensity(), recipe.pitchRate)}} Gramos
                     </span>
                 </div>
             </li>
-            <li class="list-group-item" style="overflow: hidden;" ng-show="yeastNeed(recipe.BATCH_SIZE, recipe.OG, totalYeast(),totalDensity())<0">
+            <li class="list-group-item" style="overflow: hidden;" ng-show="yeastNeed(recipe.BATCH_SIZE, recipe.OG, totalYeast(),totalDensity(), recipe.pitchRate)<0">
                 <div class="col-md-2">
                     <strong>Cantidad Faltante:</strong>
                 </div>
                 <div class="col-md-2">
                     <span class="form-control input-sm gt-calculated">
-                        {{-yeastNeed(recipe.BATCH_SIZE, recipe.OG, totalYeast(),totalDensity())}} Gramos
+                        {{-yeastNeed(recipe.BATCH_SIZE, recipe.OG, totalYeast(),totalDensity(), recipe.pitchRate)}} Gramos
                     </span>
                 </div>
                 <div class="col-md-6">
                     <span class="text-danger">
-                        Aun necesitas {{-yeastNeed(recipe.BATCH_SIZE, recipe.OG, totalYeast(),totalDensity())}} gramos para una correcta fermentacion!
+                        Aun necesitas {{-yeastNeed(recipe.BATCH_SIZE, recipe.OG, totalYeast(),totalDensity(), recipe.pitchRate)}} gramos para una correcta fermentacion!
                     </span>
                 </div>
                 <div class="col-md-2">
@@ -59,13 +71,13 @@
                     </button>
                 </div>
             </li>
-            <li class="list-group-item" style="overflow: hidden;" ng-show="yeastNeed(recipe.BATCH_SIZE, recipe.OG, totalYeast(),totalDensity())>=0">
+            <li class="list-group-item" style="overflow: hidden;" ng-show="yeastNeed(recipe.BATCH_SIZE, recipe.OG, totalYeast(),totalDensity(), recipe.pitchRate)>=0">
                 <div class="col-md-2">
                     <strong>Cantidad Sobrante:</strong>
                 </div>
                 <div class="col-md-2">
                     <span class="form-control input-sm gt-calculated">
-                        {{yeastNeed(recipe.BATCH_SIZE, recipe.OG, totalYeast(),totalDensity())}} Gramos
+                        {{yeastNeed(recipe.BATCH_SIZE, recipe.OG, totalYeast(),totalDensity(), recipe.pitchRate)}} Gramos
                     </span>
                 </div>
                 <div class="col-md-8">

@@ -128,6 +128,7 @@
                 recipe.SpargeDeadSpace = recipe.SpargeDeadSpace || 0;
                 recipe.lossMashTemp = recipe.lossMashTemp || 0;
                 recipe.PercentEvap = recipe.PercentEvap || 10;
+                recipe.pitchRate = recipe.pitchRate || 0.75;
                 if ( !recipe.WatertoGrainRatio ) {
                     recipe.WatertoGrainRatio = 3;
                     recipe.StrikeWater = BrewHelper.round(recipe.WatertoGrainRatio * recipe.totalAmountMash,10);
@@ -248,23 +249,23 @@
             dilution: function(currentGrav, currentVol, finalGrav) {
                 return bfDilution.recalculate(currentVol, currentGrav, finalGrav);
             },
-            yeastDiff: function(volume, gravity, grams, density) {
+            yeastDiff: function(volume, gravity, grams, density, pitchRate) {
                 return bfYeast.recalculate(
                     volume,
                     gravity,
-                    0.75,
+                    pitchRate || 0.75,
                     'dry',
                     grams,
                     density || 10
                 ).yeastDifference;
             },
             //In grams
-            yeastNeed: function(volume, gravity, grams, density) {
+            yeastNeed: function(volume, gravity, grams, density, pitchRate) {
                 density = density || 10;
                 var diff = bfYeast.recalculate(
                     volume,
                     gravity,
-                    0.75,
+                    pitchRate || 0.75,
                     'dry',
                     grams,
                     density

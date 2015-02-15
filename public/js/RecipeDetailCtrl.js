@@ -10,31 +10,33 @@
         $scope.amountGrs=$scope.hop.AMOUNT*1000;
     });
 
-    index.controller("RecipeDetailCtrl",
-                     function (
-                               $scope,
-                               BrewHelper,
-                               BrewCalc,
-                               Grain,
-                               Hop,
-                               HopUse,
-                               HopForm,
-                               Yeast,
-                               Style,
-                               Tag,
-                               Misc,
-                               MiscType,
-                               MiscUse,
-                               $routeParams,
-                               $rootScope,
-                               Recipe,
-                               $location,
-                               alertFactory,
-                               TagColor,
-                               CalculatorPopup,
-                               PrintRecipePopup,
-                               FermentableUses) {
-
+    index.controller(
+        "RecipeDetailCtrl",
+        function (
+           $scope,
+           BrewHelper,
+           BrewCalc,
+           Grain,
+           Hop,
+           HopUse,
+           HopForm,
+           Yeast,
+           Style,
+           Tag,
+           Misc,
+           MiscType,
+           MiscUse,
+           $routeParams,
+           $rootScope,
+           Recipe,
+           $location,
+           alertFactory,
+           TagColor,
+           CalculatorPopup,
+           PrintRecipePopup,
+           FermentableUses,
+           PitchRate
+        ) {
 
         $scope.BrewHelper = BrewHelper;
 
@@ -67,6 +69,8 @@
         $scope.miscUses = MiscUse.query();
 
         $scope.fermentableUses = FermentableUses.query();
+
+        $scope.pitchRates = PitchRate.query();
 
         $scope.tags = Tag.query();
 
@@ -743,7 +747,7 @@
         };
 
         //Yeast section
-        $scope.yeastDiff = BrewCalc.yeastDiff;
+        // $scope.yeastDiff = BrewCalc.yeastDiff;
         $scope.yeastNeed = BrewCalc.yeastNeed;
         $scope.totalYeast = function() {
             if ( !$scope.recipe || !$scope.recipe.YEASTS ) return 0;
@@ -766,7 +770,8 @@
                 $scope.recipe.BATCH_SIZE,
                 $scope.recipe.OG,
                 0,
-                $scope.totalDensity()
+                $scope.totalDensity(),
+                $scope.recipe.pitchRate
             );
             need = Math.ceil(need);
             try {

@@ -97,3 +97,20 @@ data.factory("MiscUse",function() {
         }
     };
 });
+
+data.factory('PitchRate', function() {
+    return {
+        query: function() {
+            return [
+                {value:0.35, name:'MFG Recomendado 0.35 (Ale, levadura fresca)'},
+                {value:0.5, name:'MFG Recommendado+ 0.5 (Ale, levadura fresca)'},
+                {value:0.75 , name:'Pro Brewer 0.75 (Ale)'},
+                {value:1.0, name:'Pro Brewer 1.0 (Ale, Alta densidad)'},
+                {value:1.25, name:'Pro Brewer 1.25 (Ale, or Alta densidad)'},
+                {value:1.5, name:'Pro Brewer 1.5 (Lager)'},
+                {value:1.75, name:'Pro Brewer 1.75 (Lager)'},
+                {value:2.0, name:'Pro Brewer 2.0 (Lager alta densidad)'}
+            ];
+        }
+    };
+});
