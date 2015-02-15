@@ -24,7 +24,8 @@ exports.User = mongoose.model("User",new Schema({
             GrainAbsorbtion: Number,
             PercentEvap: Number,
             TrubChillerLosses: Number,
-            isPublic: Boolean
+            isPublic: Boolean,
+            pitchRate: Number
         },
         closeUseSurvey: Boolean
     },

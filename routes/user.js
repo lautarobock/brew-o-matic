@@ -28,7 +28,8 @@ function buildNewUser(google_id, name) {
             "GrainAbsorbtion":0.9,
             "PercentEvap":10,
             "TrubChillerLosses":0,
-            isPublic: false
+            "isPublic": false,
+            "pitchRate": 0.75
         }
     };
     return user;
@@ -42,7 +43,7 @@ exports.add = function(req,res) {
     model.User.create(user,function(err,newuser) {
         res.send(newuser);
     });
-    
+
 };
 
 exports.updateSettings = function(req,res) {
@@ -60,9 +61,9 @@ exports.updateSettings = function(req,res) {
                 console.log("err",err);
                 console.log(resp);
                 res.send(user);
-                actions.log(req.session.user_id, "UPDATE_SETTINGS","User: " + user.name);    
+                actions.log(req.session.user_id, "UPDATE_SETTINGS","User: " + user.name);
             });
-            
+
         }
     });
 };
@@ -92,10 +93,10 @@ exports.getByGoogleId = function(req, res){
             s.user_id = user._id;
             s.user_name = user.name;
             s.user_isAdmin = user.isAdmin;
-            
+
             user.lastLogin = new Date();
             user.singInDate = user.singInDate || user.lastLogin;
-            
+
             user.save();
             res.send(user);
             //actions.log(req.session.user_id, "LOG_IN","User: " + req.query.name);
@@ -107,7 +108,7 @@ exports.getByGoogleId = function(req, res){
             actions.log(req.session.user_id, "SING_IN","User: " + req.query.name);
         }
 
-    });   
+    });
 };
 
 exports.addToFavorites = function(req,res) {
@@ -126,7 +127,7 @@ exports.addToFavorites = function(req,res) {
                 actions.log(req.session.user_id, "ADD_FAVORITES","El usuario '"+user.name+"' agrego la receta '"+recipe.NAME+"' de '"+recipe.BREWER+"'. recipe_id: "+req.body._id);
                 notifications.notifyAddFavorite(recipe.owner,recipe,req.session.user_id,req.session.user_name);
             });
-            
+
             user.save(function(err,user) {
                 res.send(user);
             });
@@ -138,7 +139,7 @@ exports.removeFromFavorites = function(req,res) {
     model.User
             .findOne({_id: new mongoose.Types.ObjectId(req.session.user_id)})
             .exec(function(err,user) {
-        
+
         var index = user.favorites.indexOf(req.body._id);
         if ( index > -1 ) {
             user.favorites.splice(index,1);
@@ -146,7 +147,7 @@ exports.removeFromFavorites = function(req,res) {
         user.save(function(err,user) {
             res.send(user);
         });
-        
+
         //update recipe too (async)
         model.Recipe.findOne({_id:req.body._id},function(err,recipe) {
             Arrays.remove(recipe.starredBy,user._id,function(userid,object){

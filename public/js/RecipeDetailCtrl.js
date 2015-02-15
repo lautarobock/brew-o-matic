@@ -560,6 +560,7 @@
                         SpargeDeadSpace: $scope.user.settings.defaultValues.SpargeDeadSpace,
                         SpargeTempDesired: $scope.user.settings.defaultValues.SpargeTempDesired,
                         TopUpWater: 0,
+                        pitchRate: $scope.user.settings.defaultValues.pitchRate,
                         PercentEvap: $scope.user.settings.defaultValues.PercentEvap,
                         TrubChillerLosses: $scope.user.settings.defaultValues.TrubChillerLosses,
                         isPublic: $scope.user.settings.defaultValues.isPublic,

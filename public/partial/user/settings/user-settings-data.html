@@ -14,7 +14,7 @@
         <div class="panel-heading"><strong>Valores por defecto en tus recetas</strong></div>
         <div class="panel-body" >
             <div class="row">
-                <div class="col-md-3">        
+                <div class="col-md-3">
                     <label for="batchSize">Tamaño Batch (Lts)</label>
                     <input type="number"
                            step="0.1"
@@ -23,7 +23,7 @@
                            placeholder="(Tamaño del batch por defecto)"
                            ng-model="user.settings.defaultValues.BATCH_SIZE">
                 </div>
-                <div class="col-md-3">        
+                <div class="col-md-3">
                     <label for="eficiency">Eficiencia</label>
                     <input type="number"
                            class="form-control input-sm"
@@ -31,7 +31,7 @@
                            placeholder="(Eficiencia del equipo)"
                            ng-model="user.settings.defaultValues.EFFICIENCY">
                 </div>
-                <div class="col-md-3">        
+                <div class="col-md-3">
                     <label for="boilTime">Tiempo de hervido (min)</label>
                     <input type="number"
                            class="form-control input-sm"
@@ -39,7 +39,7 @@
                            placeholder="(Tiempo de hervido)"
                            ng-model="user.settings.defaultValues.BOIL_TIME">
                 </div>
-                <div class="col-md-3">        
+                <div class="col-md-3">
                     <label for="brewer">Cervecero</label>
                     <input type="text"
                            class="form-control input-sm"
@@ -48,9 +48,9 @@
                            ng-model="user.settings.defaultValues.BREWER">
                 </div>
             </div>
-                
+
             <div class="row">
-                <div class="col-md-3">        
+                <div class="col-md-3">
                     <label for="GrainTemp">Temperatura del grano</label>
                     <input type="number"
                            step="0"
@@ -59,7 +59,7 @@
                            placeholder="(Temperatura del grano)"
                            ng-model="user.settings.defaultValues.GrainTemp">
                 </div>
-                <div class="col-md-3">        
+                <div class="col-md-3">
                     <label for="WatertoGrainRatio">Relacion Empaste (Lts/Kg)</label>
                     <input type="number"
                            class="form-control input-sm"
@@ -67,7 +67,7 @@
                            placeholder="(Relacion Empaste)"
                            ng-model="user.settings.defaultValues.WatertoGrainRatio">
                 </div>
-                <div class="col-md-3">        
+                <div class="col-md-3">
                     <label for="mashTemp">Temp. Macerado</label>
                     <input type="number"
                            class="form-control input-sm"
@@ -75,7 +75,7 @@
                            placeholder="(Temperatura macerado)"
                            ng-model="user.settings.defaultValues.mashTemp">
                 </div>
-                <div class="col-md-3">        
+                <div class="col-md-3">
                     <label for="lossMashTemp">Perdida (ºC)</label>
                     <input type="text"
                            class="form-control input-sm"
@@ -84,9 +84,9 @@
                            ng-model="user.settings.defaultValues.lossMashTemp">
                 </div>
             </div>
-                
+
             <div class="row">
-                <div class="col-md-3">        
+                <div class="col-md-3">
                     <label for="SpargeTempDesired">Temperatura Lavado</label>
                     <input type="number"
                            class="form-control input-sm"
@@ -94,7 +94,7 @@
                            placeholder="(Temperatura lavado)"
                            ng-model="user.settings.defaultValues.SpargeTempDesired">
                 </div>
-                <div class="col-md-3">        
+                <div class="col-md-3">
                     <label for="SpargeDeadSpace">Espacio Muerto (Lts)</label>
                     <input type="number"
                            step="0.1"
@@ -103,7 +103,7 @@
                            placeholder="(Espacio Muerto Macerador)"
                            ng-model="user.settings.defaultValues.SpargeDeadSpace">
                 </div>
-                <div class="col-md-3">        
+                <div class="col-md-3">
                     <label for="GrainAbsorbtion">Absorcion del grano Lts/Kg</label>
                     <input type="number"
                            step="0.1"
@@ -112,7 +112,7 @@
                            placeholder="(Absorcion del grano)"
                            ng-model="user.settings.defaultValues.GrainAbsorbtion">
                 </div>
-                <div class="col-md-3">        
+                <div class="col-md-3">
                     <label for="PercentEvap">Evaporacion (%)</label>
                     <input type="number"
                            class="form-control input-sm"
@@ -123,7 +123,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-3">        
+                <div class="col-md-3">
                     <label for="TrubChillerLosses">Perdida Turb y Enfirador (Lts)</label>
                     <input type="number"
                            step="0.1"
@@ -137,6 +137,14 @@
                         <label title="Las recetas seran visibles por todos los usuarios (podra deshabilitar esta opcion en cada receta)" for="isPublic">Publica receta</label>
                         <input id="isPublic" type="checkbox" ng-model="user.settings.defaultValues.isPublic" />
                     </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="pitchRate">Taza de inoculacion</label>
+                    <select class="form-control input-sm" ng-model="user.settings.defaultValues.pitchRate">
+                        <option ng-selected="pr.value === user.settings.defaultValues.pitchRate" ng-repeat="pr in pitchRates" value="{{pr.value}}">
+                            {{pr.name}}
+                        </option>
+                    </select>
                 </div>
             </div>
         </div>

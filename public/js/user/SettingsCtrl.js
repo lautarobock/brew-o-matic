@@ -24,7 +24,7 @@
         $scope.save = function() {
             $scope.water.$save(function(saved) {
                 alertFactory.create('success','Reporte de agua Guardado!');
-                $location.path('/settings/water/' + saved._id) 
+                $location.path('/settings/water/' + saved._id)
             });
         };
     });
@@ -50,12 +50,14 @@
             $timeout(function() {
                 report.$remove(function() {
                     $scope.reports = WaterReport.query();
-                });    
+                });
             },500);
         };
     });
 
-	settings.controller("UserSettingsCtrl",function($scope,User,$rootScope) {
+	settings.controller("UserSettingsCtrl",function($scope,User,$rootScope,PitchRate) {
+
+		$scope.user.settings.defaultValues.pitchRate = $scope.user.settings.defaultValues.pitchRate || 0.75;
 
         $scope.disconnectUser = function() {
             var revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' +
@@ -87,21 +89,24 @@
             link: '#',
             title: 'Configuracion'
         }];
-        
+
+		$scope.pitchRates = PitchRate.query();
+
         $scope.notifications = [];
         $scope.save = function() {
-            //$scope.user.settings.defaultValues = $scope.dv;      
+            //$scope.user.settings.defaultValues = $scope.dv;
+			$scope.user.settings.defaultValues.pitchRate = parseFloat($scope.user.settings.defaultValues.pitchRate);
             User.updateSettings($scope.user, function() {
                 $scope.notifications.push({
                     type:'success',
                     title:'Configuracion guardada!',
                     text:'Tus cambios han sido guardados con exito!'
-                });    
+                });
             });
-            
+
         };
     });
-    
+
 
     settings.controller("SettingsTabCtrl",function($scope) {
         $scope.sortTabs = ['data'];
