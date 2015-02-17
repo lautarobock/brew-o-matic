@@ -2,6 +2,27 @@
 
     var helper = angular.module("helper",[]);
 
+    helper.directive('alertInput', function() {
+        return {
+            restrict : 'A',
+            scope : {
+                alertInput: '='
+            },
+            link: function(scope, element, attrs) {
+                scope.$watch('alertInput', function(v) {
+                    if ( v ) {
+                        element.addClass('gt-error');
+                        element.removeClass('gt-calculated');
+                    } else {
+                        element.addClass('gt-calculated');
+                        element.removeClass('gt-error');
+                    }
+                    element.attr.title = v;
+                });
+            }
+        };
+    });
+
     helper.directive('showTags', function($compile,TagColor) {
         return {
             restrict : 'EA',
@@ -11,10 +32,10 @@
                 removable: '@',
                 itemClick: '&'
             },
-            template: "<button style='margin:2px' ng-click='removeTag($index)' ng-repeat='tag in tags() track by $index' type='button' class='btn btn-xs' ng-class='color(tag)'>"
-                    + "{{tag}}"
-                    + "<span ng-show='removable' class='glyphicon glyphicon-remove'></span>"
-                    + "</button>",
+            template: "<button style='margin:2px' ng-click='removeTag($index)' ng-repeat='tag in tags() track by $index' type='button' class='btn btn-xs' ng-class='color(tag)'>" +
+                    "{{tag}}" +
+                    "<span ng-show='removable' class='glyphicon glyphicon-remove'></span>" +
+                    "</button>",
             controller: function($scope) {
                 $scope.color = TagColor;
 

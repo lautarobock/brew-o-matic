@@ -60,10 +60,11 @@
                 </div>
             </div>
         </div>
-        <div class="row" style="margin:0">
-            <strong>Color:</strong> {{recipe.CALCCOLOUR | number:1}} SRM
+        <div class="row" style="margin:0" >
+            <strong>Color:</strong> <span title="{{error.CALCCOLOUR}}" alert-input="error.CALCCOLOUR">
+                {{recipe.CALCCOLOUR | number:1}} SRM</span>
             <div style="border: 1px solid; height: 50px; background-color: {{convertColor(recipe.CALCCOLOUR)}};border-radius: 5px;">
-                
+
             </div>
         </div>
 

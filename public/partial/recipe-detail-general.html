@@ -12,7 +12,7 @@
             <div class="col-lg-2">
               <label for="OG">OG</label>
               <div class="input-group">
-                <span class="form-control input-sm gt-calculated" id="OG" ng-bind="recipe.OG" />
+                <span class="form-control input-sm" title="{{error.OG}}" alert-input="error.OG" id="OG" ng-bind="recipe.OG" />
                 <span class="input-group-btn">
                   <a class="btn btn-default btn-sm" href="" ng-click="openCalculatorOG()">
                     <img src="images/calculator.png"/>
@@ -22,7 +22,7 @@
             </div>
             <div class="col-lg-2">
               <label for="ibu">IBU</label>
-              <span class="form-control input-sm gt-calculated" id="ibu" ng-bind="recipe.CALCIBU">
+              <span class="form-control input-sm" title="{{error.CALCIBU}}" alert-input="error.CALCIBU" id="ibu" ng-bind="recipe.CALCIBU">
             </div>
             <div class="col-lg-2">
               <label for="balance">Balance</label>
@@ -47,7 +47,7 @@
             <div class="col-lg-2">
               <label for="fg">FG</label>
               <div class="input-group">
-                <span class="form-control input-sm gt-calculated" id="fg" ng-bind="recipe.FG"/>
+                <span class="form-control input-sm"  title="{{error.FG}}" alert-input="error.FG" id="fg" ng-bind="recipe.FG"/>
                 <span class="input-group-btn">
                   <a class="btn btn-default btn-sm" href="" ng-click="openCalculatorFG()">
                     <img src="images/calculator.png"/>
@@ -61,7 +61,7 @@
             </div>
             <div class="col-lg-2">
               <label for="abv">Alcohol (ABV) %</label>
-              <span class="form-control input-sm gt-calculated" id="abv" ng-bind="recipe.ABV"/>
+              <span class="form-control input-sm" title="{{error.ABV}}" alert-input="error.ABV" id="abv" ng-bind="recipe.ABV"/>
             </div>
         </div>
     </div>

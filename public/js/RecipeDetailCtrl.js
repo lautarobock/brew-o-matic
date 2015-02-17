@@ -245,7 +245,42 @@
             $scope.recipe.StrikeWater=BrewHelper.round($scope.recipe.WatertoGrainRatio*$scope.recipe.totalAmountMash,10);
 
             $scope.changeHop();
+
+            checkStyle();
         };
+
+        $scope.error = {};
+        function checkStyle() {
+            var style;
+            angular.forEach($scope.styles, function(s) {
+                if ( s.name === $scope.recipe.STYLE.NAME) {
+                    style = s;
+                }
+            });
+            function range(attr, min, max, name) {
+                if ( $scope.recipe.naziMode && ($scope.recipe[attr] > max || $scope.recipe[attr] < min)) {
+                    $scope.error[attr] = (name||attr) + ' entre ' + min + ' y ' + max;
+                } else {
+                    delete $scope.error[attr];
+                }
+            }
+            if ( style ) {
+                range('OG', style.OG_Min, style.OG_Max);
+                range('FG', style.FG_Min, style.FG_Max);
+                range('CALCIBU', style.IBU_Min, style.IBU_Max,'IBU');
+                range('CALCCOLOUR', style.Colour_Min, style.Colour_Max,'Color');
+                range('ABV', style.ABV_Min, style.ABV_Max);
+            } else {
+                delete $scope.error.OG;
+                delete $scope.error.FG;
+                delete $scope.error.CALCIBU;
+                delete $scope.error.CALCCOLOUR;
+                delete $scope.error.ABV;
+            }
+        }
+        $scope.$watch('recipe.naziMode+recipe.STYLE.NAME', function() {
+            checkStyle();
+        });
 
         $scope.hopGramsPerLiter = function(hop,batchSize) {
             return hop.AMOUNT*1000/batchSize;
@@ -327,6 +362,8 @@
             var RTE = 0.82 * FG + 0.18 * OG;
 
             $scope.recipe.BV = BrewHelper.round(0.8 * $scope.recipe.CALCIBU / RTE,100);
+
+            checkStyle();
         };
 
         $scope.convertColor = function(srm) {

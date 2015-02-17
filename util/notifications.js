@@ -19,7 +19,7 @@ exports.notifyNewCollaborators = function(recipe, collaborators) {
 
         var link = "#/recipe/edit/" + encodeURIComponent(recipe._id);
 
-        notify(c_id,data,link)
+        notify(c_id,data,link);
     }
 };
 
@@ -83,7 +83,7 @@ exports.notifyUpdateFavorite = function(recipe) {
     for (var i=0; i<recipe.starredBy.length; i++) {
         var data = "Han actualizado tu receta favorita <b>{{recipe.NAME}}</b>";
         data = data.replace('{{recipe.NAME}}',recipe.NAME);
-        
+
         var link = "/share.html#/" + encodeURIComponent(recipe._id);
         notify(recipe.starredBy[i]._id, data, link);
     }
@@ -99,7 +99,7 @@ exports.notifyUpdateCollaborators = function(recipe, user_id, user_name) {
         var data = "<b>{{user_name}}</b> ha actualizado tu receta <b>{{recipe.NAME}}</b>";
         data = data.replace('{{recipe.NAME}}',recipe.NAME);
         data = data.replace('{{user_name}}',user_name);
-        
+
         var link = "#/recipe/edit/" + encodeURIComponent(recipe._id);
 
         notify(recipe.owner._id, data, link);
@@ -110,10 +110,10 @@ exports.notifyUpdateCollaborators = function(recipe, user_id, user_name) {
             var data = "<b>{{user_name}}</b> ha actualizado la receta <b>{{recipe.NAME}}</b> en la que eres colaborador";
             data = data.replace('{{recipe.NAME}}',recipe.NAME);
             data = data.replace('{{user_name}}',user_name);
-            
+
             var link = "#/recipe/edit/" + encodeURIComponent(recipe._id);
-            
-            notify(col_id, data, link);    
+
+            notify(col_id, data, link);
         }
     }
 };
@@ -132,7 +132,7 @@ exports.notifyCommentOnFavorite = function(recipe, user_id , user_name) {
             var data = "<b>{{user_name}}</b> ha comentado tu receta favorita <b>{{recipe.NAME}}</b>";
             data = data.replace('{{user_name}}',user_name);
             data = data.replace('{{recipe.NAME}}',recipe.NAME);
-            
+
             var link = "/share.html#/" + encodeURIComponent(recipe._id);
             notified.push(recipe.starredBy[i]._id.toString());
             notify(recipe.starredBy[i]._id, data, link);
@@ -159,7 +159,7 @@ exports.notifyChangeFermentationStage = function(owner_id, recipe_id, recipe_nam
     if ( stageFrom ) {
         data = "Tu receta <b>{{recipe.NAME}}</b> ha pasado de la etapa de fermentacion <b>{{stageFrom}}</b> "
             + " (temperatura {{tempFrom}}º) a la <b>{{stageTo}}</b> (temperatura {{tempTo}}º).";
-        data = data.replace('{{recipe.NAME}}',recipe_name);    
+        data = data.replace('{{recipe.NAME}}',recipe_name);
         data = data.replace('{{stageFrom}}',stageFrom.title);
         data = data.replace('{{stageTo}}',stageTo.title);
         data = data.replace('{{tempFrom}}',stageFrom.temperatureEnd);
@@ -167,11 +167,11 @@ exports.notifyChangeFermentationStage = function(owner_id, recipe_id, recipe_nam
      } else {
         data = "Tu receta <b>{{recipe.NAME}}</b> ha comenzado las etapas de fermentacion con <b>{{stageTo}}</b> "
             + " (temperatura {{tempTo}}º).";
-        data = data.replace('{{recipe.NAME}}',recipe_name);    
+        data = data.replace('{{recipe.NAME}}',recipe_name);
         data = data.replace('{{stageTo}}',stageTo.title);
         data = data.replace('{{tempTo}}',stageTo.temperature);
     }
-    
+
     var link = "#/recipe/edit/" + encodeURIComponent(recipe_id);
     notify(owner_id, data, link);
 }
@@ -190,7 +190,7 @@ exports.notifyCommentOnRecipe = function(owner_id, user_id,user_name , recipe_id
         var data = "<b>{{user_name}}</b> ha comentado en tu receta <b>{{recipe.NAME}}</b>";
         data = data.replace('{{user_name}}',user_name);
         data = data.replace('{{recipe.NAME}}',recipe_name);
-        
+
         var link = "#/recipe/edit/" + encodeURIComponent(recipe_id);
         notify(owner_id, data, link);
     }

@@ -40,7 +40,15 @@
                     <option ng-selected="!recipe.fixIngredients || recipe.fixIngredients=='0'" value="0">
                         Si
                     </option>
-                </select>                        
+                </select>
+            </div>
+            <div>
+                <div class="checkbox">
+                    <label>
+                        Nazi Mode
+                        <input type="checkbox" ng-model="recipe.naziMode"/>
+                    </label>
+                </div>
             </div>
         </div>
     </div>
