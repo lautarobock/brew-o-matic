@@ -250,6 +250,7 @@
         };
 
         $scope.error = {};
+        $scope.hasStyleError = false;
         function checkStyle() {
             var style;
             angular.forEach($scope.styles, function(s) {
@@ -257,19 +258,28 @@
                     style = s;
                 }
             });
+            var prevError = $scope.hasStyleError;
+            $scope.hasStyleError = false;
             function range(attr, min, max, name) {
                 if ( $scope.recipe.naziMode && ($scope.recipe[attr] > max || $scope.recipe[attr] < min)) {
                     $scope.error[attr] = (name||attr) + ' entre ' + min + ' y ' + max;
+                    return false;
                 } else {
                     delete $scope.error[attr];
+                    return true;
                 }
             }
             if ( style ) {
-                range('OG', style.OG_Min, style.OG_Max);
-                range('FG', style.FG_Min, style.FG_Max);
-                range('CALCIBU', style.IBU_Min, style.IBU_Max,'IBU');
-                range('CALCCOLOUR', style.Colour_Min, style.Colour_Max,'Color');
-                range('ABV', style.ABV_Min, style.ABV_Max);
+                $scope.hasStyleError = !range('OG', style.OG_Min, style.OG_Max) || $scope.hasStyleError;
+                $scope.hasStyleError = !range('FG', style.FG_Min, style.FG_Max) || $scope.hasStyleError;
+                $scope.hasStyleError = !range('CALCIBU', style.IBU_Min, style.IBU_Max,'IBU') || $scope.hasStyleError;
+                $scope.hasStyleError = !range('CALCCOLOUR', style.Colour_Min, style.Colour_Max,'Color') || $scope.hasStyleError;
+                $scope.hasStyleError = !range('ABV', style.ABV_Min, style.ABV_Max) || $scope.hasStyleError;
+                if ( $scope.hasStyleError ) {
+                    alertFactory.create('warning','Nazi mode alerta, tiene parametros fuera de estilo ');
+                } else if ( prevError && $scope.recipe.naziMode ){
+                    alertFactory.create('success','Felicitaciones! Has conseguido tener los parametros dentro del estilo!');
+                }
             } else {
                 delete $scope.error.OG;
                 delete $scope.error.FG;

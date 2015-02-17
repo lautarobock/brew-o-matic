@@ -42,13 +42,37 @@
                     </option>
                 </select>
             </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><strong>Nazi Mode</strong></div>
+        <div class="panel-body" >
             <div>
-                <div class="checkbox">
-                    <label>
-                        Nazi Mode
-                        <input type="checkbox" ng-model="recipe.naziMode"/>
-                    </label>
-                </div>
+                Habilitado
+                <span ng-show="recipe.naziMode" class="glyphicon glyphicon-check"/>
+                <span ng-hide="recipe.naziMode" class="glyphicon glyphicon-unchecked"/>
+                <br/>
+                <button type="button" class="btn btn-default" ng-model="recipe.naziMode" btn-checkbox>
+                    <span ng-hide="recipe.naziMode">
+                        Habilitar
+                    </span>
+                    <span ng-show="recipe.naziMode">
+                        Deshabilitar
+                    </span>
+                </button>
+            </div>
+            <br/>
+            <span ng-show="!hasStyleError && recipe.naziMode"
+                class="glyphicon glyphicon-ok-circle"
+                style="font-size: 30px;color: green;">
+            </span>
+            <div>
+                <strong ng-show="hasStyleError">Falta ajustar</strong>
+                <ul class="list-group">
+                    <li class="list-group-item " ng-repeat="(k,v) in error">
+                        <span class="text text-warning">{{v}}</span>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
