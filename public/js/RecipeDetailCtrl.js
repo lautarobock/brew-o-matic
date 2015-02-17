@@ -250,6 +250,7 @@
         };
 
         $scope.error = {};
+        $scope.suggestedStyles = [];
         $scope.hasStyleError = false;
         function checkStyle() {
             var style;
@@ -287,6 +288,24 @@
                 delete $scope.error.CALCCOLOUR;
                 delete $scope.error.ABV;
             }
+
+            //suggestedStyles
+            $scope.suggestedStyles = [];
+            function isRange(attr, min, max) {
+                return $scope.recipe[attr] <= max && $scope.recipe[attr] >= min;
+            }
+            angular.forEach($scope.styles, function(s) {
+                var ok = true;
+                ok = isRange('OG', s.OG_Min, s.OG_Max) && ok;
+                ok = isRange('FG', s.FG_Min, s.FG_Max) && ok;
+                ok = isRange('CALCIBU', s.IBU_Min, s.IBU_Max) && ok;
+                ok = isRange('CALCCOLOUR', s.Colour_Min, s.Colour_Max) && ok;
+                ok = isRange('ABV', s.ABV_Min, s.ABV_Max) && ok;
+                if ( ok ) {
+                    $scope.suggestedStyles.push(s.name);
+                }
+            });
+
         }
         $scope.$watch('recipe.naziMode+recipe.STYLE.NAME', function() {
             checkStyle();

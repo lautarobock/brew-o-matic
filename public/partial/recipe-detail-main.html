@@ -74,6 +74,23 @@
                     </li>
                 </ul>
             </div>
+            <div ng-init="isCollapsed=true">
+                <strong>
+                    <a href="" ng-click="isCollapsed = !isCollapsed">
+                        Estilos sugeridos
+                        <span ng-show="isCollapsed" class="glyphicon glyphicon-chevron-down"/>
+                        <span ng-hide="isCollapsed" class="glyphicon glyphicon-chevron-up"/>
+                    </a>
+                </strong>
+                <ul class="list-group" collapse="isCollapsed">
+                    <li class="list-group-item " ng-repeat="(k,v) in suggestedStyles">
+                        {{v}}
+                        <a href="" ng-click="recipe.STYLE.NAME = v">
+                            <span class="glyphicon glyphicon-upload"/>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
     <ng-include src="'partial/recipe-detail-indicators.html'"></ng-include>
