@@ -22,13 +22,7 @@
             return time;
         };
 
-        $scope.totalTime = function() {
-            var time = 0;
-            angular.forEach($scope.recipe.MASH.MASH_STEPS.MASH_STEP,function(step) {
-                time += step.STEP_TIME;
-            });
-            return time;
-        };
+
 
         $scope.spargeWater = function() {
             return $scope.totalWater()
@@ -409,7 +403,18 @@
      * TabControler
      */
     module.controller("RecipeTabCtrl",function($scope) {
-        $scope.sortTabs = ['main','mash','boil','fermentation','bottling','log','collaborators','rating','temperature'];
+        $scope.sortTabs = [
+            'main',
+            'mash',
+            'boil',
+            'fermentation',
+            'bottling',
+            'log',
+            'collaborators',
+            'rating',
+            'temperature',
+            'chronometer'
+        ];
         $scope.tabs = {
             main: {
                 title: 'Receta',
@@ -446,6 +451,10 @@
             temperature: {
                 title: 'Temp. CEBADA',
                 template: 'temperature'
+            },
+            chronometer: {
+                title: 'Tiempos',
+                template: 'chronometer'
             }};
 
         $scope.selectedTab = 'main';
@@ -544,6 +553,105 @@
             "formatters": {}
         };
 
+
+
+    });
+
+    module.directive('chron', function() {
+        return {
+            restrict : 'EA',
+            replace : true,
+            scope : {
+                id: '@',
+                initial: '='
+            },
+            templateUrl: 'partial/chron/chron.html',
+            controller: function($scope, $interval) {
+
+                function calculate(mashTime) {
+                    $scope.hours = Math.floor(mashTime / (1000*60*60));
+                    $scope.minutes = Math.floor( mashTime / (1000*60) - ($scope.hours*60));
+                    $scope.seconds = Math.floor( mashTime / 1000 - (Math.floor( mashTime / (1000*60))*60));
+                    // localStorage.hours = $scope.hours;
+                    // localStorage.minutes = $scope.minutes;
+                    // localStorage.seconds = $scope.seconds;
+                }
+                calculate(parseInt(localStorage.left)||$scope.initial||0);
+
+                var int;
+                var start = parseInt(localStorage.start);
+                localStorage.state = localStorage.state  || 'new'; //new | run | stop
+                var left = $scope.initial;
+                localStorage.left = left;
+                $scope.start = function() {
+                    left = $scope.hours * 60 * 60 * 1000;
+                    left += $scope.minutes * 60 * 1000;
+                    left += $scope.seconds * 1000;
+                    localStorage.left = left;
+                    localStorage.state = 'run';
+                    if ( !start ) {
+                        start = new Date().getTime();
+                        localStorage.start = start;
+                    }
+                    int = $interval(function() {
+                        var now = new Date().getTime();
+                        var diff = now - start;
+                        var value = left - diff;
+                        if ( value <= 0) {
+                            $scope.stop();
+                            calculate(0);
+                        } else {
+                            calculate(value);
+                        }
+                    },100);
+                };
+                if ( localStorage.state === 'run' ) {
+                    $scope.start();
+                }
+                $scope.stop = function() {
+                    localStorage.state = 'stop';
+
+                    var now = new Date().getTime();
+                    var diff = now - start;
+                    left = left - diff;
+                    localStorage.left = left;
+                    localStorage.start = start = null;
+
+                    if ( int ) {
+                        $interval.cancel(int);
+                    }
+                };
+                $scope.reset = function() {
+                    localStorage.state = 'new';
+                    localStorage.start = start = null;
+                    left = $scope.initial;
+                    localStorage.left = left;
+                    calculate(left);
+                };
+                $scope.enableStart = function() {
+                    return localStorage.state === 'new' || localStorage.state === 'stop';
+                };
+                $scope.enableStop = function() {
+                    return localStorage.state === 'run';
+                };
+                $scope.enableReset = function() {
+                    return localStorage.state === 'stop';
+                };
+                $scope.enable = function() {
+                    return localStorage.state === 'new' || localStorage.state === 'stop';
+                };
+                $scope.$on('$destroy',function() {
+                    if ( int ) {
+                        $interval.cancel(int);
+                    }
+                });
+            }
+        };
+    });
+
+    module.controller("RecipeChronometerCtrl", function($scope) {
+
+        $scope.mashTime = $scope.totalTime() * 60 * 1000;
 
 
     });

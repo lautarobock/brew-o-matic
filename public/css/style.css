@@ -70,7 +70,7 @@ a {
     border: 1px solid #ccc;
     border-radius: 4px;
     font-family: Monaco,Menlo,Consolas,"Courier New",monospace;
-    
+
 }
 
 .gt-sorted {
@@ -187,4 +187,14 @@ a {
 
 .print-panel table {
     font-size: inherit;
+}
+
+.chron {
+    font-family: "Lucida Console", Sans-serif;
+    font-size: 60px;
+    width: 100px;
+    font-weight: bold;
+    color: green;
+    background: black;
+    padding-left: 10px;
 }

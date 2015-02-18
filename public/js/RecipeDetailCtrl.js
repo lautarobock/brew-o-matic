@@ -96,6 +96,14 @@
             });
         };
 
+        $scope.totalTime = function() {
+            var time = 0;
+            angular.forEach($scope.recipe.MASH.MASH_STEPS.MASH_STEP,function(step) {
+                time += step.STEP_TIME;
+            });
+            return time;
+        };
+
         //Helper functions
 
         $scope.round = function(value) {
