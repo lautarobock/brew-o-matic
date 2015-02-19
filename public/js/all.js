@@ -17,7 +17,7 @@ function getScript2(src) {
 /*
  * if load from index.html should be _baseDir === "js". if load from jasmine
  * should be "src".
- * 
+ *
  * @see pom.xml <srcDirectoryName/> in jasmine configuration
  */
 var _baseDir = (_baseDir || "js") + "/";

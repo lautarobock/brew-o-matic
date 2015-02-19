@@ -557,7 +557,12 @@
 
     });
 
-    module.directive('chron', function() {
+    function parse(value) {
+        if ( value ) return parseInt(value);
+        return null;
+    }
+
+    module.directive('chron', function(ngAudio) {
         return {
             restrict : 'EA',
             replace : true,
@@ -568,30 +573,36 @@
             templateUrl: 'partial/chron/chron.html',
             controller: function($scope, $interval) {
 
+                var bell = ngAudio.load('sounds/bell.wav');
+
+
+                var ID = $scope.id || Math.random().toString();
+
                 function calculate(mashTime) {
                     $scope.hours = Math.floor(mashTime / (1000*60*60));
                     $scope.minutes = Math.floor( mashTime / (1000*60) - ($scope.hours*60));
                     $scope.seconds = Math.floor( mashTime / 1000 - (Math.floor( mashTime / (1000*60))*60));
-                    // localStorage.hours = $scope.hours;
-                    // localStorage.minutes = $scope.minutes;
-                    // localStorage.seconds = $scope.seconds;
                 }
-                calculate(parseInt(localStorage.left)||$scope.initial||0);
+                if ( localStorage['bom'+ID+'left'] ) {
+                    calculate(parse(localStorage['bom'+ID+'left']));
+                } else {
+                    calculate($scope.initial||0);
+                }
+
 
                 var int;
-                var start = parseInt(localStorage.start);
-                localStorage.state = localStorage.state  || 'new'; //new | run | stop
+                var start = parse(localStorage['bom'+ID+'start']);
+                localStorage['bom'+ID+'state'] = localStorage['bom'+ID+'state']  || 'new'; //new | run | stop
                 var left = $scope.initial;
-                localStorage.left = left;
+                localStorage['bom'+ID+'left'] = left;
                 $scope.start = function() {
                     left = $scope.hours * 60 * 60 * 1000;
                     left += $scope.minutes * 60 * 1000;
                     left += $scope.seconds * 1000;
-                    localStorage.left = left;
-                    localStorage.state = 'run';
+                    localStorage['bom'+ID+'left'] = left;
+                    localStorage['bom'+ID+'state'] = 'run';
                     if ( !start ) {
-                        start = new Date().getTime();
-                        localStorage.start = start;
+                        localStorage['bom'+ID+'start'] = start = new Date().getTime();
                     }
                     int = $interval(function() {
                         var now = new Date().getTime();
@@ -600,45 +611,46 @@
                         if ( value <= 0) {
                             $scope.stop();
                             calculate(0);
+                            bell.play();
                         } else {
                             calculate(value);
                         }
                     },100);
                 };
-                if ( localStorage.state === 'run' ) {
+                if ( localStorage['bom'+ID+'state'] === 'run' ) {
                     $scope.start();
                 }
                 $scope.stop = function() {
-                    localStorage.state = 'stop';
+                    localStorage['bom'+ID+'state'] = 'stop';
 
                     var now = new Date().getTime();
                     var diff = now - start;
                     left = left - diff;
-                    localStorage.left = left;
-                    localStorage.start = start = null;
+                    localStorage['bom'+ID+'left'] = left;
+                    localStorage['bom'+ID+'start'] = start = null;
 
                     if ( int ) {
                         $interval.cancel(int);
                     }
                 };
                 $scope.reset = function() {
-                    localStorage.state = 'new';
-                    localStorage.start = start = null;
+                    localStorage['bom'+ID+'state'] = 'new';
+                    localStorage['bom'+ID+'start'] = start = null;
                     left = $scope.initial;
-                    localStorage.left = left;
+                    localStorage['bom'+ID+'left'] = left;
                     calculate(left);
                 };
                 $scope.enableStart = function() {
-                    return localStorage.state === 'new' || localStorage.state === 'stop';
+                    return localStorage['bom'+ID+'state'] === 'new' || localStorage['bom'+ID+'state'] === 'stop';
                 };
                 $scope.enableStop = function() {
-                    return localStorage.state === 'run';
+                    return localStorage['bom'+ID+'state'] === 'run';
                 };
                 $scope.enableReset = function() {
-                    return localStorage.state === 'stop';
+                    return localStorage['bom'+ID+'state'] === 'stop';
                 };
                 $scope.enable = function() {
-                    return localStorage.state === 'new' || localStorage.state === 'stop';
+                    return localStorage['bom'+ID+'state'] === 'new' || localStorage['bom'+ID+'state'] === 'stop';
                 };
                 $scope.$on('$destroy',function() {
                     if ( int ) {

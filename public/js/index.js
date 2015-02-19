@@ -27,7 +27,8 @@
                                 'observer',
                                 'print',
                                 'gt.listview',
-                                'vr.directives.wordCloud']);
+                                'vr.directives.wordCloud',
+                                'ngAudio']);
 
     index.
         config(['$routeProvider', function($routeProvider) {
