@@ -615,7 +615,7 @@
                 }
 
 
-                var int;
+                var interval;
                 var start = parse(localStorage['bom'+ID+'start']);
                 localStorage['bom'+ID+'state'] = localStorage['bom'+ID+'state']  || 'new'; //new | run | stop
                 var left = $scope.initial;
@@ -634,7 +634,7 @@
                         delete c.check;
                     });
                     checkTime(true);
-                    int = $interval(function() {
+                    interval = $interval(function() {
                         var now = new Date().getTime();
                         var diff = now - start;
                         var value = left - diff;
@@ -661,8 +661,8 @@
                     localStorage['bom'+ID+'left'] = left;
                     localStorage['bom'+ID+'start'] = start = null;
 
-                    if ( int ) {
-                        $interval.cancel(int);
+                    if ( interval ) {
+                        $interval.cancel(interval);
                     }
                 };
                 $scope.reset = function() {
@@ -685,8 +685,8 @@
                     return localStorage['bom'+ID+'state'] === 'new' || localStorage['bom'+ID+'state'] === 'stop';
                 };
                 $scope.$on('$destroy',function() {
-                    if ( int ) {
-                        $interval.cancel(int);
+                    if ( interval ) {
+                        $interval.cancel(interval);
                     }
                 });
                 /**
