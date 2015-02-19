@@ -561,22 +561,47 @@
         if ( value ) return parseInt(value);
         return null;
     }
+    function parseB(value) {
+        if ( value ) return value.toLowerCase() === 'true';
+        return null;
+    }
 
-    module.directive('chron', function(ngAudio) {
+    /**
+    * @param checkpoints [{
+    *   time: Number,
+    *   name: String
+    * }]
+    */
+    module.directive('chron', function(ngAudio, alertFactory, BrewHelper) {
         return {
             restrict : 'EA',
             replace : true,
             scope : {
                 id: '@',
-                initial: '='
+                initial: '=',
+                checkpoints: '='
             },
             templateUrl: 'partial/chron/chron.html',
             controller: function($scope, $interval) {
 
-                var bell = ngAudio.load('sounds/bell.wav');
-
-
                 var ID = $scope.id || Math.random().toString();
+
+                //Sounds
+                var bell = ngAudio.load('sounds/bell.wav');
+                var bip = ngAudio.load('sounds/bip.wav');
+
+                if ( parseB(localStorage['bom'+ID+'soundAlert']) !== null ) {
+                    $scope.soundAlert =  parseB(localStorage['bom'+ID+'soundAlert']);
+                } else {
+                    $scope.soundAlert =  true;
+                }
+                localStorage['bom'+ID+'soundAlert'] = $scope.soundAlert;
+                $scope.$watch('soundAlert', function(v) {
+                    localStorage['bom'+ID+'soundAlert'] = v;
+                });
+                function playSound(sound) {
+                    if ( $scope.soundAlert ) sound.play();
+                }
 
                 function calculate(mashTime) {
                     $scope.hours = Math.floor(mashTime / (1000*60*60));
@@ -604,6 +629,11 @@
                     if ( !start ) {
                         localStorage['bom'+ID+'start'] = start = new Date().getTime();
                     }
+                    //Reset checkpoints
+                    angular.forEach($scope.checkpoints, function(c) {
+                        delete c.check;
+                    });
+                    checkTime(true);
                     int = $interval(function() {
                         var now = new Date().getTime();
                         var diff = now - start;
@@ -611,8 +641,10 @@
                         if ( value <= 0) {
                             $scope.stop();
                             calculate(0);
-                            bell.play();
+                            if ( left !== 0 ) playSound(bell);
+                            localStorage['bom'+ID+'left'] = left = 0;
                         } else {
+                            checkTime();
                             calculate(value);
                         }
                     },100);
@@ -657,6 +689,43 @@
                         $interval.cancel(int);
                     }
                 });
+                /**
+                * @param time miliseconds
+                * @return {hours:Number,minutes:Number,seconds:Number}
+                */
+                $scope.timeToHour = function(time) {
+                    var hours = Math.floor(time / (1000*60*60));
+                    var minutes = Math.floor( time / (1000*60) - (hours*60));
+                    var seconds = Math.floor( time / 1000 - (Math.floor( time / (1000*60))*60));
+                    return {
+                        hours: hours,
+                        minutes: minutes,
+                        seconds: seconds,
+                        toString: function() {
+                            return 'hh:MM:ss'
+                                .replace('hh',BrewHelper.pad(this.hours,2))
+                                .replace('MM',BrewHelper.pad(this.minutes,2))
+                                .replace('ss',BrewHelper.pad(this.seconds,2));
+                        }
+                    };
+                };
+
+                function checkTime(noAlert) {
+                    if ( !$scope.checkpoints ) return;
+                    var l = $scope.hours * 60 * 60 * 1000;
+                    l += $scope.minutes * 60 * 1000;
+                    l += $scope.seconds * 1000;
+                    angular.forEach($scope.checkpoints, function(c) {
+                        if ( c.time > l && !c.check ) {
+                            c.check = true;
+                            if (!noAlert) {
+                                alertFactory.create('info',c.name);
+                                playSound(bip);
+                            }
+                        }
+                    });
+                }
+                checkTime(true);
             }
         };
     });
@@ -664,6 +733,32 @@
     module.controller("RecipeChronometerCtrl", function($scope) {
 
         $scope.mashTime = $scope.totalTime() * 60 * 1000;
+
+        $scope.mashSteps = [];
+
+        //Mash Steps
+        var actualTime = $scope.totalTime();
+        angular.forEach($scope.recipe.MASH.MASH_STEPS.MASH_STEP,function(step) {
+            $scope.mashSteps.push({
+                time: actualTime * 60 * 1000,
+                name: step.NAME
+            });
+            actualTime -= step.STEP_TIME;
+        });
+
+        //Hoping
+        $scope.boilStep = [];
+        for( var i=0; i<$scope.recipe.HOPS.HOP.length; i++ ) {
+            var hop = $scope.recipe.HOPS.HOP[i];
+
+                prevDelay = hop.TIME;
+            var name = hop.AMOUNT*1000 + 'g de ' + hop.NAME;
+            $scope.boilStep.push({
+                time: hop.TIME * 60 * 1000,
+                name: name
+            });
+        }
+
 
 
     });

@@ -7,7 +7,11 @@
                         Tiempo Macerado
                     </div>
                     <div class="panel-body" >
-                        <chron initial="mashTime" id="mash-{{recipe._id}}"></chron>
+                        <chron
+                            initial="mashTime"
+                            id="mash-{{recipe._id}}"
+                            checkpoints="mashSteps">
+                        </chron>
                     </div>
                 </div>
                 <div class="panel panel-default">
@@ -15,7 +19,11 @@
                         Tiempo Hervor
                     </div>
                     <div class="panel-body" >
-                        <chron initial="recipe.BOIL_TIME * 60 * 1000" id="boil-{{recipe._id}}"></chron>
+                        <chron
+                            initial="recipe.BOIL_TIME * 60 * 1000"
+                            id="boil-{{recipe._id}}"
+                            checkpoints="boilStep">
+                        </chron>
                     </div>
                 </div>
             </div>

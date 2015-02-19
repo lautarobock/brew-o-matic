@@ -1,16 +1,36 @@
-<div>
-    <input ng-disabled="!enable()" type="number" ng-model="hours" min="0" class="chron"/>
-    <span style="font-family: monospace;font-size: 60px;">:</span>
-    <input ng-disabled="!enable()" type="number" ng-model="minutes" max="59" min="0" class="chron"/>:
-    <span style="font-family: monospace;font-size: 60px;">:</span>
-    <input ng-disabled="!enable()" type="number" ng-model="seconds" max="59" min="0" class="chron"/>
-    <button ng-hide="!enableStart()" type="button" class="btn btn-primary" ng-click="start()">
-        Start
-    </button>
-    <button ng-hide="!enableStop()" type="button" class="btn btn-danger" ng-click="stop()">
-        Stop
-    </button>
-    <button ng-hide="!enableReset()" type="button" class="btn btn-warning" ng-click="reset()">
-        Reset
-    </button>
+<div class="row">
+    <div class="col-md-8">
+        <div>
+            <input ng-disabled="!enable()" type="number" ng-model="hours" min="0" class="chron"/>
+            <span style="font-family: monospace;font-size: 60px;">:</span>
+            <input ng-disabled="!enable()" type="number" ng-model="minutes" max="59" min="0" class="chron"/>:
+            <span style="font-family: monospace;font-size: 60px;">:</span>
+            <input ng-disabled="!enable()" type="number" ng-model="seconds" max="59" min="0" class="chron"/>
+            <button ng-hide="!enableStart()" type="button" class="btn btn-primary" ng-click="start()">
+                Start
+            </button>
+            <button ng-hide="!enableStop()" type="button" class="btn btn-danger" ng-click="stop()">
+                Stop
+            </button>
+            <button ng-hide="!enableReset()" type="button" class="btn btn-warning" ng-click="reset()">
+                Reset
+            </button>
+        </div>
+        <div class="checkbox">
+            <label>
+                Alerta sonora?
+                <input type="checkbox" ng-model="soundAlert"/>
+            </label>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="cp in checkpoints">
+                <strong>{{timeToHour(cp.time).toString()}}:</strong>
+                {{cp.name}}
+                <span ng-hide="cp.check" class="glyphicon glyphicon-time" style="color: yellow;"/>
+                <span ng-show="cp.check" class="glyphicon glyphicon-ok-circle" style="color: green;"/>
+            </li>
+        </ul>
+    </div>
 </div>
