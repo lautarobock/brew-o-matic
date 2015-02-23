@@ -398,6 +398,50 @@
 
     });
 
+    var tabs = {
+        main: {
+            title: 'Receta',
+            template: 'detail-main'
+        },
+        mash: {
+            title: 'Macerado',
+            template: 'mash'
+        },
+        boil: {
+            title: 'Hervido',
+            template: 'boil'
+        },
+        fermentation: {
+            title: 'Fermentacion',
+            template: 'fermentation'
+        },
+        bottling: {
+            title: 'Embotellado',
+            template: 'bottling'
+        },
+        log: {
+            title: 'Bitacora',
+            template: 'log'
+        },
+        collaborators: {
+            title: 'Colaboradores',
+            template: 'collaborators'
+        },
+        rating: {
+            title: 'Calificaciones',
+            template: 'rating'
+        },
+        temperature: {
+            title: 'Temp. CEBADA',
+            template: 'temperature'
+        },
+        chronometer: {
+            title: 'Tiempos',
+            template: 'chronometer'
+        }
+    };
+
+
 
     /**
      * TabControler
@@ -415,47 +459,30 @@
             'temperature',
             'chronometer'
         ];
-        $scope.tabs = {
-            main: {
-                title: 'Receta',
-                template: 'detail-main'
-            },
-            mash: {
-                title: 'Macerado',
-                template: 'mash'
-            },
-            boil: {
-                title: 'Hervido',
-                template: 'boil'
-            },
-            fermentation: {
-                title: 'Fermentacion',
-                template: 'fermentation'
-            },
-            bottling: {
-                title: 'Embotellado',
-                template: 'bottling'
-            },
-            log: {
-                title: 'Bitacora',
-                template: 'log'
-            },
-            collaborators: {
-                title: 'Colaboradores',
-                template: 'collaborators'
-            },
-            rating: {
-                title: 'Calificaciones',
-                template: 'rating'
-            },
-            temperature: {
-                title: 'Temp. CEBADA',
-                template: 'temperature'
-            },
-            chronometer: {
-                title: 'Tiempos',
-                template: 'chronometer'
-            }};
+        $scope.tabs = tabs;
+
+        $scope.selectedTab = 'main';
+
+        $scope.changeTab = function(tab) {
+            $scope.selectedTab=tab;
+            $scope.$parent.notifications = [];
+        };
+    });
+
+    /**
+    * TabControler
+    */
+    module.controller("ShareTabCtrl",function($scope) {
+        $scope.sortTabs = [
+            'main',
+            'mash',
+            'boil',
+            'fermentation',
+            'bottling',
+            'log',
+            'rating'
+        ];
+        $scope.tabs = tabs;
 
         $scope.selectedTab = 'main';
 

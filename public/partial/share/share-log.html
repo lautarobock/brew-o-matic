@@ -1,0 +1,26 @@
+<div ng-controller="RecipeLogCtrl">
+    <div class="col-md-10">
+        <div class="panel panel-default">
+            <div class="panel-body" >
+                <table class="table table-condensed table-hover">
+                    <thead>
+                        <tr>
+                            <th style="width: 13em">Fecha y Hora</th>
+                            <th>Detalle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="log in recipe.log.logs | orderBy:orderLog | filter:discardFilter" ng-class="{'gt-log-active': edit == log,'gt-log-removed': log.discard }">
+                            <td>{{log.time|formatDate}}</td>
+                            <td>{{log.detail}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2" >
+        <ng-include src="'partial/recipe-detail-indicators.html'"></ng-include>
+        <ng-include src="'partial/recipe-detail-social.html'"></ng-include>
+    </div>
+</div>
