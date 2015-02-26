@@ -774,6 +774,11 @@
         });
 
         //Hoping
+        // var hopMax = 0;
+        // angular.forEach($scope.recipe.HOPS.HOP, function(h) {
+        //     hopMax = Math.max(hopMax,h.TIME);
+        // });
+        $scope.hopTime = $scope.recipe.BOIL_TIME * 60 * 1000;
         $scope.boilStep = [];
         for( var i=0; i<$scope.recipe.HOPS.HOP.length; i++ ) {
             var hop = $scope.recipe.HOPS.HOP[i];

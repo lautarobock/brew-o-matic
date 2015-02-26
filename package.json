@@ -2,21 +2,22 @@
   "name": "brew-o-matic",
   "description": "Software para desarrollo de recetas de cerveza",
   "version": "0.14.0",
-  "repository" : { 
-        "type":"git", 
-        "url":"https://github.com/lautarobock/brew-o-matic.git" },
-
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lautarobock/brew-o-matic.git"
+  },
   "devDependencies": {
-      "karma": "0.10.8",
-      "karma-phantomjs-launcher": "0.1.1",
-      "phantomjs": "1.9.1-0"
+    "karma": "0.10.8",
+    "karma-phantomjs-launcher": "0.1.1",
+    "phantomjs": "1.9.1-0"
   },
   "dependencies": {
     "express": "3.3.5",
     "ejs": "*",
     "stylus": "*",
     "mongoose": "*",
-    "socket.io": "*"
+    "socket.io": "*",
+    "stable": "^0.1.5"
   },
   "engines": {
     "node": "0.10.x",

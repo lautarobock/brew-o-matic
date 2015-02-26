@@ -3,6 +3,7 @@ var notifications = require('../util/notifications.js');
 var model = require('../domain/model.js');
 var observer = require("./observer");
 var Arrays = require('../public/js/util/util.js').Arrays;
+var stable = require('stable');
 
 function processFilter(filter) {
     if ( filter && filter.searchCriteria ) {
@@ -164,6 +165,11 @@ exports.publicStyles = function(req, res) {
 
 exports.get = function(req, res) {
     model.Recipe.findOne({_id:req.params.id}).populate('collaborators').populate('owner').populate('cloneFrom').exec(function(err,results) {
+        function userCompare(a, b) {
+            return -(a.TIME - b.TIME);
+        }
+        stable.inplace(results.HOPS.HOP, userCompare);
+
         res.send(results);
     });
 };
@@ -244,6 +250,12 @@ exports.save = function(req, res) {
 //        console.log("response bottling",s.bottling);
         notifications.notifyUpdateFavorite(s);
         notifications.notifyUpdateCollaborators(s,req.session.user_id,req.session.user_name);
+
+        function userCompare(a, b) {
+            return -(a.TIME - b.TIME);
+        }
+        stable.inplace(s.HOPS.HOP, userCompare);
+
         res.send(s);
 
         //Update tags
