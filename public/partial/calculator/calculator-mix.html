@@ -1,0 +1,47 @@
+<div class="panel panel-default" >
+    <div class="panel-heading">Mezclas</div>
+    <div class="panel-body">
+        <form class="form-horizontal" role="form">
+            <table class="table table-bordered table-condensed">
+                <thead>
+                    <tr>
+                        <th>Densidad</th>
+                        <th>Litros</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in items">
+                        <td>
+                            <input
+                                ng-change=""
+                                class="form-control input-sm"
+                                type="number"
+                                step="0.001"
+                                ng-model="item.gravity"/>
+                        </td>
+                        <td>
+                            <input
+                            ng-change=""
+                            class="form-control input-sm"
+                            type="number"
+                            step="0.5"
+                            ng-model="item.size"/>
+                        </td>
+                        <td>
+                            <button type="button" class="close" aria-hidden="true" ng-click="remove(item)">&times;</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="panel-body">
+                <span class="pull-left">
+                    Densidad: <b>{{gravity}}</b>
+                </span>
+                <button type="button" class="btn btn-default pull-right" ng-click="add()">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

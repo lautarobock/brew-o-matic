@@ -16,6 +16,35 @@
 
     });
 
+    calculator.directive("calculatorMix", function() {
+        return {
+            restrict: 'AE',
+            templateUrl: 'partial/calculator/calculator-mix.html',
+            controller: function($scope, BrewCalc) {
+
+                $scope.items = [];
+
+                $scope.add = function() {
+                    $scope.items.push({
+                        size: 20,
+                        gravity: 1.050
+                    });
+                };
+
+                $scope.remove = function(item) {
+                    util.Arrays.remove($scope.items, item);
+                };
+
+                $scope.gravity = 0;
+
+                $scope.$watch('items', function() {
+                    $scope.gravity = BrewCalc.calculateMix($scope.items);
+                }, true);
+
+            }
+        };
+    });
+
     calculator.directive("calculatorAbv", function() {
         return {
             restrict: 'AE',
@@ -25,14 +54,14 @@
                 $scope.alcohol = {
                     OG: $scope.values.OG || 1.050,
                     FG: $scope.values.FG || 1.010,
-                    mode: 'ABV' 
+                    mode: 'ABV'
                 };
 
                 function updateABV() {
                     if ( $scope.alcohol.mode == 'ABV' ) {
                         // console.log("calculate ABV");
-                        $scope.alcohol.ABV = BrewCalc.calculateABV($scope.alcohol.OG,$scope.alcohol.FG);    
-                        
+                        $scope.alcohol.ABV = BrewCalc.calculateABV($scope.alcohol.OG,$scope.alcohol.FG);
+
                     } else if ( $scope.alcohol.mode == 'OG' ) {
                         // console.log("calculate OG");
                         $scope.alcohol.OG = BrewCalc.calculateOG($scope.alcohol.FG,$scope.alcohol.ABV);
@@ -56,7 +85,7 @@
                 $scope.updateFG = function() {
                     $scope.alcohol.FG = BrewCalc.fromPlato($scope.alcohol.FGP);
                 };
-                
+
             }
         };
     });
@@ -84,13 +113,13 @@
                 $scope.$watch("hydrometer.gravity+hydrometer.reading+hydrometer.calibration", function() {
                     $scope.hydrometer.gravityP = BrewCalc.toPlato($scope.hydrometer.gravity);
                     updateValue();
-                    
+
                 });
 
                 $scope.updateGravity = function() {
                     $scope.hydrometer.gravity = BrewCalc.fromPlato($scope.hydrometer.gravityP);
                 };
-                
+
             }
         };
     });
@@ -129,7 +158,7 @@
                 $scope.updateFG = function() {
                     $scope.refractometer.FG = BrewCalc.fromPlato($scope.refractometer.FGP);
                 };
-                
+
             }
         };
     });
@@ -168,7 +197,7 @@
                 $scope.updateFG = function() {
                     $scope.dilution.finalGrav = BrewCalc.fromPlato($scope.dilution.finalGravP);
                 };
-                
+
             }
         };
     });
@@ -177,13 +206,14 @@
         var obj = {
             open : function (show,values) {
                 var scope = $rootScope.$new();
-                
+
                 /* Show/Hide */
                 scope.show = show || {
                     abv: true,
                     hydrometer: true,
                     refractometer: true,
-                    dilution: true
+                    dilution: true,
+                    mix: true
                 };
                 var count = 0;
                 angular.forEach(scope.show, function(value, key) {
@@ -216,6 +246,6 @@
     });
 
 
-    
+
 
 })();

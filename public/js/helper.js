@@ -1,6 +1,6 @@
 (function() {
 
-    var helper = angular.module("helper",[]);
+    var helper = angular.module("helper",['data']);
 
     helper.directive('alertInput', function() {
         return {
@@ -230,7 +230,7 @@
                 var C8=anions.nitrate || 0;
                 var C9=anions.nitrite || 0;
                 var C10=anions.fluoride || 0;
-                return (C4/61)+(C5/30)+(C6/48)+(C7/35.45)+(C8/62)+(C9/46)+(C10/19)
+                return (C4/61)+(C5/30)+(C6/48)+(C7/35.45)+(C8/62)+(C9/46)+(C10/19);
             },
             waterBalance: function(water) {
                 if ( !water ) return null;
@@ -300,6 +300,24 @@
                 ).yeastDifference;
                 //diff is billon of cells
                 return Math.ceil(diff/density); //10 is density (it may change)
+            },
+            /**
+            * @param items [{size, gravity}]
+            */
+            calculateMix: function(items) {
+                items = items || [];
+                var sumGrav = 0;
+                var sumSize = 0;
+                for ( var i=0; i<items.length; i++ ) {
+                    var item = items[i];
+                    sumGrav += (item.gravity*1000-1000) * item.size;
+                    sumSize += item.size;
+                }
+                if ( sumSize === 0 || isNaN(sumSize) ) return 0;
+
+                var v = (sumGrav/sumSize + 1000) / 1000;
+                console.log(v,BrewHelper.round(v,1000));
+                return BrewHelper.round(v,1000);
             }
         };
     });
