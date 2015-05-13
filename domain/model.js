@@ -27,7 +27,8 @@ exports.User = mongoose.model("User",new Schema({
             isPublic: Boolean,
             pitchRate: Number
         },
-        closeUseSurvey: Boolean
+        closeUseSurvey: Boolean,
+        gotoFanPage: Boolean
     },
 
 }));

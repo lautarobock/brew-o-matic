@@ -169,9 +169,16 @@
                 href: 'https://docs.google.com/forms/d/1lCObRGFtB2g3S3jiwwNweNUz5hRrLuyni2zFZz40R58/viewform'
             },
             id: 'closeUseSurvey'
+        },{
+            text: 'Nueva pagina en Facebook, enterate de las ultimas novedades',
+            link: {
+                text: 'Ir a la pagina',
+                href: 'https://www.facebook.com/brewomatic/timeline'
+            },
+            id: 'gotoFanPage'
         }];
 
-        $scope.infos = []
+        $scope.infos = [];
 
         $scope.closeInfo = function(index) {
             $scope.infos.splice(index,1);
@@ -182,7 +189,7 @@
             User.updateSettings($scope.user, function() {
                 $scope.infos.splice(index,1);
             });
-        }
+        };
 
         $scope.$watch("user", function(user) {
             if ( user ) {
@@ -193,7 +200,7 @@
                     }
                 }
             }
-        })
+        });
     });
 
 
