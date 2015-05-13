@@ -1,0 +1,30 @@
+<ul class="nav nav-tabs" style="margin-bottom: -0.1em;">
+    <li class="active">
+        <a><b>Inicio</b></a>
+    </li>
+    <li>
+        <a href="/#/recipe">Mis recetas ({{stats.owns}})</a>
+    </li>
+    <li>
+        <a href="/#/collaborated">Colaboraciones ({{stats.collaborations}})</a>
+    </li>
+    <li>
+        <a href="/#/favorites">Favoritas ({{user.favorites.length}})</a>
+    </li>
+    <li>
+        <a href="/#/public">Publicadas ({{stats.publics}})</a>
+    </li>
+</ul>
+<div class="panel panel-default" ng-cloak>
+    <div class="panel panel-default" style="margin:1em">
+        <div class="panel panel-heading">
+            Recetas en curso
+        </div>
+        <listview ng-if="user"
+            listview-data="recipes"
+            listview-sort="sort"
+            listview-config="config"
+            listview-filter="filterData"
+            listview-header="headers"></listview>
+    </div>
+</div>

@@ -82,6 +82,7 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     OG_exclude: Number,
     CALCIBU: Number,
     FG: Number,
+    state: String,
     FERMENTABLES: {
         FERMENTABLE: [ {
             NAME: String,
