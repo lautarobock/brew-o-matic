@@ -35,7 +35,8 @@
            CalculatorPopup,
            PrintRecipePopup,
            FermentableUses,
-           PitchRate
+           PitchRate,
+           State
         ) {
 
         $scope.BrewHelper = BrewHelper;
@@ -71,6 +72,8 @@
         $scope.fermentableUses = FermentableUses.query();
 
         $scope.pitchRates = PitchRate.query();
+
+        $scope.states = State.query();
 
         $scope.tags = Tag.query();
 
@@ -594,6 +597,7 @@
                         OG: 1,
                         CALCIBU: 0,
                         FG: 1,
+                        state: 'draft',
                         BOIL_TIME: $scope.user.settings.defaultValues.BOIL_TIME,
                         BREWER: $scope.user.settings.defaultValues.BREWER,
                         GrainAbsorbtion: $scope.user.settings.defaultValues.GrainAbsorbtion || 0.9,

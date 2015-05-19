@@ -35,6 +35,7 @@
             findPublic: {method:'GET',params: {operation:'public'}, isArray:true },
             findCollaborated: {method:'GET',params: {operation:'collaborated'}, isArray:true },
             publish: {method:'POST', params: {operation: 'publish_'}},
+            state: {method:'POST', params: {operation: 'state_'}},
             publicStyles: {method:'GET', params: {operation: 'public_styles'}, isArray:true},
             count: {method:'GET', params: {operation:'my_count'}, isArray:false},
             tags: {method:'GET', params: {operation:'my_tags'}, isArray:true},

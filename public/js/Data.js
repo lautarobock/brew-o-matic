@@ -114,3 +114,18 @@ data.factory('PitchRate', function() {
         }
     };
 });
+
+data.factory('State', function() {
+    return {
+        query: function() {
+            return [
+                {value:'whish', name:'Deseo'},
+                {value:'draft', name:'Borrador'},
+                {value:'ready', name:'Lista'},
+                {value:'running', name:'En Curso'},
+                {value:'finished', name:'Finalizada'},
+                {value:'archived', name:'Archivada'}
+            ];
+        }
+    };
+});

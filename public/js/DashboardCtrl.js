@@ -75,14 +75,15 @@
             };
 
             $scope.config = {
-                name: 'recipes.mines',
+                name: 'recipes.dashboard',
                 filterOrder: ['[state]'],
                 filterColSpan: 6,
                 plural: 'Recetas',
                 singular: 'Receta',
                 searchCriteriaLabel: 'Buscar',
-                hideSorting: false,
-                hideFilters: false
+                hideSorting: true,
+                hideFilters: true,
+                pageSize: 5
             };
 
             $templateCache.put('my-recipe-name.html',
@@ -225,7 +226,7 @@
                 caption: 'Estado',
                 data: ['defined'],
                 type: 'combo',
-                value: 'defined',
+                value: 'ready',
                 comparator: 'equal'
             };
 
