@@ -1,4 +1,4 @@
-<div class="row"  ng-controller="RecipeTabCtrl">
+<div class="row"  ng-controller="RecipeTabCtrl" ng-hide="errorLoading">
     <div class="col-md-12" style="margin-bottom: -0.1em;">
         <ul class="nav nav-tabs">
             <li ng-class="{active:selectedTab === tab}" ng-repeat="tab in sortTabs">

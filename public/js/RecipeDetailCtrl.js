@@ -552,7 +552,7 @@
                 var now = new Date();
                 if ( $routeParams.recipeId ) {
                     $scope.recipe = Recipe.get({id:$routeParams.recipeId},function() {
-                        if ( $location.path().indexOf('/recipe/clone') == 0) {
+                        if ( $location.path().indexOf('/recipe/clone') === 0) {
                             $scope.recipe.cloneFrom = $scope.recipe._id;
                             $scope.recipe._id = undefined;
                             $scope.recipe.code = undefined;
@@ -566,18 +566,25 @@
                         }
 
                         //antes de cargar todos los datos verfico si hay valores en null y los reemplazo por el Default
-                        BrewCalc.fixEmptyValues($scope.recipe);
+                        //Verifico si realmente existe la receta que buscaba
+                        if ( $scope.recipe._id || $scope.recipe.cloneFrom ) {
+                            BrewCalc.fixEmptyValues($scope.recipe);
 
-                        $scope.changeYeast();
-                        //$scope.$emit("recipeLoaded");
+                            $scope.changeYeast();
+                            //$scope.$emit("recipeLoaded");
 
-                        $rootScope.breadcrumbs = [{
-                            link: '#',
-                            title: 'Home'
-                        },{
-                            link: '#',
-                            title: 'Receta - ' + $scope.recipe.NAME
-                        }];
+                            $rootScope.breadcrumbs = [{
+                                link: '#',
+                                title: 'Home'
+                            },{
+                                link: '#',
+                                title: 'Receta - ' + $scope.recipe.NAME
+                            }];
+                        } else {
+                            $scope.errorLoading = true;
+                            alertFactory.create('danger','La receta que intentas abrir no existe');
+                        }
+
                     });
                 } else {
                     $scope.recipe = new Recipe({

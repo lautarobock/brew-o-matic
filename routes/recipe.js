@@ -168,7 +168,9 @@ exports.get = function(req, res) {
         function userCompare(a, b) {
             return -(a.TIME - b.TIME);
         }
-        stable.inplace(results.HOPS.HOP, userCompare);
+        if ( results && results.HOPS && results.HOPS.HOP ) {
+            stable.inplace(results.HOPS.HOP, userCompare);    
+        }
 
         res.send(results);
     });
