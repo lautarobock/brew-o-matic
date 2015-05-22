@@ -20,11 +20,28 @@
         <div class="panel panel-heading">
             Recetas en curso
         </div>
-        <listview ng-if="user"
+        <gt-table
+            can-remove="false"
+            can-edit="false"
+            can-add="false"
+            config="defined"
+            entity="Receta">
+        </gt-table>
+        <!-- <listview ng-if="user"
             listview-data="recipes"
             listview-sort="sort"
             listview-config="config"
             listview-filter="filterData"
-            listview-header="headers"></listview>
+            listview-header="headers"></listview> -->
+        <div class="panel panel-heading">
+            Recetas Borradores
+        </div>
+        <gt-table
+            can-remove="false"
+            can-edit="false"
+            can-add="false"
+            config="draft"
+            entity="Receta">
+        </gt-table>
     </div>
 </div>

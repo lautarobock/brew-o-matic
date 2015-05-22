@@ -3,15 +3,15 @@
     var gt = angular.module('gt.abm',[]);
 
     gt.constant("PAGE_SIZE",10);
-    
+
     function getValue(entity,field) {
         var value;
         if ( field.indexOf(".") != -1 ) {
             var chain = field.split(".");
-            
+
             for ( var i=0; i<chain.length; i++) {
                 if (entity) {
-                    entity = entity[chain[i]];    
+                    entity = entity[chain[i]];
                 }
             }
             value = entity||'-';
@@ -20,7 +20,7 @@
         }
         return value;
     }
-    
+
     gt.filter("pageFilter",function(PAGE_SIZE) {
         return function(rows,page,pageSize) {
             var from = (page-1)*(pageSize||PAGE_SIZE);
@@ -36,7 +36,7 @@
             return value;
         }
     }
-    
+
     var fixedFilters = {
         equal: function(fieldName,value,ic) {
             return function(item) {
@@ -46,7 +46,7 @@
         like: function(fieldName,value,ic) {
             return function(item) {
                 var patt = new RegExp(".*"+convert(value,ic)+".*");
-                
+
                 return patt.exec(convert(getValue(item,fieldName),ic)) != null ? 0 : -1;
             };
         },
@@ -68,7 +68,7 @@
             };
         }
     };
-    
+
     gt.filter("textFilter", function($filter,$timeout) {
         return function(rows, criteria) {
             return $filter('filter')(rows,criteria);
@@ -89,16 +89,16 @@
                         filters.push(f);
                     }
                 });
-                
+
                 angular.forEach(filters,function(f) {
                     rows = util.Arrays.filter(rows,f);
                 });
                 return rows;
             }
-            
+
         };
     });
-    
+
     // var templateDir = "abm";
 
     gt.run(function($templateCache,abm) {
@@ -112,7 +112,7 @@
                 '{{getValue(row,header)}}' +
             '</a>');
     });
-    
+
     gt.directive('gtTable', function($compile, $rootScope, sortData, PAGE_SIZE, abm) {
         return {
             restrict : 'EA',
@@ -129,7 +129,7 @@
             },
             templateUrl: abm.templateDir +'/abm.html',
             link : function(scope, element, attrs) {
-                
+
             },
             controller: function($scope,$timeout) {
 
@@ -139,7 +139,7 @@
                 $scope._searchCriteria = $scope.searchCriteria;
 
                 var activeTimeout = null;
-                
+
                 $scope.search = function() {
                     if ( activeTimeout ) $timeout.cancel(activeTimeout);
                     activeTimeout = $timeout(function() {
@@ -151,9 +151,9 @@
                     $scope.searchCriteria = ""
                     $scope._searchCriteria = "";
                 };
-                
+
                 $scope.sort = sortData($scope.config().orderBy,$scope.config().orderDir||"",$scope.config().sort);
-                
+
                 $scope.getActiveClass = function(tab) {
                     if (tab == $scope.entity()) {
                         return 'active';
@@ -161,11 +161,11 @@
                         return '';
                     }
                 };
-                
+
                 $scope.urlTemplate = function(filter) {
                     return abm.templateDir + '/abm-filter-' + filter.type + ".html";
                 };
-                
+
                 $scope.getHeaderStyle = function(header) {
                     var style = header.headerStyle || {};
                     if ( header.width ) {
@@ -178,14 +178,14 @@
                     $scope.rows.push({_draft:true});
                     $scope.page = $scope.getPageCount($scope.rows.length);
                 };
-                
+
                 $scope.edit_id = null;
 
                 $scope.isEditing = function(row) {
                     return row._id == $scope.edit_id;
                 };
 
-                
+
                 $scope.valueTemplate = function(row,header) {
                     if ( $scope.isEditing(row) && !header.readonly) {
                         if ( !header.type || header.type == 'text' || header.type == 'number'  ) {
@@ -209,23 +209,23 @@
                         return abm.templateDir + '/abm-value.html';
                     }
                 };
-                
+
                 $scope.edit = function(row) {
                     $scope.edit_id = row._id;
                 };
-                
+
                 $scope.copy = function(row) {
                     return angular.copy(row);
                 };
-                
+
                 $scope.getValue = function(entity,header) {
                     var value;
                     if ( header.field.indexOf(".") != -1 ) {
                         var chain = header.field.split(".");
-                        
+
                         for ( var i=0; i<chain.length; i++) {
                             if (entity) {
-                                entity = entity[chain[i]];    
+                                entity = entity[chain[i]];
                             }
                         }
                         value = entity||'-';
@@ -233,12 +233,12 @@
                         value = entity[header.field];
                     }
                     if ( header.format ) {
-                        return header.format(value);    
+                        return header.format(value);
                     } else {
-                        return value;    
+                        return value;
                     }
                 };
-                
+
                 $scope.remove = function(row) {
                     var clean = function() {
                         util.Arrays.remove($scope.rows,row);
@@ -246,21 +246,21 @@
                     if (!row.$delete) {
                         $scope.config().data.remove(row,clean);
                     } else {
-                        row.$delete(clean);    
+                        row.$delete(clean);
                     }
                 };
-                
+
                 $scope.cancel = function (row,value) {
                     if (row._draft){
                         util.Arrays.remove($scope.rows,row);
                     } else {
                         angular.forEach($scope.config().headers,function(h) {
                             value[h.field] = row[h.field];
-                        });                
+                        });
                     }
                     $scope.edit_id = null;
                 };
-                
+
                 $scope.save = function(value,row) {
                     angular.forEach($scope.config().headers,function(h) {
                         row[h.field] = value[h.field];
@@ -269,7 +269,7 @@
                         if (!row.$save) {
                             $scope.config().data.save(row);
                         } else {
-                            row.$save();    
+                            row.$save();
                         }
                         $scope.edit_id = null;
                     } else {
@@ -278,17 +278,20 @@
                         });
                     }
                 };
-        
+
                 $scope.loading = true;
                 $scope.page = 1;
-                $scope.rows = $scope.config().data.query(function() {
-                    $scope.loading = false;
-                });
-                
+                $scope.rows = $scope.config().data.query(
+                    $scope.config().serverFilter||{},
+                    function() {
+                        $scope.loading = false;
+                    }
+                );
+
                 $scope.pageSize = function() {
                     return $scope.config().pageSize || PAGE_SIZE;
                 };
-                
+
                 $scope.getPageCount = function(length) {
                     var pageSize = $scope.pageSize();
                     return Math.ceil(length/pageSize);
@@ -296,7 +299,7 @@
             }
         };
     });
-    
+
     gt.provider("abm", function() {
         var service = {
             templateDir: "abm"
@@ -323,7 +326,7 @@
                     if ( this.sort ) {
                         return this.sort;
                     } else  {
-                        return this.field; 
+                        return this.field;
                     }
                 },
                 reverse: function() {
