@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-    <div class="panel-body" style="padding-bottom: 0;">
+    <div class="panel-body" style="padding-bottom: 0;" ng-hide="listviewConfig.hideSorting">
         <div class="row">
             <div class="col-md-6">
                 <div class="well well-sm" style="padding: 7px;">
@@ -28,7 +28,7 @@
             </div>
         </div>
     </div>
-    <div  class="panel panel-default" style="margin: 0 1em 1em 1em">
+    <div  class="panel panel-default" style="margin: 0 1em 1em 1em" ng-hide="listviewConfig.hideFilters">
         <div class="panel-body">
             <div class="row">
                 <div class="col-sm-{{listviewConfig.filterColSpan||'12'}}" style="margin-bottom: 1em;">
@@ -60,7 +60,7 @@
         <table class="table table-striped table-hover" >
             <thead>
                 <tr>
-                    <th ng-repeat="header in listviewHeader" 
+                    <th ng-repeat="header in listviewHeader"
                         ng-class={'hidden-xs':header.hidden.xs,'hidden-sm':header.hidden.sm}
                         ng-style="getStyle(header)">
                         <span tooltip="{{header.tooltip}}" tooltip-append-to-body="true">
@@ -72,7 +72,7 @@
             <tbody>
                 <tr ng-repeat="$model in models">
                     <td ng-repeat="header in listviewHeader" ng-class={'hidden-xs':header.hidden.xs,'hidden-sm':header.hidden.sm}>
-                        <span ng-if="header.templateUrl"> 
+                        <span ng-if="header.templateUrl">
                             <ng-include src="header.templateUrl"></ng-include>
                         </span>
                         <span ng-if="!header.templateUrl" ng-bind-html="getValue(header,$model)"></span>

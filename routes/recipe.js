@@ -90,7 +90,7 @@ exports.findAll = function(req, res) {
     filter.owner = req.session.user_id;
 
     console.log("filter",JSON.stringify(filter));
-    model.Recipe.find(filter,'NAME code tags STYLE OG ABV CALCCOLOUR CALCIBU BATCH_SIZE BREWER owner publishDate isPublic')
+    model.Recipe.find(filter,'NAME code tags STYLE OG ABV CALCCOLOUR CALCIBU BATCH_SIZE BREWER owner publishDate state isPublic')
         .limit(req.query.limit)
         .skip(req.query.skip)
         .sort(req.query.sort)
@@ -243,13 +243,25 @@ exports.deleteComment = function(req,res) {
     });
 };
 
+exports.updateState = function(req, res) {
+    model.Recipe.findOne({_id:req.params.id}).populate('owner').exec(function(err,recipe) {
+        recipe.state = req.query.state;
+        recipe.save(function(err) {
+            if ( err ) {
+                res.send(500,{error: 'Error al cambiar estado la receta'});
+            } else {
+                res.send(recipe);
+            }
+        });
+    });
+};
+
 exports.save = function(req, res) {
 
     function callback(err,s){
         if (err) {
             console.log("error", err);
         }
-//        console.log("response bottling",s.bottling);
         notifications.notifyUpdateFavorite(s);
         notifications.notifyUpdateCollaborators(s,req.session.user_id,req.session.user_name);
 
@@ -266,6 +278,7 @@ exports.save = function(req, res) {
             tag.save();
         }
     }
+
     if (!req.body._id) {
         var recipe = new model.Recipe(req.body);
         var id = generateId(req.body.NAME,req.session.user_id);

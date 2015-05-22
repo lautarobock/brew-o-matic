@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-    <div class="panel-body" >
+    <div class="panel-body" ng-hide="config().hideFilters">
         <div class="col-md-10" style="padding-top: 5px;">
             <span ng-class="{invisible:loading}">
                 <ng-pluralize count="(rows | textFilter:searchCriteria | advanced:filterData).length"
@@ -13,7 +13,7 @@
         </div>
     </div>
     <!-- ADVANCED SEARCH -->
-    <div class="panel panel-default" style="margin: 0 1em">
+    <div class="panel panel-default" style="margin: 0 1em" ng-hide="config().hideFilters">
         <div class="panel-body">
             <div class="row">
                 <div class="col-sm-{{config().filterColSpan||'12'}}" style="margin-bottom: 1em;">
@@ -87,5 +87,5 @@
                 <span class="glyphicon glyphicon-plus"></span> nuevo
             </a>
         </div>
-    </div>    
+    </div>
 </div>

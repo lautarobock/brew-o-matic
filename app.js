@@ -102,6 +102,7 @@ app.get('/recipe/collaborated',filter,recipe.findCollaborated);
 app.put('/recipe/comment',filter,recipe.addComment);
 app.get('/recipe/comment:id',recipe.getComments);
 app.post('/recipe/publish_:id',filter,recipe.publish);
+app.post('/recipe/state_:id',filter,recipe.updateState);
 app.put('/recipe/remove_comment',filter,recipe.deleteComment);
 app.get('/recipe/my_count',filter,recipe.countAll);
 app.get('/recipe/my_tags',filter,recipe.myTags);

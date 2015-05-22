@@ -28,11 +28,13 @@
                                 'print',
                                 'gt.listview',
                                 'vr.directives.wordCloud',
-                                'ngAudio']);
+                                'ngAudio',
+                                'dashboard']);
 
     index.
         config(['$routeProvider', function($routeProvider) {
             $routeProvider.
+                when('/dashboard', {templateUrl: 'partial/dashboard.html',   controller: 'DashboardCtrl'}).
                 when('/recipe', {templateUrl: 'partial/recipe-list.html',   controller: 'RecipeListCtrl'}).
                 when('/collaborated', {templateUrl: 'partial/recipe-collaborated.html',   controller: 'RecipeCollaboratedCtrl'}).
                 when('/favorites', {templateUrl: 'partial/recipe-favorite.html',   controller: 'RecipeFavoriteCtrl'}).

@@ -351,7 +351,7 @@
 
   $templateCache.put('listview/listview.html',
     "<div class=\"panel panel-default\">\n" +
-    "    <div class=\"panel-body\" style=\"padding-bottom: 0;\">\n" +
+    "    <div class=\"panel-body\" style=\"padding-bottom: 0;\" ng-hide=\"listviewConfig.hideSorting\">\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-md-6\">\n" +
     "                <div class=\"well well-sm\" style=\"padding: 7px;\">\n" +
@@ -380,7 +380,7 @@
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "    <div  class=\"panel panel-default\" style=\"margin: 0 1em 1em 1em\">\n" +
+    "    <div  class=\"panel panel-default\" style=\"margin: 0 1em 1em 1em\" ng-hide=\"listviewConfig.hideFilters\">\n" +
     "        <div class=\"panel-body\">\n" +
     "            <div class=\"row\">\n" +
     "                <div class=\"col-sm-{{listviewConfig.filterColSpan||'12'}}\" style=\"margin-bottom: 1em;\">\n" +
@@ -412,7 +412,7 @@
     "        <table class=\"table table-striped table-hover\" >\n" +
     "            <thead>\n" +
     "                <tr>\n" +
-    "                    <th ng-repeat=\"header in listviewHeader\" \n" +
+    "                    <th ng-repeat=\"header in listviewHeader\"\n" +
     "                        ng-class={'hidden-xs':header.hidden.xs,'hidden-sm':header.hidden.sm}\n" +
     "                        ng-style=\"getStyle(header)\">\n" +
     "                        <span tooltip=\"{{header.tooltip}}\" tooltip-append-to-body=\"true\">\n" +
@@ -424,7 +424,7 @@
     "            <tbody>\n" +
     "                <tr ng-repeat=\"$model in models\">\n" +
     "                    <td ng-repeat=\"header in listviewHeader\" ng-class={'hidden-xs':header.hidden.xs,'hidden-sm':header.hidden.sm}>\n" +
-    "                        <span ng-if=\"header.templateUrl\"> \n" +
+    "                        <span ng-if=\"header.templateUrl\">\n" +
     "                            <ng-include src=\"header.templateUrl\"></ng-include>\n" +
     "                        </span>\n" +
     "                        <span ng-if=\"!header.templateUrl\" ng-bind-html=\"getValue(header,$model)\"></span>\n" +
@@ -438,7 +438,7 @@
     "            <div style=\"white-space: pre-wrap;box-sizing: border-box;\">{{(pagination.page-1)*pagination.pageSize + 1}} - <span ng-hide=\"pagination.page == getPageCount(pagination.totalItems)\">{{pagination.page*pagination.pageSize}}</span><span ng-show=\"pagination.page == getPageCount(pagination.totalItems)\">{{pagination.totalItems}}</span> de {{pagination.totalItems}}</div>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "</div>"
+    "</div>\n"
   );
 	}]);;(function() {
 

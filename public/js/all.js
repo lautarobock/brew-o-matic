@@ -24,6 +24,7 @@ var _baseDir = (_baseDir || "js") + "/";
 
 var imports = [ "index.js",
         "helper.js",
+        "DashboardCtrl.js",
         "RecipeCtrl.js",
         "RecipeListCtrl.js",
         "RecipeDetailCtrl.js",
