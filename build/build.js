@@ -31,10 +31,10 @@ function compressFolder(folder,files) {
 	var base = fs.readdirSync(folder);
 	for( var i=0; i < base.length; i++ ) {
 		if ( base[i].endsWith(".js") ) {
-			files.push(folder+base[i]);	
+			files.push(folder+base[i]);
 		} else {
 			if ( excludes.indexOf(base[i]) == -1 ) {
-				compressFolder(folder+base[i]+"/",files);	
+				compressFolder(folder+base[i]+"/",files);
 			}
 		}
 	}
@@ -44,11 +44,12 @@ function min() {
 	// var files = [];
 
 	// var baseStr = "public/js/";
-	
+
 	// compressFolder(baseStr,files);
 
 	files = [ "public/js/index.js",
         "public/js/helper.js",
+		"public/js/DashboardCtrl.js",
         "public/js/RecipeCtrl.js",
         "public/js/RecipeListCtrl.js",
         "public/js/RecipeDetailCtrl.js",
@@ -89,6 +90,3 @@ function min() {
 }
 
 min();
-
-
-
