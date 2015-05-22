@@ -16,32 +16,46 @@
     </li>
 </ul>
 <div class="panel panel-default" ng-cloak>
-    <div class="panel panel-default" style="margin:1em">
-        <div class="panel panel-heading">
-            Recetas en curso
+    <div style="margin:1em 1em 2em 1em" ng-repeat="panel in panels">
+        <div class="well well-sm">
+            <strong>{{configs[panel].title}}</strong>
         </div>
-        <gt-table
-            can-remove="false"
-            can-edit="false"
-            can-add="false"
-            config="defined"
-            entity="Receta">
-        </gt-table>
-        <!-- <listview ng-if="user"
-            listview-data="recipes"
-            listview-sort="sort"
-            listview-config="config"
-            listview-filter="filterData"
-            listview-header="headers"></listview> -->
-        <div class="panel panel-heading">
-            Recetas Borradores
+        <div id="products" class="row list-group">
+            <div ng-repeat="recipe in configs[panel].items" class="item col-xs-4">
+                <div class="thumbnail" style="height: 150px;">
+                    <img class="group list-group-image"alt="" />
+                    <div class="caption">
+                        <h4 class="group inner list-group-item-heading">
+                            <a href="#/recipe/edit/{{recipe._id}}">{{recipe.code}} - {{recipe.NAME}}</a>
+                        </h4>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-4">
+                                <a href=href="#/recipe/edit/{{recipe._id}}">
+                                    <i style="font-size: 100px;color:{{convertColor(recipe.CALCCOLOUR)}}" class="fa fa-beer"></i>
+                                </a>
+                            </div>
+                            <div class="col-xs-12 col-md-8">
+                                <ul class="list-group">
+                                    <li class="list-group-item" style="border:none; padding: 3px 10px;text-overflow: ellipsis;overflow: hidden; white-space: nowrap;">
+                                        {{recipe.STYLE.NAME}}
+                                    </li>
+                                    <li class="list-group-item" style="border:none; padding: 3px 10px">
+                                        <b>OG</b>: {{recipe.OG}} <b>ABV</b>: {{recipe.ABV}}
+                                    </li>
+                                    <li class="list-group-item" style="border:none; padding: 3px 10px">
+                                        <b>IBU</b>: {{recipe.CALCIBU}} <b>Batch</b>: {{recipe.BATCH_SIZE}} Lts
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item col-xs-4" ng-hide="configs[panel].noMore">
+                <div class="thumbnail" style="height: 150px;">
+                    <a href="" ng-click="configs[panel].more()">Mas</a>
+                </div>
+            </div>
         </div>
-        <gt-table
-            can-remove="false"
-            can-edit="false"
-            can-add="false"
-            config="draft"
-            entity="Receta">
-        </gt-table>
     </div>
 </div>

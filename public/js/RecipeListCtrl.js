@@ -475,11 +475,11 @@
             '</a>' +
             '<span class="glyphicon glyphicon-check" title="Esta receta es publica, puede ser vista por todos los usuarios" ng-show="$model.isPublic"/>');
 
-        $templateCache.put('recipe-state.html',
-            '<a href="" ng-click="header.state($model,\'draft\')" type="button" class="btn btn-success btn-xs" title="Compartir la receta con el resto de los cerveceros">' +
-                '<span class="glyphicon glyphicon-cloud-upload"></span>' +
-                'borrador ({{$model.state}})' +
-            '</a>');
+        // $templateCache.put('recipe-state.html',
+        //     '<a href="" ng-click="header.state($model,\'draft\')" type="button" class="btn btn-success btn-xs" title="Compartir la receta con el resto de los cerveceros">' +
+        //         '<span class="glyphicon glyphicon-cloud-upload"></span>' +
+        //         'borrador ({{$model.state}})' +
+        //     '</a>');
 
         $templateCache.put('recipe-remove.html', '<button data-target="#{{header.confirmationID($model._id)}}" data-toggle="modal"  type="button" class="close" aria-hidden="true">&times;</button>' +
             '<div class="modal fade" id="{{header.confirmationID($model._id)}}" role="dialog" aria-labelledby="#label">' +
@@ -558,24 +558,24 @@
                 caption: 'Litros'
             },{
                 field: 'clone',
-                caption: 'Acciones',
+                caption: '',
                 template:   '<a class="btn btn-default btn-xs" href="#/recipe/clone/{{header.encodeName($model._id)}}">' +
                                 'clonar' +
                             '</a>',
                 encodeName: $scope.encodeName
-            },{
-                field: 'state',
-                caption: 'Archivar',
-                templateUrl: 'recipe-state.html',
-                state: function(recipe, state) {
-                    recipe.$state({state: state},function() {
-                        alertFactory.create(
-                            'success',
-                            'La Receta fue archivada!',
-                            'Receta archivada con exito!'
-                        );
-                    });
-                }
+            // },{
+            //     field: 'state',
+            //     caption: 'Archivar',
+            //     templateUrl: 'recipe-state.html',
+            //     state: function(recipe, state) {
+            //         recipe.$state({state: state},function() {
+            //             alertFactory.create(
+            //                 'success',
+            //                 'La Receta fue archivada!',
+            //                 'Receta archivada con exito!'
+            //             );
+            //         });
+            //     }
             },{
                 field: 'publish',
                 caption: '',
