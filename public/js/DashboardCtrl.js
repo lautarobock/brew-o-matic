@@ -49,7 +49,6 @@
                         $scope.configs[key].load();
                     });
                 }
-                reload();
 
                 $scope.convertColor = function(srm) {
                     return BrewHelper.convertColor(srm);
@@ -73,11 +72,11 @@
 
                 $scope.defaultActionName = function(recipe) {
                     if ( recipe.state === 'draft' ) {
-                        return 'Lista';
+                        return 'Esta Lista';
                     } else if ( recipe.state === 'ready' ) {
-                        return 'En Curso';
+                        return 'Comenzar';
                     } else if ( recipe.state === 'running' ) {
-                        return 'Finalizada';
+                        return 'Finalizar';
                     }
                 };
 
@@ -89,6 +88,7 @@
                     if ( user ) {
                         // $scope.recipes = Recipe.query();
                         $scope.stats = Recipe.stats();
+                        reload();
                     }
                 });
             }

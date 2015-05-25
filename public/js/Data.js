@@ -117,6 +117,14 @@ data.factory('PitchRate', function() {
 
 data.factory('State', function() {
     return {
+        valueOf: function(name) {
+            for ( var i=0; i<this.query().length; i++ ) {
+                if ( name === this.query()[i].value ) {
+                    return this.query()[i];
+                }
+            }
+            return null;
+        },
         query: function() {
             return [
                 {value:'whish', name:'Deseo'},
