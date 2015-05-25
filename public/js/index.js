@@ -54,7 +54,7 @@
                 when('/data/:entity', {templateUrl: 'partial/data/abm.html', controller: 'AbmCtrl'}).
                 when('/admin/Stats', {templateUrl: 'partial/admin/stats.html', controller: 'AdminCtrl'}).
                 when('/admin/:entity', {templateUrl: 'partial/admin/admin.html', controller: 'AdminCtrl'}).
-                otherwise({redirectTo: '/recipe'});
+                otherwise({redirectTo: '/dashboard'});
     }]);
 
     index.config(['abmProvider',function(abmProvider) {

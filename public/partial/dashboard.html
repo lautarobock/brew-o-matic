@@ -16,13 +16,23 @@
     </li>
 </ul>
 <div class="panel panel-default" ng-cloak>
+    <div class="panel-body" >
+        <div class="col-md-12" >
+            <a type="button" class="btn btn-primary pull-right" href="#/recipe/new">
+                <span class="glyphicon glyphicon-plus"></span> Nueva receta
+            </a>
+        </div>
+    </div>
     <div style="margin:1em 1em 2em 1em" ng-repeat="panel in panels">
-        <div class="well well-sm">
+        <div ng-show="configs[panel].items.length==0" style="margin: 2em 2em 0;" class="alert alert-info">
+            {{configs[panel].emptyText}}
+        </div>
+        <div ng-hide="configs[panel].items.length==0" class="well well-sm">
             <strong>{{configs[panel].title}}</strong>
         </div>
-        <div id="products" class="row list-group">
+        <div ng-hide="configs[panel].items.length==0" id="products" class="row list-group">
             <div ng-repeat="recipe in configs[panel].items" class="item col-xs-4">
-                <div class="thumbnail" style="height: 150px;">
+                <div class="thumbnail" style="height: 180px;">
                     <img class="group list-group-image"alt="" />
                     <div class="caption">
                         <h4 class="group inner list-group-item-heading">
@@ -48,12 +58,35 @@
                                 </ul>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-8"></div>
+                            <div class="col-xs-12 col-md-4">
+                                <button type="button"
+                                    class="btn"
+                                    ng-class="{
+                                        'btn-success': recipe.state == 'draft',
+                                        'btn-primary': recipe.state == 'ready',
+                                        'btn-danger': recipe.state == 'running'
+                                    }"
+                                    ng-click="doDefault(recipe)">
+                                    {{defaultActionName(recipe)}}
+                                    <span class="glyphicon"
+                                        ng-class="{
+                                            'glyphicon-ok': recipe.state == 'draft',
+                                            'glyphicon-arrow-up': recipe.state == 'ready',
+                                            'glyphicon-ok-circle': recipe.state == 'running'
+                                        }"/>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="item col-xs-4" ng-hide="configs[panel].noMore">
-                <div class="thumbnail" style="height: 150px;">
-                    <a href="" ng-click="configs[panel].more()">Mas</a>
+                <div class="thumbnail" style="height: 180px;padding: 20% 46%;font-size: 30px">
+                    <a href="" ng-click="configs[panel].more()">
+                        <center><span class="glyphicon glyphicon-plus"></span></center>
+                    </a>
                 </div>
             </div>
         </div>

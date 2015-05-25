@@ -1,7 +1,4 @@
 (function() {
-
-
-
     angular.module('dashboard', [])
         .controller(
             'DashboardCtrl',
@@ -16,9 +13,10 @@
                 Tag,
                 TagColor
             ) {
-                function createConfig(state,title) {
+                function createConfig(state,title,emptyText) {
                     var config = {
                         title: title,
+                        emptyText: emptyText,
                         limit: 5,
                         noMore: false,
                         load: function() {
@@ -27,9 +25,7 @@
                                 limit: this.limit,
                                 sort:'-code'},
                                 function(recipes) {
-                                    if ( recipes.length < config.limit ) {
-                                        config.noMore = true;
-                                    }
+                                    config.noMore =  recipes.length < config.limit;
                                     config.items = recipes;
                                 }
                             );
@@ -44,16 +40,45 @@
 
                 $scope.panels = ['running','ready','draft'];
                 $scope.configs = {
-                    running: createConfig('running', 'En Curso'),
-                    ready: createConfig('ready', 'Listas'),
-                    draft: createConfig('draft', 'Borradores')
+                    running: createConfig('running', 'En Curso', 'No tenes recetas en curso'),
+                    ready: createConfig('ready', 'Listas', 'No tenes recetas listas'),
+                    draft: createConfig('draft', 'Borradores', 'No tenes recetas en borrador')
                 };
-                angular.forEach($scope.panels, function(key) {
-                    $scope.configs[key].load();
-                });
+                function reload() {
+                    angular.forEach($scope.panels, function(key) {
+                        $scope.configs[key].load();
+                    });
+                }
+                reload();
 
                 $scope.convertColor = function(srm) {
                     return BrewHelper.convertColor(srm);
+                };
+
+                $scope.doDefault = function(recipe) {
+                    if ( recipe.state === 'draft' ) {
+                        recipe.$state({state:'ready'}, function() {
+                            reload();
+                        });
+                    } else if ( recipe.state === 'ready' ) {
+                        recipe.$state({state:'running'}, function() {
+                            reload();
+                        });
+                    } else if ( recipe.state === 'running' ) {
+                        recipe.$state({state:'finished'}, function() {
+                            reload();
+                        });
+                    }
+                };
+
+                $scope.defaultActionName = function(recipe) {
+                    if ( recipe.state === 'draft' ) {
+                        return 'Lista';
+                    } else if ( recipe.state === 'ready' ) {
+                        return 'En Curso';
+                    } else if ( recipe.state === 'running' ) {
+                        return 'Finalizada';
+                    }
                 };
 
                 $rootScope.breadcrumbs = [{
