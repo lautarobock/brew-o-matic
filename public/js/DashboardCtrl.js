@@ -144,6 +144,48 @@
                     localStorage['home.' + panel.state + '.show'] = false;
                 };
 
+                $scope.currentState = function(recipe) {
+                    if ( recipe.state === 'running' &&
+                        recipe.fermentation.estimateDate &&
+                        new Date(recipe.fermentation.estimateDate).getTime() < (new Date()).getTime()) {
+
+                        var now = new Date(recipe.fermentation.estimateDate).getTime();
+                        var lastStage = null;
+                        for (var i=0; i<recipe.fermentation.stages.length; i++) {
+                            var duration = recipe.fermentation.stages[i].duration;
+                            var mode = recipe.fermentation.stages[i].durationMode;
+                            lastStage = recipe.fermentation.stages[i];
+                            if ( mode === 'Horas' ) {
+                                now += duration*60*60*1000;
+                            } else {
+                                now += duration*24*60*60*1000;
+                            }
+                            if ( now > new Date().getTime() ) {
+                                break;
+                            }
+                        }
+                        if ( now < new Date().getTime() ) {
+                            return 'Lista para embotellar';
+                        } else if ( lastStage !== null ) {
+                            if ( lastStage.temperature === lastStage.temperatureEnd) {
+                                return '$title: $tiº'
+                                .replace('$title',lastStage.title)
+                                .replace('$ti',lastStage.temperature);
+                            } else {
+                                return '$title: $tiº a $tfº'
+                                .replace('$title',lastStage.title)
+                                .replace('$ti',lastStage.temperature)
+                                .replace('$tf',lastStage.temperatureEnd);
+                            }
+
+                        } else {
+                            return null;
+                        }
+                    } else {
+                        return null;
+                    }
+                };
+
                 $rootScope.breadcrumbs = [{
                     link: '#',
                     title: 'Inicio'
