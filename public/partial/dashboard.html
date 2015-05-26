@@ -24,69 +24,85 @@
         </div>
     </div>
     <div style="margin:1em 1em 2em 1em" ng-repeat="panel in panels">
-        <div ng-show="configs[panel].items.length==0" style="margin: 2em 2em 0;" class="alert alert-info">
-            {{configs[panel].emptyText}}
+        <div  ng-hide="configs[panel].show">
+            <a href="" ng-click="show(configs[panel])">
+                {{configs[panel].showPanel}}
+            </a>
         </div>
-        <div ng-hide="configs[panel].items.length==0" class="well well-sm">
-            <strong>{{configs[panel].title}}</strong>
-        </div>
-        <div ng-hide="configs[panel].items.length==0" id="products" class="row list-group">
-            <div ng-repeat="recipe in configs[panel].items" class="item col-xs-4">
-                <div class="thumbnail" style="height: 180px;">
-                    <img class="group list-group-image"alt="" />
-                    <div class="caption">
-                        <h4 class="group inner list-group-item-heading">
-                            <a href="#/recipe/edit/{{recipe._id}}">{{recipe.code}} - {{recipe.NAME}}</a>
-                        </h4>
-                        <div class="row">
-                            <div class="col-xs-12 col-md-4">
-                                <a href="#/recipe/edit/{{recipe._id}}">
-                                    <i style="font-size: 100px;color:{{convertColor(recipe.CALCCOLOUR)}}" class="fa fa-beer"></i>
-                                </a>
+        <div  ng-show="configs[panel].show">
+            <div ng-show="configs[panel].items.length==0" style="margin: 2em 2em 0;" class="alert alert-info">
+                {{configs[panel].emptyText}}
+            </div>
+            <div ng-hide="configs[panel].items.length==0" class="well well-sm">
+                <strong>{{configs[panel].title}}</strong>
+                <button ng-click="hide(configs[panel])"
+                    type="button"
+                    title="Ocultar panel"
+                    class="close" aria-hidden="true">&times;
+                </button>
+            </div>
+            <div ng-hide="configs[panel].items.length==0" id="products" class="row list-group">
+                <div ng-repeat="recipe in configs[panel].items" class="item col-xs-4">
+                    <div class="thumbnail" style="height: 180px;">
+                        <img class="group list-group-image"alt="" />
+                        <div class="caption">
+                            <h4 class="group inner list-group-item-heading">
+                                <a href="#/recipe/edit/{{recipe._id}}">{{recipe.code}} - {{recipe.NAME}}</a>
+                            </h4>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-4">
+                                    <a href="#/recipe/edit/{{recipe._id}}">
+                                        <i style="font-size: 100px;color:{{convertColor(recipe.CALCCOLOUR)}}" class="fa fa-beer"></i>
+                                    </a>
+                                </div>
+                                <div class="col-xs-12 col-md-8">
+                                    <ul class="list-group">
+                                        <li class="list-group-item" style="border:none; padding: 3px 10px;text-overflow: ellipsis;overflow: hidden; white-space: nowrap;">
+                                            {{recipe.STYLE.NAME}}
+                                        </li>
+                                        <li class="list-group-item" style="border:none; padding: 3px 10px">
+                                            <b>OG</b>: {{recipe.OG}} <b>ABV</b>: {{recipe.ABV}}
+                                        </li>
+                                        <li class="list-group-item" style="border:none; padding: 3px 10px">
+                                            <b>IBU</b>: {{recipe.CALCIBU}} <b>Batch</b>: {{recipe.BATCH_SIZE}} Lts
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="col-xs-12 col-md-8">
-                                <ul class="list-group">
-                                    <li class="list-group-item" style="border:none; padding: 3px 10px;text-overflow: ellipsis;overflow: hidden; white-space: nowrap;">
-                                        {{recipe.STYLE.NAME}}
-                                    </li>
-                                    <li class="list-group-item" style="border:none; padding: 3px 10px">
-                                        <b>OG</b>: {{recipe.OG}} <b>ABV</b>: {{recipe.ABV}}
-                                    </li>
-                                    <li class="list-group-item" style="border:none; padding: 3px 10px">
-                                        <b>IBU</b>: {{recipe.CALCIBU}} <b>Batch</b>: {{recipe.BATCH_SIZE}} Lts
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-md-8"></div>
-                            <div class="col-xs-12 col-md-4">
-                                <button type="button"
-                                    class="btn"
-                                    ng-class="{
-                                        'btn-success': recipe.state == 'draft',
-                                        'btn-primary': recipe.state == 'ready',
-                                        'btn-danger': recipe.state == 'running'
-                                    }"
-                                    ng-click="doDefault(recipe)">
-                                    {{defaultActionName(recipe)}}
-                                    <span class="glyphicon"
+                            <div class="row">
+                                <div class="col-xs-12 col-md-8"></div>
+                                <div class="col-xs-12 col-md-4">
+                                    <button type="button"
+                                        class="btn"
+                                        ng-hide="recipe.state == 'archived'"
                                         ng-class="{
-                                            'glyphicon-ok': recipe.state == 'draft',
-                                            'glyphicon-arrow-up': recipe.state == 'ready',
-                                            'glyphicon-ok-circle': recipe.state == 'running'
-                                        }"/>
-                                </button>
+                                            'btn-success': recipe.state == 'draft' || recipe.state == 'wish',
+                                            'btn-primary': recipe.state == 'ready',
+                                            'btn-danger': recipe.state == 'running',
+                                            'btn-info': recipe.state == 'finished'
+                                        }"
+                                        ng-click="doDefault(recipe)">
+                                        {{defaultActionName(recipe)}}
+                                        <span class="glyphicon"
+                                            ng-class="{
+                                                'glyphicon-ok': recipe.state == 'draft',
+                                                'glyphicon-arrow-up': recipe.state == 'ready',
+                                                'glyphicon-ok-circle': recipe.state == 'running',
+                                                'glyphicon-arrow-down': recipe.state == 'finished',
+                                                'glyphicon-plus': recipe.state == 'wish'
+                                            }"/>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="item col-xs-4" ng-hide="configs[panel].noMore">
-                <div class="thumbnail" style="height: 180px;padding: 20% 46%;font-size: 30px">
-                    <a href="" ng-click="configs[panel].more()">
-                        <center><span class="glyphicon glyphicon-plus"></span></center>
-                    </a>
+                <div class="item col-xs-4" ng-hide="configs[panel].noMore">
+                    <div class="thumbnail" style="height: 180px;padding: 20% 46%;font-size: 30px">
+                        <a href="" ng-click="configs[panel].more()">
+                            <center><span class="glyphicon glyphicon-plus"></span></center>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

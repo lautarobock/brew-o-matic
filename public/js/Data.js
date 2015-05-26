@@ -127,7 +127,7 @@ data.factory('State', function() {
         },
         query: function() {
             return [
-                {value:'whish', name:'Deseo'},
+                {value:'wish', name:'Deseo'},
                 {value:'draft', name:'Borrador'},
                 {value:'ready', name:'Lista'},
                 {value:'running', name:'En Curso'},
