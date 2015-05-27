@@ -23,7 +23,7 @@
             </a>
         </div>
     </div>
-    <div style="margin:1em 1em 2em 1em" ng-repeat="panel in panels">
+    <div style="margin:1em 1em 2em 1em" ng-repeat="panel in panels" class="animate-repeat">
         <div  ng-hide="configs[panel].show">
             <a href="" ng-click="show(configs[panel])">
                 {{configs[panel].showPanel}}
