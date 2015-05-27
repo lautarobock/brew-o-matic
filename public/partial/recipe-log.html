@@ -11,7 +11,7 @@
                 <table class="table table-condensed table-hover">
                     <thead>
                       <tr>
-                        <th style="width: 13em">Fecha y Hora</th>
+                        <th style="width: 16em">Fecha y Hora</th>
                         <th>Detalle</th>
                         <th style="width:2%"></th>
                         <th style="width:2%"></th>
@@ -20,7 +20,9 @@
                     </thead>
                     <tbody>
                       <tr ng-repeat="log in recipe.log.logs | orderBy:orderLog | filter:discardFilter" ng-class="{'gt-log-active': edit == log,'gt-log-removed': log.discard }">
-                        <td>{{log.time|formatDate}}</td>
+                        <td title="{{log.time|date:'dd/MM/yyyy HH:mm'}}">
+                            {{log.time|formatDate}}
+                        </td>
                         <td>{{log.detail}}</td>
                         <td>
                             <button ng-disabled="edit==log || log.discard" ng-click="goEdit(log)" type="button" class="btn btn-default btn-xs" title="Editar entrada">
@@ -80,7 +82,7 @@
                 <table class="table table-condensed table-hover" ng-show="recipe.FERMENTABLES.FERMENTABLE.length != 0" style="margin-top: 1em;">
                     <thead>
                       <tr>
-                        <th style="width: 13em">Fecha y Hora estimada</th>
+                        <th style="width: 16em">Fecha y Hora estimada</th>
                         <th>Detalle Sugerido</th>
                         <th style="width:2%"></th>
                         <th style="width:2%"></th>
@@ -89,7 +91,9 @@
                     </thead>
                     <tbody>
                       <tr ng-repeat="log in pendingLogs">
-                        <td>{{log.time()|formatDate}}</td>
+                        <td title="{{log.time()|date:'dd/MM/yyyy HH:mm'}}">
+                            {{log.time()|formatDate}}
+                        </td>
                         <td>{{log.detail}}</td>
                         <td>
                             <button ng-click="push(log)" type="button" class="btn btn-default btn-xs" title="Pasa la entrada directamente a la bitacora">
@@ -108,7 +112,7 @@
                         </td>
                       </tr>
                     </tbody>
-                </table>                
+                </table>
             </div>
         </div>
         <div style="overflow: hidden;margin-bottom: 1em;">
@@ -126,7 +130,7 @@
                 <strong>{{notification.title}}</strong>
                 {{notification.text}}
             </div>
-        </div>            
+        </div>
     </div>
     <div class="col-md-2" >
         <ng-include src="'partial/recipe-detail-indicators.html'"></ng-include>

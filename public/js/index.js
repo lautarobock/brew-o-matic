@@ -259,7 +259,7 @@
         };
 
         $rootScope.formatDate = function(date) {
-            return util.formatDate(date, $filter('date'))
+            return util.formatDate(date, $filter('date'));
         };
     });
 

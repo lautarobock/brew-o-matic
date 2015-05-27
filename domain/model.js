@@ -145,10 +145,6 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
                 DECOCTION_AMT: Number,  //cantidad sacada para decocction
                 infuse: Boolean,        //Indica si agrega agua o no.
                 recirculate: Boolean    //Si recircula o no
-                //Others data not used yet
-                //RAMP_TIME: Number,   //Este es redundante con END_TEMP
-                //DISPLAY_STEP_TEMP: Number,
-                //DISPLAY_INFUSE_AMT: Number,
             }]
         }
     },
@@ -217,6 +213,8 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     GrainAbsorbtion: Number,
     WatertoGrainRatio: Number,
     SpargeTempDesired: Number,
+    SpargeWhaterDesiredPH: Number,
+    MashDesiredPH: Number,
     PercentEvap: Number,
     TrubChillerLosses: Number,
     TopUpWater: Number,

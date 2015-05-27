@@ -52,7 +52,7 @@
 
     helper.filter("formatDate",function($filter) {
         return function(date) {
-            return util.formatDate(date,$filter('date'))
+            return util.formatDate(date,$filter('date'));
         };
     });
 

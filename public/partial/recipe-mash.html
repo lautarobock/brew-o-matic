@@ -19,6 +19,10 @@
                         <span class="form-control input-sm gt-calculated" id="totalWater"
                               ng-bind="round1(totalWater()) + ' Lts'" />
                     </div>
+                    <div class="col-lg-3">
+                        <label for="phMash">pH Deseado</label>
+                        <input type="number" step="0.01" class="form-control input-sm" id="phMash" ng-model="recipe.MashDesiredPH" />
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-3">
@@ -217,20 +221,24 @@
             <div class="panel-heading"><strong>Lavado</strong></div>
             <div class="panel-body" >
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-2">
                         <label for="spargeTempDesired">Temperatura</label>
                         <input type="number"  class="form-control input-sm" id="spargeTempDesired" step="0.1" ng-model="recipe.SpargeTempDesired" />
                     </div>
-                    <div class="col-lg-3">
-                        <label for="spargeWater">Cantidad Agua</label>
+                    <div class="col-lg-2">
+                        <label for="spargeWhaterDesiredPH">pH Deseado</label>
+                        <input type="number"  class="form-control input-sm" id="spargeWhaterDesiredPH" step="0.01" ng-model="recipe.SpargeWhaterDesiredPH" />
+                    </div>
+                    <div class="col-lg-2">
+                        <label for="spargeWater">Agua</label>
                         <span class="form-control input-sm gt-calculated" id="spargeWater"
                               ng-bind="round1(spargeWater()) + ' Lts'" />
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-2">
                         <label title="Litros perdidos en el lavado (por ejemplo debajo del FF)" for="spargeDeadSpace">Espacio Muerto</label>
                         <input type="number"  class="form-control input-sm gt-preset" id="spargeDeadSpace" step="0.1" ng-model="recipe.SpargeDeadSpace" />
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-2">
                         <label title="Litros de agua que quedan en el bagazo por cada Kg de malta" for="grainAbsorbtion">Absorcion (L/Kg)</label>
                         <input type="number"  class="form-control input-sm gt-preset" id="grainAbsorbtion" step="0.1" ng-model="recipe.GrainAbsorbtion" />
                     </div>

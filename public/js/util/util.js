@@ -1,5 +1,5 @@
 (function(exports) {
-    
+
     function DiffHelper() {
         var ready;
         var result;
@@ -35,7 +35,7 @@
                     }
                     this.compare(obj1,obj2,i,parent||p);
                 }
-                
+
             }
         };
 
@@ -64,7 +64,7 @@
                 }
                 if ( !fail ) {
                     result.push(diff[i]);
-                }    
+                }
             }
         };
 
@@ -105,8 +105,8 @@
                 if ( index !== -1 ) {
                     array.splice(index,1);
                 }
-                return index;       
-            }            
+                return index;
+            }
         },
         filter: function(array, comparator) {
             var result = [];
@@ -129,16 +129,25 @@
         //Diferencia en segundos
         var diffSec = today-dateSec;
 
+        var yesterday = new Date();
+        yesterday.setDate(yesterday.getDate()-1);
+        var tomorroy = new Date();
+        tomorroy.setDate(tomorroy.getDate()+1);
+
         if ( diffSec < 0 ) { //En el futuro
             if ( diffSec>-10) {
                 return "Ahora";
             } else if ( diffSec>-60) {
-                return "En menos de un minuto"
+                return "En menos de un minuto";
             } else if (diffSec > -(60*60)) { // Si es menos de una hora
                 return "En " + Math.round(-diffSec/60) + " minutos";
-            } else if ( date.getDate() == new Date().getDate()) { //si aun es el mismo dia, pero mas adelante
+            } else if ( date.getDate() == new Date().getDate() &&
+                date.getMonth() == new Date().getMonth() &&
+                date.getYear() == new Date().getYear()) { //si aun es el mismo dia, pero mas adelante
                 return "En " + Math.floor(-diffSec/60/60) + ":" + exports.pad(Math.floor((-diffSec/60) % 60),2) + " Horas";
-            } else if (date.getDate() == new Date().getDate()+1 ) { // Si sera mañana
+            } else if (date.getDate() == tomorroy.getDate() &&
+                date.getMonth() == tomorroy.getMonth() &&
+                date.getYear() == tomorroy.getYear()) { // Si sera mañana
                 return "Mañana " + defaultFormatter(date,'HH:mm');
             }  else {
                 return defaultFormatter(date,'dd/MM/yyyy HH:mm');
@@ -147,19 +156,69 @@
             if (diffSec<10) { // Si es menos de un minuto
                 return "Ahora";
             } else if (diffSec<60) { // Si es menos de un minuto
-                return "Hace menos de un minuto"
+                return "Hace menos de un minuto";
             } else if (diffSec < (60*60)) { // Si es menos de una hora
                 return "Hace " + Math.round(diffSec/60) + " minutos";
-            } else if (date.getDate() == new Date().getDate()) { //si aun es el mismo dia
-                return "Hoy" + " hace " + Math.round(diffSec/60/60) + " horas";
-            } else if (date.getDate() == new Date().getDate()-1 ) { // Si fue durane el dia de ayer
+            } else if (date.getDate() == new Date().getDate() &&
+                date.getMonth() == new Date().getMonth() &&
+                date.getYear() == new Date().getYear()) { //si aun es el mismo dia
+                // return "Hoy" + " hace " + Math.round(diffSec/60/60) + " horas";
+                return "Hoy" + " hace " + Math.floor(diffSec/60/60) + ":" + exports.pad(Math.floor((diffSec/60) % 60),2) + " Horas";
+            } else if (date.getDate() == yesterday.getDate() &&
+                date.getMonth() == yesterday.getMonth() &&
+                date.getYear() == yesterday.getYear()) { // Si fue durane el dia de ayer
                 return "Ayer " + defaultFormatter(date,'HH:mm');
             } else {
-                return defaultFormatter(date,'dd/MM/yyyy HH:mm');
+                var days = diffSec/60/60/24;
+                if ( days > 365 ) {
+                    var years = Math.floor(days / 365);
+                    var daysLeft = Math.floor(days % 365);
+                    return 'Hace $years$months$days'
+                        .replace('$years', yearText(years))
+                        .replace('$months', monthsText(Math.floor(daysLeft / 30)))
+                        .replace('$days', daysText(Math.floor(daysLeft % 30)));
+                } else if ( days > 30 ) {
+                    return 'Hace $months meses y $days dias'
+                        .replace('$months', Math.floor(days / 30))
+                        .replace('$days', Math.floor(days % 30));
+                } else {
+                    return 'Hace $days dias'
+                    .replace('$days', Math.floor(days));
+                }
             }
         }
 
     };
+
+    function yearText(years) {
+        if ( years > 1 ) {
+            return years + ' años';
+        } else if ( years === 1 ) {
+            return '1 año';
+        } else {
+            return '';
+        }
+    }
+
+    function daysText(days) {
+        if ( days > 1 ) {
+            return ', ' + days + ' dias';
+        } else if ( days === 1 ) {
+            return ', 1 dia';
+        } else {
+            return '';
+        }
+    }
+
+    function monthsText(months) {
+        if ( months > 1 ) {
+            return ', ' + months + ' meses';
+        } else if ( months === 1 ) {
+            return ', 1 mes';
+        } else {
+            return '';
+        }
+    }
 
     exports.pad = function(value,zeros) {
         value = value.toString();
