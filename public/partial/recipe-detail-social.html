@@ -38,7 +38,7 @@
             <div style="margin:0 0.5em">
                 <strong>Actualizacion:</strong>
                 <div><b>User:</b> {{recipe.version[recipe.version.length-1].user_name}}</div>
-                <div><b>Fecha:</b> {{recipe.version[recipe.version.length-1].timeStamp | formatDate}}</div>
+                <div title="{{recipe.version[recipe.version.length-1].timeStamp|date:'dd/MM/yyyy HH:mm'}}"><b>Fecha:</b> {{recipe.version[recipe.version.length-1].timeStamp | formatDate}}</div>
                 <div><b>Version:</b> {{recipe.version[recipe.version.length-1].number}}</div>
             </div>
         </div>

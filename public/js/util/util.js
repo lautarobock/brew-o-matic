@@ -150,7 +150,16 @@
                 date.getYear() == tomorroy.getYear()) { // Si sera mañana
                 return "Mañana " + defaultFormatter(date,'HH:mm');
             }  else {
-                return defaultFormatter(date,'dd/MM/yyyy HH:mm');
+                var days = -diffSec/60/60/24;
+                var years = Math.floor(days / 365);
+                var daysLeft = Math.floor(days % 365);
+                var months = Math.floor(daysLeft / 30);
+                var daysLeftMonth = Math.floor(daysLeft % 30);
+                return 'En $years$months$days$hours'
+                .replace('$years', yearText(years))
+                .replace('$months', monthsText(months,years))
+                .replace('$days', daysText(daysLeftMonth, months, years))
+                .replace('$hours', hoursText(Math.floor(-diffSec/60/60 % 24), daysLeftMonth, months, years));
             }
         } else {// en el pasado
             if (diffSec<10) { // Si es menos de un minuto
@@ -170,25 +179,31 @@
                 return "Ayer " + defaultFormatter(date,'HH:mm');
             } else {
                 var days = diffSec/60/60/24;
-                if ( days > 365 ) {
-                    var years = Math.floor(days / 365);
-                    var daysLeft = Math.floor(days % 365);
-                    return 'Hace $years$months$days'
-                        .replace('$years', yearText(years))
-                        .replace('$months', monthsText(Math.floor(daysLeft / 30)))
-                        .replace('$days', daysText(Math.floor(daysLeft % 30)));
-                } else if ( days > 30 ) {
-                    return 'Hace $months meses y $days dias'
-                        .replace('$months', Math.floor(days / 30))
-                        .replace('$days', Math.floor(days % 30));
-                } else {
-                    return 'Hace $days dias'
-                    .replace('$days', Math.floor(days));
-                }
+                var years = Math.floor(days / 365);
+                var daysLeft = Math.floor(days % 365);
+                var months = Math.floor(daysLeft / 30);
+                var daysLeftMonth = Math.floor(daysLeft % 30);
+                return 'Hace $years$months$days$hours'
+                    .replace('$years', yearText(years))
+                    .replace('$months', monthsText(months,years))
+                    .replace('$days', daysText(daysLeftMonth, months, years))
+                    .replace('$hours', hoursText(Math.floor(diffSec/60/60 % 24), daysLeftMonth, months, years));
             }
         }
 
     };
+
+    function hoursText(hours, days, months, years) {
+        if ( months > 0 || years > 0 ) return '';
+        //FIXME, ver si conviene solo mostar la hora cuando son menos de 10 dias
+        if ( hours > 1 ) {
+            return ', ' + hours + ' horas';
+        } else if ( hours === 1 ) {
+            return ', 1 hora';
+        } else {
+            return '';
+        }
+    }
 
     function yearText(years) {
         if ( years > 1 ) {
@@ -200,21 +215,29 @@
         }
     }
 
-    function daysText(days) {
+    function daysText(days, months, years) {
         if ( days > 1 ) {
-            return ', ' + days + ' dias';
+            return colon(months, years) + days + ' dias';
         } else if ( days === 1 ) {
-            return ', 1 dia';
+            return colon(months, years) + '1 dia';
         } else {
             return '';
         }
     }
 
-    function monthsText(months) {
+    function colon(value, value2) {
+        if ( value !== 0 || (value2 && value2 !== 0) ) {
+            return ', ';
+        } else {
+            return '';
+        }
+    }
+
+    function monthsText(months,years) {
         if ( months > 1 ) {
-            return ', ' + months + ' meses';
+            return colon(years) + months + ' meses';
         } else if ( months === 1 ) {
-            return ', 1 mes';
+            return colon(years) + '1 mes';
         } else {
             return '';
         }
