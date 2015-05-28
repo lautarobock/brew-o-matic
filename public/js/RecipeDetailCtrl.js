@@ -242,11 +242,15 @@
             var og = 0;
             var OG_exclude = 0;
             angular.forEach($scope.recipe.FERMENTABLES.FERMENTABLE,function(f) {
-                og += BrewHelper.toLbs(f.AMOUNT) * BrewHelper.toPpg(f.POTENTIAL) * ($scope.recipe.EFFICIENCY/100)
-                    / BrewHelper.toGal($scope.recipe.BATCH_SIZE);
+                og += BrewHelper.toLbs(f.AMOUNT) *
+                    BrewHelper.toPpg(f.POTENTIAL) *
+                    ($scope.recipe.EFFICIENCY/100) /
+                    BrewHelper.toGal($scope.recipe.BATCH_SIZE);
                 if ( !f.excludeIBU ) {
-                    OG_exclude += BrewHelper.toLbs(f.AMOUNT) * BrewHelper.toPpg(f.POTENTIAL) * ($scope.recipe.EFFICIENCY/100)
-                    / BrewHelper.toGal($scope.recipe.BATCH_SIZE);
+                    OG_exclude += BrewHelper.toLbs(f.AMOUNT) *
+                        BrewHelper.toPpg(f.POTENTIAL) *
+                        ($scope.recipe.EFFICIENCY/100) /
+                        BrewHelper.toGal($scope.recipe.BATCH_SIZE);
                 }
             });
             $scope.recipe.OG = BrewHelper.toPotential(og);

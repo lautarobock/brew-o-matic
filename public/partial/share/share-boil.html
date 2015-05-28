@@ -10,7 +10,7 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label title="La densidad medida antes de enviar a hervor" for="ogBeforeBoil">Densidad</label>
-                                        <span class="form-control input-sm gt-calculated" id="ogBeforeBoil" ng-bind="calculateSgBeforeBoil(recipe.BOIL_TIME, recipe.PercentEvap, recipe.OG)"/>
+                                        <span class="form-control input-sm gt-calculated" id="ogBeforeBoil" ng-bind="calculateSgBeforeBoil(recipe.BOIL_TIME, recipe.PercentEvap)"/>
                                     </div>
                                     <div class="col-lg-6">
                                       <label for="beforeBoil">Litros antes de hervor</label>
@@ -61,7 +61,7 @@
                                     <div class="col-lg-6">
                                         <label for="afterBoil">Volumen</label>
                                         <span class="form-control input-sm gt-calculated" id="afterBoil" ng-bind="BrewHelper.round(recipe.BATCH_SIZE/0.94+recipe.TrubChillerLosses,10) + ' Lts'" />
-                                    </div>                                    
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -73,14 +73,14 @@
                                     <div class="col-lg-6">
                                         <label for="finalVolume">Volumen Final</label>
                                         <span class="form-control input-sm gt-calculated" id="finalVolume" ng-bind="BrewHelper.round(recipe.BATCH_SIZE/0.94,10) + ' Lts'" />
-                                    </div>                                
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="panel panel-default">
-                            
+
                             <div class="panel-heading"><strong>Luego de Enfriado</strong></div>
                             <div class="panel-body" >
                                 <div class="row">
@@ -91,7 +91,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
             </div>
         </div>

@@ -10,9 +10,13 @@
                             {{recipe.BATCH_SIZE}} Lts
                         </span>
                     </div>
-                    <div class="col-lg-3">
+                    <!-- <div class="col-lg-3">
                       <label for="OG">OG</label>
                       <span class="form-control input-sm gt-calculated" id="OG" ng-bind="recipe.OG" />
+                    </div> -->
+                    <div class="col-lg-3">
+                        <label for="firstRun">Primer Mosto</label>
+                        <span class="form-control input-sm gt-calculated" id="firstRun" />
                     </div>
                     <div class="col-lg-3">
                         <label for="totalWater">Agua total</label>
@@ -26,7 +30,9 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-3">
-                        <label for="totalGrain">Total Granos</label>
+                        <label for="totalGrain" title="No se cuenta los fermentables que van directo al hervido o etapas posteriores">
+                            Total Granos
+                        </label>
                         <span class="form-control input-sm gt-calculated" id="totalGrain">
                             {{recipe.totalAmountMash|number:3}} Kg
                         </span>

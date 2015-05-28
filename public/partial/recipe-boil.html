@@ -11,22 +11,26 @@
                                     <div class="col-lg-6">
                                         <label title="La densidad medida antes de enviar a hervor" for="ogBeforeBoil">Densidad</label>
                                         <span class="form-control input-sm gt-calculated" id="ogBeforeBoil"
-                                              ng-bind="calculateSgBeforeBoil(recipe.BOIL_TIME, recipe.PercentEvap, recipe.OG)"/>
+                                              ng-bind="calculateSgBeforeBoil(recipe.BOIL_TIME, recipe.PercentEvap)"/>
                                     </div>
                                     <div class="col-lg-6">
                                       <label for="beforeBoil">Litros antes de hervor</label>
-                                      <!--<span class="form-control input-sm gt-calculated" id="beforeBoil" ng-bind="round1((recipe.BATCH_SIZE/0.94+recipe.TrubChillerLosses)/( 1-((recipe.BOIL_TIME/60)*recipe.PercentEvap/100) )+recipe.TopUpWater) + ' Lts'" />-->
                                       <span class="form-control input-sm gt-calculated"
                                             id="beforeBoil"
                                             ng-bind="round1(BrewCalc.calculateBoilSize(recipe.BATCH_SIZE, recipe.TrubChillerLosses, recipe.BOIL_TIME, recipe.PercentEvap, recipe.TopUpWater)) + ' Lts'" />
                                     </div>
                                 </div>
-                                <!--<div class="row">-->
-                                <!--    <div class="col-lg-6">-->
-                                <!--        <label for="topUpWater">Agua Agregada</label>-->
-                                <!--        <input type="number" class="form-control input-sm" id="topUpWater" step="0.1" ng-model="recipe.TopUpWater" />-->
-                                <!--    </div>-->
-                                <!--</div>-->
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label title="Densidad aumentada por fermentables durante el hervor" for="sgDuringBoil">
+                                            Fermentables Agregados
+                                        </label>
+                                        <span class="form-control input-sm gt-calculated"
+                                            id="sgDuringBoil"
+                                            ng-bind="calculateSgDuringBoil(recipe.BOIL_TIME, recipe.PercentEvap)">
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -61,24 +65,24 @@
                                     <div class="col-lg-6">
                                         <label for="afterBoil">Volumen</label>
                                         <span class="form-control input-sm gt-calculated" id="afterBoil" ng-bind="round1(recipe.BATCH_SIZE/0.94+recipe.TrubChillerLosses) + ' Lts'" />
-                                    </div>                                    
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <label for="trubChillerLosses">Perdida Turb y Enfirador</label>
+                                        <label for="trubChillerLosses">Perdida Trub y Enfriador</label>
                                         <input type="number" class="form-control input-sm gt-preset" id="trubChillerLosses" step="0.1" ng-model="recipe.TrubChillerLosses" />
                                     </div>
                                     <div class="col-lg-6">
                                         <label for="finalVolume">Volumen Final</label>
                                         <span class="form-control input-sm gt-calculated" id="finalVolume" ng-bind="round1(recipe.BATCH_SIZE/0.94) + ' Lts'" />
-                                    </div>                                
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="panel panel-default">
-                            
+
                             <div class="panel-heading"><strong>Luego de Enfriado</strong></div>
                             <div class="panel-body" >
                                 <div class="row">
@@ -89,7 +93,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
             </div>
         </div>
@@ -108,7 +112,7 @@
                 <strong>{{notification.title}}</strong>
                 {{notification.text}}
             </div>
-        </div>            
+        </div>
     </div>
     <div class="col-md-2" >
         <ng-include src="'partial/recipe-detail-indicators.html'"></ng-include>
