@@ -10,13 +10,10 @@
                             {{recipe.BATCH_SIZE}} Lts
                         </span>
                     </div>
-                    <!-- <div class="col-lg-3">
-                      <label for="OG">OG</label>
-                      <span class="form-control input-sm gt-calculated" id="OG" ng-bind="recipe.OG" />
-                    </div> -->
                     <div class="col-lg-3">
-                        <label for="firstRun">Primer Mosto</label>
-                        <span class="form-control input-sm gt-calculated" id="firstRun" />
+                        <label for="firstRun" title="Es solo una estimacion">Primer Mosto</label>
+                        <span class="form-control input-sm gt-calculated" id="firstRun"
+                            ng-bind="firstRunSg()"/>
                     </div>
                     <div class="col-lg-3">
                         <label for="totalWater">Agua total</label>
@@ -43,7 +40,10 @@
                     </div>
                     <div class="col-lg-3">
                         <label for="strikeWater">Agua inicial (L)</label>
-                        <input ng-change="recipe.WatertoGrainRatio=round1(recipe.StrikeWater/recipe.totalAmountMash)" type="number" class="form-control input-sm" id="strikeWater" step="0.1" ng-model="recipe.StrikeWater" />
+                        <input ng-change="recipe.WatertoGrainRatio=round1(recipe.StrikeWater/recipe.totalAmountMash)"
+                            type="number" class="form-control input-sm"
+                            id="strikeWater" step="0.1"
+                            ng-model="recipe.StrikeWater" />
                     </div>
                     <div class="col-lg-3">
                         <label for="watertoGrainRatio">Empaste (L/Kg)</label>

@@ -3,9 +3,12 @@
     var module = angular.module("brew-o-module.controller",[]);
 
 
-    module.controller("RecipeMashCtrl",function($scope,BrewCalc,BrewHelper) {
-
-
+    module.controller("RecipeMashCtrl",function(
+        $scope,
+        BrewCalc,
+        BrewHelper,
+        FermentableUses
+    ) {
         $scope.styleTitle = function(onFocus) {
             if ( onFocus ) {
                 return {background: 'white','border-color':'#ccc'};
@@ -13,7 +16,6 @@
                 return {background: 'white','border-color':'white',cursor:'pointer'};
             }
         };
-
         $scope.moment = function($index) {
             var time = 0;
             for (var i=0; i<$index; i++) {
@@ -21,16 +23,29 @@
             }
             return time;
         };
-
-
+        $scope.firstRunSg = function() {
+            var og = 0;
+            angular.forEach($scope.recipe.FERMENTABLES.FERMENTABLE,function(f) {
+                if ( FermentableUses.valueOf(f.USE).mash ) {
+                    og += BrewHelper.toLbs(f.AMOUNT) *
+                        BrewHelper.toPpg(f.POTENTIAL) *
+                        // ($scope.recipe.EFFICIENCY/100) /
+                        0.75 /
+                        BrewHelper.toGal($scope.recipe.StrikeWater);
+                }
+            });
+            return BrewHelper.toPotential(og);
+        };
 
         $scope.spargeWater = function() {
-            return $scope.totalWater()
-                    -BrewCalc.actualMashVolume($scope.recipe.MASH.MASH_STEPS.MASH_STEP.length-1,
-                                               0,
-                                               $scope.recipe.MASH.MASH_STEPS.MASH_STEP)*2
-                    -$scope.recipe.StrikeWater
-                    -($scope.recipe.TopUpWater||0);
+            return $scope.totalWater() -
+                BrewCalc.actualMashVolume(
+                    $scope.recipe.MASH.MASH_STEPS.MASH_STEP.length-1,
+                   0,
+                   $scope.recipe.MASH.MASH_STEPS.MASH_STEP
+                )*2 -
+                $scope.recipe.StrikeWater-
+                ($scope.recipe.TopUpWater||0);
         };
 
         $scope.totalWater = function() {
