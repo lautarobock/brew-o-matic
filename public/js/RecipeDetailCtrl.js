@@ -34,6 +34,7 @@
            TagColor,
            CalculatorPopup,
            PrintRecipePopup,
+           BuyListPopup,
            FermentableUses,
            PitchRate,
            State
@@ -835,6 +836,10 @@
 
         $scope.printRecipe = function() {
             PrintRecipePopup.open($scope.recipe);
+        };
+
+        $scope.showBuyList = function() {
+            BuyListPopup.open($scope.recipe);
         };
 
         //Yeast section
