@@ -55,16 +55,26 @@
 							mywindow.document.write('<link rel="stylesheet" href="/css/style.css" type="text/css" />');
 							mywindow.document.write('<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />');
 							mywindow.document.write('<link rel="stylesheet" href="/css/bootstrap-theme.min.css" type="text/css" />');
+							mywindow.document.write(
+								'<script>' +
+								'	setTimeout(function() {' +
+								'		window.print();' +
+								'		setTimeout(function() {' +
+								'			window.close();' +
+								'		},100);' +
+								'	},100);' +
+								'</script>'
+							);
 							mywindow.document.write('</head><body >');
 							mywindow.document.write(angular.element("#print_content").html());
 							mywindow.document.write('</body></html>');
 
-							setTimeout(function() {
-								mywindow.print();
-								setTimeout(function() {
-									mywindow.close();
-								},1);
-							},1000);
+							// setTimeout(function() {
+							// 	mywindow.print();
+							// 	setTimeout(function() {
+							// 		mywindow.close();
+							// 	},1);
+							// },1000);
 
 
 							// $modalInstance.close();
@@ -107,16 +117,26 @@
 					        mywindow.document.write('<link rel="stylesheet" href="/css/style.css" type="text/css" />');
 					        mywindow.document.write('<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />');
 					        mywindow.document.write('<link rel="stylesheet" href="/css/bootstrap-theme.min.css" type="text/css" />');
-					        mywindow.document.write('</head><body >');
+							mywindow.document.write(
+								'<script>' +
+								'	setTimeout(function() {' +
+								'		window.print();' +
+								'		setTimeout(function() {' +
+								'			window.close();' +
+								'		},100);' +
+								'	},100);' +
+								'</script>'
+							);
+							mywindow.document.write('</head><body >');
 					        mywindow.document.write(angular.element("#print_content").html());
 					        mywindow.document.write('</body></html>');
 
-							setTimeout(function() {
-						        mywindow.print();
-								setTimeout(function() {
-									mywindow.close();
-								},250);
-							},100);
+							// setTimeout(function() {
+						    //     mywindow.print();
+							// 	setTimeout(function() {
+							// 		mywindow.close();
+							// 	},250);
+							// },100);
 
 
 				            // $modalInstance.close();
