@@ -63,8 +63,8 @@
 								mywindow.print();
 								setTimeout(function() {
 									mywindow.close();
-								},250);
-							},100);
+								},1);
+							},250);
 
 
 							// $modalInstance.close();
