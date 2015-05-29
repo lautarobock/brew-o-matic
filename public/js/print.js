@@ -64,7 +64,7 @@
 								setTimeout(function() {
 									mywindow.close();
 								},1);
-							},250);
+							},1000);
 
 
 							// $modalInstance.close();
