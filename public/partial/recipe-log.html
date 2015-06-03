@@ -3,6 +3,9 @@
         <div class="panel panel-default">
             <div class="panel-body" >
                 <div class="row" style="width: 100%;margin-bottom: 1em">
+                    <button style="margin-left: 1em" ng-click="restoreAll()" type="button" class="btn btn-default btn-xs pull-right">
+                        <span>Restaurar todo</span>
+                    </button>
                     <button style="margin-left: 1em" ng-click="toogleRemovedFilter()" type="button" class="btn btn-default btn-xs pull-right">
                         <span ng-show="isFiltering">Ver eliminados</span>
                         <span ng-hide="isFiltering">Ocultar eliminados</span>

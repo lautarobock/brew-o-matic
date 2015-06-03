@@ -1,5 +1,5 @@
 (function() {
-	
+
 	var module = angular.module('brew-o-module.controller');
 
 	module.controller("RecipeLogCtrl",function($scope,BrewCalc,BrewHelper,$timeout) {
@@ -143,10 +143,10 @@
 
         $scope.calculatePending = function() {
             $scope.pendingLogs = [];
-            
+
             addFixed(mashFixed);
             var delay = MASH_TEMP_TIME;
-            
+
             //add mash step
             for ( var i=0; i<$scope.recipe.MASH.MASH_STEPS.MASH_STEP.length; i ++ ) {
                 step = $scope.recipe.MASH.MASH_STEPS.MASH_STEP[i];
@@ -239,7 +239,7 @@
                     continue;
                 }
                 var name =  bottle.bottleType+' - '+bottle.amount+' Unidades';
-                
+
                 addPending(prevDelay,name,'BOTTLING',bottle._id.toString());
                 prevDelay = 0;
             }
@@ -286,8 +286,8 @@
         	$scope.push(log);
         	var last = $scope.recipe.log.logs[$scope.recipe.log.logs.length-1];
         	$scope.goEdit(last);
-        }
-        
+        };
+
         $scope.push = function(log) {
             log.time = new Date();
             $scope.recipe.log.logs.push({
@@ -309,15 +309,20 @@
         $scope.pushAndDiscard = function(log) {
         	$scope.push(log);
         	var last = $scope.recipe.log.logs[$scope.recipe.log.logs.length-1];
-        	$scope.discard(last);	
+        	$scope.discard(last);
         };
+
+		$scope.restoreAll = function() {
+			$scope.recipe.log.logs = [];
+			$scope.calculatePending();
+		};
 
         /*
          * Remove Log from top, and put in down list again.
          */
         $scope.restore = function(log) {
         	util.Arrays.remove($scope.recipe.log.logs,log);
-        	$scope.calculatePending();        	
+        	$scope.calculatePending();
         };
     });
 })();
