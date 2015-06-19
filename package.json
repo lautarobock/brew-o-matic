@@ -17,8 +17,7 @@
     "stylus": "*",
     "mongoose": "*",
     "socket.io": "*",
-    "stable": "^0.1.5",
-    "newrelic": "^1.20.1"
+    "stable": "^0.1.5"
   },
   "engines": {
     "node": "0.10.x",
