@@ -11,6 +11,7 @@ var notifications = require('./util/notifications.js');
 var http = require('http');
 var path = require('path');
 var mongoose = require('mongoose');
+require('newrelic');
 
 var app = express();
 
