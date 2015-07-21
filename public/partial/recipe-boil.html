@@ -8,12 +8,12 @@
                             <div class="panel-heading"><strong>Antes del Hervor</strong></div>
                             <div class="panel-body" >
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-xs-6">
                                         <label title="La densidad medida antes de enviar a hervor" for="ogBeforeBoil">Densidad</label>
                                         <span class="form-control input-sm gt-calculated" id="ogBeforeBoil"
                                               ng-bind="calculateSgBeforeBoil(recipe.BOIL_TIME, recipe.PercentEvap)"/>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-xs-6">
                                       <label for="beforeBoil">Litros antes de hervor</label>
                                       <span class="form-control input-sm gt-calculated"
                                             id="beforeBoil"
@@ -21,7 +21,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-xs-6">
                                         <label title="Densidad aumentada por fermentables durante el hervor" for="sgDuringBoil">
                                             Fermentables Agregados
                                         </label>
@@ -39,11 +39,11 @@
                             <div class="panel-heading"><strong>Hervor</strong></div>
                             <div class="panel-body" >
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-xs-6">
                                         <label for="BOIL_TIME_2">Tiempo Hervor</label>
                                         <input type="number" class="form-control input-sm" id="BOIL_TIME_2" ng-model="recipe.BOIL_TIME" />
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-xs-6">
                                         <label title="% por hora" for="percentEvap">Evaporacion %</label>
                                         <input type="number" class="form-control input-sm gt-preset" id="percentEvap" step="0.1" ng-model="recipe.PercentEvap" />
                                     </div>
@@ -58,21 +58,21 @@
                             <div class="panel-heading"><strong>Luego del Hervor</strong></div>
                             <div class="panel-body" >
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-xs-6">
                                       <label for="OG">Densidad (OG)</label>
                                       <span class="form-control input-sm gt-calculated" id="OG" ng-bind="recipe.OG" />
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-xs-6">
                                         <label for="afterBoil">Volumen</label>
                                         <span class="form-control input-sm gt-calculated" id="afterBoil" ng-bind="round1(recipe.BATCH_SIZE/0.94+recipe.TrubChillerLosses) + ' Lts'" />
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-xs-6">
                                         <label for="trubChillerLosses">Perdida Trub y Enfriador</label>
                                         <input type="number" class="form-control input-sm gt-preset" id="trubChillerLosses" step="0.1" ng-model="recipe.TrubChillerLosses" />
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-xs-6">
                                         <label for="finalVolume">Volumen Final</label>
                                         <span class="form-control input-sm gt-calculated" id="finalVolume" ng-bind="round1(recipe.BATCH_SIZE/0.94) + ' Lts'" />
                                     </div>
@@ -86,7 +86,7 @@
                             <div class="panel-heading"><strong>Luego de Enfriado</strong></div>
                             <div class="panel-body" >
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-xs-6">
                                         <label title="Litros en el fermentador" for="afterCooling">Luego Enfriado (4%)</label>
                                         <span style="font-weight: bold;" class="form-control input-sm gt-calculated" id="afterCooling" ng-bind="recipe.BATCH_SIZE + ' Lts'" />
                                     </div>
