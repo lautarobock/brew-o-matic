@@ -2,22 +2,22 @@
     <div class="panel-heading"><strong>Otros datos</strong></div>
     <div class="panel-body" >
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-6 col-xs-12">
                 <label for="brewer">Cervecero</label>
                 <input type="text" class="form-control input-sm" id="brewer" placeholder="Cervecero" ng-model="recipe.BREWER">
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-2 col-xs-4">
                 <label for="boil_size">Litros a Hervir (L)</label>
                 <span class="form-control input-sm gt-calculated" id="beforeBoil" ng-bind="round1(BrewCalc.calculateBoilSize(recipe.BATCH_SIZE, recipe.TrubChillerLosses, recipe.BOIL_TIME, recipe.PercentEvap, recipe.TopUpWater)) + ' Lts'" />
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-2 col-xs-4">
               <label for="boil_time">Hervido (min)</label>
               <input type="number" class="form-control input-sm" id="boil_time" ng-model="recipe.BOIL_TIME">
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-2 col-xs-4">
               <label for="code">Codigo</label>
               <input type="text" class="form-control input-sm" id="code" ng-model="recipe.code"/>
-            </div>            
+            </div>
         </div>
         <div class="row" ng-show="recipe._id">
             <div class="col-lg-12">
