@@ -43,47 +43,6 @@
 
         $scope.BrewHelper = BrewHelper;
 
-        var hopWidthXs = {
-            name: "width:30%;",
-            alpha: "width:12%;min-width: 70px;",
-            mode: "width:16%",
-            grams: "width:14%;min-width: 60px;",
-            ratio: "width:0%",
-            percentage: "width:0%",
-            use: "width:16%",
-            time: "width:12%;min-width: 70px;",
-            ibu: "width:0%",
-            delete: "width:2%",
-            copy: "width:2%"
-        };
-        var hopWidth = {
-            name: "width:26%",
-            alpha: "width:8%",
-            mode: "width:12%",
-            grams: "width:10%",
-            ratio: "width:8%",
-            percentage: "width:8%",
-            use: "width:12%",
-            time: "width:8%",
-            ibu: "width:6%",
-            delete: "width:2%",
-            copy: "width:2%"
-        };
-
-        $scope.hopWidth = function(name) {
-            var widths;
-            if ( Responsive.isXs() ) {
-                widths = hopWidthXs;
-            } else {
-                widths = hopWidth;
-            }
-            return widths[name];
-        };
-
-        $scope.isXs = function() {
-            return Responsive.isXs();
-        };
-
         $rootScope.breadcrumbs = [{
             link: '#',
             title: 'Home'
