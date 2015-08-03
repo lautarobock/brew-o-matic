@@ -60,7 +60,7 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <label for="afterBoil">Volumen</label>
-                                        <span class="form-control input-sm gt-calculated" id="afterBoil" ng-bind="BrewHelper.round(recipe.BATCH_SIZE/0.94+recipe.TrubChillerLosses,10) + ' Lts'" />
+                                        <span class="form-control input-sm gt-calculated" id="afterBoil" ng-bind="BrewHelper.round(recipe.BATCH_SIZE/0.96+recipe.TrubChillerLosses,10) + ' Lts'" />
                                     </div>
                                 </div>
                                 <div class="row">
@@ -72,7 +72,7 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <label for="finalVolume">Volumen Final</label>
-                                        <span class="form-control input-sm gt-calculated" id="finalVolume" ng-bind="BrewHelper.round(recipe.BATCH_SIZE/0.94,10) + ' Lts'" />
+                                        <span class="form-control input-sm gt-calculated" id="finalVolume" ng-bind="BrewHelper.round(recipe.BATCH_SIZE/0.96,10) + ' Lts'" />
                                     </div>
                                 </div>
                             </div>

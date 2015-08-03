@@ -653,6 +653,7 @@
                         TopUpWater: 0,
                         pitchRate: $scope.user.settings.defaultValues.pitchRate,
                         PercentEvap: $scope.user.settings.defaultValues.PercentEvap,
+                        LitersEvap: $scope.user.settings.defaultValues.LitersEvap,
                         TrubChillerLosses: $scope.user.settings.defaultValues.TrubChillerLosses,
                         isPublic: $scope.user.settings.defaultValues.isPublic,
                         collaborators: [],

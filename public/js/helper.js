@@ -105,7 +105,7 @@
                 return 1-percentageEvap;
             },
             calculateBoilSize: function (BATCH_SIZE, TrubChillerLosses, BOIL_TIME, PercentEvap, TopUpWater) {
-                var ltsAfterBoil = BATCH_SIZE/0.94+TrubChillerLosses;
+                var ltsAfterBoil = BATCH_SIZE/0.96+TrubChillerLosses;
 
                 var percentageEvap = this.evapTotal(BOIL_TIME,PercentEvap);
                 var tuw = TopUpWater ? TopUpWater : 0;
