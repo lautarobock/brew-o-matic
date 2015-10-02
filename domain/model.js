@@ -23,6 +23,7 @@ exports.User = mongoose.model("User",new Schema({
             SpargeDeadSpace: Number,
             GrainAbsorbtion: Number,
             PercentEvap: Number,
+            LitersEvap: Number,
             TrubChillerLosses: Number,
             isPublic: Boolean,
             pitchRate: Number
@@ -216,6 +217,7 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     SpargeWhaterDesiredPH: Number,
     MashDesiredPH: Number,
     PercentEvap: Number,
+    LitersEvap: Number,
     TrubChillerLosses: Number,
     TopUpWater: Number,
     calendarpressed: String,

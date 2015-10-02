@@ -15,7 +15,7 @@
     "express": "3.3.5",
     "ejs": "*",
     "stylus": "*",
-    "mongoose": "*",
+    "mongoose": "3.8",
     "socket.io": "*",
     "stable": "^0.1.5"
   },
