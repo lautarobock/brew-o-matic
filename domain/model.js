@@ -86,7 +86,7 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     FG: Number,
     state: String,
     FERMENTABLES: {
-        FERMENTABLE: [ {
+        FERMENTABLE: [new Schema({
             NAME: String,
             VERSION: String,
             AMOUNT: Number,
@@ -97,10 +97,10 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
             PERCENTAGE: Number,
             USE: String,
             excludeIBU: Boolean
-        } ]
+        }, {_id:true}) ]
     },
     HOPS: {
-        HOP: [{
+        HOP: [new Schema({
             NAME: String,
             VERSION: String,
             ALPHA: Number,
@@ -108,31 +108,31 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
             USE: String,
             TIME: Number,
             FORM: String
-        }]
+        }, {_id:true})]
     },
     YEASTS: {
-        YEAST: [{
+        YEAST: [new Schema({
             NAME: String,
             VERSION: String,
             ATTENUATION: Number,
             AMOUNT: Number,
             density: Number,
             packageSize: Number
-        }]
+        }, {_id:true})]
     },
     MISCS: {
-        MISC: [{
+        MISC: [new Schema({
             NAME: String,
             VERSION: String,
             TYPE: String,
             USE: String,
             TIME: Number,
             AMOUNT: Number
-        }]
+        }, {_id:true})]
     },
     MASH: {
         MASH_STEPS: {
-            MASH_STEP: [ {
+            MASH_STEP: [new Schema({
                 NAME: String,
                 TYPE: String, //'Infusion' fijo por ahora
                 INFUSE_AMOUNT: Number, //Agua agregada
@@ -146,14 +146,14 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
                 DECOCTION_AMT: Number,  //cantidad sacada para decocction
                 infuse: Boolean,        //Indica si agrega agua o no.
                 recirculate: Boolean    //Si recircula o no
-            }]
+            },{_id:true})]
         }
     },
     fermentation: {
         view: String,
         estimateDate: Date,
         alertTime: Number,
-        stages: [{
+        stages: [new Schema({
             title: String,
             duration: Number, //In days/hours
             durationMode: String, //'Dias' / 'Horas'
@@ -163,7 +163,7 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
             temperatureEnd: Number,
             action: String, // 'Inoculacion', 'Dry-Hop', 'Otro'
             alertDone: Boolean
-        }]
+        }, {_id:true})]
     },
     bottling: {
         sugar: {
@@ -178,17 +178,17 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
             desiredVol: Number,
             temperature: Number
         },
-        bottles: [{
+        bottles: [new Schema({
             bottleType: String,
             size: Number,
             amount: Number,
             subTotal: Number,
             carbonatationType: String,
             colour: String
-        }]
+        }, {_id:true})]
     },
     log: {
-       logs: [{
+       logs: [new Schema({
            time: Date,
            detail: String,
            delay: Number,
@@ -196,7 +196,7 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
            logType: String,
            logRef: String,
            discard: Boolean
-       }]
+       },{_id:true})]
     },
     PRIMARY_TEMP: Number,
     BIAB: String,
