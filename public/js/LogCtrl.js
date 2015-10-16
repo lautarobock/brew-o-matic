@@ -5,8 +5,8 @@
 	module.controller("RecipeLogCtrl",function($scope,BrewCalc,BrewHelper,$timeout) {
 
         //Constantes (Esto tengo q poder configurarlo)
-        var MASH_TEMP_TIME = 40;
-        var COOLING_TIME = 30;
+        var MASH_TEMP_TIME = 60;
+        var COOLING_TIME = 60;
 
         $scope.discardFilter = {discard:false};
         $scope.isFiltering = true;
@@ -85,10 +85,14 @@
             delay: 60,
             detail: 'Comenzar Lavado',
             logType: 'SPARGE'
+        }, {
+            delay: 60,
+            detail: 'Finalizar Lavado',
+            logType: 'SPARGE'
         }];
 
         var boilFixed = [{
-            delay: 120,
+            delay: 60,
             delayUnit: 'm',
             detail: 'Romper Hervor',
             logType: 'BOIL'
@@ -183,24 +187,37 @@
             };
 
             addFixed(boilFixed);
+			for (var i=0; i<boilFixed.length; i++) {
+				delay = boilFixed[i].delay;
+			}
+
 
             var prevDelay = $scope.recipe.BOIL_TIME;
-            //Hoping
+            //Hoping (exclud Dry-Hop)
             for( var i=0; i<$scope.recipe.HOPS.HOP.length; i++ ) {
                 var hop = $scope.recipe.HOPS.HOP[i];
-
-                var filter = util.Arrays.filter($scope.recipe.log.logs,function(item) {
-                    return item.logType == 'BOIL_HOP' && item.logRef == hop._id.toString() ? 0 : -1;
-                });
-                if ( filter.length != 0 ) {
-                    prevDelay = hop.TIME;
-                    continue;
-                }
-                var name = hop.AMOUNT*1000 + 'g de ' + hop.NAME + ' (' + hop.USE + ' '+hop.TIME+'\')';
-                addPending(prevDelay - hop.TIME,name,'BOIL_HOP',hop._id.toString());
-                prevDelay = hop.TIME;
+				if ( hop.USE !== 'Dry Hop') {
+					var filter = util.Arrays.filter($scope.recipe.log.logs,function(item) {
+	                    return item.logType == 'BOIL_HOP' && item.logRef == hop._id.toString() ? 0 : -1;
+	                });
+					var hopTime;
+					if ( hop.USE !== 'First Wort') {
+						hopTime = hop.TIME;
+					} else {
+						hopTime = $scope.recipe.BOIL_TIME;
+					}
+	                if ( filter.length != 0 ) {
+						prevDelay = hopTime;
+	                    continue;
+	                }
+	                var name = hop.AMOUNT*1000 + 'g de ' + hop.NAME + ' (' + hop.USE + ' '+hop.TIME+'\')';
+	                addPending(prevDelay - hopTime,name,'BOIL_HOP',hop._id.toString());
+					prevDelay = hopTime;
+				}
             }
 
+			//add coling time for last hopping addiction
+			coolingFixed[0].delay = prevDelay;
             addFixed(coolingFixed);
 
             //Hasta la inoculacion tomo el tiempo fijo de enfriado.
@@ -224,6 +241,23 @@
 
                 addPending(prevDelay,name,'FERM_STAGE',stage._id.toString());
                 prevDelay = convert2Minutes(stage);
+            }
+
+			//Hoping (only Dry-Hop)
+            for( var i=0; i<$scope.recipe.HOPS.HOP.length; i++ ) {
+                var hop = $scope.recipe.HOPS.HOP[i];
+				if ( hop.USE === 'Dry Hop') {
+					var filter = util.Arrays.filter($scope.recipe.log.logs,function(item) {
+	                    return item.logType == 'BOIL_HOP' && item.logRef == hop._id.toString() ? 0 : -1;
+	                });
+	                if ( filter.length != 0 ) {
+	                    prevDelay = hop.TIME;
+	                    continue;
+	                }
+	                var name = hop.AMOUNT*1000 + 'g de ' + hop.NAME + ' (' + hop.USE + ' '+hop.TIME+'\')';
+	                addPending(prevDelay - hop.TIME,name,'BOIL_HOP',hop._id.toString());
+	                prevDelay = hop.TIME;
+				}
             }
 
             //en prevDelay me queda ya cargado el timpo del ultimo paso de fermentacion.

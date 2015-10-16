@@ -1,1 +1,1 @@
-{ "options" : { "create" : "objectlabs-system" }, "indexes" : [ { "v" : 1, "key" : { "_id" : 1 }, "ns" : "af_brew-o-matic-lautaromail.objectlabs-system", "name" : "_id_" } ] }
+{"options":{},"indexes":[{"v":1,"key":{"_id":1},"ns":"af_brew-o-matic-lautaromail.objectlabs-system","name":"_id_"}]}

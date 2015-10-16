@@ -1,1 +1,1 @@
-{ "indexes" : [ { "v" : 1, "key" : { "_id" : 1 }, "ns" : "af_brew-o-matic-lautaromail.styles", "name" : "_id_" } ] }
+{"options":{},"indexes":[{"v":1,"key":{"_id":1},"ns":"af_brew-o-matic-lautaromail.styles","name":"_id_"}]}
