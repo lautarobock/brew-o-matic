@@ -138,7 +138,7 @@ for (s in admin ) {
 var scheduler = require("./util/scheduler");
 
 scheduler.runEveryDay(notifications.removeOld,false);
-scheduler.runEveryMinute(recipe.fireFermentationNotification,true);
+scheduler.runEveryHour(recipe.fireFermentationNotification,true);
 // scheduler.runEverySecond(recipe.fireFermentationNotification,true);
 
 
