@@ -103,6 +103,27 @@
             Y otros proyectos <a target="_blank" href="https://github.com/lautarobock/">aca</a>.
             Cualquier duda, problema o sugerencia <a href="mailto:brewomatic@gmail.com">brewomatic@gmail.com</a>
         </p>
+        <p class="text-muted">
+            No es el objetivo de este proyecto ganar plata. Pero tampoco perderla :) y debido al gran crecimiento
+            que tuvo el sistema en estos últimos meses me vi obligado a cambiar el hosting por uno pago, lo mismo
+            que el sistema de almacenamiento. Por lo tanto, en forma sumamente opcional, dejo un link para poder
+            hacer donaciones. Aclaro por las dudas que mientras exista Brew-o-Matic seguira siendo siempre gratuito
+            con el objetivo de difundir este maravilloso hobby.
+        </p>
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="RUEHPQGFCA49L">
+            <table>
+            <tr><td><input type="hidden" name="on0" value="Donativo">Donativo</td></tr><tr><td><select name="os0">
+            	<option value="1 US$">1 US$ $1,00 USD</option>
+            	<option value="2 US$">2 US$ $2,00 USD</option>
+            	<option value="5 US$">5 US$ $5,00 USD</option>
+            </select> </td></tr>
+            </table>
+            <input type="hidden" name="currency_code" value="USD">
+            <input type="image" src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_paynowCC_LG.gif" border="0" name="submit" alt="PayPal. La forma rápida y segura de pagar en Internet.">
+            <img alt="" border="0" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1">
+        </form>
     </footer>
     <script type="text/javascript">
 
@@ -147,6 +168,8 @@
             $scope.$emit('g+login', authResult)
         }
     </script>
+
+
   </body>
 
 </html>
