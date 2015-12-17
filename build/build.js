@@ -72,13 +72,14 @@ function min() {
         "public/js/env.js",
         "public/js/ObjTree.js",
         "public/js/directive/abm.js",
-        "public/js/observer/observer.js"
+        "public/js/observer/observer.js",
+		"public/js/lib/jsonpath-0.8.0.js"
 	];
 
 	var compressor = require('node-minify');
 	console.log("Files",files);
 	new compressor.minify({
-	    type: 'gcc',
+	    type: 'no-compress',
 	    fileIn: files,
 	    fileOut: 'build/scripts.min.js',
 	    callback: function(err, min){
