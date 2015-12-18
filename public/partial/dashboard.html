@@ -48,6 +48,9 @@
                         <div class="caption">
                             <h4 class="group inner list-group-item-heading">
                                 <a href="#/recipe/edit/{{recipe._id}}">{{recipe.code}} - {{recipe.NAME}}</a>
+                                <span class="pull-right" title="{{recipe.fermentation.estimateDate|formatDate}}">
+                                    {{recipe.fermentation.estimateDate|date:'dd-MM-yy'}}
+                                </span>
                             </h4>
                             <div class="row">
                                 <div class="col-xs-12 col-md-4">

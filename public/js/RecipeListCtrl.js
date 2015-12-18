@@ -406,6 +406,12 @@
                 label: 'Por nombre descendente',
                 sort: '-NAME'
             },{
+                label: 'Fecha de Inicio',
+                sort: '-fermentation.estimateDate'
+            },{
+                label: 'Fecha de Inicio asc',
+                sort: 'fermentation.estimateDate'
+            },{
                 label: 'Por estilo',
                 sort: 'STYLE.NAME'
             },{
@@ -545,7 +551,7 @@
                 tooltip: 'Densidad inicial'
             },{
                 field: 'ABV',
-                caption: '% alc',
+                caption: '%alc',
                 tooltip: 'graduacion alcoholica'
             },{
                 field: 'CALCIBU',
@@ -553,6 +559,11 @@
             },{
                 field: 'BATCH_SIZE',
                 caption: 'Litros'
+            },{
+                field: 'estimateDate',
+                caption: 'Fecha',
+                width: 65,
+                template:   '{{$model.fermentation.estimateDate | date:"dd-MM-yy"}}'
             },{
                 field: 'state',
                 caption: 'Estado',
