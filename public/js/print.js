@@ -84,7 +84,6 @@
 
 						$scope.recipe = recipe;
 					},
-					windowClass: 'modal-lg',
 					resolve:  {
 						recipe: function() {
 							return recipe;
@@ -146,7 +145,6 @@
 
                         $scope.recipe = recipe;
                     },
-                    windowClass: 'modal-lg',
                     resolve:  {
                     	recipe: function() {
                     		return recipe;

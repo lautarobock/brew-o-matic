@@ -1,163 +1,165 @@
-<div class="modal-header">
-  
-  <div class="row">
+<div>
+    <div class="modal-header">
 
-    <div class="col-xs-12">
-      <h3 class="pull-left">Brew-o-Matic: Previsualizacion Receta</h3>
-      <div class="pull-right" style="padding-top: 1em;">
-        <button type="button" class="btn btn-default btn-xs" ng-class="{active:fontClass == 'print-panel-xs'}" ng-click="fontClass = 'print-panel-xs'">
-          <span class="glyphicon glyphicon-font"></span>
-        </button>
-        <button type="button" class="btn btn-default btn-sm" ng-class="{active:fontClass == 'print-panel-sm'}" ng-click="fontClass = 'print-panel-sm'">
-          <span class="glyphicon glyphicon-font"></span>
-        </button>
-        <button type="button" class="btn btn-default btn-md" ng-class="{active:fontClass == 'print-panel-md'}" ng-click="fontClass = 'print-panel-md'">
-          <span class="glyphicon glyphicon-font"></span>
-        </button>
-        <button type="button" class="btn btn-default btn-lg" ng-class="{active:fontClass == 'print-panel-lg'}" ng-click="fontClass = 'print-panel-lg'">
-          <span class="glyphicon glyphicon-font"></span>
-        </button>
-        <span style="font-size: 25px;margin: 0 1em;"> | </span>
-        <a class="btn btn-default" ng-click="cancel()" >Cerrar</a>
-        <a class="btn btn-default" ng-click="print()" >
-          <span class="glyphicon glyphicon-print"></span> Imprimir
-        </a>
+      <div class="row">
+
+        <div class="col-xs-12">
+          <h3 class="pull-left">Brew-o-Matic: Previsualizacion Receta</h3>
+          <div class="pull-right" style="padding-top: 1em;">
+            <button type="button" class="btn btn-default btn-xs" ng-class="{active:fontClass == 'print-panel-xs'}" ng-click="fontClass = 'print-panel-xs'">
+              <span class="glyphicon glyphicon-font"></span>
+            </button>
+            <button type="button" class="btn btn-default btn-sm" ng-class="{active:fontClass == 'print-panel-sm'}" ng-click="fontClass = 'print-panel-sm'">
+              <span class="glyphicon glyphicon-font"></span>
+            </button>
+            <button type="button" class="btn btn-default btn-md" ng-class="{active:fontClass == 'print-panel-md'}" ng-click="fontClass = 'print-panel-md'">
+              <span class="glyphicon glyphicon-font"></span>
+            </button>
+            <button type="button" class="btn btn-default btn-lg" ng-class="{active:fontClass == 'print-panel-lg'}" ng-click="fontClass = 'print-panel-lg'">
+              <span class="glyphicon glyphicon-font"></span>
+            </button>
+            <span style="font-size: 25px;margin: 0 1em;"> | </span>
+            <a class="btn btn-default" ng-click="cancel()" >Cerrar</a>
+            <a class="btn btn-default" ng-click="print()" >
+              <span class="glyphicon glyphicon-print"></span> Imprimir
+            </a>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-<div class="modal-body" id="print_content" >
-  <div class="print-panel" ng-class="fontClass" >
-    <h3>{{recipe.NAME}}</h3>
-    Cervecero: <b>{{recipe.BREWER}}</b><br/>
-    Estilo: <b>{{recipe.STYLE.NAME}}</b> | 
-    Litros: <b>{{recipe.BATCH_SIZE}}</b> | 
-    Hervor: <b>{{recipe.BOIL_TIME}}'</b><br/>
-    DI: <b>{{recipe.OG}}</b> | 
-    DF: <b>{{recipe.FG}}</b> | 
-    Eficiencia: <b>{{recipe.EFFICIENCY}} %</b><br/>
-    IBUs: <b>{{recipe.CALCIBU}}</b> | 
-    Alcohol: <b>{{recipe.ABV}} %</b><br/>
-    
-    <hr/>
-    <div style="page-break-inside: avoid;">
-      <h4>Granos</h4>
-      <table class="table table-condensed table-bordered" ng-show="recipe.FERMENTABLES.FERMENTABLE.length != 0">
-        <thead>
-          <tr>
-            <th>Grano/Fermentable</th>
-            <th>Extracto</th>
-            <th>Color</th>
-            <th>%</th>
-            <th>Kg</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="fermentable in recipe.FERMENTABLES.FERMENTABLE">
-              <td><span ng-bind="fermentable.NAME"></span></td>
-              <td><span ng-bind="fermentable.POTENTIAL"></span></td>
-              <td><span ng-bind="fermentable.COLOR"/></td>
-              <td><span ng-bind="fermentable.PERCENTAGE"/></td>
-              <td><span ng-bind="fermentable.AMOUNT"/></td>
-          </tr>
-          <tr>
-              <td colspan="4"><strong class="pull-right">Total:</strong></td>
-              <td>{{recipe.totalAmount | number:3}} Kg</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div style="page-break-inside: avoid;">
-      <h4>Lupulos</h4>
-      <table class="table table-condensed table-bordered" ng-show="recipe.HOPS.HOP.length != 0">
-        <thead>
-          <tr>
-            <th>Lupulo</th>
-            <th>Alpha</th>
-            <th>Modo</th>
-            <th>Grs</th>
-            <!-- <th>g/L</th> -->
-            <!-- <th>%</th> -->
-            <th>Uso</th>
-            <th>Tiempo</th>
-            <!-- <th>IBU</th> -->
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="hop in recipe.HOPS.HOP">
-              <td><span ng-bind="hop.NAME"/></td>
-              <td><span ng-bind="hop.ALPHA"/></td>
-              <td><span ng-bind="hop.FORM">/></td>
-              <td>{{hop.AMOUNT*1000}}</td>
-              <!-- <td><span>{{hopGramsPerLiter(hop,recipe.BATCH_SIZE)|number:2}}</span></td> -->
-              <!-- <td><span class="form-control input-sm gt-calculated">{{hopPercentage(hop,recipe.totalHop)|number:2}}</span></td> -->
-              <td><span ng-bind="hop.USE"/></td>
-              <td><span ng-bind="hop.TIME"/></td>
-              <!-- <td><span class="form-control input-sm gt-calculated">{{hopIBU(hop)|number:2}}</span></td> -->
-          </tr>
-          <tr>
-              <td colspan="3"><strong class="pull-right">Total:</strong></td>
-              <td>{{recipe.totalHop*1000 | number:0}} Grs</td>
-              <td><strong class="pull-right">IBUs:</strong></td>
-              <td>{{recipe.CALCIBU|number:2}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div style="page-break-inside: avoid;">
-      <h4>Levadura</h4>
-      <table class="table table-condensed table-bordered">
-        <thead>
-          <tr>
-            <th>Levadura</th>
-            <th style="width:8em">Cantidad (g)</th>
-            <th style="width:6em">Atenuacion</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="yeast in recipe.YEASTS.YEAST">
-              <td><span ng-bind="yeast.NAME"/></td>
-              <td><span ng-bind="yeast.AMOUNT"/></td>
-              <td><span ng-bind="yeast.ATTENUATION"/></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div style="page-break-inside: avoid;" ng-class="{hidden:recipe.MISCS.MISC.length == 0}">
-      <h4>Miscelaneas<h4>
-      <table class="table table-condensed table-bordered">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Tipo</th>
-            <th>Uso</th>
-            <th>Tiempo (min)</th>
-            <th>Peso (Grs)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="misc in recipe.MISCS.MISC">
-              <td><span ng-bind="misc.NAME"/></td>
-              <td><span ng-bind="misc.TYPE"/></td>
-              <td><span ng-bind="misc.USE"></td>
-              <td><span ng-bind="misc.TIME"/></td>
-              <td>{{misc.AMOUNT*1000}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    --<br/>
-    <span>Receta generada por Brew-o-Matic http://brew-o-matic.com.ar</span>
+    <div class="modal-body" id="print_content" >
+      <div class="print-panel" ng-class="fontClass" >
+        <h3>{{recipe.NAME}}</h3>
+        Cervecero: <b>{{recipe.BREWER}}</b><br/>
+        Estilo: <b>{{recipe.STYLE.NAME}}</b> |
+        Litros: <b>{{recipe.BATCH_SIZE}}</b> |
+        Hervor: <b>{{recipe.BOIL_TIME}}'</b><br/>
+        DI: <b>{{recipe.OG}}</b> |
+        DF: <b>{{recipe.FG}}</b> |
+        Eficiencia: <b>{{recipe.EFFICIENCY}} %</b><br/>
+        IBUs: <b>{{recipe.CALCIBU}}</b> |
+        Alcohol: <b>{{recipe.ABV}} %</b><br/>
 
-  </div>
-</div>
-<div class="modal-footer">
-  <div class="form-group">
-    <div class="col-lg-10 col-lg-offset-2">
-      <a class="btn btn-default" ng-click="cancel()" >Cerrar</a>
-      <a class="btn btn-default" ng-click="print()" >
-        <span class="glyphicon glyphicon-print"></span> Imprimir
-      </a>
+        <hr/>
+        <div style="page-break-inside: avoid;">
+          <h4>Granos</h4>
+          <table class="table table-condensed table-bordered" ng-show="recipe.FERMENTABLES.FERMENTABLE.length != 0">
+            <thead>
+              <tr>
+                <th>Grano/Fermentable</th>
+                <th>Extracto</th>
+                <th>Color</th>
+                <th>%</th>
+                <th>Kg</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="fermentable in recipe.FERMENTABLES.FERMENTABLE">
+                  <td><span ng-bind="fermentable.NAME"></span></td>
+                  <td><span ng-bind="fermentable.POTENTIAL"></span></td>
+                  <td><span ng-bind="fermentable.COLOR"/></td>
+                  <td><span ng-bind="fermentable.PERCENTAGE"/></td>
+                  <td><span ng-bind="fermentable.AMOUNT"/></td>
+              </tr>
+              <tr>
+                  <td colspan="4"><strong class="pull-right">Total:</strong></td>
+                  <td>{{recipe.totalAmount | number:3}} Kg</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="page-break-inside: avoid;">
+          <h4>Lupulos</h4>
+          <table class="table table-condensed table-bordered" ng-show="recipe.HOPS.HOP.length != 0">
+            <thead>
+              <tr>
+                <th>Lupulo</th>
+                <th>Alpha</th>
+                <th>Modo</th>
+                <th>Grs</th>
+                <!-- <th>g/L</th> -->
+                <!-- <th>%</th> -->
+                <th>Uso</th>
+                <th>Tiempo</th>
+                <!-- <th>IBU</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="hop in recipe.HOPS.HOP">
+                  <td><span ng-bind="hop.NAME"/></td>
+                  <td><span ng-bind="hop.ALPHA"/></td>
+                  <td><span ng-bind="hop.FORM">/></td>
+                  <td>{{hop.AMOUNT*1000}}</td>
+                  <!-- <td><span>{{hopGramsPerLiter(hop,recipe.BATCH_SIZE)|number:2}}</span></td> -->
+                  <!-- <td><span class="form-control input-sm gt-calculated">{{hopPercentage(hop,recipe.totalHop)|number:2}}</span></td> -->
+                  <td><span ng-bind="hop.USE"/></td>
+                  <td><span ng-bind="hop.TIME"/></td>
+                  <!-- <td><span class="form-control input-sm gt-calculated">{{hopIBU(hop)|number:2}}</span></td> -->
+              </tr>
+              <tr>
+                  <td colspan="3"><strong class="pull-right">Total:</strong></td>
+                  <td>{{recipe.totalHop*1000 | number:0}} Grs</td>
+                  <td><strong class="pull-right">IBUs:</strong></td>
+                  <td>{{recipe.CALCIBU|number:2}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="page-break-inside: avoid;">
+          <h4>Levadura</h4>
+          <table class="table table-condensed table-bordered">
+            <thead>
+              <tr>
+                <th>Levadura</th>
+                <th style="width:8em">Cantidad (g)</th>
+                <th style="width:6em">Atenuacion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="yeast in recipe.YEASTS.YEAST">
+                  <td><span ng-bind="yeast.NAME"/></td>
+                  <td><span ng-bind="yeast.AMOUNT"/></td>
+                  <td><span ng-bind="yeast.ATTENUATION"/></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="page-break-inside: avoid;" ng-class="{hidden:recipe.MISCS.MISC.length == 0}">
+          <h4>Miscelaneas<h4>
+          <table class="table table-condensed table-bordered">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Uso</th>
+                <th>Tiempo (min)</th>
+                <th>Peso (Grs)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="misc in recipe.MISCS.MISC">
+                  <td><span ng-bind="misc.NAME"/></td>
+                  <td><span ng-bind="misc.TYPE"/></td>
+                  <td><span ng-bind="misc.USE"></td>
+                  <td><span ng-bind="misc.TIME"/></td>
+                  <td>{{misc.AMOUNT*1000}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        --<br/>
+        <span>Receta generada por Brew-o-Matic http://brew-o-matic.com.ar</span>
+
+      </div>
     </div>
-  </div>
+    <div class="modal-footer">
+      <div class="form-group">
+        <div class="col-lg-10 col-lg-offset-2">
+          <a class="btn btn-default" ng-click="cancel()" >Cerrar</a>
+          <a class="btn btn-default" ng-click="print()" >
+            <span class="glyphicon glyphicon-print"></span> Imprimir
+          </a>
+        </div>
+      </div>
+    </div>
 </div>
