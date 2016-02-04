@@ -34,7 +34,7 @@ data.factory("HopUse",function() {
                     utilization: 0
                 },{
                     name:'Aroma',
-                    utilization: 0
+                    utilization: 0.5
                 },{
                     name:'Mash',
                     utilization: 0.2
