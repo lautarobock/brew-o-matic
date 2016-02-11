@@ -19,6 +19,12 @@
                     <th>
                         Balance
                     </th>
+                    <th>
+                        Publico
+                    </th>
+                    <th>
+                        Usuario
+                    </th>
                     <th style="width:1em">
                     </th>
                 </tr>
@@ -41,6 +47,13 @@
                     </td>
                     <td>
                         {{BrewCalc.waterBalance(report) | number:2 }}
+                    </td>
+                    <td>
+                        <span class="glyphicon glyphicon-check" title="Este reporte de agua es publico, puede ser vista por todos los usuarios" ng-show="report.isPublic"/>
+                        <span class="glyphicon glyphicon-unchecked" title="Este reporte de agua es privado, solo lo puede ver usted" ng-hide="report.isPublic"/>
+                    </td>
+                    <td>
+                        {{report.owner.name}}
                     </td>
                     <td>
                         <button data-target="#confirmation-{{water._id}}" data-toggle="modal"  type="button" class="close" aria-hidden="true">&times;</button>

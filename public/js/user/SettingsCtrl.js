@@ -21,6 +21,10 @@
             }
         });
 
+		$scope.canEdit = function() {
+			return $rootScope.user && $rootScope.user._id === $scope.water.owner;
+		};
+
         $scope.save = function() {
             $scope.water.$save(function(saved) {
                 alertFactory.create('success','Reporte de agua Guardado!');

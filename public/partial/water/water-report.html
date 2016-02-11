@@ -15,10 +15,10 @@
                     </span>
                 </td>
                 <td>
-                    <input ng-hide="!row.cation.name" class="form-control input-sm" type="number" step="0.1" ng-model="water().cations[row.cation.name]" placeholder="ppm"  title="{{row.cation.title}}"/>
+                    <input ng-disabled="!canEdit()" ng-hide="!row.cation.name" class="form-control input-sm" type="number" step="0.1" ng-model="water().cations[row.cation.name]" placeholder="ppm"  title="{{row.cation.title}}"/>
                 </td>
                 <td>
-                    <input ng-hide="!row.anion.name" class="form-control input-sm" type="number" step="0.1" ng-model="water().anions[row.anion.name]" placeholder="ppm" title="{{row.anion.title}}"/>
+                    <input ng-disabled="!canEdit()" ng-hide="!row.anion.name" class="form-control input-sm" type="number" step="0.1" ng-model="water().anions[row.anion.name]" placeholder="ppm" title="{{row.anion.title}}"/>
                 </td>
                 <td>
                     <span ng-hide="!row.anion.name" class="form-control input-sm" title="{{row.anion.title}}">
@@ -32,21 +32,21 @@
         <h4>Ion Balance</h4>
         <div>
             <div class="row">
-                <div class="col-md-3">        
+                <div class="col-md-3">
                     <label for="totalCations">Total Cationes (meq/L)</label>
                     <span class="form-control input-sm"
                            id="totalCations">
                            {{ BrewCalc.totalCations(water().cations) | number:2 }}
                     </span>
                 </div>
-                <div class="col-md-3">        
+                <div class="col-md-3">
                     <label for="totalAnions">Total Aniones (meq/L)</label>
                     <span class="form-control input-sm"
                            id="totalAnions">
                            {{ BrewCalc.totalAnions(water().anions) | number:2 }}
                     </span>
                 </div>
-                <div class="col-md-3" title="This result should be close to 0. A difference of less than 0.1 is good.  If the difference is greater than 0.5 meq/L, begin to question the reported concentrations.">        
+                <div class="col-md-3" title="This result should be close to 0. A difference of less than 0.1 is good.  If the difference is greater than 0.5 meq/L, begin to question the reported concentrations.">
                     <label for="totalAnions">Diferencia</label>
                     <span class="form-control input-sm"
                            id="totalAnions" ng-class="{'gt-error':BrewCalc.waterBalance(water())>0.5}">
@@ -66,26 +66,26 @@
                 </div>
             </div>
         </div>
-    </div>            
+    </div>
     <div class="col-md-12" style="margin-top:3em">
         <h4>Dureza y Alcalinidad</h4>
         <div>
             <div class="row">
-                <div class="col-md-4">        
+                <div class="col-md-4">
                     <label for="totalHardness">Tureza total como CaCO3 (ppm)</label>
                     <span class="form-control input-sm"
                            id="totalHardness">
                            {{ BrewCalc.totalHardness(water().cations) | number:2 }}
                     </span>
                 </div>
-                <div class="col-md-4">        
+                <div class="col-md-4">
                     <label for="totalCations">Dureza permanente como CaCO3 (ppm)</label>
                     <span class="form-control input-sm"
                            id="totalCations">
                            {{ BrewCalc.permanentHardness(water()) | number:2 }}
                     </span>
                 </div>
-                <div class="col-md-4">        
+                <div class="col-md-4">
                     <label for="totalCations">Dureza temporal como CaCO3 (ppm)</label>
                     <span class="form-control input-sm"
                            id="totalCations">
@@ -94,21 +94,21 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">        
+                <div class="col-md-4">
                     <label for="totalCations">Alcalindad (ppm como CaCO3)</label>
                     <span class="form-control input-sm"
                            id="totalCations">
                            {{ BrewCalc.alkalinity(water().anions) | number:2 }}
                     </span>
                 </div>
-                <div class="col-md-4">        
+                <div class="col-md-4">
                     <label for="totalCations">RA Dureza efectiva (ppm como CaCO3)</label>
                     <span class="form-control input-sm"
                            id="totalCations">
                            {{ BrewCalc.effectiveHardness(water().cations) | number:2 }}
                     </span>
                 </div>
-                <div class="col-md-4">        
+                <div class="col-md-4">
                     <label for="totalCations">Alcalinidad Residual (RA) (ppm como CaCO3)</label>
                     <span class="form-control input-sm"
                            id="totalCations">

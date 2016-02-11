@@ -8,7 +8,11 @@
               water: '&'
           },
           templateUrl: "partial/water/water-report.html",
-          controller: function($scope, BrewCalc) {
+          controller: function($scope, BrewCalc, $rootScope) {
+
+            $scope.canEdit = function() {
+                return $rootScope.user && $rootScope.user._id === $scope.water().owner;
+            };
 
             $scope.BrewCalc = BrewCalc;
             // $scope.totalCations = BrewCalc.totalCations;

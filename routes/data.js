@@ -18,23 +18,27 @@ function createRest(exports,service) {
             console.log(service + " .findAll");
             model[service].find().exec(function(err,results) {
                 res.send(results);
-            });    
+            });
         },
         count: function(req, res) {
             console.log(service + " .count");
             model[service].count().exec(function(err,results) {
                 res.send({count:results});
-            });    
+            });
         },
         save: function(req, res) {
             delete req.body._id;
             var id;
             if ( customIds.indexOf(service) != -1 ) {
+                console.log("CUSTOM");
                 id = req.params.id;
             } else {
+                console.log("OBJECT");
                 id = new mongoose.Types.ObjectId(req.params.id);
             }
+            console.log('GUARDAR', id, JSON.stringify(req.body));
             model[service].findByIdAndUpdate(id,req.body,{upsert:true}).exec(function(err,results) {
+                console.log('ERR',err);
                 res.send(results);
             });
         },
@@ -47,7 +51,7 @@ function createRest(exports,service) {
         findById: function(req, res) {
             model[service].findOne({_id:req.params.id},function(err,results) {
                 res.send(results);
-            });  
+            });
         }
     };
 }
@@ -73,7 +77,7 @@ exports.Recipe.findAll = function(req, res) {
         })
         .populate({path:'owner',select:'name'}).exec(function(err,results) {
             res.send(results);
-    });    
+    });
 };
 
 exports.Recipe.save = function(req, res) {
@@ -86,9 +90,12 @@ exports.Recipe.save = function(req, res) {
 };
 
 exports.WaterReport.findAll = function(req, res) {
-    model.WaterReport.find({owner:req.session.user_id}).exec(function(err,results) {
-        res.send(results);
-    });  
+    model.WaterReport
+        .find({'$or':[{isPublic:true},{owner:req.session.user_id}]})
+        .populate({path:'owner',select:'name'})
+        .exec(function(err,results) {
+            res.send(results);
+    });
 };
 
 exports.TempDeviceReport.findAll = function(req, res) {
@@ -98,7 +105,7 @@ exports.TempDeviceReport.findAll = function(req, res) {
     }
     model.TempDeviceReport.find(filter).exec(function(err,results) {
         res.send(results);
-    });  
+    });
 }
 
 exports.TempDeviceReport.save = function(req, res) {
@@ -109,7 +116,7 @@ exports.TempDeviceReport.save = function(req, res) {
     if ( !temp.timestamp ) {
         temp.timestamp = new Date().getTime();
     }
-    
+
     var id = new mongoose.Types.ObjectId(req.params.id);
 
     //Busco el dispositivo correspondiente y obtengo el ID de la receta que corresponde.
@@ -123,7 +130,7 @@ exports.TempDeviceReport.save = function(req, res) {
                 // console.log('err', err);
                 // console.log('results', results);
                 if ( temp.recipe_id ) {
-                    push.emit("TEMP_DEVICE_REPORT_" + temp.recipe_id,results);    
+                    push.emit("TEMP_DEVICE_REPORT_" + temp.recipe_id,results);
                 }
                 res.send(results);
 
@@ -132,15 +139,15 @@ exports.TempDeviceReport.save = function(req, res) {
                     recipe_id: device[0].recipe_id
                 }).sort("timestamp").exec(function (err, duplicated) {
                     if ( duplicated.length > 2 ) {
-                        
+
                         var base = duplicated[duplicated.length-1];
                         var toRemove = null;
-                        
+
                         var finish = false;
                         var i = duplicated.length-2;
-                        while ( !finish && i>=0 ) { 
+                        while ( !finish && i>=0 ) {
                             var actual = duplicated[i--];
-                            if ( 
+                            if (
                                 actual.source == base.source &&
                                 actual.temperature == base.temperature &&
                                 actual.temperatureExt == base.temperatureExt &&
@@ -157,7 +164,7 @@ exports.TempDeviceReport.save = function(req, res) {
                                 finish = true;
                             }
                         }
-                        
+
                     }
                 });
             });
@@ -169,6 +176,6 @@ exports.TempDeviceReport.save = function(req, res) {
 
     });
 
-    
-    
+
+
 }

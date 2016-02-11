@@ -38,6 +38,7 @@ exports.WaterReport = mongoose.model("WaterReport",new Schema({
     date: Date,
     name: String,
     owner: {type:String, ref:'User'},
+    isPublic: {type: Boolean, default: false},
     cations: {
         calcium: {type: Number, default: null},
         magnesium: {type: Number, default: null},
@@ -55,7 +56,7 @@ exports.WaterReport = mongoose.model("WaterReport",new Schema({
         fluoride: {type: Number, default: null}
     }
 
-}));
+}, { versionKey: false }));
 
 exports.Recipe = mongoose.model("Recipe", new Schema({
     _id: String,
