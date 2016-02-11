@@ -11,10 +11,22 @@
                         Nombre
                     </th>
                     <th>
-                        Cationes
+                        Calcio
                     </th>
                     <th>
-                        Aniones
+                        Magnesio
+                    </th>
+                    <th>
+                        Sodio
+                    </th>
+                    <th>
+                        Sulfatos
+                    </th>
+                    <th>
+                        Cloruros
+                    </th>
+                    <th>
+                        Carbonatos
                     </th>
                     <th>
                         Balance
@@ -40,10 +52,22 @@
                         </a>
                     </td>
                     <td>
-                        {{BrewCalc.totalCations(report.cations) | number:2 }}
+                        {{report.cations.calcium}}
                     </td>
                     <td>
-                        {{BrewCalc.totalAnions(report.anions) | number:2 }}
+                        {{report.cations.magnesium}}
+                    </td>
+                    <td>
+                        {{report.cations.sodium}}
+                    </td>
+                    <td>
+                        {{report.anions.sulfate}}
+                    </td>
+                    <td>
+                        {{report.anions.chloride}}
+                    </td>
+                    <td>
+                        {{report.anions.carbonate}}
                     </td>
                     <td>
                         {{BrewCalc.waterBalance(report) | number:2 }}
