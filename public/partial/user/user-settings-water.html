@@ -80,8 +80,8 @@
                         {{report.owner.name}}
                     </td>
                     <td>
-                        <button data-target="#confirmation-{{water._id}}" data-toggle="modal"  type="button" class="close" aria-hidden="true">&times;</button>
-                        <div class="modal fade" id="confirmation-{{water._id}}" role="dialog" aria-labelledby="#label">
+                        <button ng-show="user._id === report.owner._id" data-target="#confirmation-{{report._id}}" data-toggle="modal"  type="button" class="close" aria-hidden="true">&times;</button>
+                        <div class="modal fade" id="confirmation-{{report._id}}" role="dialog" aria-labelledby="#label">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -89,7 +89,7 @@
                                         <h4 class="modal-title" id="label">Confirmacion</h4>
                                     </div>
                                     <div class="modal-body">
-                                        ¿Esta seguro que desea eliminar el reporte de agua?
+                                        ¿Esta seguro que desea eliminar el reporte de agua {{report.name}}?
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn" data-dismiss="modal">No</a>
