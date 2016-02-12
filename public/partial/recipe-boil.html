@@ -30,6 +30,12 @@
                                             ng-bind="calculateSgDuringBoil(recipe.BOIL_TIME, recipe.PercentEvap)">
                                         </span>
                                     </div>
+                                    <div class="col-xs-6">
+                                        <label title="pH medido antes de comenzar el hervor">
+                                            pH
+                                        </label>
+                                        <input type="number" class="form-control input-sm" ng-model="recipe.phPreBoil" step="0.01" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -92,13 +98,16 @@
                     </div>
                     <div class="col-md-6">
                         <div class="panel panel-default">
-
                             <div class="panel-heading"><strong>Luego de Enfriado</strong></div>
                             <div class="panel-body" >
                                 <div class="row">
                                     <div class="col-xs-6">
                                         <label title="Litros en el fermentador" for="afterCooling">Luego Enfriado (4%)</label>
                                         <span style="font-weight: bold;" class="form-control input-sm gt-calculated" id="afterCooling" ng-bind="recipe.BATCH_SIZE + ' Lts'" />
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <label title="pH de mosto a fermentar">pH</label>
+                                        <input type="number" class="form-control input-sm" ng-model="recipe.phPostBoil" step="0.01"/>
                                     </div>
                                 </div>
                             </div>

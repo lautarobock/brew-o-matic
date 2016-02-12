@@ -96,6 +96,13 @@
                     return BrewHelper.convertColor(srm);
                 };
 
+                $scope.publish = function(recipe) {
+                    recipe.$publish({isPublic: true},function() {
+                        alertFactory.create('success','La misma ya estara disponible para el resto de los usuarios!','Receta publicada con exito!');
+                        reload();
+                    });
+                };
+
                 $scope.doDefault = function(recipe) {
                     if ( recipe.state === 'draft' ) {
                         recipe.$state({state:'ready'}, function() {

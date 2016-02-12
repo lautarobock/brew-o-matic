@@ -26,7 +26,11 @@ exports.User = mongoose.model("User",new Schema({
             LitersEvap: Number,
             TrubChillerLosses: Number,
             isPublic: Boolean,
-            pitchRate: Number
+            pitchRate: Number,
+            phPreBoil: Number,
+            phPostBoil: Number,
+            SpargeWhaterDesiredPH: Number,
+            MashDesiredPH: Number
         },
         closeUseSurvey: Boolean,
         gotoFanPage: Boolean
@@ -232,6 +236,8 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     isPublic: Boolean,
     publishDate: Date,
     naziMode: Boolean,
+    phPreBoil: Number,
+    phPostBoil: Number,
     cloneFrom: {type:String, ref:'Recipe'},
     starredBy: [{_id:Schema.Types.ObjectId,name:String}],
     clonedBy: [{_id:Schema.Types.ObjectId,name:String,recipe_id:{type:String, ref:'Recipe'}}],

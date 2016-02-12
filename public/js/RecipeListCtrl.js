@@ -257,7 +257,8 @@
                 field: 'clone',
                 caption: '',
                 template:   '<a class="btn btn-default btn-xs" href="#/recipe/clone/{{header.encodeName($model._id)}}">' +
-                                'clonar' +
+                                '<i class="glyphicon glyphicon-duplicate"></i>' +
+                                ' clonar' +
                             '</a>',
                 encodeName: $scope.encodeName
             }
@@ -477,10 +478,10 @@
 
         $templateCache.put('recipe-publish.html',
             '<a href="" ng-click="header.publish($model)" type="button" class="btn btn-success btn-xs" ng-hide="$model.isPublic" title="Compartir la receta con el resto de los cerveceros">' +
-                '<span class="glyphicon glyphicon-cloud-upload"></span>' +
-                 'publicar' +
+                '<i class="glyphicon glyphicon-cloud-upload"></i>' +
+                 ' publicar' +
             '</a>' +
-            '<span class="glyphicon glyphicon-check" title="Esta receta es publica, puede ser vista por todos los usuarios" ng-show="$model.isPublic"/>');
+            '<span class="glyphicon glyphicon-cloud" title="Esta receta es publica, puede ser vista por todos los usuarios" ng-show="$model.isPublic"/>');
 
         $templateCache.put('recipe-state.html','{{header.stateName($model)}}');
 
@@ -575,7 +576,8 @@
                 field: 'clone',
                 caption: '',
                 template:   '<a class="btn btn-default btn-xs" href="#/recipe/clone/{{header.encodeName($model._id)}}">' +
-                                'clonar' +
+                                '<i class="glyphicon glyphicon-duplicate"></i>' +
+                                ' clonar' +
                             '</a>',
                 encodeName: $scope.encodeName
             },{

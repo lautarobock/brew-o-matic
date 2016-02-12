@@ -42,5 +42,12 @@
                 <div><b>Version:</b> {{recipe.version[recipe.version.length-1].number}}</div>
             </div>
         </div>
+        <div class="row" ng-show="recipe._id">
+            <div style="margin:0 0.5em">
+                <a href="/#/recipe/clone/{{encodeName(recipe._id)}}" type="button" class="btn btn-default btn-xs">
+                    <i class="glyphicon glyphicon-duplicate"></i> clonar
+                </a>
+            </div>
+        </div>
     </div>
 </div>

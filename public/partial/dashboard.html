@@ -48,6 +48,9 @@
                         <div class="caption">
                             <h4 class="group inner list-group-item-heading">
                                 <a href="#/recipe/edit/{{recipe._id}}">{{recipe.code}} - {{recipe.NAME}}</a>
+                                <span class="glyphicon glyphicon-cloud"
+                                    title="Esta receta es publica, puede ser vista por todos los usuarios"
+                                    ng-show="recipe.isPublic"/>
                                 <span class="pull-right" title="{{recipe.fermentation.estimateDate|formatDate}}">
                                     {{recipe.fermentation.estimateDate|date:'dd-MM-yy'}}
                                 </span>
@@ -76,12 +79,19 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-8">
+                                <div class="col-xs-4">
                                     <show-tags tags="recipe.tags"></show-tags>
                                 </div>
                                 <div class="col-xs-4">
+                                    <button ng-click="publish(recipe)" ng-hide="recipe.isPublic" type="button" class="btn btn-success btn-sm">
+                                        <i class="glyphicon glyphicon-cloud-upload"></i>
+                                        publicar
+                                    </button>
+                                    <!-- <span ng-show="recipe.isPublic" class="label label-success">Publicada</span> -->
+                                </div>
+                                <div class="col-xs-4">
                                     <button type="button"
-                                        class="btn"
+                                        class="btn btn-sm"
                                         ng-hide="recipe.state == 'archived'"
                                         ng-class="{
                                             'btn-success': recipe.state == 'draft' || recipe.state == 'wish',

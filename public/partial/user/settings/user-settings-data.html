@@ -147,6 +147,41 @@
                     </select>
                 </div>
             </div>
+            <!-- pH -->
+            <div class="row">
+                <div class="col-md-3">
+                    <label>pH Mash</label>
+                    <input type="number"
+                           step="0.01"
+                           class="form-control input-sm"
+                           placeholder="(ph Mash)"
+                           ng-model="user.settings.defaultValues.MashDesiredPH">
+                </div>
+                <div class="col-md-3">
+                    <label>pH Lavado</label>
+                    <input type="number"
+                           step="0.01"
+                           class="form-control input-sm"
+                           placeholder="(pH Lavado)"
+                           ng-model="user.settings.defaultValues.SpargeWhaterDesiredPH">
+                </div>
+                <div class="col-md-3">
+                    <label>pH Pre-Hervor</label>
+                    <input type="number"
+                           step="0.01"
+                           class="form-control input-sm"
+                           placeholder="(pH Pre-Hervor)"
+                           ng-model="user.settings.defaultValues.phPreBoil">
+                </div>
+                <div class="col-md-3">
+                    <label>pH Post-Hervor</label>
+                    <input type="number"
+                           step="0.01"
+                           class="form-control input-sm"
+                           placeholder="(pH Post-Hervor)"
+                           ng-model="user.settings.defaultValues.phPostBoil">
+                </div>
+            </div>
         </div>
 
     </div>

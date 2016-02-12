@@ -656,6 +656,10 @@
                         LitersEvap: $scope.user.settings.defaultValues.LitersEvap,
                         TrubChillerLosses: $scope.user.settings.defaultValues.TrubChillerLosses,
                         isPublic: $scope.user.settings.defaultValues.isPublic,
+                        MashDesiredPH: $scope.user.settings.defaultValues.MashDesiredPH,
+                        SpargeWhaterDesiredPH: $scope.user.settings.defaultValues.SpargeWhaterDesiredPH,
+                        phPreBoil: $scope.user.settings.defaultValues.phPreBoil,
+                        phPostBoil: $scope.user.settings.defaultValues.phPostBoil,
                         collaborators: [],
                         version: [],
                         log: {
