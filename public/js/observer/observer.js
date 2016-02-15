@@ -17,11 +17,11 @@
             },
             off: function(id, fn) {
                 if ( fn ) {
-                    this.socket.removeListener(id,fn);    
+                    this.socket.removeListener(id,fn);
                 } else {
-                    this.socket.removeAllListeners(id);    
+                    this.socket.removeAllListeners(id);
                 }
-                
+
             }
         };
     });
