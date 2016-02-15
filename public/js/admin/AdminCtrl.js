@@ -263,8 +263,18 @@
                 'Noviembre',
                 'Diciembre'
             ];
+            var DAYS_MONTHS = [31,28,31,30,31,30,31,31,30,31,30,31];
             $scope.monthName = function(date) {
                 return MONTHS[new Date(date).getMonth()];
+            };
+            $scope.monthDays = function(date) {
+                var date = new Date(date);
+                var now = new Date();
+                if ( date.getMonth() === now.getMonth() && date.getYear() === now.getYear() )  {
+                    return now.getDate();
+                } else {
+                    return DAYS_MONTHS[date.getMonth()];
+                }
             };
             $scope.greaterThan = function(value) {
                 return value.total > ($scope.recipesFilter || 0);

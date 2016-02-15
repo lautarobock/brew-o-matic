@@ -93,13 +93,15 @@
                 <th>#</th>
                 <th>Mes</th>
                 <th>Cantidad</th>
+                <th>x Dia</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="month in stats.newRecipesByPeriod">
+            <tr ng-repeat="month in stats.newRecipesByPeriod|orderBy:'-date'">
             <th>{{$index+1}}</th>
             <th>{{monthName(month.date)}} {{month.date|date:'yyyy'}}</th>
             <th>{{month.total}}</th>
+            <th>{{month.total/monthDays(month.date)|number:2}}</th>
         </tr>
     </tbody>
 </table>
