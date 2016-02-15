@@ -76,8 +76,14 @@
         </tbody>
     </table>
 </div>
+<br/>
+<button type="button" ng-hide="loaded.newRecipesByPeriod"
+        ng-click="load('newRecipesByPeriod')"
+        class="btn btn-link">
+    Cargar Recetas nuevas por mes
+</button>
 
-<div class="panel panel-default">
+<div class="panel panel-default" ng-show="loaded.newRecipesByPeriod">
     <div class="panel-heading">
         Recetas nuevas por mes
     </div>
@@ -98,8 +104,13 @@
     </tbody>
 </table>
 </div>
-
-<div class="panel panel-default">
+<br/>
+<button type="button" ng-hide="loaded.recipesByUser"
+        ng-click="load('recipesByUser')"
+        class="btn btn-link">
+    Cargar Usuarios con Recetas
+</button>
+<div class="panel panel-default" ng-show="loaded.recipesByUser">
     <div class="panel-heading">
         <strong>
             Usuarios con Recetas ({{stats.recipesByUser.length}})

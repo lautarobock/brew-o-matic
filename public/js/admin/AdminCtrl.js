@@ -222,6 +222,8 @@
             title: $scope.config.name
         }];
 
+        $scope.loaded = {};
+
         if ( $scope.entity == 'Stats' ) {
             $scope.recipeCount = AdminRecipe.count();
             $scope.userCount = AdminUser.count();
@@ -233,7 +235,7 @@
             Stats.query({stats:['date']}, mix);
             Stats.query({stats:['modificationDate']}, mix);
             Stats.query({stats:['isPublic']}, mix);
-            Stats.query({stats:['recipesByUser']}, mix);
+            // Stats.query({stats:['recipesByUser']}, mix);
             Stats.query({stats:['active']}, mix);
             Stats.query({stats:['newRecipesByPeriod']}, mix);
             $scope.fields = ['today','week','month','year','origin'];
@@ -274,6 +276,11 @@
             console.log('stats.add', stats);
             console.log('stats', $scope.stats);
         }
+
+        $scope.load = function(type) {
+            Stats.query({stats:[type]}, mix);
+            $scope.loaded[type] = true;
+        };
 
     });
 
