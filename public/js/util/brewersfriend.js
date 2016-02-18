@@ -205,6 +205,7 @@
         return (5 / 9) * (fahrenheit - 32)
     }
 })(typeof exports === 'undefined'? this['bfHydrometer'] = {} : exports );
+
 /**
  * bfRefractometer
  */
@@ -335,6 +336,7 @@
         recalculate()
     }
 })(typeof exports === 'undefined'? this['bfRefractometer'] = {} : exports );
+
 /**
  * bfDilution
  */
@@ -616,9 +618,8 @@
 
 })(typeof exports === 'undefined'? this['bfYeast'] = {} : exports );
 
-
 /**
- * bfYeast
+ * bfWater
  */
 (function(exports) {
 
@@ -800,6 +801,7 @@
     * @param in {
     *   dilution  Numeric % of dilution
     *   mashvolume Numeric
+    *   mashunits gallons / quarts / liters
     *   source  Numeric[0..7] (source[6] is out)
     *   target Numeric[0..7] (target[6] is out)
     *   CaCO3 Numeric
@@ -814,6 +816,13 @@
     * }
     */
     function recalculate(input, output) {
+        input.mashunits = input.mashunits || 'liters';
+        if ( input.mashunits === 'quarts' ) {
+            input.mashvolume = input.mashvolume * 0.25;
+        }
+        if ( input.mashunits === 'liters' ) {
+            input.mashvolume = input.mashvolume * 0.264172052;
+        }
         output.startwater = new Array(6);
         for (i = 0; i <= 5; i++) {
             output.diluted[i] = rounddecimal(input.source[i] * ((100 - input.dilution) / 100), 0);
@@ -829,34 +838,34 @@
         input.target[6] = rounddecimal((input.target[5] * (50 / 61)), 0);
         output.diff[6] = rounddecimal(((input.source[5] - input.target[5]) * (50 / 61)), 0);
         if (input.CaCO3 > 0) {
-            output.CaCO3_tsp = "add " + rounddecimal(input.CaCO3 / 3.8, 2) + " tsp"
+            output.CaCO3_tsp = input.CaCO3 / 3.8;
         } else {
-            output.CaCO3_tsp = ""
+            output.CaCO3_tsp = 0;
         }
         if (input.NaHCO3 > 0) {
-            output.NaHCO3_tsp = "add " + rounddecimal(input.NaHCO3 / 4.4, 2) + " tsp"
+            output.NaHCO3_tsp = input.NaHCO3 / 4.4;
         } else {
-            output.NaHCO3_tsp = ""
+            output.NaHCO3_tsp = 0;
         }
         if (input.CaSO4 > 0) {
-            output.CaSO4_tsp = "add " + rounddecimal(input.CaSO4 / 4, 2) + " tsp"
+            output.CaSO4_tsp = input.CaSO4 / 4;
         } else {
-            output.CaSO4_tsp = ""
+            output.CaSO4_tsp = 0;
         }
         if (input.CaCl2 > 0) {
-            output.CaCl2_tsp = "add " + rounddecimal(input.CaCl2 / 3.4, 2) + " tsp"
+            output.CaCl2_tsp = input.CaCl2 / 3.4;
         } else {
-            output.CaCl2_tsp = ""
+            output.CaCl2_tsp = 0;
         }
         if (input.MgSO4 > 0) {
-            output.MgSO4_tsp = "add " + rounddecimal(input.MgSO4 / 4.5, 2) + " tsp"
+            output.MgSO4_tsp = input.MgSO4 / 4.5;
         } else {
-            output.MgSO4_tsp = ""
+            output.MgSO4_tsp = 0;
         }
         if (input.NaCl > 0) {
-            output.NaCl_tsp = "add " + rounddecimal(input.NaCl / 6, 2) + " tsp"
+            output.NaCl_tsp = input.NaCl / 6;
         } else {
-            output.NaCl_tsp = ""
+            output.NaCl_tsp = 0;
         }
         var adjCa = 0;
         var adjMg = 0;
@@ -898,112 +907,114 @@
         output.salts[6] = rounddecimal((adjHCO3 * (50 / 61)), 0);
         for (i = 0; i <= 5; i++) {
             var resultinglevel = rounddecimal(parseFloat(rounddecimal(output.diff[i], 10)) + parseFloat(rounddecimal(output.salts[i], 10)), 0);
-            if (resultinglevel > 0) {
-                resultinglevel = "+" + resultinglevel
-            }
-            output.result[i] = resultinglevel;
+            // if (resultinglevel > 0) {
+            //     resultinglevel = "+" + resultinglevel
+            // }
+            output.result[i] = {
+                value: resultinglevel,
+                range: true
+            };
             output.adjusted[i] = rounddecimal(parseFloat(rounddecimal(output.diluted[i], 10)) + parseFloat(rounddecimal(output.salts[i], 10)), 0);
-            if (resultinglevel < -20 || resultinglevel > 20) {
-                output.result[i] += '(red)';
-            } else {
-                output.result[i] += '(green)';
-            }
+            output.result[i].range = !(resultinglevel < -20 || resultinglevel > 20);
         }
         output.adjusted[6] = rounddecimal((rounddecimal(output.adjusted[5], 10) * (50 / 61)), 0);
-        output.result[6] = rounddecimal((rounddecimal(output.result[5], 10) * (50 / 61)), 0);
+        output.result[6] = {
+            value: rounddecimal((rounddecimal(output.result[5].value, 10) * (50 / 61)), 0),
+            range: 'ok'
+        };
         var CaValue = rounddecimal(output.adjusted[0], 10);
         if (CaValue < 50) {
-            output.Ca_balance = "<img src='/images/checkmark_range_low.gif'>"
+            output.Ca_balance = Balance.LOW;
         }
         if (CaValue >= 50 && CaValue <= 150) {
-            output.Ca_balance = "<img src='/images/checkmark_range_normal.gif'>"
+            output.Ca_balance = Balance.NORMAL;
         }
         if (CaValue > 150) {
-            output.Ca_balance = "<img src='/images/checkmark_range_high.gif'>"
+            output.Ca_balance = Balance.HIGH;
         }
         if (CaValue > 250) {
-            output.Ca_balance = "<img src='/images/checkmark_range_harmful.gif'>"
+            output.Ca_balance = Balance.HARMFUL;
         }
         var MgValue = rounddecimal(output.adjusted[1], 10);
         if (MgValue >= 0 && MgValue <= 30) {
-            output.Mg_balance = "<img src='/images/checkmark_range_normal.gif'>"
+            output.Mg_balance = Balance.NORMAL;
         }
         if (MgValue > 30) {
-            output.Mg_balance = "<img src='/images/checkmark_range_high.gif'>"
+            output.Mg_balance = Balance.HIGH;
         }
         if (MgValue > 50) {
-            output.Mg_balance = "<img src='/images/checkmark_range_harmful.gif'>"
+            output.Mg_balance = Balance.HARMFUL;
         }
         var SO4Value = rounddecimal(output.adjusted[2], 10);
         if (SO4Value < 50) {
-            output.SO4_balance = "<img src='/images/checkmark_range_low.gif'>"
+            output.SO4_balance = Balance.LOW;
         }
         if (SO4Value >= 50 && SO4Value <= 150) {
-            output.SO4_balance = "<img src='/images/checkmark_range_normal.gif'>"
+            output.SO4_balance = Balance.NORMAL;
         }
         if (SO4Value > 150 && SO4Value <= 350) {
-            output.SO4_balance = "<img src='/images/checkmark_range_normal.gif'>"
+            output.SO4_balance = Balance.NORMAL;
         }
         if (SO4Value > 350) {
-            output.SO4_balance = "<img src='/images/checkmark_range_high.gif'>"
+            output.SO4_balance = Balance.HIGH;
         }
         if (SO4Value > 750) {
-            output.SO4_balance = "<img src='/images/checkmark_range_harmful.gif'>"
+            output.SO4_balance = Balance.HARMFUL;
         }
         var NaValue = rounddecimal(output.adjusted[3], 10);
         if (NaValue >= 0 && NaValue <= 150) {
-            output.Na_balance = "<img src='/images/checkmark_range_normal.gif'>"
+            output.Na_balance = Balance.NORMAL;
         }
         if (NaValue > 150) {
-            output.Na_balance = "<img src='/images/checkmark_range_high.gif'>"
+            output.Na_balance = Balance.HIGH;
         }
         if (NaValue > 200) {
-            output.Na_balance = "<img src='/images/checkmark_range_harmful.gif'>"
+            output.Na_balance = Balance.HARMFUL;
         }
         var ClValue = rounddecimal(output.adjusted[4], 10);
         if (ClValue >= 0 && ClValue <= 250) {
-            output.Cl_balance = "<img src='/images/checkmark_range_normal.gif'>"
+            output.Cl_balance = Balance.NORMAL;
         }
         if (ClValue > 250) {
-            output.Cl_balance = "<img src='/images/checkmark_range_high.gif'>"
+            output.Cl_balance = Balance.HIGH;
         }
         if (ClValue > 300) {
-            output.Cl_balance = "<img src='/images/checkmark_range_harmful.gif'>"
+            output.Cl_balance = Balance.HARMFUL;
         }
         if (ClValue <= 0) {
             ClValue = 1
         }
         var SO4Clratio = SO4Value / ClValue;
         if (SO4Clratio > 0 && SO4Clratio <= 0.5) {
-            output.SO4Cl_balance = "highly malty"
+            output.SO4Cl_balance = Ratio.HIGHLY_MALTY;
         }
         if (SO4Clratio > 0.5 && SO4Clratio <= 0.7) {
-            output.SO4Cl_balance = "malty"
+            output.SO4Cl_balance = Ratio.MALTY;
         }
         if (SO4Clratio > 0.7 && SO4Clratio <= 1.3) {
-            output.SO4Cl_balance = "balance between malt and bitterness"
+            output.SO4Cl_balance = Ratio.BALANCE;
         }
         if (SO4Clratio > 1.3 && SO4Clratio <= 2) {
-            output.SO4Cl_balance = "bitter"
+            output.SO4Cl_balance = Ratio.BITTER;
         }
         if (SO4Clratio > 2) {
-            output.SO4Cl_balance = "highly bitter"
+            output.SO4Cl_balance = Ratio.HIGHLY_BITTER;
         }
         if (ClValue <= 5 && SO4Value <= 5) {
-            output.SO4Cl_balance = "low values - guessing balanced"
+            output.SO4Cl_balance = Ratio.LOW_VALUES;
         }
         var AlkalinityValue = rounddecimal(output.adjusted[6], 10);
         if (AlkalinityValue >= 0 && AlkalinityValue <= 50) {
-            output.Alkalinity_balance = " pale beer (0-50 ppm Alkalinity)"
+            output.Alkalinity_balance = Alkalinity.PALE;
         }
         if (AlkalinityValue > 50 && AlkalinityValue <= 150) {
-            output.Alkalinity_balance = "good for amber beer (50-150 ppm Alkalinity)"
+            output.Alkalinity_balance = Alkalinity.AMBER;
         }
         if (AlkalinityValue > 150 && AlkalinityValue <= 300) {
-            output.Alkalinity_balance = "good for dark beer (150-300 ppm Alkalinity)"
+            output.Alkalinity_balance = Alkalinity.DARK;
         }
         if (AlkalinityValue > 300) {
-            output.Alkalinity_balance = "high, decrese below 300"
+            output.Alkalinity_balance = Alkalinity.HIGH;
         }
     }
 
@@ -1060,7 +1071,48 @@
         }
     }
 
+    var Balance = {
+        LOW: 'LOW',
+        HIGH: 'HIGH',
+        NORMAL: 'NORMAL',
+        HARMFUL: 'HARMFUL'
+    };
+
+    // var Ratio = {
+    //     HIGHLY_MALTY: 'highly malty',
+    //     MALTY: 'malty',
+    //     BALANCE: 'balance between malt and bitterness',
+    //     BITTER: 'bitter',
+    //     HIGHLY_BITTER: 'highly bitter',
+    //     LOW_VALUES: 'low values - guessing balanced'
+    // };
+    var Ratio = {
+        HIGHLY_MALTY: 'HIGHLY_MALTY',
+        MALTY: 'MALTY',
+        BALANCE: 'BALANCE',
+        BITTER: 'BITTER',
+        HIGHLY_BITTER: 'HIGHLY_BITTER',
+        LOW_VALUES: 'LOW_VALUES'
+    };
+
+    // var Alkalinity = {
+    //     PALE: "pale beer (0-50 ppm Alkalinity)",
+    //     AMBER: "good for amber beer (50-150 ppm Alkalinity)",
+    //     DARK: "good for dark beer (150-300 ppm Alkalinity)",
+    //     HIGH: "high, decrese below 300"
+    // };
+    var Alkalinity = {
+        PALE: 'PALE',
+        AMBER: 'AMBER',
+        DARK: 'DARK',
+        HIGH: 'HIGH'
+    };
+
     exports.recalculate = recalculate;
     exports.rounddecimal = rounddecimal;
+    exports.Balance = Balance;
+    exports.Ratio = Ratio;
+    exports.Alkalinity = Alkalinity;
+
 
 })(typeof exports === 'undefined'? this['bfWater'] = {} : exports );

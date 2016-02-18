@@ -203,6 +203,36 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
            discard: Boolean
        },{_id:true})]
     },
+    water: {
+        liters: {type: Number, default: 0},
+        dilution: {type: Number, default: 0},
+        source: {
+            ca: {type: Number, default: 0},
+            mg: {type: Number, default: 0},
+            so4: {type: Number, default: 0},
+            na: {type: Number, default: 0},
+            cl: {type: Number, default: 0},
+            hco3: {type: Number, default: 0},
+            alc: {type: Number, default: 0}
+        },
+        target: {
+            ca: {type: Number, default: 0},
+            mg: {type: Number, default: 0},
+            so4: {type: Number, default: 0},
+            na: {type: Number, default: 0},
+            cl: {type: Number, default: 0},
+            hco3: {type: Number, default: 0},
+            alc: {type: Number, default: 0}
+        },
+        CaCO3: {type: Number, default: 0},
+        NaHCO3: {type: Number, default: 0},
+        CaSO4: {type: Number, default: 0},
+        CaCl2: {type: Number, default: 0},
+        MgSO4: {type: Number, default: 0},
+        NaCl: {type: Number, default: 0},
+        selectedSource: {type:String, ref:'WaterReport'},
+        selectedTarget: {type:String, ref:'WaterReport'}
+    },
     PRIMARY_TEMP: Number,
     BIAB: String,
     IBUCalcMethod: String,

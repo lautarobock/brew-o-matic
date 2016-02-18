@@ -644,6 +644,19 @@
                             sugarType: 'cane', //'cane', 'corn'
                             bottles: []
                         },
+                        water: {
+                            liters: 0,
+                            dilution: 0,
+                            source: { ca: 0, mg: 0, so4: 0, na: 0, cl: 0, hco3: 0,alc: 0},
+                            target: { ca: 0, mg: 0, so4: 0, na: 0, cl: 0, hco3: 0,alc: 0},
+                            CaCO3: 0,
+                            NaHCO3: 0,
+                            CaSO4: 0,
+                            CaCl2: 0,
+                            MgSO4: 0,
+                            NaCl: 0
+
+                        },
                         WatertoGrainRatio: $scope.user.settings.defaultValues.WatertoGrainRatio,
                         mashTemp: $scope.user.settings.defaultValues.mashTemp,
                         lossMashTemp: $scope.user.settings.defaultValues.lossMashTemp,

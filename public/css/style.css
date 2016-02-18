@@ -125,6 +125,14 @@ a {
     background: lightpink !important;
 }
 
+.gt-range-in {
+    color: green !important;
+}
+
+.gt-range-out {
+    color: red !important;
+}
+
 .animate-repeat {
 
 }

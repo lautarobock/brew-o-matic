@@ -236,6 +236,9 @@
                 if ( !water ) return null;
                 return Math.abs(this.totalAnions(water.anions)-this.totalCations(water.cations));
             },
+            waterCalculation: function(input, output) {
+                return bfWater.recalculate(input, output);
+            },
             calculateABV: function(og, fg) {
                 var OG = BrewHelper.toPpg(og);
                 var FG = BrewHelper.toPpg(fg);
