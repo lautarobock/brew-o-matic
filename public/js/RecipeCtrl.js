@@ -451,6 +451,10 @@
             title: 'Receta',
             template: 'detail-main'
         },
+        water: {
+            title: 'Agua',
+            template: 'water'
+        },
         mash: {
             title: 'Macerado',
             template: 'mash'
@@ -497,6 +501,7 @@
     module.controller("RecipeTabCtrl",function($scope) {
         $scope.sortTabs = [
             'main',
+            'water',
             'mash',
             'boil',
             'fermentation',

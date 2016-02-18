@@ -25,7 +25,10 @@ module.exports = function(config) {
       '../public/js/RecipeCtrl.js',
       '../public/js/*.js',
       '../public/js/**/*.js',
-      '../public/bower_components/**/*.js',
+      '../public/bower_components/angular/angular.min.js',
+      '../public/bower_components/angular-audio/app/angular.audio.js',
+      '../public/bower_components/angular-word-cloud/build/angular-word-cloud.min.js',
+      '../public/bower_components/ng-util/dist/lautarobock-ng-util.min.js',
       '**/*Spec.js',
       '**/*.spec.js'
     ],
