@@ -100,6 +100,7 @@
                     +$scope.recipe.SpargeDeadSpace
                     +$scope.recipe.GrainAbsorbtion*$scope.recipe.totalAmountMash;
             $scope.recipe.water.liters = Math.round(total);
+            $scope.onChange();
         };
 
         $scope.onChange = function() {
