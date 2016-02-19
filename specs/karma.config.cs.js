@@ -29,6 +29,7 @@ module.exports = function(config) {
       '../public/bower_components/angular-audio/app/angular.audio.js',
       '../public/bower_components/angular-word-cloud/build/angular-word-cloud.min.js',
       '../public/bower_components/ng-util/dist/lautarobock-ng-util.min.js',
+      '../public/bower_components/lodash/dist/lodash.core.min.js',
       '**/*Spec.js',
       '**/*.spec.js'
     ],

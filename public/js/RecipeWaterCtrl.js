@@ -103,6 +103,37 @@
             $scope.onChange();
         };
 
+        $scope.suggest = function() {
+            var input = {
+                dilution: $scope.recipe.water.dilution,
+                mashvolume: $scope.recipe.water.liters,
+                source: convertArray($scope.recipe.water.source),
+                target: convertArray($scope.recipe.water.target),
+                CaCO3: $scope.recipe.water.CaCO3,
+                NaHCO3: $scope.recipe.water.NaHCO3,
+                CaSO4: $scope.recipe.water.CaSO4,
+                CaCl2: $scope.recipe.water.CaCl2,
+                MgSO4: $scope.recipe.water.MgSO4,
+                NaCl: $scope.recipe.water.NaCl
+            };
+
+            var suggest = BrewCalc.suggestWaterCalculation(input, {
+                diluted: new Array(6),
+                diff: new Array(6),
+                salts: new Array(6),
+                result: new Array(6),
+                adjusted: new Array(6)
+            });
+
+            $scope.recipe.water.CaCO3 = suggest.CaCO3;
+            $scope.recipe.water.NaHCO3 = suggest.NaHCO3;
+            $scope.recipe.water.CaSO4 = suggest.CaSO4;
+            $scope.recipe.water.CaCl2 = suggest.CaCl2;
+            $scope.recipe.water.MgSO4 = suggest.MgSO4;
+            $scope.recipe.water.NaCl = suggest.NaCl;
+
+        };
+
         $scope.onChange = function() {
             var input = {
                 dilution: $scope.recipe.water.dilution,

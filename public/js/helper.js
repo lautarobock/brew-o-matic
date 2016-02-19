@@ -239,6 +239,9 @@
             waterCalculation: function(input, output) {
                 return bfWater.recalculate(input, output);
             },
+            suggestWaterCalculation: function(input) {
+                return bfWater.suggest(input);
+            },
             calculateABV: function(og, fg) {
                 var OG = BrewHelper.toPpg(og);
                 var FG = BrewHelper.toPpg(fg);

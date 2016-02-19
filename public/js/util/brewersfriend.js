@@ -624,178 +624,7 @@
 (function(exports) {
 
     var e = 2.718281828459045235;
-    // var mashvolume = 7;
-    // var mashunits = 'gallons';
-    // var dilution = 0;
-    // var water = [];
-    // water[0] = {
-    //     name: '-- Default Brewing Levels --',
-    //     Ca: 75,
-    //     HCO3: 125,
-    //     Cl: 50,
-    //     Mg: 15,
-    //     Na: 10,
-    //     SO4: 75
-    // };
-    // water[1] = {
-    //     name: 'Balanced Profile',
-    //     descr: 'This basic water profile is suitable for beers ranging from dark golden to deep amber in color. The gerally low ion content should not interfere with the taste of the beer.',
-    //     Ca: '80',
-    //     Mg: '5',
-    //     SO4: '80',
-    //     Na: '25',
-    //     Cl: '75',
-    //     HCO3: '100'
-    // };
-    // water[2] = {
-    //     name: 'Balanced Profile II',
-    //     descr: 'This water profile is similar to the Balanced Profile but with twice the minerals. It&rsquo;s suitable for dark golden to deep amber beers, It&rsquo;s higher ion content makes it better suited for stronger and more robust styles.',
-    //     Ca: '150',
-    //     Mg: '10',
-    //     SO4: '160',
-    //     Na: '80',
-    //     Cl: '150',
-    //     HCO3: '220'
-    // };
-    // water[3] = {
-    //     name: 'Light colored and malty',
-    //     descr: 'Low residual alkalinity and a sulfate to chloride ration balanced towards chloride make this an excellent choice for light colored (2-5 SRM) and malt forward beers. The mineral level is restraint and should not show through in the taste of the beer.',
-    //     Ca: '60',
-    //     Mg: '5',
-    //     SO4: '55',
-    //     Na: '10',
-    //     Cl: '95',
-    //     HCO3: '0'
-    // };
-    // water[4] = {
-    //     name: 'Light colored and hoppy',
-    //     descr: 'Low residual alkalinity and a sulfate to chloride ration balanced towards sulfate make this an excellent choice for light colored (2-5 SRM) and hop forward beers. The mineral level is restraint and should not show through in the taste of the beer.',
-    //     Ca: '75',
-    //     Mg: '5',
-    //     SO4: '150',
-    //     Na: '10',
-    //     Cl: '50',
-    //     HCO3: '0'
-    // };
-    // water[5] = {
-    //     name: 'Burton on Trent (historic)',
-    //     descr: 'Burton on Trent is known for water with very high sulfate content. This profile has been constructed from a water analysis of Burton well water published in &ldquo;Burton-on-Trent, Its History, Its Waters and Its Breweries&rdquo; from 1869.',
-    //     Ca: '270',
-    //     Mg: '41',
-    //     SO4: '720',
-    //     Na: '113',
-    //     Cl: '85',
-    //     HCO3: '270'
-    // };
-    // water[6] = {
-    //     name: 'Burton on Trent (historic and decarbonated)',
-    //     descr: 'Burton on Trent is known for water with very high sulfate content. This profile has been constructed from a historic water profile after decarbonation through boiling or slaked lime. Its low residual alkality allowed English brewers to brew pale beers.',
-    //     Ca: '187',
-    //     Mg: '41',
-    //     SO4: '720',
-    //     Na: '113',
-    //     Cl: '85',
-    //     HCO3: '20'
-    // };
-    // water[7] = {
-    //     name: 'Dortmund (historic)',
-    //     descr: 'The characteristic of the histroric Dortmunder brewing water profile is a chigh calcium and sulfate content which lend the Dortmunder Export additional bitterness. This water profile has been reconstructed from analysis data given in an 1953 article about residual alkalinty by Kolbach.',
-    //     Ca: '250',
-    //     Mg: '20',
-    //     SO4: '300',
-    //     Na: '10',
-    //     Cl: '100',
-    //     HCO3: '340'
-    // };
-    // water[8] = {
-    //     name: 'Dortmund (historic and decarbonated)',
-    //     descr: 'This is the water profile Dortmunder water after it has been decarboneted with slaked lime. This resembles the decarbonated water profile given by Kolbach in his 1953 article and it was most likely the water profile used by Dortmunder brewers.',
-    //     Ca: '155',
-    //     Mg: '23',
-    //     SO4: '300',
-    //     Na: '10',
-    //     Cl: '100',
-    //     HCO3: '53'
-    // };
-    // water[9] = {
-    //     name: 'Dublin (Dry Stout)',
-    //     descr: 'With its high alkalinity Dublin water is well suited for stouts and other dark ales.',
-    //     Ca: '110',
-    //     Mg: '4',
-    //     SO4: '53',
-    //     Na: '12',
-    //     Cl: '19',
-    //     HCO3: '280'
-    // };
-    // water[10] = {
-    //     name: 'Edinburgh (Scottish Ale, Malty Ale)',
-    //     descr: 'One of the historic water profiles for Edinburgh, Scotland. Because of its geology scottish brewers have access to many different waters depending on where and how deep a well is drilled. This particular profile is well suited for darker scottish ales.',
-    //     Ca: '100',
-    //     Mg: '18',
-    //     SO4: '105',
-    //     Na: '20',
-    //     Cl: '45',
-    //     HCO3: '235'
-    // };
-    // water[11] = {
-    //     name: 'London (Porter, dark ales)',
-    //     descr: 'With its high termporary hardness the London water profile is well suited for dark beers like Porter. This profile has been taken from an average London water report and also matches the historic London profile found in various literature sources.',
-    //     Ca: '100',
-    //     Mg: '5',
-    //     SO4: '50',
-    //     Na: '35',
-    //     Cl: '60',
-    //     HCO3: '265'
-    // };
-    // water[12] = {
-    //     name: 'Munich (Dark Lager)',
-    //     descr: 'Munich water is high in temporary hardness and well suited for dark lagers such as Munich Dunkel, Schwarzbier or Doppelbock. Because of its high residual alkalinity, this water profile is not recommended for Munich Helles or Maibock. The mineral levels for this target are from the 2013 water quality report for Munich.',
-    //     Ca: '82',
-    //     Mg: '20',
-    //     SO4: '16',
-    //     Na: '4',
-    //     Cl: '2',
-    //     HCO3: '320'
-    // };
-    // water[13] = {
-    //     name: 'Munich (decarbonated)',
-    //     descr: 'The munich water profile after being treated with slaked lime and the addition of some calcium chloride and gypsum. That is the kind of water treatment a Munich brewer might do to make the water more suitable for lighter beers. Well suited for M&auml;rzen and Maibock.',
-    //     Ca: '40',
-    //     Mg: '20',
-    //     SO4: '52',
-    //     Na: '4',
-    //     Cl: '75',
-    //     HCO3: '29'
-    // };
-    // water[14] = {
-    //     name: 'Pilsen (Light Lager)',
-    //     descr: 'This very low mineral water is the traditional water for Bohemian pilsner beers. Despite its low calcium content, great pilsner and Helles style beers can be brewed with it.',
-    //     Ca: '7',
-    //     Mg: '3',
-    //     SO4: '5',
-    //     Na: '2',
-    //     Cl: '5',
-    //     HCO3: '25'
-    // };
-    // water[15] = {
-    //     name: 'Dusseldorf (Altbier)',
-    //     descr: 'The water profile of the town of D&uuml;sseldorf (Germany) is well suited for Altbier and is very likely the water used by Altbier brewries in that town without any modification. The ion levels were taken from a 2013 water quality report.',
-    //     Ca: '90',
-    //     Mg: '12',
-    //     SO4: '65',
-    //     Na: '45',
-    //     Cl: '82',
-    //     HCO3: '223'
-    // };
-    // water[16] = {
-    //     name: '-- Custom Target --',
-    //     Ca: 0,
-    //     HCO3: 0,
-    //     Cl: 0,
-    //     Mg: 0,
-    //     Na: 0,
-    //     SO4: 0
-    // };
+
 
     /**
     * @param in {
@@ -817,11 +646,12 @@
     */
     function recalculate(input, output) {
         input.mashunits = input.mashunits || 'liters';
+        var mashvolume = input.mashvolume;
         if ( input.mashunits === 'quarts' ) {
-            input.mashvolume = input.mashvolume * 0.25;
+            mashvolume = mashvolume * 0.25;
         }
         if ( input.mashunits === 'liters' ) {
-            input.mashvolume = input.mashvolume * 0.264172052;
+            mashvolume = mashvolume * 0.264172052;
         }
         output.startwater = new Array(6);
         for (i = 0; i <= 5; i++) {
@@ -873,30 +703,30 @@
         var adjNa = 0;
         var adjCl = 0;
         var adjHCO3 = 0;
-        input.CaCO3 = input.CaCO3 / 2;
-        if (input.CaCO3 > 0) {
-            adjCa = adjCa + ((105 * input.CaCO3) / input.mashvolume);
-            adjHCO3 = adjHCO3 + ((321 * input.CaCO3) / input.mashvolume)
+        var CaCO3 = input.CaCO3 / 2;
+        if (CaCO3 > 0) {
+            adjCa = adjCa + ((105 * CaCO3) / mashvolume);
+            adjHCO3 = adjHCO3 + ((321 * CaCO3) / mashvolume)
         }
         if (input.NaHCO3 > 0) {
-            adjNa = adjNa + ((75 * input.NaHCO3) / input.mashvolume);
-            adjHCO3 = adjHCO3 + ((191 * input.NaHCO3) / input.mashvolume)
+            adjNa = adjNa + ((75 * input.NaHCO3) / mashvolume);
+            adjHCO3 = adjHCO3 + ((191 * input.NaHCO3) / mashvolume)
         }
         if (input.CaSO4 > 0) {
-            adjCa = adjCa + ((61.5 * input.CaSO4) / input.mashvolume);
-            adjSO4 = adjSO4 + ((147.4 * input.CaSO4) / input.mashvolume)
+            adjCa = adjCa + ((61.5 * input.CaSO4) / mashvolume);
+            adjSO4 = adjSO4 + ((147.4 * input.CaSO4) / mashvolume)
         }
         if (input.CaCl2 > 0) {
-            adjCa = adjCa + ((72 * input.CaCl2) / input.mashvolume);
-            adjCl = adjCl + ((127 * input.CaCl2) / input.mashvolume)
+            adjCa = adjCa + ((72 * input.CaCl2) / mashvolume);
+            adjCl = adjCl + ((127 * input.CaCl2) / mashvolume)
         }
         if (input.MgSO4 > 0) {
-            adjMg = adjMg + ((26 * input.MgSO4) / input.mashvolume);
-            adjSO4 = adjSO4 + ((103 * input.MgSO4) / input.mashvolume)
+            adjMg = adjMg + ((26 * input.MgSO4) / mashvolume);
+            adjSO4 = adjSO4 + ((103 * input.MgSO4) / mashvolume)
         }
         if (input.NaCl > 0) {
-            adjNa = adjNa + ((104 * input.NaCl) / input.mashvolume);
-            adjCl = adjCl + ((160 * input.NaCl) / input.mashvolume)
+            adjNa = adjNa + ((104 * input.NaCl) / mashvolume);
+            adjCl = adjCl + ((160 * input.NaCl) / mashvolume)
         }
         output.salts[0] = rounddecimal(adjCa, 0);
         output.salts[1] = rounddecimal(adjMg, 0);
@@ -905,23 +735,28 @@
         output.salts[4] = rounddecimal(adjCl, 0);
         output.salts[5] = rounddecimal(adjHCO3, 0);
         output.salts[6] = rounddecimal((adjHCO3 * (50 / 61)), 0);
+        output.accuracy = {
+            value: 0,
+            allin: true
+        };
         for (i = 0; i <= 5; i++) {
             var resultinglevel = rounddecimal(parseFloat(rounddecimal(output.diff[i], 10)) + parseFloat(rounddecimal(output.salts[i], 10)), 0);
-            // if (resultinglevel > 0) {
-            //     resultinglevel = "+" + resultinglevel
-            // }
             output.result[i] = {
                 value: resultinglevel,
                 range: true
             };
             output.adjusted[i] = rounddecimal(parseFloat(rounddecimal(output.diluted[i], 10)) + parseFloat(rounddecimal(output.salts[i], 10)), 0);
             output.result[i].range = !(resultinglevel < -20 || resultinglevel > 20);
+            output.accuracy.value += Math.abs(resultinglevel);
+            output.accuracy.allin = output.accuracy.allin && output.result[i].range;
         }
         output.adjusted[6] = rounddecimal((rounddecimal(output.adjusted[5], 10) * (50 / 61)), 0);
         output.result[6] = {
             value: rounddecimal((rounddecimal(output.result[5].value, 10) * (50 / 61)), 0),
-            range: 'ok'
+            range: true
         };
+        output.accuracy.distance = bfUtil.distance(output.adjusted,input.target);
+        output.accuracy.value += Math.abs(output.result[6].value);
         var CaValue = rounddecimal(output.adjusted[0], 10);
         if (CaValue < 50) {
             output.Ca_balance = Balance.LOW;
@@ -1018,6 +853,98 @@
         }
     }
 
+    function dummyOutput() {
+        return {
+            diluted: new Array(6),
+            diff: new Array(6),
+            salts: new Array(6),
+            result: new Array(6),
+            adjusted: new Array(6)
+        };
+    }
+
+    function suggest(input, output) {
+        var best = {
+            CaCO3: 0,
+            lastCaCO3: 0,
+            NaHCO3: 0,
+            lastNaHCO3: 0,
+            CaSO4: 0,
+            lastCaSO4: 0,
+            CaCl2: 0,
+            lastCaCl2: 0,
+            MgSO4: 0,
+            lastMgSO4: 0,
+            NaCl: 0,
+            lastNaCl: 0,
+            distance: 10000,
+            calculations: 0
+        };
+
+        function setBest(input, output) {
+            best.CaCO3= input.CaCO3;
+            best.NaHCO3= input.NaHCO3;
+            best.CaSO4= input.CaSO4;
+            best.CaCl2= input.CaCl2;
+            best.MgSO4= input.MgSO4;
+            best.NaCl= input.NaCl;
+            best.distance = output.accuracy.distance;
+        }
+
+        best.lastCaCO3 = 10000;
+        for ( input.CaCO3=0; input.CaCO3<1000; input.CaCO3++ ) {
+            best.lastNaHCO3 = 10000
+            for ( input.NaHCO3=0; input.NaHCO3<1000; input.NaHCO3++ ) {
+                best.lastCaSO4 = 10000;
+                for ( input.CaSO4=0; input.CaSO4<1000; input.CaSO4++ ) {
+                    best.lastCaCl2 = 10000;
+                    for ( input.CaCl2=0; input.CaCl2<1000; input.CaCl2++ ) {
+                        best.lastMgSO4 = 10000;
+                        for ( input.MgSO4=0; input.MgSO4<1000; input.MgSO4++ ) {
+                            best.lastNaCl = 10000;
+                            for ( input.NaCl=0; input.NaCl<1000; input.NaCl++ ) {
+                                console.log('input', input.CaCO3, input.NaHCO3, input.CaSO4, input.CaCl2, input.MgSO4, input.NaCl);
+                                var output = dummyOutput();
+                                recalculate(input,output);
+                                best.calculations++;
+                                console.log('distance', output.accuracy.distance);
+                                if ( output.accuracy.distance > best.lastNaCl ) {
+                                    break;
+                                }
+                                best.lastNaCl = output.accuracy.distance;
+
+                                if ( output.accuracy.distance<best.distance ) {
+                                    setBest(input, output);
+                                }
+                            }
+                            if ( best.lastNaCl > best.lastMgSO4 ) {
+                                break;
+                            }
+                            best.lastMgSO4 = best.lastNaCl;
+                        }
+                        if ( best.lastMgSO4 > best.lastCaCl2 ) {
+                            break;
+                        }
+                        best.lastCaCl2 = best.lastMgSO4;
+                    }
+                    if ( best.lastCaCl2 > best.lastCaSO4 ) {
+                        break;
+                    }
+                    best.lastCaSO4 = best.lastCaCl2;
+                }
+                if ( best.lastCaSO4 > best.lastNaHCO3 ) {
+                    break;
+                }
+                best.lastNaHCO3 = best.lastCaSO4;
+            }
+            if ( best.lastNaHCO3 > best.lastCaCO3 ) {
+                break;
+            }
+            best.lastCaCO3 = best.lastNaHCO3;
+        }
+        return best;
+    }
+
     function rounddecimal(n, places) {
         if (n === null) {
             return false
@@ -1057,20 +984,6 @@
     }
 
 
-    function changeTarget() {
-        if (confirm('Are you sure you want to update the target minerals?')) {
-            dropdown = document.hops.targetprofile;
-            i = dropdown.value;
-            document.hops.target0.value = water[i].Ca;
-            document.hops.target1.value = water[i].Mg;
-            document.hops.target2.value = water[i].SO4;
-            document.hops.target3.value = water[i].Na;
-            document.hops.target4.value = water[i].Cl;
-            document.hops.target5.value = water[i].HCO3;
-            updateAll()
-        }
-    }
-
     var Balance = {
         LOW: 'LOW',
         HIGH: 'HIGH',
@@ -1078,14 +991,6 @@
         HARMFUL: 'HARMFUL'
     };
 
-    // var Ratio = {
-    //     HIGHLY_MALTY: 'highly malty',
-    //     MALTY: 'malty',
-    //     BALANCE: 'balance between malt and bitterness',
-    //     BITTER: 'bitter',
-    //     HIGHLY_BITTER: 'highly bitter',
-    //     LOW_VALUES: 'low values - guessing balanced'
-    // };
     var Ratio = {
         HIGHLY_MALTY: 'HIGHLY_MALTY',
         MALTY: 'MALTY',
@@ -1095,12 +1000,6 @@
         LOW_VALUES: 'LOW_VALUES'
     };
 
-    // var Alkalinity = {
-    //     PALE: "pale beer (0-50 ppm Alkalinity)",
-    //     AMBER: "good for amber beer (50-150 ppm Alkalinity)",
-    //     DARK: "good for dark beer (150-300 ppm Alkalinity)",
-    //     HIGH: "high, decrese below 300"
-    // };
     var Alkalinity = {
         PALE: 'PALE',
         AMBER: 'AMBER',
@@ -1113,6 +1012,28 @@
     exports.Balance = Balance;
     exports.Ratio = Ratio;
     exports.Alkalinity = Alkalinity;
+    exports.suggest = suggest;
 
 
 })(typeof exports === 'undefined'? this['bfWater'] = {} : exports );
+
+/**
+* bfUtil
+*/
+(function(exports){
+
+    exports.distance = function(p1, p2) {
+        // console.log('p1',p1);
+        // console.log('p2',p2);
+        var result = 0;
+        for ( var i=0; i<p1.length; i++ ) {
+            result += Math.pow(p1[i]-p2[i],2);
+        }
+        return exports.rounddecimal(Math.sqrt(result),2);
+    };
+
+    exports.rounddecimal = function(n, places) {
+        return Math.round(n * Math.pow(10, places)) / Math.pow(10, places);
+    };
+
+})(typeof exports === 'undefined'? this['bfUtil'] = {} : exports );

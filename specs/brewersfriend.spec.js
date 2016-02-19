@@ -149,8 +149,78 @@ describe("brewersfriend", function() {
 			expect(output.adjusted).toEqual([65,6,70,35,102,75,61]);
 			expect(output.CaSO4_tsp).toBe(1);
 			expect(output.CaCl2_tsp).toBe(3.235294117647059);
+		});
 
-			console.log('output',JSON.stringify(output,null,4));
+		it('Should calculate distance between points', function() {
+
+			expect(
+				bfUtil.distance(
+					[0,0],
+					[0,0]
+				)
+			).toBe(0);
+
+			expect(
+				bfUtil.distance(
+					[0,0],
+					[0,1]
+				)
+			).toBe(1);
+
+			expect(
+				bfUtil.distance(
+					[0,0],
+					[1,0]
+				)
+			).toBe(1);
+
+			expect(
+				bfUtil.distance(
+					[0,0],
+					[1,1]
+				)
+			).toBe(1.41);
+
+			expect(
+				bfUtil.distance(
+					[1,2,3,4,5,6],
+					[6,5,4,3,2,1]
+				)
+			).toBe(8.37);
+
+		});
+
+		it('Should suggest a mix of salts', function() {
+			var output = {
+				diluted: new Array(6),
+				diff: new Array(6),
+				salts: new Array(6),
+				result: new Array(6),
+				adjusted: new Array(6)
+			};
+
+			var input = {
+				dilution: 0,
+			    mashvolume: 79,
+			    source: [15,6,42,35,35,75,0],
+			    target: [60,5,55,10,95,0,0],
+			    CaCO3: 0,
+			    NaHCO3: 0,
+			    CaSO4: 0,
+			    CaCl2: 0,
+			    MgSO4: 0,
+			    NaCl: 0
+			};
+
+			bfWater.recalculate(input,output);
+			console.log(output.accuracy.distance);
+
+			var suggest = bfWater.suggest(input);
+			console.log(suggest);
+
+			expect(suggest.CaSO4).toBe(2);
+			expect(suggest.CaCl2).toBe(10);
+
 		});
 	});
 });

@@ -165,6 +165,7 @@
                     </tr>
                 </tbody>
             </table>
+            <br>
             <div class="panel-heading"><strong>Adicion de sales</strong></div>
             <table class="table table-condensed">
                 <thead>
@@ -225,7 +226,10 @@
                     </tr>
                 </tbody>
             </table>
-
+            <button type="button" ng-click="suggest()" class="btn btn-sm btn-info pull-right" style="margin-right: 4px;" title="Genera una posible combinacion de sales lo mas cercana posible al resutlado buscado (OJO! esto es solo un resultado posible, no el mejor, ni el esperado para la interpretacion de la receta. Se recomienda ajustar a gusto del cervecero)">
+                Magic! <i class="fa fa-magic"></i>
+            </button>
+            <br/><br/><br/>
             <div class="panel-heading"><strong>Nivel de los Inoes (segun ajuste)</strong></div>
             <table class="table table-condensed">
                 <thead>
@@ -265,6 +269,18 @@
                                 Alcalinidad muy alta, bajar de 300ppm!!
                                 <span style="color:orange" class="glyphicon glyphicon-warning-sign"></span>
                             </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Distancia</th>
+                        <td>
+                            {{output.accuracy.allin}}
+                        </td>
+                        <td>
+                            {{output.accuracy.value}}
+                        </td>
+                        <td colspan="3">
+                            {{output.accuracy.distance}}
                         </td>
                     </tr>
                 </tbody>
