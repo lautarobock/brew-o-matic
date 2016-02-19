@@ -132,6 +132,8 @@
             $scope.recipe.water.MgSO4 = suggest.MgSO4;
             $scope.recipe.water.NaCl = suggest.NaCl;
 
+            $scope.onChange();
+
         };
 
         $scope.onChange = function() {
