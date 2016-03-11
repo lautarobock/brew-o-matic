@@ -13,7 +13,7 @@
                 Tag,
                 TagColor
             ) {
-                function createConfig(state,title,emptyText,show,showPanel) {
+                function createConfig(state,title,emptyText,show,showPanel,reverse) {
                     var config = {
                         title: title,
                         emptyText: emptyText,
@@ -26,8 +26,8 @@
                             Recipe.query({
                                 'filter[state]':state,
                                 limit: this.limit,
-                                sort:'-code'},
-                                function(recipes) {
+                                sort:reverse ? 'code' : '-code'
+                            }, function(recipes) {
                                     config.noMore =  recipes.length < config.limit;
                                     config.items = recipes;
                                 }
@@ -48,21 +48,21 @@
                         'En Curso',
                         'No tenes recetas en curso',
                         localStorage['home.running.show'] || true,
-                        'Mostrar recetas en curso'
+                        'Mostrar recetas en curso',true
                     ),
                     ready: createConfig(
                         'ready',
                         'Listas',
                         'No tenes recetas listas',
                         localStorage['home.ready.show'] || true,
-                        'Mostrar recetas listas'
+                        'Mostrar recetas listas',true
                     ),
                     draft: createConfig(
                         'draft',
                         'Borradores',
                         'No tenes recetas en borrador',
                         localStorage['home.draft.show'] || true,
-                        'Mostrar Borradores'
+                        'Mostrar Borradores',true
                     ),
                     finished: createConfig(
                         'finished',
@@ -83,7 +83,7 @@
                         'Lista de deseos',
                         'No tenes recetas en lista de deseos',
                         localStorage['home.wish.show'] || false,
-                        'Mostrar lista de deseos'
+                        'Mostrar lista de deseos',true
                     )
                 };
                 function reload() {
