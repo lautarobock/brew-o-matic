@@ -147,7 +147,7 @@
 
                 return liters;
             },
-            fixEmptyValues: function (recipe) {
+            fixEmptyValues: function (recipe, defaultValues) {
                 recipe.TrubChillerLosses = recipe.TrubChillerLosses || 0;
                 recipe.mashTemp = recipe.mashTemp || 66;
                 recipe.GrainTemp = recipe.GrainTemp || 25;
@@ -179,6 +179,11 @@
                     recipe.YEASTS.YEAST[0].density = recipe.YEASTS.YEAST[0].density || 10;
                     recipe.YEASTS.YEAST[0].packageSize = recipe.YEASTS.YEAST[0].packageSize || 11;
                 }
+
+                recipe.timeWaterMash = recipe.timeWaterMash || defaultValues.timeWaterMash || 60;
+                recipe.spargeDuration = recipe.spargeDuration || defaultValues.spargeDuration || 45;
+                recipe.preBoilTime = recipe.preBoilTime || defaultValues.preBoilTime || 60;
+                recipe.coolingTime = recipe.coolingTime || defaultValues.coolingTime || 30;
             },
             totalCations: function(cations) {
                 if ( !cations ) return null;

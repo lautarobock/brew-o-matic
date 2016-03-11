@@ -30,7 +30,11 @@ exports.User = mongoose.model("User",new Schema({
             phPreBoil: Number,
             phPostBoil: Number,
             SpargeWhaterDesiredPH: Number,
-            MashDesiredPH: Number
+            MashDesiredPH: Number,
+            timeWaterMash: Number,
+            spargeDuration: Number,
+            preBoilTime: Number,
+            coolingTime: Number
         },
         closeUseSurvey: Boolean,
         gotoFanPage: Boolean
@@ -90,6 +94,10 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     CALCIBU: Number,
     FG: Number,
     state: String,
+    timeWaterMash: Number,
+    spargeDuration: Number,
+    preBoilTime: Number,
+    coolingTime: Number,
     FERMENTABLES: {
         FERMENTABLE: [new Schema({
             NAME: String,

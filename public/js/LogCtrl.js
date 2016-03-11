@@ -5,8 +5,8 @@
 	module.controller("RecipeLogCtrl",function($scope,BrewCalc,BrewHelper,$timeout) {
 
         //Constantes (Esto tengo q poder configurarlo)
-        var MASH_TEMP_TIME = 60;
-        var COOLING_TIME = 60;
+        var MASH_TEMP_TIME = $scope.recipe.timeWaterMash;
+        var COOLING_TIME = $scope.recipe.coolingTime;
 
         $scope.discardFilter = {discard:false};
         $scope.isFiltering = true;
@@ -82,7 +82,7 @@
         }];
 
         var spargeFixed = [{
-            delay: 60,
+            delay: $scope.recipe.spargeDuration,
             detail: 'Comenzar Lavado',
             logType: 'SPARGE'
         }, {
@@ -92,7 +92,7 @@
         }];
 
         var boilFixed = [{
-            delay: 60,
+            delay: $scope.recipe.preBoilTime,
             delayUnit: 'm',
             detail: 'Romper Hervor',
             logType: 'BOIL'

@@ -577,7 +577,7 @@
                         //antes de cargar todos los datos verfico si hay valores en null y los reemplazo por el Default
                         //Verifico si realmente existe la receta que buscaba
                         if ( $scope.recipe._id || $scope.recipe.cloneFrom ) {
-                            BrewCalc.fixEmptyValues($scope.recipe);
+                            BrewCalc.fixEmptyValues($scope.recipe, $scope.user.settings.defaultValues);
 
                             $scope.changeYeast();
                             //$scope.$emit("recipeLoaded");
@@ -673,6 +673,10 @@
                         SpargeWhaterDesiredPH: $scope.user.settings.defaultValues.SpargeWhaterDesiredPH,
                         phPreBoil: $scope.user.settings.defaultValues.phPreBoil,
                         phPostBoil: $scope.user.settings.defaultValues.phPostBoil,
+                        timeWaterMash: $scope.user.settings.defaultValues.timeWaterMash||60,
+                        spargeDuration: $scope.user.settings.defaultValues.spargeDuration||45,
+                        preBoilTime: $scope.user.settings.defaultValues.preBoilTime||60,
+                        coolingTime: $scope.user.settings.defaultValues.coolingTime||30,
                         collaborators: [],
                         version: [],
                         log: {

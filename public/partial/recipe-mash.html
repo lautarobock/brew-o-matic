@@ -22,7 +22,7 @@
                     </div>
                     <div class="col-lg-3 col-xs-6">
                         <label for="phMash">pH Deseado</label>
-                        <input type="number" step="0.01" class="form-control input-sm" id="phMash" ng-model="recipe.MashDesiredPH" />
+                        <input type="number" step="0.01" class="form-control input-sm gt-preset" id="phMash" ng-model="recipe.MashDesiredPH" />
                     </div>
                 </div>
                 <div class="row">
@@ -70,6 +70,12 @@
                         <span class="form-control input-sm gt-calculated" id="mashVolume" title="Valor Aproximado que ocupa la malta mas el agua en el macerador">
                             {{BrewCalc.initialMashVolume(recipe.StrikeWater,recipe.totalAmountMash)|number:1}} Lts
                         </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-xs-6">
+                        <label title="Tiempo en que se tarda en calentar el agua para el macerado">Tiempo agua (min)</label>
+                        <input type="number" class="form-control input-sm gt-preset" ng-model="recipe.timeWaterMash" />
                     </div>
                 </div>
             </div>
@@ -233,7 +239,7 @@
                     </div>
                     <div class="col-lg-2 col-xs-4">
                         <label for="spargeWhaterDesiredPH">pH Deseado</label>
-                        <input type="number"  class="form-control input-sm" id="spargeWhaterDesiredPH" step="0.01" ng-model="recipe.SpargeWhaterDesiredPH" />
+                        <input type="number"  class="form-control input-sm gt-preset" id="spargeWhaterDesiredPH" step="0.01" ng-model="recipe.SpargeWhaterDesiredPH" />
                     </div>
                     <div class="col-lg-2 col-xs-4">
                         <label for="spargeWater">Agua</label>
@@ -247,6 +253,10 @@
                     <div class="col-lg-2 col-xs-4">
                         <label title="Litros de agua que quedan en el bagazo por cada Kg de malta" for="grainAbsorbtion">Absorcion (L/Kg)</label>
                         <input type="number"  class="form-control input-sm gt-preset" id="grainAbsorbtion" step="0.1" ng-model="recipe.GrainAbsorbtion" />
+                    </div>
+                    <div class="col-lg-2 col-xs-4">
+                        <label title="Duracion total del lavado en minutos">Duracion</label>
+                        <input type="number" class="form-control input-sm gt-preset" step="1" ng-model="recipe.spargeDuration" />
                     </div>
                 </div>
                 <div class="row" style="margin-top:5em">
