@@ -62,7 +62,8 @@
                                     <div class="col-xs-6">
                                         <label title="Lts totales">Evaporacion Lts</label>
                                         <span class="form-control input-sm gt-calculated">
-                                            {{round1(BrewCalc.calculateBoilSize(recipe.BATCH_SIZE, recipe.TrubChillerLosses, recipe.BOIL_TIME, recipe.PercentEvap, recipe.TopUpWater)-(recipe.BATCH_SIZE/0.96+recipe.TrubChillerLosses))}}
+                                            {{round1(BrewCalc.calculateBoilSize(recipe.BATCH_SIZE, recipe.TrubChillerLosses, recipe.BOIL_TIME, recipe.PercentEvap, recipe.TopUpWater)-(recipe.BATCH_SIZE/0.96+recipe.TrubChillerLosses))}} Lts
+                                            ({{round1((BrewCalc.calculateBoilSize(recipe.BATCH_SIZE, recipe.TrubChillerLosses, recipe.BOIL_TIME, recipe.PercentEvap, recipe.TopUpWater)-(recipe.BATCH_SIZE/0.96+recipe.TrubChillerLosses))*60/recipe.BOIL_TIME)}} Lts/h)
                                         </span>
                                     </div>
                                 </div>
