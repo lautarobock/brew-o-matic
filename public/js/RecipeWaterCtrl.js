@@ -94,9 +94,6 @@
                                            $scope.recipe.BOIL_TIME,
                                            $scope.recipe.PercentEvap,
                                            $scope.recipe.TopUpWater)
-                    +BrewCalc.actualMashVolume($scope.recipe.MASH.MASH_STEPS.MASH_STEP.length-1,
-                                               0,
-                                               $scope.recipe.MASH.MASH_STEPS.MASH_STEP)
                     +$scope.recipe.SpargeDeadSpace
                     +$scope.recipe.GrainAbsorbtion*$scope.recipe.totalAmountMash;
             $scope.recipe.water.liters = Math.round(total);
