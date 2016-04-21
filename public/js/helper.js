@@ -180,6 +180,7 @@
                     recipe.YEASTS.YEAST[0].packageSize = recipe.YEASTS.YEAST[0].packageSize || 11;
                 }
 
+                defaultValues = defaultValues || {};
                 recipe.timeWaterMash = recipe.timeWaterMash || defaultValues.timeWaterMash || 60;
                 recipe.spargeDuration = recipe.spargeDuration || defaultValues.spargeDuration || 45;
                 recipe.preBoilTime = recipe.preBoilTime || defaultValues.preBoilTime || 60;

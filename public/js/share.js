@@ -2,6 +2,7 @@
 
 
     var share = angular.module('share', ['ngResource',
+                                        'ngSanitize',
                                         'data',
                                         'resources',
                                         'helper',
@@ -41,7 +42,7 @@
                     BrewCalc) {
 
 
-                    
+
         $rootScope.BrewCalc = BrewCalc;
 
         $rootScope.BrewHelper = BrewHelper;
@@ -52,10 +53,10 @@
             var today = new Date().getTime()/1000;
             //Fecha del comentario en segundos
             var dateSec = date.getTime()/1000;
-            
+
             //Diferencia en segundos
             var diffSec = today-dateSec;
-            
+
             if (diffSec<60) { // Si es menos de un minuto
                 return "Hace menos de un minuto"
             } if (diffSec < (60*60)) { // Si es menos de una hora
@@ -68,11 +69,11 @@
                 return $filter('date')(date,'dd/MM/yyyy HH:mm');
             }
         };
-        
+
         $scope.hopUses = HopUse.query();
-        
+
         $scope.hopForms = HopForm.query();
-        
+
         $scope.$on('$locationChangeSuccess', function(event) {
             console.log("cambio");
             $scope.notFound = false;
@@ -82,9 +83,9 @@
                     console.log("Receta no encotrada");
                 }
                 BrewCalc.fixEmptyValues($scope.recipe);
-            });            
+            });
         });
-        
+
 
         $scope.calulateBUGU = function(bu,gu) {
             return bu/(gu * 1000 - 1000);
@@ -111,33 +112,33 @@
             });
             return utilization;
         }
-        
+
         $scope.hopIBU = function(hop) {
             var U = BrewHelper.calculateU($scope.recipe.OG,hop.TIME);
             var baseIBU = BrewHelper.toOz(hop.AMOUNT)*hop.ALPHA*U*(7489/100)/BrewHelper.toGal($scope.recipe.BATCH_SIZE);
             //add or remove by utilization (ej: mash use 20%)
             return baseIBU * getUtilization(hop.USE,$scope.hopUses) * getUtilization(hop.FORM,$scope.hopForms);
         };
-        
+
         $scope.gravityBarValue = function(grav,max) {
             return BrewHelper.toPpg(grav) / max * 100;
         }
-        
+
         $scope.addFavorites = function(recipe) {
             User.addToFavorites(recipe,function(user) {
                 console.log(user);
                 $rootScope.user.favorites = user.favorites;
             });
         };
-        
+
         $scope.removeFavorites = function(recipe) {
             User.removeFromFavorites(recipe,function(user) {
                 console.log(user);
                 $rootScope.user.favorites = user.favorites;
             });
         };
-        
-        
+
+
         $scope.encodeName = function(name) {
             return encodeURIComponent(name);
         };
