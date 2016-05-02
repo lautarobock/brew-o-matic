@@ -29,6 +29,7 @@
                                 'gt.listview',
                                 'vr.directives.wordCloud',
                                 'ngAudio',
+                                'chart.js',
                                 'dashboard']);
 
     index.

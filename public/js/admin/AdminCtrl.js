@@ -229,7 +229,7 @@
             $scope.userCount = AdminUser.count();
             $scope.publicCount = PublishedRecipe.count();
             $scope.stats = {};
-            Stats.query({stats:['newRecipesByPeriod']}, mix);
+            // Stats.query({stats:['newRecipesByPeriod']}, mix);
             Stats.query({stats:['lastLogin']}, mix);
             Stats.query({stats:['singInDate']}, mix);
             Stats.query({stats:['date']}, mix);
@@ -237,7 +237,7 @@
             Stats.query({stats:['isPublic']}, mix);
             // Stats.query({stats:['recipesByUser']}, mix);
             Stats.query({stats:['active']}, mix);
-            Stats.query({stats:['newRecipesByPeriod']}, mix);
+            // Stats.query({stats:['newRecipesByPeriod']}, mix);
             $scope.fields = ['today','week','month','year','origin'];
             var origin = new Date(2013,10,19).getTime();
             var now = new Date().getTime();
@@ -287,8 +287,23 @@
             console.log('stats', $scope.stats);
         }
 
-        $scope.load = function(type) {
-            Stats.query({stats:[type]}, mix);
+        $scope.loadChart = function(stats) {
+            mix(stats);
+            $scope.labels = [];
+            $scope.series = ['Recetas'];
+            $scope.data = [[]];
+            angular.forEach(stats.newRecipesByPeriod, function(month) {
+                $scope.labels.push(''+month._id.year+'/'+month._id.month);
+                $scope.data[0].push(month.total);
+            });
+        };
+
+        $scope.load = function(type, cb) {
+            if ( cb ) {
+                Stats.query({stats:[type]}, $scope[cb]);
+            } else {
+                Stats.query({stats:[type]}, mix);
+            }
             $scope.loaded[type] = true;
         };
 

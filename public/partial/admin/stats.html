@@ -78,7 +78,7 @@
 </div>
 <br/>
 <button type="button" ng-hide="loaded.newRecipesByPeriod"
-        ng-click="load('newRecipesByPeriod')"
+        ng-click="load('newRecipesByPeriod','loadChart')"
         class="btn btn-link">
     Cargar Recetas nuevas por mes
 </button>
@@ -87,6 +87,8 @@
     <div class="panel-heading">
         Recetas nuevas por mes
     </div>
+    <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series">
+    </canvas>
     <table class="table table-hover table-condensed table-bordered">
         <thead>
             <tr>
@@ -98,13 +100,13 @@
         </thead>
         <tbody>
             <tr ng-repeat="month in stats.newRecipesByPeriod|orderBy:'-date'">
-            <th>{{$index+1}}</th>
-            <th>{{monthName(month.date)}} {{month.date|date:'yyyy'}}</th>
-            <th>{{month.total}}</th>
-            <th>{{month.total/monthDays(month.date)|number:2}}</th>
-        </tr>
-    </tbody>
-</table>
+                <th>{{$index+1}}</th>
+                <th>{{monthName(month.date)}} {{month.date|date:'yyyy'}}</th>
+                <th>{{month.total}}</th>
+                <th>{{month.total/monthDays(month.date)|number:2}}</th>
+            </tr>
+        </tbody>
+    </table>
 </div>
 <br/>
 <button type="button" ng-hide="loaded.recipesByUser"
