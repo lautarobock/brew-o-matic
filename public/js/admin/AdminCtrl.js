@@ -289,11 +289,11 @@
 
         $scope.loadChart = function(stats) {
             mix(stats);
-            $scope.labels = [];
+            $scope.chartLabels = [];
             $scope.series = ['Recetas'];
             $scope.data = [[]];
             angular.forEach(stats.newRecipesByPeriod, function(month) {
-                $scope.labels.push(''+month._id.year+'/'+month._id.month);
+                $scope.chartLabels.push(''+month._id.year+'/'+month._id.month);
                 $scope.data[0].push(month.total);
             });
         };
