@@ -349,7 +349,25 @@ exports.Style = mongoose.model("Style",new Schema({
     "ABV_Min": Number,
     "ABV_Max": Number,
     "link": String,
-    "related": String
+    "related": String,
+    "type": String,
+    "code": String,
+    "style": String,
+    "category": String,
+    "family": String,
+    "history": String,
+    "origin": String,
+    "overall": String,
+    "aroma": String,
+    "appearance": String,
+    "flavor": String,
+    "mouthfell": String,
+    "comments": String,
+    "history": String,
+    "ingredients": String,
+    "comparison": String,
+    "examples": String,
+    "note": String
 }));
 
 exports.Action = mongoose.model("Action",new Schema({
