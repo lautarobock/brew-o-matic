@@ -43,7 +43,10 @@
                 <div class="input-group">
                     <input type="text" class="form-control input-sm" id="style" placeholder="Estilo" ng-model="recipe.STYLE.NAME" typeahead="style.name for style in styles | orderBy:'name' | filter:$viewValue">
                     <span class="input-group-btn">
-                        <a title="Link a la pagina del estilo en el BJCP" ng-disabled="!bjcpLink(recipe.STYLE.NAME)" class="btn btn-default btn-sm" target="_blank" href="{{bjcpLink(recipe.STYLE.NAME)}}" ><span class="glyphicon glyphicon-link"></a>
+                        <a title="Link a la pagina del estilo en el BJCP" ng-show="bjcpLink(recipe.STYLE.NAME)" class="btn btn-default btn-sm" target="_blank" href="{{bjcpLink(recipe.STYLE.NAME)}}" ><span class="glyphicon glyphicon-link"></span></a>
+                        <button ng-click="openStyle(recipe.STYLE.NAME)" type="button" class="btn btn-default btn-sm" title="{{bjcpField(recipe.STYLE.NAME,'overall')}}">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                        </button>
                     </span>
                 </div>
                 <a ng-show="relatedLink(recipe.STYLE.NAME)" target="_blank" href="{{relatedLink(recipe.STYLE.NAME)}}" >Ver ejemplos en RateBeer.com</a>

@@ -1,0 +1,36 @@
+<div class="modal-header">
+    <a href="" ng-click="cancel()" >
+        <span class="pull-right glyphicon glyphicon-remove"></span>
+    </a>
+    <h3>{{style().name}}</h3>
+</div>
+<div class="modal-body">
+    <span ng-show="style().category"><label>Categoria</label>: {{style().category}}<br/></span>
+    <span ng-show="style().family"><label>Familia</label>: {{style().family}}<br/></span>
+    <span ng-show="style().origin"><label>Origen</label>: {{style().origin}}<br/></span>
+
+    <label>OG</label>: {{style().OG_Min}} - {{style().OG_Max}}<br/>
+    <label>FG</label>: {{style().FG_Min}} - {{style().FG_Max}}<br/>
+    <label>IBU</label>: {{style().IBU_Min}} - {{style().IBU_Max}}<br/>
+    <label>SRM</label>: {{style().Colour_Min}} - {{style().Colour_Max}}<br/>
+    <label>AVB</label>: {{style().ABV_Min}} - {{style().ABV_Max}}<br/>
+    <label>CO2</label>: {{style().co2_min}} - {{style().co2_max}}<br/>
+    <span ng-show="style().overall"><h3>Impresion general</h3><p>{{style().overall}}</p></span>
+    <span ng-show="style().aroma"><h3>Aroma</h3><p>{{style().aroma}}</p></span>
+    <span ng-show="style().appearance"><h3>Aparciencia</h3><p>{{style().appearance}}</p></span>
+    <span ng-show="style().flavor"><h3>Sabor</h3><p>{{style().flavor}}</p></span>
+    <span ng-show="style().mouthfell"><h3>Sensacion en boca</h3><p>{{style().mouthfell}}</p></span>
+    <span ng-show="style().comments"><h3>Comentarios</h3><p>{{style().comments}}</p></span>
+    <span ng-show="style().ingredients"><h3>Ingredientes</h3><p>{{style().ingredients}}</p></span>
+    <span ng-show="style().comparison"><h3>Comparacion</h3><p>{{style().comparison}}</p></span>
+    <span ng-show="style().examples"><h3>Ejemplos comerciales</h3><p>{{style().examples}}</p></span>
+    <span ng-show="style().history"><h3>Historia</h3><p>{{style().history}}</p></span>
+    <span ng-show="style().note"><h3>Notas</h3><p>{{style().note}}</p></span>
+</div>
+<div ng-if="colClass!='col-xs-6'" class="modal-footer">
+  <div class="form-group">
+    <div class="col-lg-10 col-lg-offset-2">
+      <a class="btn btn-default btn-xs" ng-click="cancel()" >Cerrar</a>
+    </div>
+  </div>
+</div>

@@ -38,7 +38,8 @@
            FermentableUses,
            PitchRate,
            State,
-           Responsive
+           Responsive,
+           $modal
         ) {
 
         $scope.BrewHelper = BrewHelper;
@@ -487,6 +488,39 @@
         //$scope.sharedUrl = function(_id) {
         //    return 'http://'+$location.host() + ":" + $location.port() + '/share.html#/' + _id;
         //};
+
+        $scope.openStyle = function(name) {
+            var selected = null;
+            angular.forEach($scope.styles,function(style) {
+                if (name == style.name) {
+                    selected = style;
+                }
+            });
+            if (selected) {
+                var modalInstance = $modal.open({
+                    templateUrl: 'partial/style-popup.html',
+                    size: 'lg',
+                    controller: function($scope, $modalInstance) {
+                        $scope.style = function() {
+                            return selected;
+                        }
+                        $scope.cancel = function () {
+                            $modalInstance.dismiss('cancel');
+                        };
+                    }
+                });
+            }
+        };
+
+        $scope.bjcpField = function(name, field) {
+            var value;
+            angular.forEach($scope.styles,function(style) {
+                if (style[field] && name == style.name) {
+                    value = style[field];
+                }
+            });
+            return value;
+        };
 
         $scope.bjcpLink = function(selected) {
             var link;

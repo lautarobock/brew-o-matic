@@ -26,7 +26,7 @@ function convert(value, div) {
 }
 var count = 0;
 var toInsert = [];
-var csvStream = csv.fromStream(stream, {objectMode:true,headers : true,delimiter:';',discardUnmappedColumns:true,quote:null})
+var csvStream = csv.fromStream(stream, {objectMode:true,headers : true,delimiter:';',discardUnmappedColumns:true,quote:'"'})
     .on("data", function(data){
         count++;
         toInsert.push({

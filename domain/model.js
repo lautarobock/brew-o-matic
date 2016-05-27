@@ -355,7 +355,7 @@ exports.Style = mongoose.model("Style",new Schema({
     "style": String,
     "category": String,
     "family": String,
-    "history": String,
+    // "history": String,
     "origin": String,
     "overall": String,
     "aroma": String,
