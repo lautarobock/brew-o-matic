@@ -99,7 +99,7 @@ exports.getByGoogleId = function(req, res){
 
             user.save();
             res.send(user);
-            //actions.log(req.session.user_id, "LOG_IN","User: " + req.query.name);
+            actions.log(req.session.user_id, "LOG_IN","User: " + req.query.name);
         } else {
             var newUser = buildNewUser(req.params.google_id,req.query.name);
             model.User.create(newUser,function(err,newuser) {

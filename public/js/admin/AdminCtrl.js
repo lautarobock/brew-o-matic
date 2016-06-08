@@ -15,7 +15,9 @@
         AdminAction,
         TempDeviceReport,
         PublishedRecipe,
-        Stats
+        Stats,
+        $http,
+        $interval
     ) {
 
         $scope.allConfigs = {
@@ -307,6 +309,20 @@
             $scope.loaded[type] = true;
         };
 
+        var timer = null;
+        $scope.loadLastActions = function() {
+            console.log('LOAD LAST ACTIONS')
+            startLoadLastActions();
+            $scope.loaded.lastActions = true;
+            if ( timer ) $interval.cancel(timer);
+            $interval(startLoadLastActions,5000);
+        };
+
+        function startLoadLastActions() {
+            $http.get('/stats/last?hours='+($scope.hours||1)).success(function(result) {
+                $scope.lastActions = result;
+            });
+        }
     });
 
 

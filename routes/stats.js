@@ -132,6 +132,24 @@ function isStat(types,type) {
     return types.indexOf(type) !== -1;
 }
 
+exports.lastActions = function(req, res) {
+    //db.actions.find({date: { $gt: new Date(new Date().getTime()-3600*1000*2) } }).sort({date:-1})
+    var hours = parseInt(req.query.hours || 1);
+    model.Action.find({
+        date: { $gt: new Date(new Date().getTime()-3600*1000*hours) }
+    })
+    .populate('user_id','name')
+    .sort('-date')
+    .exec(function(err, result) {
+        if ( err ) {
+            console.log('ERROR in lastActions', err);
+            res.status(500).send(err);
+        } else {
+            res.send(result);
+        }
+    })
+};
+
 exports.all = function(req, res) {
 
     //fix QUERY

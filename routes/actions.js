@@ -21,3 +21,14 @@ exports.log = function(user_id,actionType,data) {
             }
     });
 };
+
+/**
+* Elimina el log de acciones mas viejas que 24 horas
+*/
+exports.removeOld = function() {
+    var from  = new Date(new Date().getTime()-24*60*60*1000);
+    console.log("Eliminando actions",from);
+    model.Action.remove({date:{$lt:from}}).exec(function() {
+        
+    });
+};

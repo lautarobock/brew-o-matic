@@ -77,6 +77,39 @@
     </table>
 </div>
 <br/>
+<button type="button" ng-hide="loaded.lastActions"
+        ng-click="loadLastActions()"
+        class="btn btn-link">
+    Cargar Minuto a minuto
+</button>
+<div class="panel panel-default" ng-show="loaded.lastActions">
+    <div class="panel-heading">
+        Minuto a minuto
+    </div>
+    <div ng-init="hours=1" class="panel panel-body">
+        <label>Ultimas horas</label>
+        <input type="number" class="form-control" ng-model="hours" ng-change="loadLastActions(hours)" />
+    </div>
+    <table class="table table-hover table-condensed table-bordered">
+        <thead>
+            <tr>
+                <th>Accion</th>
+                <th>Hora</th>
+                <th>Cervecero</th>
+                <th>Datos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="action in lastActions">
+                <td>{{action.actionType}}</td>
+                <td>{{action.date|formatDate}}</td>
+                <td>{{action.user_id.name}}</td>
+                <td>{{action.data}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<br/>
 <button type="button" ng-hide="loaded.newRecipesByPeriod"
         ng-click="load('newRecipesByPeriod','loadChart')"
         class="btn btn-link">
