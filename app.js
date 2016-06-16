@@ -95,6 +95,7 @@ app.get('/user',filter,data.User.findAll);
 app.put('/user/settings',filter,user.updateSettings);
 app.get('/stats/last', filter, stats.lastActions);
 app.get('/stats',filter,stats.all);
+app.get('/recipe/export',filter,recipe.exportAll);
 app.get('/recipe/public',filter,recipe.findPublic);
 app.get('/recipe/public_count',filter,recipe.countPublic);
 app.get('/recipe/public_styles',filter,recipe.publicStyles);

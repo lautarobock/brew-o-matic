@@ -100,6 +100,64 @@ exports.findAll = function(req, res) {
     });
 };
 
+exports.exportAll = function(req, res) {
+
+
+
+    model.Recipe.find(
+        {owner: req.session.user_id},
+        'NAME code tags STYLE OG ABV CALCCOLOUR CALCIBU BATCH_SIZE BREWER fermentation.estimateDate YEASTS publishDate state isPublic'
+    )
+    .exec(function(err,results) {
+        var csv = 'NAME;code;tags;STYLE;OG;ABV;CALCCOLOUR;CALCIBU;BATCH_SIZE;BREWER;estimateDate;publishDate;state;YEAST_NAME;YEAST_ATTENUATION;YEAST_AMOUNT;YEAST_DENSITY;YEAST_PACKAGE_SIZE;isPublic\n';
+        function add(value, last,isDate) {
+            if ( value === undefined ) {
+                csv += (last?'\n':';');
+                return;
+            }
+            if ( isDate ) {
+                value = new Date(value).toISOString().replace(/T/, ' ').replace(/\..+/, '');
+            }
+            if ( typeof value === 'string') {
+                value = '\"' + value + '\"';
+            }
+            if ( typeof value === 'number') {
+                value = value.toString().replace('.',',');
+            }
+            csv += value + (last?'\n':';');
+        }
+        for ( var i=0; i<results.length; i++ ) {
+            var r = results[i];
+            add(r.NAME);
+            add(r.code);
+            add(r.tags);
+            add(r.STYLE.NAME);
+            add(r.OG);
+            add(r.ABV);
+            add(r.CALCCOLOUR);
+            add(r.CALCIBU);
+            add(r.BATCH_SIZE);
+            add(r.BREWER);
+            add(r.fermentation.estimateDate,null,true);
+            add(r.publishDate,null,true);
+            add(r.state);
+            if ( r.YEASTS.YEAST.length > 0 ) {
+                add(r.YEASTS.YEAST[0].NAME);
+                add(r.YEASTS.YEAST[0].ATTENUATION);
+                add(r.YEASTS.YEAST[0].AMOUNT);
+                add(r.YEASTS.YEAST[0].density);
+                add(r.YEASTS.YEAST[0].packageSize);
+            } else {
+                add("");add("");add("");add("");add("");
+            }
+            add(r.isPublic,true);
+        }
+        res.setHeader('Content-disposition', 'attachment; filename=misrecetas.csv');
+        res.set('Content-Type', 'application/octet-stream');
+        res.send(csv);
+    });
+};
+
 exports.countAll = function(req, res) {
     var filter = processFilter(req.query.filter);
 
