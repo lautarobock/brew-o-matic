@@ -98,6 +98,16 @@ exports.WaterReport.findAll = function(req, res) {
     });
 };
 
+exports.User.findAll = function(req, res) {
+    var filter = null;
+    if ( req.query.name ) {
+        filter = {name: {"$regex":  req.query.name,"$options": 'i'}};
+    }
+    model.User.find(filter).exec(function(err,results) {
+        res.send(results);
+    });
+};
+
 exports.TempDeviceReport.findAll = function(req, res) {
     var filter = null;
     if ( req.query.recipe_id ) {

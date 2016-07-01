@@ -22,11 +22,15 @@
                     </tbody>
                 </table>
                 <div class="input-group">
-                    <select class="form-control input" ng-model="userToAdd">
-                        <option ng-repeat="user in users | orderBy:'name'" value="{{user._id}}">
-                            {{user.name}}
-                        </option>
-                    </select>
+                    <input
+                        typeahead="user._id as user.name for user in filterUser($viewValue) | orderBy:'name'"
+                        class="form-control"
+                        type="text"
+                        ng-model="userToAdd"
+                        typeahead-editable="false"
+                        typeahead-wait-ms="500"
+                        typeahead-input-formatter="formatUserSelection($model,users, $item)"
+                        placeholder="Comience a escribir para buscar"/>
                     <span class="input-group-btn">
                         <button ng-click="userToAdd && addUser(userToAdd)" class="btn btn-default" type="button">
                             <span class="glyphicon glyphicon-plus"></span>

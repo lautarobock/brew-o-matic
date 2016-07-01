@@ -394,10 +394,35 @@
      */
     module.controller("RecipeCollaboratorsCtrl",function($scope,User,alertFactory) {
 
-        $scope.users = User.query();
+        // $scope.users = User.query();
 
         $scope.removeUser = function(collaborator) {
             util.Arrays.remove($scope.recipe.collaborators,collaborator);
+        };
+        
+        $scope.filterUser = function(name) {
+            return User.query({
+                "name": name
+            }, function(r) {
+                $scope.users = r;
+            }).$promise;
+        };
+
+        // $scope.onSelectUser = function(user) {
+        //     $scope.vintage.title = $scope.vintage.title || beer.name;
+        // };
+
+        $scope.formatUserSelection = function(user_id, users, $item) {
+            if ( users ) {
+                var filtered = _.find(users,{_id:user_id});
+                if ( filtered ) {
+                    return filtered.name;
+                } else {
+                    return null;
+                }
+            } else {
+                return null;
+            }
         };
 
         $scope.addUser = function(user_id) {
