@@ -312,6 +312,22 @@
             }
         };
 
+        $scope.totalBottles = function() {
+            return _.sumBy($scope.recipe.bottling.bottles, 'amount');
+        };
+
+        $scope.restLiters = function() {
+            return _.sumBy($scope.recipe.bottling.bottles, function(b) {
+                return b.size*(b.amount-b.used);
+            });
+        };
+
+        $scope.rest = function() {
+            return _.sumBy($scope.recipe.bottling.bottles, function(b) {
+                return b.amount-b.used;
+            });
+        };
+
         $scope.addBottle = function() {
             var rest = $scope.estimateLiters($scope.recipe.fermentation.stages.length)-$scope.bottledLiters();
 

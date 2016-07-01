@@ -195,6 +195,7 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
             bottleType: String,
             size: Number,
             amount: Number,
+            used: {type: Number, default: 0},
             subTotal: Number,
             carbonatationType: String,
             colour: String

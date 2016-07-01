@@ -33,7 +33,7 @@ var config = {
 };
 
 function postprocess(string) {
-  // Fix docdown bug by wrapping symbol property identifiers in brackets.
+  // Wrap symbol property identifiers in brackets.
   return string.replace(/\.(Symbol\.(?:[a-z]+[A-Z]?)+)/g, '[$1]');
 }
 

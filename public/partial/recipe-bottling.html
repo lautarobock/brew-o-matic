@@ -52,10 +52,12 @@
                             <tr>
                                 <th>Tipo</th>
                                 <th style="width:3em">Color</th>                                
-                                <th style="width:10em">Tamaño</th>
-                                <th style="width:10em">Cantidad</th>
-                                <th style="width:10em">Total</th>
+                                <th style="width:7em">Tamaño</th>
+                                <th style="width:7em">Cantidad</th>
+                                <th style="width:7em">Total</th>
                                 <th style="width:10em">Carbonatacion</th>
+                                <th style="width:8em">Consumidas</th>
+                                <th style="width:8em">Restantes</th>
                                 <th style="width:3em"></th>
                             </tr>
                         </thead>
@@ -91,12 +93,26 @@
                                     </select>
                                 </td>
                                 <td>
+                                    <input class="form-control input-sm" type="number" ng-model="bottle.used" placeholder="(Consumidas)" value="liters" />
+                                </td>
+                                <td>
+                                    <span class="form-control input-sm gt-calculated" ng-bind="bottle.amount-bottle.used"></span>
+                                </td>
+                                <td>
                                     <button ng-click="recipe.bottling.bottles.splice($index,1);changeBottles()"
                                             type="button"
                                             class="close" aria-hidden="true">&times;</button>
                                 </td>
                             </tr>
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th></th><th></th><th></th>
+                                <th> {{totalBottles()}} Botellas</th>
+                                <th></th><th></th>
+                                <th colspan="3">Quedan {{restLiters()|number:2}} Lts en {{rest()}} botellas</th>        
+                            </tr>
+                        </tfoot>
                     </table>                    
                     <button type="button" ng-click="addBottle()" class="btn btn-default pull-right">
                         <span class="glyphicon glyphicon-plus"></span> Agregar Botella
