@@ -18,9 +18,9 @@ function convert(value, div) {
         return undefined;
     } else {
         if ( div ) {
-            return parseFloat(value)/div;
+            return parseFloat(value.replace(',','.'))/div;
         } else {
-            return parseFloat(value)
+            return parseFloat(value.replace(',','.'))
         }
     }
 }
@@ -46,7 +46,7 @@ var csvStream = csv.fromStream(stream, {objectMode:true,headers : true,delimiter
              "code": data['#'],
              "category": data['BJCP Categories'],
              "family": data['Style Family'],
-             "history": data['Style History'],
+            //  "history": data['Style History'],
              "origin": data['Origin'],
              "overall": data['Overall Impression'],
              "aroma": data['Aroma'],
