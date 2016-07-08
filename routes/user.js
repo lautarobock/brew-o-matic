@@ -123,6 +123,7 @@ exports.addToFavorites = function(req,res) {
                     _id:user._id,
                     name: user.name
                 });
+                recipe.starredByCount = recipe.starredBy.length;
                 recipe.save();
                 actions.log(req.session.user_id, "ADD_FAVORITES","El usuario '"+user.name+"' agrego la receta '"+recipe.NAME+"' de '"+recipe.BREWER+"'. recipe_id: "+req.body._id);
                 notifications.notifyAddFavorite(recipe.owner,recipe,req.session.user_id,req.session.user_name);
@@ -157,6 +158,7 @@ exports.removeFromFavorites = function(req,res) {
                     return -1;
                 }
             });
+            recipe.starredByCount = recipe.starredBy.length;
             recipe.save();
             actions.log(req.session.user_id, "REMOVE_FAVORITES","El usuario '"+user.name+"' removio la receta '"+recipe.NAME+"' de '"+recipe.BREWER+"'. recipe_id: "+req.body._id);
         });

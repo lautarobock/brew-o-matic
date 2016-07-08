@@ -416,7 +416,7 @@
     "                        ng-class={'hidden-xs':header.hidden.xs,'hidden-sm':header.hidden.sm}\n" +
     "                        ng-style=\"getStyle(header)\">\n" +
     "                        <span tooltip=\"{{header.tooltip}}\" tooltip-append-to-body=\"true\">\n" +
-    "                            {{header.caption}}\n" +
+    "                            <span ng-bind-html=\"header.caption\">\n" +
     "                        </span> <!-- <span ng-class=\"sort.orderStyle[header.field]\"></span> -->\n" +
     "                    </th>\n" +
     "                </tr>\n" +

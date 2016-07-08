@@ -114,6 +114,12 @@
                 label: 'Fecha de publicacion asc',
                 sort: 'publishDate'
             },{
+                label: 'Mas Favorita',
+                sort: '-starredByCount'
+            },{
+                label: 'Mas Clonada',
+                sort: '-clonedByCount'
+            },{
                 label: 'Por nombre',
                 sort: 'NAME'
             },{
@@ -240,6 +246,14 @@
             },{
                 field: 'BATCH_SIZE',
                 caption: 'Litros'
+            },{
+                field: 'starredByCount',
+                caption: 'Social',
+                template: '<span title="Receta favorita">{{$model.starredByCount}} <span style="color:orange" class="glyphicon glyphicon-star"></span></span> | <span title="Cantidad de veces que fue clonada"><span class="glyphicon glyphicon-duplicate"></span> {{$model.clonedByCount}}</span>',
+                width: 80,
+            // },{
+            //     field: 'clonedByCount',
+            //     caption: '<span class="glyphicon glyphicon-duplicate"></span>'
             },{
                 field: 'BREWER',
                 caption: 'Cervecero'

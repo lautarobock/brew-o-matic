@@ -280,6 +280,8 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     cloneFrom: {type:String, ref:'Recipe'},
     starredBy: [{_id:Schema.Types.ObjectId,name:String}],
     clonedBy: [{_id:Schema.Types.ObjectId,name:String,recipe_id:{type:String, ref:'Recipe'}}],
+    starredByCount: Number,
+    clonedByCount: Number,
     comments:[{
         text: String,
         _id: String,

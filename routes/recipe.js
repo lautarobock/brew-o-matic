@@ -40,7 +40,7 @@ exports.findPublic = function(req, res) {
     filter.isPublic = true;
 
     console.log("filter",JSON.stringify(filter));
-    model.Recipe.find(filter,'NAME tags STYLE OG ABV CALCCOLOUR CALCIBU BATCH_SIZE BREWER owner publishDate')
+    model.Recipe.find(filter,'NAME tags STYLE OG ABV CALCCOLOUR CALCIBU BATCH_SIZE BREWER owner publishDate starredByCount clonedByCount')
         .limit(req.query.limit)
         .skip(req.query.skip)
         .sort(req.query.sort)
@@ -364,6 +364,7 @@ exports.save = function(req, res) {
                     name: req.session.user_name,
                     recipe_id: id
                 });
+                original.clonedByCount = original.clonedBy.length;
                 original.save();
                 notifications.notifyRecipeCloned(original.owner,recipe,req.session.user_id,req.session.user_name,original.NAME);
             });
