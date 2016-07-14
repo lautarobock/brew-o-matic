@@ -100,9 +100,104 @@ exports.findAll = function(req, res) {
     });
 };
 
+exports.exportRecipe = function(req, res) {
+    model.Recipe.findOne({_id:req.params.id}).exec(function(err,results) {
+        function userCompare(a, b) {
+            return -(a.TIME - b.TIME);
+        }
+        if ( results && results.HOPS && results.HOPS.HOP ) {
+            stable.inplace(results.HOPS.HOP, userCompare);
+        }
+        
+        var csv = '';
+        function add(value, last,isDate) {
+            if ( value === undefined ) {
+                csv += (last?'\n':';');
+                return;
+            }
+            if ( isDate ) {
+                value = new Date(value).toISOString().replace(/T/, ' ').replace(/\..+/, '');
+            }
+            if ( typeof value === 'string') {
+                value = '\"' + value + '\"';
+            }
+            if ( typeof value === 'number') {
+                value = value.toString().replace('.',',');
+            }
+            csv += value + (last?'\n':';');
+        }
+        
+        add('Nombre');add(results.NAME, true)
+        add('Batch');add(results.BATCH_SIZE);
+        add('OG');add(results.OG);
+        add('FG');add(results.FG);
+        add('IBU');add(results.CALCIBU);
+        // add('Eficiencia');add(results.EFFICIENCY);
+        add('ABV');add(results.ABV, true);
+
+        add('',true);
+        add('Granos');add('Kg');add('%',true);
+        for ( var i=0; i<results.FERMENTABLES.FERMENTABLE.length; i++ ) {
+            var F = results.FERMENTABLES.FERMENTABLE[i];
+            add(F.NAME);add(F.AMOUNT);add(F.PERCENTAGE,true);
+        }
+
+        add('',true);
+        add('Lupulos');add('Gramos');add('Tiempo',true);
+        for ( var i=0; i<results.HOPS.HOP.length; i++ ) {
+            var L = results.HOPS.HOP[i];
+            add(L.NAME);add(L.AMOUNT*1000);add(L.TIME,true);
+        }
+        
+        add('', true);
+        add('Levadura');add('Gramos',true);
+        add(results.YEASTS.YEAST[0].NAME);add(results.YEASTS.YEAST[0].AMOUNT,true);
+
+        add('',true);
+        add('Sales');add('Gramos',true);
+        if ( results.water.CaCO3 ) {add('CaCO3');add(results.water.CaCO3, true);} 
+        if ( results.water.NaHCO3 ) {add('NaHCO3');add(results.water.NaHCO3, true);}
+        if ( results.water.CaSO4 ) {add('CaSO4');add(results.water.CaSO4, true);}
+        if ( results.water.CaCl2 ) {add('CaCl2');add(results.water.CaCl2, true);}
+        if ( results.water.MgSO4 ) {add('MgSO4');add(results.water.MgSO4, true);}
+        if ( results.water.NaCl ) {add('NaCl');add(results.water.NaCl, true);}
+        
+        add('',true);
+        add('Macerado',true);
+        add('Cantidad de agua');add(results.StrikeWater);
+        add('Temperatura'); add(results.mashTemp);
+        
+        // var r = results;
+        // add(r.NAME);
+        // add(r.code);
+        // add(r.tags);
+        // add(r.STYLE.NAME);
+        // add(r.OG);
+        // add(r.ABV);
+        // add(r.CALCCOLOUR);
+        // add(r.CALCIBU);
+        // add(r.BATCH_SIZE);
+        // add(r.BREWER);
+        // add(r.fermentation.estimateDate,null,true);
+        // add(r.publishDate,null,true);
+        // add(r.state);
+        // if ( r.YEASTS.YEAST.length > 0 ) {
+        //     add(r.YEASTS.YEAST[0].NAME);
+        //     add(r.YEASTS.YEAST[0].ATTENUATION);
+        //     add(r.YEASTS.YEAST[0].AMOUNT);
+        //     add(r.YEASTS.YEAST[0].density);
+        //     add(r.YEASTS.YEAST[0].packageSize);
+        // } else {
+        //     add("");add("");add("");add("");add("");
+        // }
+        // add(r.isPublic,true);
+        res.setHeader('Content-disposition', 'attachment; filename=' + results.NAME + '.csv');
+        res.set('Content-Type', 'application/octet-stream');
+        res.send(csv);
+    });
+};
+
 exports.exportAll = function(req, res) {
-
-
 
     model.Recipe.find(
         {owner: req.session.user_id},

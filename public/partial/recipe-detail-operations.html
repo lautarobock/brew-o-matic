@@ -1,11 +1,15 @@
 <div class="panel panel-default">
     <div class="panel-body" >
-        <button class="btn btn-default btn-md" ng-click="printRecipe()">
+        <button class="btn btn-default btn-sm" ng-click="printRecipe()">
             <span class="glyphicon glyphicon-print"></span> Imprimir
         </button>
-        <button type="button" ng-click="showBuyList()" class="btn btn-default" style="margin-top:1em">
+        <button type="button" ng-click="showBuyList()" class="btn btn-default btn-sm" style="margin-top:1em">
             <span class="glyphicon glyphicon-list"/>
             Lista de compras
         </button>
+        <a href="recipe/export/{{recipe._id}}" type="button" class="btn btn-default btn-sm" style="margin-top:1em">
+            <span class="glyphicon glyphicon-export"/>
+            Exportar a CSV
+        </a>
     </div>
 </div>
