@@ -296,6 +296,9 @@
         if ( $location.$$search.style ) {
             $scope.filterData['[STYLE.NAME]'].value = $location.$$search.style;
         }
+        if ( $location.$$search.searchCriteria ) {
+            $scope.config.searchCriteria = $location.$$search.searchCriteria;
+        }
         $scope.filterByStyle = function(name) {
             $scope.filterData['[STYLE.NAME]'].value = name;
             $scope.config.control.refresh();
