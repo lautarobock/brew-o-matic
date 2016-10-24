@@ -106,6 +106,8 @@ exports.exportRecipe = function(req, res) {
             var aTime = a.TIME, bTime = b.TIME;
             if ( a.USE === 'Aroma' ) aTime = -aTime;
             if ( b.USE === 'Aroma' ) bTime = -bTime;
+            if ( a.USE === 'Dry Hop' ) aTime = -200;
+            if ( b.USE === 'Dry Hop' ) bTime = -200;
             return -(aTime - bTime);
         }
         if ( results && results.HOPS && results.HOPS.HOP ) {
@@ -325,6 +327,8 @@ exports.get = function(req, res) {
             var aTime = a.TIME, bTime = b.TIME;
             if ( a.USE === 'Aroma' ) aTime = -aTime;
             if ( b.USE === 'Aroma' ) bTime = -bTime;
+            if ( a.USE === 'Dry Hop' ) aTime = -200;
+            if ( b.USE === 'Dry Hop' ) bTime = -200;
             return -(aTime - bTime);
         }
         if ( results && results.HOPS && results.HOPS.HOP ) {
@@ -428,6 +432,8 @@ exports.save = function(req, res) {
             var aTime = a.TIME, bTime = b.TIME;
             if ( a.USE === 'Aroma' ) aTime = -aTime;
             if ( b.USE === 'Aroma' ) bTime = -bTime;
+            if ( a.USE === 'Dry Hop' ) aTime = -200;
+            if ( b.USE === 'Dry Hop' ) bTime = -200;
             return -(aTime - bTime);
         }
         stable.inplace(s.HOPS.HOP, userCompare);
