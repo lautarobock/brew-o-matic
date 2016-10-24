@@ -103,7 +103,10 @@ exports.findAll = function(req, res) {
 exports.exportRecipe = function(req, res) {
     model.Recipe.findOne({_id:req.params.id}).exec(function(err,results) {
         function userCompare(a, b) {
-            return -(a.TIME - b.TIME);
+            var aTime = a.TIME, bTime = b.TIME;
+            if ( a.USE === 'Aroma' ) aTime = -aTime;
+            if ( b.USE === 'Aroma' ) bTime = -bTime;
+            return -(aTime - bTime);
         }
         if ( results && results.HOPS && results.HOPS.HOP ) {
             stable.inplace(results.HOPS.HOP, userCompare);
@@ -319,7 +322,10 @@ exports.publicStyles = function(req, res) {
 exports.get = function(req, res) {
     model.Recipe.findOne({_id:req.params.id}).populate('collaborators').populate('owner').populate('cloneFrom').exec(function(err,results) {
         function userCompare(a, b) {
-            return -(a.TIME - b.TIME);
+            var aTime = a.TIME, bTime = b.TIME;
+            if ( a.USE === 'Aroma' ) aTime = -aTime;
+            if ( b.USE === 'Aroma' ) bTime = -bTime;
+            return -(aTime - bTime);
         }
         if ( results && results.HOPS && results.HOPS.HOP ) {
             stable.inplace(results.HOPS.HOP, userCompare);
