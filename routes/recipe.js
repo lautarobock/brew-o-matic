@@ -422,7 +422,7 @@ exports.save = function(req, res) {
             var aTime = a.TIME, bTime = b.TIME;
             if ( a.USE === 'Aroma' ) aTime = -aTime;
             if ( b.USE === 'Aroma' ) bTime = -bTime;
-            return -(a.TIME - b.TIME);
+            return -(aTime - bTime);
         }
         stable.inplace(s.HOPS.HOP, userCompare);
 
