@@ -419,6 +419,9 @@ exports.save = function(req, res) {
         notifications.notifyUpdateCollaborators(s,req.session.user_id,req.session.user_name);
 
         function userCompare(a, b) {
+            var aTime = a.TIME, bTime = b.TIME;
+            if ( a.USE === 'Aroma' ) aTime = -aTime;
+            if ( b.USE === 'Aroma' ) bTime = -bTime;
             return -(a.TIME - b.TIME);
         }
         stable.inplace(s.HOPS.HOP, userCompare);
