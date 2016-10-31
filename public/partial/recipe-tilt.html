@@ -1,0 +1,39 @@
+<div>
+    <div class="col-md-10">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>TILT Integration</strong>
+            </div>
+            <div class="panel-body" >
+                <div class="col-md-2">
+                    <strong>Chart URL:</strong>
+                </div>
+                <div class="col-md-10">
+                    <input ng-change="updateTilt()" type="text" class="input form-control" ng-model="recipe.tilt"/>
+                </div>
+                <button ng-click="refreshTilt()" type="button"  class="btn btn-default btn-sm"><span class="glyphicon glyphicon-refresh"></button>
+            </div>
+            <iframe src="{{tiltURL}}" width="100%" height="500" id="titlIFrame" scrolling="no" frameborder="0"></iframe>
+        </div>
+        <div style="overflow: hidden;margin-bottom: 1em;">
+            <div class="pull-left">
+                <a href="#/recipe/" type="button" class="btn btn-link glyphicon glyphicon-chevron-left"> Volver al listado</a>
+            </div>
+            <div class="pull-right">
+                <a href="#/recipe/" type="button" class="btn btn-default">Cancelar</a>
+                <button ng-click="save()" type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+        <div ng-repeat="notification in notifications">
+            <div class="alert alert-{{notification.type}} alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>{{notification.title}}</strong>
+                {{notification.text}}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2" >
+        <ng-include src="'partial/recipe-detail-indicators.html'"></ng-include>
+        <ng-include src="'partial/recipe-detail-social.html'"></ng-include>
+    </div>
+</div>
