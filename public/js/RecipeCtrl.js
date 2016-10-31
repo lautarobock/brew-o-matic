@@ -399,7 +399,7 @@
         $scope.removeUser = function(collaborator) {
             util.Arrays.remove($scope.recipe.collaborators,collaborator);
         };
-        
+
         $scope.filterUser = function(name) {
             return User.query({
                 "name": name
@@ -525,6 +525,10 @@
             title: 'Temp. CEBADA',
             template: 'temperature'
         },
+        tilt: {
+            title: 'TILT',
+            template: 'tilt'
+        },
         chronometer: {
             title: 'Tiempos',
             template: 'chronometer'
@@ -546,8 +550,9 @@
             'bottling',
             'log',
             'collaborators',
-            'rating',
-            'temperature',
+            'tilt',
+            // 'rating',
+            // 'temperature',
             'chronometer'
         ];
         $scope.tabs = tabs;

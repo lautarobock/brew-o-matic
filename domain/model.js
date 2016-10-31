@@ -295,6 +295,7 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     tags: [String],
     beer_id: String, //beer._id from BirrasQueHeTomado.com
     pitchRate: Number,
+    tilt: String,
     version: [{
         number: Number,
         user_id: String,

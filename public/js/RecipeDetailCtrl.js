@@ -39,7 +39,8 @@
            PitchRate,
            State,
            Responsive,
-           $modal
+           $modal,
+           $sce
         ) {
 
         $scope.BrewHelper = BrewHelper;
@@ -628,6 +629,15 @@
                             alertFactory.create('danger','La receta que intentas abrir no existe');
                         }
 
+                        $scope.updateTilt = function() {
+                            if ( $scope.recipe.tilt ) {
+                                $scope.tiltURL = $sce.trustAsResourceUrl($scope.recipe.tilt);
+                            }
+                        }
+                        $scope.updateTilt();
+                        $scope.refreshTilt = function() {
+                            document.getElementById('titlIFrame').src = document.getElementById('titlIFrame').src;
+                        };
                     });
                 } else {
                     $scope.recipe = new Recipe({
