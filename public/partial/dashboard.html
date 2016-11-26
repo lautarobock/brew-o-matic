@@ -48,7 +48,7 @@
                 <div ng-repeat="recipe in configs[panel].items" class="item col-xs-12 col-md-4">
                     <div class="thumbnail" style="height: 180px;">
                         <img class="group list-group-image"alt="" />
-                        <div class="caption">
+                        <div class="caption" style="overflow: hidden;">
                             <h4 class="group inner list-group-item-heading">
                                 <a href="#/recipe/edit/{{recipe._id}}">{{recipe.code}} - {{recipe.NAME}}</a>
                                 <span class="glyphicon glyphicon-cloud"
