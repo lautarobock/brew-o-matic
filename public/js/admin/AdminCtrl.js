@@ -17,7 +17,8 @@
         PublishedRecipe,
         Stats,
         $http,
-        $interval
+        $interval,
+        $timeout
     ) {
 
         $scope.allConfigs = {
@@ -233,12 +234,14 @@
             $scope.stats = {};
             // Stats.query({stats:['newRecipesByPeriod']}, mix);
             Stats.query({stats:['lastLogin']}, mix);
-            Stats.query({stats:['singInDate']}, mix);
-            Stats.query({stats:['date']}, mix);
-            Stats.query({stats:['modificationDate']}, mix);
-            Stats.query({stats:['isPublic']}, mix);
+            $timeout(function() {Stats.query({stats:['singInDate']}, mix); },500);
+            $timeout(function() {Stats.query({stats:['date']}, mix); },500);
+            $timeout(function() {Stats.query({stats:['modificationDate']}, mix); },500);
+            $timeout(function() {Stats.query({stats:['isPublic']}, mix); },500);
+            $timeout(function() {Stats.query({stats:['active']}, mix); },500);
+            
             // Stats.query({stats:['recipesByUser']}, mix);
-            Stats.query({stats:['active']}, mix);
+            
             // Stats.query({stats:['newRecipesByPeriod']}, mix);
             $scope.fields = ['today','week','month','year','origin'];
             var origin = new Date(2013,10,19).getTime();

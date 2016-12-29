@@ -83,7 +83,7 @@ function activeUsers(date,name,values) {
         ]
     };
 
-    model.Recipe.find(filter).exec(function(err,results) {
+    model.Recipe.find(filter,'owner').exec(function(err,results) {
         if ( err ) {
             deferred.reject(err);
         } else {
@@ -92,12 +92,11 @@ function activeUsers(date,name,values) {
             for ( var i=0; i<results.length; i++ ) {
                 users[results[i].owner] = results[i].owner;
             }
+            var count = 0;
             for ( var u in users ) {
-                r.push({
-                    _id: u
-                });
+                count++;
             }
-            values.active[name] = r.length;
+            values.active[name] = count;
             deferred.resolve();
         }
     });
@@ -182,8 +181,8 @@ exports.all = function(req, res) {
         stats.push(lastLogin('User',yesterday,'today',result,'lastLogin'));
         stats.push(lastLogin('User',week,'week',result,'lastLogin'));
         stats.push(lastLogin('User',month,'month',result,'lastLogin'));
-        stats.push(lastLogin('User',year,'year',result,'lastLogin'));
-        stats.push(lastLogin('User',origin,'origin',result,'lastLogin'));
+        // stats.push(lastLogin('User',year,'year',result,'lastLogin'));
+        // stats.push(lastLogin('User',origin,'origin',result,'lastLogin'));
     }
 
     if ( isStat(types,'singInDate') ) {
@@ -191,8 +190,8 @@ exports.all = function(req, res) {
         stats.push(lastLogin('User',yesterday,'today',result,'singInDate'));
         stats.push(lastLogin('User',week,'week',result,'singInDate'));
         stats.push(lastLogin('User',month,'month',result,'singInDate'));
-        stats.push(lastLogin('User',year,'year',result,'singInDate'));
-        stats.push(lastLogin('User',origin,'origin',result,'singInDate'));
+        // stats.push(lastLogin('User',year,'year',result,'singInDate'));
+        // stats.push(lastLogin('User',origin,'origin',result,'singInDate'));
     }
 
     if ( isStat(types,'date') ) {
@@ -200,8 +199,8 @@ exports.all = function(req, res) {
         stats.push(lastLogin('Recipe',yesterday,'today',result,'date'));
         stats.push(lastLogin('Recipe',week,'week',result,'date'));
         stats.push(lastLogin('Recipe',month,'month',result,'date'));
-        stats.push(lastLogin('Recipe',year,'year',result,'date'));
-        stats.push(lastLogin('Recipe',origin,'origin',result,'date'));
+        // stats.push(lastLogin('Recipe',year,'year',result,'date'));
+        // stats.push(lastLogin('Recipe',origin,'origin',result,'date'));
     }
 
     if ( isStat(types,'modificationDate') ) {
@@ -209,8 +208,8 @@ exports.all = function(req, res) {
         stats.push(lastLogin('Recipe',yesterday,'today',result,'modificationDate'));
         stats.push(lastLogin('Recipe',week,'week',result,'modificationDate'));
         stats.push(lastLogin('Recipe',month,'month',result,'modificationDate'));
-        stats.push(lastLogin('Recipe',year,'year',result,'modificationDate'));
-        stats.push(lastLogin('Recipe',origin,'origin',result,'modificationDate'));
+        // stats.push(lastLogin('Recipe',year,'year',result,'modificationDate'));
+        // stats.push(lastLogin('Recipe',origin,'origin',result,'modificationDate'));
     }
 
     if ( isStat(types,'isPublic') ) {
@@ -218,8 +217,8 @@ exports.all = function(req, res) {
         stats.push(publicRecipes(yesterday,'today',result));
         stats.push(publicRecipes(week,'week',result));
         stats.push(publicRecipes(month,'month',result));
-        stats.push(publicRecipes(year,'year',result));
-        stats.push(publicRecipes(origin,'origin',result));
+        // stats.push(publicRecipes(year,'year',result));
+        // stats.push(publicRecipes(origin,'origin',result));
     }
 
     if ( isStat(types,'recipesByUser') ) {
@@ -230,10 +229,10 @@ exports.all = function(req, res) {
     if ( isStat(types,'active') ) {
         result.active = {};
         stats.push(activeUsers(yesterday,'today',result));
-        stats.push(activeUsers(week,'week',result));
-        stats.push(activeUsers(month,'month',result));
-        stats.push(activeUsers(year,'year',result));
-        stats.push(activeUsers(origin,'origin',result));
+        // stats.push(activeUsers(week,'week',result));
+        // stats.push(activeUsers(month,'month',result));
+        // stats.push(activeUsers(year,'year',result));
+        // stats.push(activeUsers(origin,'origin',result));
     }
 
     if ( types.indexOf('newRecipesByPeriod') !== -1 ) {
