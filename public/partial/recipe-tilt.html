@@ -1,8 +1,20 @@
-<div>
+<div ng-controller="TiltCtrl">
     <div class="col-md-10">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <strong>TILT Integration</strong>
+            </div>
+            <div class="panel-body" >
+                <div google-chart chart="chartTilt" ng-style="chartTilt.cssStyle"></div>
+                <p>
+                    Cloud URL (valor a pegar en la configuracion del TILT): 
+                    <span class="form-control">http://brew-o-matic.com.ar/tilt/{{recipe._id}}</span>
+                </p>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>TILT Integration (Via Google Docs)</strong>
             </div>
             <div class="panel-body" >
                 <div class="col-md-2">

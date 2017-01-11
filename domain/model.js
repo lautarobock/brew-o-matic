@@ -242,6 +242,11 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
         selectedSource: {type:String, ref:'WaterReport'},
         selectedTarget: {type:String, ref:'WaterReport'}
     },
+    tiltValues: [{
+        date: Date,
+        sg: Number,
+        temp: Number
+    }],
     PRIMARY_TEMP: Number,
     BIAB: String,
     IBUCalcMethod: String,

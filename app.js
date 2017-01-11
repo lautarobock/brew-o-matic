@@ -82,6 +82,7 @@ function filter (req,res,next){
 }
 
 var recipe = require("./routes/recipe.js");
+var tilt = require("./routes/tilt.js");
 var data = require("./routes/data.js");
 var rating = require("./routes/rating.js");
 var stats = require("./routes/stats.js");
@@ -119,6 +120,7 @@ app.get('/notification',filter,notifications.findAll);
 app.get('/notification/news',filter,notifications.findNews);
 app.post("/notification/:id",filter,notifications.update);
 app.get('/rating/beers',rating.findBeers);
+app.post('/tilt/:id',tilt.updateTilt);
 
 var services = ['Style','Grain','Hop','Yeast','Misc','Bottle','Tag','WaterReport','TempDevice','TempDeviceReport'];
 for (s in services ) {

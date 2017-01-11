@@ -890,4 +890,95 @@
 
 
     });
+
+    /**
+     * TiltCtrl
+     */
+    module.controller("TiltCtrl",function(
+        $scope,
+        BrewHelper,
+        BrewCalc
+    ) {
+        $scope.updateChart = function() {
+            var cols = [{
+                    "id": "day",
+                    "label": "Tiempo",
+                    "type": "datetime"
+                },{
+                    "id": "temp",
+                    "label": "Temperatura",
+                    "type": "number"
+                },{
+                    "id": "sg",
+                    "label": "Densidad",
+                    "type": "number"
+                }];
+
+            var rows = [];
+            var day = 0;
+            var today = new Date($scope.simulatedDate_year,$scope.simulatedDate_month-1,$scope.simulatedDate_day);
+            angular.forEach($scope.recipe.tiltValues,function(point) {
+                rows.push({
+                        "c": [
+                            {
+                                "v": new Date(point.date)
+                            },
+                            {
+                                "v": point.temp
+                            },
+                            {
+                                "v": point.sg
+                            }
+                        ]
+                    });
+            });
+            $scope.chartTilt.data.cols = cols;
+            $scope.chartTilt.data.rows = rows;
+        };
+
+        $scope.chartTilt = {
+            "type": "LineChart",
+            "displayed": true,
+            "cssStyle": {height:'300px', width:'100%'},
+            "data": {
+                "cols": [],
+                "rows": []
+            },
+            "options": {
+                "title": "Evolucion",
+                "isStacked": "false",
+                "fill": 20,
+                //"curveType": "function",
+                "displayExactValues": true,
+                series:{
+                    0:{targetAxisIndex:0},
+                    1:{targetAxisIndex:1}
+                },
+                "vAxis": {
+                    0: {
+                        "title": "Temperatura",
+                        "gridlines": {
+                            "count": 10
+                        },
+                        minValue:0
+                    },
+                    1: {
+                        "title": "Densidad",
+                        "gridlines": {
+                            "count": 10
+                        },
+                        format: 'decimal',
+                        minValue:0
+                    }
+                },
+                "hAxis": {
+                    "title": "Tiempo"
+                }
+            },
+            "formatters": {}
+        };
+
+        $scope.updateChart();
+    });
+
 })();
