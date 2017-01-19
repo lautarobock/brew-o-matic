@@ -348,7 +348,11 @@ exports.getComments = function(req,res) {
 exports.remove= function(req, res) {
     model.Recipe.findByIdAndRemove(req.params.id,function(err,results) {
         res.send(results);
-        actions.log(req.session.user_id, "REMOVE_RECIPE","NAME: '"+results.NAME+"'. recipe_id: "+results._id);
+        try {
+            actions.log(req.session.user_id, "REMOVE_RECIPE","NAME: '"+results.NAME+"'. recipe_id: "+results._id);
+        } catch (e) {
+            
+        }
     });
 };
 
