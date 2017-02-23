@@ -221,10 +221,10 @@ exports.notify = notify;
  * Luego si veo q la DB crece mucho, deberia limpiar mas.
  */
 exports.removeOld = function() {
-    var from  = new Date(new Date().getTime()-3*24*60*60*1000);
+    var from  = new Date(new Date().getTime()-1*24*60*60*1000);
     console.log("Eliminando leidas desde",from);
     model.Notification.remove({date:{$lt:from},status:'read'}).exec(function() {
-        from = new Date(new Date().getTime()-7*24*60*60*1000*2);
+        from = new Date(new Date().getTime()-6*24*60*60*1000*2);
         console.log("Eliminando todas desde ",from);
         model.Notification.remove({date:{$lt:from}}).exec();
     });
