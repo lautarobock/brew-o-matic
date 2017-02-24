@@ -90,7 +90,7 @@ exports.findAll = function(req, res) {
     filter.owner = req.session.user_id;
 
     console.log("filter",JSON.stringify(filter));
-    model.Recipe.find(filter,'NAME code tags STYLE OG ABV CALCCOLOUR CALCIBU BATCH_SIZE BREWER fermentation owner publishDate state isPublic')
+    model.Recipe.find(filter,'NAME code tags STYLE OG modificationDate ABV CALCCOLOUR CALCIBU BATCH_SIZE BREWER fermentation owner publishDate state isPublic')
         .limit(req.query.limit)
         .skip(req.query.skip)
         .sort(req.query.sort)
