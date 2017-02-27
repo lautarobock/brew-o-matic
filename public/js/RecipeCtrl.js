@@ -983,11 +983,16 @@
         $scope.updateChart();
 
         $scope.refreshTiltData = function() {
-        Recipe.get({id:$routeParams.recipeId}, function(tiltRecipe) {
-            $scope.recipe.tiltValues = tiltRecipe.tiltValues;
+            Recipe.get({id:$routeParams.recipeId}, function(tiltRecipe) {
+                $scope.recipe.tiltValues = tiltRecipe.tiltValues;
+                $scope.updateChart();
+            });  
+        };
+
+        $scope.removeTiltValue = function($index) {
+            $scope.recipe.tiltValues.splice($index,1);
             $scope.updateChart();
-        });
-    }
+        };
     });
 
 })();

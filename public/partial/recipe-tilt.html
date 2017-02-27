@@ -6,6 +6,28 @@
             </div>
             <div class="panel-body" >
                 <button ng-click="refreshTiltData()" type="button"  class="btn btn-default btn-sm"><span class="glyphicon glyphicon-refresh"></button>
+                <div style="height: 407px; overflow-y: scroll; overflow-x: hidden; margin-top: 1em">
+                    <table class="table table-hover table-condensed table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Fecha y Hora</th>
+                                <th>Densidad</th>
+                                <th>Temperatura</th>
+                                <th style="width: 24px"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="value in recipe.tiltValues">
+                                <td>{{value.date|date:'yyyy-MM-dd hh:mm'}}</td>
+                                <td>{{value.sg|number:3}}</td>
+                                <td>{{value.temp|number:2}}</td>
+                                <td>
+                                    <button type="button" ng-click="removeTiltValue($index)" class="close">&times;</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <div google-chart chart="chartTilt" ng-style="chartTilt.cssStyle"></div>
                 <p>
                     Cloud URL (valor a pegar en la configuracion del TILT): 
