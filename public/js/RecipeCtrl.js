@@ -897,7 +897,9 @@
     module.controller("TiltCtrl",function(
         $scope,
         BrewHelper,
-        BrewCalc
+        BrewCalc,
+        Recipe,
+        $routeParams
     ) {
         $scope.updateChart = function() {
             var cols = [{
@@ -979,6 +981,13 @@
         };
 
         $scope.updateChart();
+
+        $scope.refreshTiltData = function() {
+        Recipe.get({id:$routeParams.recipeId}, function(tiltRecipe) {
+            $scope.recipe.tiltValues = tiltRecipe.tiltValues;
+            $scope.updateChart();
+        });
+    }
     });
 
 })();

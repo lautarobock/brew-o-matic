@@ -5,6 +5,7 @@
                 <strong>TILT Integration</strong>
             </div>
             <div class="panel-body" >
+                <button ng-click="refreshTiltData()" type="button"  class="btn btn-default btn-sm"><span class="glyphicon glyphicon-refresh"></button>
                 <div google-chart chart="chartTilt" ng-style="chartTilt.cssStyle"></div>
                 <p>
                     Cloud URL (valor a pegar en la configuracion del TILT): 

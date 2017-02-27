@@ -558,7 +558,7 @@ exports.save = function(req, res) {
             }
             notifications.notifyNewCollaborators(old,newCollaborators);
 
-
+            delete req.body.tiltValues; //do not update tilt
             model.Recipe.findByIdAndUpdate(id,req.body).populate('owner').populate('collaborators').populate('cloneFrom').exec(callback);
         });
 
