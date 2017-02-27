@@ -6,21 +6,30 @@
             </div>
             <div class="panel-body" >
                 <button ng-click="refreshTiltData()" type="button"  class="btn btn-default btn-sm"><span class="glyphicon glyphicon-refresh"></button>
+                <progressbar style="margin-top: 1em" value="(((1-(recipe.tiltValues[recipe.tiltValues.length-1].sg*1000-1000)/(recipe.OG*1000-1000))*100)/recipe.YEASTS.YEAST[0].ATTENUATION)*100">
+                    {{(((1-(recipe.tiltValues[recipe.tiltValues.length-1].sg*1000-1000)/(recipe.OG*1000-1000))*100)/recipe.YEASTS.YEAST[0].ATTENUATION)*100|number:0}}%
+                </progressbar>
                 <div style="height: 407px; overflow-y: scroll; overflow-x: hidden; margin-top: 1em">
                     <table class="table table-hover table-condensed table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>Fecha y Hora</th>
-                                <th>Densidad</th>
                                 <th>Temperatura</th>
+                                <th>Densidad</th>
+                                <th>Atenuacion</th>
+                                <th>Esperada</th>
+                                <th>Faltante</th>
                                 <th style="width: 24px"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="value in recipe.tiltValues">
+                            <tr ng-repeat="value in recipe.tiltValues | orderBy:'-date'">
                                 <td>{{value.date|date:'yyyy-MM-dd hh:mm'}}</td>
-                                <td>{{value.sg|number:3}}</td>
                                 <td>{{value.temp|number:2}}</td>
+                                <td>{{value.sg|number:3}}</td>
+                                <td>{{(1-(value.sg*1000-1000)/(recipe.OG*1000-1000))*100|number:0}}%</td>
+                                <td>{{recipe.FG}} ({{recipe.YEASTS.YEAST[0].ATTENUATION}}%) </td>
+                                <td>{{recipe.YEASTS.YEAST[0].ATTENUATION-((1-(value.sg*1000-1000)/(recipe.OG*1000-1000))*100|number:0)}}% </td>
                                 <td>
                                     <button type="button" ng-click="removeTiltValue($index)" class="close">&times;</button>
                                 </td>
