@@ -993,6 +993,28 @@
             $scope.recipe.tiltValues.splice($index,1);
             $scope.updateChart();
         };
+
+        $scope.optimizeTitl = function() {
+            var opt = [];
+            var repeated = false;
+            var last;
+            $scope.recipe.tiltValues.forEach(value => {
+                if ( !last ) {
+                    opt.push(value);
+                    repeated = false;
+                } else if (last.temp !== value.temp || last.sg !== value.sg) {
+                    if ( repeated ) {
+                        opt.push(last);
+                    }
+                    repeated = false;
+                    opt.push(value);   
+                } else {
+                   repeated = true; 
+                }
+                last = value;
+            });
+            $scope.recipe.tiltValues = opt;
+        };
     });
 
 })();

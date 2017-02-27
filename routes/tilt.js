@@ -6,6 +6,16 @@ var model = require('../domain/model.js');
  */
 exports.updateTilt = function(req, res) {
     model.Recipe.findOne({_id:req.params.id}).exec(function(err,recipe) {
+        if (recipe.tiltValues.length > 2) {
+            //si los ultimos 3 valoes son iguales elimino el anteultimo
+            var lastPos = recipe.tiltValues.length-1;
+            var last = recipe.tiltValues[lastPos];
+            var prev = recipe.tiltValues[lastPos-1];
+            if ( last.temp === prev.temp && prev.temp === fahrenheitToCelsius(req.body.Temp) && 
+                last.sg === prev.sg && prev.sg === parseFloat(req.body.SG)) {
+                recipe.pop();
+            }
+        }
         recipe.tiltValues.push({
             date: new Date(),
             sg: parseFloat(req.body.SG),
