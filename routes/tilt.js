@@ -13,7 +13,7 @@ exports.updateTilt = function(req, res) {
             var prev = recipe.tiltValues[lastPos-1];
             if ( last.temp === prev.temp && prev.temp === fahrenheitToCelsius(req.body.Temp) && 
                 last.sg === prev.sg && prev.sg === parseFloat(req.body.SG)) {
-                recipe.pop();
+                recipe.tiltValues.pop();
             }
         }
         recipe.tiltValues.push({
