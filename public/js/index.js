@@ -58,8 +58,9 @@
                 otherwise({redirectTo: '/dashboard'});
     }]);
 
-    index.config(['abmProvider',function(abmProvider) {
+    index.config(['abmProvider','ChartJsProvider',function(abmProvider, ChartJsProvider) {
         abmProvider.setTemplateDir('template');
+        // ChartJsProvider.setOptions({ colors : [ 'blue', 'red', '#DCDCDC', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'] });
     }]);
 
     index.controller("HomeCtrl",function($scope,$rootScope,User,Recipe,$routeParams) {

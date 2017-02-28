@@ -26,7 +26,7 @@
     helper.directive('showTags', function($compile,TagColor) {
         return {
             restrict : 'EA',
-            replace : true,
+            replace : false,
             scope : {
                 tags: '&',
                 removable: '@',

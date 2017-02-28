@@ -901,119 +901,168 @@
         Recipe,
         $routeParams
     ) {
-        $scope.updateChart = function() {
-            var cols = [{
-                    "id": "day",
-                    "label": "Tiempo",
-                    "type": "datetime"
-                },{
-                    "id": "temp",
-                    "label": "Temperatura",
-                    "type": "number"
-                },{
-                    "id": "sg",
-                    "label": "Densidad",
-                    "type": "number"
-                }];
+        // $scope.updateChart = function() {
+        //     var cols = [{
+        //             "id": "day",
+        //             "label": "Tiempo",
+        //             "type": "datetime"
+        //         },{
+        //             "id": "temp",
+        //             "label": "Temperatura",
+        //             "type": "number"
+        //         },{
+        //             "id": "sg",
+        //             "label": "Densidad",
+        //             "type": "number"
+        //         }];
 
-            var rows = [];
-            var day = 0;
-            var today = new Date($scope.simulatedDate_year,$scope.simulatedDate_month-1,$scope.simulatedDate_day);
-            angular.forEach($scope.recipe.tiltValues,function(point) {
-                rows.push({
-                        "c": [
-                            {
-                                "v": new Date(point.date)
-                            },
-                            {
-                                "v": point.temp
-                            },
-                            {
-                                "v": point.sg
-                            }
-                        ]
-                    });
-            });
-            $scope.chartTilt.data.cols = cols;
-            $scope.chartTilt.data.rows = rows;
-        };
+        //     var rows = [];
+        //     var day = 0;
+        //     var today = new Date($scope.simulatedDate_year,$scope.simulatedDate_month-1,$scope.simulatedDate_day);
+        //     angular.forEach($scope.recipe.tiltValues,function(point) {
+        //         rows.push({
+        //                 "c": [
+        //                     {
+        //                         "v": new Date(point.date)
+        //                     },
+        //                     {
+        //                         "v": point.temp
+        //                     },
+        //                     {
+        //                         "v": point.sg
+        //                     }
+        //                 ]
+        //             });
+        //     });
+        //     $scope.chartTilt.data.cols = cols;
+        //     $scope.chartTilt.data.rows = rows;
+        // };
 
-        $scope.chartTilt = {
-            "type": "LineChart",
-            "displayed": true,
-            "cssStyle": {height:'300px', width:'100%'},
-            "data": {
-                "cols": [],
-                "rows": []
-            },
-            "options": {
-                "title": "Evolucion",
-                "isStacked": "false",
-                "fill": 20,
-                //"curveType": "function",
-                "displayExactValues": true,
-                series:{
-                    0:{targetAxisIndex:0},
-                    1:{targetAxisIndex:1}
-                },
-                "vAxis": {
-                    0: {
-                        "title": "Temperatura",
-                        "gridlines": {
-                            "count": 10
-                        },
-                        minValue:0
-                    },
-                    1: {
-                        "title": "Densidad",
-                        "gridlines": {
-                            "count": 10
-                        },
-                        format: 'decimal',
-                        minValue:0
-                    }
-                },
-                "hAxis": {
-                    "title": "Tiempo"
-                }
-            },
-            "formatters": {}
-        };
-
-        $scope.updateChart();
+        // $scope.chartTilt = {
+        //     "type": "LineChart",
+        //     "displayed": true,
+        //     "cssStyle": {height:'300px', width:'100%'},
+        //     "data": {
+        //         "cols": [],
+        //         "rows": []
+        //     },
+        //     "options": {
+        //         "title": "Evolucion",
+        //         "isStacked": "false",
+        //         "fill": 20,
+        //         //"curveType": "function",
+        //         "displayExactValues": true,
+        //         series:{
+        //             0:{targetAxisIndex:0},
+        //             1:{targetAxisIndex:1}
+        //         },
+        //         "vAxis": {
+        //             0: {
+        //                 "title": "Temperatura",
+        //                 "gridlines": {
+        //                     "count": 10
+        //                 },
+        //                 minValue:0
+        //             },
+        //             1: {
+        //                 "title": "Densidad",
+        //                 "gridlines": {
+        //                     "count": 10
+        //                 },
+        //                 format: 'decimal',
+        //                 minValue:0
+        //             }
+        //         },
+        //         "hAxis": {
+        //             "title": "Tiempo"
+        //         }
+        //     },
+        //     "formatters": {}
+        // };
+        //
+        // $scope.updateChart();
 
         $scope.refreshTiltData = function() {
             Recipe.get({id:$routeParams.recipeId}, function(tiltRecipe) {
                 $scope.recipe.tiltValues = tiltRecipe.tiltValues;
-                $scope.updateChart();
+                // $scope.updateChart();
+                $scope.refreshChart();
             });  
         };
 
-        $scope.removeTiltValue = function($index) {
-            $scope.recipe.tiltValues.splice($index,1);
-            $scope.updateChart();
-        };
+        // $scope.removeTiltValue = function($index) {
+        //     $scope.recipe.tiltValues.splice($index,1);
+        //     $scope.updateChart();
+        // };
 
-        $scope.optimizeTitl = function() {
-            var opt = [];
-            var repeated = false;
-            var last;
-            $scope.recipe.tiltValues.forEach(value => {
-                if ( !last ) {
-                    opt.push(value);
-                    repeated = false;
-                } else if (last.temp !== value.temp || last.sg !== value.sg) {
-                    if ( repeated ) {
-                        opt.push(last);
-                    }
-                    repeated = false;
-                    opt.push(value);   
-                } else {
-                   repeated = true; 
+        // $scope.optimizeTitl = function() {
+        //     var opt = [];
+        //     var repeated = false;
+        //     var last;
+        //     $scope.recipe.tiltValues.forEach(value => {
+        //         if ( !last ) {
+        //             opt.push(value);
+        //             repeated = false;
+        //         } else if (last.temp !== value.temp || last.sg !== value.sg) {
+        //             if ( repeated ) {
+        //                 opt.push(last);
+        //             }
+        //             repeated = false;
+        //             opt.push(value);   
+        //         } else {
+        //            repeated = true; 
+        //         }
+        //         last = value;
+        //     });
+        //     $scope.recipe.tiltValues = opt;
+        // };
+
+        $scope.refreshChart = function() {
+            $scope.chartData = [
+                $scope.recipe.tiltValues.map(v => v.temp),
+                $scope.recipe.tiltValues.map(v => v.sg)
+            ];
+            $scope.chartLabels = $scope.recipe.tiltValues.map(v => v.date);
+        };
+        $scope.refreshChart();
+
+        $scope.chartSeries = ['Temperatura', 'Densidad'];
+
+		$scope.datasetOverride = [
+            { yAxisID: 'y-axis-1', fill: false }, 
+            { yAxisID: 'y-axis-2', fill: false }
+        ];
+
+        $scope.chartOptions =  {
+            legend: {
+                display: true,
+                labels: {
+                    fontColor: 'rgb(255, 99, 132)'
                 }
-                last = value;
-            });
-            $scope.recipe.tiltValues = opt;
+            },
+            scales: {
+                yAxes: [
+                    {
+                        id: 'y-axis-1',
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    },
+                    {
+                        id: 'y-axis-2',
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        min: 1
+                    }
+                ],
+                xAxes: [{
+                    type: 'time'
+                }]
+            }
         };
     });
 

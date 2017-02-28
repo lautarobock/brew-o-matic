@@ -9,7 +9,7 @@
                 <progressbar style="margin-top: 1em" value="(((1-(recipe.tiltValues[recipe.tiltValues.length-1].sg*1000-1000)/(recipe.OG*1000-1000))*100)/recipe.YEASTS.YEAST[0].ATTENUATION)*100">
                     {{(((1-(recipe.tiltValues[recipe.tiltValues.length-1].sg*1000-1000)/(recipe.OG*1000-1000))*100)/recipe.YEASTS.YEAST[0].ATTENUATION)*100|number:0}}%
                 </progressbar>
-                <div style="height: 407px; overflow-y: scroll; overflow-x: hidden; margin-top: 1em">
+                <div style="height: 407px; overflow-y: auto; overflow-x: hidden; margin-top: 1em">
                     <table class="table table-hover table-condensed table-bordered table-striped">
                         <thead>
                             <tr>
@@ -19,7 +19,7 @@
                                 <th>Atenuacion</th>
                                 <th>Esperada</th>
                                 <th>Faltante</th>
-                                <th style="width: 24px"></th>
+                                <!--<th style="width: 24px"></th>-->
                             </tr>
                         </thead>
                         <tbody>
@@ -30,14 +30,21 @@
                                 <td>{{(1-(value.sg*1000-1000)/(recipe.OG*1000-1000))*100|number:0}}%</td>
                                 <td>{{recipe.FG}} ({{recipe.YEASTS.YEAST[0].ATTENUATION}}%) </td>
                                 <td>{{recipe.YEASTS.YEAST[0].ATTENUATION-((1-(value.sg*1000-1000)/(recipe.OG*1000-1000))*100|number:0)}}% </td>
-                                <td>
+                                <!--<td>
                                     <button type="button" ng-click="removeTiltValue($index)" class="close">&times;</button>
-                                </td>
+                                </td>-->
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div google-chart chart="chartTilt" ng-style="chartTilt.cssStyle"></div>
+                <canvas id="line" class="chart chart-line" style="margin-top: 1em"
+                    chart-data="chartData" 
+                    chart-labels="chartLabels" 
+                    chart-series="chartSeries"
+                    chart-options="chartOptions"
+                    chart-dataset-override="datasetOverride" >
+                </canvas>
+                <!--<div google-chart chart="chartTilt" ng-style="chartTilt.cssStyle"></div>-->
                 <p>
                     Cloud URL (valor a pegar en la configuracion del TILT): 
                     <span class="form-control">http://brew-o-matic.com.ar/tilt/{{recipe._id}}</span>
