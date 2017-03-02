@@ -901,86 +901,6 @@
         Recipe,
         $routeParams
     ) {
-        // $scope.updateChart = function() {
-        //     var cols = [{
-        //             "id": "day",
-        //             "label": "Tiempo",
-        //             "type": "datetime"
-        //         },{
-        //             "id": "temp",
-        //             "label": "Temperatura",
-        //             "type": "number"
-        //         },{
-        //             "id": "sg",
-        //             "label": "Densidad",
-        //             "type": "number"
-        //         }];
-
-        //     var rows = [];
-        //     var day = 0;
-        //     var today = new Date($scope.simulatedDate_year,$scope.simulatedDate_month-1,$scope.simulatedDate_day);
-        //     angular.forEach($scope.recipe.tiltValues,function(point) {
-        //         rows.push({
-        //                 "c": [
-        //                     {
-        //                         "v": new Date(point.date)
-        //                     },
-        //                     {
-        //                         "v": point.temp
-        //                     },
-        //                     {
-        //                         "v": point.sg
-        //                     }
-        //                 ]
-        //             });
-        //     });
-        //     $scope.chartTilt.data.cols = cols;
-        //     $scope.chartTilt.data.rows = rows;
-        // };
-
-        // $scope.chartTilt = {
-        //     "type": "LineChart",
-        //     "displayed": true,
-        //     "cssStyle": {height:'300px', width:'100%'},
-        //     "data": {
-        //         "cols": [],
-        //         "rows": []
-        //     },
-        //     "options": {
-        //         "title": "Evolucion",
-        //         "isStacked": "false",
-        //         "fill": 20,
-        //         //"curveType": "function",
-        //         "displayExactValues": true,
-        //         series:{
-        //             0:{targetAxisIndex:0},
-        //             1:{targetAxisIndex:1}
-        //         },
-        //         "vAxis": {
-        //             0: {
-        //                 "title": "Temperatura",
-        //                 "gridlines": {
-        //                     "count": 10
-        //                 },
-        //                 minValue:0
-        //             },
-        //             1: {
-        //                 "title": "Densidad",
-        //                 "gridlines": {
-        //                     "count": 10
-        //                 },
-        //                 format: 'decimal',
-        //                 minValue:0
-        //             }
-        //         },
-        //         "hAxis": {
-        //             "title": "Tiempo"
-        //         }
-        //     },
-        //     "formatters": {}
-        // };
-        //
-        // $scope.updateChart();
 
         $scope.refreshTiltData = function() {
             Recipe.get({id:$routeParams.recipeId}, function(tiltRecipe) {
@@ -995,27 +915,18 @@
         //     $scope.updateChart();
         // };
 
-        // $scope.optimizeTitl = function() {
-        //     var opt = [];
-        //     var repeated = false;
-        //     var last;
-        //     $scope.recipe.tiltValues.forEach(value => {
-        //         if ( !last ) {
-        //             opt.push(value);
-        //             repeated = false;
-        //         } else if (last.temp !== value.temp || last.sg !== value.sg) {
-        //             if ( repeated ) {
-        //                 opt.push(last);
-        //             }
-        //             repeated = false;
-        //             opt.push(value);   
-        //         } else {
-        //            repeated = true; 
-        //         }
-        //         last = value;
-        //     });
-        //     $scope.recipe.tiltValues = opt;
-        // };
+        $scope.calculateAlc = function(SG) {
+            var OG = BrewHelper.toPpg($scope.recipe.OG);
+            var SG = BrewHelper.toPpg(SG);
+            return BrewHelper.round((OG-SG)*0.131,100);
+        };
+
+        $scope.calculateTime = function(value) {
+            var hours = (new Date(value.date).getTime() - new Date($scope.recipe.tiltValues[0].date).getTime())/1000/60/60;
+            var days = Math.floor(hours/24);
+            var rest = Math.round(hours%24);
+            return `${days}d ${rest}h`;
+        };
 
         $scope.refreshChart = function() {
             $scope.chartData = [

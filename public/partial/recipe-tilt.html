@@ -17,19 +17,23 @@
                                 <th>Temperatura</th>
                                 <th>Densidad</th>
                                 <th>Atenuacion</th>
+                                <th>% Alc</th>
                                 <th>Esperada</th>
                                 <th>Faltante</th>
+                                <th>Tiempo</th>
                                 <!--<th style="width: 24px"></th>-->
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="value in recipe.tiltValues | orderBy:'-date'">
-                                <td>{{value.date|date:'yyyy-MM-dd hh:mm'}}</td>
+                                <td>{{value.date|date:'yyyy-MM-dd HH:mm'}}</td>
                                 <td>{{value.temp|number:2}}</td>
                                 <td>{{value.sg|number:3}}</td>
                                 <td>{{(1-(value.sg*1000-1000)/(recipe.OG*1000-1000))*100|number:0}}%</td>
+                                <td>{{calculateAlc(value.sg)|number:2}}%</td>
                                 <td>{{recipe.FG}} ({{recipe.YEASTS.YEAST[0].ATTENUATION}}%) </td>
                                 <td>{{recipe.YEASTS.YEAST[0].ATTENUATION-((1-(value.sg*1000-1000)/(recipe.OG*1000-1000))*100|number:0)}}% </td>
+                                <td>{{calculateTime(value)}}</td>
                                 <!--<td>
                                     <button type="button" ng-click="removeTiltValue($index)" class="close">&times;</button>
                                 </td>-->
