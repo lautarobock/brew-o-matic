@@ -925,7 +925,8 @@
             var hours = (new Date(value.date).getTime() - new Date($scope.recipe.tiltValues[0].date).getTime())/1000/60/60;
             var days = Math.floor(hours/24);
             var rest = Math.round(hours%24);
-            return `${days}d ${rest}h`;
+            return days + 'd ' + rest + 'h';
+            // return `${days}d ${rest}h`;
         };
 
         $scope.refreshChart = function() {
