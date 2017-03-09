@@ -931,10 +931,10 @@
 
         $scope.refreshChart = function() {
             $scope.chartData = [
-                $scope.recipe.tiltValues.map(v => v.temp),
-                $scope.recipe.tiltValues.map(v => v.sg)
+                $scope.recipe.tiltValues.map(function(v) {return v.temp}),
+                $scope.recipe.tiltValues.map(function(v) {return v.sg})
             ];
-            $scope.chartLabels = $scope.recipe.tiltValues.map(v => v.date);
+            $scope.chartLabels = $scope.recipe.tiltValues.map(function(v) {return v.date});
         };
         $scope.refreshChart();
 
