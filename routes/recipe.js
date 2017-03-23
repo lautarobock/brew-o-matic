@@ -423,6 +423,39 @@ exports.updateState = function(req, res) {
     });
 };
 
+var FermentableUses = {
+    defaultValue: 'Mash',
+    valueOf: function(name) {
+        for ( var i=0; i<this.query().length; i++ ) {
+            if ( name === this.query()[i].name ) {
+                return this.query()[i];
+            }
+        }
+        return null;
+    },
+    query: function() {
+        return [
+            {
+                name:'Mash',
+                mash: true,
+                sort: 1,
+            },{
+                name:'Recirculating',
+                mash: true,
+                sort: 2
+            },{
+                name:'Boil',
+                mash: false,
+                sort: 3
+            },{
+                name:'Fermentation',
+                mash: false,
+                sort: 4
+            }
+        ];
+    }
+}
+
 exports.save = function(req, res) {
 
     function callback(err,s){
@@ -432,15 +465,26 @@ exports.save = function(req, res) {
         notifications.notifyUpdateFavorite(s);
         notifications.notifyUpdateCollaborators(s,req.session.user_id,req.session.user_name);
 
-        function userCompare(a, b) {
+        stable.inplace(s.HOPS.HOP, function hopCompare(a, b) {
             var aTime = a.TIME, bTime = b.TIME;
             if ( a.USE === 'Aroma' ) aTime = -aTime;
             if ( b.USE === 'Aroma' ) bTime = -bTime;
             if ( a.USE === 'Dry Hop' ) aTime = -200;
             if ( b.USE === 'Dry Hop' ) bTime = -200;
             return -(aTime - bTime);
-        }
-        stable.inplace(s.HOPS.HOP, userCompare);
+        });
+
+        stable.inplace(s.FERMENTABLES.FERMENTABLE, function(a, b) {
+            var sortA = FermentableUses.valueOf(a.USE).sort;
+            var sortB = FermentableUses.valueOf(b.USE).sort;
+            var valueA = a.AMOUNT;
+            var valueB = b.AMOUNT;
+            var r = sortA-sortB;
+            if ( r === 0 ) {
+                r = -(valueA-valueB);
+            }
+            return r;
+        });
 
         res.send(s);
 
