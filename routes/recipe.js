@@ -475,13 +475,18 @@ exports.save = function(req, res) {
         });
 
         stable.inplace(s.FERMENTABLES.FERMENTABLE, function(a, b) {
-            var sortA = FermentableUses.valueOf(a.USE).sort;
-            var sortB = FermentableUses.valueOf(b.USE).sort;
-            var valueA = a.AMOUNT;
-            var valueB = b.AMOUNT;
-            var r = sortA-sortB;
+            var r = FermentableUses.valueOf(a.USE).sort - FermentableUses.valueOf(b.USE).sort;
             if ( r === 0 ) {
-                r = -(valueA-valueB);
+                r = -(a.AMOUNT-b.AMOUNT);
+            }
+            if ( r === 0 ) {
+                r = -(a.COLOR-b.COLOR);
+            }
+            if ( r === 0 ) {
+                r = -(a.POTENTIAL-b.POTENTIAL);
+            }
+            if ( r === 0 ) {
+                r = -(a.NAME-b.NAME);
             }
             return r;
         });
