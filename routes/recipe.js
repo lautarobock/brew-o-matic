@@ -102,17 +102,13 @@ exports.findAll = function(req, res) {
 
 exports.exportRecipe = function(req, res) {
     model.Recipe.findOne({_id:req.params.id}).exec(function(err,results) {
-        function userCompare(a, b) {
-            var aTime = a.TIME, bTime = b.TIME;
-            if ( a.USE === 'Aroma' ) aTime = -aTime;
-            if ( b.USE === 'Aroma' ) bTime = -bTime;
-            if ( a.USE === 'Dry Hop' ) aTime = -200;
-            if ( b.USE === 'Dry Hop' ) bTime = -200;
-            return -(aTime - bTime);
-        }
         if ( results && results.HOPS && results.HOPS.HOP ) {
-            stable.inplace(results.HOPS.HOP, userCompare);
+            stable.inplace(results.HOPS.HOP, hopCompare);
         }
+        if ( results && results.FERMENTABLES && results.FERMENTABLES.FERMENTABLE ) {
+            stable.inplace(results.FERMENTABLES.FERMENTABLE, fermentableCompare);
+        }
+        
         
         var csv = '';
         function add(value, last,isDate) {
@@ -323,18 +319,12 @@ exports.publicStyles = function(req, res) {
 
 exports.get = function(req, res) {
     model.Recipe.findOne({_id:req.params.id}).populate('collaborators').populate('owner').populate('cloneFrom').exec(function(err,results) {
-        function userCompare(a, b) {
-            var aTime = a.TIME, bTime = b.TIME;
-            if ( a.USE === 'Aroma' ) aTime = -aTime;
-            if ( b.USE === 'Aroma' ) bTime = -bTime;
-            if ( a.USE === 'Dry Hop' ) aTime = -200;
-            if ( b.USE === 'Dry Hop' ) bTime = -200;
-            return -(aTime - bTime);
-        }
         if ( results && results.HOPS && results.HOPS.HOP ) {
-            stable.inplace(results.HOPS.HOP, userCompare);
+            stable.inplace(results.HOPS.HOP, hopCompare);
         }
-
+        if ( results && results.FERMENTABLES && results.FERMENTABLES.FERMENTABLE ) {
+            stable.inplace(results.FERMENTABLES.FERMENTABLE, fermentableCompare);
+        }
         res.send(results);
     });
 };
@@ -456,6 +446,32 @@ var FermentableUses = {
     }
 }
 
+function fermentableCompare(a, b) {
+    var r = FermentableUses.valueOf(a.USE).sort - FermentableUses.valueOf(b.USE).sort;
+    if ( r === 0 ) {
+        r = -(a.AMOUNT-b.AMOUNT);
+    }
+    if ( r === 0 ) {
+        r = -(a.COLOR-b.COLOR);
+    }
+    if ( r === 0 ) {
+        r = -(a.POTENTIAL-b.POTENTIAL);
+    }
+    if ( r === 0 ) {
+        r = -(a.NAME-b.NAME);
+    }
+    return r;
+}
+
+function hopCompare(a, b) {
+    var aTime = a.TIME, bTime = b.TIME;
+    if ( a.USE === 'Aroma' ) aTime = -aTime;
+    if ( b.USE === 'Aroma' ) bTime = -bTime;
+    if ( a.USE === 'Dry Hop' ) aTime = -200;
+    if ( b.USE === 'Dry Hop' ) bTime = -200;
+    return -(aTime - bTime);
+}
+
 exports.save = function(req, res) {
 
     function callback(err,s){
@@ -465,31 +481,8 @@ exports.save = function(req, res) {
         notifications.notifyUpdateFavorite(s);
         notifications.notifyUpdateCollaborators(s,req.session.user_id,req.session.user_name);
 
-        stable.inplace(s.HOPS.HOP, function hopCompare(a, b) {
-            var aTime = a.TIME, bTime = b.TIME;
-            if ( a.USE === 'Aroma' ) aTime = -aTime;
-            if ( b.USE === 'Aroma' ) bTime = -bTime;
-            if ( a.USE === 'Dry Hop' ) aTime = -200;
-            if ( b.USE === 'Dry Hop' ) bTime = -200;
-            return -(aTime - bTime);
-        });
-
-        stable.inplace(s.FERMENTABLES.FERMENTABLE, function(a, b) {
-            var r = FermentableUses.valueOf(a.USE).sort - FermentableUses.valueOf(b.USE).sort;
-            if ( r === 0 ) {
-                r = -(a.AMOUNT-b.AMOUNT);
-            }
-            if ( r === 0 ) {
-                r = -(a.COLOR-b.COLOR);
-            }
-            if ( r === 0 ) {
-                r = -(a.POTENTIAL-b.POTENTIAL);
-            }
-            if ( r === 0 ) {
-                r = -(a.NAME-b.NAME);
-            }
-            return r;
-        });
+        stable.inplace(s.HOPS.HOP, hopCompare);
+        stable.inplace(s.FERMENTABLES.FERMENTABLE, fermentableCompare);
 
         res.send(s);
 
