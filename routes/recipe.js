@@ -421,7 +421,7 @@ var FermentableUses = {
                 return this.query()[i];
             }
         }
-        return null;
+        return this.query()[0];
     },
     query: function() {
         return [
