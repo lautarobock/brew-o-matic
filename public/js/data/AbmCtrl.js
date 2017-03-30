@@ -152,7 +152,7 @@
                         width: '15%'
                     },{
                         field:'colour',
-                        caption: 'Color',
+                        caption: 'Color (SRM)',
                         type: 'number',
                         step: 0.1,
                         width: '15%'
