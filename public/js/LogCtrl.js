@@ -84,11 +84,11 @@
         var spargeFixed = [{
             delay: $scope.recipe.spargeDuration,
             detail: 'Comenzar Lavado',
-            logType: 'SPARGE'
+            logType: 'SPARGE_0'
         }, {
             delay: 60,
             detail: 'Finalizar Lavado',
-            logType: 'SPARGE'
+            logType: 'SPARGE_1'
         }];
 
         var boilFixed = [{
