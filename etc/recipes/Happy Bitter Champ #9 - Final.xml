@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href='http://www.brewmate.net/brewmate.xsl' type='text/xsl'?>
+<!--BeerXML Format Recipe - Generated with BrewMate - www.brewmate.net-->
+<RECIPES>
+  <RECIPE>
+    <NAME>Happy Bitter Champ #9</NAME>
+    <VERSION>1</VERSION>
+    <TYPE>All Grain</TYPE>
+    <STYLE>
+      <NAME>Standard/Ordinary Bitter</NAME>
+    </STYLE>
+    <BREWER>BrewMate</BREWER>
+    <BATCH_SIZE>20</BATCH_SIZE>
+    <BOIL_SIZE>26</BOIL_SIZE>
+    <BOIL_TIME>90</BOIL_TIME>
+    <EFFICIENCY>66</EFFICIENCY>
+    <HOPS>
+      <HOP>
+        <NAME>Nugget</NAME>
+        <VERSION>1</VERSION>
+        <ALPHA>12</ALPHA>
+        <AMOUNT>0.009</AMOUNT>
+        <USE>Boil</USE>
+        <TIME>60</TIME>
+        <FORM>Pellet</FORM>
+      </HOP>
+      <HOP>
+        <NAME>East Kent Golding</NAME>
+        <VERSION>1</VERSION>
+        <ALPHA>5</ALPHA>
+        <AMOUNT>0.025</AMOUNT>
+        <USE>Boil</USE>
+        <TIME>45</TIME>
+        <FORM>Pellet</FORM>
+      </HOP>
+      <HOP>
+        <NAME>East Kent Golding</NAME>
+        <VERSION>1</VERSION>
+        <ALPHA>5</ALPHA>
+        <AMOUNT>0.015</AMOUNT>
+        <USE>Boil</USE>
+        <TIME>30</TIME>
+        <FORM>Pellet</FORM>
+      </HOP>
+      <HOP>
+        <NAME>East Kent Golding</NAME>
+        <VERSION>1</VERSION>
+        <ALPHA>5</ALPHA>
+        <AMOUNT>0.01</AMOUNT>
+        <USE>Aroma</USE>
+        <TIME>0</TIME>
+        <FORM>Pellet</FORM>
+      </HOP>
+      <HOP>
+        <NAME>East Kent Golding</NAME>
+        <VERSION>1</VERSION>
+        <ALPHA>5</ALPHA>
+        <AMOUNT>0.02</AMOUNT>
+        <USE>Dry Hop</USE>
+        <TIME>0</TIME>
+        <FORM>Pellet</FORM>
+      </HOP>
+    </HOPS>
+    <FERMENTABLES>
+      <FERMENTABLE>
+        <NAME>Pilsner</NAME>
+        <VERSION>1</VERSION>
+        <AMOUNT>4.000</AMOUNT>
+        <TYPE>Grain</TYPE>
+        <YIELD>80.434782608695485</YIELD>
+        <COLOR>1.7</COLOR>
+        <POTENTIAL>1.037</POTENTIAL>
+        <PERCENTAGE>83.33</PERCENTAGE>
+      </FERMENTABLE>
+      <FERMENTABLE>
+        <NAME>Carapils (Dextrine)</NAME>
+        <VERSION>1</VERSION>
+        <AMOUNT>0.200</AMOUNT>
+        <TYPE>Grain</TYPE>
+        <YIELD>71.739130434782425</YIELD>
+        <COLOR>1</COLOR>
+        <POTENTIAL>1.033</POTENTIAL>
+        <PERCENTAGE>4.17</PERCENTAGE>
+      </FERMENTABLE>
+      <FERMENTABLE>
+        <NAME>Crystal 120</NAME>
+        <VERSION>1</VERSION>
+        <AMOUNT>0.200</AMOUNT>
+        <TYPE>Grain</TYPE>
+        <YIELD>71.739130434782425</YIELD>
+        <COLOR>120</COLOR>
+        <POTENTIAL>1.033</POTENTIAL>
+        <PERCENTAGE>4.17</PERCENTAGE>
+      </FERMENTABLE>
+      <FERMENTABLE>
+        <NAME>Crystal 30</NAME>
+        <VERSION>1</VERSION>
+        <AMOUNT>0.200</AMOUNT>
+        <TYPE>Grain</TYPE>
+        <YIELD>76.086956521738955</YIELD>
+        <COLOR>30</COLOR>
+        <POTENTIAL>1.035</POTENTIAL>
+        <PERCENTAGE>4.17</PERCENTAGE>
+      </FERMENTABLE>
+      <FERMENTABLE>
+        <NAME>Crystal 60</NAME>
+        <VERSION>1</VERSION>
+        <AMOUNT>0.200</AMOUNT>
+        <TYPE>Grain</TYPE>
+        <YIELD>73.913043478260931</YIELD>
+        <COLOR>60</COLOR>
+        <POTENTIAL>1.034</POTENTIAL>
+        <PERCENTAGE>4.17</PERCENTAGE>
+      </FERMENTABLE>
+    </FERMENTABLES>
+    <MISCS>
+      <MISC>
+        <NAME>Whirlfloc Tablet</NAME>
+        <VERSION>1</VERSION>
+        <TYPE>Fining</TYPE>
+        <USE>Boil</USE>
+        <TIME>15</TIME>
+        <AMOUNT>0.002</AMOUNT>
+      </MISC>
+    </MISCS>
+    <YEASTS>
+      <YEAST>
+        <NAME>Safale S-04</NAME>
+        <VERSION>1</VERSION>
+        <ATTENUATION>77</ATTENUATION>
+      </YEAST>
+    </YEASTS>
+    <WATERS></WATERS>
+    <MASH>
+      <NAME></NAME>
+      <VERSION>1</VERSION>
+      <MASH_STEPS>
+        <MASH_STEP>
+          <NAME>Saccharification Rest</NAME>
+          <VERSION>1</VERSION>
+          <TYPE>Infusion</TYPE>
+          <STEP_TEMP>68</STEP_TEMP>
+          <STEP_TIME>80</STEP_TIME>
+        </MASH_STEP>
+      </MASH_STEPS>
+    </MASH>
+    <NOTES>Se elimino el dry hop, no pude ir a comprar el lupulo. Por suerte le habia tirado para aroma en el 0'.</NOTES>
+    <OG>1.048</OG>
+    <PRIMARY_TEMP>18</PRIMARY_TEMP>
+    <!--BrewMate XLST-->
+    <FG>1.011</FG>
+    <CALCCOLOUR>11.8</CALCCOLOUR>
+    <CALCIBU>33.6</CALCIBU>
+    <!--BrewMate Specific Settings-->
+    <BIAB>0</BIAB>
+    <IBUCalcMethod>0</IBUCalcMethod>
+    <GrainCalcMethod>2</GrainCalcMethod>
+    <StyleNaziMode>1</StyleNaziMode>
+    <GrainUnits>1</GrainUnits>
+    <HopsUnits>0</HopsUnits>
+    <VolumeUnits>1</VolumeUnits>
+    <TemperatureUnits>0</TemperatureUnits>
+    <Colour>0</Colour>
+    <GrainTemp>0</GrainTemp>
+    <StrikeWater>14.4</StrikeWater>
+    <GrainAbsorbtion>0.9</GrainAbsorbtion>
+    <WatertoGrainRatio>3</WatertoGrainRatio>
+    <SpargeDeadSpace></SpargeDeadSpace>
+    <SpargeTempDesired>0</SpargeTempDesired>
+    <TopUpWater></TopUpWater>
+    <PercentEvap>20</PercentEvap>
+    <TrubChillerLosses>1</TrubChillerLosses>
+  </RECIPE>
+</RECIPES>

@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href='http://www.brewmate.net/brewmate.xsl' type='text/xsl'?>
+<!--BeerXML Format Recipe - Generated with BrewMate - www.brewmate.net-->
+<RECIPES>
+  <RECIPE>
+    <NAME>MacGyBeer Porter #3</NAME>
+    <VERSION>1</VERSION>
+    <TYPE>All Grain</TYPE>
+    <STYLE>
+      <NAME>Porter</NAME>
+    </STYLE>
+    <BREWER>BrewMate</BREWER>
+    <BATCH_SIZE>27.7</BATCH_SIZE>
+    <BOIL_SIZE>31.854999999999997</BOIL_SIZE>
+    <BOIL_TIME>90</BOIL_TIME>
+    <EFFICIENCY>65</EFFICIENCY>
+    <HOPS>
+      <HOP>
+        <NAME>Cascade</NAME>
+        <VERSION>1</VERSION>
+        <ALPHA>7.8</ALPHA>
+        <AMOUNT>0.02</AMOUNT>
+        <USE>Boil</USE>
+        <TIME>60</TIME>
+        <FORM>Pellet</FORM>
+      </HOP>
+      <HOP>
+        <NAME>East Kent Golding</NAME>
+        <VERSION>1</VERSION>
+        <ALPHA>4.7</ALPHA>
+        <AMOUNT>0.01</AMOUNT>
+        <USE>Boil</USE>
+        <TIME>30</TIME>
+        <FORM>Pellet</FORM>
+      </HOP>
+    </HOPS>
+    <FERMENTABLES>
+      <FERMENTABLE>
+        <NAME>Pale Ale Malt</NAME>
+        <VERSION>1</VERSION>
+        <AMOUNT>5.000</AMOUNT>
+        <TYPE>Grain</TYPE>
+        <YIELD>82.608695652173992</YIELD>
+        <COLOR>3</COLOR>
+        <POTENTIAL>1.038</POTENTIAL>
+        <PERCENTAGE>80.65</PERCENTAGE>
+      </FERMENTABLE>
+      <FERMENTABLE>
+        <NAME>Aromatic Malt</NAME>
+        <VERSION>1</VERSION>
+        <AMOUNT>0.200</AMOUNT>
+        <TYPE>Grain</TYPE>
+        <YIELD>78.260869565217448</YIELD>
+        <COLOR>20</COLOR>
+        <POTENTIAL>1.036</POTENTIAL>
+        <PERCENTAGE>3.23</PERCENTAGE>
+      </FERMENTABLE>
+      <FERMENTABLE>
+        <NAME>Black Patent</NAME>
+        <VERSION>1</VERSION>
+        <AMOUNT>0.200</AMOUNT>
+        <TYPE>Grain</TYPE>
+        <YIELD>54.347826086956331</YIELD>
+        <COLOR>525</COLOR>
+        <POTENTIAL>1.025</POTENTIAL>
+        <PERCENTAGE>3.23</PERCENTAGE>
+      </FERMENTABLE>
+      <FERMENTABLE>
+        <NAME>Caraaroma</NAME>
+        <VERSION>1</VERSION>
+        <AMOUNT>0.200</AMOUNT>
+        <TYPE>Grain</TYPE>
+        <YIELD>76.086956521738955</YIELD>
+        <COLOR>130</COLOR>
+        <POTENTIAL>1.035</POTENTIAL>
+        <PERCENTAGE>3.23</PERCENTAGE>
+      </FERMENTABLE>
+      <FERMENTABLE>
+        <NAME>Carafa I malt</NAME>
+        <VERSION>1</VERSION>
+        <AMOUNT>0.200</AMOUNT>
+        <TYPE>Grain</TYPE>
+        <YIELD>78.260869565217448</YIELD>
+        <COLOR>320</COLOR>
+        <POTENTIAL>1.036</POTENTIAL>
+        <PERCENTAGE>3.23</PERCENTAGE>
+      </FERMENTABLE>
+      <FERMENTABLE>
+        <NAME>Carafa III malt</NAME>
+        <VERSION>1</VERSION>
+        <AMOUNT>0.200</AMOUNT>
+        <TYPE>Grain</TYPE>
+        <YIELD>78.260869565217448</YIELD>
+        <COLOR>525</COLOR>
+        <POTENTIAL>1.036</POTENTIAL>
+        <PERCENTAGE>3.23</PERCENTAGE>
+      </FERMENTABLE>
+      <FERMENTABLE>
+        <NAME>Caramunich I</NAME>
+        <VERSION>1</VERSION>
+        <AMOUNT>0.200</AMOUNT>
+        <TYPE>Grain</TYPE>
+        <YIELD>78.260869565217448</YIELD>
+        <COLOR>51</COLOR>
+        <POTENTIAL>1.036</POTENTIAL>
+        <PERCENTAGE>3.23</PERCENTAGE>
+      </FERMENTABLE>
+    </FERMENTABLES>
+    <MISCS>
+      <MISC>
+        <NAME>Whirlfloc Tablet</NAME>
+        <VERSION>1</VERSION>
+        <TYPE>Fining</TYPE>
+        <USE>Boil</USE>
+        <TIME>15</TIME>
+        <AMOUNT>0.002</AMOUNT>
+      </MISC>
+    </MISCS>
+    <YEASTS>
+      <YEAST>
+        <NAME>Muntons</NAME>
+        <VERSION>1</VERSION>
+        <ATTENUATION>77</ATTENUATION>
+      </YEAST>
+    </YEASTS>
+    <WATERS></WATERS>
+    <MASH>
+      <NAME></NAME>
+      <VERSION>1</VERSION>
+      <MASH_STEPS>
+        <MASH_STEP>
+          <NAME>Saccharification Rest</NAME>
+          <VERSION>1</VERSION>
+          <TYPE>Infusion</TYPE>
+          <STEP_TEMP>66</STEP_TEMP>
+          <STEP_TIME>60</STEP_TIME>
+        </MASH_STEP>
+      </MASH_STEPS>
+    </MASH>
+    <NOTES></NOTES>
+    <OG>1.045</OG>
+    <PRIMARY_TEMP>18</PRIMARY_TEMP>
+    <!--BrewMate XLST-->
+    <FG>1.010</FG>
+    <CALCCOLOUR>34.9</CALCCOLOUR>
+    <CALCIBU>18.0</CALCIBU>
+    <!--BrewMate Specific Settings-->
+    <BIAB>0</BIAB>
+    <IBUCalcMethod>0</IBUCalcMethod>
+    <GrainCalcMethod>2</GrainCalcMethod>
+    <StyleNaziMode>1</StyleNaziMode>
+    <GrainUnits>1</GrainUnits>
+    <HopsUnits>0</HopsUnits>
+    <VolumeUnits>1</VolumeUnits>
+    <TemperatureUnits>0</TemperatureUnits>
+    <Colour>0</Colour>
+    <GrainTemp>0</GrainTemp>
+    <StrikeWater>0</StrikeWater>
+    <GrainAbsorbtion>0.9</GrainAbsorbtion>
+    <WatertoGrainRatio></WatertoGrainRatio>
+    <SpargeDeadSpace></SpargeDeadSpace>
+    <SpargeTempDesired>0</SpargeTempDesired>
+    <TopUpWater></TopUpWater>
+    <PercentEvap></PercentEvap>
+    <TrubChillerLosses></TrubChillerLosses>
+  </RECIPE>
+</RECIPES>

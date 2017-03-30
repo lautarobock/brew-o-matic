@@ -1,0 +1,39 @@
+Incivilization II, la venganza de adrian #11
+Northern English Brown Ale
+
+Recipe Specs
+----------------
+Batch Size (L):           22.0
+Total Grain (kg):         5.250
+Total Hops (g):           37.00
+Original Gravity (OG):    1.048  (°P): 11.9
+Final Gravity (FG):       1.012  (°P): 3.1
+Colour (SRM):             17.6   (EBC): 34.7
+Bitterness (IBU):         26.9   (Tinseth)
+Brewhouse Efficiency (%): 66
+Boil Time (Minutes):      70
+
+Grain Bill
+----------------
+4.000 kg Pilsner (76.19%)
+0.400 kg Biscuit (7.62%)
+0.400 kg Cristal 140 (7.62%)
+0.400 kg Vienna (7.62%)
+0.050 kg Roasted Barley (0.95%)
+
+Hop Bill
+----------------
+10.0 g Magnum Pellet (14% Alpha) @ 60 Minutes (Boil) (0.5 g/L)
+7.0 g Mapuche Pellet (7.7% Alpha) @ 60 Minutes (Boil) (0.3 g/L)
+10.0 g East Kent Golding Pellet (5% Alpha) @ 30 Minutes (Boil) (0.5 g/L)
+10.0 g East Kent Golding Pellet (5% Alpha) @ 0 Minutes (Boil) (0.5 g/L)
+
+Misc Bill
+----------------
+2.0 g Whirlfloc Tablet @ 15 Minutes (Boil)
+
+Single step Infusion at 68°C for 60 Minutes.
+Fermented at 19°C with Safale S-04
+
+
+Recipe Generated with BrewMate

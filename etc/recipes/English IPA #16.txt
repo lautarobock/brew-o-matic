@@ -1,0 +1,43 @@
+English IPA #16
+English IPA
+
+Recipe Specs
+----------------
+Batch Size (L):           23.3
+Total Grain (kg):         6.530
+Total Hops (g):           100.00
+Original Gravity (OG):    1.061  (°P): 15.0
+Final Gravity (FG):       1.010  (°P): 2.6
+Alcohol by Volume (ABV):  6.63 %
+Colour (SRM):             9.8   (EBC): 19.3
+Bitterness (IBU):         53.4   (Tinseth)
+Brewhouse Efficiency (%): 71
+Boil Time (Minutes):      90
+
+Grain Bill
+----------------
+4.000 kg Pilsner (61.26%)
+2.000 kg Pale Ale Malt (30.63%)
+0.200 kg Carapils (Dextrine) (3.06%)
+0.200 kg Crystal 60 (3.06%)
+0.130 kg Crystal 140 (1.99%)
+
+Hop Bill
+----------------
+40.0 g Nugget Pellet (12% Alpha) @ 60 Minutes (Boil) (1.7 g/L)
+10.0 g East Kent Golding Pellet (5% Alpha) @ 30 Minutes (Boil) (0.4 g/L)
+10.0 g Fuggles Pellet (5.5% Alpha) @ 30 Minutes (Boil) (0.4 g/L)
+10.0 g East Kent Golding Pellet (5% Alpha) @ 0 Minutes (Boil) (0.4 g/L)
+10.0 g Fuggles Pellet (5.5% Alpha) @ 0 Minutes (Boil) (0.4 g/L)
+10.0 g East Kent Golding Pellet (5% Alpha) @ 0 Days (Dry Hop) (0.4 g/L)
+10.0 g Fuggles Pellet (5.5% Alpha) @ 0 Days (Dry Hop) (0.4 g/L)
+
+Misc Bill
+----------------
+2.0 g Whirlfloc Tablet @ 15 Minutes (Boil)
+
+Single step Infusion at 69°C for 70 Minutes.
+Fermented at 19°C with Coopers
+
+
+Recipe Generated with BrewMate

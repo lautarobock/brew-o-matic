@@ -1,0 +1,2904 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<brewmatedata>
+  <!--BrewMate Data File - www.brewmate.net-->
+  <styles>
+    <style>
+      <name>American Amber Ale</name>
+      <OG_Min>1.045</OG_Min>
+      <OG_Max>1.060</OG_Max>
+      <FG_Min>1.010</FG_Min>
+      <FG_Max>1.015</FG_Max>
+      <IBU_Min>25</IBU_Min>
+      <IBU_Max>40</IBU_Max>
+      <Colour_Min>10</Colour_Min>
+      <Colour_Max>17</Colour_Max>
+      <ABV_Min>4.5</ABV_Min>
+      <ABV_Max>6.0</ABV_Max>
+    </style>
+    <style>
+      <name>American Barleywine</name>
+      <OG_Min>1.080</OG_Min>
+      <OG_Max>1.120</OG_Max>
+      <FG_Min>1.016</FG_Min>
+      <FG_Max>1.030</FG_Max>
+      <IBU_Min>50</IBU_Min>
+      <IBU_Max>120</IBU_Max>
+      <Colour_Min>10</Colour_Min>
+      <Colour_Max>19</Colour_Max>
+      <ABV_Min>8.0</ABV_Min>
+      <ABV_Max>12.0</ABV_Max>
+    </style>
+    <style>
+      <name>American Brown Ale</name>
+      <OG_Min>1.045</OG_Min>
+      <OG_Max>1.060</OG_Max>
+      <FG_Min>1.010</FG_Min>
+      <FG_Max>1.016</FG_Max>
+      <IBU_Min>20</IBU_Min>
+      <IBU_Max>40</IBU_Max>
+      <Colour_Min>18</Colour_Min>
+      <Colour_Max>35</Colour_Max>
+      <ABV_Min>4.3</ABV_Min>
+      <ABV_Max>6.2</ABV_Max>
+    </style>
+    <style>
+      <name>American IPA</name>
+      <OG_Min>1.056</OG_Min>
+      <OG_Max>1.075</OG_Max>
+      <FG_Min>1.010</FG_Min>
+      <FG_Max>1.018</FG_Max>
+      <IBU_Min>40</IBU_Min>
+      <IBU_Max>70</IBU_Max>
+      <Colour_Min>6</Colour_Min>
+      <Colour_Max>15</Colour_Max>
+      <ABV_Min>5.5</ABV_Min>
+      <ABV_Max>7.5</ABV_Max>
+    </style>
+    <style>
+      <name>American Pale Ale</name>
+      <OG_Min>1.045</OG_Min>
+      <OG_Max>1.060</OG_Max>
+      <FG_Min>1.010</FG_Min>
+      <FG_Max>1.015</FG_Max>
+      <IBU_Min>30</IBU_Min>
+      <IBU_Max>45</IBU_Max>
+      <Colour_Min>5</Colour_Min>
+      <Colour_Max>14</Colour_Max>
+      <ABV_Min>4.5</ABV_Min>
+      <ABV_Max>6.0</ABV_Max>
+    </style>
+    <style>
+      <name>American Stout</name>
+      <OG_Min>1.050</OG_Min>
+      <OG_Max>1.075</OG_Max>
+      <FG_Min>1.010</FG_Min>
+      <FG_Max>1.022</FG_Max>
+      <IBU_Min>35</IBU_Min>
+      <IBU_Max>75</IBU_Max>
+      <Colour_Min>30</Colour_Min>
+      <Colour_Max>40</Colour_Max>
+      <ABV_Min>5.0</ABV_Min>
+      <ABV_Max>7.0</ABV_Max>
+    </style>
+    <style>
+      <name>American Wheat or Rye Beer</name>
+      <OG_Min>1.040</OG_Min>
+      <OG_Max>1.055</OG_Max>
+      <FG_Min>1.008</FG_Min>
+      <FG_Max>1.013</FG_Max>
+      <IBU_Min>15</IBU_Min>
+      <IBU_Max>30</IBU_Max>
+      <Colour_Min>3</Colour_Min>
+      <Colour_Max>6</Colour_Max>
+      <ABV_Min>4.0</ABV_Min>
+      <ABV_Max>5.5</ABV_Max>
+    </style>
+    <style>
+      <name>Australian Dark/Old Ale</name>
+      <OG_Min>1.040</OG_Min>
+      <OG_Max>1.050</OG_Max>
+      <FG_Min>1.010</FG_Min>
+      <FG_Max>1.016</FG_Max>
+      <IBU_Min>15</IBU_Min>
+      <IBU_Max>20</IBU_Max>
+      <Colour_Min>19</Colour_Min>
+      <Colour_Max>35</Colour_Max>
+      <ABV_Min>4.5</ABV_Min>
+      <ABV_Max>5.3</ABV_Max>
+    </style>
+    <style>
+      <name>Australian Lager</name>
+      <OG_Min>1.040</OG_Min>
+      <OG_Max>1.050</OG_Max>
+      <FG_Min>1.004</FG_Min>
+      <FG_Max>1.010</FG_Max>
+      <IBU_Min>10</IBU_Min>
+      <IBU_Max>20</IBU_Max>
+      <Colour_Min>2</Colour_Min>
+      <Colour_Max>6</Colour_Max>
+      <ABV_Min>4.2</ABV_Min>
+      <ABV_Max>5.1</ABV_Max>
+    </style>
+    <style>
+      <name>Australian Light Lager</name>
+      <OG_Min>1.028</OG_Min>
+      <OG_Max>1.035</OG_Max>
+      <FG_Min>1.004</FG_Min>
+      <FG_Max>1.008</FG_Max>
+      <IBU_Min>10</IBU_Min>
+      <IBU_Max>15</IBU_Max>
+      <Colour_Min>2</Colour_Min>
+      <Colour_Max>4</Colour_Max>
+      <ABV_Min>2.8</ABV_Min>
+      <ABV_Max>3.5</ABV_Max>
+    </style>
+    <style>
+      <name>Australian Pale Ale</name>
+      <OG_Min>1.0435</OG_Min>
+      <OG_Max>1.050</OG_Max>
+      <FG_Min>1.004</FG_Min>
+      <FG_Max>1.006</FG_Max>
+      <IBU_Min>25</IBU_Min>
+      <IBU_Max>40</IBU_Max>
+      <Colour_Min>5</Colour_Min>
+      <Colour_Max>9</Colour_Max>
+      <ABV_Min>4.2</ABV_Min>
+      <ABV_Max>6.0</ABV_Max>
+    </style>
+    <style>
+      <name>Australian Premium Lager</name>
+      <OG_Min>1.045</OG_Min>
+      <OG_Max>1.055</OG_Max>
+      <FG_Min>1.008</FG_Min>
+      <FG_Max>1.012</FG_Max>
+      <IBU_Min>15</IBU_Min>
+      <IBU_Max>25</IBU_Max>
+      <Colour_Min>2</Colour_Min>
+      <Colour_Max>6</Colour_Max>
+      <ABV_Min>4.7</ABV_Min>
+      <ABV_Max>6.0</ABV_Max>
+    </style>
+    <style>
+      <name>Baltic Porter</name>
+      <OG_Min>1.060</OG_Min>
+      <OG_Max>1.090</OG_Max>
+      <FG_Min>1.016</FG_Min>
+      <FG_Max>1.024</FG_Max>
+      <IBU_Min>20</IBU_Min>
+      <IBU_Max>40</IBU_Max>
+      <Colour_Min>17</Colour_Min>
+      <Colour_Max>30</Colour_Max>
+      <ABV_Min>5.5</ABV_Min>
+      <ABV_Max>9.5</ABV_Max>
+    </style>
+    <style>
+      <name>Belgian Blond Ale</name>
+      <OG_Min>1.062</OG_Min>
+      <OG_Max>1.075</OG_Max>
+      <FG_Min>1.008</FG_Min>
+      <FG_Max>1.018</FG_Max>
+      <IBU_Min>15</IBU_Min>
+      <IBU_Max>30</IBU_Max>
+      <Colour_Min>4</Colour_Min>
+      <Colour_Max>7</Colour_Max>
+      <ABV_Min>6.0</ABV_Min>
+      <ABV_Max>7.5</ABV_Max>
+    </style>
+    <style>
+      <name>Belgian Dark Strong Ale</name>
+      <OG_Min>1.075</OG_Min>
+      <OG_Max>1.110</OG_Max>
+      <FG_Min>1.010</FG_Min>
+      <FG_Max>1.024</FG_Max>
+      <IBU_Min>20</IBU_Min>
+      <IBU_Max>35</IBU_Max>
+      <Colour_Min>12</Colour_Min>
+      <Colour_Max>22</Colour_Max>
+      <ABV_Min>8.0</ABV_Min>
+      <ABV_Max>11.0</ABV_Max>
+    </style>
+    <style>
+      <name>Belgian Dubbel</name>
+      <OG_Min>1.062</OG_Min>
+      <OG_Max>1.075</OG_Max>
+      <FG_Min>1.008</FG_Min>
+      <FG_Max>1.018</FG_Max>
+      <IBU_Min>15</IBU_Min>
+      <IBU_Max>25</IBU_Max>
+      <Colour_Min>10</Colour_Min>
+      <Colour_Max>17</Colour_Max>
+      <ABV_Min>6.0</ABV_Min>
+      <ABV_Max>7.6</ABV_Max>
+    </style>
+    <style>
+      <name>Belgian Golden Strong Ale</name>
+      <OG_Min>1.070</OG_Min>
+      <OG_Max>1.095</OG_Max>
+      <FG_Min>1.005</FG_Min>
+      <FG_Max>1.016</FG_Max>
+      <IBU_Min>22</IBU_Min>
+      <IBU_Max>35</IBU_Max>
+      <Colour_Min>3</Colour_Min>
+      <Colour_Max>6</Colour_Max>
+      <ABV_Min>7.5</ABV_Min>
+      <ABV_Max>10.5</ABV_Max>
+    </style>
+    <style>
+      <name>Belgian Pale Ale</name>
+      <OG_Min>1.048</OG_Min>
+      <OG_Max>1.054</OG_Max>
+      <FG_Min>1.010</FG_Min>
+      <FG_Max>1.014</FG_Max>
+      <IBU_Min>20</IBU_Min>
+      <IBU_Max>30</IBU_Max>
+      <Colour_Min>8</Colour_Min>
+      <Colour_Max>14</Colour_Max>
+      <ABV_Min>4.8</ABV_Min>
+      <ABV_Max>5.5</ABV_Max>
+    </style>
+    <style>
+      <name>Belgian Specialty Ale</name>
+      <OG_Min>1.030</OG_Min>
+      <OG_Max>1.080</OG_Max>
+      <FG_Min>1.006</FG_Min>
+      <FG_Max>1.019</FG_Max>
+      <IBU_Min>15</IBU_Min>
+      <IBU_Max>140</IBU_Max>
+      <Colour_Min>3</Colour_Min>
+      <Colour_Max>50</Colour_Max>
+      <ABV_Min>3.0</ABV_Min>
+      <ABV_Max>9.0</ABV_Max>
+    </style>
+    <style>
+      <name>Belgian Tripel</name>
+      <OG_Min>1.075</OG_Min>
+      <OG_Max>1.085</OG_Max>
+      <FG_Min>1.008</FG_Min>
+      <FG_Max>1.014</FG_Max>
+      <IBU_Min>20</IBU_Min>
+      <IBU_Max>40</IBU_Max>
+      <Colour_Min>4.5</Colour_Min>
+      <Colour_Max>7</Colour_Max>
+      <ABV_Min>7.5</ABV_Min>
+      <ABV_Max>9,5</ABV_Max>
+    </style>
+    <style>
+      <name>Berliner Weisse</name>
+      <OG_Min>1.028</OG_Min>
+      <OG_Max>1.032</OG_Max>
+      <FG_Min>1.003</FG_Min>
+      <FG_Max>1.006</FG_Max>
+      <IBU_Min>3</IBU_Min>
+      <IBU_Max>8</IBU_Max>
+      <Colour_Min>2</Colour_Min>
+      <Colour_Max>3</Colour_Max>
+      <ABV_Min>2.8</ABV_Min>
+      <ABV_Max>3.8</ABV_Max>
+    </style>
+    <style>
+      <name>Biere de Garde</name>
+      <OG_Min>1.060</OG_Min>
+      <OG_Max>1.080</OG_Max>
+      <FG_Min>1.008</FG_Min>
+      <FG_Max>1.016</FG_Max>
+      <IBU_Min>18</IBU_Min>
+      <IBU_Max>28</IBU_Max>
+      <Colour_Min>6</Colour_Min>
+      <Colour_Max>19</Colour_Max>
+      <ABV_Min>6.0</ABV_Min>
+      <ABV_Max>8.5</ABV_Max>
+    </style>
+    <style>
+      <name>Blonde Ale</name>
+      <OG_Min>1.038</OG_Min>
+      <OG_Max>1.054</OG_Max>
+      <FG_Min>1.008</FG_Min>
+      <FG_Max>1.013</FG_Max>
+      <IBU_Min>15</IBU_Min>
+      <IBU_Max>28</IBU_Max>
+      <Colour_Min>3</Colour_Min>
+      <Colour_Max>6</Colour_Max>
+      <ABV_Min>3.8</ABV_Min>
+      <ABV_Max>5.5</ABV_Max>
+    </style>
+    <style>
+      <name>Bohemian Pilsener</name>
+      <OG_Min>1.044</OG_Min>
+      <OG_Max>1.056</OG_Max>
+      <FG_Min>1.013</FG_Min>
+      <FG_Max>1.017</FG_Max>
+      <IBU_Min>35</IBU_Min>
+      <IBU_Max>45</IBU_Max>
+      <Colour_Min>3.5</Colour_Min>
+      <Colour_Max>6</Colour_Max>
+      <ABV_Min>4.2</ABV_Min>
+      <ABV_Max>5.4</ABV_Max>
+    </style>
+    <style>
+      <name>Brown Porter</name>
+      <OG_Min>1.040</OG_Min>
+      <OG_Max>1.052</OG_Max>
+      <FG_Min>1.008</FG_Min>
+      <FG_Max>1.014</FG_Max>
+      <IBU_Min>18</IBU_Min>
+      <IBU_Max>35</IBU_Max>
+      <Colour_Min>20</Colour_Min>
+      <Colour_Max>30</Colour_Max>
+      <ABV_Min>4.0</ABV_Min>
+      <ABV_Max>5.4</ABV_Max>
+    </style>
+    <style>
+      <name>Cascadian Dark Ale</name>
+      <OG_Min>1.060</OG_Min>
+      <OG_Max>1.075</OG_Max>
+      <FG_Min>1.008</FG_Min>
+      <FG_Max>1.016</FG_Max>
+      <IBU_Min>60</IBU_Min>
+      <IBU_Max>90</IBU_Max>
+      <Colour_Min>30</Colour_Min>
+      <Colour_Max>40</Colour_Max>
+      <ABV_Min>5.5</ABV_Min>
+      <ABV_Max>8.5</ABV_Max>
+    </style>
+    <style>
+      <name>California Common Beer</name>
+      <OG_Min>1.048</OG_Min>
+      <OG_Max>1.054</OG_Max>
+      <FG_Min>1.011</FG_Min>
+      <FG_Max>1.014</FG_Max>
+      <IBU_Min>30</IBU_Min>
+      <IBU_Max>45</IBU_Max>
+      <Colour_Min>10</Colour_Min>
+      <Colour_Max>14</Colour_Max>
+      <ABV_Min>4.5</ABV_Min>
+      <ABV_Max>5.5</ABV_Max>
+    </style>
+    <style>
+      <name>Christmas/Winter Specialty Spiced Beer</name>
+      <OG_Min>1.030</OG_Min>
+      <OG_Max>1.110</OG_Max>
+      <FG_Min>1.005</FG_Min>
+      <FG_Max>1.025</FG_Max>
+      <IBU_Min>0</IBU_Min>
+      <IBU_Max>70</IBU_Max>
+      <Colour_Min>5</Colour_Min>
+      <Colour_Max>50</Colour_Max>
+      <ABV_Min>2.5</ABV_Min>
+      <ABV_Max>12.0</ABV_Max>
+    </style>
+    <style>
+      <name>Classic American Pilsner</name>
+      <OG_Min>1.044</OG_Min>
+      <OG_Max>1.060</OG_Max>
+      <FG_Min>1.010</FG_Min>
+      <FG_Max>1.015</FG_Max>
+      <IBU_Min>25</IBU_Min>
+      <IBU_Max>40</IBU_Max>
+      <Colour_Min>3</Colour_Min>
+      <Colour_Max>6</Colour_Max>
+      <ABV_Min>4.5</ABV_Min>
+      <ABV_Max>6.0</ABV_Max>
+    </style>
+    <style>
+      <name>Classic Rauchbier</name>
+      <OG_Min>1.050</OG_Min>
+      <OG_Max>1.057</OG_Max>
+      <FG_Min>1.012</FG_Min>
+      <FG_Max>1.016</FG_Max>
+      <IBU_Min>20</IBU_Min>
+      <IBU_Max>30</IBU_Max>
+      <Colour_Min>12</Colour_Min>
+      <Colour_Max>22</Colour_Max>
+      <ABV_Min>4.8</ABV_Min>
+      <ABV_Max>6.0</ABV_Max>
+    </style>
+    <style>
+      <name>Cream Ale</name>
+      <OG_Min>1.042</OG_Min>
+      <OG_Max>1.055</OG_Max>
+      <FG_Min>1.006</FG_Min>
+      <FG_Max>1.012</FG_Max>
+      <IBU_Min>15</IBU_Min>
+      <IBU_Max>20</IBU_Max>
+      <Colour_Min>2.5</Colour_Min>
+      <Colour_Max>5</Colour_Max>
+      <ABV_Min>4.2</ABV_Min>
+      <ABV_Max>5.6</ABV_Max>
+    </style>
+    <style>
+      <name>Dark American Lager</name>
+      <OG_Min>1.044</OG_Min>
+      <OG_Max>1.056</OG_Max>
+      <FG_Min>1.008</FG_Min>
+      <FG_Max>1.012</FG_Max>
+      <IBU_Min>8</IBU_Min>
+      <IBU_Max>20</IBU_Max>
+      <Colour_Min>14</Colour_Min>
+      <Colour_Max>22</Colour_Max>
+      <ABV_Min>4.2</ABV_Min>
+      <ABV_Max>6</ABV_Max>
+    </style>
+    <style>
+      <name>Doppelbock</name>
+      <OG_Min>1.072</OG_Min>
+      <OG_Max>1.112</OG_Max>
+      <FG_Min>1.016</FG_Min>
+      <FG_Max>1.024</FG_Max>
+      <IBU_Min>16</IBU_Min>
+      <IBU_Max>26</IBU_Max>
+      <Colour_Min>6</Colour_Min>
+      <Colour_Max>25</Colour_Max>
+      <ABV_Min>7.0</ABV_Min>
+      <ABV_Max>10.0</ABV_Max>
+    </style>
+    <style>
+      <name>Dortmunder Export</name>
+      <OG_Min>1.048</OG_Min>
+      <OG_Max>1.056</OG_Max>
+      <FG_Min>1.010</FG_Min>
+      <FG_Max>1.015</FG_Max>
+      <IBU_Min>23</IBU_Min>
+      <IBU_Max>30</IBU_Max>
+      <Colour_Min>4</Colour_Min>
+      <Colour_Max>6</Colour_Max>
+      <ABV_Min>4.8</ABV_Min>
+      <ABV_Max>6.0</ABV_Max>
+    </style>
+    <style>
+      <name>Dry Stout</name>
+      <OG_Min>1.036</OG_Min>
+      <OG_Max>1.050</OG_Max>
+      <FG_Min>1.007</FG_Min>
+      <FG_Max>1.011</FG_Max>
+      <IBU_Min>30</IBU_Min>
+      <IBU_Max>45</IBU_Max>
+      <Colour_Min>25</Colour_Min>
+      <Colour_Max>40</Colour_Max>
+      <ABV_Min>4.0</ABV_Min>
+      <ABV_Max>5.0</ABV_Max>
+    </style>
+    <style>
+      <name>Dunkelweizen</name>
+      <OG_Min>1.044</OG_Min>
+      <OG_Max>1.056</OG_Max>
+      <FG_Min>1.010</FG_Min>
+      <FG_Max>1.014</FG_Max>
+      <IBU_Min>10</IBU_Min>
+      <IBU_Max>18</IBU_Max>
+      <Colour_Min>14</Colour_Min>
+      <Colour_Max>23</Colour_Max>
+      <ABV_Min>4.3</ABV_Min>
+      <ABV_Max>5.6</ABV_Max>
+    </style>
+    <style>
+      <name>Dusseldorf Altbier</name>
+      <OG_Min>1.046</OG_Min>
+      <OG_Max>1.054</OG_Max>
+      <FG_Min>1.010</FG_Min>
+      <FG_Max>1.015</FG_Max>
+      <IBU_Min>35</IBU_Min>
+      <IBU_Max>50</IBU_Max>
+      <Colour_Min>11</Colour_Min>
+      <Colour_Max>17</Colour_Max>
+      <ABV_Min>4.5</ABV_Min>
+      <ABV_Max>5.2</ABV_Max>
+    </style>
+    <style>
+      <name>Eisbock</name>
+      <OG_Min>1.078</OG_Min>
+      <OG_Max>1.120</OG_Max>
+      <FG_Min>1.020</FG_Min>
+      <FG_Max>1.035</FG_Max>
+      <IBU_Min>25</IBU_Min>
+      <IBU_Max>35</IBU_Max>
+      <Colour_Min>18</Colour_Min>
+      <Colour_Max>30</Colour_Max>
+      <ABV_Min>9</ABV_Min>
+      <ABV_Max>14.0</ABV_Max>
+    </style>
+    <style>
+      <name>English Barleywine</name>
+      <OG_Min>1.080</OG_Min>
+      <OG_Max>1.120</OG_Max>
+      <FG_Min>1.018</FG_Min>
+      <FG_Max>1.030</FG_Max>
+      <IBU_Min>35</IBU_Min>
+      <IBU_Max>70</IBU_Max>
+      <Colour_Min>8</Colour_Min>
+      <Colour_Max>22</Colour_Max>
+      <ABV_Min>8.0</ABV_Min>
+      <ABV_Max>12.0</ABV_Max>
+    </style>
+    <style>
+      <name>English IPA</name>
+      <OG_Min>1.050</OG_Min>
+      <OG_Max>1.075</OG_Max>
+      <FG_Min>1.010</FG_Min>
+      <FG_Max>1.018</FG_Max>
+      <IBU_Min>40</IBU_Min>
+      <IBU_Max>60</IBU_Max>
+      <Colour_Min>8</Colour_Min>
+      <Colour_Max>14</Colour_Max>
+      <ABV_Min>5.0</ABV_Min>
+      <ABV_Max>7.5</ABV_Max>
+    </style>
+    <style>
+      <name>Extra Special/Strong Bitter (English Pale Ale)</name>
+      <OG_Min>1.048</OG_Min>
+      <OG_Max>1.060</OG_Max>
+      <FG_Min>1.010</FG_Min>
+      <FG_Max>1.016</FG_Max>
+      <IBU_Min>30</IBU_Min>
+      <IBU_Max>50</IBU_Max>
+      <Colour_Min>6</Colour_Min>
+      <Colour_Max>18</Colour_Max>
+      <ABV_Min>4.6</ABV_Min>
+      <ABV_Max>6.2</ABV_Max>
+    </style>
+    <style>
+      <name>Flanders Brown Ale/Oud Bruin</name>
+      <OG_Min>1.040</OG_Min>
+      <OG_Max>1.074</OG_Max>
+      <FG_Min>1.008</FG_Min>
+      <FG_Max>1.012</FG_Max>
+      <IBU_Min>20</IBU_Min>
+      <IBU_Max>25</IBU_Max>
+      <Colour_Min>15</Colour_Min>
+      <Colour_Max>22</Colour_Max>
+      <ABV_Min>4.0</ABV_Min>
+      <ABV_Max>8.0</ABV_Max>
+    </style>
+    <style>
+      <name>Flanders Red Ale</name>
+      <OG_Min>1.048</OG_Min>
+      <OG_Max>1.057</OG_Max>
+      <FG_Min>1.002</FG_Min>
+      <FG_Max>1.012</FG_Max>
+      <IBU_Min>10</IBU_Min>
+      <IBU_Max>25</IBU_Max>
+      <Colour_Min>10</Colour_Min>
+      <Colour_Max>16</Colour_Max>
+      <ABV_Min>4.6</ABV_Min>
+      <ABV_Max>6.5</ABV_Max>
+    </style>
+    <style>
+      <name>Foreign Extra Stout</name>
+      <OG_Min>1.056</OG_Min>
+      <OG_Max>1.075</OG_Max>
+      <FG_Min>1.010</FG_Min>
+      <FG_Max>1.018</FG_Max>
+      <IBU_Min>30</IBU_Min>
+      <IBU_Max>70</IBU_Max>
+      <Colour_Min>30</Colour_Min>
+      <Colour_Max>40</Colour_Max>
+      <ABV_Min>5.5</ABV_Min>
+      <ABV_Max>8.0</ABV_Max>
+    </style>
+    <style>
+      <name>Fruit Beer</name>
+      <OG_Min>1.030</OG_Min>
+      <OG_Max>1.110</OG_Max>
+      <FG_Min>1.004</FG_Min>
+      <FG_Max>1.024</FG_Max>
+      <IBU_Min>5</IBU_Min>
+      <IBU_Max>70</IBU_Max>
+      <Colour_Min>3</Colour_Min>
+      <Colour_Max>50</Colour_Max>
+      <ABV_Min>2.5</ABV_Min>
+      <ABV_Max>12.0</ABV_Max>
+    </style>
+    <style>
+      <name>Fruit Lambic</name>
+      <OG_Min>1.040</OG_Min>
+      <OG_Max>1.060</OG_Max>
+      <FG_Min>1.000</FG_Min>
+      <FG_Max>1.010</FG_Max>
+      <IBU_Min>0</IBU_Min>
+      <IBU_Max>10</IBU_Max>
+      <Colour_Min>3</Colour_Min>
+      <Colour_Max>7</Colour_Max>
+      <ABV_Min>5.0</ABV_Min>
+      <ABV_Max>7.0</ABV_Max>
+    </style>
+    <style>
+      <name>German Pilsner (Pils)</name>
+      <OG_Min>1.044</OG_Min>
+      <OG_Max>1.050</OG_Max>
+      <FG_Min>1.008</FG_Min>
+      <FG_Max>1.013</FG_Max>
+      <IBU_Min>25</IBU_Min>
+      <IBU_Max>45</IBU_Max>
+      <Colour_Min>2</Colour_Min>
+      <Colour_Max>5</Colour_Max>
+      <ABV_Min>4.4</ABV_Min>
+      <ABV_Max>5.2</ABV_Max>
+    </style>
+    <style>
+      <name>Gueuze</name>
+      <OG_Min>1.040</OG_Min>
+      <OG_Max>1.060</OG_Max>
+      <FG_Min>1.000</FG_Min>
+      <FG_Max>1.006</FG_Max>
+      <IBU_Min>0</IBU_Min>
+      <IBU_Max>10</IBU_Max>
+      <Colour_Min>3</Colour_Min>
+      <Colour_Max>7</Colour_Max>
+      <ABV_Min>5.0</ABV_Min>
+      <ABV_Max>8.0</ABV_Max>
+    </style>
+    <style>
+      <name>Imperial IPA</name>
+      <OG_Min>1.075</OG_Min>
+      <OG_Max>1.090</OG_Max>
+      <FG_Min>1.010</FG_Min>
+      <FG_Max>1.020</FG_Max>
+      <IBU_Min>60</IBU_Min>
+      <IBU_Max>120</IBU_Max>
+      <Colour_Min>8</Colour_Min>
+      <Colour_Max>15</Colour_Max>
+      <ABV_Min>7.5</ABV_Min>
+      <ABV_Max>10.0</ABV_Max>
+    </style>
+    <style>
+      <name>Imperial Stout</name>
+      <OG_Min>1.075</OG_Min>
+      <OG_Max>1.115</OG_Max>
+      <FG_Min>1.018</FG_Min>
+      <FG_Max>1.030</FG_Max>
+      <IBU_Min>50</IBU_Min>
+      <IBU_Max>90</IBU_Max>
+      <Colour_Min>30</Colour_Min>
+      <Colour_Max>40</Colour_Max>
+      <ABV_Min>8.0</ABV_Min>
+      <ABV_Max>12.0</ABV_Max>
+    </style>
+    <style>
+      <name>Irish Red Ale</name>
+      <OG_Min>1.044</OG_Min>
+      <OG_Max>1.060</OG_Max>
+      <FG_Min>1.010</FG_Min>
+      <FG_Max>1.016</FG_Max>
+      <IBU_Min>17</IBU_Min>
+      <IBU_Max>28</IBU_Max>
+      <Colour_Min>9</Colour_Min>
+      <Colour_Max>18</Colour_Max>
+      <ABV_Min>4.0</ABV_Min>
+      <ABV_Max>6.0</ABV_Max>
+    </style>
+    <style>
+      <name>Kolsch</name>
+      <OG_Min>1.044</OG_Min>
+      <OG_Max>1.050</OG_Max>
+      <FG_Min>1.007</FG_Min>
+      <FG_Max>1.011</FG_Max>
+      <IBU_Min>20</IBU_Min>
+      <IBU_Max>30</IBU_Max>
+      <Colour_Min>3.5</Colour_Min>
+      <Colour_Max>5</Colour_Max>
+      <ABV_Min>4.4</ABV_Min>
+      <ABV_Max>5.2</ABV_Max>
+    </style>
+    <style>
+      <name>Lite American Lager</name>
+      <OG_Min>1.028</OG_Min>
+      <OG_Max>1.040</OG_Max>
+      <FG_Min>0.998</FG_Min>
+      <FG_Max>1.008</FG_Max>
+      <IBU_Min>8</IBU_Min>
+      <IBU_Max>12</IBU_Max>
+      <Colour_Min>2</Colour_Min>
+      <Colour_Max>3</Colour_Max>
+      <ABV_Min>2.8</ABV_Min>
+      <ABV_Max>4.2</ABV_Max>
+    </style>
+    <style>
+      <name>Maibock/Helles Bock</name>
+      <OG_Min>1.064</OG_Min>
+      <OG_Max>1.072</OG_Max>
+      <FG_Min>1.011</FG_Min>
+      <FG_Max>1.018</FG_Max>
+      <IBU_Min>23</IBU_Min>
+      <IBU_Max>35</IBU_Max>
+      <Colour_Min>6</Colour_Min>
+      <Colour_Max>11</Colour_Max>
+      <ABV_Min>6.3</ABV_Min>
+      <ABV_Max>7.4</ABV_Max>
+    </style>
+    <style>
+      <name>Mild</name>
+      <OG_Min>1.030</OG_Min>
+      <OG_Max>1.038</OG_Max>
+      <FG_Min>1.008</FG_Min>
+      <FG_Max>1.013</FG_Max>
+      <IBU_Min>10</IBU_Min>
+      <IBU_Max>25</IBU_Max>
+      <Colour_Min>12</Colour_Min>
+      <Colour_Max>25</Colour_Max>
+      <ABV_Min>2.8</ABV_Min>
+      <ABV_Max>4.5</ABV_Max>
+    </style>
+    <style>
+      <name>Munich Dunkel</name>
+      <OG_Min>1.048</OG_Min>
+      <OG_Max>1.056</OG_Max>
+      <FG_Min>1.010</FG_Min>
+      <FG_Max>1.016</FG_Max>
+      <IBU_Min>18</IBU_Min>
+      <IBU_Max>28</IBU_Max>
+      <Colour_Min>14</Colour_Min>
+      <Colour_Max>28</Colour_Max>
+      <ABV_Min>4.5</ABV_Min>
+      <ABV_Max>5.6</ABV_Max>
+    </style>
+    <style>
+      <name>Munich Helles</name>
+      <OG_Min>1.045</OG_Min>
+      <OG_Max>1.051</OG_Max>
+      <FG_Min>1.008</FG_Min>
+      <FG_Max>1.012</FG_Max>
+      <IBU_Min>16</IBU_Min>
+      <IBU_Max>22</IBU_Max>
+      <Colour_Min>3</Colour_Min>
+      <Colour_Max>5</Colour_Max>
+      <ABV_Min>4.7</ABV_Min>
+      <ABV_Max>5.4</ABV_Max>
+    </style>
+    <style>
+      <name>North German Altbier</name>
+      <OG_Min>1.046</OG_Min>
+      <OG_Max>1.054</OG_Max>
+      <FG_Min>1.010</FG_Min>
+      <FG_Max>1.015</FG_Max>
+      <IBU_Min>25</IBU_Min>
+      <IBU_Max>40</IBU_Max>
+      <Colour_Min>13</Colour_Min>
+      <Colour_Max>19</Colour_Max>
+      <ABV_Min>4.5</ABV_Min>
+      <ABV_Max>5.2</ABV_Max>
+    </style>
+    <style>
+      <name>Northern English Brown Ale</name>
+      <OG_Min>1.040</OG_Min>
+      <OG_Max>1.052</OG_Max>
+      <FG_Min>1.008</FG_Min>
+      <FG_Max>1.013</FG_Max>
+      <IBU_Min>20</IBU_Min>
+      <IBU_Max>30</IBU_Max>
+      <Colour_Min>12</Colour_Min>
+      <Colour_Max>22</Colour_Max>
+      <ABV_Min>4.2</ABV_Min>
+      <ABV_Max>5.4</ABV_Max>
+    </style>
+    <style>
+      <name>Oatmeal Stout</name>
+      <OG_Min>1.048</OG_Min>
+      <OG_Max>1.065</OG_Max>
+      <FG_Min>1.010</FG_Min>
+      <FG_Max>1.018</FG_Max>
+      <IBU_Min>25</IBU_Min>
+      <IBU_Max>40</IBU_Max>
+      <Colour_Min>22</Colour_Min>
+      <Colour_Max>40</Colour_Max>
+      <ABV_Min>4.2</ABV_Min>
+      <ABV_Max>5.9</ABV_Max>
+    </style>
+    <style>
+      <name>Oktoberfest/Marzen</name>
+      <OG_Min>1.050</OG_Min>
+      <OG_Max>1.057</OG_Max>
+      <FG_Min>1.012</FG_Min>
+      <FG_Max>1.016</FG_Max>
+      <IBU_Min>20</IBU_Min>
+      <IBU_Max>28</IBU_Max>
+      <Colour_Min>7</Colour_Min>
+      <Colour_Max>14</Colour_Max>
+      <ABV_Min>4.8</ABV_Min>
+      <ABV_Max>5.7</ABV_Max>
+    </style>
+    <style>
+      <name>Old Ale</name>
+      <OG_Min>1.060</OG_Min>
+      <OG_Max>1.090</OG_Max>
+      <FG_Min>1.015</FG_Min>
+      <FG_Max>1.022</FG_Max>
+      <IBU_Min>30</IBU_Min>
+      <IBU_Max>60</IBU_Max>
+      <Colour_Min>10</Colour_Min>
+      <Colour_Max>22</Colour_Max>
+      <ABV_Min>6.0</ABV_Min>
+      <ABV_Max>9.0</ABV_Max>
+    </style>
+    <style>
+      <name>Other Smoked Beer</name>
+      <OG_Min>1.030</OG_Min>
+      <OG_Max>1.110</OG_Max>
+      <FG_Min>1.006</FG_Min>
+      <FG_Max>1.024</FG_Max>
+      <IBU_Min>5</IBU_Min>
+      <IBU_Max>70</IBU_Max>
+      <Colour_Min>5</Colour_Min>
+      <Colour_Max>50</Colour_Max>
+      <ABV_Min>2.5</ABV_Min>
+      <ABV_Max>12.0</ABV_Max>
+    </style>
+    <style>
+      <name>Premium American Lager</name>
+      <OG_Min>1.046</OG_Min>
+      <OG_Max>1.056</OG_Max>
+      <FG_Min>1.008</FG_Min>
+      <FG_Max>1.012</FG_Max>
+      <IBU_Min>15</IBU_Min>
+      <IBU_Max>25</IBU_Max>
+      <Colour_Min>2</Colour_Min>
+      <Colour_Max>6</Colour_Max>
+      <ABV_Min>4.6</ABV_Min>
+      <ABV_Max>6.0</ABV_Max>
+    </style>
+    <style>
+      <name>Robust Porter</name>
+      <OG_Min>1.048</OG_Min>
+      <OG_Max>1.065</OG_Max>
+      <FG_Min>1.012</FG_Min>
+      <FG_Max>1.016</FG_Max>
+      <IBU_Min>25</IBU_Min>
+      <IBU_Max>50</IBU_Max>
+      <Colour_Min>22</Colour_Min>
+      <Colour_Max>35</Colour_Max>
+      <ABV_Min>4.8</ABV_Min>
+      <ABV_Max>6.5</ABV_Max>
+    </style>
+    <style>
+      <name>Roggenbier (German Rye Beer)</name>
+      <OG_Min>1.046</OG_Min>
+      <OG_Max>1.056</OG_Max>
+      <FG_Min>1.010</FG_Min>
+      <FG_Max>1.014</FG_Max>
+      <IBU_Min>10</IBU_Min>
+      <IBU_Max>20</IBU_Max>
+      <Colour_Min>14</Colour_Min>
+      <Colour_Max>19</Colour_Max>
+      <ABV_Min>4.5</ABV_Min>
+      <ABV_Max>6.0</ABV_Max>
+    </style>
+    <style>
+      <name>Saison</name>
+      <OG_Min>1.048</OG_Min>
+      <OG_Max>1.065</OG_Max>
+      <FG_Min>1.002</FG_Min>
+      <FG_Max>1.012</FG_Max>
+      <IBU_Min>20</IBU_Min>
+      <IBU_Max>35</IBU_Max>
+      <Colour_Min>5</Colour_Min>
+      <Colour_Max>14</Colour_Max>
+      <ABV_Min>5.0</ABV_Min>
+      <ABV_Max>7.0</ABV_Max>
+    </style>
+    <style>
+      <name>Schwarzbier</name>
+      <OG_Min>1.046</OG_Min>
+      <OG_Max>1.052</OG_Max>
+      <FG_Min>1.010</FG_Min>
+      <FG_Max>1.016</FG_Max>
+      <IBU_Min>22</IBU_Min>
+      <IBU_Max>32</IBU_Max>
+      <Colour_Min>17</Colour_Min>
+      <Colour_Max>30</Colour_Max>
+      <ABV_Min>4.4</ABV_Min>
+      <ABV_Max>5.4</ABV_Max>
+    </style>
+    <style>
+      <name>Scottish Light 60/-</name>
+      <OG_Min>1.030</OG_Min>
+      <OG_Max>1.035</OG_Max>
+      <FG_Min>1.010</FG_Min>
+      <FG_Max>1.013</FG_Max>
+      <IBU_Min>10</IBU_Min>
+      <IBU_Max>20</IBU_Max>
+      <Colour_Min>9</Colour_Min>
+      <Colour_Max>17</Colour_Max>
+      <ABV_Min>2.5</ABV_Min>
+      <ABV_Max>3.2</ABV_Max>
+    </style>
+    <style>
+      <name>Scottish Light 70/-</name>
+      <OG_Min>1.035</OG_Min>
+      <OG_Max>1.040</OG_Max>
+      <FG_Min>1.010</FG_Min>
+      <FG_Max>1.013</FG_Max>
+      <IBU_Min>10</IBU_Min>
+      <IBU_Max>25</IBU_Max>
+      <Colour_Min>9</Colour_Min>
+      <Colour_Max>17</Colour_Max>
+      <ABV_Min>3.2</ABV_Min>
+      <ABV_Max>3.9</ABV_Max>
+    </style>
+    <style>
+      <name>Scottish Light 80/-</name>
+      <OG_Min>1.040</OG_Min>
+      <OG_Max>1.054</OG_Max>
+      <FG_Min>1.010</FG_Min>
+      <FG_Max>1.015</FG_Max>
+      <IBU_Min>15</IBU_Min>
+      <IBU_Max>30</IBU_Max>
+      <Colour_Min>9</Colour_Min>
+      <Colour_Max>17</Colour_Max>
+      <ABV_Min>3.9</ABV_Min>
+      <ABV_Max>5.0</ABV_Max>
+    </style>
+    <style>
+      <name>Southern English Brown Ale</name>
+      <OG_Min>1.033</OG_Min>
+      <OG_Max>1.042</OG_Max>
+      <FG_Min>1.011</FG_Min>
+      <FG_Max>1.014</FG_Max>
+      <IBU_Min>12</IBU_Min>
+      <IBU_Max>20</IBU_Max>
+      <Colour_Min>19</Colour_Min>
+      <Colour_Max>35</Colour_Max>
+      <ABV_Min>2.8</ABV_Min>
+      <ABV_Max>4.1</ABV_Max>
+    </style>
+    <style>
+      <name>Special/Best/Premium Bitter</name>
+      <OG_Min>1.040</OG_Min>
+      <OG_Max>1.048</OG_Max>
+      <FG_Min>1.008</FG_Min>
+      <FG_Max>1.012</FG_Max>
+      <IBU_Min>25</IBU_Min>
+      <IBU_Max>40</IBU_Max>
+      <Colour_Min>5</Colour_Min>
+      <Colour_Max>16</Colour_Max>
+      <ABV_Min>3.8</ABV_Min>
+      <ABV_Max>4.6</ABV_Max>
+    </style>
+    <style>
+      <name>Specialty Beer</name>
+      <OG_Min>1.030</OG_Min>
+      <OG_Max>1.110</OG_Max>
+      <FG_Min>1.006</FG_Min>
+      <FG_Max>1.024</FG_Max>
+      <IBU_Min>5</IBU_Min>
+      <IBU_Max>70</IBU_Max>
+      <Colour_Min>5</Colour_Min>
+      <Colour_Max>50</Colour_Max>
+      <ABV_Min>2.5</ABV_Min>
+      <ABV_Max>12.0</ABV_Max>
+    </style>
+    <style>
+      <name>Spice, Herb, or Vegetable Beer</name>
+      <OG_Min>1.030</OG_Min>
+      <OG_Max>1.110</OG_Max>
+      <FG_Min>1.005</FG_Min>
+      <FG_Max>1.025</FG_Max>
+      <IBU_Min>0</IBU_Min>
+      <IBU_Max>70</IBU_Max>
+      <Colour_Min>5</Colour_Min>
+      <Colour_Max>50</Colour_Max>
+      <ABV_Min>2.5</ABV_Min>
+      <ABV_Max>12.0</ABV_Max>
+    </style>
+    <style>
+      <name>Standard American Lager</name>
+      <OG_Min>1.040</OG_Min>
+      <OG_Max>1.050</OG_Max>
+      <FG_Min>1.004</FG_Min>
+      <FG_Max>1.010</FG_Max>
+      <IBU_Min>8</IBU_Min>
+      <IBU_Max>15</IBU_Max>
+      <Colour_Min>2</Colour_Min>
+      <Colour_Max>4</Colour_Max>
+      <ABV_Min>4.2</ABV_Min>
+      <ABV_Max>5.3</ABV_Max>
+    </style>
+    <style>
+      <name>Standard/Ordinary Bitter</name>
+      <OG_Min>1.032</OG_Min>
+      <OG_Max>1.040</OG_Max>
+      <FG_Min>1.007</FG_Min>
+      <FG_Max>1.011</FG_Max>
+      <IBU_Min>25</IBU_Min>
+      <IBU_Max>35</IBU_Max>
+      <Colour_Min>4</Colour_Min>
+      <Colour_Max>14</Colour_Max>
+      <ABV_Min>3.2</ABV_Min>
+      <ABV_Max>3.8</ABV_Max>
+    </style>
+    <style>
+      <name>Straight (Unblended) Lambic</name>
+      <OG_Min>1.040</OG_Min>
+      <OG_Max>1.054</OG_Max>
+      <FG_Min>1.001</FG_Min>
+      <FG_Max>1.010</FG_Max>
+      <IBU_Min>0</IBU_Min>
+      <IBU_Max>10</IBU_Max>
+      <Colour_Min>3</Colour_Min>
+      <Colour_Max>7</Colour_Max>
+      <ABV_Min>5.0</ABV_Min>
+      <ABV_Max>6.5</ABV_Max>
+    </style>
+    <style>
+      <name>Strong Scotch Ale</name>
+      <OG_Min>1.070</OG_Min>
+      <OG_Max>1.130</OG_Max>
+      <FG_Min>1.018</FG_Min>
+      <FG_Max>1.056</FG_Max>
+      <IBU_Min>17</IBU_Min>
+      <IBU_Max>35</IBU_Max>
+      <Colour_Min>14</Colour_Min>
+      <Colour_Max>25</Colour_Max>
+      <ABV_Min>6.5</ABV_Min>
+      <ABV_Max>10.0</ABV_Max>
+    </style>
+    <style>
+      <name>Sweet Stout</name>
+      <OG_Min>1.044</OG_Min>
+      <OG_Max>1.060</OG_Max>
+      <FG_Min>1.012</FG_Min>
+      <FG_Max>1.024</FG_Max>
+      <IBU_Min>20</IBU_Min>
+      <IBU_Max>40</IBU_Max>
+      <Colour_Min>30</Colour_Min>
+      <Colour_Max>40</Colour_Max>
+      <ABV_Min>4.0</ABV_Min>
+      <ABV_Max>6.0</ABV_Max>
+    </style>
+    <style>
+      <name>Traditional Bock</name>
+      <OG_Min>1.064</OG_Min>
+      <OG_Max>1.072</OG_Max>
+      <FG_Min>1.013</FG_Min>
+      <FG_Max>1.019</FG_Max>
+      <IBU_Min>20</IBU_Min>
+      <IBU_Max>27</IBU_Max>
+      <Colour_Min>14</Colour_Min>
+      <Colour_Max>22</Colour_Max>
+      <ABV_Min>6.3</ABV_Min>
+      <ABV_Max>7.2</ABV_Max>
+    </style>
+    <style>
+      <name>Vienna Lager</name>
+      <OG_Min>1.046</OG_Min>
+      <OG_Max>1.052</OG_Max>
+      <FG_Min>1.010</FG_Min>
+      <FG_Max>1.014</FG_Max>
+      <IBU_Min>18</IBU_Min>
+      <IBU_Max>30</IBU_Max>
+      <Colour_Min>10</Colour_Min>
+      <Colour_Max>16</Colour_Max>
+      <ABV_Min>4.5</ABV_Min>
+      <ABV_Max>5.5</ABV_Max>
+    </style>
+    <style>
+      <name>Weizen/Weissbier</name>
+      <OG_Min>1.044</OG_Min>
+      <OG_Max>1.052</OG_Max>
+      <FG_Min>1.010</FG_Min>
+      <FG_Max>1.014</FG_Max>
+      <IBU_Min>8</IBU_Min>
+      <IBU_Max>15</IBU_Max>
+      <Colour_Min>2</Colour_Min>
+      <Colour_Max>8</Colour_Max>
+      <ABV_Min>4.3</ABV_Min>
+      <ABV_Max>5.6</ABV_Max>
+    </style>
+    <style>
+      <name>Weizenbock</name>
+      <OG_Min>1.064</OG_Min>
+      <OG_Max>1.090</OG_Max>
+      <FG_Min>1.015</FG_Min>
+      <FG_Max>1.022</FG_Max>
+      <IBU_Min>15</IBU_Min>
+      <IBU_Max>30</IBU_Max>
+      <Colour_Min>12</Colour_Min>
+      <Colour_Max>25</Colour_Max>
+      <ABV_Min>6.5</ABV_Min>
+      <ABV_Max>8.0</ABV_Max>
+    </style>
+    <style>
+      <name>Witbier</name>
+      <OG_Min>1.044</OG_Min>
+      <OG_Max>1.052</OG_Max>
+      <FG_Min>1.008</FG_Min>
+      <FG_Max>1.012</FG_Max>
+      <IBU_Min>10</IBU_Min>
+      <IBU_Max>20</IBU_Max>
+      <Colour_Min>2</Colour_Min>
+      <Colour_Max>4</Colour_Max>
+      <ABV_Min>4,5</ABV_Min>
+      <ABV_Max>5.5</ABV_Max>
+    </style>
+    <style>
+      <name>Wood-Aged Beer</name>
+      <OG_Min>1.030</OG_Min>
+      <OG_Max>1.110</OG_Max>
+      <FG_Min>1.006</FG_Min>
+      <FG_Max>1.024</FG_Max>
+      <IBU_Min>5</IBU_Min>
+      <IBU_Max>70</IBU_Max>
+      <Colour_Min>5</Colour_Min>
+      <Colour_Max>50</Colour_Max>
+      <ABV_Min>2.5</ABV_Min>
+      <ABV_Max>12.0</ABV_Max>
+    </style>
+  </styles>
+  <grains>
+    <grain>
+      <name>Acidulated Malt</name>
+      <type>Grain</type>
+      <colour>1.8</colour>
+      <potential>1.030</potential>
+    </grain>
+    <grain>
+      <name>Amber Malt</name>
+      <type>Grain</type>
+      <colour>22.0</colour>
+      <potential>1.035</potential>
+    </grain>
+    <grain>
+      <name>American 2-Row</name>
+      <type>Grain</type>
+      <colour>1.8</colour>
+      <potential>1.037</potential>
+    </grain>
+    <grain>
+      <name>American 6-Row</name>
+      <type>Grain</type>
+      <colour>1.8</colour>
+      <potential>1.035</potential>
+    </grain>
+    <grain>
+      <name>Aromatic Malt</name>
+      <type>Grain</type>
+      <colour>20.0</colour>
+      <potential>1.036</potential>
+    </grain>
+    <grain>
+      <name>Biscuit</name>
+      <type>Grain</type>
+      <colour>25.0</colour>
+      <potential>1.036</potential>
+    </grain>
+    <grain>
+      <name>Black Malt</name>
+      <type>Grain</type>
+      <colour>600.0</colour>
+      <potential>1.034</potential>
+    </grain>
+    <grain>
+      <name>Black Patent</name>
+      <type>Grain</type>
+      <colour>525.0</colour>
+      <potential>1.025</potential>
+    </grain>
+    <grain>
+      <name>Black Roasted Barley</name>
+      <type>Grain</type>
+      <colour>500.0</colour>
+      <potential>1.025</potential>
+    </grain>
+    <grain>
+      <name>Brown Malt</name>
+      <type>Grain</type>
+      <colour>70.0</colour>
+      <potential>1.032</potential>
+    </grain>
+    <grain>
+      <name>Brown Sugar, Dark</name>
+      <type>Sugar</type>
+      <colour>50.0</colour>
+      <potential>1.046</potential>
+    </grain>
+    <grain>
+      <name>Brown Sugar, Light</name>
+      <type>Sugar</type>
+      <colour>8.0</colour>
+      <potential>1.046</potential>
+    </grain>
+    <grain>
+      <name>Candi Sugar, Amber</name>
+      <type>Sugar</type>
+      <colour>75.0</colour>
+      <potential>1.036</potential>
+    </grain>
+    <grain>
+      <name>Candi Sugar, Clear</name>
+      <type>Sugar</type>
+      <colour>0.5</colour>
+      <potential>1.036</potential>
+    </grain>
+    <grain>
+      <name>Candi Sugar, Dark</name>
+      <type>Sugar</type>
+      <colour>275.0</colour>
+      <potential>1.036</potential>
+    </grain>
+    <grain>
+      <name>Cane Sugar</name>
+      <type>Sugar</type>
+      <colour>0.0</colour>
+      <potential>1.046</potential>
+    </grain>
+    <grain>
+      <name>Caraamber</name>
+      <type>Grain</type>
+      <colour>36.0</colour>
+      <potential>1.037</potential>
+    </grain>
+    <grain>
+      <name>Caraaroma</name>
+      <type>Grain</type>
+      <colour>130.0</colour>
+      <potential>1.035</potential>
+    </grain>
+    <grain>
+      <name>Carafa I malt</name>
+      <type>Grain</type>
+      <colour>320.0</colour>
+      <potential>1.036</potential>
+    </grain>
+    <grain>
+      <name>Carafa II malt</name>
+      <type>Grain</type>
+      <colour>415.0</colour>
+      <potential>1.036</potential>
+    </grain>
+    <grain>
+      <name>Carafa III malt</name>
+      <type>Grain</type>
+      <colour>525.0</colour>
+      <potential>1.036</potential>
+    </grain>
+    <grain>
+      <name>Carahell</name>
+      <type>Grain</type>
+      <colour>13.0</colour>
+      <potential>1.035</potential>
+    </grain>
+    <grain>
+      <name>Caramalt</name>
+      <type>Grain</type>
+      <colour>25.0</colour>
+      <potential>1.036</potential>
+    </grain>
+    <grain>
+      <name>Caramunich I</name>
+      <type>Grain</type>
+      <colour>51.0</colour>
+      <potential>1.036</potential>
+    </grain>
+    <grain>
+      <name>Caramunich II</name>
+      <type>Grain</type>
+      <colour>63.0</colour>
+      <potential>1.035</potential>
+    </grain>
+    <grain>
+      <name>Caramunich III</name>
+      <type>Grain</type>
+      <colour>71.0</colour>
+      <potential>1.037</potential>
+    </grain>
+    <grain>
+      <name>Carapils (Dextrine)</name>
+      <type>Grain</type>
+      <colour>1.0</colour>
+      <potential>1.033</potential>
+    </grain>
+    <grain>
+      <name>Carared</name>
+      <type>Grain</type>
+      <colour>24.0</colour>
+      <potential>1.036</potential>
+    </grain>
+    <grain>
+      <name>Caravienna</name>
+      <type>Grain</type>
+      <colour>20.0</colour>
+      <potential>1.034</potential>
+    </grain>
+    <grain>
+      <name>Chocolate</name>
+      <type>Grain</type>
+      <colour>350.0</colour>
+      <potential>1.029</potential>
+    </grain>
+    <grain>
+      <name>Chocolate, Pale</name>
+      <type>Grain</type>
+      <colour>200.0</colour>
+      <potential>1.030</potential>
+    </grain>
+    <grain>
+      <name>Corn Sugar</name>
+      <type>Sugar</type>
+      <colour>0.0</colour>
+      <potential>1.046</potential>
+    </grain>
+    <grain>
+      <name>Crystal 10</name>
+      <type>Grain</type>
+      <colour>10.0</colour>
+      <potential>1.035</potential>
+    </grain>
+    <grain>
+      <name>Crystal 120</name>
+      <type>Grain</type>
+      <colour>120.0</colour>
+      <potential>1.033</potential>
+    </grain>
+    <grain>
+      <name>Crystal 140</name>
+      <type>Grain</type>
+      <colour>140</colour>
+      <potential>1.033</potential>
+    </grain>
+    <grain>
+      <name>Crystal 15</name>
+      <type>Grain</type>
+      <colour>15.0</colour>
+      <potential>1.035</potential>
+    </grain>
+    <grain>
+      <name>Crystal 20</name>
+      <type>Grain</type>
+      <colour>20.0</colour>
+      <potential>1.035</potential>
+    </grain>
+    <grain>
+      <name>Crystal 30</name>
+      <type>Grain</type>
+      <colour>30.0</colour>
+      <potential>1.035</potential>
+    </grain>
+    <grain>
+      <name>Crystal 40</name>
+      <type>Grain</type>
+      <colour>40.0</colour>
+      <potential>1.034</potential>
+    </grain>
+    <grain>
+      <name>Crystal 60</name>
+      <type>Grain</type>
+      <colour>60.0</colour>
+      <potential>1.034</potential>
+    </grain>
+    <grain>
+      <name>Crystal 80</name>
+      <type>Grain</type>
+      <colour>80.0</colour>
+      <potential>1.034</potential>
+    </grain>
+    <grain>
+      <name>Crystal 90</name>
+      <type>Grain</type>
+      <colour>90.0</colour>
+      <potential>1.033</potential>
+    </grain>
+    <grain>
+      <name>Dextrose</name>
+      <type>Sugar</type>
+      <colour>0.0</colour>
+      <potential>1.046</potential>
+    </grain>
+    <grain>
+      <name>Dry Malt Extract - Amber</name>
+      <type>Extract</type>
+      <colour>12.5</colour>
+      <potential>1.045</potential>
+    </grain>
+    <grain>
+      <name>Dry Malt Extract - Dark</name>
+      <type>Extract</type>
+      <colour>18.0</colour>
+      <potential>1.044</potential>
+    </grain>
+    <grain>
+      <name>Dry Malt Extract - Light</name>
+      <type>Extract</type>
+      <colour>7.5</colour>
+      <potential>1.045</potential>
+    </grain>
+    <grain>
+      <name>Flaked Barley</name>
+      <type>Grain</type>
+      <colour>1.7</colour>
+      <potential>1.032</potential>
+    </grain>
+    <grain>
+      <name>Flaked Corn</name>
+      <type>Adjunct</type>
+      <colour>1.3</colour>
+      <potential>1.037</potential>
+    </grain>
+    <grain>
+      <name>Flaked Oats</name>
+      <type>Adjunct</type>
+      <colour>1.0</colour>
+      <potential>1.037</potential>
+    </grain>
+    <grain>
+      <name>Flaked Rice</name>
+      <type>Adjunct</type>
+      <colour>1.0</colour>
+      <potential>1.032</potential>
+    </grain>
+    <grain>
+      <name>Flaked Rye</name>
+      <type>Adjunct</type>
+      <colour>2.0</colour>
+      <potential>1.036</potential>
+    </grain>
+    <grain>
+      <name>Flaked Wheat</name>
+      <type>Adjunct</type>
+      <colour>1.6</colour>
+      <potential>1.035</potential>
+    </grain>
+    <grain>
+      <name>Golden Promise Malt</name>
+      <type>Grain</type>
+      <colour>3.0</colour>
+      <potential>1.038</potential>
+    </grain>
+    <grain>
+      <name>Honey</name>
+      <type>Sugar</type>
+      <colour>1.0</colour>
+      <potential>1.035</potential>
+    </grain>
+    <grain>
+      <name>Honey Malt</name>
+      <type>Grain</type>
+      <colour>25.0</colour>
+      <potential>1.037</potential>
+    </grain>
+    <grain>
+      <name>Liquid Malt Extract - Amber</name>
+      <type>Extract</type>
+      <colour>9.0</colour>
+      <potential>1.036</potential>
+    </grain>
+    <grain>
+      <name>Liquid Malt Extract - Dark</name>
+      <type>Extract</type>
+      <colour>15.0</colour>
+      <potential>1.036</potential>
+    </grain>
+    <grain>
+      <name>Liquid Malt Extract - Light</name>
+      <type>Extract</type>
+      <colour>5.0</colour>
+      <potential>1.037</potential>
+    </grain>
+    <grain>
+      <name>Liquid Malt Extract - Wheat</name>
+      <type>Extract</type>
+      <colour>3.0</colour>
+      <potential>1.037</potential>
+    </grain>
+    <grain>
+      <name>Maris Otter Malt</name>
+      <type>Grain</type>
+      <colour>4.0</colour>
+      <potential>1.038</potential>
+    </grain>
+    <grain>
+      <name>Melanoidin</name>
+      <type>Grain</type>
+      <colour>30.0</colour>
+      <potential>1.037</potential>
+    </grain>
+    <grain>
+      <name>Munich I</name>
+      <type>Grain</type>
+      <colour>7.1</colour>
+      <potential>1.038</potential>
+    </grain>
+    <grain>
+      <name>Munich II</name>
+      <type>Grain</type>
+      <colour>8.5</colour>
+      <potential>1.038</potential>
+    </grain>
+    <grain>
+      <name>Pale Ale Malt</name>
+      <type>Grain</type>
+      <colour>3.0</colour>
+      <potential>1.038</potential>
+    </grain>
+    <grain>
+      <name>Pale Malt</name>
+      <type>Grain</type>
+      <colour>2.0</colour>
+      <potential>1.037</potential>
+    </grain>
+    <grain>
+      <name>Peated Malt</name>
+      <type>Grain</type>
+      <colour>2.8</colour>
+      <potential>1.034</potential>
+    </grain>
+    <grain>
+      <name>Pilsner</name>
+      <type>Grain</type>
+      <colour>1.7</colour>
+      <potential>1.037</potential>
+    </grain>
+    <grain>
+      <name>Rauchmalt</name>
+      <type>Grain</type>
+      <colour>14.0</colour>
+      <potential>1.037</potential>
+    </grain>
+    <grain>
+      <name>Rice Hulls</name>
+      <type>Adjunct</type>
+      <colour>0.0</colour>
+      <potential>1.000</potential>
+    </grain>
+    <grain>
+      <name>Roasted Barley</name>
+      <type>Grain</type>
+      <colour>450.0</colour>
+      <potential>1.028</potential>
+    </grain>
+    <grain>
+      <name>Rye Malt</name>
+      <type>Grain</type>
+      <colour>3.5</colour>
+      <potential>1.030</potential>
+    </grain>
+    <grain>
+      <name>Special Roast</name>
+      <type>Grain</type>
+      <colour>50.0</colour>
+      <potential>1.033</potential>
+    </grain>
+    <grain>
+      <name>Special-B</name>
+      <type>Grain</type>
+      <colour>180.0</colour>
+      <potential>1.030</potential>
+    </grain>
+    <grain>
+      <name>Torrified Wheat</name>
+      <type>Grain</type>
+      <colour>2.0</colour>
+      <potential>1.035</potential>
+    </grain>
+    <grain>
+      <name>Victory</name>
+      <type>Grain</type>
+      <colour>25.0</colour>
+      <potential>1.034</potential>
+    </grain>
+    <grain>
+      <name>Vienna</name>
+      <type>Grain</type>
+      <colour>3.0</colour>
+      <potential>1.038</potential>
+    </grain>
+    <grain>
+      <name>Wheat Malt</name>
+      <type>Grain</type>
+      <colour>2.0</colour>
+      <potential>1.038</potential>
+    </grain>
+    <grain>
+      <name>Wheat Malt, Dark</name>
+      <type>Grain</type>
+      <colour>7.0</colour>
+      <potential>1.038</potential>
+    </grain>
+    <grain>
+      <name>Wheat Roasted</name>
+      <type>Grain</type>
+      <colour>300</colour>
+      <potential>1.025</potential>
+    </grain>
+  </grains>
+  <hops>
+    <hop>
+      <name>Admiral</name>
+      <alpha>10.6</alpha>
+    </hop>
+    <hop>
+      <name>Ahtanum</name>
+      <alpha>5.2</alpha>
+    </hop>
+    <hop>
+      <name>Amarillo</name>
+      <alpha>8.6</alpha>
+    </hop>
+    <hop>
+      <name>Aquila</name>
+      <alpha>6.5</alpha>
+    </hop>
+    <hop>
+      <name>B Saaz</name>
+      <alpha>6.8</alpha>
+    </hop>
+    <hop>
+      <name>Banner</name>
+      <alpha>10.0</alpha>
+    </hop>
+    <hop>
+      <name>Boadicea</name>
+      <alpha>7.1</alpha>
+    </hop>
+    <hop>
+      <name>Bramling Cross</name>
+      <alpha>5.1</alpha>
+    </hop>
+    <hop>
+      <name>Brewers Gold</name>
+      <alpha>5.0</alpha>
+    </hop>
+    <hop>
+      <name>Bullion</name>
+      <alpha>9.5</alpha>
+    </hop>
+    <hop>
+      <name>Cascade</name>
+      <alpha>7.8</alpha>
+    </hop>
+    <hop>
+      <name>Cascade USA</name>
+      <alpha>5.5</alpha>
+    </hop>
+    <hop>
+      <name>Centennial</name>
+      <alpha>9.7</alpha>
+    </hop>
+    <hop>
+      <name>Challenger</name>
+      <alpha>6.1</alpha>
+    </hop>
+    <hop>
+      <name>Chinook</name>
+      <alpha>11.4</alpha>
+    </hop>
+    <hop>
+      <name>Citra</name>
+      <alpha>11.1</alpha>
+    </hop>
+    <hop>
+      <name>Cluster</name>
+      <alpha>5.7</alpha>
+    </hop>
+    <hop>
+      <name>Columbia</name>
+      <alpha>5.5</alpha>
+    </hop>
+    <hop>
+      <name>Columbus</name>
+      <alpha>14.2</alpha>
+    </hop>
+    <hop>
+      <name>Cornet</name>
+      <alpha>9.5</alpha>
+    </hop>
+    <hop>
+      <name>Crystal</name>
+      <alpha>4.3</alpha>
+    </hop>
+    <hop>
+      <name>D Saaz</name>
+      <alpha>5.4</alpha>
+    </hop>
+    <hop>
+      <name>Delta</name>
+      <alpha>5</alpha>
+    </hop>
+    <hop>
+      <name>East Kent Golding</name>
+      <alpha>4.7</alpha>
+    </hop>
+    <hop>
+      <name>Eroica</name>
+      <alpha>2.4</alpha>
+    </hop>
+    <hop>
+      <name>First Gold</name>
+      <alpha>7.9</alpha>
+    </hop>
+    <hop>
+      <name>Fuggles</name>
+      <alpha>5.7</alpha>
+    </hop>
+    <hop>
+      <name>Galaxy</name>
+      <alpha>13.4</alpha>
+    </hop>
+    <hop>
+      <name>Galena</name>
+      <alpha>12.5</alpha>
+    </hop>
+    <hop>
+      <name>Galena</name>
+      <alpha>5.8</alpha>
+    </hop>
+    <hop>
+      <name>Green Bullet</name>
+      <alpha>13.6</alpha>
+    </hop>
+    <hop>
+      <name>Hallertau Aroma</name>
+      <alpha>8.1</alpha>
+    </hop>
+    <hop>
+      <name>Hallertau Mittlefrueh</name>
+      <alpha>6.3</alpha>
+    </hop>
+    <hop>
+      <name>Hallertau Tradition</name>
+      <alpha>5.7</alpha>
+    </hop>
+    <hop>
+      <name>Herald</name>
+      <alpha>12.0</alpha>
+    </hop>
+    <hop>
+      <name>Hersbrucker</name>
+      <alpha>2.8</alpha>
+    </hop>
+    <hop>
+      <name>Horizon</name>
+      <alpha>13.0</alpha>
+    </hop>
+    <hop>
+      <name>Liberty</name>
+      <alpha>4.5</alpha>
+    </hop>
+    <hop>
+      <name>Lublin</name>
+      <alpha>5.0</alpha>
+    </hop>
+    <hop>
+      <name>Magnum</name>
+      <alpha>12.5</alpha>
+    </hop>
+    <hop>
+      <name>Mapuche</name>
+      <alpha>7.7</alpha>
+    </hop>
+    <hop>
+      <name>Marco Polo</name>
+      <alpha>12.0</alpha>
+    </hop>
+    <hop>
+      <name>Millennium</name>
+      <alpha>14.4</alpha>
+    </hop>
+    <hop>
+      <name>Mt. Hood</name>
+      <alpha>5.2</alpha>
+    </hop>
+    <hop>
+      <name>Nelson Sauvin</name>
+      <alpha>11.5</alpha>
+    </hop>
+    <hop>
+      <name>Newport</name>
+      <alpha>11.0</alpha>
+    </hop>
+    <hop>
+      <name>Northdown</name>
+      <alpha>8.1</alpha>
+    </hop>
+    <hop>
+      <name>Northern Brewer</name>
+      <alpha>9.6</alpha>
+    </hop>
+    <hop>
+      <name>Nugget</name>
+      <alpha>12</alpha>
+    </hop>
+    <hop>
+      <name>Opal</name>
+      <alpha>10.0</alpha>
+    </hop>
+    <hop>
+      <name>Orion</name>
+      <alpha>7.2</alpha>
+    </hop>
+    <hop>
+      <name>Pacific Gem</name>
+      <alpha>13.7</alpha>
+    </hop>
+    <hop>
+      <name>Pacific Hallertau</name>
+      <alpha>5.8</alpha>
+    </hop>
+    <hop>
+      <name>Pacific Jade</name>
+      <alpha>15.2</alpha>
+    </hop>
+    <hop>
+      <name>Palisade</name>
+      <alpha>7.3</alpha>
+    </hop>
+    <hop>
+      <name>Perle</name>
+      <alpha>6.0</alpha>
+    </hop>
+    <hop>
+      <name>Phoenix</name>
+      <alpha>8.0</alpha>
+    </hop>
+    <hop>
+      <name>Pilgrim</name>
+      <alpha>10.4</alpha>
+    </hop>
+    <hop>
+      <name>Pioneer</name>
+      <alpha>9.5</alpha>
+    </hop>
+    <hop>
+      <name>Pride of Ringwood</name>
+      <alpha>8.3</alpha>
+    </hop>
+    <hop>
+      <name>Progress</name>
+      <alpha>7.3</alpha>
+    </hop>
+    <hop>
+      <name>Saaz</name>
+      <alpha>3.6</alpha>
+    </hop>
+    <hop>
+      <name>Santiam</name>
+      <alpha>6.7</alpha>
+    </hop>
+    <hop>
+      <name>Saphire</name>
+      <alpha>4.5</alpha>
+    </hop>
+    <hop>
+      <name>Simcoe</name>
+      <alpha>12.2</alpha>
+    </hop>
+    <hop>
+      <name>Smaragd</name>
+      <alpha>8.0</alpha>
+    </hop>
+    <hop>
+      <name>Sorachi</name>
+      <alpha>11.8</alpha>
+    </hop>
+    <hop>
+      <name>Southern Cross</name>
+      <alpha>14.8</alpha>
+    </hop>
+    <hop>
+      <name>Spalt</name>
+      <alpha>4.0</alpha>
+    </hop>
+    <hop>
+      <name>Sterling</name>
+      <alpha>7.5</alpha>
+    </hop>
+    <hop>
+      <name>Stickebract</name>
+      <alpha>14.0</alpha>
+    </hop>
+    <hop>
+      <name>Strisselspalt</name>
+      <alpha>2.0</alpha>
+    </hop>
+    <hop>
+      <name>Styrian Golding</name>
+      <alpha>4.4</alpha>
+    </hop>
+    <hop>
+      <name>Sun</name>
+      <alpha>14.0</alpha>
+    </hop>
+    <hop>
+      <name>Super Alpha</name>
+      <alpha>12.0</alpha>
+    </hop>
+    <hop>
+      <name>Super Pride</name>
+      <alpha>13.0</alpha>
+    </hop>
+    <hop>
+      <name>Target</name>
+      <alpha>9.0</alpha>
+    </hop>
+    <hop>
+      <name>Tarus</name>
+      <alpha>13.0</alpha>
+    </hop>
+    <hop>
+      <name>Tettnanger</name>
+      <alpha>4.0</alpha>
+    </hop>
+    <hop>
+      <name>Tomahawk</name>
+      <alpha>14.5</alpha>
+    </hop>
+    <hop>
+      <name>Topaz</name>
+      <alpha>16.2</alpha>
+    </hop>
+    <hop>
+      <name>Tradition</name>
+      <alpha>6.0</alpha>
+    </hop>
+    <hop>
+      <name>Ultra</name>
+      <alpha>3.3</alpha>
+    </hop>
+    <hop>
+      <name>Vanguard</name>
+      <alpha>5.0</alpha>
+    </hop>
+    <hop>
+      <name>Warrior</name>
+      <alpha>15.8</alpha>
+    </hop>
+    <hop>
+      <name>Willamette</name>
+      <alpha>7.1</alpha>
+    </hop>
+    <hop>
+      <name>Zeus</name>
+      <alpha>13.5</alpha>
+    </hop>
+  </hops>
+  <yeasts>
+    <yeast>
+      <name>Ale yeast</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Lager yeast</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Safbrew T-58</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Safbrew S-33</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Safbrew WB-06</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Safale S-04</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Safale US-05</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Safale K-97</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Saflager S-23</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Saflager S-189</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Saflager W-34/70</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Safeale S-04</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Danstar Munich</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Danstar Nottingham</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Danstar Windsor</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 1007 - German Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 1010 - American Wheat</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 1028 - London Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 1056 - American Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 1084 - Irish Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 1098 - British Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 1099 - Whitbread Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 1187 - Ringwood Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 1272 - American Ale II</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 1275 - Thames Valley Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 1318 - London Ale III</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 1332 - Northwest Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 1335 - British Ale II</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 1338 - European Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 1469 - West Yorkshire Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 1728 - Scottish Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 1968 - London ESB Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 2565 - Kölsch</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 2000 - Budvar Lager</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 2001 - Urquell Lager</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 2007 - Pilsen Lager</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 2035 - American Lager</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 2042 - Danish Lager</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 2112 - California Lager</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 2124 - Bohemian Lager</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 2206 - Bavarian Lager</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 2278 - Czech Pils</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 2308 - Munich Lager</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 2633 - Octoberfest Lager Blend</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 1214 - Belgian Abbey</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 1388 - Belgian Strong Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 1762 - Belgian Abbey II</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 3056 - Bavarian Wheat Blend</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 3068 - Weihenstephan Weizen</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 3278 - Belgian Lambic Blend</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 3333 - German Wheat</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 3463 - Forbidden Fruit</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 3522 - Belgian Ardennes</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 3638 - Bavarian Wheat</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 3724 - Belgian Saison</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 3787 - Trappist High Gravity</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 3942 - Belgian Wheat</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 3944 - Belgian Witbier</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 5112 - Brettanomyces bruxellensis</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 5335 - Lactobacillus</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 5526 - Brettanomyces lambicus</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>Wyeast 5733 - Pediococcus</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP001 - California Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP002 - English Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP004 - Irish Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP005 - British Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP006 - Bedford British</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP007 - Dry English Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP008 - East Coast Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP009 - Australian Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP011 - European Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP013 - London Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP022 - Essex Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP023 - Burton Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP026 - Premium Bitter Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP028 - Edinburgh Scottish Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP029 - German Ale/Kolsch</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP036 - Dusseldorf Alt</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP037 - Yorkshire Square Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP038 - Manchester Ale Yeast</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP039 - Nottingham Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP041 - Pacific Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP060 - American Ale Yeast Blend</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP072 - French Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP080 - Cream Ale Blend</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP099 - Super High Gravity Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP300 - Hefeweizen Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP320 - American Hefeweizen Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP351 - Bavarian Weizen</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP380 - Hefeweizen IV Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP400 - Belgian Wit Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP410 - Belgian Wit II Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP500 - Trappist Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP510 - Belgian Bastogne Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP515 - Antwerp Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP530 - Abbey Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP540 - Abbey IV Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP545 - Belgian Strong Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP550 - Belgian Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP565 - Belgian Saison I</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP566 - Belgian Saison II</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP568 - Belgian Style Saison Ale Blend</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP570 - Belgian Golden Ale</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP575 - Belgian Style Ale Blend</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP800 - Pilsner Lager</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP802 - Czech Budejovice Lager</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP810 - San Francisco Lager</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP820 - Oktoberfest/Märzen Lager</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP830 - German Lager</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP833 - German Bock Lager</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP838 - Southern German Lager</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP840 - American Lager</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP862 - Cry Havoc</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP885 - Zurich Lager</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP940 - Mexican Lager</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP645 - Brettanomyces claussenii</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP650 - Brettanomyces bruxellensis</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP653 - Brettanomyces lambicus</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP655 - Belgian Sour Mix 1</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP675 - Malolactic Bacteria</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>WLP677 - Lactobacillus Bacteria</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-09 - AMERICAN ALE</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-10 - AMERICAN SIERRA ALE</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-11 - ENGLISH LONDON ALE</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-12 - IRISH ALE</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-13 - ENGLISH RINGWOOD</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-14 - ENGLISH LONDON OAK</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-15 - ENGLISH THAMES ALE</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-16 - GERMAN KOLSCH</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-17 - BREWER’S MATE</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-18 - GERMAN HEFEWEIZEN</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-19 - BELGIAN WHITE</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-20 - BELGIAN TRAPPIST ALE</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-21 - BELGIAN ACHOUFFE</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-22 - BELGIAN SAISON</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-23 - CZECH LAGER</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-24 - CZECH PILSENER</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-25 - AMERICAN LAGER</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-26 - GERMAN OCTOBERFEST</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-27 - GERMAN STH BAVARIAN</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-28 - STH GERMAN LAGER</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-29 - WEST EUROPEAN LAGER</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-30 - BRETTANOMYCES CLAUSSENII</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-31 - BRETTANOMYCES BRUXELLENSIS</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-32 - BRETTANOMYCES LAMBICUS</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-33 - BELGIAN SOUR MIX I</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-34 - MALOLACTIC CULTURE</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-35 - LACTOBACILLUS CULTURE</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-41 - GERMAN WHEAT</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-42 - BELGIAN WHEAT</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-43 - BELGIAN WIT</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-44 - GERMAN BAVARIAN</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-45 - GERMAN HEFEWEISSE</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-46 - GERMAN MARZEN</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-47 - GERMAN ALTBIER</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-48 - LONDON ALE</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-60 - AMERICAN WHEAT</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-61 - ENGLISH ALE</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-62 - CALIFORNIAN ALE</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-63 - IRISH STOUT</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-64 - BRITISH DRY ALE</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-65 - WHITBREAD ALE</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-66 - ENGLISH RINGWOOD</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-67 - BELGIAN TRAPPIST</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-68 - CALIFORNIAN NUT ALE</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-69 - ENGLISH THAMES ALE</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-70 - NORTHWEST ALE</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-71 - EUROPEAN ALE</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-72 - BELGIAN GOLDEN ALE</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-73 - BELGIAN ABBEY AL</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-74 - ENGLISH PALE ALE</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-75 - URQUELL PILSENER</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-76 - AMERICAN LAGER II</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-77 - DANISH LAGER</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-78 - SAN FRANCISCO LAGER</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-79 - GERMAN LAGER</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-80 - GERMAN DOPPLEBOCK</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-81 - CZECH PILSENER</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-82 - GERMAN LAGER II</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-83 - GERMAN KOLSCH</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-84 - BELGIAN LAMBIC BLEND</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-85 - BELGIAN TRIPPEL</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-86 - BELGIAN SAISON ALE II</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-87 - BELGIAN TRAPPIST ALE II</name>
+      <aa>75.0</aa>
+    </yeast>
+    <yeast>
+      <name>PRO-88 - CANADIAN ALE</name>
+      <aa>75.0</aa>
+    </yeast>
+  </yeasts>
+  <miscs>
+    <misc>
+      <name>Black Pepper</name>
+      <type>Spice</type>
+      <use>Boil</use>
+    </misc>
+    <misc>
+      <name>Calcium Chloride</name>
+      <type>Water Agent</type>
+      <use>Mash</use>
+    </misc>
+    <misc>
+      <name>Caraway Seed</name>
+      <type>Spice</type>
+      <use>Boil</use>
+    </misc>
+    <misc>
+      <name>Cardamom Seed</name>
+      <type>Spice</type>
+      <use>Boil</use>
+    </misc>
+    <misc>
+      <name>Chamomile</name>
+      <type>Spice</type>
+      <use>Boil</use>
+    </misc>
+    <misc>
+      <name>Chili Pepper</name>
+      <type>Spice</type>
+      <use>Boil</use>
+    </misc>
+    <misc>
+      <name>Cinnamon</name>
+      <type>Spice</type>
+      <use>Boil</use>
+    </misc>
+    <misc>
+      <name>Cinnamon Stick</name>
+      <type>Spice</type>
+      <use>Boil</use>
+    </misc>
+    <misc>
+      <name>Citric Acid</name>
+      <type>Water Agent</type>
+      <use>Mash</use>
+    </misc>
+    <misc>
+      <name>Cocoa Powder</name>
+      <type>Other</type>
+      <use>Boil</use>
+    </misc>
+    <misc>
+      <name>Coriander Seed</name>
+      <type>Spice</type>
+      <use>Boil</use>
+    </misc>
+    <misc>
+      <name>Corriander Seed</name>
+      <type>Spice</type>
+      <use>Boil</use>
+    </misc>
+    <misc>
+      <name>Dried Elderberries</name>
+      <type>Other</type>
+      <use>Secondary</use>
+    </misc>
+    <misc>
+      <name>Dried Elderflowers</name>
+      <type>Other</type>
+      <use>Secondary</use>
+    </misc>
+    <misc>
+      <name>Epsom Salt (MgSO4)</name>
+      <type>Water Agent</type>
+      <use>Mash</use>
+    </misc>
+    <misc>
+      <name>Fennel Seed</name>
+      <type>Spice</type>
+      <use>Boil</use>
+    </misc>
+    <misc>
+      <name>Gelatin</name>
+      <type>Fining</type>
+      <use>Secondary</use>
+    </misc>
+    <misc>
+      <name>Ginger Root</name>
+      <type>Herb</type>
+      <use>Boil</use>
+    </misc>
+    <misc>
+      <name>Grains of Paradise</name>
+      <type>Spice</type>
+      <use>Boil</use>
+    </misc>
+    <misc>
+      <name>Gypsum (Calcium Sulfate)</name>
+      <type>Water Agent</type>
+      <use>Mash</use>
+    </misc>
+    <misc>
+      <name>Irish Moss</name>
+      <type>Fining</type>
+      <use>Boil</use>
+    </misc>
+    <misc>
+      <name>Isinglass (Liquid)</name>
+      <type>Fining</type>
+      <use>Secondary</use>
+    </misc>
+    <misc>
+      <name>Jamaican Peper</name>
+      <type>Other</type>
+      <use>Boil</use>
+    </misc>
+    <misc>
+      <name>Juniper Berries</name>
+      <type>Other</type>
+      <use>Secondary</use>
+    </misc>
+    <misc>
+      <name>Lactic Acid</name>
+      <type>Water Agent</type>
+      <use>Mash</use>
+    </misc>
+    <misc>
+      <name>Lavender</name>
+      <type>Herb</type>
+      <use>Boil</use>
+    </misc>
+    <misc>
+      <name>Licorice Root</name>
+      <type>Other</type>
+      <use>Boil</use>
+    </misc>
+    <misc>
+      <name>Malto-Dextrine</name>
+      <type>Other</type>
+      <use>Boil</use>
+    </misc>
+    <misc>
+      <name>Mugwort</name>
+      <type>Herb</type>
+      <use>Boil</use>
+    </misc>
+    <misc>
+      <name>Oak Chips</name>
+      <type>Flavor</type>
+      <use>Secondary</use>
+    </misc>
+    <misc>
+      <name>Orange Peel</name>
+      <type>Spice</type>
+      <use>Boil</use>
+    </misc>
+    <misc>
+      <name>Papain</name>
+      <type>Fining</type>
+      <use>Secondary</use>
+    </misc>
+    <misc>
+      <name>PH 5.2</name>
+      <type>Water Agent</type>
+      <use>Mash</use>
+    </misc>
+    <misc>
+      <name>Polyclar</name>
+      <type>Fining</type>
+      <use>Secondary</use>
+    </misc>
+    <misc>
+      <name>Red Peper</name>
+      <type>Other</type>
+      <use>Boil</use>
+    </misc>
+    <misc>
+      <name>Rosemary</name>
+      <type>Herb</type>
+      <use>Boil</use>
+    </misc>
+    <misc>
+      <name>Spruce Tips</name>
+      <type>Other</type>
+      <use>Boil</use>
+    </misc>
+    <misc>
+      <name>Star Anise</name>
+      <type>Spice</type>
+      <use>Boil</use>
+    </misc>
+    <misc>
+      <name>Vanilla</name>
+      <type>Other</type>
+      <use>Boil</use>
+    </misc>
+    <misc>
+      <name>Whirlfloc Tablet</name>
+      <type>Fining</type>
+      <use>Boil</use>
+    </misc>
+    <misc>
+      <name>Yarrow</name>
+      <type>Herb</type>
+      <use>Boil</use>
+    </misc>
+    <misc>
+      <name>Yeast Nutrient</name>
+      <type>Other</type>
+      <use>Boil</use>
+    </misc>
+  </miscs>
+</brewmatedata>

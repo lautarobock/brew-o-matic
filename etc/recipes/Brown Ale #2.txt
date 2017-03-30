@@ -1,0 +1,35 @@
+[b]Brown Ale #2[/b]
+Northern English Brown Ale
+
+[b]Recipe Specs[/b]
+----------------
+Batch Size (L):           18.0
+Total Grain (kg):         5.600
+Total Hops (g):           49.23
+Original Gravity (OG):    1.069  (°P): 16.8
+Final Gravity (FG):       1.017  (°P): 4.3
+Colour (SRM):             27.1   (EBC): 53.4
+Bitterness (IBU):         44.3   (Average)
+Brewhouse Efficiency (%): 70
+Boil Time (Minutes):      90
+
+[b]Grain Bill[/b]
+----------------
+5.000 kg Pale Ale Malt (89.29%)
+0.400 kg Carafa I malt (7.14%)
+0.200 kg Biscuit (3.57%)
+
+[b]Hop Bill[/b]
+----------------
+38.5 g Cascade Pellet (7.8% Alpha) @ 60 Minutes (Boil) (2.1 g/L)
+10.8 g East Kent Golding Pellet (4.7% Alpha) @ 20 Minutes (Boil) (0.6 g/L)
+
+[b]Misc Bill[/b]
+----------------
+3.1 g Whirlfloc Tablet @ 5 Minutes (Boil)
+
+Single step Infusion at 66°C for 60 Minutes.
+Fermented at 18°C with Danstar Nottingham
+
+
+Recipe Generated with [b][url=http://www.brewmate.net]BrewMate[/url][/b]

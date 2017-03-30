@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Settings>
+  <!--BrewMate Settings File - www.brewmate.net-->
+  <BrewerName>Lautaro - MacGyBeer</BrewerName>
+  <IBUCalcMethod>0</IBUCalcMethod>
+  <GrainCalcMethod>2</GrainCalcMethod>
+  <StyleNaziMode>1</StyleNaziMode>
+  <GrainUnits>1</GrainUnits>
+  <HopsUnits>0</HopsUnits>
+  <VolumeUnits>1</VolumeUnits>
+  <TemperatureUnits>0</TemperatureUnits>
+  <Colour>0</Colour>
+  <RecipeType>2</RecipeType>
+  <BIAB>0</BIAB>
+  <BatchSize>20.0</BatchSize>
+  <Efficiency>60</Efficiency>
+  <MashTemp>66</MashTemp>
+  <MashLength>70</MashLength>
+  <BoilLength>60</BoilLength>
+  <FermentTemp>19</FermentTemp>
+  <YeastAA>75</YeastAA>
+  <ShowSplashScreen>0</ShowSplashScreen>
+  <CheckforUpdates>1</CheckforUpdates>
+  <GrainTemp>25.0</GrainTemp>
+  <WatertoGrainRatio>3.00</WatertoGrainRatio>
+  <GrainAbsorbtion>0.90</GrainAbsorbtion>
+  <SpargeDeadSpace>0.00</SpargeDeadSpace>
+  <SpargeTempDesired>75.0</SpargeTempDesired>
+  <TopUpWater>0.0</TopUpWater>
+  <PercentEvap>16.0</PercentEvap>
+  <TrubChillerLosses>1.0</TrubChillerLosses>
+</Settings>
