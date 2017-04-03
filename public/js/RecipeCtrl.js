@@ -968,7 +968,9 @@
                         type: 'linear',
                         display: true,
                         position: 'right',
-                        min: 1
+                        ticks: {
+                            min: 1
+                        }
                     }
                 ],
                 xAxes: [{

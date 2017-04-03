@@ -71,10 +71,10 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     code: String,
     owner: {type:String, ref:'User'},
     collaborators: [{type:String, ref:'User'}],
-    GrainCalcMethod: String,
+    GrainCalcMethod: String,//valor o %
     date: Date,
     modificationDate: Date,
-    totalAmount: Number,
+    totalAmount: Number, //cantidad de granos/FERMENTABLES
     totalAmountMash: Number,
     totalHop: Number,
     NAME: String,
@@ -84,7 +84,7 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     BREWER: String,
     CALCCOLOUR: Number,
     BATCH_SIZE: Number,
-    BOIL_SIZE: Number,
+    BOIL_SIZE: Number, //@deprecated, esto se guarda pero nunca se usa, se muestra siempre desde el calculo
     BOIL_TIME: Number,
     ABV: Number,
     BV: Number,
@@ -94,20 +94,20 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     CALCIBU: Number,
     FG: Number,
     state: String,
-    timeWaterMash: Number,
-    spargeDuration: Number,
-    preBoilTime: Number,
-    coolingTime: Number,
+    timeWaterMash: Number, //tiempo seteado por el usuario q se tarda en calentar el agua del mash.
+    spargeDuration: Number, //duracion del lavado
+    preBoilTime: Number, //tiempo para llegar a herovr
+    coolingTime: Number, //tiempo de enfriado
     FERMENTABLES: {
         FERMENTABLE: [new Schema({
             NAME: String,
             VERSION: String,
             AMOUNT: Number,
             TYPE: String,
-            YIELD: Number,
+            YIELD: Number, //@deprecated parece que no se usa
             COLOR: Number,
             POTENTIAL: Number,
-            PERCENTAGE: Number,
+            PERCENTAGE: Number, //calculado
             USE: String,
             excludeIBU: Boolean
         }, {_id:true}) ]
@@ -247,16 +247,16 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
         sg: Number,
         temp: Number
     }],
-    PRIMARY_TEMP: Number,
-    BIAB: String,
-    IBUCalcMethod: String,
-    StyleNaziMode: String,
-    IsNoChill: String,
-    GrainUnits: String,
-    HopsUnits: String,
-    VolumeUnits: String,
-    TemperatureUnits: String,
-    Colour: String,
+    PRIMARY_TEMP: Number, //@deprecated parece sin uso
+    BIAB: String, //@deprecated parece sin uso
+    IBUCalcMethod: String, //@deprecated parece sin uso
+    StyleNaziMode: String, //@deprecated parece sin uso, cree uno diferente
+    IsNoChill: String, //@deprecated parece sin uso
+    GrainUnits: String, //@deprecated parece sin uso
+    HopsUnits: String, //@deprecated parece sin uso
+    VolumeUnits: String, //@deprecated parece sin uso
+    TemperatureUnits: String, //@deprecated parece sin uso
+    Colour: String, //@deprecated parece sin uso
     GrainTemp: Number,
     StrikeWater: Number,
     SpargeDeadSpace: Number,
@@ -266,16 +266,16 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
     SpargeWhaterDesiredPH: Number,
     MashDesiredPH: Number,
     PercentEvap: Number,
-    LitersEvap: Number,
+    LitersEvap: Number, //@deprecated esto fue para intentar cambiarlo por litros en lugar de %
     TrubChillerLosses: Number,
     TopUpWater: Number,
-    calendarpressed: String,
-    brewdayEnabled: String,
-    yeastpitchEnabled: String,
-    primaryEnabled: String,
-    secondaryEnabled: String,
-    keggingEnabled: String,
-    serveEnabled: String,
+    calendarpressed: String, //@deprecated parece sin uso
+    brewdayEnabled: String, //@deprecated parece sin uso
+    yeastpitchEnabled: String, //@deprecated parece sin uso
+    primaryEnabled: String, //@deprecated parece sin uso
+    secondaryEnabled: String, //@deprecated parece sin uso
+    keggingEnabled: String, //@deprecated parece sin uso
+    serveEnabled: String, //@deprecated parece sin uso
     //Start own properties
     isPublic: Boolean,
     publishDate: Date,
