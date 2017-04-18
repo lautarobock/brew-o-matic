@@ -203,17 +203,36 @@
         }
 
         function onLoadSuccess() {
-            gapi.auth.authorize({
-                client_id: google_client_id,
-                scope: google_scope,
-                immediate:true
-            },
-            cb);
+            if ( getParameterByName('googleId') ) {
+                //viene del iframe en mobile
+                cb({
+                    googleId: getParameterByName('googleId'),
+                    name: getParameterByName('name')
+                });
+            } else {
+                gapi.auth.authorize({
+                    client_id: google_client_id,
+                    scope: google_scope,
+                    immediate:true
+                },cb);
+            }
         }
 
         function cb(authResult) {
             var $scope = angular.element(document.getElementById('LoginController')).scope();
             $scope.$emit('g+login', authResult)
+        }
+
+        function getParameterByName(name, url) {
+            if (!url) {
+                url = window.location.href;
+            }
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
         }
     </script>
 

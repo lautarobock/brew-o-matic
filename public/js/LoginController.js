@@ -41,8 +41,16 @@
                     
                 });
               });
-              
-              //document.getElementById('signinButton').setAttribute('style', 'display: none');
+            } else if ( authResult.googleId ) {
+                //En este caso viene de login interno de la app mobile (en un iframe)
+                User.getByGoogleId({
+                    id: authResult.googleId,
+                    name: authResult.name
+                },function(user){
+                    $rootScope.loginSuccess = true;
+                    $rootScope.user = user;
+                    console.log(user);
+                });
             } else if ( authResult['error'] == "immediate_failed") {
                 $rootScope.loginSuccess = true;
                 $scope.loginError = '';
