@@ -218,9 +218,15 @@
             }
         }
 
-        function cb(authResult) {
-            var $scope = angular.element(document.getElementById('LoginController')).scope();
-            $scope.$emit('g+login', authResult)
+        function cb(authResult, delay) {
+            setTimeout(function() {
+                var $scope = angular.element(document.getElementById('LoginController')).scope();
+                if ($scope) {
+                    $scope.$emit('g+login', authResult)
+                } else {
+                    cb(authResult, true);
+                }
+            },delay?500:0);
         }
 
         function getParameterByName(name, url) {
