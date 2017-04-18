@@ -159,8 +159,34 @@
     });
 
 
-    index.controller("MainController",function($scope,$rootScope,User) {
+    index.controller("MainController",function($scope,$rootScope,User, $location) {
         $rootScope.breadcrumbs = [];
+        
+        //Si tiene user en localstorage autenticamos 
+
+        var user = JSON.parse( window.localStorage.getItem( "user" ));
+        if(user){
+            $rootScope.loginSuccess = true;
+             $rootScope.user = user;
+
+        }
+
+        //Si tiene googleId autenticamos
+        var qry=$location.search();
+        if(qry.googleId){
+            //si entramos por aca seteamos una cookie para guardar el asunto
+             
+             User.getByGoogleId({
+                        id:qry.googleId,
+                        name: qry.name
+                    },function(user){ 
+                        $rootScope.loginSuccess = true;
+                        $rootScope.user = user;
+                        window.localStorage.setItem( "user", JSON.stringify(user)); 
+                        console.log(user);
+                    });
+                    
+        }
 
         $scope.login = function() {
             googleSignIn();
