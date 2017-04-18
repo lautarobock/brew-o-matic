@@ -1,0 +1,63 @@
+@media (max-width: 630px)
+{
+   
+body {
+    padding: 0; 
+    margin: 0;
+}
+
+.container {
+    padding: 0;
+}
+
+.panel-body {
+    padding: 15px;
+    width: 100%;
+    border: none;
+}
+
+
+
+input#batch_size {
+    width: 100%;
+    border-radius: 2px;
+}
+
+.input-group {
+    width: 100%;
+}
+
+.panel-heading {
+    border-radius: 0;
+    width: 100%;
+}
+
+td {}
+
+table.table.table-condensed.table-hover td {
+}
+
+table.table.table-condensed.table-hover table {
+    width: 100%;
+}
+
+table.table.table-condensed.table-hover tr {
+    width: 100%;
+    border: 1px solid #a7a7a7;
+}
+.panel.panel-default {
+    border: none;
+}
+
+.panel-body {
+    border: aliceblue;
+}
+ 
+.panel-body > ul.list-group {
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-top: -15px;
+    margin-bottom: -15px;
+}
+
+}
