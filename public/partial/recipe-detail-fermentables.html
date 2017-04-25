@@ -3,8 +3,9 @@
     <div style="margin: 2em 2em 0;" class="alert alert-info" ng-hide="recipe.FERMENTABLES.FERMENTABLE.length != 0">
         Aun no tiene ningun fermentable en la receta
     </div>
-    <table class="table table-condensed table-hover" ng-show="recipe.FERMENTABLES.FERMENTABLE.length != 0" style="margin-top: 1em;">
-      <thead>
+    <div class="table-responsive-container fermentables">
+    <table id="fermentables-table" class="table table-condensed table-hover" ng-show="recipe.FERMENTABLES.FERMENTABLE.length != 0" style="margin-top: 1em;">
+     <thead>
         <tr>
           <th style="width:40%">Grano/Fermentable</th>
           <th style="width:8%; min-width: 75px;">Extracto</th>
@@ -44,11 +45,12 @@
         <tr>
             <td class="hidden-xs" colspan="4"><strong class="pull-right">Total:</strong></td>
             <td class="visible-xs" colspan="3"><strong class="pull-right">Total:</strong></td>
-            <td>{{recipe.totalAmount | number:3}} Kg</td>
+            <td colspan="3">{{recipe.totalAmount | number:3}} Kg</td>
             <td colspan="3"></td>
         </tr>
       </tbody>
     </table>
+    </div>
     <div class="panel-body">
         <button type="button" class="btn btn-default pull-right" ng-click="addFermentable()">
             <span class="glyphicon glyphicon-plus"></span> Agregar
