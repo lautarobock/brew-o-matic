@@ -1,10 +1,13 @@
 <div class="row"  ng-controller="RecipeTabCtrl" ng-hide="errorLoading">
     <div class="col-md-12" style="margin-bottom: -0.1em;">
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs hidden-xs">
             <li ng-class="{active:selectedTab === tab}" ng-repeat="tab in sortTabs">
                 <a style="cursor: pointer" ng-click="changeTab(tab)">{{tabs[tab].title}}</a>
             </li>
         </ul>
+       	<select class="mobile-only form-control" id="recipeTab" ng-model="selectedTab" ng-options="tab as tabs[tab].title for tab in sortTabs">
+           
+        </select> 
     </div>
     <div ng-include="'partial/recipe-'+tabs[selectedTab].template+'.html'"></div>
 </div>

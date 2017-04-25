@@ -552,7 +552,7 @@
                 }
             },{
                 field: 'STYLE.NAME',
-                caption: 'Estilo'
+                caption: 'Estilo',
             },{
                 field: 'CALCCOLOUR',
                 caption: 'Color',
