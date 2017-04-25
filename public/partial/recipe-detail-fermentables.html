@@ -5,7 +5,7 @@
     </div>
     <div class="table-responsive-container fermentables">
     <table id="fermentables-table" class="table table-condensed table-hover" ng-show="recipe.FERMENTABLES.FERMENTABLE.length != 0" style="margin-top: 1em;">
-     
+     <thead>
         <tr>
           <th style="width:40%">Grano/Fermentable</th>
           <th style="width:8%; min-width: 75px;">Extracto</th>
@@ -16,7 +16,7 @@
           <th style="width:6%" title="Si se excluye para el calculo de OG para IBU">Excl. OG</th>
           <th style="width:2%"></th>
         </tr>
-      
+      </thead>
       <tbody>
         <tr ng-repeat="fermentable in recipe.FERMENTABLES.FERMENTABLE">
             <td>
