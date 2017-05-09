@@ -11,6 +11,24 @@
         </div>
     </div>
     <div class="panel panel-default">
+        <div class="panel-heading"><strong>Acceso Moblie</strong></div>
+        <div class="panel-body" >
+            <div class="row">
+                <div class="col-lg-6">
+                    <label for="name">Clave de acceso</label>
+                    <div class="input-group">
+                        <input type="{{inputType}}" class="form-control input-sm" id="name" readonly ng-model="user.accessCode">
+                        <span class="input-group-btn">
+                            <a class="btn btn-default btn-sm" href="" ng-click="toggleAccessInput()">
+                                <span ng-class="{'fa-eye':inputType=='password','fa-eye-slash':inputType!='password'}" class="fa"></span>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
         <div class="panel-heading"><strong>Valores por defecto en tus recetas</strong></div>
         <div class="panel-body" >
             <div class="row">

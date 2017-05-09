@@ -1,11 +1,11 @@
 <div class="panel panel-default">
     <div class="panel-body">
         <div class="row">
-            <div class="col-lg-4 col-xs-6">
+            <div class="col-lg-4 col-xs-12">
                 <label for="recipename">Nombre</label>
                 <input type="text" class="form-control input-sm" id="recipename" placeholder="Nombre" ng-model="recipe.NAME">
             </div>
-            <div class="col-lg-2 col-xs-6">
+            <div class="col-lg-2 col-xs-12">
               <label for="batch_size">Batch (L)</label>
               <div class="input-group">
                   <input ng-blur="batchSizeBlur()" type="number" min="1" class="form-control input-sm" id="batch_size" step="0.1" ng-model="recipe.BATCH_SIZE">
@@ -17,7 +17,7 @@
                   </span> -->
               </div>
             </div>
-            <div class="col-lg-2 col-xs-6">
+            <div class="col-lg-2 col-xs-12">
               <label for="OG">OG</label>
               <div class="input-group">
                 <span class="form-control input-sm" title="{{error.OG}}" alert-input="error.OG" id="OG" ng-bind="recipe.OG" />
@@ -28,17 +28,17 @@
                 </span>
               </div>
             </div>
-            <div class="col-lg-2 col-xs-6">
+            <div class="col-lg-2 col-xs-12">
               <label for="ibu">IBU</label>
               <span class="form-control input-sm" title="{{error.CALCIBU}}" alert-input="error.CALCIBU" id="ibu" ng-bind="recipe.CALCIBU">
             </div>
-            <div class="col-lg-2 col-xs-6">
+            <div class="col-lg-2 col-xs-12">
               <label for="balance">Balance</label>
               <span class="form-control input-sm gt-calculated" id="balance" ng-bind="recipe.BV"/>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-xs-6">
+            <div class="col-lg-4 col-xs-12">
                 <label for="style">Style</label>
                 <div class="input-group">
                     <input type="text" class="form-control input-sm" id="style" placeholder="Estilo" ng-model="recipe.STYLE.NAME" typeahead="style.name for style in styles | orderBy:'name' | filter:$viewValue">
@@ -51,11 +51,11 @@
                 </div>
                 <a ng-show="relatedLink(recipe.STYLE.NAME)" target="_blank" href="{{relatedLink(recipe.STYLE.NAME)}}" >Ver ejemplos en RateBeer.com</a>
             </div>
-            <div class="col-lg-2 col-xs-6">
+            <div class="col-lg-2 col-xs-12">
               <label for="EFFICIENCY">Eficiencia</label>
               <input type="number" class="form-control input-sm gt-preset" id="EFFICIENCY" ng-model="recipe.EFFICIENCY">
             </div>
-            <div class="col-lg-2 col-xs-6">
+            <div class="col-lg-2 col-xs-12">
               <label for="fg">FG</label>
               <div class="input-group">
                 <span class="form-control input-sm"  title="{{error.FG}}" alert-input="error.FG" id="fg" ng-bind="recipe.FG"/>
@@ -66,11 +66,11 @@
                 </span>
               </div>
             </div>
-            <div class="col-lg-2 col-xs-6">
+            <div class="col-lg-2 col-xs-12">
               <label for="bugu">BU/GU</label>
               <span class="form-control input-sm gt-calculated" id="bugu" >{{calulateBUGU(recipe.CALCIBU,recipe.OG)|number:2}}</span>
             </div>
-            <div class="col-lg-2 col-xs-6">
+            <div class="col-lg-2 col-xs-12">
               <label for="abv">Alcohol (ABV) %</label>
               <span class="form-control input-sm" title="{{error.ABV}}" alert-input="error.ABV" id="abv" ng-bind="recipe.ABV"/>
             </div>

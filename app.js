@@ -93,6 +93,7 @@ var data = require("./routes/data.js");
 var rating = require("./routes/rating.js");
 var stats = require("./routes/stats.js");
 
+app.get('/user/accessCode/:accessCode', user.getByAccessCode);
 app.get('/user/google_:google_id', user.getByGoogleId);
 app.post('/user', user.add);
 app.get('/user/id_:id', user.get);

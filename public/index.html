@@ -13,8 +13,11 @@
         <link rel="stylesheet" href="bower_components/bootstrap/css/bootstrap-theme.min.css">
         <!-- <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"> -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel='stylesheet' href='/css/media_query.css' />
+        
         <script src="http://code.jquery.com/jquery.js"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        
         <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>-->
         <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>-->
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
@@ -44,10 +47,10 @@
     <div ng-include="'partial/nav.html'"></div>
 
     <!-- Logo & Breadcrumb -->
-    <div class="container" style="margin-top: 1em;">
+    <div  class="container" style="margin-top: 1em;">
       <div class="row" >
         <div class="col-md-2" >
-          <div class="panel panel-default" style="max-width:200px; max-height:200px;">
+          <div id="logo-container" class="panel panel-default" style="max-width:200px; max-height:200px;">
             <div class="panel-body" >
               <img src="images/logo.jpg" style="max-width:100%; max-height:100%;"/>
             </div>
@@ -129,6 +132,7 @@
             Y otros proyectos <a target="_blank" href="https://github.com/lautarobock/">aca</a>.
             Cualquier duda, problema o sugerencia <a href="mailto:brewomatic@gmail.com">brewomatic@gmail.com</a>
         </p>
+        <a target="_blank" href='https://play.google.com/store/apps/details?id=com.ar.brew_o_matic.brewapp&utm_source=brew-o-matic&utm_campaign=home&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img width="180" alt='Disponible en Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/es-419_badge_web_generic.png'/></a>
         <!--<p class="text-muted">
             No es el objetivo de este proyecto ganar plata. Pero tampoco perderla :) y debido al gran crecimiento
             que tuvo el sistema en estos últimos meses me vi obligado a cambiar el hosting por uno pago, lo mismo

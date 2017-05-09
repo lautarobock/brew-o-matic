@@ -1,2 +1,4 @@
 .idea/workspace.xml
 node_modules/
+startup-prod.sh
+npm-debug.log

@@ -1,0 +1,128 @@
+.mobile-only{
+    display:none;
+}
+@media (max-width: 630px)
+{
+    .mobile-only{
+        display:block;
+    }
+
+    /* generales  Tweeks abootstrap */
+    body {
+        padding: 50px 0; 
+        margin: 0;
+    }
+    .input-sm {
+        padding: 5px 2px;
+    }
+    th {
+        min-width: 0!important; /*here the darkness start*/
+    }
+    .container {
+        padding: 0 15px 0 15px;
+    }
+    .horizontal-scroller-xs{
+        overflow-x:auto;
+    }
+
+    .panel-body {
+        padding: 15px;
+        width: 100%;
+    }
+    .input-group {
+        width: 100%;
+    }
+
+    .panel-heading {
+        border-radius: 0;
+        width: 100%;
+    }
+
+
+ 
+     
+    .panel-body > ul.list-group {
+        margin-left: -15px;
+        margin-right: -15px;
+        margin-top: -15px;
+        margin-bottom: -15px;
+    }
+    /*logo*/
+    div#logo-container {
+        margin: 0 auto 12px;
+        border: 1px solid #ddd;
+    }
+
+    /*menu */
+    
+    .nav li {
+        width: 100%;
+        border-bottom: 1px solid #ddd; 
+    }
+
+    .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+        border: none!;
+        background: #f0f8ff;
+    }
+    /* ul.nav.nav-tabs li.active {
+        position: absolute;
+        top: -1px;
+    }*/
+    .nav-tabs {
+        border: none;
+    }
+
+
+    ul.nav.nav-tabs {
+       /* overflow: hidden;
+        height: 42px;
+        position: relative;*/
+        border: solid #ddd;
+        border-width: 2px 0px;
+    }
+
+   select#recipeTab {
+        height: 35px;
+        margin-bottom: 10px;
+    }
+
+
+    /*footer */
+
+    footer.container.footer {
+        padding: 0 25px;
+    }
+
+    /*receta*/
+    input#batch_size {
+        width: 100%;
+        border-radius: 2px;
+    }
+
+    table.table.table-condensed.table-hover td {
+        padding: 2px;
+    }
+
+    table.table.table-condensed.table-hover table {
+        width: 100%;
+    }
+
+    table.table.table-condensed.table-hover tr {
+        width: 100%;
+        /*border: 1px solid #a7a7a7;*/
+    }
+    /*save box flotante */
+    div#save-box { 
+        position: fixed;
+        bottom: -11px;
+        width: 100%;
+        background: white;
+        z-index: 999;
+        left: 0;
+        height: 46px;
+        padding: 7px 10px;
+        border-top: 1px solid #b7b7b7;
+    }
+
+
+}
