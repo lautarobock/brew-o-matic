@@ -118,9 +118,9 @@ exports.getByGoogleId = function(req, res){
     });
 };
 
-exports.getByAccessCode = (req, res, next) => {
+exports.getByAccessCode = function(req, res, next) {
     model.User.findOne({'accessCode':req.params.accessCode}, 'name accessCode google_id')
-        .exec((err, user) =>{ 
+        .exec(function(err, user) { 
             if ( err ) {
                 res.status(404).send()
             } else {
