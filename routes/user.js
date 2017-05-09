@@ -6,13 +6,19 @@ var Arrays = require("../public/js/util/util.js").Arrays;
 /*
  * GET users listing.
  */
-
+function code() {
+    return getRandomInt(10000,99999).toString();
+}
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
 function buildNewUser(google_id, name) {
     var user = new model.User();
     user.google_id = google_id;
     user.name = name;
     user.singInDate = new Date();
     user.lastLogin = new Date();
+    user.accessCode = code();
     user.settings = {
         "defaultValues":{
             "BATCH_SIZE":20,
@@ -96,6 +102,7 @@ exports.getByGoogleId = function(req, res){
 
             user.lastLogin = new Date();
             user.singInDate = user.singInDate || user.lastLogin;
+            user.accessCode = user.accessCode || code();
 
             user.save();
             res.send(user);
@@ -110,6 +117,17 @@ exports.getByGoogleId = function(req, res){
 
     });
 };
+
+exports.getByAccessCode = (req, res, next) => {
+    model.User.findOne({'accessCode':req.params.accessCode}, 'name accessCode google_id')
+        .exec((err, user) =>{ 
+            if ( err ) {
+                res.status(404).send()
+            } else {
+                res.send(user);
+            }
+        });
+}
 
 exports.addToFavorites = function(req,res) {
     model.User

@@ -61,7 +61,19 @@
 
 	settings.controller("UserSettingsCtrl",function($scope,User,$rootScope,PitchRate) {
 
-		$scope.user.settings.defaultValues.pitchRate = $scope.user.settings.defaultValues.pitchRate || 0.75;
+        $rootScope.$watch('user',function(user) {
+            if ( !user) return;
+            $scope.user.settings.defaultValues.pitchRate = $scope.user.settings.defaultValues.pitchRate || 0.75;
+        });
+		
+        $scope.inputType = 'password';
+        $scope.toggleAccessInput = function() {
+            if ( $scope.inputType === 'password' ) {
+                $scope.inputType = 'text';
+            } else {
+                $scope.inputType = 'password';
+            }
+        };
 
         $scope.disconnectUser = function() {
             var revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' +
