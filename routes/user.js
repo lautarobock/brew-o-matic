@@ -7,7 +7,7 @@ var Arrays = require("../public/js/util/util.js").Arrays;
  * GET users listing.
  */
 function code() {
-    return getRandomInt(10000,99999).toString();
+    return getRandomInt(100000,999999).toString();
 }
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
