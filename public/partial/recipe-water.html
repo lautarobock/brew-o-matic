@@ -36,7 +36,7 @@
                         <label>Agua a utilizar</label>
                         <div class="input-group">
                             <select class="form-control input-sm" ng-model="recipe.water.selectedSource">
-                                <option ng-repeat="report in reports" ng-selected="report._id==recipe.water.selectedSource" value="{{report._id}}">{{report.name}}</option>
+                                <option ng-repeat="report in reports | orderBy:'name'" ng-selected="report._id==recipe.water.selectedSource" value="{{report._id}}">{{report.name}}</option>
                             </select>
                             <span class="input-group-btn">
                                 <button ng-disabled="sourceEqual()" type="button" class="btn btn-default btn-sm" ng-click="updateSource()">
@@ -69,7 +69,7 @@
                         <label>Objetivo</label>
                         <div class="input-group">
                             <select ng-change="changeTarget()" class="form-control input-sm" ng-model="recipe.water.selectedTarget">
-                                <option ng-repeat="report in reports" ng-selected="report._id==recipe.water.selectedTarget" value="{{report._id}}">{{report.name}}</option>
+                                <option ng-repeat="report in reports | orderBy:'name'" ng-selected="report._id==recipe.water.selectedTarget" value="{{report._id}}">{{report.name}}</option>
                             </select>
                             <span class="input-group-btn">
                                 <button  ng-disabled="targetEqual()" type="button" class="btn btn-default btn-sm" ng-click="updateTarget()">
@@ -112,6 +112,9 @@
                         <th>
                             Fuente de agua
                             <span style="color:orange" title="El agua seleccionada como origen no esta actualizada" ng-hide="sourceEqual()" class="glyphicon glyphicon-warning-sign"></span>
+                            <button type="button" class="btn btn-default btn-xs" ng-hide="sourceEqual()" ng-click="addProfile('source')" title="Agregar nuevo reporte de aguas">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
                         </th>
                         <td ng-repeat="ion in ions">
                             <input type="number" step="1" class="form-control input-sm"
@@ -129,6 +132,9 @@
                         <th>
                             Objetivo
                             <span style="color:orange" title="El agua seleccionada como objetivo no esta actualizada" ng-hide="targetEqual()" class="glyphicon glyphicon-warning-sign"></span>
+                            <button type="button" class="btn btn-default btn-xs" ng-hide="targetEqual()" ng-click="addProfile('target')" title="Agregar nuevo reporte de aguas">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
                         </th>
                         <td ng-repeat="ion in ions">
                             <input type="number" step="1" class="form-control input-sm"

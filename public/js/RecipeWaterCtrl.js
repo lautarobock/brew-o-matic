@@ -2,7 +2,7 @@
 
     var module = angular.module('brew-o-module.controller');
 
-    module.controller('RecipeWaterCtrl', function($scope, BrewCalc, WaterReport) {
+    module.controller('RecipeWaterCtrl', function($scope, BrewCalc, WaterReport, alertFactory) {
 
         WaterReport.query(function(reports) {
             $scope.reports = reports;
@@ -74,6 +74,33 @@
             } else {
                 return false;
             }
+        };
+
+        $scope.addProfile = function(id) {
+            var name = prompt('Ingrese el nombre para el nuevo reporte (privado)','Mi Reporte de agua');
+            if ( name ) {
+                var report = new WaterReport({
+                    date: new Date(),
+                    name: name,
+                    owner: $scope.user._id,
+                    cations: {},
+                    isPublic: false,
+                    anions: {}
+                });
+                for ( var i=0;i<$scope.ions.length-1;i++) {
+                    var ion = $scope.ions[i];
+                    report[ion.type][ion.wr] = $scope.recipe.water[id][ion.key];
+                }
+                console.log('Report', report);
+                report.$save(function(saved) {
+                    alertFactory.create('success','Reporte de agua Guardado!');
+                    WaterReport.query(function(reports) {
+                        $scope.reports = reports;
+                    });
+                    $scope.recipe.water['selected'+id[0].toUpperCase()+id.substr(1)] = saved._id;
+                });
+            }
+            
         };
 
         $scope.getReport = function(id) {
