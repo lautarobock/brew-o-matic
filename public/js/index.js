@@ -92,6 +92,7 @@
             });
         };
 
+
     });
 
     var notification = angular.module("notification",[]);
@@ -159,7 +160,7 @@
     });
 
 
-    index.controller("MainController",function($scope,$rootScope,User) {
+    index.controller("MainController",function($scope,$rootScope,User,$location) {
         $rootScope.breadcrumbs = [];
 
         $scope.login = function() {
@@ -205,6 +206,10 @@
                 }
             }
         });
+        
+        $scope.goToTab = function(path) {
+            $location.path(path);
+        };
     });
 
 

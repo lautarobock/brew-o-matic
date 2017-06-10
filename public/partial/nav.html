@@ -5,6 +5,27 @@
         <a class="navbar-brand" href="/#/dashboard">
           Brew-o-Matic <button ng-show="env" title="Version {{version}}" class="btn btn-xs btn-{{color}}">{{env}}</button>
         </a>
+        <div class="navbar-collapse navbar-ex1-collapse mobile-only" >
+            <ul class="nav navbar-nav" ng-show="user">
+                <li class="dropdown" style="border-bottom: none">
+                    <a  href="" class="dropdown-toggle" data-toggle="dropdown"><span>Configuracion</span> <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="/#/dashboard">Inicio</a>
+                        </li>
+                        <li>
+                            <a href="/#/settings">Datos</a>
+                        </li>
+                        <li>
+                            <a href="/#/settings/water">Agua</a>
+                        </li>
+                        <li>
+                            <a href="/#/settings/device">Dispositivos</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse" >
             <ul class="nav navbar-nav" ng-show="user">
                 <li class="dropdown">

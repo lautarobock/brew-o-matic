@@ -1,4 +1,4 @@
-<ul class="nav nav-tabs" style="margin-bottom: -0.1em;">
+<ul class="nav nav-tabs hidden-xs" style="margin-bottom: -0.1em;">
     <li class="active">
         <a><b>Inicio</b></a>
     </li>
@@ -15,6 +15,13 @@
         <a href="/#/public">Publicadas ({{stats.publics}})</a>
     </li>
 </ul>
+<select ng-init="selectedPath='dashboard'" class="mobile-only form-control" id="recipeTab" ng-model="selectedPath" ng-change="goToTab(selectedPath)">
+    <option value="dashboard">Inicio</option>
+    <option value="recipe">Mis recetas ({{stats.owns}})</option>
+    <option value="collaborated">Colaboraciones ({{stats.collaborations}})</option>
+    <option value="favorites">Favoritas ({{user.favorites.length}})</option>
+    <option value="public">Publicadas ({{stats.publics}})</option>
+</select>
 <div class="panel panel-default" ng-cloak>
     <div class="panel-body" >
         <div class="col-md-12" >

@@ -1,4 +1,7 @@
-<ul class="nav nav-tabs" style="margin-bottom: -0.1em;">
+<ul class="nav nav-tabs hidden-xs" style="margin-bottom: -0.1em;">
+    <li>
+        <a href="/#/dashboard">Inicio</a>
+    </li>
     <li>
         <a href="/#/recipe">Mis recetas ({{stats.owns}})</a>
     </li>
@@ -12,8 +15,15 @@
         <a><b>Publicadas ({{stats.publics}})</b></a>
     </li>
 </ul>
+<select ng-init="selectedPath='public'" class="mobile-only form-control" id="recipeTab" ng-model="selectedPath" ng-change="goToTab(selectedPath)">
+    <option value="dashboard">Inicio</option>
+    <option value="recipe">Mis recetas ({{stats.owns}})</option>
+    <option value="collaborated">Colaboraciones ({{stats.collaborations}})</option>
+    <option value="favorites">Favoritas ({{user.favorites.length}})</option>
+    <option value="public">Publicadas ({{stats.publics}})</option>
+</select>
 <div ng-cloak>
-    <div class="panel panel-default">
+    <!--<div class="panel panel-default">
         <div class="panel-body" >
 
             <word-cloud words="styles" type="cloud" ng-click="filterByStyle">
@@ -26,7 +36,7 @@
                 </a>
             </word-cloud>
         </div>
-    </div>
+    </div>-->
     <listview ng-if="user"
           listview-data="published"
           listview-sort="sort"

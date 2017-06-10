@@ -52,6 +52,10 @@
         margin: 0 auto 12px;
         border: 1px solid #ddd;
     }
+    div#logo-container-sm {
+        /*margin: 0 auto 12px;*/
+        margin-bottom: 1em;
+    }
 
     /*menu */
     
