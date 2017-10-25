@@ -26,7 +26,7 @@
     "npm": "1.2.x"
   },
   "scripts": {
-    "start": "node app.js",
+    "start": "bash ./etc/bin/startup-prod.sh",
     "test": "./run-test.sh"
   }
 }
