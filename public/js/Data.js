@@ -93,6 +93,8 @@ data.factory("MiscUse",function() {
         query: function() {
             return ['Boil',
                     'Mash',
+                    'Licor',
+                    'Primary',
                     'Secondary'];
         }
     };
