@@ -21,17 +21,10 @@ function processFilter(filter) {
 }
 
 exports.findCollaborated = function (req, res) {
-    model.Recipe.find({collaborators: { $in : [req.session.user_id] } }).populate('owner').limit(req.query.limit).exec(function(err,results) {
+    model.Recipe.find({collaborators: { $in : [req.session.user_id] } }).populate('owner').limit(nullOrNumer(req.query.limit)).exec(function(err,results) {
         res.send(results);
     });
 };
-
-// exports.findPublic = function (req, res) {
-//     //where('owner').ne(req.session.user_id).
-//     model.Recipe.find({isPublic:true}).populate('owner').sort('-publishDate').limit(req.query.limit).skip(req.query.skip).exec(function(err,results) {
-//         res.send(results);
-//     });
-// };
 
 exports.findPublic = function(req, res) {
     var filter = processFilter(req.query.filter);
@@ -41,8 +34,8 @@ exports.findPublic = function(req, res) {
 
     console.log("filter",JSON.stringify(filter));
     model.Recipe.find(filter,'NAME tags STYLE OG ABV CALCCOLOUR CALCIBU BATCH_SIZE BREWER owner publishDate starredByCount clonedByCount')
-        .limit(req.query.limit)
-        .skip(req.query.skip)
+        .limit(nullOrNumer(req.query.limit))
+        .skip(nullOrNumer(req.query.skip))
         .sort(req.query.sort)
         // .sort('-publishDate')
         .populate('owner','name _id')
@@ -91,14 +84,18 @@ exports.findAll = function(req, res) {
 
     console.log("filter",JSON.stringify(filter));
     model.Recipe.find(filter,'NAME code tags STYLE OG modificationDate ABV CALCCOLOUR CALCIBU BATCH_SIZE BREWER fermentation owner publishDate state isPublic')
-        .limit(req.query.limit)
-        .skip(req.query.skip)
+        .limit(nullOrNumer(req.query.limit))
+        .skip(nullOrNumer(req.query.skip))
         .sort(req.query.sort)
         .populate('owner','name _id')
         .exec(function(err,results) {
             res.send(results);
     });
 };
+
+function nullOrNumer(value) {
+    return value ? parseInt(value) : null;
+}
 
 exports.exportRecipe = function(req, res) {
     model.Recipe.findOne({_id:req.params.id}).exec(function(err,results) {

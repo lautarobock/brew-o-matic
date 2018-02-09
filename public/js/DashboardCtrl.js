@@ -20,7 +20,8 @@
                         showPanel: showPanel,
                         limit: 5,
                         state: state,
-                        show: show,
+                        // show: show === true || show === 'true',
+                        show: true,
                         noMore: false,
                         load: function() {
                             Recipe.query({
