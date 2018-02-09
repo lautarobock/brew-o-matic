@@ -11,7 +11,7 @@
             "program": "${workspaceRoot}\\app.js",
             "cwd": "${workspaceRoot}",
             "env": {
-                "MONGOLAB_URI": "app:lac713@ds047948.mongolab.com:47948/af_brew-o-matic-lautaromail"
+                "MONGOLAB_URI": "mongodb://app:lac713@ds047948.mongolab.com:47948/af_brew-o-matic-lautaromail"
             }
         },
         {
