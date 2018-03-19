@@ -9,6 +9,7 @@ exports.User = mongoose.model("User",new Schema({
     singInDate: Date,
     lastLogin: Date,
     isAdmin: Boolean,
+    isData: Boolean,
     accessCode: String,
     settings: {
         defaultValues: {
