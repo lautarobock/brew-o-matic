@@ -598,7 +598,7 @@ exports.save = function(req, res) {
             notifications.notifyNewCollaborators(old,newCollaborators);
 
             delete req.body.tiltValues; //do not update tilt
-            model.Recipe.findByIdAndUpdate(id,req.body).populate('owner').populate('collaborators').populate('cloneFrom').exec(callback);
+            model.Recipe.findByIdAndUpdate(id,req.body, {new: true}).populate('owner').populate('collaborators').populate('cloneFrom').exec(callback);
         });
 
         actions.log(req.session.user_id, "UPDATE_RECIPE","NAME: '"+req.body.NAME+"'. recipe_id: "+id);
