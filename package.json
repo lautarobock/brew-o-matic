@@ -3,7 +3,7 @@
   "description": "Software para desarrollo de recetas de cerveza",
   "version": "0.14.0",
   "engines": {
-    "node": "8.9.4"
+    "node": "6.7.0"
   },
   "repository": {
     "type": "git",
