@@ -15,7 +15,8 @@
     "ejs": "*",
     "express": "3.3.5",
     "mongoose": "^5.0.4",
-    "node-minify": "^1.3.7",
+    "node-minify": "^2.4.2",
+    "postinstall": "npm run min",
     "q": "^1.4.1",
     "socket.io": "^2.0.4",
     "stable": "^0.1.5",
@@ -23,6 +24,7 @@
   },
   "scripts": {
     "start": "bash ./etc/bin/startup-prod.sh",
-    "test": "./run-test.sh"
+    "test": "./run-test.sh",
+    "min": "bash etc/bin/conf.prod.sh"
   }
 }

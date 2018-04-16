@@ -79,10 +79,10 @@ function min() {
 
 	var compressor = require('node-minify');
 	console.log("Files",files);
-	new compressor.minify({
-	    type: 'no-compress',
-	    fileIn: files,
-	    fileOut: 'build/scripts.min.js',
+	compressor.minify({
+	    compressor: 'no-compress',
+	    input: files,
+	    output: 'build/scripts.min.js',
 	    callback: function(err, min){
 	        console.log("err:",err);
 	        console.log("and you're done");

@@ -7,6 +7,13 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Build",
+            "program": "${workspaceFolder}/build/build.js",
+            "cwd": "${workspaceRoot}"
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "Launch Program",
             "program": "${workspaceRoot}\\app.js",
             "cwd": "${workspaceRoot}",
