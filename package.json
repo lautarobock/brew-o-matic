@@ -2,6 +2,9 @@
   "name": "brew-o-matic",
   "description": "Software para desarrollo de recetas de cerveza",
   "version": "0.14.0",
+  "engines": {
+    "node": "8.9.4"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/lautarobock/brew-o-matic.git"
@@ -16,7 +19,6 @@
     "express": "3.3.5",
     "mongoose": "^5.0.4",
     "node-minify": "^2.4.2",
-    "postinstall": "npm run min",
     "q": "^1.4.1",
     "socket.io": "^2.0.4",
     "stable": "^0.1.5",
@@ -25,6 +27,7 @@
   "scripts": {
     "start": "bash ./etc/bin/startup-prod.sh",
     "test": "./run-test.sh",
-    "min": "bash etc/bin/conf.prod.sh"
+    "min": "bash etc/bin/conf.prod.sh",
+    "postinstall": "npm run min"
   }
 }
