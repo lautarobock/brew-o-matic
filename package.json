@@ -27,7 +27,7 @@
   "scripts": {
     "start": "bash ./etc/bin/startup-prod.sh",
     "test": "./run-test.sh",
-    "min": "bash etc/bin/conf.prod.sh",
+    "min": "bash ./etc/bin/conf.prod.sh",
     "postinstall": "npm run min"
   }
 }
