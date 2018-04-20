@@ -93,6 +93,10 @@ var data = require("./routes/data.js");
 var rating = require("./routes/rating.js");
 var stats = require("./routes/stats.js");
 
+// hack for avoid timeout looking for socket.io
+app.get('/socket.io', function(req, res, next) {
+    res.status(204).send();
+});
 app.get('/user/accessCode/:accessCode', user.getByAccessCode);
 app.get('/user/google_:google_id', user.getByGoogleId);
 app.post('/user', user.add);
