@@ -4,7 +4,7 @@ var http = require('http');
 exports.findBeers = function(req, mainRes) {
     // options for GET
     var optionsget = {
-        host : 'www.birrasquehetomado.com.ar', // here only the domain name
+        host : 'birrasquehetomado.herokuapp.com', // here only the domain name
         // (no http/https !)
         port : 80,
         path : '/api/Beer', // the rest of the url with parameters if needed
