@@ -24,18 +24,20 @@ exports.notifyNewCollaborators = function(recipe, collaborators) {
 };
 
 exports.notifyOnPublish = function(recipe_name,recipe_id,user_name,user_id) {
-    model.User.find().exec(function(err,users) {
-        for ( var i=0; i<users.length; i++) {
-            if ( users[i]._id != user_id) {
-                var data = "El usuario <b>{{user_name}}</b> ha publicado la receta <b>{{recipe_name}}</b>";
-                data = data.replace('{{user_name}}',user_name);
-                data = data.replace('{{recipe_name}}',recipe_name);
+  return Promise.resolve();
+    // avoid notification on publish, creo qeu nadie las lee.
+    // model.User.find().exec(function(err,users) {
+    //     for ( var i=0; i<users.length; i++) {
+    //         if ( users[i]._id != user_id) {
+    //             var data = "El usuario <b>{{user_name}}</b> ha publicado la receta <b>{{recipe_name}}</b>";
+    //             data = data.replace('{{user_name}}',user_name);
+    //             data = data.replace('{{recipe_name}}',recipe_name);
 
-                var link = "/share.html#/" + encodeURIComponent(recipe_id);
-                notify(users[i]._id, data, link);
-            }
-        }
-    });
+    //             var link = "/share.html#/" + encodeURIComponent(recipe_id);
+    //             notify(users[i]._id, data, link);
+    //         }
+    //     }
+    // });
 };
 
 /**
@@ -216,8 +218,8 @@ exports.notify = notify;
 
 /**
  * Elimina las notificaciones viejas.
- * Por ahora limpia las mas viejas q 3 dias q ya hayan sido leidas.
- * Y desde 2 semanas atra limpia todas.
+ * Por ahora limpia las mas viejas q 1 dias q ya hayan sido leidas.
+ * Y desde 6 dias hacia atras limpia todas.
  * Luego si veo q la DB crece mucho, deberia limpiar mas.
  */
 exports.removeOld = function() {
