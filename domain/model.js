@@ -68,7 +68,7 @@ exports.WaterReport = mongoose.model("WaterReport",new Schema({
 
 }, { versionKey: false }));
 
-exports.Recipe = mongoose.model("Recipe", new Schema({
+const RecipeSchema = new Schema({
     _id: String,
     code: String,
     owner: {type:String, ref:'User'},
@@ -309,7 +309,12 @@ exports.Recipe = mongoose.model("Recipe", new Schema({
         timeStamp: Date,
         user_name: String
     }]
-},{ _id: false }));
+});
+RecipeSchema.index({collaborators:1});
+RecipeSchema.index({state: 1, owner: 1, code: 1});
+RecipeSchema.index({isPublic: 1});
+RecipeSchema.index({owner: 1});
+exports.Recipe = mongoose.model("Recipe", RecipeSchema,{ _id: false });
 
 exports.Bottle = mongoose.model("Bottle",new Schema({
     _id: String,
