@@ -328,7 +328,7 @@ exports.get = function(req, res) {
 
 exports.getComments = function(req,res) {
     model.Recipe.findOne({_id:req.params.id}).exec(function(err,results) {
-        res.send(results.comments);
+        res.send(results ? results.comments : undefined);
     });
 };
 
