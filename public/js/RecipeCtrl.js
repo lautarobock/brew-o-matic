@@ -575,8 +575,9 @@
             'boil',
             'fermentation',
             'bottling',
-            'log',
-            'rating'
+            'log'
+            // ,
+            // 'rating'
         ];
         $scope.tabs = tabs;
 
