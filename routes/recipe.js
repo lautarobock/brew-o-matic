@@ -418,6 +418,10 @@ exports.getBeerXML = function(req, res) {
             </MASH>
         </RECIPE>
         `;
+        res.setHeader(
+            'Content-disposition',
+            `attachment; filename=${recipe.NAME}.xml`
+        );
         res.set('Content-Type', `text/xml`);
         res.send(xml);
     });
