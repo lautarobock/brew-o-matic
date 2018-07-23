@@ -367,8 +367,9 @@ function mash2XML(mash) {
         <NAME>${mash.NAME}</NAME>
         <TYPE>${mash.TYPE}</TYPE>
         <INFUSE_AMOUNT>${mash.INFUSE_AMOUNT}</INFUSE_AMOUNT>
+        <INFUSE_TEMP>${mash.INFUSE_TEMP}</INFUSE_TEMP>
         <STEP_TIME>${mash.STEP_TIME}</STEP_TIME>
-        <STEP_TEMP>${mash.INFUSE_TEMP}</STEP_TEMP>
+        <STEP_TEMP>${mash.STEP_TEMP}</STEP_TEMP>
         <RAMP_TIME>${mash.RAMP_TIME}</RAMP_TIME>
         <END_TEMP>${mash.END_TEMP}</END_TEMP>
     </MASH_STEP>
