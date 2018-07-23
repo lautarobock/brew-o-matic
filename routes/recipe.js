@@ -326,6 +326,102 @@ exports.get = function(req, res) {
     });
 };
 
+function hop2XML(hop) {
+    return `
+    <HOP>
+        <NAME>${hop.NAME}</NAME>
+        <AMOUNT>${hop.AMOUNT}</AMOUNT>
+        <ALPHA>${hop.ALPHA}</ALPHA>
+        <USE>${hop.USE}</USE>
+        <TIME>${hop.TIME}</TIME>
+    </HOP>
+    `;
+}
+
+function grain2XML(grain) {
+    return `
+    <FERMENTABLE>
+        <NAME>${grain.NAME}</NAME>
+        <TYPE>${grain.TYPE}</TYPE>
+        <AMOUNT>${grain.AMOUNT}</AMOUNT>
+        <YIELD>${grain.YIELD}</YIELD>
+        <COLOR>${grain.COLOR}</COLOR>
+        <DISPLAY_COLOR>${grain.DISPLAY_COLOR ? grain.DISPLAY_COLOR : ''}</DISPLAY_COLOR>
+    </FERMENTABLE>
+    `;
+}
+
+function yeast2XML(yeast) {
+    return `
+    <YEAST>
+        <NAME>${yeast.NAME}</NAME>
+        <ATTENUATION>${yeast.ATTENUATION}</ATTENUATION>
+        <AMOUNT>${yeast.AMOUNT}</AMOUNT>
+    </YEAST>
+    `;
+}
+
+function mash2XML(mash) {
+    return `
+    <MASH_STEP>
+        <NAME>${mash.NAME}</NAME>
+        <TYPE>${mash.TYPE}</TYPE>
+        <INFUSE_AMOUNT>${mash.INFUSE_AMOUNT}</INFUSE_AMOUNT>
+        <STEP_TIME>${mash.STEP_TIME}</STEP_TIME>
+        <STEP_TEMP>${mash.INFUSE_TEMP}</STEP_TEMP>
+        <RAMP_TIME>${mash.RAMP_TIME}</RAMP_TIME>
+        <END_TEMP>${mash.END_TEMP}</END_TEMP>
+    </MASH_STEP>
+    `;
+}
+
+exports.getBeerXML = function(req, res) {
+    model.Recipe.findOne({_id:req.params.id}).populate('collaborators').populate('owner').populate('cloneFrom').exec(function(err,recipe) {
+        if ( recipe && recipe.HOPS && recipe.HOPS.HOP ) {
+            stable.inplace(recipe.HOPS.HOP, hopCompare);
+        }
+        if ( recipe && recipe.FERMENTABLES && recipe.FERMENTABLES.FERMENTABLE ) {
+            stable.inplace(recipe.FERMENTABLES.FERMENTABLE, fermentableCompare);
+        }
+        let xml = `
+        <RECIPE>
+            <NAME>${recipe.NAME}</NAME>
+            <VERSION>1</VERSION>
+            <TYPE>All Grain</TYPE>
+            <BREWER>${recipe.BREWER}</BREWER>
+            <ASST_BREWER/>
+            <BATCH_SIZE>${recipe.BATCH_SIZE}</BATCH_SIZE>
+            <BOIL_SIZE>${recipe.BOIL_SIZE}</BOIL_SIZE>
+            <BOIL_TIME>${recipe.BOIL_TIME}</BOIL_TIME>
+            <EFFICIENCY>${recipe.EFFICIENCY}</EFFICIENCY>
+            <OG>${recipe.OG}</OG>
+            <FG>${recipe.FG}</FG>
+            <IBU>${recipe.CALCIBU}</IBU>
+            <ABV>${recipe.ABV}</ABV>
+            <HOPS>
+             ${recipe.HOPS.HOP.map(hop => hop2XML(hop)).join('\n')}
+            </HOPS>
+            <FERMENTABLES>
+             ${recipe.FERMENTABLES.FERMENTABLE.map(grain => grain2XML(grain)).join('\n')}
+            </FERMENTABLES>
+            <YEASTS>
+             ${recipe.YEASTS.YEAST.map(yeast => yeast2XML(yeast)).join('\n')}
+            </YEASTS>
+            <STYLE>
+                <NAME>${recipe.STYLE.NAME}</NAME>
+            </STYLE>
+            <MASH>
+                <MASH_STEPS>
+                    ${recipe.MASH.MASH_STEPS.MASH_STEP.map(mash => mash2XML(mash)).join('\n')}
+                </MASH_STEPS>
+            </MASH>
+        </RECIPE>
+        `;
+        res.set('Content-Type', `text/xml`);
+        res.send(xml);
+    });
+}
+
 exports.getComments = function(req,res) {
     model.Recipe.findOne({_id:req.params.id}).exec(function(err,results) {
         res.send(results ? results.comments : undefined);

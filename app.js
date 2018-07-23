@@ -124,6 +124,7 @@ app.get('/recipe',filter,recipe.findAll);
 app.get('/recipe/stats',filter,recipe.stats);
 app.get('/recipe/by_user_:id',filter,recipe.findByUser);
 app.get('/recipe/:id',recipe.get);
+app.get('/recipe/:id/xml',recipe.getBeerXML);
 app.post('/recipe/:id',filter,recipe.save);
 app.post('/recipe',filter,recipe.save);
 app.delete('/recipe/:id',filter,recipe.remove);
