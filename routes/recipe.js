@@ -351,6 +351,12 @@ function grain2XML(grain) {
     `;
 }
 
+function strikeWaterTemp(recipe) {
+    return (recipe.mashTemp-recipe.GrainTemp)*0.417/recipe.WatertoGrainRatio
+            +recipe.mashTemp
+            +recipe.lossMashTemp;
+};
+
 function yeast2XML(yeast) {
     return `
     <YEAST>
@@ -416,6 +422,7 @@ exports.getBeerXML = function(req, res) {
                     ${recipe.MASH.MASH_STEPS.MASH_STEP.map(mash => mash2XML(mash)).join('\n')}
                 </MASH_STEPS>
             </MASH>
+            <strikeWaterTemp>${strikeWaterTemp(recipe)}</strikeWaterTemp>
         </RECIPE>
         `;
         res.setHeader(
