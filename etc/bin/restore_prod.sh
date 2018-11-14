@@ -1,0 +1,1 @@
+/c/Program\ Files/MongoDB/Server/3.6/bin/mongorestore.exe -d brew-o-matic-prod -h ds255020-a0.mlab.com:55020 -u app-user -p app-user713 dump/af_brew-o-matic-lautaromail/ --drop

@@ -1,1 +1,1 @@
-/c/Program\ Files/MongoDB/Server/3.2/bin/mongorestore.exe -d brew-o-matic-dev -h ds051838.mongolab.com:51838 -u app-dev -p app-dev dump/af_brew-o-matic-lautaromail/ --drop
+/c/Program\ Files/MongoDB/Server/3.6/bin/mongorestore.exe -d brew-o-matic-dev -h ds031597.mlab.com:31597 -u bom-dev -p bom-dev dump/af_brew-o-matic-lautaromail/ --drop
