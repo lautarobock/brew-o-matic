@@ -5,7 +5,9 @@
         <link rel='stylesheet' href='/css/style.css' />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <script src="https://apis.google.com/js/client:plusone.js"></script>
+        <!-- <script src="https://apis.google.com/js/client:plusone.js"></script> -->
+        <!-- <script src="https://apis.google.com/js/platform.js"></script> -->
+        <!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
 
         <link rel="canonical" href="http://brew-o-matic.eu01.aws.af.cm" />
         <!-- <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"> -->
@@ -84,7 +86,7 @@
       </div>
     </div>
 
-    <div ng-show="loginSuccess">
+    <div >
         <!-- Content -->
         <div class="container" ng-hide="user">
             <div class="jumbotron" >
@@ -93,7 +95,7 @@
                     <p>Para poder comenzar a crear recetas debes primero loguearte, para esto necesitas una cuenta de Google/Gmail/Google+ (pronto mas opciones).</p>
                     <p>
                         Si ya tienes una cuenta solo tienes que hacer click aqui
-                        <button type="button" class="btn btn-danger" ng-click="login()">Acceder</button>
+                        <button type="button" class="btn btn-danger" id="login" >Acceder</button>
                     </p>
                     <p>Si no tienes una cuenta puedes crearla desde <a target="_blank" href="https://accounts.google.com/SignUp?service=mail">aqui</a></p>
                 </div>
@@ -188,7 +190,7 @@
         Chart.defaults.global.colors = ['#FF0000','#0000FF','#00FF00'];
         (function() {
             var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-            po.src = 'https://apis.google.com/js/plusone.js?onload=onLoadSuccess';
+            po.src = 'https://apis.google.com/js/platform.js?onload=onLoadSuccess';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
         })();
 
@@ -204,14 +206,14 @@
         var google_client_id = '819410194566.apps.googleusercontent.com';
         var google_scope = ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'];
 
-        function googleSignIn() {
-            gapi.auth.authorize({
-                client_id: google_client_id,
-                scope: google_scope,
-                immediate:false
-            },
-            cb);
-        }
+        // function googleSignIn() {
+        //     gapi.auth2.authorize({
+        //         client_id: google_client_id,
+        //         scope: google_scope,
+        //         immediate:false
+        //     },
+        //     cb);
+        // }
 
         function onLoadSuccess() {
             if ( getParameterByName('googleId') ) {
@@ -221,13 +223,61 @@
                     name: getParameterByName('name')
                 });
             } else {
-                gapi.auth.authorize({
-                    client_id: google_client_id,
-                    scope: google_scope,
-                    immediate:true
-                },cb);
+                gapi.load('auth2', function(){
+                    // Retrieve the singleton for the GoogleAuth library and set up the client.
+                    auth2 = gapi.auth2.init({
+                        client_id: google_client_id,
+                        // cookiepolicy: 'single_host_origin',
+                        // Request scopes in addition to 'profile' and 'email'
+                        //scope: 'additional_scope'
+                    });
+                    // gapi.auth2
+                    // attachSignin(document.getElementById(''));
+                    auth2.attachClickHandler('login', {}, onSuccess, onFailure);
+                    auth2.isSignedIn.listen(function(val) {
+                        console.log('Signin state changed to ', val);
+                        if (val) {
+                            console.log(auth2.currentUser.get().getBasicProfile());
+                            onSuccess(auth2.currentUser.get());
+                            
+                            // auth2.signIn();
+                        }
+                    });
+                    
+                    // if (auth2.isSignedIn.get() == true) {
+                        // auth2.signIn();
+                    // }
+                    // gapi.auth2.authorize({
+                    //     client_id: google_client_id,
+                    //     scope: google_scope,
+                    //     immediate:true
+                    // },cb);
+                });
+                
             }
         }
+
+        /**
+         * Handle successful sign-ins.
+         */
+        var onSuccess = function(user) {
+            console.log('Signed in as ' + user.getBasicProfile());
+            console.log('Signed in as ' + user.getBasicProfile().getName());
+            console.log('Signed in as ' + user.getId());
+            // $scope.$emit('g+login', authResult)
+            cb({
+                googleId: user.getId(),
+                name: user.getBasicProfile().getName(),
+                // email: auth2.currentUser.get().getBasicProfile().getEmail()
+            });
+        };
+
+        /**
+         * Handle sign-in failures.
+         */
+        var onFailure = function(error) {
+            console.log(error);
+        };
 
         function cb(authResult, delay) {
             setTimeout(function() {
