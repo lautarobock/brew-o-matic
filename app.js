@@ -156,7 +156,7 @@ var scheduler = require("./util/scheduler");
 
 scheduler.runEveryDay(notifications.removeOld,true);
 scheduler.runEveryDay(require("./routes/actions.js").removeOld,true);
-scheduler.runEveryHour(recipe.fireFermentationNotification,true);
+scheduler.runEveryDay(recipe.fireFermentationNotification,true);
 // scheduler.runEverySecond(recipe.fireFermentationNotification,true);
 
 
