@@ -763,7 +763,10 @@ exports.stats = function(req, res) {
 };
 
 exports.fireFermentationNotification = function() {
-    model.Recipe.find({"fermentation.alertTime":{$exists:true}}).exec(function(err, recipes) {
+    model.Recipe.find({
+        "fermentation.alertTime": { $exists: true },
+        "fermentation.estimateDate": { $gt: new Date(new Date().getTime() - 1000 * 60 * 60 * 24 * 90) }
+    }).exec(function(err, recipes) {
         console.log("POSIBLES", recipes.length);
         var nowTime = new Date().getTime();
 
