@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 
 exports.User = mongoose.model("User",new Schema({
-    google_id: String,
+    google_id: {type: String, index: true},
     name: String,
     favorites: [String],
     singInDate: Date,
@@ -314,6 +314,7 @@ RecipeSchema.index({collaborators:1});
 RecipeSchema.index({state: 1, owner: 1, code: 1});
 RecipeSchema.index({isPublic: 1});
 RecipeSchema.index({owner: 1});
+RecipeSchema.index({alertTime: 1, estimateDate: 1});
 exports.Recipe = mongoose.model("Recipe", RecipeSchema);
 
 exports.Bottle = mongoose.model("Bottle",new Schema({
