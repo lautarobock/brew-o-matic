@@ -653,11 +653,14 @@ exports.save = function(req, res) {
 //        model.Recipe.findByIdAndUpdate(id,req.body).populate('owner').exec(callback);
         model.Recipe.findById(id).exec(function (err,old) {
             //Verifico los permisos de la receta contra la version guardada de la misma
-            if ( old.owner != req.session.user_id ) {
+            if ( old && old.owner != req.session.user_id ) {
                 if ( old.collaborators.indexOf(req.session.user_id) == -1 ) {
                     res.send(500,{error: "No tiene permisos para modificar esta receta"});
                     return;
                 }
+            } else if (!old) {
+                res.send(422,{error: "not found"});
+                return;
             }
 
             var oldNumber = 0;
