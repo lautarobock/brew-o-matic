@@ -23,6 +23,16 @@
         },
         {
             "type": "node",
+            "request": "launch",
+            "name": "Launch PROD",
+            "program": "${workspaceRoot}\\app.js",
+            "cwd": "${workspaceRoot}",
+            "env": {
+                "MONGOLAB_URI": "mongodb://app-user:app-user713@ds255020-a0.mlab.com:55020,ds255020-a1.mlab.com:55020/brew-o-matic-prod?replicaSet=rs-ds255020&retryWrites=false"
+            }
+        },
+        {
+            "type": "node",
             "request": "attach",
             "name": "Attach to Process",
             "port": 5858
