@@ -17,7 +17,7 @@
   "dependencies": {
     "ejs": "*",
     "express": "3.3.5",
-    "mongoose": "^5.0.4",
+    "mongoose": "^5.7.5",
     "node-minify": "^2.4.2",
     "q": "^1.4.1",
     "socket.io": "^2.0.4",
