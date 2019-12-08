@@ -3136,7 +3136,7 @@
                 $scope.hasStyleError = !range('CALCCOLOUR', style.Colour_Min, style.Colour_Max,'Color') || $scope.hasStyleError;
                 $scope.hasStyleError = !range('ABV', style.ABV_Min, style.ABV_Max) || $scope.hasStyleError;
                 if ( $scope.hasStyleError ) {
-                    alertFactory.create('warning','Nazi mode alerta, tiene parametros fuera de estilo ');
+                    alertFactory.create('warning','Alerta modo estricto, tiene parametros fuera de estilo ');
                 } else if ( prevError && $scope.recipe.naziMode ){
                     alertFactory.create('success','Felicitaciones! Has conseguido tener los parametros dentro del estilo!');
                 }
