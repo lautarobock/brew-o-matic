@@ -57,24 +57,24 @@
     <ng-include src="'partial/recipe-detail-indicators.html'"></ng-include>
     <ng-include src="'partial/recipe-detail-operations.html'"></ng-include>
     <div class="panel panel-default">
-        <div class="panel-heading"><strong>Nazi Mode</strong></div>
+        <div class="panel-heading"><strong>Modo estricto</strong></div>
         <div class="panel-body" >
             <div>
                 Habilitado
-                <span ng-show="recipe.naziMode" class="glyphicon glyphicon-check"/>
-                <span ng-hide="recipe.naziMode" class="glyphicon glyphicon-unchecked"/>
+                <span ng-show="recipe.strictMode" class="glyphicon glyphicon-check"/>
+                <span ng-hide="recipe.strictMode" class="glyphicon glyphicon-unchecked"/>
                 <br/>
-                <button type="button" class="btn btn-default" ng-model="recipe.naziMode" btn-checkbox>
-                    <span ng-hide="recipe.naziMode">
+                <button type="button" class="btn btn-default" ng-model="recipe.strictMode" btn-checkbox>
+                    <span ng-hide="recipe.strictMode">
                         Habilitar
                     </span>
-                    <span ng-show="recipe.naziMode">
+                    <span ng-show="recipe.strictMode">
                         Deshabilitar
                     </span>
                 </button>
             </div>
             <br/>
-            <span ng-show="!hasStyleError && recipe.naziMode"
+            <span ng-show="!hasStyleError && recipe.strictMode"
                 class="glyphicon glyphicon-ok-circle"
                 style="font-size: 30px;color: green;">
             </span>

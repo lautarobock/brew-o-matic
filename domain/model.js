@@ -252,7 +252,7 @@ const RecipeSchema = new Schema({
     PRIMARY_TEMP: Number, //@deprecated parece sin uso
     BIAB: String, //@deprecated parece sin uso
     IBUCalcMethod: String, //@deprecated parece sin uso
-    StyleNaziMode: String, //@deprecated parece sin uso, cree uno diferente
+    StyleStrictMode: String, //@deprecated parece sin uso, cree uno diferente
     IsNoChill: String, //@deprecated parece sin uso
     GrainUnits: String, //@deprecated parece sin uso
     HopsUnits: String, //@deprecated parece sin uso
@@ -281,7 +281,7 @@ const RecipeSchema = new Schema({
     //Start own properties
     isPublic: Boolean,
     publishDate: Date,
-    naziMode: Boolean,
+    strictMode: Boolean,
     phPreBoil: Number,
     phPostBoil: Number,
     cloneFrom: {type:String, ref:'Recipe'},

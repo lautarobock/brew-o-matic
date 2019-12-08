@@ -3121,7 +3121,7 @@
             var prevError = $scope.hasStyleError;
             $scope.hasStyleError = false;
             function range(attr, min, max, name) {
-                if ( $scope.recipe.naziMode && ($scope.recipe[attr] > max || $scope.recipe[attr] < min)) {
+                if ( $scope.recipe.strictMode && ($scope.recipe[attr] > max || $scope.recipe[attr] < min)) {
                     $scope.error[attr] = (name||attr) + ' entre ' + min + ' y ' + max;
                     return false;
                 } else {
@@ -3136,8 +3136,8 @@
                 $scope.hasStyleError = !range('CALCCOLOUR', style.Colour_Min, style.Colour_Max,'Color') || $scope.hasStyleError;
                 $scope.hasStyleError = !range('ABV', style.ABV_Min, style.ABV_Max) || $scope.hasStyleError;
                 if ( $scope.hasStyleError ) {
-                    alertFactory.create('warning','Nazi mode alerta, tiene parametros fuera de estilo ');
-                } else if ( prevError && $scope.recipe.naziMode ){
+                    alertFactory.create('warning','Alerta modo estricto, tiene parametros fuera de estilo ');
+                } else if ( prevError && $scope.recipe.strictMode ){
                     alertFactory.create('success','Felicitaciones! Has conseguido tener los parametros dentro del estilo!');
                 }
             } else {
@@ -3166,7 +3166,7 @@
             });
 
         }
-        $scope.$watch('recipe.naziMode+recipe.STYLE.NAME', function() {
+        $scope.$watch('recipe.strictMode+recipe.STYLE.NAME', function() {
             checkStyle();
         });
 
