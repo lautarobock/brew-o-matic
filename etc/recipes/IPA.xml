@@ -118,7 +118,7 @@
     <BIAB>0</BIAB>
     <IBUCalcMethod>2</IBUCalcMethod>
     <GrainCalcMethod>2</GrainCalcMethod>
-    <StyleStrictMode>1</StyleStrictMode>
+    <StyleNaziMode>1</StyleNaziMode>
     <GrainUnits>1</GrainUnits>
     <HopsUnits>0</HopsUnits>
     <VolumeUnits>1</VolumeUnits>
