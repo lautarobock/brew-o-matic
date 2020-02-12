@@ -1,1 +1,1 @@
-/c/Program\ Files/MongoDB/Server/3.2/bin/mongodump.exe -h ds047948.mongolab.com:47948 -d af_brew-o-matic-lautaromail -u app -p lac713 -o dump/ --excludeCollection "system.users"
+/c/Program\ Files/MongoDB/Server/3.6/bin/mongodump.exe -h ds255020-a0.mlab.com:55020 -d brew-o-matic-prod -u app-user -p app-user713 -o dump/ --excludeCollection "system.users"

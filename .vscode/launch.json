@@ -14,21 +14,11 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceRoot}\\app.js",
-            "cwd": "${workspaceRoot}",
-            "env": {
-                "MONGOLAB_URI": "mongodb://app:lac713@ds047948.mongolab.com:47948/af_brew-o-matic-lautaromail"
-            }
-        },
-        {
-            "type": "node",
-            "request": "launch",
             "name": "Launch PROD",
             "program": "${workspaceRoot}\\app.js",
             "cwd": "${workspaceRoot}",
             "env": {
-                "MONGOLAB_URI": "mongodb://app-user:app-user713@ds255020-a0.mlab.com:55020,ds255020-a1.mlab.com:55020/brew-o-matic-prod?replicaSet=rs-ds255020&retryWrites=false"
+                "MONGOLAB_URI": "mongodb+srv://bom-app-user:kr2mK7PkQfc9vY9@brew-o-matic-vrtbs.mongodb.net/brew-o-matic-prod?retryWrites=true&w=majority"
             }
         },
         {

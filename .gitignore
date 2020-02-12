@@ -2,4 +2,3 @@
 node_modules/
 startup-prod.sh
 npm-debug.log
-dump
