@@ -24,7 +24,7 @@
         $rootScope.color = color;
 
         $rootScope.sharedUrl = function(_id) {
-            return 'http://'+$location.host() + ":" + $location.port() + '/share.html#/' + _id;
+            return '//'+$location.host() + ":" + $location.port() + '/share.html#/' + _id;
         };
 
     });
