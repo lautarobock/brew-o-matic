@@ -60,7 +60,7 @@ function recipesByUser(values) {
             deferred.reject(err);
         } else {
             model.User.populate(res, {path: '_id'}, function(err, result) {
-                values.recipesByUser = result;
+                values.recipesByUser = result.slice(0, 200);
                 deferred.resolve();
             });
         }
