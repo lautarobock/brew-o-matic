@@ -10,11 +10,8 @@ var notifications = require('./util/notifications.js');
 var http = require('http');
 var path = require('path');
 var mongoose = require('mongoose');
-var sslRedirect = require("heroku-ssl-redirect");
 
 var app = express();
-
-app.use(sslRedirect);
 
 // all environments
 app.use(function(req, res, next) {
