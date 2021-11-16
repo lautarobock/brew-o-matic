@@ -10,8 +10,12 @@ var notifications = require('./util/notifications.js');
 var http = require('http');
 var path = require('path');
 var mongoose = require('mongoose');
+var enforce = require('express-sslify');
 
 var app = express();
+if (process.env.ENV !== 'dev') {
+    app.use(enforce.HTTPS({ trustProtoHeader: true }));
+}
 
 // all environments
 app.use(function(req, res, next) {

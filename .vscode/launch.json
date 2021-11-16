@@ -18,7 +18,8 @@
             "program": "${workspaceRoot}\\app.js",
             "cwd": "${workspaceRoot}",
             "env": {
-                "MONGOLAB_URI": "mongodb+srv://bom-app-user:kr2mK7PkQfc9vY9@brew-o-matic-vrtbs.mongodb.net/brew-o-matic-prod?retryWrites=true&w=majority"
+                "MONGOLAB_URI": "mongodb+srv://bom-app-user:kr2mK7PkQfc9vY9@brew-o-matic-vrtbs.mongodb.net/brew-o-matic-prod?retryWrites=true&w=majority",
+                "ENV": "dev"
             }
         },
         {
