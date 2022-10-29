@@ -21,7 +21,7 @@
     "mongoose": "^6.2.1",
     "node-minify": "^2.4.2",
     "q": "^1.4.1",
-    "socket.io": "^2.0.4",
+    "socket.io": "^2.5.0",
     "stable": "^0.1.5",
     "stylus": "*"
   },
