@@ -10,7 +10,7 @@
     "url": "https://github.com/lautarobock/brew-o-matic.git"
   },
   "devDependencies": {
-    "karma": "0.10.8",
+    "karma": "6.4.1",
     "karma-phantomjs-launcher": "0.1.1",
     "phantomjs": "1.9.20"
   },
