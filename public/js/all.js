@@ -262,7 +262,7 @@
         };
 
         $rootScope.sharedUrl = function(_id) {
-            return 'http://'+$location.host() + ":" + $location.port() + '/share.html#/' + _id;
+            return '//'+$location.host() + ":" + $location.port() + '/share.html#/' + _id;
         };
 
         $rootScope.formatDate = function(date) {
@@ -1748,8 +1748,9 @@
             'boil',
             'fermentation',
             'bottling',
-            'log',
-            'rating'
+            'log'
+            // ,
+            // 'rating'
         ];
         $scope.tabs = tabs;
 
@@ -5509,7 +5510,7 @@
 
         $scope.context = {
             sharedUrl: function(_id) {
-                return 'http://'+$location.host() + ":" + $location.port() + '/share.html#/' + _id;
+                return '//'+$location.host() + ":" + $location.port() + '/share.html#/' + _id;
             }
         };
 
