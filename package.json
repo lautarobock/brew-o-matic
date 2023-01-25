@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "ejs": "*",
-    "express": "3.3.5",
+    "express": "4.17.3",
     "express-sslify": "^1.2.0",
     "mongoose": "^6.8.4",
     "node-minify": "^2.4.2",
