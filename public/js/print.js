@@ -59,9 +59,6 @@
 								'<script>' +
 								'	setTimeout(function() {' +
 								'		window.print();' +
-								'		setTimeout(function() {' +
-								'			window.close();' +
-								'		},100);' +
 								'	},100);' +
 								'</script>'
 							);
@@ -120,9 +117,6 @@
 								'<script>' +
 								'	setTimeout(function() {' +
 								'		window.print();' +
-								'		setTimeout(function() {' +
-								'			window.close();' +
-								'		},100);' +
 								'	},100);' +
 								'</script>'
 							);
