@@ -46,7 +46,7 @@ exports.updateTilt = function(req, res) {
             console.error('Error al actializr TITL en la receta', error);
             res.send(500,{error: 'Error al actializr TITL en la receta'});
 
-        
+        }
     });
 };
 
