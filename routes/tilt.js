@@ -5,9 +5,17 @@ var model = require('../domain/model.js');
  * @Params body  {"SG":"1.020","Temp":"66.8","Color":"BLACK","Timepoint":"42746.416989097226","Beer":"Brown #51","Comment":""}
  */
 exports.updateTilt = function(req, res) {
+    console.log('UPDATE TILT', req.params.id);
+    console.log(req.body);
     model.Recipe.findOne({_id:req.params.id}).exec(function(err,recipe) {
-        console.log('UPDATE TILT', req.params.id);
-        console.log(req.body);
+        if (err) {
+            res.send(500,{error: 'Error al obtener la receta'});
+            return;
+        }
+        if (!recipe) {
+            res.send(404,{error: 'Receta no encontrada'});
+            return;
+        }
         try {
             if (recipe.tiltValues.length > 2) {
                 //si los ultimos 3 valoes son iguales elimino el anteultimo
@@ -36,7 +44,8 @@ exports.updateTilt = function(req, res) {
             });
         } catch (error) {
             console.error('Error al actializr TITL en la receta', error);
-        }
+            res.send(500,{error: 'Error al actializr TITL en la receta'});
+
         
     });
 };
