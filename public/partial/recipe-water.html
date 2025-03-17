@@ -36,11 +36,11 @@
                         <label>Agua a utilizar</label>
                         <div class="input-group">
                             <select class="form-control input-sm" ng-model="recipe.water.selectedSource">
-                                <option ng-repeat="report in reports | orderBy:'name'" ng-selected="report._id==recipe.water.selectedSource" value="{{report._id}}">{{report.name}}</option>
+                            <option ng-repeat="report in reports | orderBy:'name'" ng-selected="report._id==recipe.water.selectedSource" value="{{report._id}}">{{report.name}}</option>
                             </select>
                             <span class="input-group-btn">
                                 <button ng-disabled="sourceEqual()" type="button" class="btn btn-default btn-sm" ng-click="updateSource()">
-                                    Actualiazr
+                                    Actualizar
                                 </button>
                             </span>
                         </div>
@@ -73,7 +73,7 @@
                             </select>
                             <span class="input-group-btn">
                                 <button  ng-disabled="targetEqual()" type="button" class="btn btn-default btn-sm" ng-click="updateTarget()">
-                                    Actualiazr
+                                    Actualizar
                                 </button>
                             </span>
                         </div>

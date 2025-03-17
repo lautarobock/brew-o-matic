@@ -72,7 +72,7 @@
         <div>
             <div class="row">
                 <div class="col-md-4">
-                    <label for="totalHardness">Tureza total como CaCO3 (ppm)</label>
+                    <label for="totalHardness">Dureza total como CaCO3 (ppm)</label>
                     <span class="form-control input-sm"
                            id="totalHardness">
                            {{ BrewCalc.totalHardness(water().cations) | number:2 }}
@@ -95,7 +95,7 @@
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <label for="totalCations">Alcalindad (ppm como CaCO3)</label>
+                    <label for="totalCations">Alcalinidad (ppm como CaCO3)</label>
                     <span class="form-control input-sm"
                            id="totalCations">
                            {{ BrewCalc.alkalinity(water().anions) | number:2 }}
