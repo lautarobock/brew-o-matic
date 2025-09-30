@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 exports.User = mongoose.model("User",new Schema({
     google_id: {type: String, index: true},
     name: String,
+    email: String,
     favorites: [String],
     singInDate: Date,
     lastLogin: Date,
