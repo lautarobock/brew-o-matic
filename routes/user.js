@@ -74,6 +74,15 @@ exports.updateSettings = function(req,res) {
     });
 };
 
+exports.updatePassword = function(req,res) {
+    model.User.findOne({_id: req.session.user_id}, function(err, user) {
+        user.password = req.body.password;
+        user.save(function(err,resp) {
+            res.send(resp);
+        });
+    });
+};
+
 exports.get = function(req, res) {
     model.User.findOne({_id: req.params.id},
                        function(err,user) {
@@ -119,6 +128,31 @@ exports.getByGoogleId = function(req, res){
 
     });
 };
+
+exports.loginPassword = function(req, res) {
+
+    model.User.findOne({ email: req.body.email, password: req.body.password }).exec(function(err, user) {
+        if (user) {
+            var s = req.session;
+            console.log("Set User_Id in session: " + user._id);
+            s.user_id = user._id;
+            s.user_name = user.name;
+            s.user_isAdmin = user.isAdmin;
+
+            user.lastLogin = new Date();
+            user.singInDate = user.singInDate || user.lastLogin;
+            user.accessCode = user.accessCode || code();
+            user.email = user.email || req.query.email;
+
+            user.save();
+            res.send(user);
+            actions.log(req.session.user_id, "LOG_IN","User: " + req.query.name + " Email: " + req.query.email);
+        } else {
+            // return 404
+            res.status(404).send({ error: 'User not found or invalid credentials' });
+        }
+    });
+}
 
 exports.getByAccessCode = function(req, res, next) {
     model.User.findOne({'accessCode':req.params.accessCode}, 'name accessCode google_id')

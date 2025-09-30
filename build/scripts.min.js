@@ -163,6 +163,9 @@
     index.controller("MainController",function($scope,$rootScope,User,$location) {
         $rootScope.breadcrumbs = [];
 
+        $scope.email = '';
+        $scope.password = '';
+
         $scope.login = function() {
             googleSignIn();
         };
@@ -210,6 +213,15 @@
         $scope.goToTab = function(path) {
             $location.path(path);
         };
+
+        $scope.loginPassword = function() {
+            console.log('loginPassword', $scope.email, $scope.password);
+            User.loginPassword({email: $scope.email, password: $scope.password}, function(user) {
+                $rootScope.loginSuccess = true;
+                $rootScope.user = user;
+                console.log(user);
+            });
+        }
     });
 
 
@@ -3803,6 +3815,24 @@
             CalculatorPopup.open();
         };
 
+        function afterLogin(user) {
+            if (!user.password) {
+                alert('Proximamente se dejara de tener la opcion de login con google, por favor crear una constraseña para futuros accesos');
+                prompt('Ingresar contraseña', function(password) {
+                    user.password = password;
+                    User.updatePassword(user, function() {
+                        $rootScope.loginSuccess = true;
+                        $rootScope.user = user;
+                        console.log(user);
+                    });
+                });
+            } else {
+                $rootScope.loginSuccess = true;
+                $rootScope.user = user;
+                console.log(user);
+            }
+        }
+
         $scope.$on('g+login',function(event,authResult) {
             if ( authResult == null ) {
                 $rootScope.loginSuccess = true;
@@ -3821,12 +3851,9 @@
                 request.execute(function (obj){
                     User.getByGoogleId({
                         id:obj.id,
-                        name: obj.name
-                    },function(user){
-                        $rootScope.loginSuccess = true;
-                        $rootScope.user = user;
-                        console.log(user);
-                    });
+                        name: obj.name,
+                        email: obj.email
+                    }, afterLogin);
                     
                 });
               });
@@ -3834,12 +3861,9 @@
                 //En este caso viene de login interno de la app mobile (en un iframe)
                 User.getByGoogleId({
                     id: authResult.googleId,
-                    name: authResult.name
-                },function(user){
-                    $rootScope.loginSuccess = true;
-                    $rootScope.user = user;
-                    console.log(user);
-                });
+                    name: authResult.name,
+                    email: authResult.email
+                }, afterLogin);
             } else if ( authResult['error'] == "immediate_failed") {
                 $rootScope.loginSuccess = true;
                 $scope.loginError = '';
@@ -4879,9 +4903,6 @@
 								'<script>' +
 								'	setTimeout(function() {' +
 								'		window.print();' +
-								'		setTimeout(function() {' +
-								'			window.close();' +
-								'		},100);' +
 								'	},100);' +
 								'</script>'
 							);
@@ -4940,9 +4961,6 @@
 								'<script>' +
 								'	setTimeout(function() {' +
 								'		window.print();' +
-								'		setTimeout(function() {' +
-								'			window.close();' +
-								'		},100);' +
 								'	},100);' +
 								'</script>'
 							);
@@ -5958,7 +5976,9 @@
             removeFromFavorites: {method: 'PUT', params: {type:'favorite_drop'}},
             get:{method:'GET',params: {type:'id_'}},
             //findStats: {method: 'GET', params: {type:'stats'}},
-            updateSettings: {method: 'PUT', params: {type:'settings'}}
+            updateSettings: {method: 'PUT', params: {type:'settings'}},
+            updatePassword: {method: 'PUT', params: {type:'password'}},
+            loginPassword: {method: 'POST', params: {type:'login_password'}}
         });
     });
 

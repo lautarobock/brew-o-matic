@@ -13,7 +13,9 @@
             removeFromFavorites: {method: 'PUT', params: {type:'favorite_drop'}},
             get:{method:'GET',params: {type:'id_'}},
             //findStats: {method: 'GET', params: {type:'stats'}},
-            updateSettings: {method: 'PUT', params: {type:'settings'}}
+            updateSettings: {method: 'PUT', params: {type:'settings'}},
+            updatePassword: {method: 'PUT', params: {type:'password'}},
+            loginPassword: {method: 'POST', params: {type:'login_password'}}
         });
     });
 

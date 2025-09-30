@@ -163,6 +163,9 @@
     index.controller("MainController",function($scope,$rootScope,User,$location) {
         $rootScope.breadcrumbs = [];
 
+        $scope.email = '';
+        $scope.password = '';
+
         $scope.login = function() {
             googleSignIn();
         };
@@ -210,6 +213,15 @@
         $scope.goToTab = function(path) {
             $location.path(path);
         };
+
+        $scope.loginPassword = function() {
+            console.log('loginPassword', $scope.email, $scope.password);
+            User.loginPassword({email: $scope.email, password: $scope.password}, function(user) {
+                $rootScope.loginSuccess = true;
+                $rootScope.user = user;
+                console.log(user);
+            });
+        }
     });
 
 

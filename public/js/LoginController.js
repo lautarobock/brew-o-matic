@@ -14,6 +14,24 @@
             CalculatorPopup.open();
         };
 
+        function afterLogin(user) {
+            if (!user.password) {
+                alert('Proximamente se dejara de tener la opcion de login con google, por favor crear una constraseña para futuros accesos');
+                prompt('Ingresar contraseña', function(password) {
+                    user.password = password;
+                    User.updatePassword(user, function() {
+                        $rootScope.loginSuccess = true;
+                        $rootScope.user = user;
+                        console.log(user);
+                    });
+                });
+            } else {
+                $rootScope.loginSuccess = true;
+                $rootScope.user = user;
+                console.log(user);
+            }
+        }
+
         $scope.$on('g+login',function(event,authResult) {
             if ( authResult == null ) {
                 $rootScope.loginSuccess = true;
@@ -34,11 +52,7 @@
                         id:obj.id,
                         name: obj.name,
                         email: obj.email
-                    },function(user){
-                        $rootScope.loginSuccess = true;
-                        $rootScope.user = user;
-                        console.log(user);
-                    });
+                    }, afterLogin);
                     
                 });
               });
@@ -48,11 +62,7 @@
                     id: authResult.googleId,
                     name: authResult.name,
                     email: authResult.email
-                },function(user){
-                    $rootScope.loginSuccess = true;
-                    $rootScope.user = user;
-                    console.log(user);
-                });
+                }, afterLogin);
             } else if ( authResult['error'] == "immediate_failed") {
                 $rootScope.loginSuccess = true;
                 $scope.loginError = '';

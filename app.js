@@ -109,6 +109,8 @@ app.put('/user/favorite_add',filter,user.addToFavorites);
 app.put('/user/favorite_drop',filter,user.removeFromFavorites);
 app.get('/user',filter,data.User.findAll);
 app.put('/user/settings',filter,user.updateSettings);
+app.put('/user/password',filter,user.updatePassword);
+app.post('/user/login_password',user.loginPassword);
 app.get('/stats/last', filter, stats.lastActions);
 app.get('/stats',filter,stats.all);
 app.get('/recipe/export/:id',filter,recipe.exportRecipe);
