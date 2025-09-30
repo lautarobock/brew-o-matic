@@ -265,6 +265,7 @@
         var onSuccess = function(user) {
             console.log('Signed in as ' + JSON.stringify(user.getBasicProfile()));
             console.log('Signed in as ' + user.getBasicProfile().getName());
+            console.log('Signed in as ' + user.getBasicProfile().getEmail());
             console.log('Signed in as ' + user.getId());
             // $scope.$emit('g+login', authResult)
             cb({
