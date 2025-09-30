@@ -271,6 +271,7 @@
             cb({
                 googleId: user.getId(),
                 name: user.getBasicProfile().getName(),
+                email: user.getBasicProfile().getEmail(),
                 // email: auth2.currentUser.get().getBasicProfile().getEmail()
             });
         };

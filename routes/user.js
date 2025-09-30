@@ -103,16 +103,18 @@ exports.getByGoogleId = function(req, res){
             user.lastLogin = new Date();
             user.singInDate = user.singInDate || user.lastLogin;
             user.accessCode = user.accessCode || code();
+            user.email = user.email || req.query.email;
 
             user.save();
             res.send(user);
-            actions.log(req.session.user_id, "LOG_IN","User: " + req.query.name);
+            actions.log(req.session.user_id, "LOG_IN","User: " + req.query.name + " Email: " + req.query.email);
         } else {
             var newUser = buildNewUser(req.params.google_id,req.query.name);
+            newUser.email = newUser.email || req.query.email;
             model.User.create(newUser,function(err,newuser) {
                 res.send(newuser);
             });
-            actions.log(req.session.user_id, "SING_IN","User: " + req.query.name);
+            actions.log(req.session.user_id, "SING_IN","User: " + req.query.name + " Email: " + req.query.email);
         }
 
     });

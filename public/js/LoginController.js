@@ -32,7 +32,8 @@
                 request.execute(function (obj){
                     User.getByGoogleId({
                         id:obj.id,
-                        name: obj.name
+                        name: obj.name,
+                        email: obj.email
                     },function(user){
                         $rootScope.loginSuccess = true;
                         $rootScope.user = user;
@@ -45,7 +46,8 @@
                 //En este caso viene de login interno de la app mobile (en un iframe)
                 User.getByGoogleId({
                     id: authResult.googleId,
-                    name: authResult.name
+                    name: authResult.name,
+                    email: authResult.email
                 },function(user){
                     $rootScope.loginSuccess = true;
                     $rootScope.user = user;
