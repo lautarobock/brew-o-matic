@@ -84,6 +84,9 @@
                     <a  href="" class="dropdown-toggle" data-toggle="dropdown"><span>{{user.name}}</span> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="https://docs.google.com/document/d/1lH9tL2bq6RDdG1ljv8Bg62HCdAb5yvbpGzec09ahi2M/edit" target="_blank">Ayuda V. {{version}}</a></li>
+                        <li ng-show="user.password">
+                            <a href="" ng-click="disconnectUser()">Desconectar</a>
+                        </li>
                     </ul>
                 </li>
             </ul>

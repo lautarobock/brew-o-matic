@@ -218,8 +218,15 @@
             console.log('loginPassword', $scope.email, $scope.password);
             User.loginPassword({email: $scope.email, password: $scope.password}, function(user) {
                 $rootScope.loginSuccess = true;
+                $scope.loginError = '';
                 $rootScope.user = user;
+                localStorage.setItem('bomuser', JSON.stringify(user));
+                // $rootScope.$apply();
                 console.log(user);
+            }, function() {
+                $rootScope.loginSuccess = false;
+                $scope.loginError = 'Error al iniciar sesión';
+                // $rootScope.$apply();
             });
         }
     });
@@ -3921,6 +3928,13 @@
             });
         };            
         
+        $scope.disconnectUser = function() {
+            $rootScope.user = null;
+            $rootScope.loginSuccess = false;
+            localStorage.removeItem('bomuser');
+            // $rootScope.$apply();
+            window.location.reload();
+        };
 
 
     });

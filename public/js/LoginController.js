@@ -120,6 +120,13 @@
             });
         };            
         
+        $scope.disconnectUser = function() {
+            $rootScope.user = null;
+            $rootScope.loginSuccess = false;
+            localStorage.removeItem('bomuser');
+            // $rootScope.$apply();
+            window.location.reload();
+        };
 
 
     });

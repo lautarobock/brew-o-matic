@@ -230,7 +230,10 @@
         // }
 
         function onLoadSuccess() {
-            if ( getParameterByName('googleId') ) {
+            var bomuserStr = localStorage.getItem('bomuser');
+            if (bomuserStr) {
+                setBomuser(JSON.parse(bomuserStr));
+            } else if ( getParameterByName('googleId') ) {
                 //viene del iframe en mobile
                 cb({
                     googleId: getParameterByName('googleId'),
@@ -294,6 +297,20 @@
         var onFailure = function(error) {
             console.log(error);
         };
+
+        function setBomuser(user) {
+            setTimeout(function() {
+                var $body = angular.element(document.body);  // 1
+                var $rootScope = $body.scope().$root;        // 2
+                if ($rootScope) {
+                    $rootScope.loginSuccess = true;
+                    $rootScope.user = user;
+                    $rootScope.$apply();
+                } else {
+                    setBomuser(user);
+                }
+            }, 500);
+        }
 
         function cb(authResult, delay) {
             setTimeout(function() {
