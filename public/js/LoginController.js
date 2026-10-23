@@ -15,12 +15,14 @@
         };
 
         function afterLogin(user) {
-            if (!user.password) {
+            if (!user.hasPassword) {
                 alert('Proximamente se dejara de tener la opcion de login con google, por favor crear una constraseña para futuros accesos');
                 var password = prompt('Ingresar contraseña');
                 if (password) {
                     user.password = password;
                     User.updatePassword(user, function() {
+                        delete user.password;
+                        user.hasPassword = true;
                         $rootScope.loginSuccess = true;
                         $rootScope.user = user;
                         console.log(user);

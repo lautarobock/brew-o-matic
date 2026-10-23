@@ -84,7 +84,7 @@ exports.Recipe.save = function(req, res) {
     delete req.body._id;
     var id = req.params.id;
     req.body.owner = req.body.owner._id;
-    model.Recipe.findByIdAndUpdate(id,req.body,{upsert:true}).populate('owner').exec(function(err,results) {
+    model.Recipe.findByIdAndUpdate(id,req.body,{upsert:true}).populate('owner', 'name _id').exec(function(err,results) {
         res.send(results);
     });
 };
@@ -103,7 +103,9 @@ exports.User.findAll = function(req, res) {
     if ( req.query.name ) {
         filter = {name: {"$regex":  req.query.name,"$options": 'i'}};
     }
-    model.User.find(filter).exec(function(err,results) {
+    var url = req.originalUrl || req.url || '';
+    var fields = url.indexOf('/admin/') === 0 ? 'name _id singInDate lastLogin' : 'name _id';
+    model.User.find(filter).select(fields).exec(function(err,results) {
         res.send(results);
     });
 };

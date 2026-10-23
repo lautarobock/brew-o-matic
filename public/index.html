@@ -232,7 +232,13 @@
         function onLoadSuccess() {
             var bomuserStr = localStorage.getItem('bomuser');
             if (bomuserStr) {
-                setBomuser(JSON.parse(bomuserStr));
+                var bomuser = JSON.parse(bomuserStr);
+                if (bomuser && bomuser.password) {
+                    bomuser.hasPassword = true;
+                    delete bomuser.password;
+                    localStorage.setItem('bomuser', JSON.stringify(bomuser));
+                }
+                setBomuser(bomuser);
             } else if ( getParameterByName('googleId') ) {
                 //viene del iframe en mobile
                 cb({

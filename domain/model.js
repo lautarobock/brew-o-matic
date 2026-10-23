@@ -6,7 +6,7 @@ exports.User = mongoose.model("User",new Schema({
     google_id: {type: String, index: true},
     name: String,
     email: String,
-    password: String,
+    password: { type: String, select: false },
     favorites: [String],
     singInDate: Date,
     lastLogin: Date,

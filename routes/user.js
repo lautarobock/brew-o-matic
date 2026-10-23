@@ -1,8 +1,17 @@
 var notifications = require('../util/notifications.js');
 var model = require('../domain/model.js');
 var actions = require('./actions.js');
+var passwords = require('../util/password.js');
 var mongoose = require('mongoose');
 var Arrays = require("../public/js/util/util.js").Arrays;
+
+function toClientUser(user) {
+    if (!user) return user;
+    var obj = user.toObject ? user.toObject() : user;
+    obj.hasPassword = !!obj.password;
+    delete obj.password;
+    return obj;
+}
 /*
  * GET users listing.
  */
@@ -47,14 +56,14 @@ exports.add = function(req,res) {
     var user = buildNewUser(google_id, name);
 
     model.User.create(user,function(err,newuser) {
-        res.send(newuser);
+        res.send(toClientUser(newuser));
     });
 
 };
 
 exports.updateSettings = function(req,res) {
     console.log("update settings", req.session.user_id);
-    model.User.findOne({_id: req.session.user_id},
+    model.User.findOne({_id: req.session.user_id}).select('+password').exec(
                        function(err,user) {
         if ( err ) {
             console.log("err",err);
@@ -66,7 +75,7 @@ exports.updateSettings = function(req,res) {
             user.save(function(err, resp) {
                 console.log("err",err);
                 console.log(resp);
-                res.send(user);
+                res.send(toClientUser(user));
                 actions.log(req.session.user_id, "UPDATE_SETTINGS","User: " + user.name);
             });
 
@@ -75,24 +84,38 @@ exports.updateSettings = function(req,res) {
 };
 
 exports.updatePassword = function(req,res) {
-    model.User.findOne({_id: req.session.user_id}, function(err, user) {
-        user.password = req.body.password;
-        user.save(function(err,resp) {
-            res.send(resp);
+    if (!req.body || !req.body.password) {
+        res.status(400).send({ error: 'Password requerida' });
+        return;
+    }
+    model.User.findOne({_id: req.session.user_id}).select('+password').exec(function(err, user) {
+        if (err || !user) {
+            res.status(404).send({ error: 'User not found' });
+            return;
+        }
+        passwords.hash(req.body.password, function(hashErr, hashed) {
+            if (hashErr) {
+                res.status(500).send({ error: hashErr });
+                return;
+            }
+            user.password = hashed;
+            user.save(function(saveErr, resp) {
+                if (saveErr) {
+                    res.status(500).send({ error: saveErr });
+                    return;
+                }
+                res.send(toClientUser(resp));
+            });
         });
     });
 };
 
 exports.get = function(req, res) {
-    model.User.findOne({_id: req.params.id},
+    model.User.findOne({_id: req.params.id}, 'name',
                        function(err,user) {
         if ( err ) {
             res.send(500,{error:err});
         } else {
-            delete user.google_id;
-            delete user.singInDate;
-            delete user.lastLogin;
-            delete user.settings;
             res.send(user);
         }
     });
@@ -100,7 +123,7 @@ exports.get = function(req, res) {
 
 exports.getByGoogleId = function(req, res){
     //console.log('getByGoogleId with id: ' + req.params.google_id);
-    model.User.findOne({'google_id':req.params.google_id}).exec(function(err,user) {
+    model.User.findOne({'google_id':req.params.google_id}).select('+password').exec(function(err,user) {
         //console.log(user);
         if (user) {
             var s = req.session;
@@ -115,13 +138,13 @@ exports.getByGoogleId = function(req, res){
             user.email = user.email || req.query.email;
 
             user.save();
-            res.send(user);
+            res.send(toClientUser(user));
             actions.log(req.session.user_id, "LOG_IN","User: " + req.query.name + " Email: " + req.query.email);
         } else {
             var newUser = buildNewUser(req.params.google_id,req.query.name);
             newUser.email = newUser.email || req.query.email;
             model.User.create(newUser,function(err,newuser) {
-                res.send(newuser);
+                res.send(toClientUser(newuser));
             });
             actions.log(req.session.user_id, "SING_IN","User: " + req.query.name + " Email: " + req.query.email);
         }
@@ -130,9 +153,22 @@ exports.getByGoogleId = function(req, res){
 };
 
 exports.loginPassword = function(req, res) {
+    if (!req.body || !req.body.password) {
+        res.status(404).send({ error: 'User not found or invalid credentials' });
+        return;
+    }
 
-    model.User.findOne({ email: req.body.email, password: req.body.password }).exec(function(err, user) {
-        if (user) {
+    model.User.findOne({ email: req.body.email }).select('+password').exec(function(err, user) {
+        if (err || !user) {
+            res.status(404).send({ error: 'User not found or invalid credentials' });
+            return;
+        }
+        passwords.verify(req.body.password, user.password, function(verifyErr, ok, legacy) {
+            if (verifyErr || !ok) {
+                res.status(404).send({ error: 'User not found or invalid credentials' });
+                return;
+            }
+
             var s = req.session;
             console.log("Set User_Id in session: " + user._id);
             s.user_id = user._id;
@@ -144,13 +180,31 @@ exports.loginPassword = function(req, res) {
             user.accessCode = user.accessCode || code();
             user.email = user.email || req.query.email;
 
-            user.save();
-            res.send(user);
-            actions.log(req.session.user_id, "LOG_IN","User: " + req.query.name + " Email: " + req.query.email);
-        } else {
-            // return 404
-            res.status(404).send({ error: 'User not found or invalid credentials' });
-        }
+            function sendUser() {
+                res.send(toClientUser(user));
+                actions.log(req.session.user_id, "LOG_IN","User: " + req.query.name + " Email: " + req.query.email);
+            }
+
+            if (legacy) {
+                passwords.hash(req.body.password, function(hashErr, hashed) {
+                    if (hashErr) {
+                        res.status(500).send({ error: hashErr });
+                        return;
+                    }
+                    user.password = hashed;
+                    user.save(function(saveErr) {
+                        if (saveErr) {
+                            res.status(500).send({ error: saveErr });
+                            return;
+                        }
+                        sendUser();
+                    });
+                });
+            } else {
+                user.save();
+                sendUser();
+            }
+        });
     });
 }
 
@@ -168,6 +222,7 @@ exports.getByAccessCode = function(req, res, next) {
 exports.addToFavorites = function(req,res) {
     model.User
             .findOne({_id: new mongoose.Types.ObjectId(req.session.user_id)})
+            .select('+password')
             .exec(function(err,user) {
             user.favorites.push(req.body._id);
 
@@ -184,7 +239,7 @@ exports.addToFavorites = function(req,res) {
             });
 
             user.save(function(err,user) {
-                res.send(user);
+                res.send(toClientUser(user));
             });
 
     });
@@ -193,6 +248,7 @@ exports.addToFavorites = function(req,res) {
 exports.removeFromFavorites = function(req,res) {
     model.User
             .findOne({_id: new mongoose.Types.ObjectId(req.session.user_id)})
+            .select('+password')
             .exec(function(err,user) {
 
         var index = user.favorites.indexOf(req.body._id);
@@ -200,7 +256,7 @@ exports.removeFromFavorites = function(req,res) {
             user.favorites.splice(index,1);
         }
         user.save(function(err,user) {
-            res.send(user);
+            res.send(toClientUser(user));
         });
 
         //update recipe too (async)

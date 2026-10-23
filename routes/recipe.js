@@ -21,7 +21,7 @@ function processFilter(filter) {
 }
 
 exports.findCollaborated = function (req, res) {
-    model.Recipe.find({collaborators: { $in : [req.session.user_id] } }).populate('owner').limit(nullOrNumer(req.query.limit)).exec(function(err,results) {
+    model.Recipe.find({collaborators: { $in : [req.session.user_id] } }).populate('owner', 'name _id').limit(nullOrNumer(req.query.limit)).exec(function(err,results) {
         res.send(results);
     });
 };
@@ -315,7 +315,7 @@ exports.publicStyles = function(req, res) {
 };
 
 exports.get = function(req, res) {
-    model.Recipe.findOne({_id:req.params.id}).populate('collaborators').populate('owner').populate('cloneFrom').exec(function(err,results) {
+    model.Recipe.findOne({_id:req.params.id}).populate('collaborators', 'name _id').populate('owner', 'name _id').populate('cloneFrom').exec(function(err,results) {
         if ( results && results.HOPS && results.HOPS.HOP ) {
             stable.inplace(results.HOPS.HOP, hopCompare);
         }
@@ -506,7 +506,7 @@ exports.deleteComment = function(req,res) {
 };
 
 exports.updateState = function(req, res) {
-    model.Recipe.findOne({_id:req.params.id}).populate('owner').exec(function(err,recipe) {
+    model.Recipe.findOne({_id:req.params.id}).populate('owner', 'name _id').exec(function(err,recipe) {
         recipe.state = req.query.state;
         recipe.save(function(err) {
             if ( err ) {
@@ -709,7 +709,7 @@ exports.save = function(req, res) {
             notifications.notifyNewCollaborators(old,newCollaborators);
 
             delete req.body.tiltValues; //do not update tilt
-            model.Recipe.findByIdAndUpdate(id,req.body, {new: true}).populate('owner').populate('collaborators').populate('cloneFrom').exec(callback);
+            model.Recipe.findByIdAndUpdate(id,req.body, {new: true}).populate('owner', 'name _id').populate('collaborators', 'name _id').populate('cloneFrom').exec(callback);
         });
 
         actions.log(req.session.user_id, "UPDATE_RECIPE","NAME: '"+req.body.NAME+"'. recipe_id: "+id);
@@ -718,7 +718,7 @@ exports.save = function(req, res) {
 };
 
 exports.publish = function(req, res) {
-    model.Recipe.findOne({_id:req.params.id}).populate('owner').exec(function(err,recipe) {
+    model.Recipe.findOne({_id:req.params.id}).populate('owner', 'name _id').exec(function(err,recipe) {
         recipe.isPublic = req.query.isPublic;
         if (recipe.isPublic) {
             recipe.publishDate = new Date();
