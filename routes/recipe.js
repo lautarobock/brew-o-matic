@@ -1,5 +1,6 @@
 var actions = require('./actions.js');
 var notifications = require('../util/notifications.js');
+var contentDisposition = require('../util/contentDisposition.js');
 var model = require('../domain/model.js');
 var observer = require("./observer");
 var Arrays = require('../public/js/util/util.js').Arrays;
@@ -189,7 +190,7 @@ exports.exportRecipe = function(req, res) {
         //     add("");add("");add("");add("");add("");
         // }
         // add(r.isPublic,true);
-        res.setHeader('Content-disposition', 'attachment; filename=' + results.NAME + '.csv');
+        res.setHeader('Content-disposition', contentDisposition.attachment(results.NAME + '.csv'));
         res.set('Content-Type', 'application/octet-stream');
         res.send(csv);
     });
@@ -427,7 +428,7 @@ exports.getBeerXML = function(req, res) {
         `;
         res.setHeader(
             'Content-disposition',
-            `attachment; filename=${recipe.NAME}.xml`
+            contentDisposition.attachment(recipe.NAME + '.xml')
         );
         res.set('Content-Type', `text/xml`);
         res.send(xml);
